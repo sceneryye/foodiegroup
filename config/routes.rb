@@ -22,7 +22,7 @@ RailsOnForum::Application.routes.draw do
 
   resources :events do 
     resources :participants do
-       get   'confirm_paid'  ,:on=>:member
+       get   'confirm_paid'  ,on: :member
     end
     resources :comments, only: [:new, :create]
   end

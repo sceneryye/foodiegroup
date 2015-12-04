@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def create
     if user_params[:password].nil?
-      user_params[:password]=user_params[:mobile]
+      user_params[:password] = user_params[:mobile]
     end
     @user = User.new(user_params)
     @user.weixin_openid = session[:openid]

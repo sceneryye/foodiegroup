@@ -44,9 +44,11 @@
      
        <%= link_to "#{@again}报名", new_event_participant_path(@event),
                                 class:"tiny button radius " if signed_in? %>
-     
-      
+
       <% if current_user == @event.user %>
+      <% if @event.id = Participant.find(user_id: current_user.id).event_id %>
+        <%= link_to "立即支付", "#" %>
+      <% end %>
         <%= link_to "编辑", edit_event_path(@event), class:"tiny button radius" %>
         <%= link_to "删除", @event,
                            method: :delete,
