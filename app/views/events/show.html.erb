@@ -45,7 +45,7 @@
       <%= link_to "#{@again}报名", new_event_participant_path(@event),
       class:"tiny button radius " if signed_in? %>
 
-      <% if @event.id == Participant.find(user_id: current_user.id).try :event_id %>
+      <% if @event.id == Participant.find(user_id: current_user.id).try(:event_id) %>
       <%= link_to "立即支付", "#" %>
       <% end %>
 
