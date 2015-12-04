@@ -23,6 +23,7 @@ RailsOnForum::Application.routes.draw do
   resources :events do 
     resources :participants do
        get   'confirm_paid'  ,on: :member
+       post 'wechat_pay', on: :member
     end
     resources :comments, only: [:new, :create]
   end
@@ -36,6 +37,7 @@ RailsOnForum::Application.routes.draw do
   get '/register',    to: 'users#new',  as: :register
   get '/:id',         to: 'users#show', as: :profile
   get '/:id/edit', to: 'users#edit', as: :edit_profile
+
 
   root 'forums#index'
 end

@@ -24,3 +24,8 @@
 	}).on('changeDate', function (ev) {
 		checkout.hide();
 	}).data('datepicker');
+
+	//--------调用微信支付---------
+	$('.wc-pay').on("click", function(){
+		$('form .pay-form').submit();
+	})
