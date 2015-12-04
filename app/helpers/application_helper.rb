@@ -80,12 +80,12 @@ module ApplicationHelper
 
   def vote_for(object)
     ' '
-    # '<a href="#"><i class="fi-like"></i>2</a> <a href="#" style="margin-left:50px"><i class="fi-dislike"></i>3</a>'
-  end
+    # '<a href="#"><i class="fa fa-thumbs-o-up"></i>2</a> <a href="#" style="margin-left:50px"><i class="fa fa-thumbs-o-down"></i>3</a>'
+  end 
 
   def owner_buttons_for(comment)
-    link_to('编辑', edit_comment_path(comment)) + ' | ' +
-    link_to('删除', comment, method: :delete)
+    link_to('<i class="fa fa-pencil"></i>', edit_comment_path(comment)) + ' | ' +
+    link_to('<i class="fa fa-times"></i>', comment, method: :delete)
   end
 
   def markdown(text, options= {links: true})
