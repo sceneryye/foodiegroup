@@ -55,8 +55,8 @@
       </form>-->
 
       <%= form_tag wechat_pay_event_participant_path(@event.id, participant.id) do %>
-      <%= hidden_field_tag openid, current_user.weixin_openid %>
-      <%= hidden_field_tag money, @event.price * participant.goods_amount %>
+      <%= hidden_field_tag :openid, current_user.weixin_openid %>
+      <%= hidden_field_tag :money, @event.price * participant.goods_amount %>
       <%= submit_tag "立即支付" %>
 
       <% end %>
