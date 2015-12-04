@@ -46,10 +46,11 @@
       class:"tiny button radius " if signed_in? %>
       <% participant = Participant.find_by(user_id: current_user.id) %>
       <% if @event.id == participant.try(:event_id) && participant.status_pay == 0 %>
-      <button class="wc-pay">立即支付</button>
+      
       <form class="pay-form" action="/events/<%= @event.id %>/participants/<%= participant.id %>/wechat_pay">
         <input type="hidden" name="openid" value="<%= current_user.weixin_openid %>">
         <input type="hidden" name="money" value="<%= @event.price * participant.goods_amount %>">
+        <input type="submit" value="立即支付">
       </form>
 
       <% end %>
