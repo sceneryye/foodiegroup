@@ -45,7 +45,7 @@ class ParticipantsController < ApplicationController
     event_id = params[:event_id],
     participant_id = params[:id],
     data = {
-      money: money,
+      money: 100,
       from: from,
       openid: openid,
       event_id: event_id,
