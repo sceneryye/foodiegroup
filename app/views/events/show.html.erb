@@ -50,7 +50,7 @@
       <form method="post" class="pay-form" action="/events/<%= @event.id %>/participants/<%= participant.id %>/wechat_pay">
         <input type="hidden" name="openid" value="<%= current_user.weixin_openid %>">
         <input type="hidden" name="money" value="<%= @event.price * participant.goods_amount %>">
-        <input type="hidden" name="request_forgery_protection_token.to_s" value="<%= form_authenticity_token %>"
+        <input type="hidden" name="request_forgery_protection_token.to_s" value="<%= form_authenticity_token %>">
         <input type="submit" value="立即支付">
       </form>
 
