@@ -48,6 +48,7 @@ class ParticipantsController < ApplicationController
     url = URI.encode "http://www.trade-v.com/vshop/1/payments?money=#{money}&from=#{from}&openid=#{openid}&event_id=#{event_id}&participant_id=#{participant_id}&user_id=#{user_id}"
 
     res_data_hash = RestClient.get url
+    return render :text => res_data_hash
 
   end
 
