@@ -11,7 +11,7 @@
     </div>
     <div class="event-id-name">
       <span class="event-id">
-        <%= "[#{t(:event_no)}000000000#{event.id}]" %>
+        <%= "[No. 000000000#{event.id}]" %>
       </span>
       <span class="event-name">
         <%="#{t(:sponsor)}: #{event.name}" %>
@@ -19,7 +19,7 @@
     </div>
     <div class="event-other-info">
       <span class="price">
-      <i class="fa fa-jpy"></i><%=event.price %>
+      <i class="fa fa-cny"></i><%=event.price %>
       </span>
       <span class="participants">
        <i class="fa fa-user"></i>(<%=event.participants_count%>)
