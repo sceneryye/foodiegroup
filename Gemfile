@@ -21,7 +21,6 @@ gem 'rest-client'
 	gem 'coffee-rails'#, '~> 4.0.0'
     gem 'foundation-rails'#,'~>5.5.3.2'
     gem 'foundation-datetimepicker-rails'
-    gem 'foundation-icons-sass-rails'
 	#gem 'foundation_form_builder'
 #end
 

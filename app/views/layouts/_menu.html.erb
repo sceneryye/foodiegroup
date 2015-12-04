@@ -14,16 +14,16 @@
 %>
 <footer class="icon-bar five-up" role="navigation">
   <a class="item <%=@forums_active%>" role="button" tabindex="0" aria-label="home" href="/">
-    <i class="fi-home"></i>
+    <i class="fa fa-home"></i>
   </a>
   <a class="item <%=@searchs_active%>" role="button" tabindex="0" aria-label="search" href='/searchs'>
-    <i class="fi-magnifying-glass"></i>
+    <i class="fa fa-search"></i>
   </a>
   <a class="item <%=@events_active%>" role="button" tabindex="0" aria-label="events" href='/events'>
-    <i class="fi-calendar"></i>
+    <i class="fa fa-calendar"></i>
   </a>
   <a class="item <%=@topics_active%>" role="button" tabindex="0" aria-label="coversations">
-    <i class="fi-comment"></i>
+    <i class="fa fa-comment"></i>
   </a>
   <%
     if current_user
@@ -33,7 +33,7 @@
     end
   %>
   <a class="item <%=@users_active%>" role="button" tabindex="0" aria-label="user" href='<%=@user_url%>'>
-    <i class="fi-torso"></i>
+    <i class="fa fa-user"></i>
   </a>
  
 </footer>
