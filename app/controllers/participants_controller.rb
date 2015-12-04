@@ -38,6 +38,19 @@ class ParticipantsController < ApplicationController
     # end
   end
 
+  def wechat_pay
+    money = params[:money],
+    from = 'foodiegroup',
+    openid = params[:openid],
+    event_id = params[:event_id],
+    participant_id = params[:id],
+    user_id = Participant.find(params[:id]).user_id
+    url = URI.encode "http://www.trade-v.com/vshop/1/payments?money=#{money}&from=#{from}&openid=#{openid}&event_id=#{event_id}&participant_id=#{participant_id}&user_id=#{user_id}"
+
+    res_data_hash = RestClient.get url
+
+  end
+
   def edit() end
 
   def update
