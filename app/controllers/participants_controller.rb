@@ -44,10 +44,17 @@ class ParticipantsController < ApplicationController
     openid = params[:openid],
     event_id = params[:event_id],
     participant_id = params[:id],
+    data = {
+      money: money,
+      from: from,
+      openid: openid,
+      event_id: event_id,
+      participant_id: participant_id
+    }
     user_id = Participant.find(params[:id]).user_id
-    url = "http://www.trade-v.com/vshop/1/payments?money=#{money}&from=#{from}&openid=#{openid}&event_id=#{event_id}&participant_id=#{participant_id}&user_id=#{user_id}"
+    url = "http://www.trade-v.com/vshop/1/payments"
 
-    res_data_hash = RestClient.get url
+    res_data_hash = RestClient.get url, {params: data}
     return render :text => res_data_hash
 
   end
