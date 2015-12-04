@@ -47,12 +47,19 @@
       <% participant = Participant.find_by(user_id: current_user.id) %>
       <% if @event.id == participant.try(:event_id) && participant.status_pay == 0 %>
       
-      <form method="post" class="pay-form" action="/events/<%= @event.id %>/participants/<%= participant.id %>/wechat_pay">
-        <input type="hidden" name="openid" value="<%= current_user.weixin_openid %>">
-        <input type="hidden" name="money" value="<%= @event.price * participant.goods_amount %>">
+      <!--<form method="post" class="pay-form" action="/events/<%= @event.id %>/participants/<%#= participant.id %>/wechat_pay">
+        <input type="hidden" name="openid" value="<%#= current_user.weixin_openid %>">
+        <input type="hidden" name="money" value="<%#= @event.price * participant.goods_amount %>">
         <input type="hidden" name="request_forgery_protection_token" value="<%= form_authenticity_token %>">
         <input type="submit" value="立即支付">
-      </form>
+      </form>-->
+
+      <%= form_tag wechat_pay_event_participant_path do %>
+      <%= hidden_field_tag openid, current_user.weixin_openid %>
+      <%= hidden_field_tag money, @event.price * participant.goods_amount %>
+      <%= submit_tag "立即支付" %>
+
+      <% end %>
 
       <% end %>
 
