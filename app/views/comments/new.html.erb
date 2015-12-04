@@ -1,0 +1,11 @@
+<% provide :title, '新增评论' %>
+<div class="topics panel columns radius ">
+  <h2><%= @parent.title %></h2>
+  <p><%= markdown @parent.body  %></p>
+
+  <%#= topic_info(@parent) %>
+</div>
+<div class="small-11 columns offset-1">
+  <h4>请输入您的评论</h4>
+  <%= render 'form' %>
+</div>

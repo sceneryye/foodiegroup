@@ -1,0 +1,12 @@
+<div class="comment">
+  <p> 
+  <% if @event
+  	 if current_user == @event.user && participant.status_pay==0%>
+        <%= link_to "确认支付", confirm_paid_event_participant_path(participant.event,participant), class:"tiny button radius alert" %>
+	 <small><%=participant.mobile%>||<%=participant.address%></small>
+  <%end
+  end%>
+  </p>
+  <%= participant_info(participant) %>
+ 
+</div>

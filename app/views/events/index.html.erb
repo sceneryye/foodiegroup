@@ -1,0 +1,35 @@
+<p>活动查询</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>开始时间:
+				<input type="text" class="span2" value="" id="dpd1">
+			</th>
+			<th>结束时间:
+				<input type="text" class="span2" value="" id="dpd2">
+			</th>
+		</tr>
+	</thead>
+</table>
+
+<% provide :title, "活动" %>
+<%# content_for(:event_content) do %>
+  <div class="columns">
+    <div>
+      <h1 class="left">活动</h1>
+      <% if signed_in? %>
+        <%= link_to '新增活动', new_event_path,
+                               class: 'small new button right radius' %><hr>
+      <% end %>
+    </div>
+    <div class="topics panel columns radius ">
+      <% if @events.any? %>
+        <%= render @events %>
+      <% else %>
+        <p>还没有任何活动。</p>
+      <% end%>
+    </div>
+  </div>
+<%# end %>
+
+

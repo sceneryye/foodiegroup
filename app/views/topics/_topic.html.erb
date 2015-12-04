@@ -1,0 +1,27 @@
+<div class="topic">
+  <div class="topic-text">
+    <div class="topic-title">
+      <h5><%= link_to topic.title, topic %></h5>
+    </div>
+    <div class="topic-content">
+      <%= truncate(markdown(topic.body), length: 50, escape:false) %>
+    </div>
+    <div class="topic-info">
+      <%= topic_info(topic) %>
+    </div>
+  </div>
+  <div class="topic-count">
+    <div class="border">
+      <div class="number">
+        <strong>
+          <%= topic.comments_count %>
+        </strong>
+        </div>
+        <div class="count-text">
+          评论
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  <div class="clear"></div>
+</div>

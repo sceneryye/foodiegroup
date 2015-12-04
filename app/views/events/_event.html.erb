@@ -1,0 +1,34 @@
+
+
+<%= link_to event do %>
+<div class="event">
+  <div class="event-pic">
+    <img src="<%= event.pic_url %>" />
+  </div>
+  <div class="event-info">
+    <div class="event-title">
+      <%= event.title %>
+    </div>
+    <div class="event-id-name">
+      <span class="event-id">
+        <%= "[#{t(:event_no)}000000000#{event.id}]" %>
+      </span>
+      <span class="event-name">
+        <%="#{t(:sponsor)}: #{event.name}" %>
+      </span>
+    </div>
+    <div class="event-other-info">
+      <span class="price">
+       <%="#{t(:price)}: ¥#{event.price}" %>
+      </span>
+      <span class="participants">
+       <%="#{t(:participants)}:#{event.participants_count}" %>
+      </span>
+      <span class="comments">
+        <%="#{t(:comments)}:#{event.comments_count}" %>
+      </span>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<% end %>

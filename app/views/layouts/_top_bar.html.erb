@@ -1,0 +1,28 @@
+<div class="contain-to-grid">
+  <nav class="top-bar" data-topbar>
+    <ul class="title-area">
+      <li class="name">
+        <h1><a href="/">吃货帮</a></h1>
+      </li>
+    </ul>
+    <section class="top-bar-section">
+      <ul class="right">
+        <% if signed_in? %>
+          <li class="has-dropdown">
+            <a href="#"> <%= current_user.name %></a>
+              <ul class="dropdown">
+                <li><%= link_to "个人中心", profile_path(current_user) %></li>
+                <li><%= link_to "退出", logout_path, method: :delete %></li>
+              </ul>
+          </li>
+        <% else %>
+          <li class="divider"></li>
+          <li><%= link_to "注册", register_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to "登录", login_path %></li>
+          <li class="divider"></li>
+        <% end %>
+      </ul>
+    </section>
+  </nav>
+</div>

@@ -1,0 +1,9 @@
+<% provide :title, @user.name if @user %>
+<% content_for(:profile_content) do%>
+  <h2><%= page.capitalize %></h2><hr>
+  <% if @data.blank? %>
+    <p>该会员没有发表过 <%= page %>。</p>
+  <% else %>
+    <%= render @data %>
+  <% end %>
+<% end %>

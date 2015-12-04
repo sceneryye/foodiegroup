@@ -1,0 +1,7 @@
+<%= form_for @forum, data: {abide: ''} do |f| %>
+  <%= render 'layouts/form_errors', object: @forum %>
+  <div>
+    <%= f.text_area :name, required: true%>
+    <%= show_error_message('不能为空！') %></div>
+  <%= f.submit class:'tiny button radius' %>
+<% end %>

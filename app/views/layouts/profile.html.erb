@@ -1,0 +1,55 @@
+<% content_for(:content) do %>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="large-2 columns">
+      <%= image_tag @user.avatar, class: 'profile-image round' if @user %>
+    </div>
+
+    <div class="large-10 columns">
+      <div class="row">
+        <div class="small-8 columns">
+          <h2><%=@user.username if @user%></h2>
+          <p><%= @user.name  if @user%></p>
+          <p>微信群:<%= @user.group.name if @user%></p>
+          <p>职业:<%= @user.profession if @user%></p>
+          <p>地点:<%= @user.location if @user%></p>
+        </div>
+        <div class="small-4 columns">
+          <ul class="button-group radius">                         
+          <% if current_user == @user %>
+            <%= link_to "个人信息", edit_profile_path(@user),
+                                                 class: 'tiny button secondary' if @user%>
+            <%= link_to "关注信息", '#',
+                                                 class: 'tiny button secondary' if @user%>
+            <!-- <li><%= link_to "删除账号", @user,
+                                             method: :delete,
+                                             data: {confirm: 'Hesabınızı silmek istediğinize emin misiniz?'},
+                                             class: 'small button alert' if@user%></li> -->
+            <%= link_to "退出登录", logout_path, method: :delete, class: 'tiny button secondary' %>
+            <%=link_to "会员守则",register_path, class: 'tiny button secondary'%>
+          <% end %>
+        </div>
+      </div>
+      <div class="button-bar">
+        <ul class="button-group radius">
+          <li><%= link_to "话题", profile_path(@user, type: '话题'),
+                                     class: 'small button secondary'  if @user%></li>
+          <li><%= link_to "评论", profile_path(@user, type: '评论'),
+                                      class: 'small button secondary'  if @user%></li>
+          <li><%= link_to "活动", profile_path(@user, type: '活动'),
+                                      class: 'small button secondary'  if @user%></li>
+          <li><%= link_to "参与", profile_path(@user, type: '参与'),
+                                      class: 'small button secondary'  if @user%></li>                           
+       
+        </ul>
+      </div>
+    </div><hr>
+
+    <div class="large-12 columns">
+      <%= yield :profile_content %>
+    </div>
+
+  </div>
+</div>
+<% end %>
+<%= render template: "layouts/application" %>

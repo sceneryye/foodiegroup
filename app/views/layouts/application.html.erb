@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "吃货帮" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+<!--    <div class="wrapper">
+     <div class="wrapper-inner"> -->
+    <%#=render '/layouts/top_bar'%>
+  <div class="off-canvas-wrap docs-wrap" data-offcanvas>
+  <div class="inner-wrap">
+    <nav class="tab-bar">
+      <section class="left-small">
+        <a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+      </section>
+
+      <section class="right tab-bar-section">
+        <h1 class="title"><%=t(:site_name)%></h1>
+      </section>
+
+    </nav>
+    <!-- Off Canvas Menu -->
+    <aside class="left-off-canvas-menu">
+        <!-- whatever you want goes here -->
+        <ul>
+          <li><%=link_to t(:home), root_path%></a></li>
+          <li><%=link_to t(:search), searchs_path%></li>
+          <li><%=link_to t(:events), events_path%></li>
+          <li><%=link_to t(:Topics), forums_url(forum_id:1)%></li> 
+          <li>
+              <%
+                if current_user
+                  @user_url="/#{current_user.username}"
+                else
+                  @user_url="/login"
+                end
+              %>
+              <%=link_to t(:user_center),@user_url%>
+          </li>
+        </ul>
+    </aside>
+
+    <!-- main content goes here -->
+    <%= yield %>
+    <%= yield :content %>
+<!--   </div>
+  </div> -->
+ <%=render '/layouts/menu'%>
+
+  <!-- close the off-canvas menu -->
+  <a class="exit-off-canvas"></a>
+
+  </div>
+</div>
+   
+
+   
+    <%#= javascript_include_tag "application" 'data-turbolinks-track' => true %>
+     <%= javascript_include_tag "application"%>
+    <%= javascript_include_tag controller_name%>
+     
+  </body>
+</html>

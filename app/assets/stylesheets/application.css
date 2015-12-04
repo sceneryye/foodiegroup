@@ -1,0 +1,67 @@
+/*
+ *= require_self
+ *= require foundation_and_overrides
+
+ *= require_tree .
+ */
+
+/*html,body{ height: 100%;}
+
+body{ position: relative; min-height: 550px;}
+
+footer{ position: absolute; bottom: 0; left: 0; }*/
+
+html, body {position: relative;font-family: "Microsoft YaHei";}
+
+.field_with_errors label{color: #f04124;}
+
+.profile-image{
+  margin-top: 15px;
+  border-radius: 50%;}
+
+.new.button{
+  margin-top: 15px;}
+
+.forums.panel {
+  background-color: #fff;
+  border: none;
+  border-right: 1px solid #eee;
+}
+
+.topics.panel{
+  background-color: #fff;
+  padding:30px 15px;}
+
+.topic-area{
+  min-height: 200px;
+}
+
+.topic{
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0 20px;}
+
+  .topic:last-child{
+    border: none;}
+
+  .topic p{font-size: .85em;}
+
+  .topic .answer-count{
+    padding: 25px 10px;
+    border: 1px solid #eee;
+    border-radius: 5px;}
+
+.details{
+  font-size: .70em;
+  margin-top: 5px;}
+
+.badge{
+  background: #eee;
+  border-radius: 10px;
+  padding: 3px 10px;
+  margin-right: 10px;
+}
+
+.user-thumb{
+  border-radius: 50%;
+  width:50px;
+}

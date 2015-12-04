@@ -1,0 +1,19 @@
+<div class="large-12 medium-12 medium-centered columns">
+<%= form_for form_params(@forum, @topic), data: {abide: ''} do |f| %>
+  <%= render 'layouts/form_errors', object: @topic %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title, required: true%>
+    <%= show_error_message('不能为空！') %>
+  </div>
+  <div>
+    <%= f.label :body %>
+    <%#= f.text_area :body, class:'topic-area', required: true, pattern: ".{20,}" %>
+    <%= f.cktext_area :body, :class => 'someclass', :ckeditor => {:language => 'zh'} , required: true%>
+    <%= show_error_message('内容请不要超过1千字')%>
+  </div>
+  <div>
+    <%= f.submit class: 'small button right' %>
+  </div>
+<% end %>
+</div>

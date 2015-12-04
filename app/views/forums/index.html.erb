@@ -1,0 +1,100 @@
+ <!--[if lt IE 9]><script type="text/javascript" src="/assets/excanvas.js"></script><![endif]-->
+ <% provide :title, t(:site_name) %>
+
+ <script src="/assets/tagcanvas.min.js" type="text/javascript"></script>
+
+ <div id="myCanvasContainer">
+  <canvas width="450" height="250" id="myCanvas" style="">
+    <p><img src='/foodie_logo.jpg'></p>
+  </canvas>
+</div>
+<div id="tags" style="display: none;">
+  <ul>
+    <li><a href="/events/2"><span style='color:yellow;font-weight: 25pt;'>麦盖提灰枣</span></a></li>
+    <li><a href="/forums/1">吃货帮</a></li>
+    <li><a href="/register">你该来</a></li>
+    <li><a href="/events/4">冬季野生海参</a></li>
+    <li><a href="/events/1">辉哥土鸡</a></li>
+    <li><a href="/events/3">大连金石滩海参</a></li>
+   <!--  <%#@tags.each do |tag|%>
+     <li><%#=link_to tag.name, "/searchs?tag=#{tag.name}", :target=>"_blank"%></li>
+     <%#end if @tags%> -->
+   </ul>
+ </div>
+ <script type="text/javascript">
+  window.onload = function() {
+
+    try {
+              // var gradient = {
+              //  0:    '#f00', // red
+              //  0.33: '#ff0', // yellow
+              //  0.66: '#0f0', // green
+              //  1:    '#00f'  // blue
+              // };
+              // TagCanvas.weightGradient = gradient;
+
+              TagCanvas.Start('myCanvas','tags',{
+                shape: "hcylinder",
+                lock: "x",
+            textColour: null,//'#008CBA',
+            textHeight: 20,
+            outlineColour: '#0000ff',
+            reverse: true,
+            depth: 0.5,
+            maxSpeed: 0.02
+          });
+            } catch(e) {
+          // something went wrong, hide the canvas container
+          document.getElementById('myCanvasContainer').style.display = 'none';
+        }
+      };
+    </script>
+
+    <div class="large-12 columns">
+      <div class="topics panel columns radius ">
+
+        <div class="small-6 columns">
+          <input type="text" style="height:45px" placeholder="请输入您想搜索的内容...">
+        </div>
+        <div class="small-6 columns">
+          <a href="/searchs" class="button split small"><i class="fi-magnifying-glass"></i><span data-dropdown="drop"></span></a><br>
+          <ul id="drop" class="f-dropdown" data-dropdown-content>
+            <li><a href="#">会员</a></li>
+            <li><a href="#">标签</a></li>
+            <li><a href="#">内容</a></li>
+          </ul>
+        </div>
+        <div  class="small-6 columns">
+         <%= link_to '发起话题', new_forum_topic_path(1),
+         class: 'small new button middle radius' %>
+       </div>
+       <div  class="small-6 columns">
+        <%=link_to '发起活动', new_event_path, class: 'small new button middle radius'%>
+      </div>
+    </div>
+  </div>
+  <hr />
+
+
+  <div>
+    <div class="events-index">
+      <% if @events.any? %>
+      <%= render @events %>
+      <% else %>
+      <p>还没有任何活动。</p>
+      <% end%>
+    </div>
+  </div>
+  <hr />
+  <div>
+    <% content_for(:forum_content) do %>
+
+    <div class="topics-index">
+      <% if @topics.any? %>
+      <%= render @topics %>
+      <% else %>
+      <p>还没有任何话题.</p>
+      <% end%>
+    </div>
+    <% end %>
+  </div>
