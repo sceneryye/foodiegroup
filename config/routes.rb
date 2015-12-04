@@ -1,8 +1,8 @@
 RailsOnForum::Application.routes.draw do
 
-  get 'votes/create'
+  
 
-  get 'votes/destroy'
+  resource :votes, only: :create
 
   mount Ckeditor::Engine => '/ckeditor'
   
