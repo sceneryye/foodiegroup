@@ -1,27 +1,30 @@
-<div class="contain-to-grid">
-  <nav class="top-bar" data-topbar>
+<div class="sticky">
+  <nav class="top-bar" data-topbar role="navigation" data-topbar data-options="sticky_on: large">
     <ul class="title-area">
-      <li class="name">
-        <h1><a href="/">吃货帮</a></h1>
+      <!-- Title Area -->
+      <li class="name middle">
+        <h1 class="title">
+        <a href="/"><%=t(:site_name)%></a></h1>      
       </li>
+      <li class="toggle-topbar"><a href="#"><span><i class="fa fa-plus"></i></span></a></li>
     </ul>
+
     <section class="top-bar-section">
+
+      <!-- Right Nav Section -->
       <ul class="right">
-        <% if signed_in? %>
-          <li class="has-dropdown">
-            <a href="#"> <%= current_user.name %></a>
-              <ul class="dropdown">
-                <li><%= link_to "个人中心", profile_path(current_user) %></li>
-                <li><%= link_to "退出", logout_path, method: :delete %></li>
-              </ul>
-          </li>
-        <% else %>
-          <li class="divider"></li>
-          <li><%= link_to "注册", register_path %></li>
-          <li class="divider"></li>
-          <li><%= link_to "登录", login_path %></li>
-          <li class="divider"></li>
-        <% end %>
+      <li>
+      
+        <%if session[:locale] == 'en'%>  
+           <%=link_to '<i class="fa fa-language"></i>'.html_safe+' 中文',"#{request.url.sub('?locale=en','')}?locale=zh"%>
+        <%else%>
+          <%=link_to '<i class="fa fa-language"></i>'.html_safe+' English',"#{request.url.sub('?locale=zh','')}?locale=en"%>
+        <%end%>
+      </li>
+        <li class="divider hide-for-small"></li>
+        <%@plus_menu.each do |link|%>
+        <li><%=link_to link[:name], link[:path]%></li>
+        <%end if @plus_menu%>
       </ul>
     </section>
   </nav>

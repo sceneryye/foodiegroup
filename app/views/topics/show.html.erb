@@ -1,21 +1,21 @@
-<% provide :title, "#{t(:topic): #{@topic.title}" %>
+<% provide :title, "#{t(:topic)}: #{@topic.title}" %>
 <div class="topics panel columns radius ">
   <h2><%= @topic.title %></h2>
   <p><%= @topic.body.html_safe  %></p>
   <%= topic_info(@topic) %>
 </div>
 <div>
-    <%= link_to "添加评论", new_topic_comment_path(@topic),
+    <%#= link_to "添加评论", new_topic_comment_path(@topic),
                               class:"tiny button radius" if signed_in? %>
     <% if current_user == @topic.user %>
-      <%= link_to "编辑话题", edit_topic_path(@topic), class:"tiny button radius" %>
-      <%= link_to "删除", @topic,
+      <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_topic_path(@topic), class:"tiny button radius" %>
+      <%= link_to '<i class="fa fa-times"></i>'.html_safe, @topic,
                          method: :delete,
                          class:"tiny button alert radius",
                          data: {confirm: 'Konuyu silmek istediğinize emin misiniz?'} %>
     <% end %>
 </div>
 <div class="comments">
-  <h2>评论 (<%= @topic.comments_count %>)</h2><hr>
+<h2><i class="fa fa-comment"></i> (<%= @topic.comments_count %>)</h2><hr>
   <%= render @comments %>
 </div>
