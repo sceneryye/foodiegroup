@@ -2,7 +2,8 @@
   <%= render 'layouts/form_errors', object: @comment %>
   <div>
   	<%= show_error_message('内容不能为空,请不要超过1千字！') %>
-    <%= f.cktext_area :body, :class => 'someclass', :ckeditor => {:language => 'zh'} , required: true%>
+  	 <%= f.text_area :body, class:'comment-area', required: true%>
+    <%#= f.cktext_area :body, :class => 'someclass', :ckeditor => {:language => 'zh'} , required: true%>
     </div>
-  <%= f.submit '提交评论', class:'tiny button radius' %>
+  <%= f.submit  class:'tiny button radius' %>
 <% end %>

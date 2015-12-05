@@ -57,20 +57,20 @@
           <input type="text" style="height:45px" placeholder="请输入您想搜索的内容...">
         </div>
         <div class="small-6 columns">
-          <a href="/searchs" class="button split small"><i class="fi-magnifying-glass"></i><span data-dropdown="drop"></span></a><br>
+          <a href="/searchs" class="button split small"><i class="fa fa-search"></i><span data-dropdown="drop"></span></a><br>
           <ul id="drop" class="f-dropdown" data-dropdown-content>
-            <li><a href="#">会员</a></li>
-            <li><a href="#">标签</a></li>
-            <li><a href="#">内容</a></li>
+            <li><a href="#"><i class="fa fa-user"></i></a></li>
+            <li><a href="#"><i class="fa fa-comment-o"></i></a></li>
+            <li><a href="#"><i class="fa fa-calendar"></i></a></li>
           </ul>
         </div>
-        <div  class="small-6 columns">
+       <!--  <div  class="small-6 columns">
          <%= link_to '发起话题', new_forum_topic_path(1),
          class: 'small new button middle radius' %>
        </div>
        <div  class="small-6 columns">
         <%=link_to '发起活动', new_event_path, class: 'small new button middle radius'%>
-      </div>
+      </div> -->
     </div>
   </div>
   <hr />
@@ -79,25 +79,30 @@
   <div>
     <div class="events-index">
       <% if @events.any? %>
-      <%= render @events %>
+      <%= render @events.limit(1) %>
       <% else %>
       <p>还没有任何活动。</p>
       <% end%>
     </div>
   </div>
-  <hr />
-  <div>
-    <% content_for(:forum_content) do %>
+  <div class="columns small-12 medium">
+    <a href="/events"><h4>更多精彩活动...</h4></a>
+  </div>
 
+  <hr />
+  <!-- <div> -->
+    <!-- <%# content_for(:forum_content) do %> -->
     <div class="topics-index">
       <% if @topics.any? %>
-      <%= render @topics %>
+      <%= render @topics.limit(1) %>
       <% else %>
       <p>还没有任何话题.</p>
       <% end%>
     </div>
-    <% end %>
-  </div>
-
+   <!--  <%# end %>
+  </div> -->
+<div class="columns small-12 medium">
+  <a href="/forums/1"><h4>更多精彩话题...</h4></a>
+</div>
 
   

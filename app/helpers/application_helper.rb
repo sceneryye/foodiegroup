@@ -84,8 +84,8 @@ module ApplicationHelper
   end 
 
   def owner_buttons_for(comment)
-    link_to('<i class="fa fa-pencil"></i>', edit_comment_path(comment)) + ' | ' +
-    link_to('<i class="fa fa-times"></i>', comment, method: :delete)
+    link_to('<i class="fa fa-pencil"></i>'.html_safe, edit_comment_path(comment)) + ' | ' +
+    link_to('<i class="fa fa-times"></i>'.html_safe, comment, method: :delete)
   end
 
   def markdown(text, options= {links: true})
