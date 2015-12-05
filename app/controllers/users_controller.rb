@@ -17,6 +17,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.weixin_openid = session[:openid]
     @user.avatar = session[:avatar]    
+    @user.nickname = session[:nickname]
 
     if @user.save
       login(@user)

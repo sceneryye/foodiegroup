@@ -34,11 +34,12 @@ class ForumsController < ApplicationController
 			session[:nickname] = params[:nickname]
 			user = User.where(:weixin_openid=>session[:openid])
 			if user.size>0
-				user = user.first
-				user.avator = session[:avatar]
-				user.nickname = params[:nickname]
-				user.save!
-				login user
+				@user = user.first do |u|
+					u.avatar = session[:avatar]
+					u.nickname = session[:nickname]
+				end.save
+				
+				login user.first
 				redirect_to '/' #清空传过来的参数
 			else
 				redirect_to '/register'
