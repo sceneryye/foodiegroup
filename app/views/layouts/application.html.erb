@@ -15,31 +15,10 @@
   <body>
 <!--    <div class="wrapper">
      <div class="wrapper-inner"> -->
-    <%#=render '/layouts/top_bar'%>
+    
   <div class="row">
   <div class="large-12 columns">
-    <div class="sticky">
-  <nav class="top-bar" data-topbar role="navigation" data-topbar data-options="sticky_on: large">
-  <ul class="title-area">
-    <!-- Title Area -->
-    <li class="name">
-      <h1 class="title"><a href="/"><%=t(:site_name)%></a></h1>
-    </li>
-    <li class="toggle-topbar"><a href="#"><span><i class="fa fa-plus"></i></span></a></li>
-  </ul>
-
-  <section class="top-bar-section">
-
-    <!-- Right Nav Section -->
-    <ul class="right">
-      <li class="divider hide-for-small"></li>
-      <%@plus_menu.each do |link|%>
-      <li><%=link_to link[:name], link[:path]%></li>
-      <%end if @plus_menu%>
-    </ul>
-  </section>
-</nav>
-</div>
+    <%=render '/layouts/top_bar'%>
 
     <!-- main content goes here -->
     <%= yield %>
@@ -57,6 +36,8 @@
         </div>
     </div>
   </footer><!--/#footer-->
+  </div>
+  </div>
   <script>
       var myDate = new Date();
       var currentYear = myDate.getFullYear(); 
