@@ -31,9 +31,14 @@ class ForumsController < ApplicationController
 		if params[:openid]
 			session[:openid] = params[:openid].split('_shop')[0]
 			session[:avatar] = params[:avatar]
+			session[:nickname] = params[:nickname]
 			user = User.where(:weixin_openid=>session[:openid])
 			if user.size>0
-				login user.first
+				user = user.first
+				user.avator = session[:avatar]
+				user.nickname = params[:nickname]
+				user.save!
+				login user
 				redirect_to '/' #清空传过来的参数
 			else
 				redirect_to '/register'
