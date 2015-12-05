@@ -17,28 +17,28 @@
         <div class="small-4 columns">
           <ul class="button-group radius">                         
           <% if current_user == @user %>
-            <%= link_to "个人信息", edit_profile_path(@user),
+            <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_profile_path(@user),
                                                  class: 'tiny button secondary' if @user%>
-            <%= link_to "关注信息", '#',
+            <%= link_to '<i class="fa fa-heart"></i>'.html_safe, '#',
                                                  class: 'tiny button secondary' if @user%>
             <!-- <li><%= link_to "删除账号", @user,
                                              method: :delete,
                                              data: {confirm: 'Hesabınızı silmek istediğinize emin misiniz?'},
                                              class: 'small button alert' if@user%></li> -->
-            <%= link_to "退出登录", logout_path, method: :delete, class: 'tiny button secondary' %>
-            <%=link_to "会员守则",register_path, class: 'tiny button secondary'%>
+            <%= link_to '<i class="fa fa-sign-out"></i>'.html_safe, logout_path, method: :delete, class: 'tiny button secondary' %>
+            <%=link_to '<i class="fa fa-file-text"></i>'.html_safe,register_path, class: 'tiny button secondary'%>
           <% end %>
         </div>
       </div>
       <div class="button-bar">
         <ul class="button-group radius">
-          <li><%= link_to "话题", profile_path(@user, type: '话题'),
+          <li><%= link_to t(:topic), profile_path(@user, type: 'topic'),
                                      class: 'small button secondary'  if @user%></li>
-          <li><%= link_to "评论", profile_path(@user, type: '评论'),
+          <li><%= link_to t(:comment), profile_path(@user, type: 'comment'),
                                       class: 'small button secondary'  if @user%></li>
-          <li><%= link_to "活动", profile_path(@user, type: '活动'),
+          <li><%= link_to t(:event), profile_path(@user, type: 'event'),
                                       class: 'small button secondary'  if @user%></li>
-          <li><%= link_to "参与", profile_path(@user, type: '参与'),
+          <li><%= link_to t(:participant), profile_path(@user, type: 'participant'),
                                       class: 'small button secondary'  if @user%></li>                           
        
         </ul>

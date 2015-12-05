@@ -2,11 +2,11 @@
 <%= form_for @event, data: {abide: ''}  ,:html => {:multipart => true} do|f| %>
   <%= render 'layouts/form_errors', object: @event %>
   <div>
-    <%= f.text_field :title, required: true,placeholder: '活动名称' %>
-    <%= show_error_message('活动名称，不能为空！') %>
+    <%= f.text_field :title, required: true,placeholder: t(:title) %>
+   <!--  <%#= show_error_message('活动名称，不能为空！') %> -->
   </div>
   <div>    
-    <p>请选择活动时间：</p>
+    <p><%=t(:please_choose_event_time)%></p>
     <table class="table">
       <thead>
         <tr>         
@@ -27,40 +27,40 @@
   <div>
     <%= f.label :pic_url %>
      <%= file_field_tag :file%>
-    <%= show_error_message('请上传活动图片') %>
+    <!-- <%#= show_error_message('请上传活动图片') %> -->
     <%#= f.text_field :pic_url, required: true%>
   </div>
-  <div>
+ <!--  <div>
     <%= f.label :limited_people%>
     <%= f.text_field :limited_people,:value=>0%>
-  </div>
+  </div> -->
   <div>
     <%= f.label :price %>
     <%= f.text_field :price%>
   </div>
   <div>
-    <%= f.text_field :goods_unit,placeholder: '团购商品单位，例如公斤'%>
+    <%= f.text_field :goods_unit,placeholder: t(:goods_unit)%>
   </div>
-  <div>
+ <!--  <div>
     <%= f.label :goods_small_than %>
     <%= f.text_field :goods_small_than, :value=>0%>
-  </div>
+  </div> -->
    <div>
     <%= f.label :goods_big_than %>
     <%= f.text_field :goods_big_than, :value=>0%>
   </div>
-  <div>
+ <!--  <div>
     <%= f.text_field :name, required: true, placeholder: '姓名'%>
     <%= show_error_message('活动联系人')%>
   </div>
   <div>
     <%= f.text_field :mobile, required: true, placeholder: '手机'%>
-    <%= show_error_message('活动联系电话')%>
-  </div>
+    <%#= show_error_message('活动联系电话')%>
+  </div> -->
   <div>
     <%= f.label :body %>
     <%= f.cktext_area :body, :class => 'someclass', :ckeditor => {:language => 'zh'} , required: true%>
-    <%= show_error_message('内容请不要超过1千字')%>
+    <!-- <%#= show_error_message('内容请不要超过1千字')%> -->
   </div>
   <div>
     <%= f.submit class: 'small button right' %>

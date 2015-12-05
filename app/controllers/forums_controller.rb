@@ -38,7 +38,7 @@ class ForumsController < ApplicationController
 					u.avatar = session[:avatar]
 					u.nickname = session[:nickname]
 				end.save
-				
+
 				login user.first
 				redirect_to '/' #清空传过来的参数
 			else
@@ -50,10 +50,14 @@ class ForumsController < ApplicationController
 		@events = Event.includes(:user)
 	  	@tags = Tag.order("rate DESC").limit(10)
 	    @topics = Topic.includes(:forum, :forum)
+
 	end
 
 	def show
 	    @forum  = Forum.find(params[:id])
 	    @topics = @forum.topics.includes(:forum)
+	    if signed_in?
+	    	 @plus_menu = [{name: t(:add_topic), path: new_forum_topic_path(@forum)}]
+        end
 	end
 end

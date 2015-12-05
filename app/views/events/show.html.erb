@@ -1,4 +1,4 @@
-<% provide :title, "活动: #{@event.title}" %>
+<% provide :title, "t(:event): #{@event.title}" %>
 <div class="row">
   <div class="large-12 columns">
     <div class="large-2 columns">
@@ -6,24 +6,24 @@
     </div>
 
     <div class="large-10 columns">
-      <h2><%= "[活动No.000000000#{@event.id}]#{@event.title}"%></h2>      
+      <h2><%= "[No.000000000#{@event.id}]#{@event.title}"%></h2>      
     </div>
     <div>
       <table style="width:100%">
         <tr>
-          <th>开始时间</th>
+          <th><%=t(:start_time)%></th>
           <td><%= @event.start_time.strftime("%Y-%m-%d %H:%M") %></td>
         </tr>
         <tr>
-          <th>结束时间</th>
+          <th><%=t(:end_time)%></th>
           <td><%=@event.end_time.strftime("%Y-%m-%d %H:%M")%></td>
         </tr>
         <tr>
-          <th>最少成团数量</th>
+          <th><%=t(:goods_big_than)%></th>
           <td><%=@event.goods_big_than%><%=@event.goods_unit%></td>
         </tr>
         <tr>
-          <th>价格</th>
+          <th><%=t(:price)%></th>
           <td>￥<%=@event.price%>/<%=@event.goods_unit%></td>
         </tr>
         <tr>
@@ -38,12 +38,6 @@
       <%= event_info(@event) %>
     </div>
     <div>
-      <%= link_to "发表评论", new_event_comment_path(@event),
-      class:"tiny button radius" if signed_in? %>
-
-
-      <%= link_to "#{@again}报名", new_event_participant_path(@event),
-      class:"tiny button radius " if signed_in? %>
       <%if signed_in?%>
         <% participant = Participant.find_by(user_id: current_user.id)%>
         <% if @event.id == participant.try(:event_id) && participant.status_pay == 0 %>
@@ -67,18 +61,17 @@
 
       <% if current_user == @event.user %>
 
-      <%= link_to "编辑", edit_event_path(@event), class:"tiny button radius" %>
-      <%= link_to "删除", @event,
-      method: :delete,
-      class:"tiny button alert radius",
-       data: {confirm: 'Konuyu silmek istediğinize emin misiniz?'} %>
-       <% end %>
+        <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_event_path(@event), class:"tiny button radius" %>
+        <%= link_to '<i class="fa fa-times"></i>'.html_safe, @event,method: :delete,
+                  class:"tiny button alert radius",
+                  data: {confirm: 'Konuyu silmek istediğinize emin misiniz?'} %>
+      <% end %>
      </div>
 
      <div class="comments">
        <ul class="tabs" data-tab role="tablist">
-        <li class="tab-title active"><a href="#participants">报名 (<%=@event.participants_count%>)</a></li>
-        <li class="tab-title"><a href="#comments">评论 (<%=@event.comments_count%>)</a></li>
+        <li class="tab-title active"><a href="#participants"><i class="fa fa-user"></i><%=t(:participant)%> (<%=@event.participants_count%>)</a></li>
+        <li class="tab-title"><a href="#comments"><i class="fa fa-comment"></i><%=t(:comment)%> (<%=@event.comments_count%>)</a></li>
       </ul>
       <div class="tabs-content">
         <div class="content active" id="participants">

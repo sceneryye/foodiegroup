@@ -1,13 +1,6 @@
-<% provide :title, "Forum: #{@forum.name}" %>
+<% provide :title, "#{@forum.name}" %>
 <% content_for(:forum_content) do %>
   <div class="columns">
-    <div>
-      <!-- <h1 class="left"><%= @forum.name %></h1> -->
-      <% if signed_in? %>
-        <%= link_to '新增话题', new_forum_topic_path(@forum),
-                               class: 'small new button right radius' %><hr>
-      <% end %>
-    </div>
     <div class="topics panel columns radius ">
       <% if @topics.any? %>
         <%= render @topics %>

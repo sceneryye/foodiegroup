@@ -28,22 +28,22 @@ class UsersController < ApplicationController
   end
 
   def show
-    type = params[:type] || '话题'
+    type = params[:type] || 'topic'
 
     case type 
-    when '话题'
+    when 'topic'
       @user = User.includes(:topics).find_by_username(params[:id])
       if @user
         @data = @user.topics.includes(:forum)
       end
-    when '评论'
+    when 'comment'
       @user = User.includes(:comments).find_by_username(params[:id])
       @data = @user.comments.includes(:topic)
       #@data = @user.comments.includes(:events)
-    when '活动'
+    when 'event'
       @user = User.includes(:events).find_by_username(params[:id])
       @data = @user.events
-     when '参与'
+     when 'participant'
       @user = User.includes(:participants).find_by_username(params[:id])
       @data = @user.participants.includes(:event)
     end

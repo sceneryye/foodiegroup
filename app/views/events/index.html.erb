@@ -1,4 +1,4 @@
-<p>活动查询</p>
+<!-- <p>活动查询</p>
 <table class="table">
 	<thead>
 		<tr>
@@ -10,17 +10,14 @@
 			</th>
 		</tr>
 	</thead>
-</table>
+</table> -->
 
-<% provide :title, "活动" %>
+<% provide :title, t(:event) %>
 <%# content_for(:event_content) do %>
   <div class="columns">
     <div>
-      <h1 class="left">活动</h1>
-      <% if signed_in? %>
-        <%= link_to '新增活动', new_event_path,
-                               class: 'small new button right radius' %><hr>
-      <% end %>
+      <h1 class="left"><%=t(:event)%></h1>
+      
     </div>
     <div class="topics panel columns radius ">
       <% if @events.any? %>

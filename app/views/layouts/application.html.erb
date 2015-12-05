@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "吃货帮" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : t(:site_name) %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -16,51 +16,55 @@
 <!--    <div class="wrapper">
      <div class="wrapper-inner"> -->
     <%#=render '/layouts/top_bar'%>
-  <div class="off-canvas-wrap docs-wrap" data-offcanvas>
-  <div class="inner-wrap">
-    <nav class="tab-bar">
-      <section class="left-small">
-        <a class="left-off-canvas-toggle menu-icon" ><span></span></a>
-      </section>
+  <div class="row">
+  <div class="large-12 columns">
+    <div class="sticky">
+  <nav class="top-bar" data-topbar role="navigation" data-topbar data-options="sticky_on: large">
+  <ul class="title-area">
+    <!-- Title Area -->
+    <li class="name">
+      <h1 class="title"><a href="/"><%=t(:site_name)%></a></h1>
+    </li>
+    <li class="toggle-topbar"><a href="#"><span><i class="fa fa-plus"></i></span></a></li>
+  </ul>
 
-      <section class="right tab-bar-section">
-        <h1 class="title"><%=t(:site_name)%></h1>
-      </section>
+  <section class="top-bar-section">
 
-    </nav>
-    <!-- Off Canvas Menu -->
-    <aside class="left-off-canvas-menu">
-        <!-- whatever you want goes here -->
-        <ul>
-          <li><%=link_to t(:home), root_path%></a></li>
-          <li><%=link_to t(:search), searchs_path%></li>
-          <li><%=link_to t(:events), events_path%></li>
-          <li><%=link_to t(:Topics), forums_url(forum_id:1)%></li> 
-          <li>
-              <%
-                if current_user
-                  @user_url="/#{current_user.username}"
-                else
-                  @user_url="/login"
-                end
-              %>
-              <%=link_to t(:user_center),@user_url%>
-          </li>
-        </ul>
-    </aside>
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="divider hide-for-small"></li>
+      <%@plus_menu.each do |link|%>
+      <li><%=link_to link[:name], link[:path]%></li>
+      <%end if @plus_menu%>
+    </ul>
+  </section>
+</nav>
+</div>
 
     <!-- main content goes here -->
     <%= yield %>
     <%= yield :content %>
 <!--   </div>
   </div> -->
+  <br>
+  <br>
+  <hr>
+  <footer id="footer">
+    <div class="row">
+        <div class="columns small-12">
+           &copy; 2014 - <span id='copyright_year'></span>, 吃货帮<br>                    
+             技术支持: <a target="_blank" href="http://www.trade-v.com/" title="上海普慧信息科技有限公司">上海普慧信息科技有限公司</a><br>
+        </div>
+    </div>
+  </footer><!--/#footer-->
+  <script>
+      var myDate = new Date();
+      var currentYear = myDate.getFullYear(); 
+      document.getElementById('copyright_year').innerText=currentYear;
+  </script> 
  <%=render '/layouts/menu'%>
 
-  <!-- close the off-canvas menu -->
-  <a class="exit-off-canvas"></a>
-
-  </div>
-</div>
+ 
    
 
    

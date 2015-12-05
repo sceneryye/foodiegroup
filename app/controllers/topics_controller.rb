@@ -25,6 +25,9 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.includes(:forum, :comments, :user).find(params[:id])
     @comments = @topic.comments.includes(:user)
+    if signed_in?
+     @plus_menu = [{name: t(:add_comment), path: new_event_comment_path(@topic)}]
+    end
   end
 
   def edit() end

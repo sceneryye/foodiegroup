@@ -12,11 +12,11 @@
       @topics_active = 'active'
   end
 %>
-<footer class="icon-bar five-up" role="navigation" id="bottomNav">
+<div class="icon-bar five-up" role="navigation" id="bottomNav">
   <a class="item <%=@forums_active%>" role="button" tabindex="0" aria-label="home" href="/">
     <i class="fa fa-home"></i>
   </a>
-  <a class="item <%=@searchs_active%>" role="button" tabindex="0" aria-label="search" href='/searchs'>
+  <a class="item <%=@searchs_active%>" role="button" tabindex="0" aria-label="search" href='/search'>
     <i class="fa fa-search"></i>
   </a>
   <a class="item <%=@events_active%>" role="button" tabindex="0" aria-label="events" href='/events'>
@@ -36,4 +36,4 @@
     <i class="fa fa-user"></i>
   </a>
  
-</footer>
+</div>

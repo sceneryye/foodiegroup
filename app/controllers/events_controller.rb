@@ -4,17 +4,24 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.includes(:user)
+    if signed_in?
+      @plus_menu = [{name: t(:add_event), path: new_event_path}]
+    end
   end
 
   def show
     @event  = Event.find(params[:id])
     @participants = @event.participants.includes(:user)
     @comments = @event.comments.includes(:user)
+
    #@goods_amount = Foodie::Participant.where
 
    if signed_in? 
     if @participants.where(:user_id => current_user.id).size>0
       @again = '再次'
+      @plus_menu = [{name: t(:add_comment), path: new_event_comment_path(@event)},
+                    {name: t(:enroll), path: new_event_participant_path(@event)}
+                  ]
     else
       @again = '立即'
     end

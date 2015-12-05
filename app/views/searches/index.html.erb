@@ -1,0 +1,31 @@
+<h4>搜索:<%=@keyword%></h4>
+<% provide :title, "搜索结果" %>
+
+ <div class="button-bar">
+        <ul class="button-group radius">
+          <li><%= link_to t(:topic), search_path(keyword: @keyword, type: 'topic'),
+                                     class: 'small button secondary'  if @keyword%></li>
+          <li><%= link_to t(:comment), search_path(keyword: @keyword, type: 'comment'),
+                                      class: 'small button secondary'  if @keyword%></li>
+          <li><%= link_to t(:event), search_path(keyword:@keyword, type: 'event'),
+                                      class: 'small button secondary'  if @keyword%></li>
+          <li><%= link_to t(:user), search_path(keyword:  @keyword, type: 'user'),
+                                      class: 'small button secondary'  if @keyword%></li>                           
+       
+        </ul>
+      </div>
+</div><hr>
+
+<%# content_for(:event_content) do %>
+  <div class="columns">
+    <div>
+       <% if @data.blank? %>
+    <p>没有搜到 <%= page %>。</p>
+  <% else %>
+    <%= render @data %>
+  <% end %>
+	</div>
+  </div>
+<%# end %>
+
+

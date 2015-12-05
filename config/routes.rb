@@ -10,6 +10,8 @@ RailsOnForum::Application.routes.draw do
   delete '/logout', to: 'sessions#destroy', as: :logout
   resource  :session, only: :create
 
+  resource :search
+
   resources :forums  do
     resources :topics, only: [:new, :create]
   end
@@ -18,7 +20,7 @@ RailsOnForum::Application.routes.draw do
     resources :comments, only: [:new, :create,:destroy]
   end
 
-  resources :searchs
+ 
 
   resources :events do 
     resources :participants do

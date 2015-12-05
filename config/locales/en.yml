@@ -203,15 +203,35 @@ en:
       long: "%B %d, %Y %H:%M"
       short: "%d %b %H:%M"
     pm: pm
+  placeholder:
+    events:
+      title: "Title"
 
-  event_no: Event's No.
-  sponsor: Sponsor
+  by: By
   price: Price
   participants: Participants
   comments: Comments
   site_name: Foodie Group Buying Group
   home: Home
   search: Search
-  events: Events
-  topics: Topics
-  user_center: User Center
+  event: Events
+  topic: Topics
+  user_center: User Center  
+  before: before.
+  more: More
+  add_comment: Add Comment
+  enroll: enroll
+  add_topic: Add Topic
+  add_event: Add Event
+  title: Title
+  goods_unit: Goods' unit
+  please_choose_event_time: Please choose event time
+  start_time: Start Time
+  end_time: End Time
+  price:  Price
+  goods_big_than: Goods Big Than
+  new_forum:  New Forum
+  edit_forum: Edit Forum
+  new_topic:  New Topic
+  edit_topic: Edit Topic
+  
