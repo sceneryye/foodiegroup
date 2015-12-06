@@ -26,5 +26,18 @@ module RailsOnForum
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :zh
+
+    #for rspec
+    config.generators do |g|
+      g.tset_framework :rspec,
+      fixtures: true,
+      view_specs: false,
+      helper_specs: false,
+      routing_specs: false,
+      controller_specs: true,
+      requeset_specs: false
+      g.fixture_replacement :factory_girl, dir: 'specs/factories'
+    end
+
   end
 end

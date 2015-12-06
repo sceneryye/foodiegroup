@@ -26,6 +26,16 @@ gem 'rest-client'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails', '~> 4.4'
+end
+
+group :text do
+  gem 'faker', '~> 1.6'
+  gem 'capybara', '~> 2.5'
+  gem 'database_cleaner', '~> 1.5'
+  gem 'launchy', '~> 2.4'
+  gem 'selenium-webdriver', '~> 2.43'
+
 end
 
 
