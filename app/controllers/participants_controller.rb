@@ -50,7 +50,7 @@ class ParticipantsController < ApplicationController
       from: from,
       openid: openid,
       event_id: event_id,
-      participant_id: participant_id
+      participant_id: participant_id,
       user_id: Participant.find(params[:id]).user_id
     }
     url = "http://www.trade-v.com/vshop/1/payments"
