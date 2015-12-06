@@ -39,7 +39,7 @@ class ParticipantsController < ApplicationController
   end
 
   def wechat_pay
-    money = (params[:money].to_f * 100).to_i
+    money = params[:money].to_f
     from = 'foodiegroup'
     openid = params[:openid]
     event_id = params[:event_id]
