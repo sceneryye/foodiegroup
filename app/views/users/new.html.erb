@@ -5,9 +5,9 @@
     <h2>欢迎您加入吃货帮!</h2>
     <%= render 'form' %>
   </div>
-<%else%>
-  <div class="large-4 medium-5 offset-1 columns panel">
-    <p>亲爱的<%=current_user.name%><%= current_user.sex=='2'? '小姐':'先生'%>：
+<%elsif session[:locale]=='zh'%>
+  <div class=" small-12 large-4 medium-5 columns panel">
+    <p>亲爱的<%=current_user.name%><%= current_user.sex=='2'? '小姐':'先生/小姐'%>：
 
       <p>恭喜您成为吃货帮会员，您的会员编号为:&nbsp;&nbsp;
         <span  style='font-size:12pt;font-weight:bold'>F0000<%= current_user.id%></span>
@@ -25,9 +25,33 @@
     <p>详细组织规则将另行择日公布。
 
     <p>吃货帮管理团队
-    <p>2015年11月27日</p>
+    <p><%=current_user.created_at.strftime("%Y-%m-%d")%></p>
     <div class="columns small-12 center">
       <%=link_to '立即体验', '/',class:'button'%>
     </div>  
+  </div
+    <%else%>
+    <div class=" small-12 large-4 medium-5 columns panel">
+      Dear <%=current_user.name%>:
+   
+      <p>Welcome to the Shanghai "Food Group-buying" group!Your registration number is: <span  style='font-size:12pt;font-weight:bold'>F0000<%= current_user.id%></span>.</p>
+      <p>This is a platform for Foodies to access special discounts through group buying deals! </p>
+      <p>We are building a platform to gather a big community in Shanghai to share amazing deals on our favourite foods products!</p>
+      <p>Invite more friends to the group to share the deals and get even higher discounts! </p>
+      <p>How to use this group and rules to follow:</p>
+      <dl>
+        <li>- The main discussions should be about food related topics, e.g. Your favourite dishes; what do you eat the most; what product you love but you would like to be cheaper etc. </li>
+        <li>- No spam, advertising or off-topic conversations are allowed. </li>
+        <li>- In this group conversation and contents should always be in ENGLISH. </li>
+        <li>- Special requests from producers, importers or distributors must be discussed in private.</li>
+      </dl>
+     
+      <p>Sincerely,<br>
+        Food Group-buying Team</p>
+        <p><%=current_user.created_at.strftime("%Y-%m-%d")%></p>
+       <div class="columns small-12 center">
+        <%=link_to 'Goto Homepage', '/',class:'button'%>
+      </div> 
+    </div> 
   <%end%>
 </div>
