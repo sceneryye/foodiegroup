@@ -39,11 +39,11 @@ class ParticipantsController < ApplicationController
   end
 
   def wechat_pay
-    money = (params[:money].to_f * 100).to_i,
-    from = 'foodiegroup',
-    openid = params[:openid],
-    event_id = params[:event_id],
-    participant_id = params[:id],
+    money = (params[:money].to_f * 100).to_i
+    from = 'foodiegroup'
+    openid = params[:openid]
+    event_id = params[:event_id]
+    participant_id = params[:id]
     Rails.logger.info money
     data = {
       money: 100,
