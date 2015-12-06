@@ -44,6 +44,7 @@ class ParticipantsController < ApplicationController
     openid = params[:openid],
     event_id = params[:event_id],
     participant_id = params[:id],
+    Rails.logger.info "The money equals #{money}!"
     data = {
       money: 100,
       from: from,
@@ -51,7 +52,7 @@ class ParticipantsController < ApplicationController
       event_id: event_id,
       participant_id: participant_id
     }
-    user_id = Participant.find(params[:id]).user_id
+    data["user_id"] = Participant.find(params[:id]).user_id
     url = "http://www.trade-v.com/vshop/1/payments"
 
     res_data_hash = RestClient.get url, {params: data}
