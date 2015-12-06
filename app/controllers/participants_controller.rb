@@ -44,7 +44,7 @@ class ParticipantsController < ApplicationController
     openid = params[:openid],
     event_id = params[:event_id],
     participant_id = params[:id],
-    Rails.logger.info "The money equals #{money}!"
+    Rails.logger.info money
     data = {
       money: 100,
       from: from,
