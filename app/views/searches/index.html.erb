@@ -1,5 +1,26 @@
-<h4>搜索:<%=@keyword%></h4>
-<% provide :title, "搜索结果" %>
+ <div class="topics panel columns radius ">
+        <%= form_for :search, url: search_path do |f|%>
+          <div class="small-8 columns">
+            <%= f.text_field :keyword, value:@keyword%>
+          </div>
+          <div class="small-4 columns">
+            <button type="submit" class="button postfix"><i class='fa fa-search'></i></button>
+            <!-- <input type="text" style="height:45px" placeholder="请输入您想搜索的内容..."> -->
+          </div>
+
+        <%end%>
+         <!--  <div class="small-6 columns">
+            <a href="/searchs" class="button split small"><i class="fa fa-search"></i><span data-dropdown="drop"></span></a><br>
+            <ul id="drop" class="f-dropdown" data-dropdown-content>
+              <li><a href="#"><i class="fa fa-user"></i></a></li>
+              <li><a href="#"><i class="fa fa-comment-o"></i></a></li>
+              <li><a href="#"><i class="fa fa-calendar"></i></a></li>
+            </ul>
+          </div> -->
+    </div>
+  </div>
+  <hr />
+<% provide :title, "search" %>
 
  <div class="button-bar">
         <ul class="button-group radius">
