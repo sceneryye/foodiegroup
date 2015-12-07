@@ -60,17 +60,17 @@ class ParticipantsController < ApplicationController
   end
 
   def wechat_notify_url
-    if params["result_code"] == 'success'
-      event_id, participant_id, user_id = params["xml"]["attach"].split('_')
+    if params["result_code"] == 'SUCCESS'
+      event_id, participant_id, user_id = params["attach"].split('_')
       Participant.find(params["participant_id"]).update(status_pay: 1)
       post_url = "http://www.trade-v.com/temp_info_api"
-      openid = params["xml"]["openid"]
+      openid = params["openid"]
       template_id = "E_Mfmg0TwyE3hRnccleURsU5QpqsPVsj0LD5dU4fu0Y"
       url = "http://182.254.137.73:5000/events/#{event_id}"
       title = Event.find(event_id).title
       data = {
         :first => '支付成功',
-        :orderMoneySum => params["xml"]["cash_fee"].to_f / 100.00,
+        :orderMoneySum => params["cash_fee"].to_f / 100.00,
         :orderProductName => title,
         :Remark => '您已支付成功！您可以在吃货帮查看更多详情'
       }
