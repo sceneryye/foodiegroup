@@ -2,7 +2,7 @@
 class ParticipantsController < ApplicationController
 
   skip_before_action :verify_authenticity_token, only: :wechat_notify_url
-  before_action :validate_user!
+  before_action :validate_user!, except: :wechat_notify_url
   before_action only: [:edit, :update, :destroy] do
     validate_permission!(select_participant.user)
   end
