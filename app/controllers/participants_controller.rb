@@ -69,10 +69,10 @@ class ParticipantsController < ApplicationController
       url = "http://182.254.137.73:5000/events/#{event_id}"
       title = Event.find(event_id).title
       data = {
-        :first => '支付成功',
-        :orderMoneySum => params["cash_fee"].to_f / 100.00,
-        :orderProductName => title,
-        :Remark => '您已支付成功！您可以在吃货帮查看更多详情'
+        :first => {:value => '支付成功', :color => "#173177"},
+        :orderMoneySum => {:value => params["cash_fee"].to_f / 100.00, :color => "#173177"},
+        :orderProductName => {:value => title, :color => "#173177"},
+        :Remark => {:value => '您已支付成功！您可以在吃货帮查看更多详情', :color => "#173177"}
       }
       post_data = {
         openid: openid,
