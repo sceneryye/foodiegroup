@@ -1,20 +1,20 @@
 #encoding:utf-8
 class ParticipantsController < ApplicationController
 
- skip_before_filter :verify_authenticity_token, only: :wechat_pay
- before_action :validate_user!
- before_action only: [:edit, :update, :destroy] do
-  validate_permission!(select_participant.user)
-end
-before_action :select_participant, only: [:edit, :update, :destroy]
-before_action only: [:new, :create] {@event = Event.find(params[:event_id])}
+  skip_before_action :verify_authenticity_token, only: :wechat_notify_url
+  before_action :validate_user!
+  before_action only: [:edit, :update, :destroy] do
+    validate_permission!(select_participant.user)
+  end
+  before_action :select_participant, only: [:edit, :update, :destroy]
+  before_action only: [:new, :create] {@event = Event.find(params[:event_id])}
 
-def new
-  @participant = @event.participants.new
-end
+  def new
+    @participant = @event.participants.new
+  end
 
-def confirm_paid
-  @participant = Participant.find(params[:id])
+  def confirm_paid
+    @participant = Participant.find(params[:id])
     if current_user = @participant.event.user #只能由活动发起人修改支付状态    
       @participant.update(:status_pay=>1)
     end
@@ -23,7 +23,7 @@ def confirm_paid
 
 
   def create  
-   
+
     # is_enrolled = @event.participants.where(:user_id => current_user.id).size
     # if  is_enrolled ==0
     @participant = @event.participants.new(participant_params)
