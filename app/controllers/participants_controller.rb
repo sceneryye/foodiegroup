@@ -1,19 +1,20 @@
 #encoding:utf-8
 class ParticipantsController < ApplicationController
- 
-  before_action :validate_user!
-  before_action only: [:edit, :update, :destroy] do
-    validate_permission!(select_participant.user)
-  end
-  before_action :select_participant, only: [:edit, :update, :destroy]
-  before_action only: [:new, :create] {@event = Event.find(params[:event_id])}
 
-  def new
-    @participant = @event.participants.new
-  end
+ skip_before_filter :verify_authenticity_token, only: :wechat_pay
+ before_action :validate_user!
+ before_action only: [:edit, :update, :destroy] do
+  validate_permission!(select_participant.user)
+end
+before_action :select_participant, only: [:edit, :update, :destroy]
+before_action only: [:new, :create] {@event = Event.find(params[:event_id])}
 
-  def confirm_paid
-    @participant = Participant.find(params[:id])
+def new
+  @participant = @event.participants.new
+end
+
+def confirm_paid
+  @participant = Participant.find(params[:id])
     if current_user = @participant.event.user #只能由活动发起人修改支付状态    
       @participant.update(:status_pay=>1)
     end
@@ -25,14 +26,14 @@ class ParticipantsController < ApplicationController
    
     # is_enrolled = @event.participants.where(:user_id => current_user.id).size
     # if  is_enrolled ==0
-      @participant = @event.participants.new(participant_params)
-      @participant.user = current_user
+    @participant = @event.participants.new(participant_params)
+    @participant.user = current_user
 
-      if @participant.save
-        redirect_to event_url(@event), notice: '活动报名成功'
-      else
-        render :new
-      end
+    if @participant.save
+      redirect_to event_url(@event), notice: '活动报名成功'
+    else
+      render :new
+    end
     # else
     #   redirect_to event_url(@event), notice: '您已经报过名了'
     # end
@@ -66,26 +67,26 @@ class ParticipantsController < ApplicationController
 
   def edit() end
 
-  def update
-    if @participant.update(participant_params)
-      redirect_to event_url(@participant.event), notice: '活动报名修改成功'
-    else
-      render :edit
+    def update
+      if @participant.update(participant_params)
+        redirect_to event_url(@participant.event), notice: '活动报名修改成功'
+      else
+        render :edit
+      end
+    end
+
+    def destroy
+      @participant.destroy
+      redirect_to event_url(@participant.event), notice: '取消报名成功'
+    end
+
+    private
+
+    def select_participant
+      @participant = Participant.find(params[:id])
+    end
+
+    def participant_params
+      params.require(:participant).permit(:name,:mobile,:people_amount,:goods_amount,:address)
     end
   end
-
-  def destroy
-    @participant.destroy
-    redirect_to event_url(@participant.event), notice: '取消报名成功'
-  end
-
-  private
-
-  def select_participant
-    @participant = Participant.find(params[:id])
-  end
-
-  def participant_params
-    params.require(:participant).permit(:name,:mobile,:people_amount,:goods_amount,:address)
-  end
-end
