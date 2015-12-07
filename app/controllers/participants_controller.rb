@@ -55,7 +55,7 @@ class ParticipantsController < ApplicationController
       user_id: Participant.find(params[:id]).user_id,
       event_name: event_name
     }
-    return redirect_to "http://www.trade-v.com/foodie/foodie_pay?#{data.to_query}"
+    return redirect_to "http://www.trade-v.com/foodies/foodie_pay?#{data.to_query}"
     # url = "http://www.trade-v.com/vshop/1/payments"
 
     # res_data_hash = RestClient.get url, {params: data}
