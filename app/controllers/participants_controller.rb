@@ -62,7 +62,7 @@ class ParticipantsController < ApplicationController
   def wechat_notify_url
     if params["result_code"] == 'SUCCESS'
       event_id, participant_id, user_id = params["attach"].split('_')
-      Participant.find(params["participant_id"]).update(status_pay: 1)
+      Participant.find(participant_id).update(status_pay: 1)
       post_url = "http://www.trade-v.com/temp_info_api"
       openid = params["openid"]
       template_id = "E_Mfmg0TwyE3hRnccleURsU5QpqsPVsj0LD5dU4fu0Y"
