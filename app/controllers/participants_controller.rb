@@ -56,11 +56,10 @@ class ParticipantsController < ApplicationController
       event_name: event_name
     }
     return redirect_to "http://www.trade-v.com/foodies/foodie_pay?#{data.to_query}"
-    # url = "http://www.trade-v.com/vshop/1/payments"
+  end
 
-    # res_data_hash = RestClient.get url, {params: data}
-    # return render :text => res_data_hash
-
+  def wechat_notify_url
+    
   end
 
   def edit() end
