@@ -70,7 +70,7 @@
 
      <div class="comments">
        <ul class="tabs" data-tab role="tablist">
-        <li class="tab-title active"><a href="/events/#{params[:id]}/participants/new"><i class="fa fa-user"></i><%=t(:participant)%> (<%=@event.participants_count%>)</a></li>
+        <li class="tab-title active"><a href="/events/#<%= params[:id] %>/participants/new"><i class="fa fa-user"></i><%=t(:participant)%> (<%=@event.participants_count%>)</a></li>
         <li class="tab-title"><a href="#comments"><i class="fa fa-comment"></i><%=t(:comment)%> (<%=@event.comments_count%>)</a></li>
       </ul>
       <div class="tabs-content">
