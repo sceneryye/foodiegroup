@@ -59,7 +59,9 @@ class ParticipantsController < ApplicationController
   end
 
   def wechat_notify_url
-    
+    if params["result_code"] == 'success'
+      Participant.find(params["participant_id"]).update(status_pay: 1)
+    end
   end
 
   def edit() end
