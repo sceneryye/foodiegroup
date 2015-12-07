@@ -43,6 +43,7 @@ class ParticipantsController < ApplicationController
     from = 'foodiegroup'
     openid = params[:openid]
     event_id = params[:event_id]
+    event_name = Event.find(event_id).title
     participant_id = params[:id]
     Rails.logger.info money
     data = {
@@ -51,12 +52,14 @@ class ParticipantsController < ApplicationController
       openid: openid,
       event_id: event_id,
       participant_id: participant_id,
-      user_id: Participant.find(params[:id]).user_id
+      user_id: Participant.find(params[:id]).user_id,
+      event_name: event_name
     }
-    url = "http://www.trade-v.com/vshop/1/payments"
+    return redirect_to "http://www.trade-v.com/foodie/foodie_pay?#{data.to_query}"
+    # url = "http://www.trade-v.com/vshop/1/payments"
 
-    res_data_hash = RestClient.get url, {params: data}
-    return render :text => res_data_hash
+    # res_data_hash = RestClient.get url, {params: data}
+    # return render :text => res_data_hash
 
   end
 
