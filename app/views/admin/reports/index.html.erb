@@ -2,6 +2,9 @@
   <h3>系统报告</h3>
 </div>
 
+<div class="counting">
+  <span class="text">统计：</span><span>会员数：<%= @user.count %></span><span>活动数：<%= Event.count %></span><span>话题数：<%= Topic.count %></span><span>评论数：<%= Comment.count %></span>
+</div>
 <div class="content">
   <table>
     <tr class="title">

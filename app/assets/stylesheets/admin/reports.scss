@@ -12,7 +12,17 @@ table {
   width: 80%;
   margin: 20px auto;
 }
-.paginate {
-  display: block;
+.pagination {
+  
   margin: 0 auto;
+}
+span {
+  padding-left: 200x;
+}
+span .text {
+  font-weight: bold;
+  padding-left: 0;
+}
+.counting  {
+  margin-bottom: 10px;
 }
