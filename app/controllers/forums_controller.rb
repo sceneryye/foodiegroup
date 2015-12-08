@@ -49,10 +49,10 @@ class ForumsController < ApplicationController
 		@events = Event.includes(:user).first
 	  	@tags = Tag.order("rate DESC").limit(10)
 	    @topics = Topic.includes(:forum, :forum).first
-	    
+
 	    if signed_in?
 	      @plus_menu = [{name: t(:add_event), path: new_event_path},
-	      				@plus_menu = [{name: t(:add_topic), path: new_forum_topic_path(1)}]
+	      				{name: t(:add_topic), path: new_forum_topic_path(1)}
 	      			]
 	    end
 

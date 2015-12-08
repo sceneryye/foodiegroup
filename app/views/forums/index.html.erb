@@ -77,8 +77,8 @@
 
   <div>
     <div class="events-index">
-      <% if @events.any? %>
-      <%= render @events.limit(1) %>
+      <% if @events %>
+      <%= render @events %>
       <% else %>
       <p>还没有任何活动。</p>
       <% end%>
@@ -92,8 +92,8 @@
   <!-- <div> -->
     <!-- <%# content_for(:forum_content) do %> -->
     <div class="topics-index">
-      <% if @topics.any? %>
-      <%= render @topics.limit(1) %>
+      <% if @topics%>
+      <%= render @topics %>
       <% else %>
       <p>还没有任何话题.</p>
       <% end%>
