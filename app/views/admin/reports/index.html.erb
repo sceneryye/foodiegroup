@@ -10,16 +10,22 @@
       <th>用户名字</th>
       <th>参与活动</th>
       <th>参与话题</th>
+      <th>发表活动</th>
+      <th>发表话题</th>
     </tr>
     <% @user.each_with_index do |user| %>
     <tr class="body">
       <td><%= user.id %></td>
       <td><%= user.username %></td>
       <td><%= user.name %></td>
+      <td><%= Participant.where(user_id: user.id).count %></td>
+      <td><%= user.comments.group(:topic_id).count.select {|key, value|key.present?}.count %></td>
       <td><%= user.events.count.to_i %></td>
       <td><%= user.topics.count.to_i %></td>
     </tr>
     <% end %>
   </table>
-  <%= will_paginate @user %>
+  <div class="paginate">
+    <%= will_paginate @user %>
+  </div>
 </div>
