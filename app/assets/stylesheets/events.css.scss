@@ -5,13 +5,13 @@
   clear: both;
 }
 .events-index {
-  background-color: #E7ECEF;
+  
 
   a, a:hover {
     color: black;
   }
   .event {
-    background-color: white;
+    
     margin-bottom: 10px;
     padding: 5px 0;
     .event-pic, .event-info {
@@ -19,7 +19,7 @@
     }
     .event-pic {
       width: 25%;
-      margin-left: 10px;
+      
       img {
         width: 100%;
       }
@@ -27,7 +27,7 @@
     .event-info {
       width: 70%;
       padding-left: 3%;
-      padding-top: 20px;
+      padding-top: 5px;
       padding-right: 1%;
       .event-title {
         font-size: 1.5em;
