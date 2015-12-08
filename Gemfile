@@ -14,6 +14,7 @@ gem 'paperclip'
 gem 'ckeditor', github: 'galetahub/ckeditor'
 
 gem 'rest-client'
+gem 'will_paginate', '~> 3.0.6'
 
 #group :assets do
    	gem 'sass-rails'#, '~> 5.0.3'
