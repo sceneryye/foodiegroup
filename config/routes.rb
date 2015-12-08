@@ -3,7 +3,7 @@ RailsOnForum::Application.routes.draw do
   
 
   namespace :admin do
-  resources :report
+  resources :reports
   end
 
   resource :votes, only: :create
