@@ -2,6 +2,10 @@ RailsOnForum::Application.routes.draw do
 
   
 
+  namespace :admin do
+  resources :report
+  end
+
   resource :votes, only: :create
 
   mount Ckeditor::Engine => '/ckeditor'
