@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : t(:site_name) %></title>
+
+    <%= stylesheet_link_tag    "admin/reports" %>
+    <%= javascript_include_tag "admin/reports" %>
+    
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+    <%= yield %>
+    
+    <%#= javascript_include_tag "application" 'data-turbolinks-track' => true %>
+     <%= javascript_include_tag "application"%>
+    <%= javascript_include_tag controller_name%>
+     
+  </body>
+</html>
