@@ -1,6 +1,6 @@
 module SessionsHelper
   def is_admin?
-    [1, 2, 3, 5, 25, 51].include? current_user.try :id
+    current_user.role == '1'
   end
 
   def autheorize_admin!
