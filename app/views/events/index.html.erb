@@ -15,10 +15,6 @@
 <% provide :title, t(:event) %>
 <%# content_for(:event_content) do %>
   <div class="columns">
-    <div>
-      <h1 class="left"><%=t(:event)%></h1>
-      
-    </div>
     <div class="topics panel columns radius ">
       <% if @events.any? %>
         <%= render @events %>

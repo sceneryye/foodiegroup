@@ -26,11 +26,16 @@ class SearchesController < ApplicationController
   def search
     type = params[:type] || 'event'
 
-    if  params[:search]
-      @keyword = q = params[:search][:keyword].strip
+    if params[:search]
+      @keyword = q = params[:search][:keyword]
     else
-      @keyword = q = params[:keyword].strip
+      @keyword = q = params[:keyword]
     end
+
+    if q.nil?
+      return 
+    end
+    q = q.strip
 
     q = q.gsub(/[\s,\.\*\+\/\-:'"!\&\^\[\]\(\)， 。：”’（）%@！、]+/,"%")
     @splits = q.split(/%+/)
