@@ -20,8 +20,8 @@ class EventsController < ApplicationController
     if @participants.where(:user_id => current_user.id).size>0
       @again = '再次'
       @plus_menu = [{name: t(:add_comment), path: new_event_comment_path(@event)},
-                    {name: t(:enroll), path: new_event_participant_path(@event)}
-                  ]
+        {name: t(:enroll), path: new_event_participant_path(@event)}
+      ]
     else
       @again = '立即'
     end
@@ -103,11 +103,17 @@ def create
   
 
   def destroy
+    @event = Event.find(params[:id])
+    if @event.delete
+      respond_to do |format|
+        format.js
+      end
+    end
   end
 
   private
   def set_event
-    @event = event.find(params[:id])
+    @event = Event.find(params[:id])
   end
 
   def event_params

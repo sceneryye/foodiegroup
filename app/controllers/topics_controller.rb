@@ -27,10 +27,10 @@ class TopicsController < ApplicationController
     @comments = @topic.comments.includes(:user)
     if signed_in?
      @plus_menu = [{name: t(:add_comment), path: new_topic_comment_path(@topic)}]
-    end
-  end
+   end
+ end
 
-  def edit() end
+ def edit() end
 
   def update
     if @topic.update(topic_params)
@@ -42,13 +42,16 @@ class TopicsController < ApplicationController
 
   def destroy
     @topic.destroy
-    redirect_to root_url, notice: '话题删除成功'
+    respond_to do |format|
+      format.html {redirect_to root_url, notice: '话题删除成功'}
+      format.js
+    end
   end
 
   private
-    def set_topic
-      @topic = Topic.find(params[:id])
-    end
+  def set_topic
+    @topic = Topic.find(params[:id])
+  end
 
   def topic_params
     params.require(:topic).permit(:title, :body)

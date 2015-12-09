@@ -1,0 +1,42 @@
+<div class="users_list">
+  <div class="title">
+    <h3>用户列表</h3>
+  </div>
+
+  <div class="navpath">
+    <span>
+      <%= link_to "首页", admin_reports_path %>
+    </span>
+    <span class="slash">/</span>
+    <span class="subpath">
+      用户列表
+    </span>
+  </div>
+  <div class="content">
+    <table>
+      <tr class="title">
+        <th>用户id</th>
+        <th>用户昵称</th>
+        <th>用户名字</th>
+        <th>用户手机</th>
+        <th>用户邮箱</th>
+        <th>用户职业</th>
+        <th>所属地区</th>
+      </tr>
+      <% @users.each_with_index do |user| %>
+      <tr class="body">
+        <td><%= user.id %></td>
+        <td><%= user.username %></td>
+        <td><%= user.name %></td>
+        <td><%= user.mobile %></td>
+        <td><%= user.email %></td>
+        <td><%= user.profession %></td>
+        <td><%= user.location %></td>
+      </tr>
+      <% end %>
+    </table>
+    <div class="paginate">
+    <%= will_paginate @users %>
+    </div>
+  </div>
+</div>

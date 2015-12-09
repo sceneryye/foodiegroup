@@ -1,5 +1,13 @@
 
+$slash-color: #C0C0C0;
+.navpath {
+  margin-left: 10%;
+  .subpath, .slash {
+    margin-left: 5px;
+    color: $slash-color;
+  }
 
+}
 /*****************index******************/
 
 .title {
