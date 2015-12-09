@@ -4,6 +4,9 @@ RailsOnForum::Application.routes.draw do
 
   namespace :admin do
   resources :reports
+  get '/users_list', to: 'reports#users_list'
+  get '/events_list', to: 'reports#events_list'
+  get '/topics_list', to: 'reports#topics_list'
   end
 
   resource :votes, only: :create

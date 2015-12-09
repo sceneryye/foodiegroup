@@ -3,7 +3,19 @@
 </div>
 
 <div class="counting">
-  <span class="text">统计：</span><span class="count">会员数：<%= @user.count %></span><span class="count">活动数：<%= Event.count %></span><span class="count">话题数：<%= Topic.count %></span><span class="count">评论数：<%= Comment.count %></span>
+  <span class="text">统计：</span><span class="count">
+  <%= link_to admin_users_list_path do %>
+  会员数：<%= @users.count %>
+  <% end %>
+</span><span class="count">
+<%= link_to admin_events_list_path do %>
+活动数：<%= Event.count %>
+<% end %>
+</span><span class="count">
+<%= link_to admin_topics_list_path do %>
+话题数：<%= Topic.count %>
+<% end %>
+</span><span class="count">评论数：<%= Comment.count %></span>
 </div>
 <div class="content">
   <table>
@@ -16,7 +28,7 @@
       <th>发表活动</th>
       <th>发表话题</th>
     </tr>
-    <% @user.each_with_index do |user| %>
+    <% @users.each_with_index do |user| %>
     <tr class="body">
       <td><%= user.id %></td>
       <td><%= user.username %></td>
@@ -29,6 +41,6 @@
     <% end %>
   </table>
   <div class="paginate">
-    <%= will_paginate @user %>
+    <%= will_paginate @users %>
   </div>
 </div>

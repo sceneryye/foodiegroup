@@ -10,7 +10,7 @@
         <div class="small-8 columns">
           <h2><%=@user.username if @user%></h2>
           <p><i class="fa fa-weixin"></i>:<%= @user.nickname  if @user%></p>
-          <p><i class="fa fa-group"></i>:<%= @user.group.name if @user%></p>
+          <p><i class="fa fa-group"></i>:<%= @user.group.try :name if @user%></p>
           <p><i class="fa fa-briefcase"></i>:<%= @user.profession if @user%></p>
           <p><i class="fa fa-map-marker"></i>:<%= @user.location if @user%></p>
         </div>
