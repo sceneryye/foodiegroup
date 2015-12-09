@@ -50,19 +50,10 @@ class ForumsController < ApplicationController
 	  	@tags = Tag.order("rate DESC").limit(10)
 	    @topics = Topic.includes(:forum, :forum).first
 
-	    if signed_in?
-	      @plus_menu = [{name: t(:add_event), path: new_event_path},
-	      				{name: t(:add_topic), path: new_forum_topic_path(1)}
-	      			]
-	    end
-
 	end
 
 	def show
 	    @forum  = Forum.find(params[:id])
 	    @topics = @forum.topics.includes(:forum)
-	    if signed_in?
-	    	 @plus_menu = [{name: t(:add_topic), path: new_forum_topic_path(@forum)}]
-        end
 	end
 end

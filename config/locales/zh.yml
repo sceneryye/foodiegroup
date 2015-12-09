@@ -306,9 +306,8 @@ zh:
   site_name: 吃货帮
   before: 前。
   more: 更多
-  add_comment: 添加评论
-  enroll: 立即报名
-  add_topic: 新增话题
+  new_comment: 添加评论
+  new_participant: 立即报名
   title: 标题
   goods_unit: 商品单位
   please_choose_event_time: 请输入活动时间
@@ -317,6 +316,7 @@ zh:
   price:  单价
   goods_big_than: 最少成团商品数量
   new_forum:  新增论坛
+  new_event:  新增活动
   edit_forum: 编辑论坛
   new_topic:  新增话题
   edit_topic: 编辑话题

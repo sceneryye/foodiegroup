@@ -4,9 +4,7 @@
   <p><%= @topic.body.html_safe  %></p>
   <%= topic_info(@topic) %>
 </div>
-<div>
-    <%#= link_to "添加评论", new_topic_comment_path(@topic),
-                              class:"tiny button radius" if signed_in? %>
+<div>   
     <% if current_user == @topic.user %>
       <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_topic_path(@topic), class:"tiny button radius" %>
       <%= link_to '<i class="fa fa-times"></i>'.html_safe, @topic,
@@ -18,4 +16,8 @@
 <div class="comments">
 <h2><i class="fa fa-comment"></i> (<%= @topic.comments_count %>)</h2><hr>
   <%= render @comments %>
+</div>
+<div>
+  <%= link_to t(:new_comment), new_topic_comment_path(@topic),
+                              class:"tiny button radius" if signed_in? %>
 </div>
