@@ -13,23 +13,22 @@
 
       <!-- Right Nav Section -->
       <ul class="right">
-      <li>
-      
-        <%if session[:locale] == 'en'%>  
-           <%=link_to '<i class="fa fa-language"></i>'.html_safe+' 中文',"#{request.url.sub('?locale=en','')}?locale=zh"%>
-        <%else%>
-          <%=link_to '<i class="fa fa-language"></i>'.html_safe+' English',"#{request.url.sub('?locale=zh','')}?locale=en"%>
-        <%end%>
+        <li>      
+          <%if session[:locale] == 'en'%>  
+             <%=link_to '<i class="fa fa-language"></i>'.html_safe+' 中文',"#{request.url.sub('?locale=en','')}?locale=zh"%>
+          <%else%>
+            <%=link_to '<i class="fa fa-language"></i>'.html_safe+' English',"#{request.url.sub('?locale=zh','')}?locale=en"%>
+          <%end%>
+        </li>
         <%if signed_in?%>
-          <%=link_to '<i class="fa fa-language"></i>'.html_safe+t(:new_event), new_event_path%>
-          <%=link_to '<i class="fa fa-language"></i>'.html_safe+t(:new_topic), new_forum_topic_path(1)%>
+          <li><%=link_to '<i class="fa fa-calendar"></i>'.html_safe+' '+t(:new_event), new_event_path%></li>
+          <li><%=link_to '<i class="fa fa-bullhorn"></i>'.html_safe+' '+t(:new_topic), new_forum_topic_path(1)%></li>
         <%else%>
-           <%=link_to '<i class="fa fa-language"></i>'.html_safe+t(:new_event), new_event_path%>
+          <li><%=link_to '<i class="fa  fa-sign-in"></i>'.html_safe+' '+t(:login), login_path%></li>
         <%end%>
-      </li>
-        <li class="divider hide-for-small"></li>
+          <li class="divider hide-for-small"></li>
         <%@plus_menu.each do |link|%>
-        <li><%=link_to link[:name], link[:path]%></li>
+          <li><%=link_to link[:name], link[:path]%></li>
         <%end if @plus_menu%>
       </ul>
     </section>
