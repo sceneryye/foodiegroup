@@ -17,11 +17,12 @@ class EventsController < ApplicationController
    #@goods_amount = Foodie::Participant.where
 
    if signed_in? 
+     @plus_menu = [{name: t(:new_comment), path: new_event_comment_path(@event)},
+                    {name: t(:new_participant), path: new_event_participant_path(@event)}
+                  ]
     if @participants.where(:user_id => current_user.id).size>0
       @again = '再次'
-      @plus_menu = [{name: t(:add_comment), path: new_event_comment_path(@event)},
-                    {name: t(:enroll), path: new_event_participant_path(@event)}
-                  ]
+     
     else
       @again = '立即'
     end

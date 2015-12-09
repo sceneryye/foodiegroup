@@ -219,10 +219,8 @@ en:
   user_center: User Center  
   before: before.
   more: More
-  add_comment: Add Comment
-  enroll: join
-  add_topic: Add Topic
-  add_event: Add Event
+  new_comment: Add Comment
+  new_participant: join
   title: Title
   goods_unit: Goods' unit
   please_choose_event_time: Please choose event time
