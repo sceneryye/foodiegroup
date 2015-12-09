@@ -1,5 +1,5 @@
 
-
+$mid-gray: #666362;
 /*****************index******************/
 
 .title {
@@ -25,4 +25,14 @@ table {
 .counting  {
   margin-bottom: 10px;
   margin-left: 10%;
+}
+
+/********************share css*******************/
+.navpath {
+  margin-left: 10%;
+  color: black;
+  .slash, .subpath {
+    padding-left: 5px;
+    color: $mid-gray;
+  }
 }
