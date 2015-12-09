@@ -6,68 +6,13 @@ class SearchesController < ApplicationController
 	end
 
 	def create
-		type = params[:type] || 'topic'
-
-    @keyword = q = params[:search][:keyword].strip
-    q = q.gsub(/[\s,\.\*\+\/\-:'"!\&\^\[\]\(\)， 。：”’（）%@！、]+/,"%")
-    @splits = q.split(/%+/)
-
-
-    case type 
-    when 'topic'
-      @splits.each do |key|
-        @data = Topic.where("title like :key or body like :key",:key=>"%#{key}%")
-      end
-    when 'comment'
-      @splits.each do |key|
-        @data = Comment.where("body like :key",:key=>"%#{key}%")
-      end
-    when 'event'
-      @splits.each do |key|
-        @data = Event.where("title like :key or body like :key",:key=>"%#{key}%")
-      end
-     when 'user'
-      @splits.each do |key|
-        @data = User.where("name like :key or nickname like :key",:key=>"%#{key}%")
-      end
-    end
-    render 'index', locals: {page: type}
+    render 'index', locals: {page: search}
 	end
 
 	def show
-
-    type = params[:type] || 'topic'
-
-    @keyword = params[:keyword]
-    if @keyowrd
-      q = @keyword.strip
-      q = q.gsub(/[\s,\.\*\+\/\-:'"!\&\^\[\]\(\)， 。：”’（）%@！、]+/,"%")
-      @splits = q.split(/%+/)
-
-
-      case type 
-      when 'topic'
-        @splits.each do |key|
-          @data = Topic.where("title like :key or body like :key",:key=>"%#{key}%")
-        end
-      when 'comment'
-        @splits.each do |key|
-          @data = Comment.where("body like :key",:key=>"%#{key}%")
-        end
-      when 'event'
-        @splits.each do |key|
-          @data = Event.where("title like :key or body like :key",:key=>"%#{key}%")
-        end
-       when 'user'
-        @splits.each do |key|
-          @data = User.where("name like :key or nickname like :key",:key=>"%#{key}%")
-        end
-      end
-    end
-    render 'index', locals: {page: type}
-
-
+    render 'index', locals: {page: search}
 	end
+
 	def tag
 
 	end
@@ -75,6 +20,41 @@ class SearchesController < ApplicationController
 	def user
 
 	end
+
+  private
+
+  def search
+    type = params[:type] || 'event'
+
+    if  params[:search]
+      @keyword = q = params[:search][:keyword].strip
+    else
+      @keyword = q = params[:keyword].strip
+    end
+
+    q = q.gsub(/[\s,\.\*\+\/\-:'"!\&\^\[\]\(\)， 。：”’（）%@！、]+/,"%")
+    @splits = q.split(/%+/)
+
+    case type 
+      when 'topic'
+        @splits.each do |key|
+          @data = Topic.where("title like :key or body like :key",:key=>"%#{q}%")
+        end
+      when 'comment'
+        @splits.each do |key|
+          @data = Comment.where("body like :key",:key=>"%#{q}%")
+        end       
+      when 'user'
+        @splits.each do |key|
+          @data = User.where("name like :key or nickname like :key",:key=>"%#{q}%")
+        end
+      else
+          type='event'
+         @splits.each do |key|
+          @data = Event.where("title like :key or body like :key",:key=>"%#{q}%")
+        end
+    end
+  end
 
 	
 

@@ -4,9 +4,6 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.includes(:user)
-    if signed_in?
-      @plus_menu = [{name: t(:add_event), path: new_event_path}]
-    end
   end
 
   def show

@@ -3,8 +3,7 @@
     <ul class="title-area">
       <!-- Title Area -->
       <li class="name middle">
-        <h1 class="title">
-        <a href="/"><%=t(:site_name)%></a></h1>      
+        <h1 class="title" style="color:white"><%= content_for?(:title) ? yield(:title) : t(:site_name) %></h1>      
       </li>
       <li class="toggle-topbar"><a href="#"><span><i class="fa fa-plus"></i></span></a></li>
     </ul>
