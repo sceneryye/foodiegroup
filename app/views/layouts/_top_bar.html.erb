@@ -20,12 +20,6 @@
         <%else%>
           <%=link_to '<i class="fa fa-language"></i>'.html_safe+' English',"#{request.url.sub('?locale=zh','')}?locale=en"%>
         <%end%>
-        <%if signed_in?%>
-          <%=link_to '<i class="fa fa-language"></i>'.html_safe+t(:new_event), new_event_path%>
-          <%=link_to '<i class="fa fa-language"></i>'.html_safe+t(:new_topic), new_forum_topic_path(1)%>
-        <%else%>
-           <%=link_to '<i class="fa fa-language"></i>'.html_safe+t(:new_event), new_event_path%>
-        <%end%>
       </li>
         <li class="divider hide-for-small"></li>
         <%@plus_menu.each do |link|%>
