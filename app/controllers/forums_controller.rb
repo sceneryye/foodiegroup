@@ -46,19 +46,14 @@ class ForumsController < ApplicationController
 			end
 		end
 
-		@events = Event.includes(:user).first
+		@events = Event.where(locale: session[:locale]).includes(:user).first
 	  	@tags = Tag.order("rate DESC").limit(10)
-	    @topics = Topic.includes(:forum, :forum).first
+	    @topics = Topic.where(forum_id:forum_id).includes(:forum, :forum).first
 
 	end
 
 	def show
-		if session[:locale]=='en'
-			id = 2
-		else
-			id=1
-		end
-	    @forum  = Forum.find(id)
+	    @forum  = Forum.find(forum_id)
 	    @topics = @forum.topics.includes(:forum)
 	end
 end

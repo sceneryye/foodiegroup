@@ -1,38 +1,29 @@
 
-
-<%= link_to event do %>
-<div class="event">
-  <div class="event-pic">
-    <img src="<%= event.pic_url %>" />
+<div class="row panel">
+  <div class="columns small-4">
+    <%= link_to event do %>
+    <img src="<%= event.pic_url %>"/>
+    <%end%>
   </div>
-  <div class="event-info">
-    <div class="event-title">
-      <%= event.title %>
+  <div class="columns small-8">
+    <h4><%= link_to event.title, event%></h4>
+      <span class="price"><%=t(:price)%>:&nbsp;<i class="fa fa-cny"></i><%=event.price %></span><br>
+      <span><%=t(:by)%>:&nbsp;<%=link_to event.user.username.html_safe,profile_path(event.user) %><span>   
+  </div>
+    <div class="columns small-6">
+      <%= "[No. #{event.id.to_s.rjust(10,'0')}]" %>
+     
     </div>
-    <div class="event-id-name">
-      <span class="event-id">
-        <%= "[No. 000000000#{event.id}]" %>
-      </span>
-      <span class="event-name">
-        <%="#{t(:by)}: #{event.name}" %>
-      </span>
-    </div>
-    <div class="event-other-info">
-      <span class="price">
-      <i class="fa fa-cny"></i><%=event.price %>
-      </span>
+    <div class="columns small-3">
       <span class="participants">
-       <i class="fa fa-user"></i>(<%=event.participants_count%>)
-      </span>
-      <span class="comments">
-        <i class="fa fa-comment"></i>(<%=event.comments_count%>)
+       <i class="fa fa-users"></i>(<%=event.participants_count%>)
       </span>
     </div>
-  </div>
-  <div class="clear"></div>
+    <div class="columns small-3">
+      <span class="comments">
+        <i class="fa fa-comments"></i>(<%=event.comments_count%>)
+      </span>
+    </div>
 </div>
-<% end %>
-<% if controller_name = 'events' %>
-<hr />
-<% end %>
+
 

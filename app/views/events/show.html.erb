@@ -6,7 +6,7 @@
     </div>
 
     <div class="large-10 columns">
-      <h2><%= "[No.000000000#{@event.id}]#{@event.title}"%></h2>      
+      <h2><%= "[No. #{@event.id.to_s.rjust(10,'0')}]" %></h2>      
     </div>
     <div>
       <table style="width:100%">

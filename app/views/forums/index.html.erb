@@ -21,61 +21,60 @@
      <%#end if @tags%> -->
    </ul>
  </div>
- <script type="text/javascript">
+<script type="text/javascript">
   window.onload = function() {
-
     try {
-              // var gradient = {
-              //  0:    '#f00', // red
-              //  0.33: '#ff0', // yellow
-              //  0.66: '#0f0', // green
-              //  1:    '#00f'  // blue
-              // };
-              // TagCanvas.weightGradient = gradient;
+            // var gradient = {
+            //  0:    '#f00', // red
+            //  0.33: '#ff0', // yellow
+            //  0.66: '#0f0', // green
+            //  1:    '#00f'  // blue
+            // };
+            // TagCanvas.weightGradient = gradient;
 
               TagCanvas.Start('myCanvas','tags',{
                 shape: "hcylinder",
                 lock: "x",
-            textColour: null,//'#008CBA',
-            textHeight: 20,
-            outlineColour: '#0000ff',
-            reverse: true,
-            depth: 0.5,
-            maxSpeed: 0.02
-          });
+                textColour: null,//'#008CBA',
+                textHeight: 20,
+                outlineColour: '#0000ff',
+                reverse: true,
+                depth: 0.5,
+                maxSpeed: 0.02
+              });
             } catch(e) {
           // something went wrong, hide the canvas container
           document.getElementById('myCanvasContainer').style.display = 'none';
         }
       };
-    </script>
 
-    <div class="large-12 columns">
-      <div class="topics panel columns radius ">
-        <%= form_for :search, url: search_path do |f|%>
-          <div class="small-8 columns">
-            <%= f.text_field :keyword,  placeholder: 'search' %>
-          </div>
-          <div class="small-4 columns">
-            <button type="submit" class="button postfix "><i class='fa fa-search'></i></button>
-            <!-- <input type="text" style="height:45px" placeholder="请输入您想搜索的内容..."> -->
-          </div>
+</script>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="topics panel columns radius ">
+      <%= form_for :search, url: search_path do |f|%>
+        <div class="small-8 columns">
+          <%= f.text_field :keyword,  placeholder: 'search' %>
+        </div>
+        <div class="small-4 columns">
+          <button type="submit" class="button postfix "><i class='fa fa-search'></i></button>
+          <!-- <input type="text" style="height:45px" placeholder="请输入您想搜索的内容..."> -->
+        </div>
 
-        <%end%>
-         <!--  <div class="small-6 columns">
-            <a href="/searchs" class="button split small"><i class="fa fa-search"></i><span data-dropdown="drop"></span></a><br>
-            <ul id="drop" class="f-dropdown" data-dropdown-content>
-              <li><a href="#"><i class="fa fa-user"></i></a></li>
-              <li><a href="#"><i class="fa fa-comment-o"></i></a></li>
-              <li><a href="#"><i class="fa fa-calendar"></i></a></li>
-            </ul>
-          </div> -->
+      <%end%>
+       <!--  <div class="small-6 columns">
+          <a href="/searchs" class="button split small"><i class="fa fa-search"></i><span data-dropdown="drop"></span></a><br>
+          <ul id="drop" class="f-dropdown" data-dropdown-content>
+            <li><a href="#"><i class="fa fa-user"></i></a></li>
+            <li><a href="#"><i class="fa fa-comment-o"></i></a></li>
+            <li><a href="#"><i class="fa fa-calendar"></i></a></li>
+          </ul>
+        </div> -->
     </div>
   </div>
-  <hr />
-
-
-  <div>
+</div>
+<div class="row">
+  <div class="columns small-12">
     <div class="events-index">
       <% if @events %>
       <%= render @events %>
@@ -84,11 +83,10 @@
       <% end%>
     </div>
   </div>
-  <div class="columns small-12 medium">
+  <div class="columns small-12 right panel">
     <a href="/events"><h4><%=t(:more)%>...</h4></a>
   </div>
-
-  <hr />
+</div>
   <!-- <div> -->
     <!-- <%# content_for(:forum_content) do %> -->
     <div class="topics-index">
@@ -101,7 +99,8 @@
    <!--  <%# end %>
   </div> -->
 <div class="columns small-12 medium">
-  <a href="/forums/1"><h4><%=t(:more)%>...</h4></a>
+  <a href="/forums/<%=forum_id%>"><h4><%=t(:more)%>...</h4></a>
 </div>
+<br>
 
   

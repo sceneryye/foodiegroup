@@ -3,7 +3,7 @@ require 'rest-client'
 class EventsController < ApplicationController
 
   def index
-    @events = Event.includes(:user)
+    @events = Event.where(locale: session[:locale]).includes(:user)
   end
 
   def show

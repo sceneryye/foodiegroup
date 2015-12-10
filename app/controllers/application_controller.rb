@@ -2,7 +2,7 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
   protect_from_forgery with: :exception
-  helper_method :signed_in?, :current_user
+  helper_method :signed_in?, :current_user,:forum_id
 
   before_action :set_locale
 
@@ -39,9 +39,9 @@ class ApplicationController < ActionController::Base
 
   def forum_id
     if session[:locale]=='en'
-      2
+      @forum_id=2
     else
-      1
+      @forum_id=1
     end
   end
 
