@@ -1,4 +1,4 @@
-<% provide :title, "#{t(:topic)}: #{@topic.title}" %>
+<% provide :title, t(:topic) %>
 <div class="topics panel columns radius ">
   <h2><%= @topic.title %></h2>
   <p><%= @topic.body.html_safe  %></p>
