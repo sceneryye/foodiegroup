@@ -14,8 +14,8 @@
 
 <% provide :title, t(:event) %>
 <%# content_for(:event_content) do %>
-  <div class="columns">
-    <div class="topics panel columns radius ">
+  <div class="columns small-12 medium-8 medium-centered large-6 large-centered">
+    <div class="events-index-list ">
       <% if @events.any? %>
         <%= render @events %>
       <% else %>

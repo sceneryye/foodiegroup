@@ -7,3 +7,54 @@
 .clear {
   clear: both;
 }
+
+/*****************index****************/
+.events-index-list {
+  
+.event {
+  
+  margin-bottom: 5px;
+  padding: 5px 0;
+  .event-pic, .event-info {
+    float: left;
+  }
+  .event-pic {
+    width: 25%;
+    margin-left: 10px;
+    img {
+      width: 100%;
+    }
+  }
+  .event-info {
+    width: 70%;
+    padding-left: 3%;
+    padding-top: 20px;
+    padding-right: 1%;
+    .event-title {
+      font-size: 1.5em;
+      line-height: 1.2em;
+    }
+    .event-id-name {
+      font-size: 0.8em;
+      color: #808080;
+      padding-top: 5px;
+      .event-name {
+        padding-left: 10px;
+      }
+    }
+    .event-other-info {
+      padding-top: 5px;
+      font-size: 0.8em;
+      .price {
+        font-size: 1.2em;
+        color: #0078A0;
+      }
+      .participants, .comments {
+        padding-left: 10px;
+        color: #808080;
+      }
+    }
+  }
+}
+
+}
