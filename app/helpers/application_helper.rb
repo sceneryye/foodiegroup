@@ -49,14 +49,14 @@ module ApplicationHelper
 
   def participant_info(participant)
     if participant.status_pay==1
-      is_paid ='已付款'
+      is_paid = t(:paid)
     else
-      is_paid='未付款'
+      is_paid= t(:unpaid)
     end
     info = ["<small class='details'>"]
     info << link_to( is_paid, '#', class: 'badge')   
     info << info_for(participant.user)
-    info << ' | 购买数量:' + participant.goods_amount.to_s + 'kg'
+    info << ' | ' + participant.goods_amount.to_s + 'kg'
 
    #info << '参加人数' + participant.people_amount.to_s
     #info << owner_buttons_for(participant) if current_user == participant.user

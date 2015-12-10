@@ -223,16 +223,18 @@ en:
   new_participant: Join Us
   title: Title
   goods_unit: Goods' unit
-  please_choose_event_during: Please choose event during
+  please_choose_event_duration: Please choose event's duration
   start_time: Start Time
   end_time: End Time
   price:  Price
-  goods_big_than: Goods Big Than
+  goods_big_than: Minimum amount of goods
   new_forum:  New Forum
   edit_forum: Edit Forum
   new_topic:  New Topic
   edit_topic: Edit Topic
   pay: Pay Now
-  reserved: Reserved
+  reservation: Reservations
   homepage: Homepage
+  unpaid: Unpaid
+  paid: Paid
   

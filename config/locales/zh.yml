@@ -310,7 +310,7 @@ zh:
   new_participant: 立即报名
   title: 标题
   goods_unit: 商品单位
-  please_choose_event_during: 请输入活动时间
+  please_choose_event_duration: 请输入活动时间
   start_time: 开始时间
   end_time: 结束时间
   price:  单价
@@ -321,8 +321,10 @@ zh:
   new_topic:  新增话题
   edit_topic: 编辑话题
   pay: 立即支付
-  reserved: 报名人数
+  reservation: 报名人数
   homepage: 首页
+  unpaid: 未付款
+  paid: 已付款
     
 
  
