@@ -53,7 +53,12 @@ class ForumsController < ApplicationController
 	end
 
 	def show
-	    @forum  = Forum.find(params[:id])
+		if session[:locale]=='en'
+			id = 2
+		else
+			id=1
+		end
+	    @forum  = Forum.find(id)
 	    @topics = @forum.topics.includes(:forum)
 	end
 end

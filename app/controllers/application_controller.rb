@@ -37,6 +37,14 @@ class ApplicationController < ActionController::Base
     #@current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+  def forum_id
+    if session[:locale]=='en'
+      2
+    else
+      1
+    end
+  end
+
   def signed_in?
     current_user
   end

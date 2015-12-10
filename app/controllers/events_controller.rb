@@ -33,6 +33,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.user = current_user
+    @event.locale = session[:locale]
 
     uploaded_io = params[:file]
     if !uploaded_io.blank?
