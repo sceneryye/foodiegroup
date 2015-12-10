@@ -219,11 +219,11 @@ en:
   user_center: User Center  
   before: before.
   more: More
-  new_comment: Add Comment
-  new_participant: join
+  new_comment: New Comment
+  new_participant: Join Us
   title: Title
   goods_unit: Goods' unit
-  please_choose_event_time: Please choose event time
+  please_choose_event_during: Please choose event during
   start_time: Start Time
   end_time: End Time
   price:  Price

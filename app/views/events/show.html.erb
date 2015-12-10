@@ -1,4 +1,4 @@
-<% provide :title, "#{t(:event)}: #{@event.title}" %>
+<% provide :title, @event.title %>
 <div class="row">
   <div class="large-12 columns">
     <div class="large-2 columns">
@@ -38,9 +38,9 @@
       <%= event_info(@event) %>
     </div>
     <div>
-       <%= link_to t(:new_comment), new_event_comment_path(@event),
+       <%= link_to t(:comment), new_event_comment_path(@event),
                               class:"tiny button radius" if signed_in? %>
-       <%= link_to t(:new_participant), new_event_comment_path(@event),
+       <%= link_to t(:new_participant), new_event_participant_path(@event),
                               class:"tiny button radius" if signed_in? %>
       
 

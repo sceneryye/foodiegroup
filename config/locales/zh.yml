@@ -297,7 +297,7 @@ zh:
       update: "更新%{model}"
       submit: "提交%{model}"
 
-  events: 活动
+  event: 活动
   topic: 话题
   by: 发起人
   price: 价格
@@ -310,7 +310,7 @@ zh:
   new_participant: 立即报名
   title: 标题
   goods_unit: 商品单位
-  please_choose_event_time: 请输入活动时间
+  please_choose_event_during: 请输入活动时间
   start_time: 开始时间
   end_time: 结束时间
   price:  单价
