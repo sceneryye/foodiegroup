@@ -101,11 +101,11 @@ class EventsController < ApplicationController
   
 
   def destroy
-    @event = Event.find(params[:id])
-    @event.delete
-    respond_to do |format|
-      format.js
+    @event = Event.find_by_id(params[:id])
+    if @event
+      @event.delete
     end
+    redirect_to events_path
   end
 
   private
