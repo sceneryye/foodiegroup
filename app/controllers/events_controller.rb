@@ -54,7 +54,7 @@ class EventsController < ApplicationController
     if @event.save
       post_url = "http://www.trade-v.com/send_group_message_api"
       # openids = User.plunk(:weixin_openid)
-      openids = ["oVxC9uA1tLfpb7OafJauUm-RgzQ8", "oVxC9uDhsiNDxWV4u7KdukRjceQM"]
+      openids = "oVxC9uA1tLfpb7OafJauUm-RgzQ8"
       msgtype = "text"
       content = "吃货帮刚刚发布了一个新活动：#{@event.title}, 赶紧来看看哦～"
       data_hash = {
