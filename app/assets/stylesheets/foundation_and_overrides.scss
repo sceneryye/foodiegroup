@@ -697,11 +697,11 @@ $primary-color: #008CBA;
 // $icon-bar-hover-color: $primary-color;
 // $icon-bar-icon-color: $white;
 // $icon-bar-icon-color-hover: $icon-bar-icon-color;
-// $icon-bar-icon-size: 1.875rem;
-// $icon-bar-image-width: 1.875rem;
-// $icon-bar-image-height: 1.875rem;
+ $icon-bar-icon-size: 1.2rem;
+ $icon-bar-image-width: 1.2rem;
+ $icon-bar-image-height: 1.2rem;
 // $icon-bar-active-color: $primary-color;
-// $icon-bar-item-padding: 1.25rem;
+ $icon-bar-item-padding: 0.8rem;
 
 // 13. Inline Lists
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1370,7 +1370,7 @@ $primary-color: #008CBA;
 // $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
-// $topbar-bg-color: $oil;
+$topbar-bg-color: $primary-color;
 // $topbar-bg: $topbar-bg-color;
 
 // Height and margin
@@ -1382,10 +1382,10 @@ $primary-color: #008CBA;
 // $topbar-title-font-size: rem-calc(17);
 
 // Style the top bar dropdown elements
-// $topbar-dropdown-bg: $oil;
+ $topbar-dropdown-bg: $primary-color;
 // $topbar-dropdown-link-color: $white;
-// $topbar-dropdown-link-bg: $oil;
-// $topbar-dropdown-link-bg-hover: $oil;
+ $topbar-dropdown-link-bg: $yellow;
+ $topbar-dropdown-link-bg-hover: $yellow;
 // $topbar-dropdown-link-weight: $font-weight-normal;
 // $topbar-dropdown-toggle-size: 5px;
 // $topbar-dropdown-toggle-color: $white;
@@ -1401,7 +1401,7 @@ $primary-color: #008CBA;
 // $topbar-link-hover-lightness: -10%; // Darken by 10%
 // $topbar-link-bg: $topbar-bg;
 // $topbar-link-bg-color-hover: $charcoal;
-// $topbar-link-bg-hover: $oil;
+ $topbar-link-bg-hover: $yellow;
 // $topbar-link-bg-active: $primary-color;
 // $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
  $topbar-link-font-family: $body-font-family;

@@ -2,7 +2,7 @@
 <%= form_for @event, data: {abide: ''}  ,:html => {:multipart => true} do|f| %>
   <%= render 'layouts/form_errors', object: @event %>
   <div>
-    <%= f.text_field :title, required: true,placeholder: "#{t(:event)} #{t(:title)} %>
+    <%= f.text_field :title, required: true,placeholder: "#{t(:event)} #{t(:title)}" %>
    <!--  <%#= show_error_message('活动名称，不能为空！') %> -->
   </div>
   <div>    
