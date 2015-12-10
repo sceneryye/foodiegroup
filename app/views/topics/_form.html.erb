@@ -8,8 +8,8 @@
   </div>
   <div>
     <%= f.label :body %>
-    <%#= f.text_area :body, class:'topic-area', required: true, pattern: ".{20,}" %>
-    <%= f.cktext_area :body, :class => 'someclass', :ckeditor => {:language => 'zh'} , required: true%>
+    <%= f.text_area :body, class:'topic-area', required: true%>
+    <%#= f.cktext_area :body, :class => 'someclass', :ckeditor => {:language => 'zh'} , required: true%>
     <%= show_error_message('内容请不要超过1千字')%>
   </div>
   <div>

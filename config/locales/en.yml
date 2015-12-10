@@ -214,8 +214,8 @@ en:
   site_name: Foodie Group Buying Group
   home: Home
   search: Search
-  event: Events
-  topic: Topics
+  event: Event
+  topic: Topic
   user_center: User Center  
   before: before.
   more: More
@@ -227,7 +227,7 @@ en:
   start_time: Start Time
   end_time: End Time
   price:  Price
-  goods_big_than: Minimum amount of goods
+  goods_big_than: Minimum quantity
   new_forum:  New Forum
   edit_forum: Edit Forum
   new_topic:  New Topic
@@ -236,5 +236,7 @@ en:
   reservation: Reservations
   homepage: Homepage
   unpaid: Unpaid
+  pic_url: Picture upload
   paid: Paid
+  body: detail
   

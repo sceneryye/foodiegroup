@@ -10,11 +10,11 @@
     <table class="table">
       <thead>
         <tr>         
-          <th> <%= f.label :start_time %>
-            <%= f.text_field :start_time, required: true,:class=>"span2",:id=>"dpd2"%>
+          <th> <%#= f.label :start_time %>
+            <%= f.text_field :start_time, required: true,:class=>"span2",:id=>"dpd2",placeholder: t(:start_time)%>
           </th>
-           <th><%= f.label :end_time %>
-             <%= f.text_field :end_time, required: true,:class=>"span2",:id=>"dpd1"%>
+           <th><%#= f.label :end_time %>
+             <%= f.text_field :end_time, required: true,:class=>"span2",:id=>"dpd1",placeholder: t(:end_time)%>
           </th>
         </tr>
       </thead>
@@ -25,7 +25,8 @@
     <%= f.text_field :event_type, value:'tuan', required: true%>
   </div> -->
   <div>
-    <%= f.label :pic_url %>
+    <%#= f.label :pic_url %>
+    <span><%=t(:pic_url)%>
      <%= file_field_tag :file%>
     <!-- <%#= show_error_message('请上传活动图片') %> -->
     <%#= f.text_field :pic_url, required: true%>
@@ -35,8 +36,8 @@
     <%= f.text_field :limited_people,:value=>0%>
   </div> -->
   <div>
-    <%= f.label :price %>
-    <%= f.text_field :price%>
+    <!-- <%#= f.label :price %> -->
+    <%= f.text_field :price,placeholder: t(:price)%>
   </div>
   <div>
     <%= f.text_field :goods_unit,placeholder: t(:goods_unit)%>
@@ -46,8 +47,8 @@
     <%= f.text_field :goods_small_than, :value=>0%>
   </div> -->
    <div>
-    <%= f.label :goods_big_than %>
-    <%= f.text_field :goods_big_than, :value=>0%>
+    <!-- <%#= f.label :goods_big_than %> -->
+    <%= f.text_field :goods_big_than,placeholder: t(:goods_big_than)%>
   </div>
  <!--  <div>
     <%= f.text_field :name, required: true, placeholder: '姓名'%>
@@ -58,8 +59,9 @@
     <%#= show_error_message('活动联系电话')%>
   </div> -->
   <div>
-    <%= f.label :body %>
-    <%= f.cktext_area :body, :class => 'someclass', :ckeditor => {:language => 'zh'} , required: true%>
+    <%#= f.label :body %>
+    <%= f.text_area :body,placeholder: t(:body)%>
+    <!-- <%#= f.cktext_area :body, :class => 'someclass', :ckeditor => {:language => 'zh'} , required: true%> -->
     <!-- <%#= show_error_message('内容请不要超过1千字')%> -->
   </div>
   <div>
