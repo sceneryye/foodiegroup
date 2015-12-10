@@ -26,7 +26,7 @@ class TopicsController < ApplicationController
     @topic = Topic.includes(:forum, :comments, :user).find(params[:id])
     @comments = @topic.comments.includes(:user)
     if signed_in?
-     @plus_menu = [{name: t(:add_comment), path: new_topic_comment_path(@topic)}]
+     @plus_menu = [{name: t(:new_comment), path: new_topic_comment_path(@topic)}]
    end
  end
 
