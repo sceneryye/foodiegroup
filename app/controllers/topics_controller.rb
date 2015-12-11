@@ -41,7 +41,7 @@ class TopicsController < ApplicationController
   end
 
   def destroy
-    @topic.delete
+    @topic.destroy
     respond_to do |format|
       format.html {redirect_to root_url, notice: '话题删除成功'}
       format.js
