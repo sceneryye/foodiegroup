@@ -13,39 +13,39 @@ class EventsController < ApplicationController
 
    #@goods_amount = Foodie::Participant.where
 
-    if signed_in? 
-       @plus_menu = [{name: '<i class="fa  fa-comment"></i>'.html_safe+' '+t(:new_comment), path: new_event_comment_path(@event)},
-        {name: '<i class="fa  fa-sign-in"></i>'.html_safe+' '+t(:new_participant), path: new_event_participant_path(@event)}
-      ]
-      if @participants.where(:user_id => current_user.id).size>0
-        @again = '再次'     
-      else
-        @again = '立即'
-      end
+   if signed_in? 
+     @plus_menu = [{name: '<i class="fa  fa-comment"></i>'.html_safe+' '+t(:new_comment), path: new_event_comment_path(@event)},
+      {name: '<i class="fa  fa-sign-in"></i>'.html_safe+' '+t(:new_participant), path: new_event_participant_path(@event)}
+    ]
+    if @participants.where(:user_id => current_user.id).size>0
+      @again = '再次'     
+    else
+      @again = '立即'
     end
-
   end
 
-  def new
-   @event = Event.new
-  end
+end
 
-  def create
-    @event = Event.new(event_params)
-    @event.user = current_user
-    @event.locale = session[:locale]
+def new
+ @event = Event.new
+end
 
-    uploaded_io = params[:file]
-    if !uploaded_io.blank?
-      extension = uploaded_io.original_filename.split('.')
-      filename = "#{Time.now.strftime('%Y%m%d%H%M%S')}.#{extension[-1]}"
-      filepath = "#{PIC_PATH}/events/#{filename}"
-      File.open(filepath, 'wb') do |file|
-        file.write(uploaded_io.read)
-      end
+def create
+  @event = Event.new(event_params)
+  @event.user = current_user
+  @event.locale = session[:locale]
+
+  uploaded_io = params[:file]
+  if !uploaded_io.blank?
+    extension = uploaded_io.original_filename.split('.')
+    filename = "#{Time.now.strftime('%Y%m%d%H%M%S')}.#{extension[-1]}"
+    filepath = "#{PIC_PATH}/events/#{filename}"
+    File.open(filepath, 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
         # event_params.merge!(:pic_url=>"/events/#{filename}")
         @event.pic_url = "/events/#{filename}"
-    end
+      end
 
     #  return render :text=>  event_params
 
@@ -105,6 +105,7 @@ class EventsController < ApplicationController
     @event.destroy
     respond_to do |format|
       format.js
+      format.html {redirect_to events_path}
     end
   end
 
