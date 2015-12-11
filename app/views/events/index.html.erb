@@ -14,15 +14,15 @@
 
 <% provide :title, t(:event) %>
 <%# content_for(:event_content) do %>
-  <div class="columns small-12 medium-8 medium-centered large-6 large-centered">
+
     <div class="events-index-list ">
       <% if @events.any? %>
-        <%= render @events %>
+      <%= render partial: 'event2', locals: {events: @events} %>
       <% else %>
-        <p>还没有任何活动。</p>
+      <p>还没有任何活动。</p>
       <% end%>
     </div>
-  </div>
+  
 <%# end %>
 
 

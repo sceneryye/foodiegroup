@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
   def login(user)
     session[:user_id] = user.id
-    if user.group.name =='Foodie Group Buying Group'
+    if user.group.try(:name) =='Foodie Group Buying Group'
       session[:locale]='en'
     else
       session[:locale]='zh'
