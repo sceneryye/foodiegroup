@@ -46,7 +46,7 @@ class ForumsController < ApplicationController
 			end
 		end
 
-		@events = Event.where("locale='#{session[:locale]}' and recommend>0").includes(:user).order('recommend DESC')
+		@events = Event.where("(locale='#{session[:locale]}' and recommend>0 or id = 41) and id != 3").includes(:user).order('recommend DESC')
 	  	@tags = Tag.order("rate DESC").limit(10)
 	    @topics = Topic.where(forum_id:forum_id).includes(:forum, :forum).first
 
