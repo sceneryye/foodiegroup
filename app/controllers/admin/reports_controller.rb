@@ -3,7 +3,6 @@ class Admin::ReportsController < ApplicationController
   layout 'admin'
   def index
     @users = User.paginate(per_page: 20, page: params[:page]).order(id: :asc)
-    render layout: 'admin'
   end
 
   def users_list

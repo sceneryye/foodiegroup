@@ -17,7 +17,8 @@
 
     <div class="events-index-list ">
       <% if @events.any? %>
-      <%= render partial: 'event2', locals: {events: @events} %>
+      <%#= render partial: 'event2', locals: {events: @events} %>
+      <%= render @events %>
       <% else %>
       <p>还没有任何活动。</p>
       <% end%>
