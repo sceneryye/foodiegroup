@@ -40,9 +40,13 @@
       <td><%= @event.price %></td>
       <td><%= p.goods_amount * @event.price %></td>
       <td><%= is_paid p %></td>
-      <td><%= is_shiped p %></td>
+      <td id="participant-<%= p.id %>" ><%= is_shiped p %></td>
       <td><%= p.created_at.strftime('%F') %></td>
-      <td id="participant-<%= p.id %>"></td>
+      <td class="participant-ship-confirm" data-id="<%= p.id %>" data-url="<%= confirm_shiped_event_participant_path(@event.id, p.id) %>">
+        <% if p.status_ship == 0 %>
+        <div class="ship-confirm">发货确认</div>
+        <% end %>
+      </td>
     </tr>
     <% end %>
   </table>

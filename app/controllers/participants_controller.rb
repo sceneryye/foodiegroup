@@ -21,6 +21,14 @@ class ParticipantsController < ApplicationController
     redirect_to event_url(@participant.event), notice: '确认付款'
   end
 
+  def confirm_shiped
+    participant = Participant.find(params[:id])
+    if is_admin?
+      participant.update(status_ship: 1)
+      return render :text => 'success'
+    end
+  end
+
 
   def create  
 
@@ -106,6 +114,6 @@ class ParticipantsController < ApplicationController
     end
 
     def participant_params
-      params.require(:participant).permit(:name,:mobile,:people_amount,:goods_amount,:address)
+      params.require(:participant).permit(:name,:mobile,:people_amount,:goods_amount,:address, :remark)
     end
   end

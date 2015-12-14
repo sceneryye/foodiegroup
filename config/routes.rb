@@ -33,6 +33,7 @@ RailsOnForum::Application.routes.draw do
   resources :events do 
     resources :participants do
        get   'confirm_paid'  ,on: :member
+       post 'confirm_shiped', on: :member
        post 'wechat_pay', on: :member
     end
     resources :comments, only: [:new, :create]
