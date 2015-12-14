@@ -50,7 +50,7 @@ end
 def participant_info(participant)
 
   info = ["<small class='details'>"]
-  info << link_to( is_paid participant, '#', class: 'badge')   
+  info << link_to( is_paid(participant), '#', class: 'badge')   
   info << info_for(participant.user)
   info << ' | ' + participant.goods_amount.to_s + Event.find(participant.event_id).goods_unit
 
