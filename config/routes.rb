@@ -7,6 +7,7 @@ RailsOnForum::Application.routes.draw do
   get '/users_list', to: 'reports#users_list'
   get '/events_list', to: 'reports#events_list'
   get '/topics_list', to: 'reports#topics_list'
+  get '/participants_list', to: 'reports#participants_list'
   end
 
   resource :votes, only: :create

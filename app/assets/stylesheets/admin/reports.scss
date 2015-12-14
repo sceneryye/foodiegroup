@@ -1,20 +1,6 @@
 
 $mid-gray: #666362;
 /*****************index******************/
-
-.title {
-  text-align: center;
-  margin-top: 30px;
-}
-table {
-  width: 80%;
-  margin: 20px auto;
-}
-.pagination {
-  position: absolute;
-  right: 10%;
-  padding-bottom: 50px;
-}
 .count {
   margin-left: 20px;
 }
@@ -28,11 +14,40 @@ table {
 }
 
 /********************share css*******************/
+.pagination {
+  position: absolute;
+  right: 10%;
+  padding-bottom: 50px;
+}
+table {
+  width: 90%;
+  margin: 20px auto;
+}
+.title {
+  text-align: center;
+  margin-top: 30px;
+}
 .navpath {
-  margin-left: 10%;
+  margin-left: 5%;
   color: black;
-  .slash, .subpath {
+  a, a:hover, a:visited {
+    color: black;
+    background-color: white;
+  }
+  a:hover {
+    color: white;
+    background-color: black;
+  }
+  .slash, .subpath, .thirdpath {
     padding-left: 5px;
+    color: $mid-gray;
+  }
+}
+
+/******************participants_list***************/
+
+.participants_list {
+  h4 {
     color: $mid-gray;
   }
 }

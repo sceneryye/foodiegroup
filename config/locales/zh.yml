@@ -328,6 +328,8 @@ zh:
   pic_url: 图片上传
   body: 内容
   waiting_confirm: 等待付款确认
-    
+  shiped: 已发货
+  unshiped: 未发货
+  received: 已收货
 
  

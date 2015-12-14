@@ -7,14 +7,14 @@ module ApplicationHelper
     { notice: 'success',
       alert:  'info',
       error:  'warning' }[type]
-  end
+    end
 
-  def form_params(parent, child)
-    child.new_record? ? [parent, child] : child
-  end
+    def form_params(parent, child)
+      child.new_record? ? [parent, child] : child
+    end
 
-  def topic_info(topic)
-    info = ["<small class='details'>"]
+    def topic_info(topic)
+      info = ["<small class='details'>"]
     # info << badge_for(topic.forum) unless params[:controller] == 'forums' &&
     #                                       params[:action]     == 'show'
     info << info_for(topic.user)   unless params[:controller] == 'users'
@@ -26,62 +26,78 @@ module ApplicationHelper
   def event_info(event)
     info = ["<small class='details'>"]
   #  info << link_to(event.event_type, '#', class: 'badge')    
-    info << info_for(event.user)   unless params[:controller] == 'users'
-    info << time_for(event)<< '</small>' 
-    info << vote_for(event) 
-    info.join.html_safe
+  info << info_for(event.user)   unless params[:controller] == 'users'
+  info << time_for(event)<< '</small>' 
+  info << vote_for(event) 
+  info.join.html_safe
+end
+
+def comment_info(comment)
+  info = ["<small class='details'>"]
+  if comment.topic
+    info << badge_for(comment.topic) unless params[:controller] == 'topics'
+  elsif comment.event
+    info << badge_for(comment.event) unless params[:controller] == 'event'
   end
+  info << info_for(comment.user)   unless params[:controller] == 'users'
+  info << time_for(comment)
+  info << owner_buttons_for(comment) if current_user == comment.user
+  info << '</small>'    
+  info << vote_for(comment)
+  info.join.html_safe
+end
 
-  def comment_info(comment)
-    info = ["<small class='details'>"]
-    if comment.topic
-      info << badge_for(comment.topic) unless params[:controller] == 'topics'
-    elsif comment.event
-      info << badge_for(comment.event) unless params[:controller] == 'event'
-    end
-    info << info_for(comment.user)   unless params[:controller] == 'users'
-    info << time_for(comment)
-    info << owner_buttons_for(comment) if current_user == comment.user
-    info << '</small>'    
-    info << vote_for(comment)
-    info.join.html_safe
-  end
+def participant_info(participant)
 
-  def participant_info(participant)
-    if participant.status_pay == 1
-      is_paid = t(:paid)
-    elsif participant.status_pay == 0
-      is_paid= t(:unpaid)
-    elsif participant.status_pay == 2
-      is_paid = t(:waiting_confirm)
-    end
-    info = ["<small class='details'>"]
-    info << link_to( is_paid, '#', class: 'badge')   
-    info << info_for(participant.user)
-    info << ' | ' + participant.goods_amount.to_s + 'kg'
+  info = ["<small class='details'>"]
+  info << link_to( is_paid participant, '#', class: 'badge')   
+  info << info_for(participant.user)
+  info << ' | ' + participant.goods_amount.to_s + Event.find(participant.event_id).goods_unit
 
-   #info << '参加人数' + participant.people_amount.to_s
-    #info << owner_buttons_for(participant) if current_user == participant.user
-    info << time_for(participant)<< '</small>' 
-    info.join.html_safe
-  end
+  #info << '参加人数' + participant.people_amount.to_s
+  #info << owner_buttons_for(participant) if current_user == participant.user
+  info << time_for(participant)<< '</small>' 
+  info.join.html_safe
+end
 
-  def badge_for(object)
-    link_text = object.try(:title) || object.name
-    link_to(link_text, object, class: 'badge')
-  end
+def is_paid participant
+  if participant.status_pay == 1
+   paid = t(:paid)
+ elsif participant.status_pay == 0
+   paid= t(:unpaid)
+ elsif participant.status_pay == 2
+   paid = t(:waiting_confirm)
+ end
+ paid
+end
 
-  def info_for(user)
-     link_text = image_tag(user.avatar, class:'user-thumb') + ' ' + user.username 
-     link_to(link_text, profile_path(user))
-  end
+def is_shiped participant
+  if participant.status_ship == 1
+   shiped = t(:shiped)
+ elsif participant.status_ship == 0
+   shiped= t(:unshiped)
+ elsif participant.status_ship == 2
+   shiped = t(:received)
+ end
+ shiped
+end
 
-  def time_for(object)
-    ' ' + time_ago_in_words(object.created_at) + ' '+t(:before)+' '
-  end
+def badge_for(object)
+  link_text = object.try(:title) || object.name
+  link_to(link_text, object, class: 'badge')
+end
 
-  def vote_for(object)
-    ' '
+def info_for(user)
+ link_text = image_tag(user.avatar, class:'user-thumb') + ' ' + user.username 
+ link_to(link_text, profile_path(user))
+end
+
+def time_for(object)
+  ' ' + time_ago_in_words(object.created_at) + ' '+t(:before)+' '
+end
+
+def vote_for(object)
+  ' '
     # '<a href="#"><i class="fa fa-thumbs-o-up"></i>2</a> <a href="#" style="margin-left:50px"><i class="fa fa-thumbs-o-down"></i>3</a>'
   end 
 

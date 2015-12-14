@@ -1,0 +1,50 @@
+<div class="participants_list">
+  <div class="title">
+    <h3>报名详情</h3>
+    <h4><%= @event.title %></h4>
+  </div>
+
+  <div class="navpath">
+    <span>
+      <%= link_to "首页", admin_reports_path %>
+    </span>
+    <span class="slash">/</span>
+    <span class="subpath">
+      <%= link_to "活动列表", admin_events_list_path(@event) %>
+    </span>
+    <span class="slash">/</span>
+    <span class="thirdpath">
+      报名详情
+    </span>
+  </div>
+
+  <table>
+    <tr>
+      <th>姓名</th>
+      <th>联系电话</th>
+      <th>地址</th>
+      <th>数量</th>
+      <th>单价</th>
+      <th>总价</th>
+      <th>付款状态</th>
+      <th>发货状态</th>
+      <th>报名时间</th>
+      <th>操作</th>
+    </tr>
+    <% @participants.each do |p| %>
+    <tr>
+      <td><%= p.name %></td>
+      <td><%= p.mobile %></td>
+      <td style="width: 25%"><%= p.address %></td>
+      <td><%= p.goods_amount %><%= @event.goods_unit %></td>
+      <td><%= @event.price %></td>
+      <td><%= p.goods_amount * @event.price %></td>
+      <td><%= is_paid p %></td>
+      <td><%= is_shiped p %></td>
+      <td><%= p.created_at.strftime('%F') %></td>
+      <td id="participant-<%= p.id %>"></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+

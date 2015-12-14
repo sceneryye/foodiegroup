@@ -240,4 +240,7 @@ en:
   paid: Paid
   body: detail
   waiting_confirm: Wait for confirm
+  shiped: Shiped
+  unshiped: Wating for ship
+  received: Received
   
