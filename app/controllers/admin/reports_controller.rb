@@ -19,6 +19,6 @@ class Admin::ReportsController < ApplicationController
 
   def participants_list
     @event = Event.find(params[:event_id])
-    @participants = Participant.unscoped {Participant.where(:event_id => params[:event_id]).order(status_pay: :desc)}
+    @participants = Participant.unscoped {Participant.where(:event_id => params[:event_id]).paginate(per_page: 100, page: params[:page]).order(status_pay: :desc)}
   end
 end
