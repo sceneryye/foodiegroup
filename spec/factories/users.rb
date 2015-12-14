@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user do
-    sequence(:name) {|n| "who#{n}"}
+    name {Faker::Name.name}
     sequence(:username) {|n| "whom#{n}"}
     group_id 1
     role '0'

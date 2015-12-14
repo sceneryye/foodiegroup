@@ -28,9 +28,11 @@ gem 'will_paginate', '~> 3.0.6'
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails', '~> 4.4'
+  gem 'guard-rspec'
+  gem 'spring-commands-rspec', '~> 1.0.2'
 end
 
-group :text do
+group :test do
   gem 'faker', '~> 1.6'
   gem 'capybara', '~> 2.5'
   gem 'database_cleaner', '~> 1.5'

@@ -35,7 +35,6 @@ RSpec.describe Admin::ReportsController, type: :controller do
 
       it 'collects user to @users' do
         user = create(:user)
-        
         get :index
         expect(assigns(:users)).to match_array [user, @user]
       end

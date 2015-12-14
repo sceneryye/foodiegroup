@@ -48,10 +48,12 @@ module ApplicationHelper
   end
 
   def participant_info(participant)
-    if participant.status_pay==1
+    if participant.status_pay == 1
       is_paid = t(:paid)
-    else
+    elsif participant.status_pay == 0
       is_paid= t(:unpaid)
+    elsif participant.status_pay == 2
+      is_paid = t(:waiting_confirm)
     end
     info = ["<small class='details'>"]
     info << link_to( is_paid, '#', class: 'badge')   
