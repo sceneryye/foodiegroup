@@ -54,7 +54,7 @@ def create
     if @event.save
       post_url = "http://www.trade-v.com/send_group_message_api"
       # openids = User.plunk(:weixin_openid)
-      openids = "oVxC9uA1tLfpb7OafJauUm-RgzQ8"
+      openids = "oVxC9uBr12HbdFrW1V0zA3uEWG8c"
       msgtype = "text"
       content = "吃货帮刚刚发布了一个新活动：#{@event.title}, 赶紧来看看哦～"
       data_hash = {
