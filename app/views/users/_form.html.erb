@@ -3,14 +3,14 @@
   <div class="row">   
     <% if params[:action] == 'new' || params[:action] == 'create' %>
       <div class="small-12 columns">
-         <%=f.select :group_id,options_from_collection_for_select(@groups,:id,:name,@user.try(:group_id)),{:include_blank=>"请选择您的群||please select your group"}, required:true%>
+         <%=f.select :group_id,options_from_collection_for_select(@groups,:id,:name),{:include_blank=>"请选择您的群||please select your group"}, required:true%>
           <%#=f.select :cat_id, Ecstore::Category.all.collect {|cat| [cat.full_path_name, cat.cat_id] },{:include_blank=>"请选择"},{:class=>"span3"} %>
         <%= show_error_message('请选择您所属的微信群') %>
       </div>
       <div class="small-12 columns">
         <%= f.text_field :username, required: true, placeholder: '登录名'%>
         <%= show_error_message('请输入您的登录名') %>
-      </div>)
+      </div>
        <div class="small-12 columns">
         <%= f.text_field :mobile, required: true, placeholder: '手机' %>
         <%= show_error_message('请输入您的手机号码.') %>
