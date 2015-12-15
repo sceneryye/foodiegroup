@@ -5,6 +5,10 @@ gem 'rails_12factor', group: :production
 gem 'rails', '4.2.5'
 gem 'mysql2'
 
+gem "faye-websocket"
+gem "sinatra"
+# gem "puma"
+ gem "redis"
 
 gem 'jquery-rails'
 gem 'turbolinks'

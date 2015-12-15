@@ -11,6 +11,7 @@ RailsOnForum::Application.routes.draw do
   end
 
   resource :votes, only: :create
+  resources :chat
 
   mount Ckeditor::Engine => '/ckeditor'
   

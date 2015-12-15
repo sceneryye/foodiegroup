@@ -5,6 +5,9 @@ require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "sprockets/railtie"
+#require '../app/middlewares/chat_backend.rb'
+
+
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -13,6 +16,14 @@ Bundler.require(:default, Rails.env)
 
 module RailsOnForum
   class Application < Rails::Application
+   
+    config.to_prepare do
+      # Load application's model / class decorators
+      Dir.glob(File.join(File.dirname(__FILE__), "../app/middlewares/chat_backend.rb")) do |c|
+        Rails.configuration.cache_classes ? require(c) : load(c)
+      end
+    end
+     # config.middleware.use ChatDemo::ChatBackend
     #config.action_view.default_form_builder = FoundationFormBuilder::Rails
     #config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
     # Settings in config/environments/* take precedence over those specified here.
