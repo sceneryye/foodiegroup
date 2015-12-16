@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151214032818) do
+ActiveRecord::Schema.define(version: 20151216002701) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255, null: false
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20151214032818) do
     t.integer  "rate",       limit: 4,   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "locale",     limit: 255
   end
 
   create_table "topics", force: :cascade do |t|

@@ -1,4 +1,4 @@
-<div class="events_list">
+<div class="events-list">
   <div class="title">
     <h3>活动列表</h3>
   </div>
@@ -22,6 +22,7 @@
         <th>支付人数</th>
         <th>发起人</th>
         <th>价格</th>
+        <th>推荐值</th>
         <th>操作</th>
       </tr>
       <% @events.each_with_index do |event| %>
@@ -33,6 +34,9 @@
         <td><%= Participant.where(event_id: event.id, status_pay: 1).count %></td>
         <td><%= event.name %></td>
         <td><%= event.price %></td>
+        <td>
+          <input type="number" name="recommend" value="<%= event.recommend %>" id="<%= event.id %>" data-value="<%= event.recommend %>" class="recommend-number" data-id="<%= event.id %>" />
+        </td>
         <td><%= link_to "删除", event_path(event), method: :delete, remote: true,  data: { confirm:'确定删除?' } %></td>
       </tr>
       <% end %>

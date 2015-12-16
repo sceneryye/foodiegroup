@@ -77,6 +77,16 @@ def create
   end
 
   def update
+    if params[:from] == 'admin_event_list'
+      if params[:recommend].blank?
+        return render :text => 'failed'
+      end
+      num = params[:recommend].to_i
+      if Event.find(params[:id]).update(recommend: num)
+        Rails.logger.info 'true'
+      return render :text => 'success'
+    end
+    end
     uploaded_io = params[:file]
     if !uploaded_io.blank?
       extension = uploaded_io.original_filename.split('.')
