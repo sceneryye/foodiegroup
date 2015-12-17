@@ -21,4 +21,8 @@ class Admin::ReportsController < ApplicationController
     @event = Event.find(params[:event_id])
     @participants = Participant.unscoped {Participant.where(:event_id => params[:event_id]).paginate(per_page: 100, page: params[:page]).order(status_pay: :desc)}
   end
+
+  def tags_list
+    @tags = Tag.all.order(locale: :asc)
+  end
 end

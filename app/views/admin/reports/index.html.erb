@@ -3,19 +3,30 @@
 </div>
 
 <div class="counting">
-  <span class="text">统计：</span><span class="count">
-  <%= link_to admin_users_list_path do %>
-  会员数：<%= @users.count %>
-  <% end %>
-</span><span class="count">
-<%= link_to admin_events_list_path do %>
-活动数：<%= Event.count %>
-<% end %>
-</span><span class="count">
-<%= link_to admin_topics_list_path do %>
-话题数：<%= Topic.count %>
-<% end %>
-</span><span class="count">评论数：<%= Comment.count %></span>
+  <span class="text">统计：</span>
+  <span class="count">
+    <%= link_to admin_users_list_path do %>
+    会员数：<%= @users.count %>
+    <% end %>
+  </span>
+  <span class="count">
+    <%= link_to admin_events_list_path do %>
+    活动数：<%= Event.count %>
+    <% end %>
+  </span>
+  <span class="count">
+    <%= link_to admin_tags_list_path do %>
+    Tag数：<%= Tag.count %>
+    <% end %>
+  </span>
+  <span class="count">
+    <%= link_to admin_topics_list_path do %>
+    话题数：<%= Topic.count %>
+    <% end %>
+  </span>
+  
+  <span class="count">评论数：<%= Comment.count %></span>
+
 </div>
 <div class="content">
   <table>

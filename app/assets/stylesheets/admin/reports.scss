@@ -1,5 +1,9 @@
 
 $mid-gray: #666362;
+$edit-button: #E8A317;
+$delete-button: #C11B17;
+$confirm-button: #86C217;
+$cancel-button: #17BFC2;
 /*****************index******************/
 .count {
   margin-left: 20px;
@@ -44,6 +48,37 @@ table {
     color: $mid-gray;
   }
 }
+.edit {
+  margin-left: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: white;
+  background-color: $edit-button;
+}
+.delete {
+  margin-left: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: white;
+  background-color: $delete-button;
+}
+.cancel {
+  margin-left: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: white;
+  background-color: $cancel-button;
+}
+.confirm {
+  margin-left: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: white;
+  background-color: $confirm-button;
+}
+.hidden {
+  display: none;
+}
 
 /******************participants_list***************/
 
@@ -64,5 +99,28 @@ table {
 .events-list {
   .recommend-number {
     width: 50px;
+  }
+}
+/*******************tags_list*******************/
+
+.tags_list {
+  table {
+    width: 80%;
+  }
+  .navpath {
+    margin-left: 10%;
+  }
+  td {
+    vertical-align: middle;
+  }
+  input {
+    margin: auto 0;
+  }
+  .add-tag {
+    float: right;
+    margin-right: 10%;
+    .tag {
+      padding-right: 10px;
+    }
   }
 }

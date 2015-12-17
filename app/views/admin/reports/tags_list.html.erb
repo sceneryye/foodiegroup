@@ -1,0 +1,49 @@
+<div class="tags_list">
+  <div class="title"><h3>标签云</h3></div>
+
+  <div class="navpath">
+    <span>
+      <%= link_to "首页", admin_reports_path %>
+    </span>
+    <span class="slash">/</span>
+    <span class="subpath">
+      标签列表
+    </span>
+    
+    <span class="add-tag confirm">新增标签</span>
+    
+  </div>
+
+  <table>
+    <tr class="table-title">
+      <th>ID</th>
+      <th>标签名</th>
+      <th>关联地址</th>
+      <th>语言</th>
+      <th>操作</th>
+    </tr>
+    <tr class="hidden-row hidden">
+      <td class="id"></td>
+      <td><%= text_field_tag 'name', '', class: 'name' %></td>
+      <td><%= text_field_tag 'url', '', class: 'url' %></td>
+      <td><%= text_field_tag 'locale', '', class: 'locale' %></td>
+      <td>
+        <span class="confirm">确定</span>
+        <span class="cancel">取消</span>
+      </td>
+    </tr>
+    <% @tags.each do |tag| %>
+    <tr class="table-content">
+      <td class="id"><%= tag.id %></td>
+      <td><%= text_field_tag 'name', tag.name, class: 'name' %></td>
+      <td><%= text_field_tag 'url', tag.url, class: 'url' %></td>
+      <td><%= text_field_tag 'locale', tag.locale, class: 'locale' %></td>
+      <td>
+        <span class="edit">编辑</span>
+        <span class="confirm hidden">确定</span>
+        <span class="delete">删除</span>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

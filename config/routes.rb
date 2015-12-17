@@ -2,16 +2,24 @@ RailsOnForum::Application.routes.draw do
 
   
 
+  get 'tags/create'
+
+  get 'tags/update'
+
+  get 'tags/destroy'
+
   namespace :admin do
   resources :reports
   get '/users_list', to: 'reports#users_list'
   get '/events_list', to: 'reports#events_list'
   get '/topics_list', to: 'reports#topics_list'
   get '/participants_list', to: 'reports#participants_list'
+  get '/tags_list', to: 'reports#tags_list'
   end
 
   resource :votes, only: :create
   resources :chat
+  resources :tags, only: [:create, :update, :destroy]
 
   mount Ckeditor::Engine => '/ckeditor'
   
