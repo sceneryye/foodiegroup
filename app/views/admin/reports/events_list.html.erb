@@ -28,8 +28,8 @@
       <% @events.each_with_index do |event| %>
       <tr class="body" id="event-<%= event.id %>">
         <td><%= event.title[0..10] %></td>
-        <td><%= event.start_time %></td>
-        <td><%= event.end_time %></td>
+        <td><%= event.start_time.strftime('%F %T') %></td>
+        <td><%= event.end_time.strftime('%F %T') %></td>
         <td><%= link_to Participant.where(event_id: event.id).count, admin_participants_list_path(event_id: event.id) %></td>
         <td><%= Participant.where(event_id: event.id, status_pay: 1).count %></td>
         <td><%= event.name %></td>
