@@ -29,19 +29,22 @@
       <td><%= text_field_tag 'locale', '', class: 'locale' %></td>
       <td>
         <span class="confirm">确定</span>
+        <span class="edit hidden">编辑</span>
         <span class="cancel">取消</span>
+        <span class="delete hidden">删除</span>
       </td>
     </tr>
     <% @tags.each do |tag| %>
     <tr class="table-content">
       <td class="id"><%= tag.id %></td>
-      <td><%= text_field_tag 'name', tag.name, class: 'name' %></td>
-      <td><%= text_field_tag 'url', tag.url, class: 'url' %></td>
-      <td><%= text_field_tag 'locale', tag.locale, class: 'locale' %></td>
+      <td><%= text_field_tag 'name', tag.name, class: 'name', "data-value": tag.name %></td>
+      <td><%= text_field_tag 'url', tag.url, class: 'url', "data-value": tag.url %></td>
+      <td><%= text_field_tag 'locale', tag.locale, class: 'locale', "data-value": tag.locale %></td>
       <td>
         <span class="edit">编辑</span>
         <span class="confirm hidden">确定</span>
         <span class="delete">删除</span>
+        <span class="cancel hidden">取消</span>
       </td>
     </tr>
     <% end %>

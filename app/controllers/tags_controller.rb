@@ -1,5 +1,14 @@
 class TagsController < ApplicationController
   def create
+    if params[:tag].nil?
+      tag = Tag.new(tag_ajax_params)
+      if tag.save
+        id = tag.id
+        render text: id
+      else
+        render text: 'fail'
+      end
+    end
   end
 
   def update
@@ -18,5 +27,14 @@ class TagsController < ApplicationController
     else
       render text: 'fail'
     end
+  end
+
+  private
+  def tag_params
+    params.require(:tag).permit(:url, :name, :locale)
+  end
+
+  def tag_ajax_params
+    params.permit(:url, :name, :locale)
   end
 end
