@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :participants, dependent: :destroy
   has_many :events, dependent: :destroy
+  has_many :groupbuys, dependent: :destroy
   has_many :user_interests, dependent: :destroy
 
   belongs_to :group

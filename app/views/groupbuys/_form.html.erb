@@ -1,12 +1,12 @@
 <div class="large-12 medium-12 medium-centered columns">
-<%= form_for @event, data: {abide: ''}  ,:html => {:multipart => true} do|f| %>
-  <%= render 'layouts/form_errors', object: @event %>
+<%= form_for @groupbuy, data: {abide: ''}  ,:html => {:multipart => true} do|f| %>
+  <%= render 'layouts/form_errors', object: @groupbuy %>
   <div>
-    <%= f.text_field :title, required: true,placeholder: "#{t(:event)} #{t(:title)}" %>
+    <%= f.text_field :title, required: true,placeholder: "#{t(:groupbuy)} #{t(:title)}" %>
    <!--  <%#= show_error_message('活动名称，不能为空！') %> -->
   </div>
   <div>    
-    <p><%=t(:please_choose_event_duration)%></p>
+    <p><%=t(:please_choose_groupbuy_duration)%></p>
     <table class="table">
       <thead>
         <tr>         
@@ -21,8 +21,8 @@
     </table>
   </div>
  <!--  <div>
-    <%= f.label :event_type %>
-    <%= f.text_field :event_type, value:'tuan', required: true%>
+    <%= f.label :groupbuy_type %>
+    <%= f.text_field :groupbuy_type, value:'tuan', required: true%>
   </div> -->
   <div>
     <%#= f.label :pic_url %>

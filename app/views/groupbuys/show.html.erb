@@ -1,54 +1,54 @@
-<% provide :title, t(:event) %>
+<% provide :title, t(:groupbuy) %>
 <div class="row">
   <div class="large-12 columns">
     <div class="large-2 columns">
-      <%= image_tag @event.pic_url, class: 'profile-image round' if @event %>
+      <%= image_tag @groupbuy.pic_url, class: 'profile-image round' if @groupbuy %>
     </div>
 
     <div class="large-10 columns">
-      <h2><%= @event.title %></h2>      
-      <h3><%= "[No. #{@event.id.to_s.rjust(10,'0')}]" %></h3>      
+      <h2><%= @groupbuy.title %></h2>      
+      <h3><%= "[No. #{@groupbuy.id.to_s.rjust(10,'0')}]" %></h3>      
     </div>
     <div>
       <table style="width:100%">
         <tr>
           <th><%=t(:start_time)%></th>
-          <td><%= @event.start_time.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><%= @groupbuy.start_time.strftime("%Y-%m-%d %H:%M") %></td>
         </tr>
         <tr>
           <th><%=t(:end_time)%></th>
-          <td><%=@event.end_time.strftime("%Y-%m-%d %H:%M")%></td>
+          <td><%=@groupbuy.end_time.strftime("%Y-%m-%d %H:%M")%></td>
         </tr>
         <tr>
           <th><%=t(:goods_big_than)%></th>
-          <td><%=@event.goods_big_than%><%=@event.goods_unit%></td>
+          <td><%=@groupbuy.goods_minimal%><%=@groupbuy.goods_unit%></td>
         </tr>
         <tr>
           <th><%=t(:price)%></th>
-          <td>￥<%=@event.price%>/<%=@event.goods_unit%></td>
+          <td>￥<%=@groupbuy.price%>/<%=@groupbuy.goods_unit%></td>
         </tr>
         <tr>
-          <td colspan='2'><%= @event.body.html_safe  %></td>
+          <td colspan='2'><%= @groupbuy.body.html_safe  %></td>
         </tr>
       </table>
-      <!-- <p><%=@event.event_type%></p> -->
-      <!-- <p><%=@event.limited_people%>人</p> -->
-      <!-- <p><%=@event.goods_small_than%><%=@event.goods_unit%></p> -->
-      <!-- <p>联系人：<%=@event.name%></p>
-      <p>电话：<%=@event.mobile%></p><hr> -->
-      <%= event_info(@event) %>
+      <!-- <p><%=@groupbuy.groupbuy_type%></p> -->
+      <!-- <p><%=@groupbuy.limited_people%>人</p> -->
+      <!-- <p><%=@groupbuy.goods_small_than%><%=@groupbuy.goods_unit%></p> -->
+      <!-- <p>联系人：<%=@groupbuy.name%></p>
+      <p>电话：<%=@groupbuy.mobile%></p><hr> -->
+      <%= groupbuy_info(@groupbuy) %>
     </div>
     <div>
-       <%= link_to t(:comment), new_event_comment_path(@event),
+       <%= link_to t(:comment), new_groupbuy_comment_path(@groupbuy),
                               class:"tiny button radius" if signed_in? %>
-       <%= link_to t(:new_participant), new_event_participant_path(@event),
+       <%= link_to t(:new_participant), new_groupbuy_participant_path(@groupbuy),
                               class:"tiny button radius" if signed_in? %>
       
 
-      <% if current_user == @event.user %>
+      <% if current_user == @groupbuy.user %>
 
-        <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_event_path(@event), class:"tiny button radius" %>
-        <%= link_to '<i class="fa fa-times"></i>'.html_safe, @event,method: :delete,
+        <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_groupbuy_path(@groupbuy), class:"tiny button radius" %>
+        <%= link_to '<i class="fa fa-times"></i>'.html_safe, @groupbuy,method: :delete,
                   class:"tiny button alert radius",
                   data: {confirm: '?'} %>
       <% end %>
@@ -56,8 +56,8 @@
 
      <div class="comments">
        <ul class="tabs" data-tab role="tablist">
-        <li class="tab-title active"><a href="/events/<%= params[:id] %>/participants/new"><i class="fa fa-users"></i><%=t(:reservation)%> (<%=@event.participants_count%>)</a></li>
-        <li class="tab-title"><a href="#comments"><i class="fa fa-comments"></i><%=t(:comments)%> (<%=@event.comments_count%>)</a></li>
+        <li class="tab-title active"><a href="/groupbuys/<%= params[:id] %>/participants/new"><i class="fa fa-users"></i><%=t(:reservation)%> (<%=@groupbuy.participants_count%>)</a></li>
+        <li class="tab-title"><a href="#comments"><i class="fa fa-comments"></i><%=t(:comments)%> (<%=@groupbuy.comments_count%>)</a></li>
       </ul>
       <div class="tabs-content panel">
         <div class="content active" id="participants">

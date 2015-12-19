@@ -1,0 +1,28 @@
+
+<div class="row panel">
+  <div class="columns small-4">
+    <%= link_to groupbuy do %>
+    <img src="<%= groupbuy.pic_url %>"/>
+    <%end%>
+  </div>
+  <div class="columns small-8">
+    <h4><%= link_to groupbuy.title, groupbuy%></h4>
+      <span class="price"><%=t(:price)%>:&nbsp;<i class="fa fa-cny"></i><%=groupbuy.price %></span><br>
+      <span><%=t(:by)%>:&nbsp;<%=link_to groupbuy.user.username.html_safe,profile_path(groupbuy.user) %><span>   
+  </div>
+    <div class="columns small-6">
+      <%= "[No. #{groupbuy.id.to_s.rjust(10,'0')}]" %>     
+    </div>
+    <div class="columns small-3">
+        <a href="#" class="show-participants" data-url="<%=groupbuy_participants_path(groupbuy)%>">
+          <i class="fa fa-users"></i>(<%=groupbuy.participants_count%>)</a>
+        </a>
+    </div>
+    <div class="columns small-3">
+        <a href="#" class="show-comments" data-url="<%=groupbuy_comments_path(groupbuy)%>">
+          <i class="fa fa-comments"></i>(<%=groupbuy.comments_count%>)
+        </a>
+    </div>
+</div>
+
+

@@ -12,15 +12,15 @@
 	</thead>
 </table> -->
 
-<% provide :title, t(:event) %>
-<%# content_for(:event_content) do %>
+<% provide :title, t(:groupbuy) %>
+<%# content_for(:groupbuy_content) do %>
 
-    <div class="events-index-list ">
-      <% if @events.any? %>
-      <%#= render partial: 'event2', locals: {events: @events} %>
-      <%= render @events %>
+    <div class="groupbuys-index-list ">
+      <% if @groupbuys.any? %>
+      <%#= render partial: 'groupbuy2', locals: {groupbuys: @groupbuys} %>
+      <%= render @groupbuys %>
       <% else %>
-      <p>还没有任何活动。</p>
+      <p>还没有任何团购。</p>
       <% end%>
     </div>
   

@@ -1,21 +1,21 @@
 #encoding:utf-8
 require 'rest-client'
-class EventsController < ApplicationController
+class GroupbuysController < ApplicationController
 
   def index
-    @events = Event.where(locale: session[:locale]).includes(:user)
+    @groupbuys = groupbuy.where(locale: session[:locale]).includes(:user)
   end
 
   def show
-    @event  = Event.find(params[:id])
-    @participants = @event.participants.includes(:user)
-    @comments = @event.comments.includes(:user)
+    @groupbuy  = groupbuy.find(params[:id])
+    @participants = @groupbuy.participants.includes(:user)
+    @comments = @groupbuy.comments.includes(:user)
 
    #@goods_amount = Foodie::Participant.where
 
    if signed_in? 
-     @plus_menu = [{name: '<i class="fa  fa-comment"></i>'.html_safe+' '+t(:new_comment), path: new_event_comment_path(@event)},
-      {name: '<i class="fa  fa-sign-in"></i>'.html_safe+' '+t(:new_participant), path: new_event_participant_path(@event)}
+     @plus_menu = [{name: '<i class="fa  fa-comment"></i>'.html_safe+' '+t(:new_comment), path: new_groupbuy_comment_path(@groupbuy)},
+      {name: '<i class="fa  fa-sign-in"></i>'.html_safe+' '+t(:new_participant), path: new_groupbuy_participant_path(@groupbuy)}
     ]
     if @participants.where(:user_id => current_user.id).size>0
       @again = '再次'     
@@ -27,36 +27,36 @@ class EventsController < ApplicationController
 end
 
 def new
- @event = Event.new
+ @groupbuy = groupbuy.new
 end
 
 def create
-  @event = Event.new(event_params)
-  @event.user = current_user
-  @event.locale = session[:locale]
+  @groupbuy = groupbuy.new(groupbuy_params)
+  @groupbuy.user = current_user
+  @groupbuy.locale = session[:locale]
 
   uploaded_io = params[:file]
   if !uploaded_io.blank?
     extension = uploaded_io.original_filename.split('.')
     filename = "#{Time.now.strftime('%Y%m%d%H%M%S')}.#{extension[-1]}"
-    filepath = "#{PIC_PATH}/events/#{filename}"
+    filepath = "#{PIC_PATH}/groupbuys/#{filename}"
     File.open(filepath, 'wb') do |file|
       file.write(uploaded_io.read)
     end
-        # event_params.merge!(:pic_url=>"/events/#{filename}")
-        @event.pic_url = "/events/#{filename}"
+        # groupbuy_params.merge!(:pic_url=>"/groupbuys/#{filename}")
+        @groupbuy.pic_url = "/groupbuys/#{filename}"
       end
 
-    #  return render :text=>  event_params
+    #  return render :text=>  groupbuy_params
 
 
 
-    if @event.save
+    if @groupbuy.save
       post_url = "http://www.trade-v.com/send_group_message_api"
       # openids = User.plunk(:weixin_openid)
       openids = "oVxC9uBr12HbdFrW1V0zA3uEWG8c"
       msgtype = "text"
-      content = "吃货帮刚刚发布了一个新活动：#{@event.title}, 赶紧来看看哦～"
+      content = "吃货帮刚刚发布了一个新活动：#{@groupbuy.title}, 赶紧来看看哦～"
       data_hash = {
         openids: openids,
         content: content,
@@ -66,23 +66,23 @@ def create
       res_data_json = RestClient.post post_url, data_hash
 
 
-      redirect_to event_url(@event), notice: '活动发布成功!'
+      redirect_to groupbuy_url(@groupbuy), notice: '活动发布成功!'
     else
       render :new
     end
   end
 
   def edit
-    @event = Event.find(params[:id])
+    @groupbuy = groupbuy.find(params[:id])
   end
 
   def update
-    if params[:from] == 'admin_event_list'
+    if params[:from] == 'admin_groupbuy_list'
       if params[:recommend].blank?
         return render :text => 'failed'
       end
       num = params[:recommend].to_i
-      if Event.find(params[:id]).update(recommend: num)
+      if groupbuy.find(params[:id]).update(recommend: num)
         Rails.logger.info 'true'
       return render :text => 'success'
     end
@@ -91,18 +91,18 @@ def create
     if !uploaded_io.blank?
       extension = uploaded_io.original_filename.split('.')
       filename = "#{Time.now.strftime('%Y%m%d%H%M%S')}.#{extension[-1]}"
-      filepath = "#{PIC_PATH}/events/#{filename}"
+      filepath = "#{PIC_PATH}/groupbuys/#{filename}"
       File.open(filepath, 'wb') do |file|
         file.write(uploaded_io.read)
       end
-      event_params.merge!(:pic_url=>"/events/#{filename}")
+      groupbuy_params.merge!(:pic_url=>"/groupbuys/#{filename}")
 
     end
 
 
-    @event = Event.find(params[:id])
-    if @event.update(event_params)
-      redirect_to event_url(@event), notice: '活动修改成功'
+    @groupbuy = groupbuy.find(params[:id])
+    if @groupbuy.update(groupbuy_params)
+      redirect_to groupbuy_url(@groupbuy), notice: '活动修改成功'
     else
       render :edit
     end
@@ -111,21 +111,21 @@ def create
   
 
   def destroy
-    @event = Event.find(params[:id])
-    @event.destroy
+    @groupbuy = groupbuy.find(params[:id])
+    @groupbuy.destroy
     respond_to do |format|
       format.js
-      format.html {redirect_to events_path}
+      format.html {redirect_to groupbuys_path}
     end
   end
 
   private
-  def set_event
-    @event = event.find(params[:id])
+  def set_groupbuy
+    @groupbuy = groupbuy.find(params[:id])
   end
 
-  def event_params
-    params.require(:event).permit(:title, :body,:end_time,:start_time,:event_type,
+  def groupbuy_params
+    params.require(:groupbuy).permit(:title, :body,:end_time,:start_time,:groupbuy_type,
       :pic_url,:limited_people,:goods_big_than,:goods_small_than,:name,:mobile,:goods_unit,:price,:pic_url)
   end
 end
