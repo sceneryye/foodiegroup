@@ -7,10 +7,15 @@ class ParticipantsController < ApplicationController
     validate_permission!(select_participant.user)
   end
   before_action :select_participant, only: [:edit, :update, :destroy]
-  before_action only: [:new, :create] {@event = Event.find(params[:event_id])}
+  before_action only: [:new, :create,:index] {@event = Event.find(params[:event_id])}
 
   def new
     @participant = @event.participants.new
+  end
+
+  def index
+    @participant = @event.participants.new
+    @participants = @event.participants
   end
 
   def confirm_paid

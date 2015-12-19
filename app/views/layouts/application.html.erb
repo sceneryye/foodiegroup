@@ -55,6 +55,38 @@
     <%#= javascript_include_tag "application" 'data-turbolinks-track' => true %>
      <%= javascript_include_tag "application"%>
     <%= javascript_include_tag controller_name%>
-     
+     <script>
+
+     $(".show-comments").on("click", function(event) {
+      event.preventDefault();
+      $(".comments").remove();
+      $(".participants").remove();
+      
+      var url = $(this).data('url');
+      htmlobj = $.ajax({url: url ,async:false});
+      var obj = $(this).parent().siblings();
+
+      if (url.indexOf("event")>0){
+         obj = $(this).parent().parent();
+      }
+      obj.append('<div class="comments">'+htmlobj.responseText+'</div>');
+    
+      // $(".comments").stop().animate({
+      //     scrollTop: $(".comments")[0].scrollHeight
+      // }, 200);
+    });
+
+      $(".show-participants").on("click", function(event) {
+        event.preventDefault();
+
+        $(".comments").remove();
+        $(".participants").remove();
+
+        var url = $(this).data('url');
+        htmlobj = $.ajax({url: url ,async:false});
+        var obj = $(this).parent().parent().append('<div class="participants">'+htmlobj.responseText+'</div>');      
+      });
+
+     </script>
   </body>
 </html>

@@ -34,10 +34,8 @@ RailsOnForum::Application.routes.draw do
   end
 
   resources :topics, except: [:index, :new, :create]  do
-    resources :comments, only: [:new, :create,:destroy]
-  end
-
- 
+    resources :comments, only: [:new, :create,:index]
+  end 
 
   resources :events do 
     resources :participants do
@@ -45,7 +43,16 @@ RailsOnForum::Application.routes.draw do
        post 'confirm_shiped', on: :member
        post 'wechat_pay', on: :member
     end
-    resources :comments, only: [:new, :create]
+    resources :comments, only: [:new, :create,:index]
+  end
+
+  resources :groupbuys do 
+    resources :participants do
+       get   'confirm_paid'  ,on: :member
+       post 'confirm_shiped', on: :member
+       post 'wechat_pay', on: :member
+    end
+    resources :comments, only: [:new, :create,:index]
   end
 
   resources :comments, only: [:edit, :update, :destroy]

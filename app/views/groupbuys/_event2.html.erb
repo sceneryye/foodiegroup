@@ -1,0 +1,68 @@
+<div class="row">
+  <% events.each do |event| %>
+  <div class="columns small-12 medium-6 large-4">
+    <div class="father-box">
+      <div class="pic">
+        <%= image_tag event.pic_url %>
+      </div>
+      <div class="discription">
+        <div class="event-title">
+          <%= event.title %>
+        </div>
+        <div class="price-founder">
+          <span class="price">单价：¥<%= event.price %></span>
+          <span class="founder"><%= event.name %></span>
+        </div>
+        <div class="info">
+          <span class="number">
+            <%= "[No. #{event.id.to_s.rjust(10,'0')}]" %>
+          </span>
+          <span class="participants">
+            <i class="fa fa-users"></i>(<%=event.participants_count%>)
+          </span>
+          <span class="comments">
+            <i class="fa fa-comments"></i>(<%=event.comments_count%>)
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% end %>
+</div>
+<!-- 暂时把css写在这里，知道确认使用改partial，再移植到scss文件中去。-->
+<style type="text/css">
+body {
+  background-color: #F4F4F4;
+}
+
+.row {
+  margin-top: 20px;
+}
+  
+  .father-box {
+    position: relative;
+    padding-top: 20px;
+  }
+  .pic {
+    width: 100%;
+  }
+  img {
+    width: 100%;
+  }
+  .discription {
+    position: absolute;
+    z-index: 1;
+    left: 5%;
+    top: 50%;
+    color: white;
+  }
+  .discription .event-title {
+    font-size: 1.6em;
+    font-weight: bold;
+    line-height: 1.5em;
+  }
+  .discription .info {
+    color: #5C5C5C;
+  }
+</style>

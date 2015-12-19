@@ -302,6 +302,7 @@ zh:
   by: 发起人
   price: 价格
   participant: 报名
+  search: 搜索
   comment: 评论
   site_name: 吃货帮
   before: 前。
@@ -331,5 +332,6 @@ zh:
   shiped: 已发货
   unshiped: 未发货
   received: 已收货
+  groupbuy: 团购
 
  

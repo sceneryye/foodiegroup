@@ -1,0 +1,29 @@
+<!-- <p>活动查询</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>开始时间:
+				<input type="text" class="span2" value="" id="dpd1">
+			</th>
+			<th>结束时间:
+				<input type="text" class="span2" value="" id="dpd2">
+			</th>
+		</tr>
+	</thead>
+</table> -->
+
+<% provide :title, t(:event) %>
+<%# content_for(:event_content) do %>
+
+    <div class="events-index-list ">
+      <% if @events.any? %>
+      <%#= render partial: 'event2', locals: {events: @events} %>
+      <%= render @events %>
+      <% else %>
+      <p>还没有任何活动。</p>
+      <% end%>
+    </div>
+  
+<%# end %>
+
+

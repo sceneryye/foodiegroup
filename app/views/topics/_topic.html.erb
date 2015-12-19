@@ -1,28 +1,11 @@
-<div class="topic">
-  <div class="topic-text">
-    <div class="topic-title">
-      <h5><%= link_to topic.title, topic %></h5>
-    </div>
-    <div class="topic-content">
-      <%= truncate(markdown(topic.body), length: 50, escape:false) %>
-    </div>
-    <div class="topic-info">
-      <%= topic_info(topic) %>
-    </div>
+<div class="topic columns">
+  <div class="small-10 columns">
+    <h5><%= link_to topic.title, topic %></h5>
+    <p><%= markdown truncate(topic.body, length: 50, escape:false), links: false  %></p>
+    <%= topic_info(topic) %>
   </div>
-  <div class="topic-count">
-    <div class="border">
-       <div class="count-text">
-          <i class="fa fa-comment"></i>
-        </div>
-      <div class="number">
-        <strong>
-          <%= topic.comments_count %>
-        </strong>
-        </div>
-       
-      </div>
-      <div class="clear"></div>
-    </div>
-  <div class="clear"></div>
+  <div class="small-2 columns text-center answer-count">
+    <a href="#" class="show-comments" data-url="<%=topic_comments_path(topic)%>"><i class="fa fa-comments"></i><strong><%= topic.comments_count %></strong></a><br>
+  </div>
+ 
 </div>

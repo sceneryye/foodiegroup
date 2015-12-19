@@ -2,10 +2,12 @@
   <%= render 'layouts/form_errors', object: @user %>
   <div class="row">   
     <% if params[:action] == 'new' || params[:action] == 'create' %>
+    <% if @groups%>
       <div class="small-12 columns">
          <%=f.select :group_id,options_from_collection_for_select(@groups,:id,:name),{:include_blank=>"请选择您的群||please select your group"}, required:true%>
-          <%#=f.select :cat_id, Ecstore::Category.all.collect {|cat| [cat.full_path_name, cat.cat_id] },{:include_blank=>"请选择"},{:class=>"span3"} %>
+          <%#=f.select :group_id, @groups.collect {|group| [group.name, group.id] },{:include_blank=>"请选择"},{:class=>"span3"} %>
         <%= show_error_message('请选择您所属的微信群') %>
+      <%end%>
       </div>
       <div class="small-12 columns">
         <%= f.text_field :username, required: true, placeholder: '登录名'%>

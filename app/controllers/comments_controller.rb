@@ -65,6 +65,16 @@ class CommentsController < ApplicationController
 
   end
 
+  def index
+    if params[:topic_id]
+      @parent = Topic.find(params[:topic_id])
+    elsif params[:event_id]
+      @parent = Event.find(params[:event_id])
+    end
+    @comment = @parent.comments.new
+    @comments = @parent.comments
+  end
+
   private
 
   def select_comment
