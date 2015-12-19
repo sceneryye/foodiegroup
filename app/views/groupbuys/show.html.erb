@@ -19,8 +19,12 @@
           <th><%=t(:end_time)%></th>
           <td><%=@groupbuy.end_time.strftime("%Y-%m-%d %H:%M")%></td>
         </tr>
+         <tr>
+          <th><%=t(:goods_maximal)%></th>
+          <td><%=@groupbuy.goods_maximal%><%=@groupbuy.goods_unit%></td>
+        </tr>
         <tr>
-          <th><%=t(:goods_big_than)%></th>
+          <th><%=t(:goods_minimal)%></th>
           <td><%=@groupbuy.goods_minimal%><%=@groupbuy.goods_unit%></td>
         </tr>
         <tr>
