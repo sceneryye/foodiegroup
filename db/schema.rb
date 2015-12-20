@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216002701) do
+ActiveRecord::Schema.define(version: 2015122006472224) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255, null: false
@@ -30,14 +30,15 @@ ActiveRecord::Schema.define(version: 20151216002701) do
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
   create_table "comments", force: :cascade do |t|
-    t.text     "body",       limit: 65535,             null: false
-    t.integer  "user_id",    limit: 4
-    t.integer  "event_id",   limit: 4
-    t.integer  "topic_id",   limit: 4
+    t.text     "body",        limit: 65535,             null: false
+    t.integer  "user_id",     limit: 4
+    t.integer  "event_id",    limit: 4
+    t.integer  "topic_id",    limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "agree",      limit: 4,     default: 0
-    t.integer  "disagree",   limit: 4,     default: 0
+    t.integer  "agree",       limit: 4,     default: 0
+    t.integer  "disagree",    limit: 4,     default: 0
+    t.integer  "groupbuy_id", limit: 4
   end
 
   add_index "comments", ["topic_id"], name: "index_comments_on_topic_id", using: :btree
@@ -77,6 +78,30 @@ ActiveRecord::Schema.define(version: 20151216002701) do
 
   add_index "forums", ["name"], name: "index_forums_on_name", unique: true, using: :btree
 
+  create_table "groupbuys", force: :cascade do |t|
+    t.string   "title",              limit: 255,                                         null: false
+    t.string   "pic_url",            limit: 500,                                         null: false
+    t.string   "body",               limit: 255,                                         null: false
+    t.string   "locale",             limit: 45,                           default: "zh"
+    t.datetime "start_time",                                                             null: false
+    t.datetime "end_time",                                                               null: false
+    t.integer  "user_id",            limit: 4
+    t.integer  "recommend",          limit: 4,                            default: 0
+    t.string   "goods_unit",         limit: 45
+    t.decimal  "price",                          precision: 10, scale: 2, default: 0.0
+    t.string   "pay_type",           limit: 7
+    t.decimal  "goods_minimal",                  precision: 20, scale: 2, default: 0.0
+    t.decimal  "goods_maximal",                  precision: 20, scale: 2, default: 0.0
+    t.string   "name",               limit: 45
+    t.string   "mobile",             limit: 45
+    t.integer  "comments_count",     limit: 4,                            default: 0
+    t.integer  "participants_count", limit: 4,                            default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "groupbuys", ["user_id"], name: "index_groupbuys_on_user_id", using: :btree
+
   create_table "groups", force: :cascade do |t|
     t.string "name", limit: 255, null: false
   end
@@ -97,6 +122,7 @@ ActiveRecord::Schema.define(version: 20151216002701) do
     t.datetime "updated_at"
     t.integer  "status_pay",    limit: 4,                             default: 0
     t.integer  "status_ship",   limit: 4,                             default: 0
+    t.integer  "groupbuy_id",   limit: 4
   end
 
   create_table "tags", force: :cascade do |t|

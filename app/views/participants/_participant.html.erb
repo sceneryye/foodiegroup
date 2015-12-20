@@ -15,7 +15,7 @@
     <%if signed_in?%>
     <% if participant.user_id == current_user.id && participant.status_pay == 0 %>
 
-    <%= form_tag wechat_pay_event_participant_path(@parent.id, participant.id) do %>
+    <%= form_tag wechat_pay_event_participant_path(@parent.id, participant.try(:id)) do %>
     <%= hidden_field_tag :openid, current_user.weixin_openid %>
     <%= hidden_field_tag :money, @parent.price * participant.goods_amount %>
     <%= submit_tag t(:pay), class: "button tiny" %>
