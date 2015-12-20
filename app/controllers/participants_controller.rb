@@ -68,8 +68,12 @@ class ParticipantsController < ApplicationController
     money = params[:money].to_f
     from = 'foodiegroup'
     openid = params[:openid]
-    event_id = params[:event_id]
-    event_name = Event.find(event_id).title
+    event_id = params[:event_id] || params[:groupbuy_id]
+    if params[:event_id]
+      event_name = Event.find(event_id).title
+    elsif params[:groupbuy_id]
+      event_name = Groupbuy.find(event_id).title
+    end
     participant_id = params[:id]
     Rails.logger.info money
     data = {
