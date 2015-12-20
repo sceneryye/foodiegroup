@@ -1,5 +1,6 @@
 /public/avatars
 /public/events
+/public/groupbuys
 /config/database.yml
 *.[.DS_Store]
 *.rbc

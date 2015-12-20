@@ -59,6 +59,7 @@
         <li class="tab-title active"><a href="/events/<%= params[:id] %>/participants/new"><i class="fa fa-users"></i><%=t(:reservation)%> (<%=@event.participants_count%>)</a></li>
         <li class="tab-title"><a href="#comments"><i class="fa fa-comments"></i><%=t(:comments)%> (<%=@event.comments_count%>)</a></li>
       </ul>
+
       <div class="tabs-content panel">
         <div class="content active" id="participants">
           <%= render @participants %>

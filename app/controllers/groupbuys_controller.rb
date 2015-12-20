@@ -7,7 +7,7 @@ class GroupbuysController < ApplicationController
   end
 
   def show
-    @groupbuy  = Groupbuy.find(params[:id])
+    @parent = @groupbuy  = Groupbuy.find(params[:id])
     @participants = @groupbuy.participants.includes(:user)
     @comments = @groupbuy.comments.includes(:user)
 
