@@ -7,15 +7,21 @@ class ParticipantsController < ApplicationController
     validate_permission!(select_participant.user)
   end
   before_action :select_participant, only: [:edit, :update, :destroy]
-  before_action only: [:new, :create,:index] {@event = Event.find(params[:event_id])}
+  before_action only: [:new, :create,:index] {
+    if params[:groupbuy_id]
+      @parent = Groupbuy.find(params[:groupbuy_id])
+    elsif params[:event_id]
+      @parent = Event.find(params[:event_id])
+    end
+  }
 
   def new
-    @participant = @event.participants.new
+    @participant = @parent.participants.new
   end
 
   def index
-    @participant = @event.participants.new
-    @participants = @event.participants
+    @participant = @parent.participants.new
+    @participants = @parent.participants.includes(:user)
   end
 
   def confirm_paid
@@ -39,11 +45,11 @@ class ParticipantsController < ApplicationController
 
     # is_enrolled = @event.participants.where(:user_id => current_user.id).size
     # if  is_enrolled ==0
-    @participant = @event.participants.new(participant_params)
+    @participant = @parent.participants.new(participant_params)
     @participant.user = current_user
 
     if @participant.save
-      redirect_to event_url(@event), notice: '活动报名成功'
+      redirect_to event_url(@parent), notice: '活动报名成功'
     else
       render :new
     end

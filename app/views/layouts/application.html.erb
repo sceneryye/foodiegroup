@@ -66,7 +66,7 @@
       htmlobj = $.ajax({url: url ,async:false});
       var obj = $(this).parent().siblings();
 
-      if (url.indexOf("event")>0){
+      if (url.indexOf("event")>0 || url.indexOf("groupbuy")>0){
          obj = $(this).parent().parent();
       }
       obj.append('<div class="comments">'+htmlobj.responseText+'</div>');

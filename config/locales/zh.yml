@@ -213,6 +213,7 @@ zh:
       topic: 话题
       event:  活动
       participant:  报名
+      groupbuy: 团购
       comment: 评论
       tag: 标签
       search: 搜索
@@ -315,8 +316,9 @@ zh:
   start_time: 开始时间
   end_time: 结束时间
   price:  单价
-  goods_big_than: 最少成团商品数量
+  goods_minimal: 最少成团商品数量
   new_forum:  新增论坛
+  new_groupbuy:  新增团购
   new_event:  新增活动
   edit_forum: 编辑论坛
   new_topic:  新增话题

@@ -17,10 +17,11 @@
              <%=link_to '<i class="fa fa-language"></i>'.html_safe+' 中文',"#{request.url.sub('?locale=en','')}?locale=zh"%>
           <%else%>
             <%=link_to '<i class="fa fa-language"></i>'.html_safe+' English',"#{request.url.sub('?locale=zh','')}?locale=en"%>
-          <%end%>
+          <%end%> 
         </li>
         <li><%=link_to ' <i class="fa fa-search"></i>'.html_safe+' '+t(:search),search_path%></li>
         <%if signed_in?%>
+          <li><%=link_to '<i class="fa fa-cart-plus"></i>'.html_safe+' '+t(:new_groupbuy), new_groupbuy_path%></li>
           <li><%=link_to '<i class="fa fa-calendar"></i>'.html_safe+' '+t(:new_event), new_event_path%></li>
           <li><%=link_to '<i class="fa fa-bullhorn"></i>'.html_safe+' '+t(:new_topic), new_forum_topic_path(forum_id)%></li>
         <%else%>

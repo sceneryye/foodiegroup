@@ -1,7 +1,7 @@
 <div class="comment">
   <p> 
-    <% if @event
-      if current_user == @event.user && participant.status_pay != 1%>
+    <% if @parent
+      if current_user == @parent.user && participant.status_pay != 1%>
       <%= link_to "确认支付", confirm_paid_event_participant_path(participant.event,participant), class:"tiny button radius alert" %>
       <small><%=participant.mobile%>||<%=participant.address%></small>
       <%end
@@ -9,7 +9,7 @@
     </p>
     
     <div class="pay-left">
-      <%#= participant_info(participant) %>
+      <%= participant_info(participant) %>
     </div>
     <div class="pay-left pay">
     <%if signed_in?%>

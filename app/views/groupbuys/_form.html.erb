@@ -3,7 +3,7 @@
   <%= render 'layouts/form_errors', object: @groupbuy %>
   <div>
     <%= f.text_field :title, required: true,placeholder: "#{t(:groupbuy)} #{t(:title)}" %>
-   <!--  <%#= show_error_message('活动名称，不能为空！') %> -->
+   <!--  <%#= show_error_message('团购名称，不能为空！') %> -->
   </div>
   <div>    
     <p><%=t(:please_choose_groupbuy_duration)%></p>
@@ -20,10 +20,6 @@
       </thead>
     </table>
   </div>
- <!--  <div>
-    <%= f.label :groupbuy_type %>
-    <%= f.text_field :groupbuy_type, value:'tuan', required: true%>
-  </div> -->
   <div>
     <%#= f.label :pic_url %>
     <span><%=t(:pic_url)%>
@@ -31,10 +27,6 @@
     <!-- <%#= show_error_message('请上传活动图片') %> -->
     <%#= f.text_field :pic_url, required: true%>
   </div>
- <!--  <div>
-    <%= f.label :limited_people%>
-    <%= f.text_field :limited_people,:value=>0%>
-  </div> -->
   <div>
     <!-- <%#= f.label :price %> -->
     <%= f.text_field :price,placeholder: t(:price)%>
@@ -42,13 +34,13 @@
   <div>
     <%= f.text_field :goods_unit,placeholder: t(:goods_unit)%>
   </div>
- <!--  <div>
-    <%= f.label :goods_small_than %>
-    <%= f.text_field :goods_small_than, :value=>0%>
+  <!-- <div>
+    <%#= f.label :goods_maximall %>
+    <%#= f.text_field :goods_maximal,placeholder: t(:goods_maximal)%>
   </div> -->
    <div>
-    <!-- <%#= f.label :goods_big_than %> -->
-    <%= f.text_field :goods_big_than,placeholder: t(:goods_big_than)%>
+    <!-- <%#= f.label :goods_minimal %> -->
+    <%= f.text_field :goods_minimal,placeholder: t(:goods_minimal)%>
   </div>
  <!--  <div>
     <%= f.text_field :name, required: true, placeholder: '姓名'%>

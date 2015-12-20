@@ -1,9 +1,9 @@
 
-<%= form_for form_params(@event, @participant), data: {abide: ''} do |f| %>
+<%= form_for form_params(@parent, @participant), data: {abide: ''} do |f| %>
 	<%= render 'layouts/form_errors', object: @participant %>
 	<div>
 		<div class="columns small-10 left"><%= f.number_field :goods_amount, required: true,placeholder:'团购数量'%></div>
-		<div class="columns small-2"><%=@event.goods_unit%></div>
+		<div class="columns small-2"><%=@parent.goods_unit%></div>
 	    <%= show_error_message('团购数量，不能为空！') %>
 	</div>
 <!-- 	<div>

@@ -13,7 +13,7 @@ module ApplicationHelper
       child.new_record? ? [parent, child] : child
     end
 
-    def topic_info(topic)
+  def topic_info(topic)
       info = ["<small class='details'>"]
     # info << badge_for(topic.forum) unless params[:controller] == 'forums' &&
     #                                       params[:action]     == 'show'
@@ -26,11 +26,20 @@ module ApplicationHelper
   def event_info(event)
     info = ["<small class='details'>"]
   #  info << link_to(event.event_type, '#', class: 'badge')    
-  info << info_for(event.user)   unless params[:controller] == 'users'
-  info << time_for(event)<< '</small>' 
-  info << vote_for(event) 
+    info << info_for(event.user)   unless params[:controller] == 'users'
+    info << time_for(event)<< '</small>' 
+    info << vote_for(event) 
+    info.join.html_safe
+  end
+
+ def groupbuy_info(groupbuy)
+  info = ["<small class='details'>"]   
+  info << info_for(groupbuy.user)   unless params[:controller] == 'users'
+  info << time_for(groupbuy)<< '</small>' 
+  info << vote_for(groupbuy) 
   info.join.html_safe
 end
+
 
 def comment_info(comment)
   info = ["<small class='details'>"]
@@ -52,7 +61,7 @@ def participant_info(participant)
   info = ["<small class='details'>"]
   info << link_to( is_paid(participant), '#', class: 'badge')   
   info << info_for(participant.user)
-  info << ' | ' + participant.goods_amount.to_s + Event.find(participant.event_id).goods_unit
+  info << ' | ' + participant.goods_amount.to_s + Groupbuy.find(participant.groupbuy_id).goods_unit
 
   #info << '参加人数' + participant.people_amount.to_s
   #info << owner_buttons_for(participant) if current_user == participant.user

@@ -70,15 +70,31 @@
 <div class="row">
   <div class="columns small-12">
     <div class="events-index">
-      <% if @events %>
-      <%= render @events %>
+      <% if @groupbuys %>
+      <%= render @groupbuys %>
+      <div class="columns small-12 text-right">
+        <a href="/groupbuys"><h5><%=t(:more)%>...</h5></a><hr>
+      </div>
       <% else %>
-      <p>还没有任何活动。</p>
+      <!-- <p>还没有任何团购。</p> -->
       <% end%>
     </div>
   </div>
-  <div class="columns small-12 right panel">
-    <a href="/events"><h4><%=t(:more)%>...</h4></a>
+ 
+</div>
+<div class="row">
+  <div class="columns small-12">
+    <div class="events-index">
+      <% if @events && @events.size>0%>
+      <%= render @events %>
+      <div class="columns small-12 text-right">
+        <a href="/events"><h5><%=t(:more)%>...</h5></a>
+        <hr>
+      </div>
+      <% else %>
+      <!-- <h5>还没有任何活动。</p> -->
+      <% end%>
+    </div>
   </div>
 </div>
   <!-- <div> -->
@@ -86,15 +102,16 @@
     <div class="topics-index">
       <% if @topics%>
       <%= render @topics %>
+      <div class="columns small-12 text-right">
+        <a href="/forums/<%=forum_id%>"><h5><%=t(:more)%>...</h5></a><hr>
+      </div>
       <% else %>
-      <p>还没有任何话题.</p>
+      <!-- <p>还没有任何话题.</p> -->
       <% end%>
     </div>
    <!--  <%# end %>
   </div> -->
-<div class="columns small-12 medium">
-  <a href="/forums/<%=forum_id%>"><h4><%=t(:more)%>...</h4></a>
-</div>
-<br>
+
+<br><br>
 
   

@@ -5,26 +5,21 @@ class CommentsController < ApplicationController
     validate_permission!(select_comment.user)
   end
   before_action :select_comment, only: [:edit, :update, :destroy]
-#  before_action only: [:new, :create] {@topic = Topic.find(params[:topic_id])}
+  before_action only: [:new, :create,:index] {
+     if params[:topic_id]
+      @parent = Topic.find(params[:topic_id])
+    elsif params[:event_id]
+      @parent = Event.find(params[:event_id])
+    elsif params[:groupbuy_id]
+      @parent = Groupbuy.find(params[:groupbuy_id])
+    end
+  }
 
   def new
-
-    if params[:topic_id]
-      @parent = Topic.find(params[:topic_id])
-    elsif params[:event_id]
-      @parent = Event.find(params[:event_id])
-    end      
-    @comment = @parent.comments.new
-    
+    @comment = @parent.comments.new    
   end
 
-  def create
-
-    if params[:topic_id]
-      @parent = Topic.find(params[:topic_id])
-    elsif params[:event_id]
-      @parent = Event.find(params[:event_id])
-    end
+  def create  
 
     @comment = @parent.comments.new(comment_params)
     @comment.user = current_user
@@ -66,13 +61,8 @@ class CommentsController < ApplicationController
   end
 
   def index
-    if params[:topic_id]
-      @parent = Topic.find(params[:topic_id])
-    elsif params[:event_id]
-      @parent = Event.find(params[:event_id])
-    end
     @comment = @parent.comments.new
-    @comments = @parent.comments
+    @comments = @parent.comments.includes(:user)
   end
 
   private

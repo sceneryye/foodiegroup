@@ -227,7 +227,7 @@ en:
   start_time: Start Time
   end_time: End Time
   price:  Price
-  goods_big_than: Minimum quantity
+  goods_minimal: Minimum quantity
   new_forum:  New Forum
   edit_forum: Edit Forum
   new_topic:  New Topic

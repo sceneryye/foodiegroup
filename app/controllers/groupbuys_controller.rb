@@ -3,11 +3,11 @@ require 'rest-client'
 class GroupbuysController < ApplicationController
 
   def index
-    @groupbuys = groupbuy.where(locale: session[:locale]).includes(:user)
+    @groupbuys = Groupbuy.where(locale: session[:locale]).includes(:user)
   end
 
   def show
-    @groupbuy  = groupbuy.find(params[:id])
+    @groupbuy  = Groupbuy.find(params[:id])
     @participants = @groupbuy.participants.includes(:user)
     @comments = @groupbuy.comments.includes(:user)
 
@@ -27,11 +27,11 @@ class GroupbuysController < ApplicationController
 end
 
 def new
- @groupbuy = groupbuy.new
+ @groupbuy = Groupbuy.new
 end
 
 def create
-  @groupbuy = groupbuy.new(groupbuy_params)
+  @groupbuy = Groupbuy.new(groupbuy_params)
   @groupbuy.user = current_user
   @groupbuy.locale = session[:locale]
 
@@ -56,7 +56,7 @@ def create
       # openids = User.plunk(:weixin_openid)
       openids = "oVxC9uBr12HbdFrW1V0zA3uEWG8c"
       msgtype = "text"
-      content = "吃货帮刚刚发布了一个新活动：#{@groupbuy.title}, 赶紧来看看哦～"
+      content = "吃货帮刚刚发布了一个新团购：#{@groupbuy.title}, 赶紧来看看哦～"
       data_hash = {
         openids: openids,
         content: content,
@@ -73,7 +73,7 @@ def create
   end
 
   def edit
-    @groupbuy = groupbuy.find(params[:id])
+    @groupbuy = Groupbuy.find(params[:id])
   end
 
   def update
@@ -82,7 +82,7 @@ def create
         return render :text => 'failed'
       end
       num = params[:recommend].to_i
-      if groupbuy.find(params[:id]).update(recommend: num)
+      if Groupbuy.find(params[:id]).update(recommend: num)
         Rails.logger.info 'true'
       return render :text => 'success'
     end
@@ -100,7 +100,7 @@ def create
     end
 
 
-    @groupbuy = groupbuy.find(params[:id])
+    @groupbuy = Groupbuy.find(params[:id])
     if @groupbuy.update(groupbuy_params)
       redirect_to groupbuy_url(@groupbuy), notice: '活动修改成功'
     else
@@ -111,7 +111,7 @@ def create
   
 
   def destroy
-    @groupbuy = groupbuy.find(params[:id])
+    @groupbuy = Groupbuy.find(params[:id])
     @groupbuy.destroy
     respond_to do |format|
       format.js
@@ -121,7 +121,7 @@ def create
 
   private
   def set_groupbuy
-    @groupbuy = groupbuy.find(params[:id])
+    @groupbuy = Groupbuy.find(params[:id])
   end
 
   def groupbuy_params

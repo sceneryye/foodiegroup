@@ -1,7 +1,7 @@
 <% provide :title, t(:new_participant) %>
 <div class="topics panel columns radius ">
-  <h2><%= @event.title %></h2>
-  <%#= event_info(@event) %>
+  <h2><%= @parent.title %></h2>
+  <%#= event_info(@parent) %>
 </div>
 <div class="small-11 columns offset-1">
   <%= render 'form' %>
