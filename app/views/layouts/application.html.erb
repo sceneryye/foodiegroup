@@ -84,7 +84,7 @@
 
         var url = $(this).data('url');
         htmlobj = $.ajax({url: url ,async:false});
-        var obj = $(this).parent().parent().append('<div class="participants">'+htmlobj.responseText+'</div>');      
+        $(this).parent().parent().append('<div class="participants">'+htmlobj.responseText+'</div>');      
       });
 
      </script>

@@ -2,7 +2,7 @@
   <p> 
     <% if @parent
       if current_user == @parent.user && participant.status_pay != 1%>
-      <%= link_to "确认支付", confirm_paid_event_participant_path(participant.event,participant), class:"tiny button radius alert" %>
+      <%= link_to "确认支付", confirm_paid_event_participant_path(participant.groupbuy,participant), class:"tiny button radius alert" %>
       <small><%=participant.mobile%>||<%=participant.address%></small>
       <%end
       end%>
@@ -15,9 +15,9 @@
     <%if signed_in?%>
     <% if participant.user_id == current_user.id && participant.status_pay == 0 %>
 
-    <%= form_tag wechat_pay_event_participant_path(@event.id, participant.id) do %>
+    <%= form_tag wechat_pay_event_participant_path(@parent.id, participant.id) do %>
     <%= hidden_field_tag :openid, current_user.weixin_openid %>
-    <%= hidden_field_tag :money, @event.price * participant.goods_amount %>
+    <%= hidden_field_tag :money, @parent.price * participant.goods_amount %>
     <%= submit_tag t(:pay), class: "button tiny" %>
 
     <% end %>

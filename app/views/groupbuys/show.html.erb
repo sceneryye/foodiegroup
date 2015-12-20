@@ -61,10 +61,11 @@
         <li class="tab-title"><a href="#comments"><i class="fa fa-comments"></i><%=t(:comments)%> (<%=@groupbuy.comments_count%>)</a></li>
       </ul>
       <div class="tabs-content panel">
-        <div class="content active" id="participants">
-          <%= render @participants %>
+        <div class="content active show-participants" id="participants" data-url='<%=groupbuy_participants_path(@groupbuy)%>'>
+          
+          <%= render @participants, :locals=>{@parent=>@groupbuy} %>
         </div>
-        <div class="content" id="comments">
+        <div class="content show-comments" id="comments"  data-url='<%=groupbuy_comments_path(@groupbuy)%>'>
          <%= render @comments %>
        </div>
      </div>

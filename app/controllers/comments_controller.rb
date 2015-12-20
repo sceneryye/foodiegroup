@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   end
   before_action :select_comment, only: [:edit, :update, :destroy]
   before_action only: [:new, :create,:index] {
-     if params[:topic_id]
+    if params[:topic_id]
       @parent = Topic.find(params[:topic_id])
     elsif params[:event_id]
       @parent = Event.find(params[:event_id])
@@ -25,10 +25,13 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
+      notice = '添加评论成功'
       if params[:topic_id]
-        redirect_to topic_url(@parent), notice: '添加评论成功'
-      else
-        redirect_to event_url(@parent), notice: '添加评论成功'
+        redirect_to topic_url(@parent), notice: notice
+      elsif  params[:event_id]
+        redirect_to event_url(@parent), notice: notice
+      elsif  params[:groupbuy_id]
+        redirect_to groupbuy_url(@parent), notice: notice
       end
     else
       render :new
@@ -39,10 +42,13 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-       if @comment.topic
-        redirect_to topic_url(@comment.topic), notice: '更新评论成功'
+      notice = '修改评论成功'
+      if @comment.topic
+        redirect_to topic_url(@comment.topic), notice: notice
       elsif @comment.event
-        redirect_to event_url(@comment.event), notice: '更新评论成功'
+        redirect_to event_url(@comment.event), notice: notice
+      elsif @comment.groupbuy
+        redirect_to groupbuy_url(@comment.groupbuy), notice: notice
       end
     else
       render :edit
@@ -52,17 +58,21 @@ class CommentsController < ApplicationController
   def destroy
 
     @comment.destroy
+    notice = '删除评论成功'
     if @comment.topic
-      redirect_to topic_url(@comment.topic), notice: '删除评论成功'
+      redirect_to topic_url(@comment.topic), notice: notice
     elsif @comment.event
-       redirect_to event_url(@comment.event), notice: '删除评论成功'
+       redirect_to event_url(@comment.event), notice: notice
+     elsif @comment.groupbuy
+        redirect_to groupbuy_url(@comment.groupbuy), notice: notice
     end
 
   end
 
   def index
     @comment = @parent.comments.new
-    @comments = @parent.comments.includes(:user)
+    @comments = @parent.comments.includes(:user).limit(3)
+    render layout: nil
   end
 
   private

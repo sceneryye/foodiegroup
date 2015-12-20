@@ -66,7 +66,7 @@ def create
       res_data_json = RestClient.post post_url, data_hash
 
 
-      redirect_to groupbuy_url(@groupbuy), notice: '活动发布成功!'
+      redirect_to groupbuy_url(@groupbuy), notice: '团购发布成功!'
     else
       render :new
     end
@@ -102,7 +102,7 @@ def create
 
     @groupbuy = Groupbuy.find(params[:id])
     if @groupbuy.update(groupbuy_params)
-      redirect_to groupbuy_url(@groupbuy), notice: '活动修改成功'
+      redirect_to groupbuy_url(@groupbuy), notice: '团购修改成功'
     else
       render :edit
     end

@@ -21,7 +21,8 @@ class ParticipantsController < ApplicationController
 
   def index
     @participant = @parent.participants.new
-    @participants = @parent.participants.includes(:user)
+    @participants = @parent.participants.includes(:user).limit(3)
+    render layout: nil
   end
 
   def confirm_paid
@@ -49,7 +50,12 @@ class ParticipantsController < ApplicationController
     @participant.user = current_user
 
     if @participant.save
-      redirect_to event_url(@parent), notice: '活动报名成功'
+      notice =  '报名成功'
+      if params[:groupbuy_id]
+        redirect_to groupbuy_url(@parent), notice: notice
+      else
+        redirect_to event_url(@parent), notice: notice
+      end
     else
       render :new
     end
@@ -80,13 +86,13 @@ class ParticipantsController < ApplicationController
 
   def wechat_notify_url
     if params["result_code"] == 'SUCCESS'
-      event_id, participant_id, user_id = params["attach"].split('_')
+      groupbuy_id, participant_id, user_id = params["attach"].split('_')
       Participant.find(participant_id).update(status_pay: 2)
       post_url = "http://www.trade-v.com/temp_info_api"
       openid = params["openid"]
       template_id = "E_Mfmg0TwyE3hRnccleURsU5QpqsPVsj0LD5dU4fu0Y"
-      url = "http://182.254.137.73:5000/events/#{event_id}"
-      title = Event.find(event_id).title
+      url = "http://182.254.137.73:5000/groupbuys/#{groupbuy_id}"
+      title = Groupbuy.find(groupbuy_id).title
       data = {
         :first => {:value => '支付成功', :color => "#173177"},
         :orderMoneySum => {:value => params["cash_fee"].to_f / 100.00, :color => "#173177"},
@@ -107,7 +113,12 @@ class ParticipantsController < ApplicationController
 
     def update
       if @participant.update(participant_params)
-        redirect_to event_url(@participant.event), notice: '活动报名修改成功'
+        notice =  '报名修改成功'
+        if params[:groupbuy_id]
+          redirect_to groupbuy_url(@participant.groupbuy), notice: notice
+        else
+          redirect_to event_url(@participant.event), notice: notice
+        end
       else
         render :edit
       end
@@ -115,7 +126,12 @@ class ParticipantsController < ApplicationController
 
     def destroy
       @participant.destroy
-      redirect_to event_url(@participant.event), notice: '取消报名成功'
+      notice =  '取消报名成功'
+      if params[:groupbuy_id]
+        redirect_to groupbuy_url(@participant.groupbuy), notice: notice
+      else
+        redirect_to event_url(@participant.event), notice: notice
+      end
     end
 
     private
