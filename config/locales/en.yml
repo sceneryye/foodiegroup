@@ -233,7 +233,8 @@ en:
   new_topic:  New Topic
   edit_topic: Edit Topic
   pay: Pay Now
-  reservation: Reservations
+  goings: Goings
+  rsvp: RSVP
   homepage: Homepage
   unpaid: Unpaid
   pic_url: Picture upload
@@ -253,4 +254,8 @@ en:
   mobile: Mobile
   address: Address
   quantity: Quantity
+  buy: Buy
+  buys: Buys
+  remark: Remark
+  submit: Submit
   

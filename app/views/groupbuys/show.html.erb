@@ -42,14 +42,14 @@
     <div>
        <%= link_to t(:comment), new_groupbuy_comment_path(@groupbuy),
                               class:"tiny button radius" if signed_in? %>
-       <%= link_to t(:new_participant), new_groupbuy_participant_path(@groupbuy),
+       <%= link_to t(:buy), new_groupbuy_participant_path(@groupbuy),
                               class:"tiny button radius" if signed_in? %>
       
 
       <% if current_user == @groupbuy.user %>
 
-        <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_groupbuy_path(@groupbuy), class:"tiny button radius" %>
-        <%= link_to '<i class="fa fa-times"></i>'.html_safe, @groupbuy,method: :delete,
+        <%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_groupbuy_path(@groupbuy), class:"tiny button radius" %>
+        <%= link_to '<i class="fa fa-times"></i>'.html_safe + ' ' + t(:delete), @groupbuy,method: :delete,
                   class:"tiny button alert radius",
                   data: {confirm: '?'} %>
       <% end %>
@@ -57,7 +57,7 @@
 
      <div class="comments">
        <ul class="tabs" data-tab role="tablist">
-        <li class="tab-title active"><a href="/groupbuys/<%= params[:id] %>/participants/new"><i class="fa fa-users"></i><%=t(:reservation)%> (<%=@groupbuy.participants_count%>)</a></li>
+        <li class="tab-title active"><a href="/groupbuys/<%= params[:id] %>/participants/new"><i class="fa fa-users"></i><%=t(:buys)%> (<%=@groupbuy.participants_count%>)</a></li>
         <li class="tab-title"><a href="#comments"><i class="fa fa-comments"></i><%=t(:comments)%> (<%=@groupbuy.comments_count%>)</a></li>
       </ul>
 
