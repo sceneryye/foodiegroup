@@ -30,7 +30,7 @@ class ParticipantsController < ApplicationController
     if current_user == @participant.groupbuy.user #只能由活动发起人修改支付状态    
       @participant.update(:status_pay=>1)
     end
-    redirect_to event_url(@participant.event), notice: '确认付款'
+    redirect_to event_url(@participant.groupbuy), notice: '确认付款'
   end
 
   def confirm_shiped
