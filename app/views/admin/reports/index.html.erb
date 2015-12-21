@@ -10,8 +10,8 @@
     <% end %>
   </span>
   <span class="count">
-    <%= link_to admin_events_list_path do %>
-    活动数：<%= Groupbuy.count %>
+    <%= link_to admin_groupbuys_list_path do %>
+    团购数：<%= Groupbuy.count %>
     <% end %>
   </span>
   <span class="count">
@@ -46,7 +46,7 @@
       <td><%= user.name %></td>
       <td><%= Participant.where(user_id: user.id).count %></td>
       <td><%= user.comments.group(:topic_id).count.select {|key, value|key.present?}.count %></td>
-      <td><%= user.events.count.to_i %></td>
+      <td><%= user.groupbuys.count.to_i %></td>
       <td><%= user.topics.count.to_i %></td>
     </tr>
     <% end %>
