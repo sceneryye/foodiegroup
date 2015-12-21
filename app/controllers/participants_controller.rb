@@ -27,7 +27,7 @@ class ParticipantsController < ApplicationController
 
   def confirm_paid
     @participant = Participant.find(params[:id])
-    if current_user = @participant.event.user #只能由活动发起人修改支付状态    
+    if current_user == @participant.groupbuy.user #只能由活动发起人修改支付状态    
       @participant.update(:status_pay=>1)
     end
     redirect_to event_url(@participant.event), notice: '确认付款'
