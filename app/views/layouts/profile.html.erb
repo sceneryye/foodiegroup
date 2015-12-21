@@ -15,41 +15,43 @@
           <p><i class="fa fa-map-marker"></i>:<%= @user.location if @user%></p>
         </div>
         <div class="small-4 columns">
-          <ul class="button-group radius">                         
-          <% if current_user == @user %>
+          <ul class="button-group radius">
+            <% if current_user == @user %>
             <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_profile_path(@user),
-                                                 class: 'tiny button secondary' if @user%>
+            class: 'tiny button secondary' if @user%>
             <%= link_to '<i class="fa fa-heart"></i>'.html_safe, '#',
-                                                 class: 'tiny button secondary' if @user%>
+            class: 'tiny button secondary' if @user%>
             <!-- <li><%= link_to "删除账号", @user,
                                              method: :delete,
                                              data: {confirm: 'Hesabınızı silmek istediğinize emin misiniz?'},
                                              class: 'small button alert' if@user%></li> -->
-            <%= link_to '<i class="fa fa-sign-out"></i>'.html_safe, logout_path, method: :delete, class: 'tiny button secondary' %>
-            <%=link_to '<i class="fa fa-file-text"></i>'.html_safe,register_path, class: 'tiny button secondary'%>
-          <% end %>
-        </div>
-      </div>
-      <div class="button-bar">
-        <ul class="button-group radius">
-          <li><%= link_to t(:topic), profile_path(@user, type: 'topic'),
-                                     class: 'small button secondary'  if @user%></li>
-          <li><%= link_to t(:comment), profile_path(@user, type: 'comment'),
-                                      class: 'small button secondary'  if @user%></li>
-          <li><%= link_to t(:event), profile_path(@user, type: 'event'),
-                                      class: 'small button secondary'  if @user%></li>
-          <li><%= link_to t(:participant), profile_path(@user, type: 'participant'),
-                                      class: 'small button secondary'  if @user%></li>                           
-       
-        </ul>
-      </div>
-    </div><hr>
+                                             <%= link_to '<i class="fa fa-sign-out"></i>'.html_safe, logout_path, method: :delete, class: 'tiny button secondary' %>
+                                             <%=link_to '<i class="fa fa-file-text"></i>'.html_safe,register_path, class: 'tiny button secondary'%>
+                                             <% end %>
+                                           </div>
+                                         </div>
+                                         <div class="button-bar">
+                                          <ul class="button-group radius">
+                                            <li><%= link_to t(:topic), profile_path(@user, type: 'topic'),
+                                             class: 'small button secondary'  if @user%></li>
+                                             <li><%= link_to t(:comment), profile_path(@user, type: 'comment'),
+                                              class: 'small button secondary'  if @user%></li>
+                                              <li><%= link_to t(:event), profile_path(@user, type: 'event'),
+                                                class: 'small button secondary'  if @user%></li>
+                                                <li><%= link_to t(:participant), profile_path(@user, type: 'participant'),
+                                                  class: 'small button secondary'  if @user%></li>
+                                                  <li><%= link_to t(:share), 'http://www.trade-v.com/foodies/foodie_group_share',
+                                                    class: 'small button secondary'  if @user%></li>
 
-    <div class="large-12 columns">
-      <%= yield :profile_content %>
-    </div>
+                                                  </ul>
+                                                </div>
+                                              </div><hr>
 
-  </div>
-</div>
-<% end %>
-<%= render template: "layouts/application" %>
+                                              <div class="large-12 columns">
+                                                <%= yield :profile_content %>
+                                              </div>
+
+                                            </div>
+                                          </div>
+                                          <% end %>
+                                          <%= render template: "layouts/application" %>
