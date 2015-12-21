@@ -1,0 +1,11 @@
+<div class="address">
+	<p><%=user_address.name%></p>
+	<p><%=user_address.mobile%></p>
+  	<p><%=user_address.address%></p>
+  	<p> <%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_user_address_path(user_address), class:"tiny button radius" %>
+      <%= link_to '<i class="fa fa-times"></i>'.html_safe + ' ' + t(:delete), user_address,
+                         method: :delete,
+                         class:"tiny button alert radius",
+                         data: {confirm: '?'} %>
+</div>
+<hr>

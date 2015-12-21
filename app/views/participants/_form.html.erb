@@ -2,29 +2,24 @@
 <%= form_for form_params(@parent, @participant), data: {abide: ''} do |f| %>
 	<%= render 'layouts/form_errors', object: @participant %>
 	<div>
-		<div class="columns small-10 left"><%= f.number_field :goods_amount, required: true,placeholder:'团购数量'%></div>
+		<div class="columns small-10 left"><%= f.number_field :goods_amount, required: true,placeholder: t(:quantity)%></div>
 		<div class="columns small-2"><%=@parent.goods_unit%></div>
 	    <%= show_error_message('团购数量，不能为空！') %>
 	</div>
-<!-- 	<div>
-		<%#= f.label :people_amount %>
-	    <%#= f.text_area :people_amount#%>
-	    <%#= show_error_message('不能为空！') %>
-	</div> -->
   	<div>
-	    <%= f.text_area :name, required: true, placeholder:'姓名'%>
+	    <%= f.text_area :name, required: true, placeholder:t(:name)%>
 	    <%= show_error_message('联系人/收货人，不能为空！') %>
    </div>
    <div>
-	    <%= f.text_area :mobile, required: true,placeholder:'手机'%>
+	    <%= f.text_area :mobile, required: true,placeholder:t(:mobile)%>
 	    <%= show_error_message('联系电话，不能为空！') %>
    	</div>
 	<div>
-	    <%= f.text_area :address, required: true, placeholder:'收货地址'%>
+	    <%= f.text_area :address, required: true, placeholder:t(:address)%>
 	    <%= show_error_message('收货地址，不能为空！') %>
    	</div>
 	<div>
-	    <%= f.text_area :remark, class:'comment-area',placeholder: '备注'%>
+	    <%= f.text_area :remark, class:'comment-area',placeholder: t(:remark)%>
 	    <%= show_error_message('备注，请不要超过500字') %>
 	</div>
   <%= f.submit '提交报名',class:'tiny button radius' %>

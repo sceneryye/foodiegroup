@@ -1,6 +1,6 @@
 RailsOnForum::Application.routes.draw do
-
   
+  resources :user_addresses
 
   get 'tags/create'
 
@@ -10,11 +10,11 @@ RailsOnForum::Application.routes.draw do
 
   namespace :admin do
   resources :reports
-  get '/users_list', to: 'reports#users_list'
-  get '/groupbuys_list', to: 'reports#groupbuys_list'
-  get '/topics_list', to: 'reports#topics_list'
-  get '/participants_list', to: 'reports#participants_list'
-  get '/tags_list', to: 'reports#tags_list'
+    get '/users_list', to: 'reports#users_list'
+    get '/groupbuys_list', to: 'reports#groupbuys_list'
+    get '/topics_list', to: 'reports#topics_list'
+    get '/participants_list', to: 'reports#participants_list'
+    get '/tags_list', to: 'reports#tags_list'
   end
 
   resource :votes, only: :create

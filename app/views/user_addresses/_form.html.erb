@@ -1,0 +1,16 @@
+<%= form_for @user_address, data: {abide: ''} do |f| %>
+  	<%= render 'layouts/form_errors', object: @user_address %>
+ 	<div>
+	    <%= f.text_area :name, required: true, placeholder:t(:name)%>
+	    <%= show_error_message('联系人/收货人，不能为空！') %>
+   </div>
+   <div>
+	    <%= f.text_area :mobile, required: true,placeholder:t(:mobile)%>
+	    <%= show_error_message('联系电话，不能为空！') %>
+   	</div>
+	<div>
+	    <%= f.text_area :address, required: true, placeholder:t(:address)%>
+	    <%= show_error_message('收货地址，不能为空！') %>
+   	</div>
+  	<%= f.submit  class:'tiny button radius' %>
+<% end %>
