@@ -4,6 +4,7 @@ $edit-button: #E8A317;
 $delete-button: #C11B17;
 $confirm-button: #86C217;
 $cancel-button: #17BFC2;
+$link-color: #2B65EC;
 /*****************index******************/
 .count {
   margin-left: 20px;
@@ -96,9 +97,15 @@ table {
 }
 
 /****************events_list********************/
-.events-list {
+.groupbuys-list {
   .recommend-number {
     width: 50px;
+  }
+  a {
+    color: $link-color;
+    &:visited {
+      color: $link-color;
+    }
   }
 }
 /*******************tags_list*******************/
@@ -119,8 +126,6 @@ table {
   .add-tag {
     float: right;
     margin-right: 10%;
-    .tag {
-      padding-right: 10px;
-    }
+    
   }
 }
