@@ -2,7 +2,7 @@
   <p> 
     <% if @parent
       if current_user == @parent.user && participant.status_pay != 1%>
-      <%= link_to "确认支付", confirm_paid_event_participant_path(participant.groupbuy,participant), class:"tiny button radius alert" %>
+      <%= link_to "确认支付", confirm_paid_groupbuy_participant_path(participant.groupbuy,participant), class:"tiny button radius alert" %>
       <small><%=participant.mobile%>||<%=participant.address%></small>
       <%end
       end%>
