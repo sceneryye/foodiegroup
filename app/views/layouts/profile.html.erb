@@ -40,7 +40,7 @@
                                                 class: 'small button secondary'  if @user%></li>
                                                 <li><%= link_to t(:participant), profile_path(@user, type: 'participant'),
                                                   class: 'small button secondary'  if @user%></li>
-                                                  <li><%= link_to t(:share), "http://www.trade-v.com/foodies/foodie_group_share?return_url=#{@return_url}",
+                                                  <li><%= link_to t(:share), "http://www.trade-v.com/foodies/foodie_group_share?return_url=#{URI.encode request.url}",
                                                     class: 'small button secondary'  if @user%></li>
 
                                                   </ul>

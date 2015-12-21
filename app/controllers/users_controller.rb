@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @reutrn_url = URI.encode request.url
+    
     type = params[:type] || 'topic'
 
     case type 
