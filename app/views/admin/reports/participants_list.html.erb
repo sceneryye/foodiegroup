@@ -1,7 +1,7 @@
 <div class="participants_list">
   <div class="title">
     <h3>报名详情</h3>
-    <h4><%= @event.title %></h4>
+    <h4><%= @groupbuy.title %></h4>
   </div>
 
   <div class="navpath">
@@ -10,7 +10,7 @@
     </span>
     <span class="slash">/</span>
     <span class="subpath">
-      <%= link_to "活动列表", admin_events_list_path(@event) %>
+      <%= link_to "活动列表", admin_groupbuys_list_path(@groupbuy) %>
     </span>
     <span class="slash">/</span>
     <span class="thirdpath">
@@ -36,13 +36,13 @@
       <td><%= p.name %></td>
       <td><%= p.mobile %></td>
       <td style="width: 25%"><%= p.address %></td>
-      <td><%= p.goods_amount %><%= @event.goods_unit %></td>
-      <td><%= @event.price %></td>
-      <td><%= p.goods_amount * @event.price %></td>
+      <td><%= p.goods_amount %><%= @groupbuy.goods_unit %></td>
+      <td><%= @groupbuy.price %></td>
+      <td><%= p.goods_amount * @groupbuy.price %></td>
       <td><%= is_paid p %></td>
       <td id="participant-<%= p.id %>" ><%= is_shiped p %></td>
       <td><%= p.created_at.strftime('%F') %></td>
-      <td class="participant-ship-confirm" data-id="<%= p.id %>" data-url="<%= confirm_shiped_event_participant_path(@event.id, p.id) %>">
+      <td class="participant-ship-confirm" data-id="<%= p.id %>" data-url="<%= confirm_shiped_groupbuy_participant_path(@groupbuy.id, p.id) %>">
         <% if p.status_ship == 0 %>
         <div class="ship-confirm">发货确认</div>
         <% end %>

@@ -9,8 +9,8 @@ class Admin::ReportsController < ApplicationController
     @users = User.paginate(per_page: 20, page: params[:page]).order(id: :asc)
   end
 
-  def events_list
-    @events = Event.paginate(per_page: 20, page: params[:page]).order(id: :asc)
+  def groupbuys_list
+    @groupbuys = Groupbuy.paginate(per_page: 20, page: params[:page]).order(id: :asc)
   end
 
   def topics_list
@@ -18,8 +18,8 @@ class Admin::ReportsController < ApplicationController
   end
 
   def participants_list
-    @event = Event.find(params[:event_id])
-    @participants = Participant.unscoped {Participant.where(:event_id => params[:event_id]).paginate(per_page: 100, page: params[:page]).order(status_pay: :desc)}
+    @groupbuy = Groupbuy.find(params[:groupbuy_id])
+    @participants = Participant.unscoped {Participant.where(:groupbuy_id => params[:groupbuy_id]).paginate(per_page: 100, page: params[:page]).order(status_pay: :desc)}
   end
 
   def tags_list

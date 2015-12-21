@@ -1,4 +1,4 @@
-<div class="events-list">
+<div class="groupbuys-list">
   <div class="title">
     <h3>活动列表</h3>
   </div>
@@ -25,24 +25,24 @@
         <th>推荐值</th>
         <th>操作</th>
       </tr>
-      <% @events.each_with_index do |event| %>
-      <tr class="body" id="event-<%= event.id %>">
-        <td><%= event.title[0..10] %></td>
-        <td><%= event.start_time.strftime('%F %T') %></td>
-        <td><%= event.end_time.strftime('%F %T') %></td>
-        <td><%= link_to Participant.where(event_id: event.id).count, admin_participants_list_path(event_id: event.id) %></td>
-        <td><%= Participant.where(event_id: event.id, status_pay: 1).count %></td>
-        <td><%= event.name %></td>
-        <td><%= event.price %></td>
+      <% @groupbuys.each_with_index do |groupbuy| %>
+      <tr class="body" id="groupbuy-<%= groupbuy.id %>">
+        <td><%= groupbuy.title[0..10] %></td>
+        <td><%= groupbuy.start_time.strftime('%F %T') %></td>
+        <td><%= groupbuy.end_time.strftime('%F %T') %></td>
+        <td><%= link_to Participant.where(groupbuy_id: groupbuy.id).count, admin_participants_list_path(groupbuy_id: groupbuy.id) %></td>
+        <td><%= Participant.where(groupbuy_id: groupbuy.id, status_pay: 1).count %></td>
+        <td><%= groupbuy.name %></td>
+        <td><%= groupbuy.price %></td>
         <td>
-          <input type="number" name="recommend" value="<%= event.recommend %>" id="<%= event.id %>" data-value="<%= event.recommend %>" class="recommend-number" data-id="<%= event.id %>" />
+          <input type="number" name="recommend" value="<%= groupbuy.recommend %>" id="<%= groupbuy.id %>" data-value="<%= groupbuy.recommend %>" class="recommend-number" data-id="<%= groupbuy.id %>" />
         </td>
-        <td><%= link_to "删除", event_path(event), method: :delete, remote: true,  data: { confirm:'确定删除?' } %></td>
+        <td><%= link_to "删除", groupbuy_path(groupbuy), method: :delete, remote: true,  data: { confirm:'确定删除?' } %></td>
       </tr>
       <% end %>
     </table>
     <div class="paginate">
-      <%= will_paginate @events %>
+      <%= will_paginate @groupbuys %>
     </div>
   </div>
 </div>
