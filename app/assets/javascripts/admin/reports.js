@@ -49,8 +49,8 @@ $('.participant-ship-confirm').on('click', function(){
 $('.recommend-number').on('change', function(){
   var that = $(this);
   var nums = $(this).val();
-  var event_id = $(this).data('id');
-  var url = '/events/' + event_id;
+  var groupbuy_id = $(this).data('id');
+  var url = '/groupbuys/' + groupbuy_id;
   var nums_value = $(this).data('value');
   if(nums == '' || nums == undefined || isNaN(nums) == true) {
     $(this).val(nums_value);
@@ -62,7 +62,7 @@ $('.recommend-number').on('change', function(){
     type: "patch",
     data: {
       recommend: nums,
-      from: 'admin_event_list'
+      from: 'admin_groupbuy_list'
     },
     success: function(e){
       if(e == 'success') {

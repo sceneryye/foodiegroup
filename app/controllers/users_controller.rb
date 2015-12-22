@@ -18,6 +18,12 @@ class UsersController < ApplicationController
     @user.weixin_openid = session[:openid]
     @user.avatar = session[:avatar]    
     @user.nickname = session[:nickname]
+    if params[:from] == 'share_from_foodie'
+      @user.weixin_openid = params[:openid]
+      @user.avatar = params[:avatar]    
+      @user.nickname = params[:nickname]
+      @user.group_id = params[:group_id]
+    end
 
     if @user.save
       login(@user)
@@ -28,7 +34,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    
+
     type = params[:type] || 'topic'
 
     case type 
@@ -44,7 +50,7 @@ class UsersController < ApplicationController
     when 'event'
       @user = User.includes(:events).find_by_username(params[:id])
       @data = @user.events
-     when 'participant'
+    when 'participant'
       @user = User.includes(:participants).find_by_username(params[:id])
       @data = @user.participants.includes(:event)
     end
@@ -63,39 +69,39 @@ class UsersController < ApplicationController
       extension = uploaded_io.original_filename.split('.')
       filename = "#{Time.now.strftime('%Y%m%d%H%M%S')}.#{extension[-1]}"
      # filepath = "#{PIC_PATH}/teachResources/devices/#{filename}"
-      filepath = "#{PIC_PATH}/avatars/#{filename}"
-      File.open(filepath, 'wb') do |file|
-        file.write(uploaded_io.read)
-      end
-      user_params.merge!(:avatar=>"/avatars/#{filename}")
+     filepath = "#{PIC_PATH}/avatars/#{filename}"
+     File.open(filepath, 'wb') do |file|
+      file.write(uploaded_io.read)
     end
-
-    update_params = user_params
-
-    if update_params.has_key?(:password)
-      update_params.delete([:password, :password_confirmation])
-    end
-
-    if @user.update(update_params)
-      redirect_to profile_url(@user), notice: '个人信息修改成功'
-    else
-      render :edit, layout: "profile"
-    end
+    user_params.merge!(:avatar=>"/avatars/#{filename}")
   end
 
-  def destroy
-    logout
-    @user.destroy
-    redirect_to root_url
+  update_params = user_params
+
+  if update_params.has_key?(:password)
+    update_params.delete([:password, :password_confirmation])
   end
 
-  private
-
-  def user_params
-    params.require(:user).permit!
+  if @user.update(update_params)
+    redirect_to profile_url(@user), notice: '个人信息修改成功'
+  else
+    render :edit, layout: "profile"
   end
+end
 
-  def select_user
-    @user = User.find_by_username(params[:id])
-  end
+def destroy
+  logout
+  @user.destroy
+  redirect_to root_url
+end
+
+private
+
+def user_params
+  params.require(:user).permit!
+end
+
+def select_user
+  @user = User.find_by_username(params[:id])
+end
 end

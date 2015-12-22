@@ -14,15 +14,15 @@
           <p><i class="fa fa-map-marker"></i>:<%= @user.location if @user%></p>
         </div>
         <div class="small-4 columns">
-          <ul class="button-group radius">            
+          <ul class="button-group radius">
           <% if current_user == @user %>
-            <li><%= link_to '<i class="fa fa-pencil"></i>'.html_safe+' '+t(:edit_profile), 
-                  edit_profile_path(@user), 
+            <li><%= link_to '<i class="fa fa-pencil"></i>'.html_safe+' '+t(:edit_profile),
+                  edit_profile_path(@user),
                   class: 'tiny button secondary' if @user%>
             </li>
             <!-- <li><%#= link_to '<i class="fa fa-heart"></i>'.html_safe +' '+t(:interest), user_interest_path,class: 'tiny button secondary' if @user%></li> -->
             <li><%= link_to '<i class="fa fa-bookmark"></i>'.html_safe+' '+t(:maintain_addresses), user_addresses_path, class: 'tiny button secondary' if @user%></li>
-            <li><%=link_to '<i class="fa fa-file-text"></i>'.html_safe+' '+t(:membership),register_path, class: 'tiny button secondary'%></li>            
+            <li><%=link_to '<i class="fa fa-file-text"></i>'.html_safe+' '+t(:membership),register_path, class: 'tiny button secondary'%></li>
             <li><%= link_to '<i class="fa fa-sign-out"></i>'.html_safe+' '+t(:logout), logout_path, method: :delete, class: 'tiny button secondary' %></li>
             <% end %>
             </ul>

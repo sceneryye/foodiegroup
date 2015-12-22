@@ -1,65 +1,69 @@
 <%= form_for @user, data: {abide: ''},:html => {:multipart => true} do |f| %>
-  <%= render 'layouts/form_errors', object: @user %>
-  <div class="row">   
-    <% if params[:action] == 'new' || params[:action] == 'create' %>
-    <% if @groups%>
-      <div class="small-12 columns">
-         <%=f.select :group_id,options_from_collection_for_select(@groups,:id,:name),{:include_blank=>"请选择您的群||please select your group"}, required:true%>
-          <%#=f.select :group_id, @groups.collect {|group| [group.name, group.id] },{:include_blank=>"请选择"},{:class=>"span3"} %>
-        <%= show_error_message('请选择您所属的微信群') %>
-      <%end%>
-      </div>
-      <div class="small-12 columns">
-        <%= f.text_field :username, required: true, placeholder: '登录名'%>
-        <%= show_error_message('请输入您的登录名') %>
-      </div>
-       <div class="small-12 columns">
-        <%= f.text_field :mobile, required: true, placeholder: '手机' %>
-        <%= show_error_message('请输入您的手机号码.') %>
-      </div>
-    <%else%>
-    <div class="small-12 columns">
-      <%= f.email_field :email, required: true, placeholder: :email%>
-      <%= show_error_message('请输入您的email.') %>
-    </div>
-      <div class="small-12 columns">
-        <%= f.password_field :password, required: true, placeholder: '密码' %>
-        <%= show_error_message('请输入8个字符以上的密码.') %>
-      </div>
-      <div class="small-12 columns">
-        <%= f.password_field :password_confirmation, required: true, placeholder: '确认密码' %>
-        <%= show_error_message('请输入与上面密码相同的8个以上的字符.') %>
-      </div>  
-        <div class="small-6 columns">
-        <%= f.label :avatar %>
-      </div>
-      <div class="small-6 columns">
-         <%= file_field_tag :file%>
-        <%= show_error_message('请上传您的头像') %>
-      </div>
-    <div class="small-12 columns">
-      <%= f.text_field :name, placeholder: '姓名' %>
-      <%= show_error_message %>
-    </div>
-    <div class="small-3 columns">性别：</div>
-    <div class="small-5 columns">
-      <%=f.radio_button :sex, 1%>
-      <label for="user_sex_1" class="radio-label">男</label>
-    </div>
-    <div class="small-4 columns">
-      <%=f.radio_button :sex, 2%>
-      <label for="user_sex_2" class="radio-label">女</label>
-    </div>
-    <div class="small-12 columns">
-      <%= show_error_message %>
-    </div>
-    <div class="small-12 columns">
-      <%= f.text_field :profession,placeholder:'职业'%>
-    </div>
-    <div class="small-12 columns">
-      <%= f.text_field :location,placeholder:'地区'%>
-    </div>    
-    <%end%>
+<%= render 'layouts/form_errors', object: @user %>
+
+<div class="row">   
+  <% if params[:action] == 'new' || params[:action] == 'create' %>
+  
+
+  <% if @groups%>
+  <div class="small-12 columns">
+   <%=f.select :group_id,options_from_collection_for_select(@groups,:id,:name),{:include_blank=>"请选择您的群||please select your group"}, required:true%>
+   <%#=f.select :group_id, @groups.collect {|group| [group.name, group.id] },{:include_blank=>"请选择"},{:class=>"span3"} %>
+   <%= show_error_message('请选择您所属的微信群') %>
+   <%end%>
+ </div>
+ <div class="small-12 columns">
+  <%= f.text_field :username, required: true, placeholder: '登录名'%>
+  <%= show_error_message('请输入您的登录名') %>
+</div>
+<div class="small-12 columns">
+  <%= f.text_field :mobile, required: true, placeholder: '手机' %>
+  <%= show_error_message('请输入您的手机号码.') %>
+</div>
+
+<%else%>
+<div class="small-12 columns">
+  <%= f.email_field :email, required: true, placeholder: :email%>
+  <%= show_error_message('请输入您的email.') %>
+</div>
+<div class="small-12 columns">
+  <%= f.password_field :password, required: true, placeholder: '密码' %>
+  <%= show_error_message('请输入8个字符以上的密码.') %>
+</div>
+<div class="small-12 columns">
+  <%= f.password_field :password_confirmation, required: true, placeholder: '确认密码' %>
+  <%= show_error_message('请输入与上面密码相同的8个以上的字符.') %>
+</div>  
+<div class="small-6 columns">
+  <%= f.label :avatar %>
+</div>
+<div class="small-6 columns">
+ <%= file_field_tag :file%>
+ <%= show_error_message('请上传您的头像') %>
+</div>
+<div class="small-12 columns">
+  <%= f.text_field :name, placeholder: '姓名' %>
+  <%= show_error_message %>
+</div>
+<div class="small-3 columns">性别：</div>
+<div class="small-5 columns">
+  <%=f.radio_button :sex, 1%>
+  <label for="user_sex_1" class="radio-label">男</label>
+</div>
+<div class="small-4 columns">
+  <%=f.radio_button :sex, 2%>
+  <label for="user_sex_2" class="radio-label">女</label>
+</div>
+<div class="small-12 columns">
+  <%= show_error_message %>
+</div>
+<div class="small-12 columns">
+  <%= f.text_field :profession,placeholder:'职业'%>
+</div>
+<div class="small-12 columns">
+  <%= f.text_field :location,placeholder:'地区'%>
+</div>    
+<%end%>
     <!-- <div class="small-6 columns">
       <%=link_to '去登录', login_path,class: 'button left' %>
     </div> -->
@@ -67,4 +71,4 @@
       <%= f.submit '提交审核',class: 'button right' %>
     </div>
   </div>
-<% end %>
+  <% end %>
