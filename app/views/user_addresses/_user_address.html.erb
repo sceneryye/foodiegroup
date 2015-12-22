@@ -1,11 +1,24 @@
-<div class="address">
-	<p><%=user_address.name%></p>
-	<p><%=user_address.mobile%></p>
-  	<p><%=user_address.address%></p>
-  	<p> <%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_user_address_path(user_address), class:"tiny button radius" %>
-      <%= link_to '<i class="fa fa-times"></i>'.html_safe + ' ' + t(:delete), user_address,
+<div class="address row">
+	<div class="columns small-1">
+		<%=radio_button_tag "user_address", user_address.id%>
+	</div>
+	<div class="columns small-5">
+		<%=user_address.name%>
+	</div>
+	<div class="columns small-6">
+		<%=user_address.mobile%>
+	</div>
+	<div class="columns small-12">
+		<small><%=user_address.address%></small>
+  	</div>
+  	<div class="columns small-6">
+  		<%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_user_address_path(user_address), class:"tiny button radius" %>
+  	</div>
+  	<div class="columns small-6">
+      	<%= link_to '<i class="fa fa-times"></i>'.html_safe + ' ' + t(:delete), user_address,
                          method: :delete,
                          class:"tiny button alert radius",
                          data: {confirm: '?'} %>
+    </div>
 </div>
 <hr>

@@ -46,6 +46,10 @@ class ParticipantsController < ApplicationController
 
     # is_enrolled = @event.participants.where(:user_id => current_user.id).size
     # if  is_enrolled ==0
+    if current_user.user_addresses.size>0
+      address = current_user.user_addresses.first
+      params[:participant].merge!(:name=>address.name,:address=>address.address,:mobile=>address.mobile)
+    end
     @participant = @parent.participants.new(participant_params)
     @participant.user = current_user
 
