@@ -4,7 +4,7 @@
   <div class="large-7 medium-6 small-12 columns">
     <h2>欢迎您加入吃货帮!</h2>
     <% if params[:from] == 'share_from_foodie' %>
-    <% form_for @user do |f| %>
+    <%= form_for @user do |f| %>
     <input name="openid" value="<%= params[:openid] %>" type="hidden" />
     <input name="from" value="share_from_foodie" type="hidden" />
     <input name="group_id" value="<%= params[:groupid] %>" type="hidden" />
