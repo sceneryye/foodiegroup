@@ -34,7 +34,10 @@
             <li><%= link_to t(:comment), profile_path(@user, type: 'comment'),class: 'small button secondary'  if @user%></li>
             <li><%= link_to t(:event), profile_path(@user, type: 'event'),class: 'small button secondary'  if @user%></li>
             <li><%= link_to t(:participant), profile_path(@user, type: 'participant'),class: 'small button secondary'  if @user%></li>
-            <li><%= link_to t(:share), "http://www.trade-v.com/foodies/foodie_group_share?return_url=#{URI.encode request.url}",class: 'small button secondary'  if @user%></li>
+            <% group = Group.where(id: current_user.group_id).first %>
+            <% group_admin = User.where(id: group.user_id).first %>
+            <% url = "http://182.254.137.73:5000?groupid=#{current_user.group_id}&groupname=#{group.name}&imgurl=#{group_admin.avatar}&name=#{group_admin.nickname}&desc=#{group.group_desc}" %>
+            <li><%= link_to t(:share), "http://www.trade-v.com/foodies/foodie_group_share?return_url=#{URI.encode url}",class: 'small button secondary'  if @user%></li>
           </ul>
         </div>
       </div><hr>
