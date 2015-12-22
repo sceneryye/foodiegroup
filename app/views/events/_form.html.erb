@@ -32,24 +32,12 @@
     <%#= f.text_field :pic_url, required: true%>
   </div>
   <div>
-    <%= f.label :limited_people%>
-    <%= f.text_field :limited_people,:value=>0%>
+    <%= f.text_field :limited_people,placeholder: t(:limited_people)%>
   </div>
   <div>
     <!-- <%#= f.label :price %> -->
     <%= f.text_field :price,placeholder: t(:price)%>
   </div>
-  <!-- <div>
-    <%= f.text_field :goods_unit,placeholder: t(:goods_unit)%>
-  </div> -->
- <!--  <div>
-    <%= f.label :goods_small_than %>
-    <%= f.text_field :goods_small_than, :value=>0%>
-  </div> -->
-  <!--  <div>
-    <%#= f.label :goods_big_than %>
-    <%= f.text_field :goods_big_than,placeholder: t(:goods_big_than)%>
-  </div> -->
  <!--  <div>
     <%= f.text_field :name, required: true, placeholder: '姓名'%>
     <%= show_error_message('活动联系人')%>

@@ -222,7 +222,7 @@ en:
   new_comment: New Comment
   new_participant: Join Us
   title: Title
-  goods_unit: Goods' unit
+  goods_unit: Unit Name
   please_choose_event_duration: Please choose meetup's duration
   start_time: Start Time
   end_time: End Time
@@ -230,12 +230,11 @@ en:
   goods_minimal: Minimum quantity
   new_forum:  New Forum
   edit_forum: Edit Forum
-  new_topic:  New Topic
-  edit_topic: Edit Topic
+  new_topic:  Add new discuz
+  edit_topic: Edit discuz
   pay: Pay Now
   goings: Goings
   rsvp: RSVP
-  homepage: Homepage
   unpaid: Unpaid
   pic_url: Picture upload
   paid: Paid
@@ -244,7 +243,7 @@ en:
   shiped: Shiped
   unshiped: Wating for ship
   received: Received
-  groupbuy: Group Buy
+  groupbuy: Groupbuying
   share: Share
   edit_profile: Edit Profile
   maintain_addresses: Maintain Addresses
@@ -258,6 +257,8 @@ en:
   buys: Buys
   remark: Remark
   submit: Submit
-  new_event: New Meetup
+  new_event: Add new meetup
   group: Group
+  limited_people: people up to
+  new groupbuy: Add new deal
   
