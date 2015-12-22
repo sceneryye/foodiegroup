@@ -15,32 +15,45 @@
         </div>
         <div class="small-4 columns">
           <ul class="button-group radius">
-          <% if current_user == @user %>
+            <% if current_user == @user %>
             <li><%= link_to '<i class="fa fa-pencil"></i>'.html_safe+' '+t(:edit_profile),
-                  edit_profile_path(@user),
-                  class: 'tiny button secondary' if @user%>
+              edit_profile_path(@user),
+              class: 'tiny button secondary' if @user%>
             </li>
             <!-- <li><%#= link_to '<i class="fa fa-heart"></i>'.html_safe +' '+t(:interest), user_interest_path,class: 'tiny button secondary' if @user%></li> -->
             <li><%= link_to '<i class="fa fa-bookmark"></i>'.html_safe+' '+t(:maintain_addresses), user_addresses_path, class: 'tiny button secondary' if @user%></li>
             <li><%=link_to '<i class="fa fa-file-text"></i>'.html_safe+' '+t(:membership),register_path, class: 'tiny button secondary'%></li>
             <li><%= link_to '<i class="fa fa-sign-out"></i>'.html_safe+' '+t(:logout), logout_path, method: :delete, class: 'tiny button secondary' %></li>
             <% end %>
-            </ul>
-        </div>
-      </div>
-        <div class="button-bar">
-          <ul class="button-group radius">
-            <li><%= link_to t(:topic), profile_path(@user, type: 'topic'),class: 'small button secondary'  if @user%></li>
-            <li><%= link_to t(:comment), profile_path(@user, type: 'comment'),class: 'small button secondary'  if @user%></li>
-            <li><%= link_to t(:event), profile_path(@user, type: 'event'),class: 'small button secondary'  if @user%></li>
-            <li><%= link_to t(:participant), profile_path(@user, type: 'participant'),class: 'small button secondary'  if @user%></li>
-            <% group = Group.where(id: current_user.group_id).first %>
-            <% group_admin = User.where(id: group.user_id).first %>
-            <% url = "http://182.254.137.73:5000?groupid=#{current_user.group_id}&groupname=#{group.name}&imgurl=#{group_admin.avatar}&name=#{group_admin.nickname}&desc=#{group.group_desc}" %>
-            <li><%= link_to t(:share), "http://www.trade-v.com/foodies/foodie_group_share?groupid=#{current_user.group_id}&groupname=#{group.name}&imgurl=#{group_admin.avatar}&name=#{group_admin.nickname}&desc=#{group.group_desc}",class: 'small button secondary'  if @user%></li>
           </ul>
         </div>
-      </div><hr>
+      </div>
+      <div class="button-bar">
+        <ul class="button-group radius">
+          <li><%= link_to t(:topic), profile_path(@user, type: 'topic'),class: 'small button secondary'  if @user%></li>
+          <li><%= link_to t(:comment), profile_path(@user, type: 'comment'),class: 'small button secondary'  if @user%></li>
+          <li><%= link_to t(:event), profile_path(@user, type: 'event'),class: 'small button secondary'  if @user%></li>
+          <li><%= link_to t(:participant), profile_path(@user, type: 'participant'),class: 'small button secondary'  if @user%></li>
+          <% group = Group.where(id: current_user.group_id).first %>
+          <% group_admin = User.where(id: group.user_id).first %>
+          <% url = "http://182.254.137.73:5000?groupid=#{current_user.group_id}&groupname=#{group.name}&imgurl=#{group_admin.avatar}&name=#{group_admin.nickname}&desc=#{group.group_desc}" %>
+          <li><%= link_to t(:share), "http://www.trade-v.com/foodies/foodie_group_share?groupid=#{current_user.group_id}&groupname=#{group.name}&imgurl=#{group_admin.avatar}&name=#{group_admin.nickname}&desc=#{group.group_desc}",class: 'small button secondary'  if @user%></li>
+          <% if ['1', '2'].include? current_user.role %>
+          <li class="small button secondary show-group"><%= t(:group) %></li>
+          <% @groups = Group.where(user_id: current_user.id) %>
+          <% end %>
+        </ul>
+        </ br>
+      </div>
+      <div class="group-list hidden">
+        <% @groups.each do |group| %>
+        <div class="small-8 columns small-center group-name">
+          <%= link_to  group.name, group_path(group) %>
+        </div>
+        <% end %>
+      </div>
+      
+    </div><hr>
 
     <div class="large-12 columns">
       <%= yield :profile_content %>

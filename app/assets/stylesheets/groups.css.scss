@@ -1,0 +1,22 @@
+.group-detail {
+  .hidden {
+    display: none;
+  }
+  input {
+    width: 60%;
+  }
+  .group-value {
+    padding-left: 20px;
+  }
+  .modify {
+    padding-left: 20px;
+  }
+  .info {
+    margin-bottom: 10px;
+  }
+  .error-message {
+    color: red;
+    font-size: 0.8em;
+    margin-left: 10%;
+  }
+}

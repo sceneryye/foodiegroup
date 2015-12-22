@@ -1,0 +1,45 @@
+<div class="group-detail" data-id="<%= params[:id] %>">
+  <div class="title"><h3><%= @group.name %></h3></div>
+  <div class="group-name info">
+    <span class="group-key">群名称：</span>
+    <span class="group-value"><%= @group.name %></span>
+    <input name="name" value="<%= @group.name %>" type="text" class="edit-form hidden" />
+    <span class="modify"><i class="fa fa-pencil"></i></span>
+    <span class="check hidden"><i class="fa fa-check"></i></span>
+    <span class="remove hidden"><i class="fa fa-remove"></i></span>
+    <div class="error-message"></div>
+  </div>
+  <div class="group-admin info">
+    <span class="group-key">群主：</span>
+    <span class="group-value"><%= @group_admin.nickname %></span>
+  </div>
+  <div class="group-member-count info">
+    <span class="group-key">群人数：</span>
+    <span class="group-value"><%= @group_member.count %></span>
+  </div>
+  <div class="group-intro info">
+    <span class="group-key">群简介：</span>
+    <span class="group-value"><%= @group.group_desc %></span>
+    <input name="group_desc" value="<%= @group.group_desc %>" type="text" row="5" class="edit-form hidden" />
+    <span class="modify"><i class="fa fa-pencil"></i></span>
+    <span class="check hidden"><i class="fa fa-check"></i></span>
+    <span class="remove hidden"><i class="fa fa-remove"></i></span>
+    <div class="error-message"></div>
+  </div>
+
+  <div class="members">
+    <div class="member-list"><h4>成员列表：</h4></div>
+    <table>
+      <tr>
+        <th>昵称</th>
+        <th>职业</th>
+      </tr>
+      <% @group_member.each_with_index do |member, index| %>
+      <tr class="<%= index %>">
+        <td><%= member.nickname %></td>
+        <td><%= member.profession %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

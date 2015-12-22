@@ -1,5 +1,7 @@
 RailsOnForum::Application.routes.draw do
   
+  get 'groups/show'
+
   resources :user_addresses
 
   get 'tags/create'
@@ -60,6 +62,8 @@ RailsOnForum::Application.routes.draw do
   resources :users,   only: [:create, :update, :destroy] do
      resources :user_instetests
   end
+
+  resources :groups, only: [:show, :update]
 
   get '/register',    to: 'users#new',  as: :register
   get '/:id',         to: 'users#show', as: :profile
