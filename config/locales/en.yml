@@ -214,7 +214,7 @@ en:
   site_name: Foodie Group Buying Group
   home: Home
   search: Search
-  event: Event
+  event: Meetup
   topic: Topic
   user_center: User Center  
   before: before.
@@ -223,7 +223,7 @@ en:
   new_participant: Join Us
   title: Title
   goods_unit: Goods' unit
-  please_choose_event_duration: Please choose event's duration
+  please_choose_event_duration: Please choose meetup's duration
   start_time: Start Time
   end_time: End Time
   price:  Price
@@ -258,4 +258,6 @@ en:
   buys: Buys
   remark: Remark
   submit: Submit
+  new_event: New Meetup
+
   
