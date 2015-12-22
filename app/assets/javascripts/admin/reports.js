@@ -4,7 +4,7 @@
 //判断值是否为空
 
 function checkNull(obj_value){
-    var name = obj_value.replace(/[]/g,"");//把所有空格去掉
+    var name = obj_value.replace(/[\s]/g,"");//把所有空格去掉
     if(name.length==0){
       return true;
     }
