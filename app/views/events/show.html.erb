@@ -20,8 +20,8 @@
           <td><%=@event.end_time.strftime("%Y-%m-%d %H:%M")%></td>
         </tr>
         <tr>
-          <th><%=t(:goods_big_than)%></th>
-          <td><%=@event.goods_big_than%><%=@event.goods_unit%></td>
+          <th><%=t(:limited_people)%></th>
+          <td><%=@event.limited_people%></td>
         </tr>
         <tr>
           <th><%=t(:price)%></th>
@@ -41,14 +41,14 @@
     <div>
        <%= link_to t(:comment), new_event_comment_path(@event),
                               class:"tiny button radius" if signed_in? %>
-       <%= link_to t(:new_participant), new_event_participant_path(@event),
+       <%= link_to t(:rsvp), new_event_participant_path(@event),
                               class:"tiny button radius" if signed_in? %>
       
 
       <% if current_user == @event.user %>
 
-        <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_event_path(@event), class:"tiny button radius" %>
-        <%= link_to '<i class="fa fa-times"></i>'.html_safe, @event,method: :delete,
+        <%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_event_path(@event), class:"tiny button radius" %>
+        <%= link_to '<i class="fa fa-times"></i>'.html_safe + ' ' + t(:delete), @event, method: :delete,
                   class:"tiny button alert radius",
                   data: {confirm: '?'} %>
       <% end %>
@@ -56,7 +56,7 @@
 
      <div class="comments">
        <ul class="tabs" data-tab role="tablist">
-        <li class="tab-title active"><a href="/events/<%= params[:id] %>/participants/new"><i class="fa fa-users"></i><%=t(:reservation)%> (<%=@event.participants_count%>)</a></li>
+        <li class="tab-title active"><a href="/events/<%= params[:id] %>/participants/new"><i class="fa fa-users"></i><%=t(:goings)%> (<%=@event.participants_count%>)</a></li>
         <li class="tab-title"><a href="#comments"><i class="fa fa-comments"></i><%=t(:comments)%> (<%=@event.comments_count%>)</a></li>
       </ul>
 

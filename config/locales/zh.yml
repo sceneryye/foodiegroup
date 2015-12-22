@@ -302,7 +302,6 @@ zh:
   topic: 话题
   by: 发起人
   price: 价格
-  participant: 报名
   search: 搜索
   comment: 评论
   site_name: 吃货帮
@@ -324,7 +323,8 @@ zh:
   new_topic:  新增话题
   edit_topic: 编辑话题
   pay: 立即支付
-  reservation: 报名人数
+  goings: 报名人数
+  rsvp: 报名
   comments: 评论
   homepage: 首页
   unpaid: 未付款
@@ -345,5 +345,8 @@ zh:
   mobile: 手机
   address: 地址
   quantity: 数量
-
+  buy: 购买
+  buys: 团购人数
+  remark: 备注
+  submit: 提交
  
