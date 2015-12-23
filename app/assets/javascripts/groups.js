@@ -1,14 +1,11 @@
-//= require jquery
-//= require jquery_ujs
-//= require foundation
-//= require foundation-datetimepicker
-//= require ckeditor/init
+
 
 
 //$('.group-detail').unbind('click');
 //$('.info').undind('click');
 //为了防止点击一次出现2次click效果，用了时间戳来阻止，但原因不明。
 var event_time = 0;
+
 $('.modify').on('click', function(){
   var now = new Date();
   if(now - event_time < 100) {
@@ -81,7 +78,7 @@ $('.check').on('click', function(){
       },
       success: function(e) {
         if(e == 'success') {
-          alert('更新成功！');
+          alert('成功','更新成功！', 'success');
           parent_element.find('.modify').toggle();
           parent_element.find('.group-value').toggle();
           parent_element.find('.edit-form').toggle();

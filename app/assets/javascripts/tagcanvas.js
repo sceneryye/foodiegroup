@@ -1,9 +1,4 @@
-//= require jquery
-//= require jquery_ujs
-//= require foundation
-//= require foundation-datetimepicker
 
-//= require ckeditor/init
 /**
  * Copyright (C) 2010-2015 Graham Breach
  *
