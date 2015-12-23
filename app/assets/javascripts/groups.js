@@ -1,3 +1,10 @@
+//= require jquery
+//= require jquery_ujs
+//= require foundation
+//= require foundation-datetimepicker
+//= require ckeditor/init
+
+
 //$('.group-detail').unbind('click');
 //$('.info').undind('click');
 //为了防止点击一次出现2次click效果，用了时间戳来阻止，但原因不明。
