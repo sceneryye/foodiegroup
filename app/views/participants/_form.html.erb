@@ -14,7 +14,7 @@
 <div>
 	<div class="columns small-10 left"><%= f.number_field :goods_amount, required: true,placeholder: t(:quantity)%></div>
 	<div class="columns small-2"><%=@parent.goods_unit%></div>
-	<div class="columns small-10 left deliver-time">
+	<div class="columns small-12 left deliver-time">
 		<span class="left">送货时间：</span>
 		<span class="date left">
 			<fieldset>
@@ -58,7 +58,7 @@
 </div>
   	<!-- <div>
 	    <%#= f.text_area :name, required: true, placeholder:t(:name)%>
-	    <%= show_error_message('联系人/收货人，不能为空！') %>
+	    <%#= show_error_message('联系人/收货人，不能为空！') %>
    </div>
    <div>
 	    <%#= f.text_area :mobile, required: true,placeholder:t(:mobile)%>
@@ -72,5 +72,5 @@
 	  	<%= f.text_area :remark, class:'comment-area',placeholder: t(:remark)%>
 	  	<%#= show_error_message('备注，请不要超过500字') %>
 	  </div>
-	  <%= f.submit t(:submit),class:'tiny button radius' %>
+	  <%= f.submit '提交', class:'tiny button radius' %>
 	  <% end %>
