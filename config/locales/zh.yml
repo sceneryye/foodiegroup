@@ -230,16 +230,27 @@ zh:
         profession: 职业
         location: 地点
       event:
-        id: 活动 No.
+        id: 活动号
         title:  活动名称
         start_time: 开始时间
         end_time: 结束时间
         event_type: 活动类型
         pic_url:  活动图片
         limited_people: 人数限制
+        name: 联系人
+        mobile: 联系电话
+        body: 活动详情
+        price: 单价
+      groupbuy:
+        id: 团购号
+        title:  活动名称
+        start_time: 开始时间
+        end_time: 结束时间
+        event_type: 活动类型
+        pic_url:  活动图片
         goods_unit: 团购商品单位
-        goods_small_than: 最高成团数量
-        goods_big_than: 最低成团数量
+        inventory: 库存
+        minimal quantity: 最低成团数量
         name: 联系人
         mobile: 联系电话
         body: 活动详情
@@ -350,4 +361,5 @@ zh:
   submit: 提交
   group: 群组
   welcome: 欢迎
+  inventory: 库存
  
