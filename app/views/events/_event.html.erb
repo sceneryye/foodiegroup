@@ -8,7 +8,7 @@
   <div class="columns small-8">
     <h4><%= link_to event.title, event%></h4>
       <span class="price"><%=t(:price)%>:&nbsp;<i class="fa fa-cny"></i><%=event.price %></span><br>
-      <span><%=t(:by)%>:&nbsp;<%=link_to event.user.username.html_safe,profile_path(event.user) %><span>   
+      <span><%=t(:by)%>:&nbsp;<%=link_to event.user.nickname.html_safe,profile_path(event.user) %><span>   
   </div>
     <div class="columns small-6">
       <%= "[No. #{event.id.to_s.rjust(10,'0')}]" %>     

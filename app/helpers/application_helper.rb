@@ -97,7 +97,7 @@ def badge_for(object)
 end
 
 def info_for(user)
- link_text = image_tag(user.avatar, class:'user-thumb') + ' ' + user.username 
+ link_text = image_tag(user.avatar, class:'user-thumb') + ' ' + user.nickname 
  link_to(link_text, profile_path(user))
 end
 
