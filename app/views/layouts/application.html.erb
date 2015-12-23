@@ -54,8 +54,7 @@
 
    
     <%#= javascript_include_tag "application" 'data-turbolinks-track' => true %>
-     <%= javascript_include_tag "application"%>
-    <%= javascript_include_tag controller_name%>
+     <%= javascript_include_tag params[:controller] %>
      <script>
 
      $(".show-comments").on("click", function(event) {
