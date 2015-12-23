@@ -11,10 +11,10 @@
 	<div class="columns small-12">
 		<small><%=user_address.address%></small>
   	</div>
-  	<div class="columns small-6">
+  	<div class="columns small-6 addr_option">
   		<%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_user_address_path(user_address), class:"tiny button radius" %>
   	</div>
-  	<div class="columns small-6">
+  	<div class="columns small-6 addr_option">
       	<%= link_to '<i class="fa fa-times"></i>'.html_safe + ' ' + t(:delete), user_address,
                          method: :delete,
                          class:"tiny button alert radius",

@@ -21,6 +21,8 @@ a.button:visited{color:white;}
   overflow:visible; 
 }
 
+.addr_option{display:none;}
+
 .field_with_errors label{color: #f04124;}
 
 .profile-image{
