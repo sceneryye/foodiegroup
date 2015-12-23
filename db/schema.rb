@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 2015122006472224) do
     t.integer  "status_pay",    limit: 4,                             default: 0
     t.integer  "status_ship",   limit: 4,                             default: 0
     t.integer  "groupbuy_id",   limit: 4
+    t.string   "delivery_time", limit: 255
   end
 
   create_table "tags", force: :cascade do |t|

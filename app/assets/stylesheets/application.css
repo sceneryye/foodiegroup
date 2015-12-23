@@ -3,7 +3,7 @@
  *= require foundation_and_overrides
 
  *= require_tree .
- *= require font-awesome/scss/font-awesome
+
  */
 
 /*html,body{ height: 100%;}

@@ -17,6 +17,9 @@ class ParticipantsController < ApplicationController
 
   def new
     @participant = @parent.participants.new
+    if current_user.user_addresses.size == 0
+      return redirect_to new_user_address_path(groupbuy_id: params[:groupbuy_id], from: 'new_participant')
+    end
   end
 
   def index
@@ -27,7 +30,7 @@ class ParticipantsController < ApplicationController
 
   def confirm_paid
     @participant = Participant.find(params[:id])
-    if current_user == @participant.groupbuy.user #只能由活动发起人修改支付状态    
+    if current_user == @participant.groupbuy.user #只能由活动发起人修改支付状态
       @participant.update(:status_pay=>1)
     end
     redirect_to groupbuy_url(@participant.groupbuy), notice: '确认付款'
@@ -42,15 +45,20 @@ class ParticipantsController < ApplicationController
   end
 
 
-  def create  
+  def create
 
     # is_enrolled = @event.participants.where(:user_id => current_user.id).size
     # if  is_enrolled ==0
     if current_user.user_addresses.size>0
       address = current_user.user_addresses.first
       params[:participant].merge!(:name=>address.name,:address=>address.address,:mobile=>address.mobile)
+    
     end
+
+    Rails.logger.info "#################{address}"
+    delivery_time = params[:date] + '-' + params[:time]
     @participant = @parent.participants.new(participant_params)
+    @participant.delivery_time = delivery_time
     @participant.user = current_user
 
     if @participant.save

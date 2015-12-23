@@ -15,6 +15,9 @@ class UserAddressesController < ApplicationController
     @user_address.user = current_user
 
     if@user_address.save
+      if params[:from] = 'new_participant'
+        return redirect_to new_groupbuy_participant_path(groupbuy_id: params[:groupbuy_id])
+      end
       redirect_to user_addresses_path, notice: '地址添加成功'
     else
       render :new
