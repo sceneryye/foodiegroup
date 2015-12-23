@@ -140,9 +140,9 @@ en:
     select:
       prompt: Please select
     submit: 
-      create: Create %{model}
-      submit: Save %{model}
-      update: Update %{model}
+      create: Submit
+      submit: Submit
+      update: Submit
   number:
     currency:
       format:
@@ -256,7 +256,6 @@ en:
   buy: Buy
   buys: Buys
   remark: Remark
-  submit: Submit
   new_event: Add new meetup
   group: Group
   limited_people: people up to
