@@ -41,6 +41,9 @@
           <% if ['1', '2'].include? current_user.role %>
           <li class="small button secondary show-group"><%= t(:group) %></li>
           <% @groups = Group.where(user_id: current_user.id) %>
+          <% if current_user.role == '1' %>
+          <% @groups = Group.all %>
+          <% end %>
           <% end %>
         </ul>
         </ br>
