@@ -15,44 +15,46 @@
 	<div class="columns small-10 left"><%= f.number_field :goods_amount, required: true,placeholder: t(:quantity)%></div>
 	<div class="columns small-2"><%=@parent.goods_unit%></div>
 	<div class="columns small-12 left deliver-time">
-		<span class="left">送货时间：</span>
-		<span class="date left">
-			<fieldset>
+		<fieldset>
+		<legend>送货时间</legend>
+			<span class="date left">
+				<fieldset>
 
-				<label class="">
-					<input type="radio" name="date" value="工作日">
-					工作日
-				</label>
-				<label class="">
-					<input type="radio" name="date" value="休息日">
-					休息日
-				</label>
-				<label class="">
-					<input type="radio" name="date" value="任意日期" checked="checked">
-					任意日期
-				</label>
-				<div class="clear"></div>
-			</fieldset>
-		</span>
+					<label class="">
+						<input type="radio" name="date" value="工作日">
+						工作日
+					</label>
+					<label class="">
+						<input type="radio" name="date" value="休息日">
+						休息日
+					</label>
+					<label class="">
+						<input type="radio" name="date" value="任意日期" checked="checked">
+						任意日期
+					</label>
+					<div class="clear"></div>
+				</fieldset>
+			</span>
 
-		<span class="time left">
-			<fieldset>
-				<label class="">
-					<input type="radio" name="time" value="上午">
-					上午
-				</label>
-				<label class="">
-					<input type="radio" name="time" value="下午">
-					下午
-				</label>
-				<label class="">
-					<input type="radio" name="time" value="任意时段" checked="checked">
-					任意时段
-				</label>
-				<div class="clear"></div>
-			</fieldset>
-		</span>
-		<div class="clear"></div>
+			<span class="time left">
+				<fieldset>
+					<label class="">
+						<input type="radio" name="time" value="上午">
+						上午
+					</label>
+					<label class="">
+						<input type="radio" name="time" value="下午">
+						下午
+					</label>
+					<label class="">
+						<input type="radio" name="time" value="任意时段" checked="checked">
+						任意时段
+					</label>
+					<div class="clear"></div>
+				</fieldset>
+			</span>
+			<div class="clear"></div>
+		</fieldset>
 	</div>
 	<%#= show_error_message('团购数量，不能为空！') %>
 </div>
