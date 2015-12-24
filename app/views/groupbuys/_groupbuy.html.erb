@@ -1,5 +1,5 @@
-
-<div class="row" style="padding:5px">
+<div class="panel radius">
+<div class="row">
   <div class="columns small-4">
     <%= link_to groupbuy do %>
     <img src="<%= groupbuy.pic_url %>"/>
@@ -7,9 +7,9 @@
   </div>
   <div class="columns small-8">
     <h4><%= link_to groupbuy.title, groupbuy%></h4>
-    <div class="row">
+    <div class="row panel radius callout" style="padding:5px;">
     <div class="columns small-4">
-     <small> <span class="price"><%=t(:price)%>:&nbsp;<i class="fa fa-cny"></i><%=groupbuy.price %></span>
+     <small> <span class="price save"><i class="fa fa-cny"></i><%=groupbuy.price %></span>
      </small></div>
       <div class="columns small-3">
      <small> 
@@ -19,14 +19,9 @@
      <span class="price save"><%=t(:save)%>:&nbsp;<i class="fa fa-cny"></i><%=(groupbuy.price*0.8).to_i %></span>
   </div>
   </div>
-      <br>
-      <small>
-      <span><%=t(:by)%>:&nbsp;<%=link_to groupbuy.user.nickname.html_safe,profile_path(groupbuy.user) %><span>  
-      </small>
-
   </div>
   </div>
-  <div class="row round" style="padding:5px">
+  <div class="row round">
     <div class="columns small-6">
       <%= "[No. #{groupbuy.id.to_s.rjust(10,'0')}]" %>     
     </div>
@@ -49,10 +44,6 @@
     <%end%>
     </div>
 </div>
-<div class="row">
-<div class="columns small-12" style="background-color: white">
-&nbsp;
-  </div>
   </div>
 
 
