@@ -19,8 +19,8 @@ class UserAddressesController < ApplicationController
         user_address = UserAddress.where(default: 1)
         if user_address.present?
           user_address.first.update(default: 0)
-          @user_address.update(default: 1)
         end
+        @user_address.update(default: 1)
       end
       if params[:groupbuy_id].present?
         return redirect_to user_addresses_path(groupbuy_id: params[:groupbuy_id])
@@ -53,8 +53,8 @@ class UserAddressesController < ApplicationController
         user_address = UserAddress.where(default: 1)
         if user_address.present?
           user_address.first.update(default: 0)
-          @user_address.update(default: 1)
         end
+        @user_address.update(default: 1)
       end
 
       if params[:groupbuy_id].present?
