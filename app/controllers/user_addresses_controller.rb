@@ -16,7 +16,8 @@ class UserAddressesController < ApplicationController
 
     if@user_address.save
       if params[:default] == '1'
-        if user_address = UserAddress.where(default: 1)
+        user_address = UserAddress.where(default: 1)
+        if user_address.present?
           user_address.first.update(default: 0)
           @user_address.update(default: 1)
         end
@@ -39,7 +40,8 @@ class UserAddressesController < ApplicationController
 
   def update
     if params[:from] == 'ajax'
-      if user_address = UserAddress.where(default: 1)
+      user_address = UserAddress.where(default: 1)
+      if user_address.present?
         user_address.first.update(default: 0)
       end
       UserAddress.find(params[:id]).update(default: 1)
