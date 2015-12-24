@@ -24,73 +24,40 @@
 	<%=render 'user_addresses/form' ,:locals=>{@user_address=>@user_address} %>
 	<%end%>
 	<hr />
-
 </div>
+
 <%= form_for form_params(@parent, @participant), data: {abide: ''} do |f| %>
 <%= render 'layouts/form_errors', object: @participant %>
 
-<div>
-	<div class="left goods-weight"><%= f.number_field :goods_amount, required: true,placeholder: t(:quantity)%></div>
-	<div class=""><%=@parent.goods_unit%></div>
-	<div class="left deliver-time">
-		<fieldset>
-			<legend><%= t(:deliverytime) %></legend>
-			<span class="date left">
-				<fieldset>
 
-					<label class="">
-						<input type="radio" name="date" value="<%= t(:weekday) %>">
-						<%= t(:weekday) %>
-					</label>
-					<label class="">
-						<input type="radio" name="date" value="<%= t(:weekend) %>">
-						<%= t(:weekend) %>
-					</label>
-					<label class="">
-						<input type="radio" name="date" value="<%= t(:anyday) %>" checked="checked">
-						<%= t(:anyday) %>
-					</label>
-					<div class="clear"></div>
-				</fieldset>
-			</span>
-
-			<span class="time left">
-				<fieldset>
-					<label class="">
-						<input type="radio" name="time" value="<%= t(:morning) %>">
-						<%= t(:morning) %>
-					</label>
-					<label class="">
-						<input type="radio" name="time" value="<%= t(:afternoon) %>">
-						<%= t(:afternoon) %>
-					</label>
-					<label class="">
-						<input type="radio" name="time" value="<%= t(:anytime) %>" checked="checked">
-						<%= t(:anytime) %>
-					</label>
-					<div class="clear"></div>
-				</fieldset>
-			</span>
-			<div class="clear"></div>
-		</fieldset>
+	<div class="input-group">
+	<div class="goods-amount left"><%= t(:goods_amount) %></div>
+		<%= f.number_field :goods_amount, required: true, placeholder: t(:quantity), class: 'input-group-field goods-weight left' %>
+		<span class="input-group-label unit left"><%=@parent.goods_unit%></span>
+		<div class="clear"></div>
 	</div>
-	<%#= show_error_message('团购数量，不能为空！') %>
-</div>
-  	<!-- <div>
-	    <%#= f.text_area :name, required: true, placeholder:t(:name)%>
-	    <%#= show_error_message('联系人/收货人，不能为空！') %>
-   </div>
-   <div>
-	    <%#= f.text_area :mobile, required: true,placeholder:t(:mobile)%>
-	    <%#= show_error_message('联系电话，不能为空！') %>
-   	</div>
-	<div>
-	    <%#= f.text_area :address, required: true, placeholder:t(:address)%>
-	    <%#= show_error_message('收货地址，不能为空！') %>
-	  </div> -->
-	  <div>
-	  	<%= f.text_area :remark, class:'comment-area',placeholder: t(:remark)%>
-	  	<%#= show_error_message('备注，请不要超过500字') %>
-	  </div>
-	  <%= f.submit '提交', class:'tiny button radius' %>
-	  <% end %>
+	<hr />
+
+	<div class="deliver-time">
+		<div class="deliver-time-title left"><%= t(:deliverytime) %></div>
+		<div class="date left">
+			<select name="date" id="">
+				<option value="<%= t(:weekday) %>"><%= t(:weekday) %></option>
+				<option value="<%= t(:weekend) %>"><%= t(:weekend) %></option>
+				<option value="<%= t(:anyday) %>" selected="selected"><%= t(:anyday) %></option></select>
+			</div>
+			<div class="date left">
+				<select name="date" id="">
+					<option value="<%= t(:morning) %>"><%= t(:morning) %></option>
+					<option value="<%= t(:afternoon) %>"><%= t(:weekend) %></option>
+					<option value="<%= t(:anytime) %>" selected="selected"><%= t(:anyday) %></option></select>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div>
+			<%= f.text_area :remark, class:'comment-area',placeholder: t(:remark)%>
+			<%#= show_error_message('备注，请不要超过500字') %>
+		</div>
+		<%= f.submit '提交', class:'tiny button radius' %>
+		<% end %>
