@@ -15,7 +15,7 @@ class EventsController < ApplicationController
 
    if signed_in? 
      @plus_menu = [{name: '<i class="fa  fa-comment"></i>'.html_safe+' '+t(:new_comment), path: new_event_comment_path(@event)},
-      {name: '<i class="fa fa-user-plus"></i>'.html_safe+' '+t(:new_participant), path: new_event_participant_path(@event)}
+      {name: '<i class="fa fa-user-plus"></i>'.html_safe+' '+t(:rsvp), path: new_event_participant_path(@event)}
     ]
     if @participants.where(:user_id => current_user.id).size>0
       @again = '再次'     

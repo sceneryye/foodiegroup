@@ -311,7 +311,7 @@ zh:
 
   event: 活动
   topic: 话题
-  by: 发起人
+  by: 团长
   price: 价格
   search: 搜索
   comment: 评论
@@ -336,6 +336,8 @@ zh:
   pay: 立即支付
   goings: 报名人数
   rsvp: 报名
+  groupbuy_deal: 团购详情
+  event_detail: 活动详情
   comments: 评论
   unpaid: 未付款
   paid: 已付款

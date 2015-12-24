@@ -220,7 +220,6 @@ en:
   before: before.
   more: More
   new_comment: New Comment
-  new_participant: Join Us
   title: Title
   goods_unit: Unit Name
   please_choose_event_duration: Please choose meetup's duration
@@ -262,3 +261,5 @@ en:
   new groupbuy: Add new deal
   welcome: Welcome
   inventory: Inventory
+  groupbuy_deal: Group Buying Deal
+  event_detail: Meetup Detail
