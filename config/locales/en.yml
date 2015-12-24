@@ -1,4 +1,3 @@
----
 en:
   date:
     abbr_day_names:
@@ -220,7 +219,6 @@ en:
   before: before.
   more: More
   new_comment: New Comment
-  new_participant: Join Us
   title: Title
   goods_unit: Unit Name
   please_choose_event_duration: Please choose meetup's duration
@@ -272,3 +270,5 @@ en:
   default_address: Default Address
   new_address: Create New Address
   set_default: Set As Default
+  groupbuy_deal: Group Buying Deal
+  event_detail: Meetup Detail

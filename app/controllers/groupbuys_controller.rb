@@ -15,7 +15,7 @@ class GroupbuysController < ApplicationController
 
    if signed_in? 
      @plus_menu = [{name: '<i class="fa  fa-comment"></i>'.html_safe+' '+t(:new_comment), path: new_groupbuy_comment_path(@groupbuy)},
-      {name: '<i class="fa fa-user-plus"></i>'.html_safe+' '+t(:new_participant), path: new_groupbuy_participant_path(@groupbuy)}
+      {name: '<i class="fa fa-user-plus"></i>'.html_safe+' '+t(:buy), path: new_groupbuy_participant_path(@groupbuy)}
     ]
     if @participants.where(:user_id => current_user.id).size>0
       @again = '再次'     
