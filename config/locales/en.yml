@@ -262,3 +262,13 @@ en:
   new groupbuy: Add new deal
   welcome: Welcome
   inventory: Inventory
+  weekday: Weekday
+  weekend: Weekend
+  anyday: Anyday
+  morning: Morning
+  afternoon: Afternoon
+  anytime: Anytime
+  deliverytime: Delivery Time
+  default_address: Default Address
+  new_address: Create New Address
+  set_default: Set As Default

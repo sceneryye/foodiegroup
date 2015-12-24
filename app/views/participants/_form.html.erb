@@ -1,36 +1,54 @@
 <div>
 	<%if current_user.user_addresses.size>0%>
-	<%=render current_user.user_addresses%>		
-	<%=link_to t(:new_address), new_user_address_url(groupbuy_id: params[:groupbuy_id]), class:"tiny button"%>
+	<% if current_user.user_addresses.size == 1 %>
+	<% address = current_user.user_addresses.first %>
+	<% elsif current_user.user_addresses.where(default: 1).present?  %>
+	<% address = current_user.user_addresses.where(default: 1).first %>
+	<% else %>
+	<% address = current_user.user_addresses.last %>
+	<% end %>
+	<%= link_to user_addresses_path(groupbuy_id: params[:groupbuy_id]) do  %>
+	<div class="address-block">
+		<div class="address-title left"><%= t(:default_address) %></div>
+		<div class="default-address left">
+			<span class="name"><%= address.name %></span>
+			<span class="mobile"><%= address.mobile %></span>
+			<div class="address"><%= address.address %></div>
+		</div>
+		<div class="right-arrow right"><i class="fa fa-2x fa-angle-right"></i></div>
+		<div class="clear"></div>
+	</div>
+	<% end %>
 	<%else%>
 	<% @user_address = UserAddress.new%>
 	<%=render 'user_addresses/form' ,:locals=>{@user_address=>@user_address} %>
 	<%end%>
+	<hr />
 
 </div>
 <%= form_for form_params(@parent, @participant), data: {abide: ''} do |f| %>
 <%= render 'layouts/form_errors', object: @participant %>
 
 <div>
-	<div class="columns small-10 left"><%= f.number_field :goods_amount, required: true,placeholder: t(:quantity)%></div>
-	<div class="columns small-2"><%=@parent.goods_unit%></div>
-	<div class="columns small-12 left deliver-time">
+	<div class="left goods-weight"><%= f.number_field :goods_amount, required: true,placeholder: t(:quantity)%></div>
+	<div class=""><%=@parent.goods_unit%></div>
+	<div class="left deliver-time">
 		<fieldset>
-		<legend>送货时间</legend>
+			<legend><%= t(:deliverytime) %></legend>
 			<span class="date left">
 				<fieldset>
 
 					<label class="">
-						<input type="radio" name="date" value="工作日">
-						工作日
+						<input type="radio" name="date" value="<%= t(:weekday) %>">
+						<%= t(:weekday) %>
 					</label>
 					<label class="">
-						<input type="radio" name="date" value="休息日">
-						休息日
+						<input type="radio" name="date" value="<%= t(:weekend) %>">
+						<%= t(:weekend) %>
 					</label>
 					<label class="">
-						<input type="radio" name="date" value="任意日期" checked="checked">
-						任意日期
+						<input type="radio" name="date" value="<%= t(:anyday) %>" checked="checked">
+						<%= t(:anyday) %>
 					</label>
 					<div class="clear"></div>
 				</fieldset>
@@ -39,16 +57,16 @@
 			<span class="time left">
 				<fieldset>
 					<label class="">
-						<input type="radio" name="time" value="上午">
-						上午
+						<input type="radio" name="time" value="<%= t(:morning) %>">
+						<%= t(:morning) %>
 					</label>
 					<label class="">
-						<input type="radio" name="time" value="下午">
-						下午
+						<input type="radio" name="time" value="<%= t(:afternoon) %>">
+						<%= t(:afternoon) %>
 					</label>
 					<label class="">
-						<input type="radio" name="time" value="任意时段" checked="checked">
-						任意时段
+						<input type="radio" name="time" value="<%= t(:anytime) %>" checked="checked">
+						<%= t(:anytime) %>
 					</label>
 					<div class="clear"></div>
 				</fieldset>

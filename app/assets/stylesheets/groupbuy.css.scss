@@ -1,3 +1,5 @@
+$light-slate-gray: #6D7B8D;
+
 /*****************index****************/
 .groupbuys-index-list {
   
@@ -6,6 +8,9 @@
 
 /**************new participant**********/
 .new-participant {
+  font-size: 0.8rem;
+  width: 100%;
+  padding: 0;
   .left {
     float: left;
   }
@@ -33,5 +38,31 @@
   }
   .date, .time {
     padding: 10px 10px;
+  }
+  .address-title {
+    font-weight: 500;
+    font-size: 1em;
+  }
+  .default-address {
+    padding-left: 10px;
+    width: 70%;
+    .name, .mobile, .address {
+      color: $light-slate-gray;
+      font-size: 0.8em;
+    }
+    .mobile {
+      padding-left: 20px;
+    }
+  }
+  .right-arrow {
+    margin-right: 2%;
+    margin-top: 5px;
+  }
+  .address-block {
+    margin-bottom: 20px;
+  }
+  .goods-weight {
+    width: 60px;
+    margin-right: 20px;
   }
 }

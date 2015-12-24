@@ -1,4 +1,26 @@
-<%#if params[:controller] == 'user_addresses'%>
-	// $(".addr_option").show();
-<%#end%>
-	
+(function ($) {
+  $.getUrlParam = function (name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]); return null;
+  }
+})(jQuery);
+
+var groupbuy_id = $.getUrlParam('groupbuy_id');
+if(groupbuy_id) {
+  $('.address-detail').on('click', function(){
+    var url = '/groupbuys/' + groupbuy_id + '/participants/new';
+    var id = $(this).data('id');
+    var post_url = '/user_addresses/' + id;
+    $.ajax({
+      url: post_url,
+      type: 'patch',
+      data: {
+        default: 1,
+        from: 'ajax'
+      },
+      success: function(e) {}
+    });
+    location.href = url;
+  });
+}

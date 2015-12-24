@@ -361,4 +361,13 @@ zh:
   group: 群组
   welcome: 欢迎
   inventory: 库存
- 
+  weekday: 工作日
+  weekend: 周末
+  anyday: 任意日期
+  morning: 上午
+  afternoon: 下午
+  anytime: 任意时间
+  deliverytime: 送货时间
+  default_address: 默认地址
+  new_address: 新建地址
+  set_default: 设为默认

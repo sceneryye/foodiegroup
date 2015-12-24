@@ -1,24 +1,19 @@
-<div class="address row">
-	<div class="columns small-1">
-		<%=radio_button_tag "user_address", user_address.id%>
-	</div>
-	<div class="columns small-5">
-		<%=user_address.name%>
-	</div>
-	<div class="columns small-6">
-		<%=user_address.mobile%>
-	</div>
-	<div class="columns small-12">
-		<small><%=user_address.address%></small>
-  	</div>
-  	<div class="columns small-6 addr_option">
-  		<%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_user_address_path(user_address), class:"tiny button radius" %>
-  	</div>
-  	<div class="columns small-6 addr_option">
-      	<%= link_to '<i class="fa fa-times"></i>'.html_safe + ' ' + t(:delete), user_address,
-                         method: :delete,
-                         class:"tiny button alert radius",
-                         data: {confirm: '?'} %>
+
+
+<div class="address-content">
+  <div class="left <%= user_address.default == 1 ? 'checked' : 'unchecked' %>">
+    <i class="fa fa-check-circle"></i>
+  </div>
+  <div class="left address-detail" data-id="<%= user_address.id %>">
+    <div class="address"><%= user_address.address %></div>
+    <div class="name-mobile">
+      <span class="name"><%= user_address.name %></span>
+      <span class="mobile"><%= user_address.mobile %></span>
     </div>
+  </div>
+  <%= link_to edit_user_address_path(user_address, groupbuy_id: params[:groupbuy_id]) do %>
+  <div class="right edit-address"><i class="fa fa-pencil"></i></div>
+  <% end %>
+  <div class="clear"></div>
 </div>
-<hr>
+<hr />
