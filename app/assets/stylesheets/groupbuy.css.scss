@@ -40,6 +40,9 @@ $light-slate-gray: #6D7B8D;
  .deliver-time-title, .goods-amount, .unit {
   padding-top: 8px;
  }
+ .deliver-time-title, .goods-amount {
+  font-weight: 500;
+ }
   .date, .time {
     padding: 0 10px;
     width: 40%;
