@@ -1,8 +1,16 @@
 $light-slate-gray: #6D7B8D;
 
+
+/**************public css**************/
+
+.clear {
+  clear: both;
+}
+
+
 /*****************index****************/
 .groupbuys-index-list {
-  
+
 }
 
 
@@ -37,12 +45,12 @@ $light-slate-gray: #6D7B8D;
     margin-bottom: 10px;
   }
 
- .deliver-time-title, .goods-amount, .unit {
-  padding-top: 8px;
- }
- .deliver-time-title, .goods-amount {
-  font-weight: 500;
- }
+  .deliver-time-title, .goods-amount, .unit {
+    padding-top: 8px;
+  }
+  .deliver-time-title, .goods-amount {
+    font-weight: 500;
+  }
   .date, .time {
     padding: 0 10px;
     width: 40%;
@@ -74,5 +82,30 @@ $light-slate-gray: #6D7B8D;
     width: 60px;
     margin-right: 20px;
     margin-left: 20px;
+  }
+}
+
+/*******************groupbuy new page******************/
+
+.new-groupbuy {
+  font-size: 0.8rem;
+  margin-top: 20px;
+  ::-webkit-input-placeholder { font-size: 0.8rem; }
+  ::-moz-placeholder { font-size: 0.8rem; } /* firefox 19+ */
+  :-ms-input-placeholder { font-size: 0.8rem; } /* ie */
+  input:-moz-placeholder { font-size: 0.8rem; }
+
+  #groupbuy_price, #groupbuy_goods_unit, #groupbuy_goods_minimal {
+    width: 20%;
+  }
+  #groupbuy_goods_unit, #groupbuy_goods_minimal {
+    margin-left: 5px;
+    width: 30%;
+  }
+  #groupbuy_goods_minimal {
+    width: 45%;
+  }
+  .medium-12 {
+    padding: 0;
   }
 }

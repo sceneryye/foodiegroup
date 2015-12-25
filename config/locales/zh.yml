@@ -212,7 +212,7 @@ zh:
       forum: 论坛
       topic: 话题
       event:  活动
-      participant:  报名
+      participants: 报名
       groupbuy: 团购
       comment: 评论
       tag: 标签
@@ -361,7 +361,7 @@ zh:
   buy: 购买
   buys: 团购人数
   remark: 备注
-  group: 群组
+  group_manage: 群组管理
   welcome: 欢迎
   inventory: 库存
   weekday: 工作日

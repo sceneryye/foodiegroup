@@ -2,6 +2,15 @@
 	// $('.datetimepicker').fdatetimepicker({
  //    language: 'zh'
  //  });
+
+	$(document).ready(function(){
+  $('.new-event').find('input').each(function(){
+  	if(($(this).val()=='0' || $(this).val()=='0.0') && location.pathname.split('/')[2] == 'new'){
+  		$(this).val('');
+  	}
+  });
+});
+
 	var nowTemp = new Date();
 	var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 	var checkin = $('#dpd1').fdatetimepicker({

@@ -29,10 +29,10 @@
   </div>
   <div>
     <!-- <%#= f.label :price %> -->
-    <%= f.text_field :price,placeholder: t(:price)%>
+    <%= f.text_field :price,placeholder: t(:price), class: 'left' %>
   </div>
   <div>
-    <%= f.text_field :goods_unit,placeholder: t(:goods_unit)%>
+    <%= f.text_field :goods_unit,placeholder: t(:goods_unit), class: 'left' %>
   </div>
   <!-- <div>
     <%#= f.label :goods_maximall %>
@@ -40,8 +40,9 @@
   </div> -->
    <div>
     <!-- <%#= f.label :goods_minimal %> -->
-    <%= f.text_field :goods_minimal,placeholder: t(:goods_minimal)%>
+    <%= f.text_field :goods_minimal,placeholder: t(:goods_minimal), class: 'left' %>
   </div>
+  <div class="clear"></div>
  <!--  <div>
     <%= f.text_field :name, required: true, placeholder: '姓名'%>
     <%= show_error_message('活动联系人')%>
@@ -52,7 +53,7 @@
   </div> -->
   <div>
     <%#= f.label :body %>
-    <%= f.text_area :body,placeholder: t(:body)%>
+    <%= f.text_area :body,placeholder: t(:body), rows: 5%>
     <!-- <%#= f.cktext_area :body, :class => 'someclass', :ckeditor => {:language => 'zh'} , required: true%> -->
     <!-- <%#= show_error_message('内容请不要超过1千字')%> -->
   </div>
