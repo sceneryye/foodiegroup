@@ -94,16 +94,20 @@ $light-slate-gray: #6D7B8D;
   ::-moz-placeholder { font-size: 0.8rem; } /* firefox 19+ */
   :-ms-input-placeholder { font-size: 0.8rem; } /* ie */
   input:-moz-placeholder { font-size: 0.8rem; }
-
-  #groupbuy_price, #groupbuy_goods_unit, #groupbuy_goods_minimal {
+  .picture-upload {
+    padding-left: 5px;
+  }
+  .price {
     width: 20%;
   }
-  #groupbuy_goods_unit, #groupbuy_goods_minimal {
-    margin-left: 5px;
+  .goods-unit {
     width: 30%;
   }
-  #groupbuy_goods_minimal {
-    width: 45%;
+  .goods-minimal {
+    width: 50%;
+  }
+  .goods-unit, .goods-minimal {
+    padding-left: 15px;
   }
   .medium-12 {
     padding: 0;
