@@ -1,4 +1,4 @@
-<div class="panel radius">
+<div class="groupbuy-list">
 <div class="row">
   <div class="columns small-4">
     <%= link_to groupbuy do %>
@@ -7,8 +7,8 @@
   </div>
   <div class="columns small-8">
     <h4><%= link_to groupbuy.title, groupbuy%></h4>
-    <small> 
-    <div class="row panel radius callout" style="padding:5px;">
+    <small class="money"> 
+    <div class="row radius callout">
       <div class="columns small-4">
         <span class="price save"><i class="fa fa-cny"></i><%=groupbuy.price %></span>
       </div>
@@ -36,8 +36,8 @@
           <i class="fa fa-comments"></i>(<%=groupbuy.comments_count%>)
         </a>
     </div>
-    <div class="columns small-12">
-    <%groupbuy.participants.limit(6).each do |p|%>
+    <div class="columns small-12 avatar">
+    <%groupbuy.participants.limit(5).each do |p|%>
         <a href="#" class="show-comments">
          <img class="user-thumb" src="<%=p.user.avatar%>" alt="<%=p.user.nickname%>"/>
         </a>
@@ -46,5 +46,6 @@
     </div>
 </div>
   </div>
+  <hr />
 
 
