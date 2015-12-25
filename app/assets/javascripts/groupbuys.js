@@ -5,3 +5,13 @@ $(document).ready(function(){
     }
   });
 });
+
+$('.new_participant').on('change', '.goods-weight', function(){
+  var that = $(this);
+  var nums = that.val();
+  if(nums == '' || nums == undefined || isNaN(nums) == true || nums < 1) {
+    $(this).val('');
+    alert("只能输入正整数");
+    return;
+  }
+})
