@@ -19,8 +19,12 @@ if(groupbuy_id) {
         default: 1,
         from: 'ajax'
       },
-      success: function(e) {}
+      success: function(e) {
+        if(e == 'success') {
+          location.href = url;
+        }
+      }
     });
-    location.href = url;
+    
   });
 }
