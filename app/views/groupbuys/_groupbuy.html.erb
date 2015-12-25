@@ -7,18 +7,19 @@
   </div>
   <div class="columns small-8">
     <h4><%= link_to groupbuy.title, groupbuy%></h4>
+    <small> 
     <div class="row panel radius callout" style="padding:5px;">
-    <div class="columns small-4">
-     <small> <span class="price save"><i class="fa fa-cny"></i><%=groupbuy.price %></span>
-     </small></div>
-      <div class="columns small-3">
-     <small> 
-      <span class="price market"><i class="fa fa-cny"></i><%=(groupbuy.price*1.8).to_i %></span>
-    </small></div>
-      <div class="columns small-5">
-     <span class="price save"><%=t(:save)%>:&nbsp;<i class="fa fa-cny"></i><%=(groupbuy.price*0.8).to_i %></span>
-  </div>
-  </div>
+      <div class="columns small-4">
+        <span class="price save"><i class="fa fa-cny"></i><%=groupbuy.price %></span>
+      </div>
+      <div class="columns small-4">
+        <span class="price market"><i class="fa fa-cny"></i><%=(groupbuy.price*1.8).to_i %></span>
+      </div>
+      <div class="columns small-4">
+        <span class="price save"><%=t(:save)%>:&nbsp;<i class="fa fa-cny"></i><%=(groupbuy.price*0.8).to_i %></span>
+      </div>
+    </div>    
+    </small>
   </div>
   </div>
   <div class="row round">
@@ -36,7 +37,7 @@
         </a>
     </div>
     <div class="columns small-12">
-    <%groupbuy.participants.limit(8).each do |p|%>
+    <%groupbuy.participants.limit(6).each do |p|%>
         <a href="#" class="show-comments">
          <img class="user-thumb" src="<%=p.user.avatar%>" alt="<%=p.user.nickname%>"/>
         </a>
