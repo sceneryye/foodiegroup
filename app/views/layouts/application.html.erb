@@ -17,66 +17,76 @@
   </head>
 
   <body>
-<!--    <div class="wrapper">
-     <div class="wrapper-inner"> -->
-    
- 
-    <%=render '/layouts/top_bar'%>
-  <div class="row">
-  <div class="large-12 columns">
-
-    <!-- main content goes here -->
-    <%= yield %>
-    <%= yield :content %>
-<!--   </div>
-  </div> -->
-  <br>
-  <br>
-  <hr>
-  <footer id="footer">
     <div class="row">
-        <div class="columns small-12">
-           &copy; 2014 - <span id='copyright_year'></span>, <%=t(:site_name)%><br>                    
-             技术支持: <a target="_blank" href="http://www.trade-v.com/" title="上海普慧信息科技有限公司">上海普慧信息科技有限公司</a><br>
-        </div>
-    </div>
-  </footer><!--/#footer-->
-  </div>
-  </div>
-  <script>
-      var myDate = new Date();
-      var currentYear = myDate.getFullYear(); 
-      document.getElementById('copyright_year').innerText=currentYear;
-  </script> 
- <%=render '/layouts/menu'%>
+      <div class="off-canvas-wrap docs-wrap" data-offcanvas>
+        <div class="inner-wrap">
+          <%=render '/layouts/top_bar'%>
 
- 
+          <!-- main content goes here -->
+          <article>
+              <%= yield %>
+              <%= yield :content %>
+               <hr>
+          <div class="large-12 columns">
+            <footer id="footer">
+              <div class="row">
+                  <div class="columns small-12">
+                     &copy; 2014 - <span id='copyright_year'></span>, <%=t(:site_name)%><br>                    
+                       技术支持: <a target="_blank" href="http://www.trade-v.com/" title="上海普慧信息科技有限公司">上海普慧信息科技有限公司</a><br>
+                     <script>
+                        var myDate = new Date();
+                        var currentYear = myDate.getFullYear(); 
+                        document.getElementById('copyright_year').innerText=currentYear;
+                    </script> 
+                  </div>
+              </div>
+            </footer><!--/#footer-->
+          </div>
+          </article>
+          <!-- close the off-canvas menu -->
+          <a class="exit-off-canvas"></a>
+      
+
+        </div>
+      </div>
+    </div>  
    
+    <%=render '/layouts/menu'%>  
 
    
     <%#= javascript_include_tag "application" 'data-turbolinks-track' => true %>
-     <%= javascript_include_tag "application"%>
-    <%#= javascript_include_tag controller_name%>
-     <script>
+    <%#= javascript_include_tag "application"%>
+    <script src="/assets/jquery.self.js?body=1"></script>
+    <script src="/assets/jquery_ujs.self.js?body=1"></script>
+    <script src="/assets/foundation/foundation.self.js?body=1"></script>
+    <script src="/assets/foundation/foundation.clearing.self.js?body=1"></script>
+    <script src="/assets/foundation/foundation.dropdown.self.js?body=1"></script>
+    <script src="/assets/foundation/foundation.offcanvas.self.js?body=1"></script>
+    <script src="/assets/foundation/foundation.tab.self.js?body=1"></script>
 
-     $(".show-comments").on("click", function(event) {
-      event.preventDefault();
-      $(".comments").remove();
-      $(".participants").remove();
+    <%= javascript_include_tag controller_name%>
+
+    <script>
+      $(function(){ $(document).foundation(); });
+
+      $(".show-comments").on("click", function(event) {
+        event.preventDefault();
+        $(".comments").remove();
+        $(".participants").remove();
+        
+        var url = $(this).data('url');
+        htmlobj = $.ajax({url: url ,async:false});
+        var obj = $(this).parent().siblings();
+
+        if (url.indexOf("event")>0 || url.indexOf("groupbuy")>0){
+           obj = $(this).parent().parent();
+        }
+        obj.append('<div class="comments">'+htmlobj.responseText+'</div>');
       
-      var url = $(this).data('url');
-      htmlobj = $.ajax({url: url ,async:false});
-      var obj = $(this).parent().siblings();
-
-      if (url.indexOf("event")>0 || url.indexOf("groupbuy")>0){
-         obj = $(this).parent().parent();
-      }
-      obj.append('<div class="comments">'+htmlobj.responseText+'</div>');
-    
-      // $(".comments").stop().animate({
-      //     scrollTop: $(".comments")[0].scrollHeight
-      // }, 200);
-    });
+        // $(".comments").stop().animate({
+        //     scrollTop: $(".comments")[0].scrollHeight
+        // }, 200);
+      });
 
       $(".show-participants").on("click",  function(event) {
         event.preventDefault();
@@ -89,6 +99,6 @@
         $(this).parent().parent().append('<div class="participants">'+htmlobj.responseText+'</div>');      
       });
 
-     </script>
+    </script>
   </body>
 </html>

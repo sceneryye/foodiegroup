@@ -1,3 +1,6 @@
+//= require foundation-datetimepicker
+//= require ckeditor/init
+
 	// implementation of disabled form fields
 	// $('.datetimepicker').fdatetimepicker({
  //    language: 'zh'
