@@ -8,20 +8,7 @@
     <div class="columns small-8">
 
       <h4 class="groupbuy-name"><%= link_to groupbuy.title, groupbuy%></h4>
-      <div class="groupbuy-number">
-        <span class="number"><%= "No. #{groupbuy.id.to_s.rjust(10,'0')}" %></span>
-        <span class="participant-count">
-        <a href="#" class="show-participants" data-url="<%=groupbuy_participants_path(groupbuy, from: 'groupbuy_list')%>">
-          <i class="fa fa-user-plus"></i>(<%=groupbuy.participants_count%>)</a>
-        </span>
-        <span class="comment-count">
-          <a href="#" class="show-comments" data-url="<%=groupbuy_comments_path(groupbuy)%>">
-        <i class="fa fa-comments"></i>(<%=groupbuy.comments_count%>)
-      </a>
-        </span>
-      </div>
-      <small class="money"> 
-
+      
         <div class="row radius callout all-kinds-of-money">
           <div class="columns small-6 groupbuy-price" style="line-height:100%">
             <span class="price save"><i class="fa fa-cny"></i><%=groupbuy.price %></span><br>
@@ -31,8 +18,7 @@
           <div class="columns small-6">
             <span class="price save"><%=t(:save)%>:&nbsp;40%</span>
           </div>
-        </div>     
-      
+        </div>           
     </div>
   </div>
    <div class="columns small-12">
