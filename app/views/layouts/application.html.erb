@@ -17,11 +17,10 @@
   </head>
 
   <body>
-    <div class="row">
+    <div class="body">
       <div class="off-canvas-wrap docs-wrap" data-offcanvas>
         <div class="inner-wrap">
           <%=render '/layouts/top_bar'%>
-
           <!-- main content goes here -->
           <article>
               <%= yield %>
@@ -31,8 +30,8 @@
             <footer id="footer">
               <div class="row">
                   <div class="columns small-12">
-                     &copy; 2014 - <span id='copyright_year'></span>, <%=t(:site_name)%><br>                    
-                       技术支持: <a target="_blank" href="http://www.trade-v.com/" title="上海普慧信息科技有限公司">上海普慧信息科技有限公司</a><br>
+                    <small> &copy; 2014 - <span id='copyright_year'></span>, <%=t(:site_name)%><br>                    
+                     技术支持: <a target="_blank" href="http://www.trade-v.com/" title="上海普慧信息科技有限公司">上海普慧信息科技有限公司</a></small>
                      <script>
                         var myDate = new Date();
                         var currentYear = myDate.getFullYear(); 

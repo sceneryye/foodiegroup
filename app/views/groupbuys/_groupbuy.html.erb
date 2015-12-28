@@ -8,7 +8,6 @@
     <div class="columns small-8">
       <h4 class="groupbuy-name"><%= link_to groupbuy.title, groupbuy%></h4>
       <div class="groupbuy-number">
-        <span class="number"><%= "No. #{groupbuy.id.to_s.rjust(10,'0')}" %></span>
         <span class="participant-count">
         <a href="#" class="show-participants" data-url="<%=groupbuy_participants_path(groupbuy)%>">
           <i class="fa fa-user-plus"></i>(<%=groupbuy.participants_count%>)</a>
@@ -34,18 +33,7 @@
       </small>
     </div>
   </div>
-  <div class="row round">
-
-    
-    <div class="columns small-12 avatar">
-      <%groupbuy.participants.limit(5).each do |p|%>
-      <a href="#" class="show-comments">
-       <img class="user-thumb" src="<%=p.user.avatar%>" alt="<%=p.user.nickname%>"/>
-     </a>
-
-     <%end%>
-   </div>
- </div>
+ 
 </div>
 <hr />
 
