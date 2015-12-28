@@ -63,7 +63,7 @@
     <script src="/assets/foundation/foundation.offcanvas.self.js?body=1"></script>
     <script src="/assets/foundation/foundation.tab.self.js?body=1"></script>
 
-    <%= javascript_include_tag controller_name%>
+    <%= javascript_include_tag params[:controller] %>
 
     <script>
       $(function(){ $(document).foundation(); });
