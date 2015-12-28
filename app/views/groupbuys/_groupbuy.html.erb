@@ -10,7 +10,7 @@
       <div class="groupbuy-number">
         <span class="number"><%= "No. #{groupbuy.id.to_s.rjust(10,'0')}" %></span>
         <span class="participant-count">
-        <a href="#" class="show-participants" data-url="<%=groupbuy_participants_path(groupbuy)%>">
+        <a href="#" class="show-participants" data-url="<%=groupbuy_participants_path(groupbuy, from: 'groupbuy_list')%>">
           <i class="fa fa-user-plus"></i>(<%=groupbuy.participants_count%>)</a>
         </span>
         <span class="comment-count">

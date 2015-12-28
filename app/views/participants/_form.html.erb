@@ -9,7 +9,9 @@
 	<% end %>
 	<%= link_to user_addresses_path(groupbuy_id: params[:groupbuy_id]) do  %>
 	<div class="address-block">
+	<% if params[:from] != 'groupbuy_list' %>
 		<div class="address-title left"><%= t(:default_address) %></div>
+		<% end %>
 		<div class="default-address left">
 			<span class="name"><%= address.name %></span>
 			<span class="mobile"><%= address.mobile %></span>
@@ -30,34 +32,34 @@
 <%= render 'layouts/form_errors', object: @participant %>
 
 
-	<div class="input-group">
+<div class="input-group">
 	<div class="goods-amount left"><%= t(:goods_amount) %></div>
-		<%= f.number_field :goods_amount, required: true, placeholder: t(:quantity), class: 'input-group-field goods-weight left' %>
-		<span class="input-group-label unit left"><%=@parent.goods_unit%></span>
-		<div class="clear"></div>
-	</div>
-	<hr />
+	<%= f.number_field :goods_amount, required: true, placeholder: t(:quantity), class: 'input-group-field goods-weight left' %>
+	<span class="input-group-label unit left"><%=@parent.goods_unit%></span>
+	<div class="clear"></div>
+</div>
+<hr />
 
-	<div class="deliver-time">
-		<div class="deliver-time-title left"><%= t(:deliverytime) %></div>
+<div class="deliver-time">
+	<div class="deliver-time-title left"><%= t(:deliverytime) %></div>
+	<div class="date left">
+		<select name="date" id="">
+			<option value="<%= t(:weekday) %>"><%= t(:weekday) %></option>
+			<option value="<%= t(:weekend) %>"><%= t(:weekend) %></option>
+			<option value="<%= t(:anyday) %>" selected="selected"><%= t(:anyday) %></option></select>
+		</div>
 		<div class="date left">
-			<select name="date" id="">
-				<option value="<%= t(:weekday) %>"><%= t(:weekday) %></option>
-				<option value="<%= t(:weekend) %>"><%= t(:weekend) %></option>
-				<option value="<%= t(:anyday) %>" selected="selected"><%= t(:anyday) %></option></select>
+			<select name="time" id="">
+				<option value="<%= t(:morning) %>"><%= t(:morning) %></option>
+				<option value="<%= t(:afternoon) %>"><%= t(:afternoon) %></option>
+				<option value="<%= t(:anytime) %>" selected="selected"><%= t(:anytime) %></option></select>
 			</div>
-			<div class="date left">
-				<select name="time" id="">
-					<option value="<%= t(:morning) %>"><%= t(:morning) %></option>
-					<option value="<%= t(:afternoon) %>"><%= t(:afternoon) %></option>
-					<option value="<%= t(:anytime) %>" selected="selected"><%= t(:anytime) %></option></select>
-				</div>
-				<div class="clear"></div>
-			</div>
+			<div class="clear"></div>
 		</div>
-		<div>
-			<%= f.text_area :remark, class:'comment-area',placeholder: t(:remark)%>
-			<%#= show_error_message('备注，请不要超过500字') %>
-		</div>
-		<%= f.submit '提交', class:'tiny button radius' %>
-		<% end %>
+	</div>
+	<div>
+		<%= f.text_area :remark, class:'comment-area',placeholder: t(:remark)%>
+		<%#= show_error_message('备注，请不要超过500字') %>
+	</div>
+	<%= f.submit '提交', class:'tiny button radius' %>
+	<% end %>

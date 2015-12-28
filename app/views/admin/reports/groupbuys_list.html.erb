@@ -27,7 +27,7 @@
       </tr>
       <% @groupbuys.each_with_index do |groupbuy| %>
       <tr class="body" id="groupbuy-<%= groupbuy.id %>">
-        <td><%= groupbuy.title[0..10] %></td>
+        <td class="groupbuy-title"><%= groupbuy.title[0..10] %></td>
         <td><%= groupbuy.start_time.strftime('%F %T') %></td>
         <td><%= groupbuy.end_time.strftime('%F %T') %></td>
         <td><%= link_to Participant.where(groupbuy_id: groupbuy.id).count, admin_participants_list_path(groupbuy_id: groupbuy.id) %></td>
@@ -37,7 +37,10 @@
         <td>
           <input type="number" name="recommend" value="<%= groupbuy.recommend %>" id="<%= groupbuy.id %>" data-value="<%= groupbuy.recommend %>" class="recommend-number" data-id="<%= groupbuy.id %>" />
         </td>
-        <td><%= link_to "删除", groupbuy_path(groupbuy), method: :delete, remote: true,  data: { confirm:'确定删除?' } %></td>
+        <td>
+        <span class="edit-title edit" data-id="<%= groupbuy.id %>" data-title="<%= groupbuy.title %>">编辑</span>
+        <%= link_to "删除", groupbuy_path(groupbuy), class: 'delete', method: :delete, remote: true,  data: { confirm:'确定删除?' } %>
+        </td>
       </tr>
       <% end %>
     </table>

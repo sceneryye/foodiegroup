@@ -84,9 +84,20 @@ def create
       num = params[:recommend].to_i
       if Groupbuy.find(params[:id]).update(recommend: num)
         Rails.logger.info 'true'
-      return render :text => 'success'
+        return render :text => 'success'
+      end
     end
+
+    if params[:from] == 'admin_edit_title'
+      if params[:title].blank?
+        return render :text => 'failed'
+      end
+      if Groupbuy.find(params[:id]).update(title: params[:title])
+        Rails.logger.info 'true'
+        return render :text => 'success'
+      end
     end
+
     uploaded_io = params[:file]
     if !uploaded_io.blank?
       extension = uploaded_io.original_filename.split('.')

@@ -225,6 +225,46 @@ $('.tags_list ').on('click', '.shown-row .confirm', function(){
   });
 });
 
+//编辑团购标题
+$('.groupbuys-list').on('click', '.edit-title', function(){
+  var that = $(this);
+  var id = that.data('id');
+  var title = that.data('title');
+  var url = '/groupbuys/' + id;
+  swal({
+    title: "修改标题",
+    text: '请输入你想要修改的标题',
+    type: 'input',
+    showCancelButton: true,
+    closeOnConfirm: true,
+    animation: "slide-from-top"
+  }, function(inputValue){
+    console.log("You wrote", inputValue);
+    var new_title = inputValue;
+    if(new_title.replace(/\s/g, '').length < 4) {
+      swlt('字数不能少于4！');
+      return;
+    }
+    $.ajax({
+      url: url,
+      type: 'patch',
+      data: {
+        id: id,
+        title: new_title,
+        from: 'admin_edit_title'
+      },
+      success: function(e) {
+        if(e == 'success') {
+          that.parent().parent().find('.groupbuy-title').text(new_title.slice(0,10));
+          swal('成功!', '修改成功！', 'success');
+        }
+        else {
+          swal('失败!', '提交失败', 'error');
+        }
+      }
+    });
+  });
+});
 
 
 
