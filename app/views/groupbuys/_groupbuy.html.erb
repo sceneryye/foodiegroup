@@ -7,17 +7,6 @@
     </div>
     <div class="columns small-8">
       <h4 class="groupbuy-name"><%= link_to groupbuy.title, groupbuy%></h4>
-      <div class="groupbuy-number">
-        <span class="participant-count">
-        <a href="#" class="show-participants" data-url="<%=groupbuy_participants_path(groupbuy)%>">
-          <i class="fa fa-user-plus"></i>(<%=groupbuy.participants_count%>)</a>
-        </span>
-        <span class="comment-count">
-          <a href="#" class="show-comments" data-url="<%=groupbuy_comments_path(groupbuy)%>">
-        <i class="fa fa-comments"></i>(<%=groupbuy.comments_count%>)
-      </a>
-        </span>
-      </div>
       <small class="money"> 
         <div class="row radius callout all-kinds-of-money">
           <div class="columns small-4 groupbuy-price">
@@ -31,6 +20,18 @@
           </div>
         </div>    
       </small>
+      <div class="groupbuy-number">
+       <div class="columns small-6">
+        <a href="#" class="show-participants" data-url="<%=groupbuy_participants_path(groupbuy)%>">
+          <i class="fa fa-user-plus"></i>(<%=groupbuy.participants_count%>)</a>
+        </div>
+         <div class="columns small-6">
+          <a href="#" class="show-comments" data-url="<%=groupbuy_comments_path(groupbuy)%>">
+        <i class="fa fa-comments"></i>(<%=groupbuy.comments_count%>)
+      </a>
+        </div>
+      </div>
+      
     </div>
   </div>
  

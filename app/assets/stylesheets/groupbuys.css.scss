@@ -9,51 +9,51 @@ $light-slate-gray: #6D7B8D;
 
 
 /*****************index****************/
-.groupbuys-index-list {
-  font-size: 0.8rem;
-  margin-top: 30px;
-  h4 {
-    font-size: 0.9rem;
-  }
-  small {
-    font-size: 0.9em;
-  }
-  .groupbuy-name {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  .groupbuy-number {
-    margin-top: 20px;
+// .groupbuys-index-list {
+//   font-size: 0.8rem;
+//   margin-top: 30px;
+//   h4 {
+//     font-size: 0.9rem;
+//   }
+//   small {
+//     font-size: 0.9em;
+//   }
+//   .groupbuy-name {
+//     text-overflow: ellipsis;
+//     white-space: nowrap;
+//     overflow: hidden;
+//   }
+//   .groupbuy-number {
+//     margin-top: 20px;
     
-    .number {
-      color: white;
-      width: 60%;
-      background-color: #0084C0;
-      padding: 2px 4px;
-    }
-    .participant-count, .comment-count {
-      padding-left: 5px;
-    }
-  }
-  .columns {
-    padding: 0 7px;
-  }
-  .money {
-    padding-right: 5px;
-    .all-kinds-of-money {
-      margin: 20px 0;
-      margin-bottom: 0;
-    }
-    .groupbuy-price {
-      padding-left: 0;
-    }
-  }
-  .avatar img {
-    width: 10%;
-  }
+//     .number {
+//       color: white;
+//       width: 60%;
+//       background-color: #0084C0;
+//       padding: 2px 4px;
+//     }
+//     .participant-count, .comment-count {
+//       padding-left: 5px;
+//     }
+//   }
+//   .columns {
+//     padding: 0 7px;
+//   }
+//   .money {
+//     padding-right: 5px;
+//     .all-kinds-of-money {
+//       margin: 20px 0;
+//       margin-bottom: 0;
+//     }
+//     .groupbuy-price {
+//       padding-left: 0;
+//     }
+//   }
+//   .avatar img {
+//     width: 10%;
+//   }
 
-}
+// }
 
 
 /**************new participant**********/
