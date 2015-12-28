@@ -6,33 +6,29 @@
       <%end%>
     </div>
     <div class="columns small-8">
-      <h4 class="groupbuy-name"><%= link_to groupbuy.title, groupbuy%></h4>
-      <small class="money"> 
+      <h4><%= link_to groupbuy.title, groupbuy%></h4>
         <div class="row radius callout all-kinds-of-money">
-          <div class="columns small-4 groupbuy-price">
-            <span class="price save"><i class="fa fa-cny"></i><%=groupbuy.price %></span>
+          <div class="columns small-6 groupbuy-price" style="line-height:100%">
+            <span class="price save"><i class="fa fa-cny"></i><%=groupbuy.price %></span><br>
+           
+            <small class="money">  <span class="price market"><i class="fa fa-cny"></i><%=(groupbuy.price*1.8).to_i %></span></small>
           </div>
-          <div class="columns small-4">
-            <span class="price market"><i class="fa fa-cny"></i><%=(groupbuy.price*1.8).to_i %></span>
-          </div>
-          <div class="columns small-4">
+          <div class="columns small-6">
             <span class="price save"><%=t(:save)%>:&nbsp;40%</span>
           </div>
-        </div>    
-      </small>
-      <div class="groupbuy-number">
-       <div class="columns small-6">
-        <a href="#" class="show-participants" data-url="<%=groupbuy_participants_path(groupbuy)%>">
-          <i class="fa fa-user-plus"></i>(<%=groupbuy.participants_count%>)</a>
-        </div>
-         <div class="columns small-6">
-          <a href="#" class="show-comments" data-url="<%=groupbuy_comments_path(groupbuy)%>">
-        <i class="fa fa-comments"></i>(<%=groupbuy.comments_count%>)
-      </a>
-        </div>
-      </div>
+        </div>     
       
     </div>
+  </div>
+  <div class="row">
+    
+    <div class="button-group">
+  <a href="#" class="show-participants button tiny secondary" data-url="<%=groupbuy_participants_path(groupbuy)%>">
+          <i class="fa fa-user-plus"></i><%=t(:buy)%>(<%=groupbuy.participants_count%>)</a>
+ <a href="#" class="show-comments button tiny second"  style="width:100%" data-url="<%=groupbuy_comments_path(groupbuy)%>">
+            <i class="fa fa-comments"></i><%=t(:new_comment)%>(<%=groupbuy.comments_count%>)
+          </a>
+</div>
   </div>
  
 </div>
