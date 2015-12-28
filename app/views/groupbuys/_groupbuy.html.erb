@@ -6,6 +6,7 @@
       <%end%>
     </div>
     <div class="columns small-8">
+
       <h4 class="groupbuy-name"><%= link_to groupbuy.title, groupbuy%></h4>
       <div class="groupbuy-number">
         <span class="number"><%= "No. #{groupbuy.id.to_s.rjust(10,'0')}" %></span>
@@ -20,32 +21,31 @@
         </span>
       </div>
       <small class="money"> 
+
         <div class="row radius callout all-kinds-of-money">
-          <div class="columns small-4 groupbuy-price">
-            <span class="price save"><i class="fa fa-cny"></i><%=groupbuy.price %></span>
+          <div class="columns small-6 groupbuy-price" style="line-height:100%">
+            <span class="price save"><i class="fa fa-cny"></i><%=groupbuy.price %></span><br>
+           
+            <small class="money">  <span class="price market"><i class="fa fa-cny"></i><%=(groupbuy.price*1.8).to_i %></span></small>
           </div>
-          <div class="columns small-4">
-            <span class="price market"><i class="fa fa-cny"></i><%=(groupbuy.price*1.8).to_i %></span>
-          </div>
-          <div class="columns small-4">
+          <div class="columns small-6">
             <span class="price save"><%=t(:save)%>:&nbsp;40%</span>
           </div>
-        </div>    
-      </small>
+        </div>     
+      
     </div>
   </div>
-  <div class="row round">
-
+  <div class="row">
     
-    <div class="columns small-12 avatar">
-      <%groupbuy.participants.limit(5).each do |p|%>
-      <a href="#" class="show-comments">
-       <img class="user-thumb" src="<%=p.user.avatar%>" alt="<%=p.user.nickname%>"/>
-     </a>
-
-     <%end%>
-   </div>
- </div>
+    <div class="button-group">
+  <a href="#" class="show-participants button tiny secondary" data-url="<%=groupbuy_participants_path(groupbuy)%>">
+          <i class="fa fa-user-plus"></i><%=t(:buy)%>(<%=groupbuy.participants_count%>)</a>
+ <a href="#" class="show-comments button tiny second"  style="width:100%" data-url="<%=groupbuy_comments_path(groupbuy)%>">
+            <i class="fa fa-comments"></i><%=t(:new_comment)%>(<%=groupbuy.comments_count%>)
+          </a>
+</div>
+  </div>
+ 
 </div>
 <hr />
 

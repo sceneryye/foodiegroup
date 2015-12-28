@@ -358,7 +358,7 @@ zh:
   mobile: 手机
   address: 地址
   quantity: 数量
-  buy: 购买
+  buy: 立即购买
   buys: 团购人数
   remark: 备注
   group_manage: 群组管理
@@ -378,3 +378,4 @@ zh:
   save: 省
   goods_amount: 商品数量
   please_choose_groupbuy_duration: 请选择团购期限
+  home: 首页
