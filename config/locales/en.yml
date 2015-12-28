@@ -241,7 +241,7 @@ en:
   shiped: Shiped
   unshiped: Wating for ship
   received: Received
-  groupbuy: Groupbuying
+  groupbuy: Group Buying List
   share: Share
   edit_profile: Edit Profile
   maintain_addresses: Maintain Addresses
@@ -252,7 +252,7 @@ en:
   address: Address
   quantity: Quantity
   buy: Buy
-  buys: Buys
+  buys: Bought
   remark: Remark
   new_event: Add new meetup
   group_management: Group Manage
@@ -270,6 +270,6 @@ en:
   default_address: Default Address
   new_address: Create New Address
   set_default: Set As Default
-  groupbuy_deal: Group Buying Deal
+  groupbuy_detail: Group Buying Detail
   event_detail: Meetup Detail
   goods_amount: Goods Amount

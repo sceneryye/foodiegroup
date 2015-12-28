@@ -26,10 +26,10 @@
               <%= yield %>
               <%= yield :content %>
                <hr>
-         <!--  <div class="large-12 columns">
+          <div class="large-12 columns">
             <footer id="footer">
               <div class="row">
-                  <div class="columns small-12">
+                  <div class="columns small-12" style="line-height: 100%">
                     <small> &copy; 2014 - <span id='copyright_year'></span>, <%=t(:site_name)%><br>                    
                      技术支持: <a target="_blank" href="http://www.trade-v.com/" title="上海普慧信息科技有限公司">上海普慧信息科技有限公司</a></small>
                      <script>
@@ -40,7 +40,7 @@
                   </div>
               </div>
             </footer>
-          </div> -->
+          </div>
           </article>
           <!-- close the off-canvas menu -->
           <a class="exit-off-canvas"></a>
@@ -80,8 +80,8 @@
         if (url.indexOf("event")>0 || url.indexOf("groupbuy")>0){
            obj = $(this).parent().parent();
         }
-        obj.append('<div class="comments">'+htmlobj.responseText+'</div>');
-      
+        obj.append('<div class="comments panel radius">'+htmlobj.responseText+'</div>');
+       $(this).parent().append('<a href="#" class="close button tiny secondary"><i class="fa fa-close"></i><%=t(:close)%></a>');
         // $(".comments").stop().animate({
         //     scrollTop: $(".comments")[0].scrollHeight
         // }, 200);
@@ -95,7 +95,7 @@
 
         var url = $(this).data('url');
         htmlobj = $.ajax({url: url ,async:false});
-        $(this).parent().parent().append('<div class="participants">'+htmlobj.responseText+'</div>');      
+        $(this).parent().parent().append('<div class="participants  panel radius">'+htmlobj.responseText+'</div>');      
       });
 
     </script>
