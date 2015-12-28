@@ -35,15 +35,14 @@
       
     </div>
   </div>
-  <div class="row">
-    
-    <div class="button-group">
-  <a href="#" class="show-participants button tiny secondary" data-url="<%=groupbuy_participants_path(groupbuy)%>">
+   <div class="columns small-12">
+    <div class="button-group expanded">
+      <a href="#" class="show-participants button tiny secondary" data-url="<%=groupbuy_participants_path(groupbuy)%>">
           <i class="fa fa-user-plus"></i><%=t(:buy)%>(<%=groupbuy.participants_count%>)</a>
- <a href="#" class="show-comments button tiny second"  style="width:100%" data-url="<%=groupbuy_comments_path(groupbuy)%>">
+      <a href="#" class="show-participants button tiny secondary"  data-url="<%=groupbuy_comments_path(groupbuy)%>">
             <i class="fa fa-comments"></i><%=t(:new_comment)%>(<%=groupbuy.comments_count%>)
-          </a>
-</div>
+      </a>
+    </div>
   </div>
  
 </div>

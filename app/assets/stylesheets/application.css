@@ -14,6 +14,8 @@ footer{ position: absolute; bottom: 0; left: 0; }*/
 html, body {position: relative;font-family: "Microsoft YaHei";}
 a.button:visited{color:white;}
 
+a.button.secondary:visited{color:black;}
+
 #bottomNav {z-index:9999; position:fixed; bottom:0; left:0; width:100%;
   _position:absolute;
   _top: expression_r(documentElement.scrollTop + documentElement.clientHeight-this.offsetHeight); 
