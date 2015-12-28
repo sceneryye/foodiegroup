@@ -305,9 +305,9 @@ zh:
     select:
       prompt: "请选择"
     submit:
-      create: "新增%{model}"
-      update: "更新%{model}"
-      submit: "提交%{model}"
+      create: "提交"
+      update: "提交"
+      submit: "提交"
 
   event: 活动
   topic: 话题
