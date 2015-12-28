@@ -40,10 +40,10 @@
       <%= groupbuy_info(@groupbuy) %>
     </div>
     <div>
-     <!--   <%= link_to t(:comment), new_groupbuy_comment_path(@groupbuy),
+       <%= link_to t(:comment), new_groupbuy_comment_path(@groupbuy),
                               class:"tiny button radius" if signed_in? %>
        <%= link_to t(:buy), new_groupbuy_participant_path(@groupbuy),
-                              class:"tiny button radius" if signed_in? %> -->
+                              class:"tiny button radius" if signed_in? %>
       
 
       <% if current_user == @groupbuy.user %>
