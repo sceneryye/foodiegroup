@@ -1,0 +1,55 @@
+//= require foundation-datetimepicker
+
+//= require ckeditor/init
+
+
+$(document).ready(function(){
+  $('.new-groupbuy').find('input').each(function(){
+    if(($(this).val()=='0' || $(this).val()=='0.0') && location.pathname.split('/')[2] == 'new'){
+      $(this).val('');
+    }
+  });
+});
+
+$('.new_participant').on('change', '.goods-weight', function(){
+  var that = $(this);
+  var nums = that.val();
+  if(nums == '' || nums == undefined || isNaN(nums) == true || parseInt(nums) < 1) {
+    $(this).val('');
+    alert("只能输入正整数");
+    return;
+  }
+});
+
+//倒计时
+
+$('.groupbuy-list').each(function(){
+  var endTime = $(this).data('endtime');
+  var that = $(this);
+  window.setInterval(function(){
+    var EndTime= endTime;
+    var NowTime = new Date();
+    var t =EndTime * 1000 - NowTime.getTime();
+    if(t < 0) {
+      console.log(t);
+      var over = $('.groupbuys-index-list').data('over');
+      $(that).find('.countdown').text(over);
+      return;
+    }
+
+    var d=Math.floor(t/1000/60/60/24);
+    var h=Math.floor(t/1000/60/60%24);
+    var m=Math.floor(t/1000/60%60);
+    var s=Math.floor(t/1000%60);
+
+    that.find('.countdown-day').text(d);
+    that.find('.countdown-hour').text(h + ':');
+    that.find('.countdown-minute').text(m + ':');
+    that.find('.countdown-second').text(s);
+  }, 1000)
+
+  
+  
+  //setInterval(getRTime,1000);
+});
+

@@ -1,4 +1,4 @@
-<div class="groupbuy-list">
+<div class="groupbuy-list" data-endtime="<%= groupbuy.end_time.to_i %>">
   <div class="row">
     <div class="columns small-4">
       <%= link_to groupbuy,class: "th" do %>
@@ -8,17 +8,25 @@
     <div class="columns small-8">
 
       <h4 class="groupbuy-name"><%= link_to groupbuy.title, groupbuy%></h4>
-      
+
         <div class="row radius callout all-kinds-of-money">
           <div class="columns small-6 groupbuy-price" style="line-height:100%">
             <span class="price save"><i class="fa fa-cny"></i><%=groupbuy.price %></span><br>
-           
+
             <small class="money">  <span class="price market"><i class="fa fa-cny"></i><%=(groupbuy.price*1.8).to_i %></span></small>
           </div>
           <div class="columns small-6">
             <span class="price save"><%=t(:save)%>:&nbsp;40%</span>
           </div>
-        </div>           
+        </div>
+
+        <div class="countdown">
+          <span class="countdonw-title"><%= t(:count_down) %></span>
+          <span class="countdown-day"></span>
+          <span class="countdown-hour"></span>
+          <span class="countdown-minute"></span>
+          <span class="countdown-second"></span>
+        </div>
     </div>
   </div>
    <div class="columns small-12">
@@ -30,7 +38,7 @@
       </a>
     </div>
   </div>
- 
+
 </div>
 <hr />
 
