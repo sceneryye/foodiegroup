@@ -7,9 +7,11 @@
   <title><%= content_for?(:title) ? yield(:title) : t(:site_name) %></title>
 
   <%= stylesheet_link_tag    "admin/reports" %>
-  <%= stylesheet_link_tag    "application" %>
+  <%#= stylesheet_link_tag    "application" %>
   <link rel="stylesheet" href="/assets/sweetalert.css">
-  <%= javascript_include_tag "admin/#{controller_name}" %>
+  <link rel="stylesheet" href="http://cdn.bootcss.com/foundation/6.0.5/css/foundation.min.css">
+  <%#= javascript_include_tag "admin/reports" %>
+  <%= javascript_include_tag "#{params[:controller]}" %>
   <script type="text/javascript" src="/assets/sweetalert.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
@@ -22,4 +24,5 @@
   <%= javascript_include_tag "application"%>
   
 </body>
+
 </html>
