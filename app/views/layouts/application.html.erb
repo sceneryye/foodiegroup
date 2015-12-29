@@ -8,7 +8,7 @@
           <%=t(:site_name) %>
     </title>
 
-    <%= stylesheet_link_tag    "application" %>
+    <%= stylesheet_link_tag    "application", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <script type="text/javascript" src="/assets/sweetalert.min.js"></script>
     <link rel="stylesheet" media="screen" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -53,7 +53,7 @@
     <%=render '/layouts/menu'%>  
 
    
-    <%#= javascript_include_tag "application" 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag "application" 'data-turbolinks-track' => true %>
     <%#= javascript_include_tag "application"%>
     <script src="/assets/jquery.self.js?body=1"></script>
     <script src="/assets/jquery_ujs.self.js?body=1"></script>
