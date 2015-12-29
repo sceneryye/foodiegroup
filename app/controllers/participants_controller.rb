@@ -91,8 +91,10 @@ class ParticipantsController < ApplicationController
     participant = Participant.find(params[:id])
     if participant.event_id
       parent = participant.event
+      controller = 'event'
     else
       parent = participant.groupbuy
+      controller = 'groupbuy'
     end
 
     money = participant.amount  * parent.price.to_f
@@ -110,6 +112,7 @@ class ParticipantsController < ApplicationController
       participant_id: participant.id,
       user_id: participant.user_id,
       event_name: event_name
+      controller: controller
     }
     return redirect_to "http://www.trade-v.com/foodies/foodie_pay?#{data.to_query}"
   end
