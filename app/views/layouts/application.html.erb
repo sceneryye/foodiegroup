@@ -78,7 +78,7 @@
         if (url.indexOf("forum")>0){
            obj = obj.parent();
         }
-        obj.append('<div class="comments panel radius">'+htmlobj.responseText+'</div>');
+        obj.append('<div class="comments" style="margin:0px;padding:0px;">'+htmlobj.responseText+'</div>');
 
         // obj.append('<a href="#" class="close button tiny secondary right"><i class="fa fa-close"></i><%=t(:close)%></a>');
         // $(".comments").stop().animate({
@@ -94,7 +94,7 @@
 
         var url = $(this).data('url');
         htmlobj = $.ajax({url: url ,async:false});
-        $(this).parent().parent().append('<div class="participants  panel radius">'+htmlobj.responseText+'</div>');      
+        $(this).parent().parent().append('<div class="participants" style="margin:0px;padding:0px;">'+htmlobj.responseText+'</div>');      
       });
 
     </script>

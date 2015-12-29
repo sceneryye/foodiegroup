@@ -4,11 +4,11 @@
 <%= form_for form_params(@parent, @participant), data: {abide: ''} do |f| %>
 	<%= render 'layouts/form_errors', object: @participant %>
     <div class="row collapse">
-	    <div class="small-3 columns">
-	        <label><%= t(:amount) %></label>
+	    <div class="small-4 columns">
+	    	<span class="prefix"><%= t(:amount) %></span>
 	    </div>
-        <div class="small-6 columns">
-          	<%= f.number_field :amount, required: true, placeholder: t(:quantity)%>
+        <div class="small-5 columns">
+          	<%= f.number_field :amount, required: true,value: 1%>
         </div>
         <div class="small-3 columns">
           <span class="postfix">
@@ -19,12 +19,9 @@
           <%end%>
           </span>
         </div>
-    </div>
-	<hr />
     <% if params[:groupbuy_id] || controller_name=='groupbuys'%>
-		<div class="row collapse">
-		    <div class="small-3 columns">
-		        <label><%= t(:deliverytime) %></label>
+		    <div class="small-4 columns">
+		        <span class="prefix"><%= t(:deliverytime) %></span>
 		    </div>
 	        <div class="small-4 columns">
 	          	<select name="date" id="">
@@ -40,20 +37,22 @@
 					<option value="<%= t(:anytime) %>" selected="selected"><%= t(:anytime) %></option>
 				</select>
 			</div>
-		</div>
 	<%else%>
-		<div class="row collapse">
-			<div class="small-12 columns">
+			 <div class="small-4 columns">
+		        <span class="prefix"><%= t(:name) %></span>
+		    </div>
+	        <div class="small-8 columns">
 			  <%= f.text_field :name, required: true, placeholder: t(:name),value: current_user.name%>
 			  <%#= show_error_message('请输入您的登录名') %>
 			</div>
-			<div class="small-12 columns">
+			 <div class="small-4 columns">
+		        <span class="prefix"><%= t(:mobile) %></span>
+		    </div>
+	        <div class="small-8 columns">
 			  <%= f.text_field :mobile, required: true, placeholder: t(:mobile),value: current_user.mobile %>
 			  <%#= show_error_message('请输入您的手机号码.') %>
 			</div>
-		</div>
 	<%end%>
-	<div class="row collapse">
 		<div class="small-12 columns">
 			<%= f.text_area :remark, class:'comment-area',placeholder: t(:remark)%>
 			<%#= show_error_message('备注，请不要超过500字') %>
