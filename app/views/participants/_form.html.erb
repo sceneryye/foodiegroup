@@ -42,13 +42,15 @@
 			</div>
 		</div>
 	<%else%>
-		<div class="small-12 columns">
-		  <%= f.text_field :name, required: true, placeholder: t(:name),value: current_user.name%>
-		  <%#= show_error_message('请输入您的登录名') %>
-		</div>
-		<div class="small-12 columns">
-		  <%= f.text_field :mobile, required: true, placeholder: t(:mobile),value: current_user.mobile %>
-		  <%#= show_error_message('请输入您的手机号码.') %>
+		<div class="row collapse">
+			<div class="small-12 columns">
+			  <%= f.text_field :name, required: true, placeholder: t(:name),value: current_user.name%>
+			  <%#= show_error_message('请输入您的登录名') %>
+			</div>
+			<div class="small-12 columns">
+			  <%= f.text_field :mobile, required: true, placeholder: t(:mobile),value: current_user.mobile %>
+			  <%#= show_error_message('请输入您的手机号码.') %>
+			</div>
 		</div>
 	<%end%>
 	<div class="row collapse">

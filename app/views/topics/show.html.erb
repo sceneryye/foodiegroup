@@ -18,7 +18,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="columns small-12">    
+  <div class="columns small-12 panel">    
     <div class="comments">    
       <%=render 'comments/form' ,:locals=>{@parent=>@topic,@comment=>@comment} if signed_in? %>
       <h4><i class="fa fa-comment"></i><%=t(:comments)%> (<%= @topic.comments_count %>)</h4><hr>

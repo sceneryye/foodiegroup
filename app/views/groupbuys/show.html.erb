@@ -1,15 +1,17 @@
 <% provide :title, t(:groupbuy_detail) %>
 <div class="row">
-  <div class="large-12 columns">
     <div class="large-2 columns">
       <%= image_tag @groupbuy.pic_url, class: 'profile-image' if @groupbuy %>
     </div>
 
     <div class="large-10 columns">
       <h2><%= @groupbuy.title %></h2>      
-      <h3><%= "[No. #{@groupbuy.id.to_s.rjust(10,'0')}]" %></h3>      
-    </div>
-    <div>
+      <h3><%= "[No. #{@groupbuy.id.to_s.rjust(10,'0')}]" %></h3> 
+      <%= groupbuy_info(@groupbuy) %>     
+  </div>
+</div>
+<div class="row">
+  <div class="small-12 columns">
       <table style="width:100%">
         <tr>
           <th><%=t(:start_time)%></th>
@@ -36,42 +38,45 @@
         </tr>
       </table>
       <!-- <p>联系人：<%=@groupbuy.name%></p>
-      <p>电话：<%=@groupbuy.mobile%></p><hr> -->
-      <%= groupbuy_info(@groupbuy) %>
-    </div>
-    <div>
+      <p>电话：<%=@groupbuy.mobile%></p><hr> -->   
      <!--   <%= link_to t(:comment), new_groupbuy_comment_path(@groupbuy),
                               class:"tiny button radius" if signed_in? %>
        <%= link_to t(:buy), new_groupbuy_participant_path(@groupbuy),
                               class:"tiny button radius" if signed_in? %>
        -->
-
-      <% if current_user == @groupbuy.user %>
-
+  </div>
+</div>
+<% if current_user == @groupbuy.user %>  
+<div class="row">
+  <div class="small-12 columns">
         <%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_groupbuy_path(@groupbuy), class:"tiny button radius" %>
         <%= link_to '<i class="fa fa-times"></i>'.html_safe + ' ' + t(:delete), @groupbuy,method: :delete,
                   class:"tiny button alert radius",
-                  data: {confirm: '?'} %>
-      <% end %>
-     </div>
-
-       <ul class="tabs" data-tab role="tablist">
-        <li class="tab-title active"><a href="#participants"><i class="fa fa-user-plus"></i><%=t(:buys)%> (<%=@groupbuy.participants_count%>)</a></li>
-        <li class="tab-title"><a href="#comments"><i class="fa fa-comments"></i><%=t(:comments)%> (<%=@groupbuy.comments_count%>)</a></li>
-      </ul>
-
-      <div class="tabs-content panel">
+                  data: {confirm: '?'} %>      
+  </div>
+</div>
+<% end %>
+<div class="row">
+  <div class="small-12 columns">
+    <ul class="tabs" data-tab role="tablist">
+      <li class="tab-title active">
+        <a href="#participants"><i class="fa fa-user-plus"></i><%=t(:buys)%> (<%=@groupbuy.participants_count%>)</a>
+      </li>
+      <li class="tab-title">
+        <a href="#comments"><i class="fa fa-comments"></i><%=t(:comments)%> (<%=@groupbuy.comments_count%>)</a>
+      </li>
+    </ul>
+    <div class="tabs-content panel">
         <div class="content active" id="participants" data-url='<%=groupbuy_participants_path(@groupbuy)%>'>
           <%=render 'participants/form' ,:locals=>{@parent=>@parent,@participant=>@participant} if current_user %>
           <%= render @participants %>
         </div>
         <div class="content show-comments" id="comments"  data-url='<%=groupbuy_comments_path(@groupbuy)%>'>
           <%=render 'comments/form' ,:locals=>{@parent=>@parent,@comment=>@comment} if current_user%>
-         <%= render @comments %>
+          <%= render @comments %>
        </div>
-     </div>
-
- </div>
+    </div>
+  </div>
 </div>
 
 

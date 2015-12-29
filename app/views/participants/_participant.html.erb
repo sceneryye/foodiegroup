@@ -1,3 +1,4 @@
+<div class="row small-collapse">
 <div class="columns small-12 comment">
   <p> 
     <%if current_user == @parent.user && participant.status_pay != 1%>
@@ -9,4 +10,5 @@
       <%= participant_info(participant, @parent.price) %>
     </div>
   </div>
+</div>
 
