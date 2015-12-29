@@ -8,6 +8,8 @@ class EventsController < ApplicationController
 
   def show
     @parent =@event  = Event.find(params[:id])
+    @participant = @parent.participants.new
+    @comment = @parent.comments.new
     @participants = @event.participants.includes(:user)
     @comments = @event.comments.includes(:user)
 

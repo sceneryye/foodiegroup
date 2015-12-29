@@ -8,6 +8,8 @@ class GroupbuysController < ApplicationController
 
   def show
     @parent = @groupbuy  = Groupbuy.find(params[:id])
+    @participant = @parent.participants.new
+    @comment = @parent.comments.new
     @participants = @groupbuy.participants.includes(:user)
     @comments = @groupbuy.comments.includes(:user)
 

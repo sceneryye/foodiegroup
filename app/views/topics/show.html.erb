@@ -15,7 +15,7 @@
 </div>
 <div class="comments">
 <h2><i class="fa fa-comment"></i> (<%= @topic.comments_count %>)</h2><hr>
-  <%#=render '/comments/form' ,:locals=>{@parent=>@topic,@comment=>@comment} %>
+  <%=render 'comments/form' ,:locals=>{@parent=>@parent,@comment=>@comment} %>
   <%= render @comments %>
 </div>
 <div>
