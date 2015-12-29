@@ -1,28 +1,34 @@
-
-<div class="row panel">
+<div class="row">
   <div class="columns small-4">
-    <%= link_to event do %>
+    <%= link_to event, class: 'th' do %>
     <img src="<%= event.pic_url %>"/>
     <%end%>
   </div>
   <div class="columns small-8">
     <h4><%= link_to event.title, event%></h4>
-      <span class="price"><%=t(:price)%>:&nbsp;<i class="fa fa-cny"></i><%=event.price %></span><br>
+      <!-- <span class="price"><%=t(:price)%>:&nbsp;<i class="fa fa-cny"></i><%=event.price %></span><br> -->
       <span><%=t(:by)%>:&nbsp;<%=link_to event.user.nickname.html_safe,profile_path(event.user) %><span>   
   </div>
     <div class="columns small-6">
       <%= "[No. #{event.id.to_s.rjust(10,'0')}]" %>     
     </div>
-    <div class="columns small-3">
-        <a href="#" class="show-participants" data-url="<%=event_participants_path(event)%>">
+</div>
+ <div class="row">
+    <div class="columns small-12">
+      <ul class="button-group even-2">
+        <li>
+        <a href="#" class="show-participants button tiny secondary" data-url="<%=event_participants_path(event)%>">
           <i class="fa fa-user-plus"></i>(<%=event.participants_count%>)</a>
         </a>
-    </div>
-    <div class="columns small-3">
-        <a href="#" class="show-comments" data-url="<%=event_comments_path(event)%>">
+          </li>
+          <li>
+         <a href="#" class="show-comments button tiny secondary" data-url="<%=event_comments_path(event)%>">
           <i class="fa fa-comments"></i>(<%=event.comments_count%>)
         </a>
+        </a>
+      </li>
+      </ul>
     </div>
-</div>
+  </div>
 
 

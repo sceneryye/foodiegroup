@@ -1,4 +1,4 @@
-<% if params[:groupbuy_id]%>
+<% if params[:groupbuy_id] || controller_name=='groupbuys'%>
 	<%= render @user_addresses%>
 <%end%>
 <%= form_for form_params(@parent, @participant), data: {abide: ''} do |f| %>
@@ -21,7 +21,7 @@
         </div>
     </div>
 	<hr />
-    <% if params[:groupbuy_id]%>
+    <% if params[:groupbuy_id] || controller_name=='groupbuys'%>
 		<div class="row collapse">
 		    <div class="small-3 columns">
 		        <label><%= t(:deliverytime) %></label>

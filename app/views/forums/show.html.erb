@@ -1,12 +1,12 @@
 <% provide :title, "#{@forum.name}" %>
 <% content_for(:forum_content) do %>
-  <div class="columns">
-    <div class="topics columns ">
+ <!--  <div class="columns">
+    <div class="topics columns "> -->
       <% if @topics.any? %>
         <%= render @topics %>
       <% else %>
         <p>还没有任何话题。</p>
       <% end%>
-    </div>
-  </div>
+    <!-- </div>
+  </div> -->
 <% end %>

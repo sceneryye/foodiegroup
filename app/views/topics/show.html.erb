@@ -1,24 +1,32 @@
 <% provide :title, t(:topic) %>
-<div class="topics panel columns radius ">
-  <h2><%= @topic.title %></h2>
-  <p><%= @topic.body.html_safe  %></p>
-  <%= topic_info(@topic) %>
+<div class="row">
+  <div class="columns small-12">
+    <div class="topics panel  radius ">
+      <h2><%= @topic.title %></h2>
+      <p><%= @topic.body.html_safe  %></p>
+      <%= topic_info(@topic) %>
+      <p>   
+        <% if current_user == @topic.user %>
+          <%= link_to '<i class="fa fa-pencil"></i> '.html_safe+t(:edit), edit_topic_path(@topic), class:"tiny button radius" %>
+          <%= link_to '<i class="fa fa-times"></i> '.html_safe+t(:delete), @topic,
+                             method: :delete,
+                             class:"tiny button alert radius",
+                             data: {confirm: 'Delete?'} %>
+        <% end %>
+    </p>
+    </div>
+  </div>
 </div>
-<div>   
-    <% if current_user == @topic.user %>
-      <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_topic_path(@topic), class:"tiny button radius" %>
-      <%= link_to '<i class="fa fa-times"></i>'.html_safe, @topic,
-                         method: :delete,
-                         class:"tiny button alert radius",
-                         data: {confirm: 'Delete?'} %>
-    <% end %>
-</div>
-<div class="comments">
-<h2><i class="fa fa-comment"></i> (<%= @topic.comments_count %>)</h2><hr>
-  <%=render 'comments/form' ,:locals=>{@parent=>@topic,@comment=>@comment} if signed_in? %>
-  <%= render @comments %>
-</div>
-<div>
- <!--  <%= link_to t(:new_comment), new_topic_comment_path(@topic),
-                              class:"tiny button radius" if signed_in? %> -->
+<div class="row">
+  <div class="columns small-12">    
+    <div class="comments">    
+      <%=render 'comments/form' ,:locals=>{@parent=>@topic,@comment=>@comment} if signed_in? %>
+      <h4><i class="fa fa-comment"></i><%=t(:comments)%> (<%= @topic.comments_count %>)</h4><hr>
+      <%= render @comments %>
+    </div>
+    <div>
+     <!--  <%= link_to t(:new_comment), new_topic_comment_path(@topic),
+                                  class:"tiny button radius" if signed_in? %> -->
+    </div>
+  </div>
 </div>
