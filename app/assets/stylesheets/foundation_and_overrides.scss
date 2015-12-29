@@ -216,10 +216,10 @@ $primary-color: #008CBA;
  $h6-font-size: 1rem;
 
 // We use these to control header size reduction on small screens
-// $h1-font-reduction: rem-calc(10) !default;
-// $h2-font-reduction: rem-calc(10) !default;
-// $h3-font-reduction: rem-calc(5) !default;
-// $h4-font-reduction: rem-calc(5) !default;
+ $h1-font-reduction: rem-calc(10) !default;
+ $h2-font-reduction: rem-calc(10) !default;
+ $h3-font-reduction: rem-calc(4) !default;
+ $h4-font-reduction: rem-calc(3) !default;
 // $h5-font-reduction: 0 !default;
 // $h6-font-reduction: 0 !default;
 
