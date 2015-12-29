@@ -242,7 +242,7 @@ $('.groupbuys-list').on('click', '.edit-title', function(){
     console.log("You wrote", inputValue);
     var new_title = inputValue;
     if(new_title.replace(/\s/g, '').length < 4) {
-      swlt('字数不能少于4！');
+      swal('字数不能少于4！');
       return;
     }
     $.ajax({
