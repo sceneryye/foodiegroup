@@ -1,33 +1,5 @@
 <% if params[:groupbuy_id]%>
-<div>
-	<%if current_user.user_addresses.size>0%>
-	<% if current_user.user_addresses.size == 1 %>
-	<% address = current_user.user_addresses.first %>
-	<% elsif current_user.user_addresses.where(default: 1).present?  %>
-	<% address = current_user.user_addresses.where(default: 1).first %>
-	<% else %>
-	<% address = current_user.user_addresses.last %>
-	<% end %>
-	<%= link_to user_addresses_path(groupbuy_id: params[:groupbuy_id]) do  %>
-	<div class="address-block">
-	<% if params[:from] != 'groupbuy_list' %>
-		<div class="address-title left"><%= t(:default_address) %></div>
-		<% end %>
-		<div class="default-address left">
-			<span class="name"><%= address.name %></span>
-			<span class="mobile"><%= address.mobile %></span>
-			<div class="address"><%= address.address %></div>
-		</div>
-		<div class="right-arrow right"><i class="fa fa-2x fa-angle-right"></i></div>
-		<div class="clear"></div>
-	</div>
-	<% end %>
-	<%else%>
-	<% @user_address = UserAddress.new%>
-	<%=render 'user_addresses/form' ,:locals=>{@user_address=>@user_address} %>
-	<%end%>
-	<hr />
-</div>
+	<%= render @user_addresses%>
 <%end%>
 <%= form_for form_params(@parent, @participant), data: {abide: ''} do |f| %>
 	<%= render 'layouts/form_errors', object: @participant %>
@@ -86,4 +58,4 @@
 		<%#= show_error_message('备注，请不要超过500字') %>
 	</div>
 	 <%= f.submit class:'tiny button radius right' %>
-	<% end %>
+<% end %>

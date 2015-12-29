@@ -22,9 +22,13 @@ class UserAddressesController < ApplicationController
         end
         @user_address.update(default: 1)
       end
-      if params[:groupbuy_id].present?
-        return redirect_to user_addresses_path(groupbuy_id: params[:groupbuy_id])
+      
+      return_url = session[:return_url]
+      if return_url
+        session[:return_url] = nil
+        return redirect_to return_url
       end
+
       redirect_to user_addresses_path, notice: '地址添加成功'
     else
       render :new
@@ -57,8 +61,10 @@ class UserAddressesController < ApplicationController
         @user_address.update(default: 1)
       end
 
-      if params[:groupbuy_id].present?
-        return redirect_to user_addresses_path(groupbuy_id: params[:groupbuy_id])
+      return_url = session[:return_url]
+      if return_url
+        session[:return_url] = nil
+        return redirect_to return_url
       end
       redirect_to user_addresses_path, notice: '地址修改成功'
     else
@@ -75,6 +81,10 @@ class UserAddressesController < ApplicationController
 end
 
 def index
+  if params[:groupbuy_id]
+    session[:return_url]= new_groupbuy_participant_path(params[:groupbuy_id])
+    params.delete(:groupbuy_id)
+  end
   @user_addresses = current_user.user_addresses
   @user_address = UserAddress.new
 end

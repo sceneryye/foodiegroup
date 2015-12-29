@@ -1,19 +1,23 @@
-
-
 <div class="address-content">
   <div class="left <%= user_address.default == 1 ? 'checked' : 'unchecked' %>">
     <i class="fa fa-check-circle"></i>
   </div>
   <div class="left address-detail" data-id="<%= user_address.id %>">
-    <div class="address"><%= user_address.address %></div>
     <div class="name-mobile">
-      <span class="name"><%= user_address.name %></span>
-      <span class="mobile"><%= user_address.mobile %></span>
-    </div>
+        <span class="name"><%= user_address.name %></span>
+        <span class="mobile"><%= user_address.mobile %></span>
+      </div>
+    <div class="address"><%= user_address.address %></div>    
   </div>
-  <%= link_to edit_user_address_path(user_address, groupbuy_id: params[:groupbuy_id]) do %>
-  <div class="right edit-address"><i class="fa fa-pencil"></i></div>
-  <% end %>
+  <%if params[:groupbuy_id].nil?%>
+    <%= link_to edit_user_address_path(user_address) do %>
+    <div class="right edit-address"><i class="fa fa-pencil"></i></div>
+    <% end %>
+  <%else%>
+       <%= link_to user_addresses_path(groupbuy_id: params[:groupbuy_id]) do %>
+    <div class="right edit-address"><i class="fa fa-pencil"></i></div>
+    <% end %>
+  <%end%>
   <div class="clear"></div>
 </div>
 <hr />
