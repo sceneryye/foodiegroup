@@ -71,7 +71,7 @@
           <%=render 'participants/form' ,:locals=>{@parent=>@parent,@participant=>@participant} if current_user %>
           <%= render @participants %>
         </div>
-        <div class="content show-comments" id="comments"  data-url='<%=groupbuy_comments_path(@groupbuy)%>'>
+        <div class="content" id="comments"  data-url='<%=groupbuy_comments_path(@groupbuy)%>'>
           <%=render 'comments/form' ,:locals=>{@parent=>@parent,@comment=>@comment} if current_user%>
           <%= render @comments %>
        </div>
