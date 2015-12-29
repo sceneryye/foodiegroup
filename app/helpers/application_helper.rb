@@ -115,15 +115,15 @@ end
   end 
 
   def owner_buttons_for_c(comment)
-    link_to('<i class="fa fa-pencil"></i>'.html_safe, edit_comment_path(comment)) + ' | ' +
-    link_to('<i class="fa fa-times"></i>'.html_safe, comment, method: :delete)
+    link_to('<span class="icons"><i class="fa fa-pencil"></i>'.html_safe + t(:edit) + '</span>'.html_safe, edit_comment_path(comment)) + ' | ' +
+    link_to('<span class="icons"><i class="fa fa-times"></i>'.html_safe + t(:delete) + '</span>'.html_safe, comment, method: :delete)
   end
 
   def owner_buttons_for_p(participant)
-    link_to('<i class="fa fa-pencil"></i>'.html_safe, edit_participant_path(participant)) + ' | ' +
-    link_to('<i class="fa fa-times"></i>'.html_safe, participant, method: :delete)  +
+    link_to('<span class="icons"><i class="fa fa-pencil"></i>'.html_safe + t(:edit) + '</span>'.html_safe, edit_participant_path(participant)) + ' | ' +
+    link_to('<span class="icons"><i class="fa fa-times"></i>'.html_safe + t(:delete) + '</span>'.html_safe, participant, method: :delete) +
     if participant.user_id == current_user.id && participant.status_pay == 0       
-       link_to(' | <i class="fa fa-jpy"></i>'.html_safe, wechat_pay_participant_path(participant))
+       link_to('|<span class="icons"><i class="fa fa-jpy"></i>'.html_safe  + t(:pay) + '</span>'.html_safe, wechat_pay_participant_path(participant))
     else
       ''  
     end

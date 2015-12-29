@@ -160,6 +160,9 @@ $light-slate-gray: #6D7B8D;
 
 .owner-buttons-for-p {
   padding-top: 8px;
-  padding-left: 10px;
-  font-size: 1.5em;
+  padding-left: 8px;
+  font-size: 1.1em;
+  .icons {
+    padding: 0 2px;
+  }
 }
