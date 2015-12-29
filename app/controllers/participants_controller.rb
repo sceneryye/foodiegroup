@@ -92,10 +92,10 @@ class ParticipantsController < ApplicationController
     participant = Participant.find(params[:id])
     if participant.event_id
       parent = participant.event
-      controller = 'event'
+      controller = 'events'
     else
       parent = participant.groupbuy
-      controller = 'groupbuy'
+      controller = 'groupbuys'
     end
 
     money = participant.amount  * parent.price.to_f
