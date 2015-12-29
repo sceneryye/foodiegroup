@@ -29,17 +29,19 @@
         </div>
     </div>
   </div>
-   <div class="columns small-12">
-    <div class="button-group expanded">
-      <a href="#" class="show-participants button tiny secondary" data-url="<%=groupbuy_participants_path(groupbuy)%>">
-          <i class="fa fa-user-plus"></i><%=t(:buys)%>(<%=groupbuy.participants_count%>)</a>
-      <a href="#" class="show-participants button tiny secondary"  data-url="<%=groupbuy_comments_path(groupbuy)%>">
-            <i class="fa fa-comments"></i><%=t(:comments)%>(<%=groupbuy.comments_count%>)
-      </a>
+  <div class="row">
+    <div class="columns small-12">
+      <ul class="button-group even-2">
+        <li>
+        <a href="#" class="show-participants button tiny secondary" data-url="<%=groupbuy_participants_path(groupbuy)%>">
+            <i class="fa fa-user-plus"></i><%=t(:buys)%>(<%=groupbuy.participants_count%>)</a>
+          </li>
+          <li>
+        <a href="#" class="show-participants button tiny secondary"  data-url="<%=groupbuy_comments_path(groupbuy)%>">
+              <i class="fa fa-comments"></i><%=t(:comments)%>(<%=groupbuy.comments_count%>)
+        </a>
+      </li>
+      </ul>
     </div>
   </div>
-
 </div>
-<hr />
-
-

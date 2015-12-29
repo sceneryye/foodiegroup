@@ -1,4 +1,4 @@
-<div class="comment">
+<div class="columns small-12 comment">
   <p> 
     <% if @parent
       if current_user == @parent.user && participant.status_pay != 1%>
@@ -7,7 +7,7 @@
       <%end
       end%>
     </p>
-    <div class="_form.html.erb">
+    <div>
       <%= participant_info(participant, @parent.price) %>
     </div>
   </div>

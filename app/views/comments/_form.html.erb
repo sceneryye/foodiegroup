@@ -1,11 +1,12 @@
+<div class="row"
+<div class="columns small-12">
 <%= form_for form_params(@parent, @comment), data: {abide: ''} do |f| %>
 <%= render 'layouts/form_errors', object: @comment %>
-<div>
  <%= show_error_message('内容不能为空,请不要超过1千字！') %>
  <%= f.text_area :body, class:'comment-area', required: true%>
  <%#= f.cktext_area :body, :class => 'someclass', :ckeditor => {:language => 'zh'} , required: true%>
-</div>
-<div class="right">
-<%= f.submit class:'tiny button radius' %>
-</div>
+
+<%= f.submit class:'tiny button radius right' %>
 <% end %>
+</div>
+</div>

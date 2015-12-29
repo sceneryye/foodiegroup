@@ -23,35 +23,31 @@
           <%=render '/layouts/top_bar'%>
           <!-- main content goes here -->
           <article>
-              <%= yield %>
-              <%= yield :content %>
-               <hr>
-          <div class="large-12 columns">
-            <footer id="footer">
-              <div class="row">
-                  <div class="columns small-12" style="line-height: 100%">
-                    <small> &copy; 2014 - <span id='copyright_year'></span>, <%=t(:site_name)%><br>                    
-                     技术支持: <a target="_blank" href="http://www.trade-v.com/" title="上海普慧信息科技有限公司">上海普慧信息科技有限公司</a></small>
-                     <script>
-                        var myDate = new Date();
-                        var currentYear = myDate.getFullYear(); 
-                        document.getElementById('copyright_year').innerText=currentYear;
-                    </script> 
-                  </div>
-              </div>
-            </footer>
-          </div>
+            <%= yield %>
+            <%= yield :content %>
+            <hr>
+            <div class="large-12 columns">
+              <footer id="footer">
+                <div class="row">
+                    <div class="columns small-12" style="line-height: 100%">
+                      <small> &copy; 2014 - <span id='copyright_year'></span>, <%=t(:site_name)%><br>                    
+                       技术支持: <a target="_blank" href="http://www.trade-v.com/" title="上海普慧信息科技有限公司">上海普慧信息科技有限公司</a></small>
+                       <script>
+                          var myDate = new Date();
+                          var currentYear = myDate.getFullYear(); 
+                          document.getElementById('copyright_year').innerText=currentYear;
+                      </script> 
+                    </div>
+                </div>
+              </footer>
+            </div>
           </article>
           <!-- close the off-canvas menu -->
           <a class="exit-off-canvas"></a>
-      
-
         </div>
       </div>
-    </div>  
-   
+    </div>     
     <%=render '/layouts/menu'%>  
-
    
     <%= javascript_include_tag "application" 'data-turbolinks-track' => true %>
     <%#= javascript_include_tag "application"%>
@@ -70,6 +66,7 @@
 
       $(".show-comments").on("click", function(event) {
         event.preventDefault();
+
         $(".comments").remove();
         $(".participants").remove();
         
@@ -78,12 +75,12 @@
 
         var obj = $(this).parent().parent();
 
-        if (url.indexOf("event")>0 || url.indexOf("groupbuy")>0){
-           obj = $(this).parent().parent();
-        }
+        // if (url.indexOf("event")>0 || url.indexOf("groupbuy")>0){
+        //    obj = $(this).parent().parent();
+        // }
         obj.append('<div class="comments panel radius">'+htmlobj.responseText+'</div>');
 
-       $(this).parent().append('<a href="#" class="close button tiny secondary"><i class="fa fa-close"></i><%=t(:close)%></a>');
+        obj.append('<a href="#" class="close button tiny secondary right"><i class="fa fa-close"></i><%=t(:close)%></a>');
         // $(".comments").stop().animate({
         //     scrollTop: $(".comments")[0].scrollHeight
         // }, 200);

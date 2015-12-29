@@ -8,7 +8,7 @@
 	        <label><%= t(:amount) %></label>
 	    </div>
         <div class="small-6 columns">
-          <%= f.number_field :amount, required: true, placeholder: t(:quantity)%>
+          	<%= f.number_field :amount, required: true, placeholder: t(:quantity)%>
         </div>
         <div class="small-3 columns">
           <span class="postfix">
@@ -19,25 +19,27 @@
           <%end%>
           </span>
         </div>
-      </div>
+    </div>
 	<hr />
     <% if params[:groupbuy_id]%>
 		<div class="row collapse">
-			    <div class="small-3 columns">
-			        <label><%= t(:deliverytime) %></label>
-			    </div>
-		        <div class="small-4 columns">
-		          <select name="date" id="">
+		    <div class="small-3 columns">
+		        <label><%= t(:deliverytime) %></label>
+		    </div>
+	        <div class="small-4 columns">
+	          	<select name="date" id="">
 					<option value="<%= t(:weekday) %>"><%= t(:weekday) %></option>
 					<option value="<%= t(:weekend) %>"><%= t(:weekend) %></option>
-					<option value="<%= t(:anyday) %>" selected="selected"><%= t(:anyday) %></option></select>
-				</div> 
-		        <div class="small-4 columns">
-		          <select name="time" id="">
-						<option value="<%= t(:morning) %>"><%= t(:morning) %></option>
-						<option value="<%= t(:afternoon) %>"><%= t(:afternoon) %></option>
-						<option value="<%= t(:anytime) %>" selected="selected"><%= t(:anytime) %></option></select>
-				</div>
+					<option value="<%= t(:anyday) %>" selected="selected"><%= t(:anyday) %></option>
+				</select>
+			</div> 
+	        <div class="small-4 columns">
+	          	<select name="time" id="">
+					<option value="<%= t(:morning) %>"><%= t(:morning) %></option>
+					<option value="<%= t(:afternoon) %>"><%= t(:afternoon) %></option>
+					<option value="<%= t(:anytime) %>" selected="selected"><%= t(:anytime) %></option>
+				</select>
+			</div>
 		</div>
 	<%else%>
 		<div class="small-12 columns">
@@ -49,9 +51,14 @@
 		  <%#= show_error_message('请输入您的手机号码.') %>
 		</div>
 	<%end%>
-	<div class="small-12 columns">
-		<%= f.text_area :remark, class:'comment-area',placeholder: t(:remark)%>
-		<%#= show_error_message('备注，请不要超过500字') %>
+	<div class="row collapse">
+		<div class="small-12 columns">
+			<%= f.text_area :remark, class:'comment-area',placeholder: t(:remark)%>
+			<%#= show_error_message('备注，请不要超过500字') %>
+		</div>
+		<div class="small-12 columns">
+		 	<%= f.submit class:'tiny button radius right' %>
+		</div>
 	</div>
-	 <%= f.submit class:'tiny button radius right' %>
+
 <% end %>

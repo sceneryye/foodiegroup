@@ -38,11 +38,11 @@
       <%= event_info(@event) %>
     </div>
     <div>
-       <%= link_to t(:comment), new_event_comment_path(@event),
+     <!--   <%= link_to t(:comment), new_event_comment_path(@event),
                               class:"tiny button radius" if signed_in? %>
        <%= link_to t(:rsvp), new_event_participant_path(@event),
                               class:"tiny button radius" if signed_in? %>
-      
+       -->
 
       <% if current_user == @event.user %>
 
@@ -53,15 +53,14 @@
       <% end %>
      </div>
 
-     <div class="comments">
        <ul class="tabs" data-tab role="tablist">
-        <li class="tab-title active"><a href="/events/<%= params[:id] %>/participants/new"><i class="fa fa-user-plus"></i><%=t(:goings)%> (<%=@event.participants_count%>)</a></li>
+        <li class="tab-title active"><a href="#participants"><i class="fa fa-user-plus"></i><%=t(:goings)%> (<%=@event.participants_count%>)</a></li>
         <li class="tab-title"><a href="#comments"><i class="fa fa-comments"></i><%=t(:comments)%> (<%=@event.comments_count%>)</a></li>
       </ul>
 
       <div class="tabs-content panel">
         <div class="content active" id="participants">
-          <%=render 'participant/form' ,:locals=>{@parent=>@parent,@participant=>@participant} %>
+          <%=render 'participants/form' ,:locals=>{@parent=>@parent,@participant=>@participant} %>
           <%= render @participants %>
         </div>
         <div class="content" id="comments">
@@ -69,7 +68,6 @@
           <%= render @comments %>
        </div>
      </div>
-   </div>
 
 
  </div>

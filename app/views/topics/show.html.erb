@@ -15,10 +15,10 @@
 </div>
 <div class="comments">
 <h2><i class="fa fa-comment"></i> (<%= @topic.comments_count %>)</h2><hr>
-  <%=render 'comments/form' ,:locals=>{@parent=>@parent,@comment=>@comment} %>
+  <%=render 'comments/form' ,:locals=>{@parent=>@topic,@comment=>@comment} if signed_in? %>
   <%= render @comments %>
 </div>
 <div>
-  <%= link_to t(:new_comment), new_topic_comment_path(@topic),
-                              class:"tiny button radius" if signed_in? %>
+ <!--  <%= link_to t(:new_comment), new_topic_comment_path(@topic),
+                              class:"tiny button radius" if signed_in? %> -->
 </div>

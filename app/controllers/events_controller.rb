@@ -7,13 +7,11 @@ class EventsController < ApplicationController
   end
 
   def show
-    @parent =@event  = Event.find(params[:id])
+    @parent = @event  = Event.find(params[:id])
     @participant = @parent.participants.new
     @comment = @parent.comments.new
     @participants = @event.participants.includes(:user)
     @comments = @event.comments.includes(:user)
-
-   #@amount = Foodie::Participant.where
 
    if signed_in? 
      @plus_menu = [{name: '<i class="fa  fa-comment"></i>'.html_safe+' '+t(:new_comment), path: new_event_comment_path(@event)},

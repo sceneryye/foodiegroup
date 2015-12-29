@@ -20,7 +20,7 @@ class ParticipantsController < ApplicationController
 
     @user_addresses = current_user.user_addresses
     if  @user_addresses.size == 0
-      return redirect_to new_user_address_path(groupbuy_id: params[:groupbuy_id], from: 'new_participant')
+      redirect_to new_user_address_path(groupbuy_id: params[:groupbuy_id], from: 'new_participant')
     elsif  @user_addresses.where(default: 1).present?
       @user_addresses =  @user_addresses.where(default: 1)
     else
