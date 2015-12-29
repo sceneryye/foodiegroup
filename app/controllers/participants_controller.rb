@@ -112,7 +112,7 @@ class ParticipantsController < ApplicationController
       event_id: event_id,
       participant_id: participant.id,
       user_id: participant.user_id,
-      event_name: event_name
+      event_name: event_name,
       controller: controller
     }
     return redirect_to "http://www.trade-v.com/foodies/foodie_pay?#{data.to_query}"
