@@ -59,6 +59,10 @@ RailsOnForum::Application.routes.draw do
 
   resources :comments, only: [:edit, :update, :destroy]
 
+  resources :participants, only: [:edit, :update, :destroy] do    
+    post 'wechat_pay', on: :member
+  end
+
   resources :users,   only: [:create, :update, :destroy] do
      resources :user_instetests
   end

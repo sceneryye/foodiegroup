@@ -50,7 +50,7 @@ def comment_info(comment)
   end
   info << info_for(comment.user)   unless params[:controller] == 'users'
   info << time_for(comment)
-  info << owner_buttons_for(comment) if current_user == comment.user
+  info << owner_buttons_for_c(comment) if current_user == comment.user
   info << '</small>'    
   info << vote_for(comment)
   info.join.html_safe
@@ -61,10 +61,12 @@ def participant_info(participant)
   info = ["<small class='details'>"]
   info << link_to( is_paid(participant), '#', class: 'badge')   
   info << info_for(participant.user)
-  info << ' | ' + participant.goods_amount.to_s + Groupbuy.find(participant.groupbuy_id).goods_unit
-
-  #info << '参加人数' + participant.people_amount.to_s
-  #info << owner_buttons_for(participant) if current_user == participant.user
+  if participant.groupbuy_id
+    info << ' | ' + participant.goods_amount.to_s + Groupbuy.find(participant.groupbuy_id).goods_unit
+  else
+    info << t(:people) +' '+ participant.people_amount.to_s
+  end
+  info << owner_buttons_for_p(participant) if current_user == participant.user
   info << time_for(participant)<< '</small>' 
   info.join.html_safe
 end
@@ -105,14 +107,19 @@ def time_for(object)
   ' ' + time_ago_in_words(object.created_at) + ' '+t(:before)+' '
 end
 
-def vote_for(object)
+  def vote_for(object)
   ' '
     # '<a href="#"><i class="fa fa-thumbs-o-up"></i>2</a> <a href="#" style="margin-left:50px"><i class="fa fa-thumbs-o-down"></i>3</a>'
   end 
 
-  def owner_buttons_for(comment)
+  def owner_buttons_for_c(comment)
     link_to('<i class="fa fa-pencil"></i>'.html_safe, edit_comment_path(comment)) + ' | ' +
     link_to('<i class="fa fa-times"></i>'.html_safe, comment, method: :delete)
+  end
+
+  def owner_buttons_for_p(participant)
+    link_to('<i class="fa fa-pencil"></i>'.html_safe, edit_participant_path(participant)) + ' | ' +
+    link_to('<i class="fa fa-times"></i>'.html_safe, participant, method: :delete)
   end
 
   def markdown(text, options= {links: true})

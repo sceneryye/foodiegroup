@@ -1,10 +1,13 @@
 #encoding:utf-8
 class CommentsController < ApplicationController
   before_action :validate_user!
+
   before_action only: [:edit, :update, :destroy] do
     validate_permission!(select_comment.user)
   end
+  
   before_action :select_comment, only: [:edit, :update, :destroy]
+
   before_action only: [:new, :create,:index] {
     if params[:topic_id]
       @parent = Topic.find(params[:topic_id])

@@ -9,11 +9,8 @@ class CreateEvents < ActiveRecord::Migration
       t.datetime :end_time,      null: false
       t.references :user,  index: true
       t.integer :limited_people, default: 0
-      t.string :goods_unit, limit: 45      
-      t.decimal :price, precision:10, scale:2, default: 0.00
+      t.decimal :price, precision:10, scale:2
       t.column :pay_type, "ENUM('online','offline')"
-      t.decimal :goods_small_than, precision:20, scale:2, default:0.00
-      t.decimal :goods_big_than, precision:20, scale:2, default:0.00
       t.string :name, limit: 45
       t.string :mobile, limit: 45       
       t.integer :comments_count, default: 0

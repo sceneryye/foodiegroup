@@ -1,3 +1,4 @@
+<% if params[:groupbuy_id]%>
 <div>
 	<%if current_user.user_addresses.size>0%>
 	<% if current_user.user_addresses.size == 1 %>
@@ -27,7 +28,7 @@
 	<%end%>
 	<hr />
 </div>
-
+<%end%>
 <%= form_for form_params(@parent, @participant), data: {abide: ''} do |f| %>
 	<%= render 'layouts/form_errors', object: @participant %>
     <div class="row collapse">
@@ -38,31 +39,47 @@
           <%= f.number_field :goods_amount, required: true, placeholder: t(:quantity)%>
         </div>
         <div class="small-3 columns">
-          <span class="postfix"><%=@parent.goods_unit%></span>
+          <span class="postfix">
+          <% if params[:groupbuy_id]%>
+          	<%=@parent.goods_unit%>
+          <%else%>
+          	<%=t(:people)%>
+          <%end%>
+          </span>
         </div>
       </div>
     </div>
-<hr />
- <div class="row collapse">
-	    <div class="small-3 columns">
-	        <label><%= t(:deliverytime) %></label>
-	    </div>
-        <div class="small-4 columns">
-          <select name="date" id="">
-			<option value="<%= t(:weekday) %>"><%= t(:weekday) %></option>
-			<option value="<%= t(:weekend) %>"><%= t(:weekend) %></option>
-			<option value="<%= t(:anyday) %>" selected="selected"><%= t(:anyday) %></option></select>
-		</div> 
-        <div class="small-4 columns">
-          <select name="time" id="">
-				<option value="<%= t(:morning) %>"><%= t(:morning) %></option>
-				<option value="<%= t(:afternoon) %>"><%= t(:afternoon) %></option>
-				<option value="<%= t(:anytime) %>" selected="selected"><%= t(:anytime) %></option></select>
-			</div>
-        </div>
-      </div>
-    </div>
-
+	<hr />
+    <% if params[:groupbuy_id]%>
+		<div class="row collapse">
+			    <div class="small-3 columns">
+			        <label><%= t(:deliverytime) %></label>
+			    </div>
+		        <div class="small-4 columns">
+		          <select name="date" id="">
+					<option value="<%= t(:weekday) %>"><%= t(:weekday) %></option>
+					<option value="<%= t(:weekend) %>"><%= t(:weekend) %></option>
+					<option value="<%= t(:anyday) %>" selected="selected"><%= t(:anyday) %></option></select>
+				</div> 
+		        <div class="small-4 columns">
+		          <select name="time" id="">
+						<option value="<%= t(:morning) %>"><%= t(:morning) %></option>
+						<option value="<%= t(:afternoon) %>"><%= t(:afternoon) %></option>
+						<option value="<%= t(:anytime) %>" selected="selected"><%= t(:anytime) %></option></select>
+					</div>
+		        </div>
+		      </div>
+		</div>
+	<%else%>
+		<div class="small-12 columns">
+		  <%= f.text_field :name, required: true, placeholder: '登录名',value: current_user.name%>
+		  <%#= show_error_message('请输入您的登录名') %>
+		</div>
+		<div class="small-12 columns">
+		  <%= f.text_field :mobile, required: true, placeholder: '手机',value: current_user.mobile %>
+		  <%#= show_error_message('请输入您的手机号码.') %>
+		</div>
+	<%end%>
 
 	<div>
 		<%= f.text_area :remark, class:'comment-area',placeholder: t(:remark)%>

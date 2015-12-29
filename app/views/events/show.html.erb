@@ -25,7 +25,7 @@
         </tr>
         <tr>
           <th><%=t(:price)%></th>
-          <td>￥<%=@event.price%>/<%=@event.goods_unit%></td>
+          <td>￥<%=@event.price%></td>
         </tr>
         <tr>
           <td colspan='2'><%= @event.body.html_safe  %></td>
@@ -33,7 +33,6 @@
       </table>
       <!-- <p><%=@event.event_type%></p> -->
       <!-- <p><%=@event.limited_people%>人</p> -->
-      <!-- <p><%=@event.goods_small_than%><%=@event.goods_unit%></p> -->
       <!-- <p>联系人：<%=@event.name%></p>
       <p>电话：<%=@event.mobile%></p><hr> -->
       <%= event_info(@event) %>

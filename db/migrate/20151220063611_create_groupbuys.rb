@@ -10,10 +10,10 @@ class CreateGroupbuys < ActiveRecord::Migration
       t.references :user,  index: true
       t.integer :recommend, default: 0
       t.string :goods_unit, limit: 45      
-      t.decimal :price, precision:10, scale:2, default: 0.00
+      t.decimal :price, precision:10, scale:2, null: false
       t.column :pay_type, "ENUM('online','offline')"
-      t.decimal :goods_minimal, precision:20, scale:2, default:0.00
-      t.decimal :goods_maximal, precision:20, scale:2, default:0.00
+      t.decimal :goods_minimal, precision:20, scale:2
+      t.decimal :goods_maximal, precision:20, scale:2
       t.string :name, limit: 45
       t.string :mobile, limit: 45       
       t.integer :comments_count, default: 0

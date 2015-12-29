@@ -12,19 +12,14 @@
     </div>
     <div class="pay-left pay">
       <%if signed_in?%>
-      <% if participant.user_id == current_user.id && participant.status_pay == 0 %>
-      <% if controller_name == 'groupbuys' %>
-      <% path_name = wechat_pay_groupbuy_participant_path(@parent.try(:id), participant.try(:id))  %>
-      <% elsif controller_name == 'events' %>
-      <% path_name = wechat_pay_event_participant_path(@parent.try(:id), participant.try(:id))  %>
-      <% end %>
-      <%= form_tag path_name do %>
-        <%= hidden_field_tag :openid, current_user.weixin_openid %>
-        <%= hidden_field_tag :money, @parent.price * participant.goods_amount %>
-        <%= submit_tag t(:pay), class: "button tiny" %>
-      <% end %>
-      
-      <%end%>
+        <% if participant.user_id == current_user.id && participant.status_pay == 0 %>
+          <%= form_tag  wechat_pay_participant_path(@parent.id, participant.id) do %>
+            <%= hidden_field_tag :openid, current_user.weixin_openid %>
+            <%= hidden_field_tag :money, @parent.price * participant.goods_amount %>
+            <%= submit_tag t(:pay), class: "button tiny" %>
+          <% end %>
+        
+        <%end%>
 
       <% end %>
     </div>

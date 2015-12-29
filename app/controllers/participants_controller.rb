@@ -2,11 +2,15 @@
 class ParticipantsController < ApplicationController
 
   skip_before_action :verify_authenticity_token, only: :wechat_notify_url
+  
   before_action :validate_user!, except: :wechat_notify_url
+
   before_action only: [:edit, :update, :destroy] do
     validate_permission!(select_participant.user)
   end
+
   before_action :select_participant, only: [:edit, :update, :destroy]
+
   before_action only: [:new, :create,:index] {
     if params[:groupbuy_id]
       @parent = Groupbuy.find(params[:groupbuy_id])
@@ -44,21 +48,21 @@ class ParticipantsController < ApplicationController
     end
   end
 
+  def create   
 
-  def create
+    if !params[:groupbuy_id].nil?     
+      if current_user.user_addresses.size>0
+        address = current_user.user_addresses.first
+        params[:participant].merge!(:name=>address.name,:address=>address.address,:mobile=>address.mobile) 
+      end
 
-    # is_enrolled = @event.participants.where(:user_id => current_user.id).size
-    # if  is_enrolled ==0
-    if current_user.user_addresses.size>0
-      address = current_user.user_addresses.first
-      params[:participant].merge!(:name=>address.name,:address=>address.address,:mobile=>address.mobile)
-    
+      Rails.logger.info "#################{address}"
+      delivery_time = params[:date] + '-' + params[:time]
+      params[:participant].merge!(:delivery_time => delivery_time)
     end
 
-    Rails.logger.info "#################{address}"
-    delivery_time = params[:date] + '-' + params[:time]
     @participant = @parent.participants.new(participant_params)
-    @participant.delivery_time = delivery_time
+    
     @participant.user = current_user
 
     if @participant.save
@@ -127,30 +131,30 @@ class ParticipantsController < ApplicationController
 
   def edit() end
 
-    def update
-      if @participant.update(participant_params)
-        notice =  '报名修改成功'
-        if params[:groupbuy_id]
-          redirect_to groupbuy_url(@participant.groupbuy), notice: notice
-        else
-          redirect_to event_url(@participant.event), notice: notice
-        end
-      else
-        render :edit
-      end
-    end
-
-    def destroy
-      @participant.destroy
-      notice =  '取消报名成功'
+  def update
+    if @participant.update(participant_params)
+      notice =  '报名修改成功'
       if params[:groupbuy_id]
         redirect_to groupbuy_url(@participant.groupbuy), notice: notice
       else
         redirect_to event_url(@participant.event), notice: notice
       end
+    else
+      render :edit
     end
+  end
 
-    private
+  def destroy
+    @participant.destroy
+    notice =  '取消报名成功'
+    if params[:groupbuy_id]
+      redirect_to groupbuy_url(@participant.groupbuy), notice: notice
+    else
+      redirect_to event_url(@participant.event), notice: notice
+    end
+  end
+
+  private
 
     def select_participant
       @participant = Participant.find(params[:id])
@@ -159,4 +163,4 @@ class ParticipantsController < ApplicationController
     def participant_params
       params.require(:participant).permit(:name,:mobile,:people_amount,:goods_amount,:address, :remark)
     end
-  end
+end
