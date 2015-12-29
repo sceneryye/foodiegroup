@@ -12,7 +12,7 @@
         </div>
         <div class="small-3 columns">
           <span class="postfix">
-          <% if params[:groupbuy_id]%>
+          <% if params[:groupbuy_id] || controller_name=='groupbuys'%>
           	<%=@parent.goods_unit%>
           <%else%>
           	<%=t(:people)%>
@@ -43,11 +43,11 @@
 		</div>
 	<%else%>
 		<div class="small-12 columns">
-		  <%= f.text_field :name, required: true, placeholder: '登录名',value: current_user.name%>
+		  <%= f.text_field :name, required: true, placeholder: t(:name),value: current_user.name%>
 		  <%#= show_error_message('请输入您的登录名') %>
 		</div>
 		<div class="small-12 columns">
-		  <%= f.text_field :mobile, required: true, placeholder: '手机',value: current_user.mobile %>
+		  <%= f.text_field :mobile, required: true, placeholder: t(:mobile),value: current_user.mobile %>
 		  <%#= show_error_message('请输入您的手机号码.') %>
 		</div>
 	<%end%>
