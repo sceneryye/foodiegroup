@@ -236,13 +236,16 @@ $('.groupbuys-list').on('click', '.edit-title', function(){
     text: '请输入你想要修改的标题',
     type: 'input',
     showCancelButton: true,
-    closeOnConfirm: true,
+    closeOnConfirm: false,
+    closeOnCancel: true,
     animation: "slide-from-top"
   }, function(inputValue){
+    if (inputValue === false) return false;
     console.log("You wrote", inputValue);
     var new_title = inputValue;
     if(new_title.replace(/\s/g, '').length < 4) {
-      swal('字数不能少于4！');
+      swal.showInputError('字数不能少于4！');
+      return false;
       return;
     }
     $.ajax({
