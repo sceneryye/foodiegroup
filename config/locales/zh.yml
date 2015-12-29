@@ -256,8 +256,7 @@ zh:
         body: 活动详情
         price: 单价
       participant:
-        people_amount:  参加人数
-        goods_amount: 预定商品数量
+        amount: 数量
         name: 收货人
         mobile: 联系电话
         address:  收货地址
@@ -376,7 +375,7 @@ zh:
   set_default: 设为默认
   market_price: 市场价
   save: 省
-  goods_amount: 商品数量
+  amount: 数量
   please_choose_groupbuy_duration: 请选择团购期限
   home: 首页
   count_down: 倒计时

@@ -145,9 +145,8 @@ ActiveRecord::Schema.define(version: 2015122006472224) do
     t.string   "mobile",        limit: 45,                                          null: false
     t.string   "address",       limit: 255
     t.integer  "event_id",      limit: 4
-    t.integer  "status",        limit: 4,                             default: 0
-    t.integer  "people_amount", limit: 4,                             default: 1
-    t.decimal  "goods_amount",               precision: 10, scale: 2, default: 0.0
+    t.integer  "status",        limit: 4,                             default: 0    
+    t.decimal  "amount",               precision: 10, scale: 2
     t.string   "remark",        limit: 1000
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -11,7 +11,7 @@ class EventsController < ApplicationController
     @participants = @event.participants.includes(:user)
     @comments = @event.comments.includes(:user)
 
-   #@goods_amount = Foodie::Participant.where
+   #@amount = Foodie::Participant.where
 
    if signed_in? 
      @plus_menu = [{name: '<i class="fa  fa-comment"></i>'.html_safe+' '+t(:new_comment), path: new_event_comment_path(@event)},

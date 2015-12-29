@@ -62,9 +62,9 @@ def participant_info(participant)
   info << link_to( is_paid(participant), '#', class: 'badge')   
   info << info_for(participant.user)
   if participant.groupbuy_id
-    info << ' | ' + participant.goods_amount.to_s + Groupbuy.find(participant.groupbuy_id).goods_unit
+    info << ' | ' + participant.amount.to_s + Groupbuy.find(participant.groupbuy_id).goods_unit
   else
-    info << t(:people) +' '+ participant.people_amount.to_s
+    info << t(:people) +' '+ participant.amount.to_s
   end
   info << owner_buttons_for_p(participant) if current_user == participant.user
   info << time_for(participant)<< '</small>' 
@@ -119,7 +119,12 @@ end
 
   def owner_buttons_for_p(participant)
     link_to('<i class="fa fa-pencil"></i>'.html_safe, edit_participant_path(participant)) + ' | ' +
-    link_to('<i class="fa fa-times"></i>'.html_safe, participant, method: :delete)
+    link_to('<i class="fa fa-times"></i>'.html_safe, participant, method: :delete)  +
+    if participant.user_id == current_user.id && participant.status_pay == 0       
+       link_to(' | ￥'.html_safe, wechat_pay_participant_path(participant))
+    else
+      ''  
+    end
   end
 
   def markdown(text, options= {links: true})

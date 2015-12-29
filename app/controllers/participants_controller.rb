@@ -5,7 +5,7 @@ class ParticipantsController < ApplicationController
   
   before_action :validate_user!, except: :wechat_notify_url
 
-  before_action only: [:edit, :update, :destroy] do
+  before_action only: [:edit, :update, :destroy,:wechat_pay] do
     validate_permission!(select_participant.user)
   end
 
@@ -81,16 +81,20 @@ class ParticipantsController < ApplicationController
   end
 
   def wechat_pay
-    money = params[:money].to_f
-    from = 'foodiegroup'
-    openid = params[:openid]
-    event_id = params[:event_id] || params[:groupbuy_id]
-    if params[:event_id]
-      event_name = Event.find(event_id).title
-    elsif params[:groupbuy_id]
-      event_name = Groupbuy.find(event_id).title
+    
+    participant = Participant.find(params[:id])
+    if participant.event_id
+      parent = participant.event
+    else
+      parent = participant.groupbuy
     end
-    participant_id = params[:id]
+
+    money = participant.amount  * participant.parent.price.to_f
+    from = 'foodiegroup'
+    openid = current_user.weixin_openid
+    event_id = parent.id
+    event_name = parent.title
+   
     Rails.logger.info money
     data = {
       money: money,
@@ -161,6 +165,6 @@ class ParticipantsController < ApplicationController
     end
 
     def participant_params
-      params.require(:participant).permit(:name,:mobile,:people_amount,:goods_amount,:address, :remark)
+      params.require(:participant).permit(:name,:mobile,:amount,:amount,:address, :remark)
     end
 end

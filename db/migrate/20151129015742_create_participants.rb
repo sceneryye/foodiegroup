@@ -8,8 +8,7 @@ class CreateParticipants < ActiveRecord::Migration
       t.string :address
       t.references :event,  index: true
       t.integer :status, default: 0
-      t.integer :people_amount
-      t.decimal :goods_amount, precision:10, scale:2
+      t.decimal :amount, precision:10, scale:2
       t.string :remark, limit: 1000
       t.integer :status_pay, default:0
 

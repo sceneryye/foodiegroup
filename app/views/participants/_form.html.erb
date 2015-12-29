@@ -33,10 +33,10 @@
 	<%= render 'layouts/form_errors', object: @participant %>
     <div class="row collapse">
 	    <div class="small-3 columns">
-	        <label><%= t(:goods_amount) %></label>
+	        <label><%= t(:amount) %></label>
 	    </div>
         <div class="small-6 columns">
-          <%= f.number_field :goods_amount, required: true, placeholder: t(:quantity)%>
+          <%= f.number_field :amount, required: true, placeholder: t(:quantity)%>
         </div>
         <div class="small-3 columns">
           <span class="postfix">
