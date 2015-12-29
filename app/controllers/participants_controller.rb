@@ -9,9 +9,9 @@ class ParticipantsController < ApplicationController
     validate_permission!(select_participant.user)
   end
 
-  before_action :select_participant, only: [:edit, :update, :destroy]
+  before_action :select_participant, only: [:edit, :update, :destroy, :confirm_paid,:confirm_shiped,:wechat_pay]
 
-  before_action only: [:new, :create,:index] {
+  before_action only: [:new, :create,:index] do
     if params[:groupbuy_id]
       @parent = Groupbuy.find(params[:groupbuy_id])
     elsif params[:event_id]
@@ -26,11 +26,10 @@ class ParticipantsController < ApplicationController
     else
       @user_addresses =  @user_addresses.first
     end
-  }
+  end
 
   def new
-    @participant = @parent.participants.new
-   
+    @participant = @parent.participants.new   
   end
 
   def index
@@ -40,17 +39,25 @@ class ParticipantsController < ApplicationController
   end
 
   def confirm_paid
-    @participant = Participant.find(params[:id])
-    if current_user == @participant.groupbuy.user #只能由活动发起人修改支付状态
+    @participant.groupbuy
+    if @participant.groupbuy_id
+      owner = @participant.groupbuy.user
+      return_url = groupbuy_url(@participant.groupbuy)
+    else
+      owner = @participant.event.user
+      return_url = event_url(@participant.event)
+    end
+
+    if current_user == owner #只能由活动发起人修改支付状态
       @participant.update(:status_pay=>1)
     end
-    redirect_to groupbuy_url(@participant.groupbuy), notice: '确认付款'
+
+    redirect_to return_url, notice: '确认付款'
   end
 
   def confirm_shiped
-    participant = Participant.find(params[:id])
     if is_admin?
-      participant.update(status_ship: 1)
+      @participant.update(status_ship: 1)
       return render :text => 'success'
     end
   end
@@ -89,16 +96,15 @@ class ParticipantsController < ApplicationController
 
   def wechat_pay
     
-    participant = Participant.find(params[:id])
-    if participant.event_id
-      parent = participant.event
+    if @participant.event_id
+      parent = @participant.event
       type_name = 'events'
     else
-      parent = participant.groupbuy
+      parent = @participant.groupbuy
       type_name = 'groupbuys'
     end
 
-    money = participant.amount  * parent.price.to_f
+    money = @participant.amount  * parent.price.to_f
     from = 'foodiegroup'
     openid = current_user.weixin_openid
     event_id = parent.id
@@ -110,8 +116,8 @@ class ParticipantsController < ApplicationController
       from: from,
       openid: openid,
       event_id: event_id,
-      participant_id: participant.id,
-      user_id: participant.user_id,
+      participant_id: @participant.id,
+      user_id: @participant.user_id,
       event_name: event_name,
       type_name: type_name
     }

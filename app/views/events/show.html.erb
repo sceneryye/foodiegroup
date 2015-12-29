@@ -60,11 +60,11 @@
 
       <div class="tabs-content panel">
         <div class="content active" id="participants">
-          <%=render 'participants/form' ,:locals=>{@parent=>@parent,@participant=>@participant} %>
+          <%=render 'participants/form' ,:locals=>{@parent=>@parent,@participant=>@participant} if current_user%>
           <%= render @participants %>
         </div>
         <div class="content" id="comments">
-          <%=render 'comments/form' ,:locals=>{@parent=>@parent,@comment=>@comment} %>
+          <%=render 'comments/form' ,:locals=>{@parent=>@parent,@comment=>@comment} if current_user%>
           <%= render @comments %>
        </div>
      </div>

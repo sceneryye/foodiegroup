@@ -1,11 +1,9 @@
 <div class="columns small-12 comment">
   <p> 
-    <% if @parent
-      if current_user == @parent.user && participant.status_pay != 1%>
-      <%= link_to "确认支付", confirm_paid_groupbuy_participant_path(participant.groupbuy_id,participant.id), class:"tiny button radius alert" %>
+    <%if current_user == @parent.user && participant.status_pay != 1%>
+      <%= link_to "确认支付", confirm_paid_participant_path(participant.id), class:"tiny button radius alert" %>
       <small><%=participant.mobile%>||<%=participant.address%></small>
-      <%end
-      end%>
+      <%end%>
     </p>
     <div>
       <%= participant_info(participant, @parent.price) %>
