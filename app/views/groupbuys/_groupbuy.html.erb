@@ -1,4 +1,4 @@
-<div class="groupbuy-list" data-endtime="<%= groupbuy.end_time.to_i %>">
+<div class="groupbuy-list" data-endtime="<%= groupbuy.end_time.to_i %>" data-day="<%= t(:day) %>">
   <div class="row">
     <div class="columns small-4">
       <%= link_to groupbuy,class: "th" do %>
@@ -22,7 +22,7 @@
 
         <div class="countdown">
           <span class="countdonw-title"></span>
-          <span class="countdown-day"></span><%= t(:day) %>
+          <span class="countdown-day"></span>
           <span class="countdown-hour"></span>
           <span class="countdown-minute"></span>
           <span class="countdown-second"></span>

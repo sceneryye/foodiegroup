@@ -6,6 +6,7 @@
 
 $('.groupbuy-list').each(function(){
   var endTime = $(this).data('endtime');
+  var day = $(this).data('day');
   var that = $(this);
   window.setInterval(function(){
     var EndTime= endTime;
@@ -23,7 +24,7 @@ $('.groupbuy-list').each(function(){
     var m=Math.floor(t/1000/60%60);
     var s=Math.floor(t/1000%60);
 
-    that.find('.countdown-day').text(d);
+    that.find('.countdown-day').text(d + day);
     that.find('.countdown-hour').text(h + ':');
     that.find('.countdown-minute').text(m + ':');
     that.find('.countdown-second').text(s);
