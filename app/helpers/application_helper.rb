@@ -50,7 +50,7 @@ def comment_info(comment)
   end
   info << info_for(comment.user)   unless params[:controller] == 'users'
   info << time_for(comment)
-  info << owner_buttons_for_c(comment) if current_user == comment.user
+  info << "<div class='owner-buttons-for-c'>" << owner_buttons_for_c(comment) << "</div>" if current_user == comment.user
   info << '</small>'    
   info << vote_for(comment)
   info.join.html_safe
@@ -61,13 +61,15 @@ def participant_info(participant)
   info = ["<small class='details'>"]
   info << link_to( is_paid(participant), '#', class: 'badge')   
   info << info_for(participant.user)
+  info << time_for(participant)
   if participant.groupbuy_id
     info << ' | ' + participant.amount.to_s + Groupbuy.find(participant.groupbuy_id).goods_unit
   else
     info << t(:people) +' '+ participant.amount.to_s
   end
-  info << owner_buttons_for_p(participant) if current_user == participant.user
-  info << time_for(participant)<< '</small>' 
+  info << "<div class='owner-buttons-for-p'>" << owner_buttons_for_p(participant) << "</div>" if current_user == participant.user
+  info << '</small>'
+   
   info.join.html_safe
 end
 
@@ -121,7 +123,7 @@ end
     link_to('<i class="fa fa-pencil"></i>'.html_safe, edit_participant_path(participant)) + ' | ' +
     link_to('<i class="fa fa-times"></i>'.html_safe, participant, method: :delete)  +
     if participant.user_id == current_user.id && participant.status_pay == 0       
-       link_to(' | ￥'.html_safe, wechat_pay_participant_path(participant))
+       link_to(' | <i class="fa fa-jpy"></i>'.html_safe, wechat_pay_participant_path(participant))
     else
       ''  
     end
