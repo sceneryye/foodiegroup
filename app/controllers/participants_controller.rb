@@ -89,7 +89,7 @@ class ParticipantsController < ApplicationController
       parent = participant.groupbuy
     end
 
-    money = participant.amount  * participant.parent.price.to_f
+    money = participant.amount  * parent.price.to_f
     from = 'foodiegroup'
     openid = current_user.weixin_openid
     event_id = parent.id
@@ -101,8 +101,8 @@ class ParticipantsController < ApplicationController
       from: from,
       openid: openid,
       event_id: event_id,
-      participant_id: participant_id,
-      user_id: Participant.find(params[:id]).user_id,
+      participant_id: participant.id,
+      user_id: participant.user_id,
       event_name: event_name
     }
     return redirect_to "http://www.trade-v.com/foodies/foodie_pay?#{data.to_query}"
