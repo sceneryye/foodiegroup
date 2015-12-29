@@ -51,6 +51,9 @@ class UsersController < ApplicationController
     when 'event'
       @user = User.includes(:events).find_by_username(params[:id])
       @data = @user.events
+    when 'groupbuy'
+      @user = User.includes(:groupbuys).find_by_username(params[:id])
+      @data = @user.groupbuys
     when 'participant'
       @user = User.includes(:participants).find_by_username(params[:id])
       @data = @user.participants.includes(:event)

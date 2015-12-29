@@ -1,13 +1,18 @@
 <div class="row small-collapse">
 <div class="columns small-12 comment">
   <p> 
-    <%if current_user == @parent.user && participant.status_pay != 1%>
+    <%if @parent && current_user == @parent.user && participant.status_pay != 1%>
       <%= link_to "确认支付", confirm_paid_participant_path(participant.id), class:"tiny button radius alert" %>
       <small><%=participant.mobile%>||<%=participant.address%></small>
       <%end%>
     </p>
     <div>
-      <%= participant_info(participant, @parent.price) %>
+      <%if @parent
+        @price = @parent.price
+      else
+       @price=0
+      end%>
+      <%= participant_info(participant, @price) %>
     </div>
   </div>
 </div>
