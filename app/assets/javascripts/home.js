@@ -13,7 +13,7 @@ $('.groupbuy-list').each(function(){
     var NowTime = new Date();
     var t =EndTime * 1000 - NowTime.getTime();
     if(t < 0) {
-      console.log(t);
+      //console.log(t);
       var over = $('.events-index').data('over');
       $(that).find('.countdown').text(over);
       return;
