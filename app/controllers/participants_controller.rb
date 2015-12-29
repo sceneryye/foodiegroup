@@ -17,19 +17,20 @@ class ParticipantsController < ApplicationController
     elsif params[:event_id]
       @parent = Event.find(params[:event_id])
     end
+
+    @user_addresses = current_user.user_addresses
+    if  @user_addresses.size == 0
+      return redirect_to new_user_address_path(groupbuy_id: params[:groupbuy_id], from: 'new_participant')
+    elsif  @user_addresses.where(default: 1).present?
+      @user_addresses =  @user_addresses.where(default: 1)
+    else
+      @user_addresses =  @user_addresses.first
+    end
   }
 
   def new
     @participant = @parent.participants.new
-
-    @address = current_user.user_addresses
-    if @address == 0
-      return redirect_to new_user_address_path(groupbuy_id: params[:groupbuy_id], from: 'new_participant')
-    elsif @address.where(default: 1).present?
-      @address = @address.where(default: 1)
-    else
-      @address = @address.first
-    end
+   
   end
 
   def index
@@ -146,25 +147,28 @@ class ParticipantsController < ApplicationController
 
   def update
     if @participant.update(participant_params)
-      notice =  '报名修改成功'
-      if params[:groupbuy_id]
-        redirect_to groupbuy_url(@participant.groupbuy), notice: notice
+      if @participant.groupbuy
+        return_url = groupbuy_url(@participant.groupbuy)
       else
-        redirect_to event_url(@participant.event), notice: notice
+        return_url = event_url(@participant.event)
       end
+      notice =  '报名修改成功'
+      redirect_to return_url, notice: notice
     else
       render :edit
     end
   end
 
   def destroy
+    if @participant.groupbuy
+      return_url = groupbuy_url(@participant.groupbuy)
+    else
+      return_url = event_url(@participant.event)
+    end
+
     @participant.destroy
     notice =  '取消报名成功'
-    if params[:groupbuy_id]
-      redirect_to groupbuy_url(@participant.groupbuy), notice: notice
-    else
-      redirect_to event_url(@participant.event), notice: notice
-    end
+    redirect_to return_url, notice: notice
   end
 
   private

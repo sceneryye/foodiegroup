@@ -66,7 +66,7 @@ class CommentsController < ApplicationController
       redirect_to topic_url(@comment.topic), notice: notice
     elsif @comment.event
        redirect_to event_url(@comment.event), notice: notice
-     elsif @comment.groupbuy
+    elsif @comment.groupbuy
         redirect_to groupbuy_url(@comment.groupbuy), notice: notice
     end
 

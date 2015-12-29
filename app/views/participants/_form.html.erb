@@ -20,7 +20,6 @@
           </span>
         </div>
       </div>
-    </div>
 	<hr />
     <% if params[:groupbuy_id]%>
 		<div class="row collapse">
@@ -38,9 +37,7 @@
 						<option value="<%= t(:morning) %>"><%= t(:morning) %></option>
 						<option value="<%= t(:afternoon) %>"><%= t(:afternoon) %></option>
 						<option value="<%= t(:anytime) %>" selected="selected"><%= t(:anytime) %></option></select>
-					</div>
-		        </div>
-		      </div>
+				</div>
 		</div>
 	<%else%>
 		<div class="small-12 columns">
@@ -52,8 +49,7 @@
 		  <%#= show_error_message('请输入您的手机号码.') %>
 		</div>
 	<%end%>
-
-	<div>
+	<div class="small-12 columns">
 		<%= f.text_area :remark, class:'comment-area',placeholder: t(:remark)%>
 		<%#= show_error_message('备注，请不要超过500字') %>
 	</div>
