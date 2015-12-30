@@ -8,7 +8,7 @@
 	    	<span class="prefix"><%= t(:amount) %></span>
 	    </div>
         <div class="small-5 columns">
-          	<%= f.number_field :amount, required: true,value: 1%>
+          	<%= f.number_field :amount, required: true,value: 1, class: 'participant-number', "data-errmsg" => t(:should_be_int)%>
         </div>
         <div class="small-3 columns">
           <span class="postfix">

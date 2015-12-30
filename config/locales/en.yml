@@ -283,3 +283,4 @@ en:
   no_events: There are no events yet.
   no_topics: There are no topics yet.
   no_groupbuys: There are no groupbuys yet.
+  should_be_int: Number should be a positive integer!

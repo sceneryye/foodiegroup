@@ -390,3 +390,4 @@ zh:
   no_events: 暂无活动。
   no_topics: 暂无话题。
   no_groupbuys: 暂无团购。
+  should_be_int: 数量必须为正整数！
