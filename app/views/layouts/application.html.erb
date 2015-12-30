@@ -88,6 +88,10 @@
 
       $(".show-participants").on("click",  function(event) {
         event.preventDefault();
+        if($('.participants').length > 0) {
+          $('.participants').remove();
+          return;
+        }
 
         $(".comments").remove();
         $(".participants").remove();
