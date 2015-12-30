@@ -14,14 +14,14 @@ RSpec.describe Admin::ReportsController, type: :controller do
     end
   end
 
-  describe "GET #events_list without admin role" do
+  describe "GET #groupbuys_list without admin role" do
     it "returns http status of 302" do
-      get :events_list
+      get :groupbuys_list
       expect(response).to have_http_status(302)
     end
 
     it 'redirect_to root path' do
-      get :events_list
+      get :groupbuys_list
       expect(response).to redirect_to root_path
     end
   end
