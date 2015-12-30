@@ -51,9 +51,10 @@
         </ul>
       </div>
       <div class="clear"></div>
+      </div>
       <div class="group-list hidden">
         <% @groups.each do |group| %>
-        <div class="small-8 columns small-center group-name">
+        <div class="small-12 columns group-name">
           <%= link_to  group.name, group_path(group) %>
         </div>
         <% end %>
