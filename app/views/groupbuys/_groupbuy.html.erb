@@ -33,7 +33,7 @@
     <div class="columns small-12 list_button">
       <ul class="button-group even-2" >
         <li>
-        <a href="#" class="show-participants button tiny secondary" data-url="<%=groupbuy_participants_path(groupbuy)%>">
+        <a href="#" class="<%= 'show-participants' if groupbuy.end_time.to_i > Time.zone.now.to_i %> button tiny secondary" data-url="<%=groupbuy_participants_path(groupbuy)%>">
             <i class="fa fa-user-plus"></i><%=t(:buys)%>(<%=groupbuy.participants_count%>)</a>
           </li>
           <li>

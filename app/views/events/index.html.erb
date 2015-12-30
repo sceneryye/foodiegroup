@@ -20,7 +20,7 @@
       <%#= render partial: 'event2', locals: {events: @events} %>
       <%= render @events %>
       <% else %>
-      <p>还没有任何活动。</p>
+      <p><%= t(:no_events) %></p>
       <% end%>
     </div>
   

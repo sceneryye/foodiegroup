@@ -280,3 +280,6 @@ en:
   delete: Delete
   comment: Comment
   logout: Logout
+  no_events: There are no events yet.
+  no_topics: There are no topics yet.
+  no_groupbuys: There are no groupbuys yet.

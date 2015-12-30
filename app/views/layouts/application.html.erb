@@ -12,7 +12,7 @@
     <%= javascript_include_tag "vendor/modernizr" %>
     <script type="text/javascript" src="/assets/sweetalert.min.js"></script>
     <link rel="stylesheet" media="screen" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    
+
     <%= csrf_meta_tags %>
   </head>
 
@@ -30,13 +30,13 @@
               <footer id="footer">
                 <div class="row">
                     <div class="columns small-12" style="line-height: 100%">
-                      <small> &copy; 2014 - <span id='copyright_year'></span>, <%=t(:site_name)%><br>                    
+                      <small> &copy; 2014 - <span id='copyright_year'></span>, <%=t(:site_name)%><br>
                        技术支持: <a target="_blank" href="http://www.trade-v.com/" title="上海普慧信息科技有限公司">上海普慧信息科技有限公司</a></small>
                        <script>
                           var myDate = new Date();
-                          var currentYear = myDate.getFullYear(); 
+                          var currentYear = myDate.getFullYear();
                           document.getElementById('copyright_year').innerText=currentYear;
-                      </script> 
+                      </script>
                     </div>
                 </div>
               </footer>
@@ -46,9 +46,9 @@
           <a class="exit-off-canvas"></a>
         </div>
       </div>
-    </div>     
-    <%=render '/layouts/menu'%>  
-   
+    </div>
+    <%=render '/layouts/menu'%>
+
     <%= javascript_include_tag "application" 'data-turbolinks-track' => true %>
     <%#= javascript_include_tag "application"%>
     <script src="/assets/jquery.self.js?body=1"></script>
@@ -69,7 +69,7 @@
 
         $(".comments").remove();
         $(".participants").remove();
-        
+
         var url = $(this).data('url');
         htmlobj = $.ajax({url: url ,async:false});
 
@@ -94,7 +94,7 @@
 
         var url = $(this).data('url');
         htmlobj = $.ajax({url: url ,async:false});
-        $(this).parent().parent().append('<div class="participants" style="margin:0px;padding:0px;">'+htmlobj.responseText+'</div>');      
+        $(this).parent().parent().append('<div class="participants" style="margin:0px;padding:0px;">'+htmlobj.responseText+'</div>');
       });
 
     </script>

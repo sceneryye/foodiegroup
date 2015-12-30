@@ -20,7 +20,7 @@
       <%#= render partial: 'groupbuy2', locals: {groupbuys: @groupbuys} %>
       <%= render @groupbuys %>
       <% else %>
-      <p>还没有任何团购。</p>
+      <p><%= t(:no_groupbuys) %></p>
       <% end%>
     </div>
   

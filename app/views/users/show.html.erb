@@ -2,7 +2,7 @@
 <% content_for(:profile_content) do%>
   <h2><%= t(page) %></h2><hr>
   <% if @data.blank? %>
-    <p>该会员没有发表过 <%= t(page) %>。</p>
+    <p><%= t(:no_topics) %></p>
   <% else %>
     <%= render @data %>
   <% end %>
