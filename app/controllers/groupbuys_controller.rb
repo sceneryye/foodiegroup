@@ -149,7 +149,7 @@ def create
   end
 
   def groupbuy_params
-    params.require(:groupbuy).permit(:title, :body,:end_time,:start_time,:groupbuy_type, :goods_maximal,
+    params.require(:groupbuy).permit(:title, :body,:end_time,:start_time,:groupbuy_type, :goods_maximal, :goods_minimal,
       :pic_url,:limited_people,:goods_big_than,:goods_small_than,:name,:mobile,:goods_unit,:price,:pic_url)
   end
 end
