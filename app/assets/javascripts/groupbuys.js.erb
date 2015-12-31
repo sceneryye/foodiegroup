@@ -79,8 +79,14 @@ var checkout = $('#dpd2').fdatetimepicker({
 }).data('datepicker');
 
 //--------------新建团购-----------------//
-
-$('#groupbuy_goods_unit').on('change', function(){
-  var val = $(this).val();
-  $('.goods-unit-blank').text(val);
-})
+var unitInput = $('#groupbuy_goods_unit');
+var unitText = $('.goods-unit-blank');
+if(unitInput.val().replace(/\s/g, '').length > 0) {
+  unitText.text(unitInput.val());
+}
+else {
+  $('#groupbuy_goods_unit').on('change', function(){
+    var val = $(this).val();
+    $('.goods-unit-blank').text(val);
+  });
+}
