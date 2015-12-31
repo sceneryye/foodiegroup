@@ -2,6 +2,15 @@
 
 //= require ckeditor/init
 
+function checkPositiveNumber(obj){
+  var num = obj.val();
+  if(isNaN(num) || num < 1 || num % 1 != 0) {
+    obj.val('');
+    var errmsg = '只能为正整数！';
+    alert(errmsg);
+  }
+}
+
 
 $(document).ready(function(){
   $('.new-groupbuy').find('input').each(function(){
@@ -90,3 +99,16 @@ else {
     $('.goods-unit-blank').text(val);
   });
 }
+
+// 价格不能为负数
+$('#groupbuy_price').on('change', function(){
+  checkPositiveNumber($(this));
+})
+
+$('#groupbuy_goods_minimal').on('change', function(){
+  checkPositiveNumber($(this));
+})
+
+$('#groupbuy_goods_maximal').on('change', function(){
+  checkPositiveNumber($(this));
+})
