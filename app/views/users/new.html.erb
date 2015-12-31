@@ -7,9 +7,9 @@
     <% end %>
     <% if params[:from] == 'share_from_foodie' %>
     <% if session[:locale]=='zh' %>
-    <h2>欢迎您加入<%= Group.find(params[:group_id]).name %>!</h2>
+    <h2>欢迎您加入<%= Group.find(params[:group_id] || params[:groupid]).name %>!</h2>
     <% else %>
-    <h2>Welcome to <%= Group.find(params[:group_id]).name %>!</h2>
+    <h2>Welcome to <%= Group.find(params[:group_id] || params[:groupid]).name %>!</h2>
     <% end %>
     <%= form_for @user do |f| %>
     <input name="openid" value="<%= params[:openid] %>" type="hidden" />
