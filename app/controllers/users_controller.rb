@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    user = User.where(openid: params[:openid])
+    user = User.where(weixin_openid: params[:openid])
     if user.present?
       login(user)
     end
