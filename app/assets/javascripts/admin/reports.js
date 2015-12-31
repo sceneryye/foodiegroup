@@ -28,20 +28,41 @@ $('.participant-ship-confirm').on('click', function(){
     closeOnConfirm: false
   },
   function(){
-    $.ajax({
-      url: url,
-      type: 'post',
-      data: {
-        id: id,
-      },
-      success: function(e) {
-        if(e == 'success') {
-          that.find('.ship-confirm').remove();
-          var ship = "#participant-" + id;
-          $(ship).text("已发货");
-          swal("发货已完成！", "该团购已完成发货，等待对方收货。", "success");
-        };
+    swal({
+      title: "确认发货",
+      text: '请输入运单号',
+      type: 'input',
+      showCancelButton: true,
+      closeOnConfirm: false,
+      closeOnCancel: true,
+      animation: "slide-from-top"
+    }, function(inputValue){
+      if (inputValue === false) return false;
+      console.log("You wrote", inputValue);
+      var trackingNumber = inputValue;
+      if(trackingNumber.replace(/\s/g, '').length < 13) {
+        swal.showInputError('正确的运单号为13位数字！');
+        return false;
+        return;
       }
+      $.ajax({
+        url: url,
+        type: 'post',
+        data: {
+          id: id,
+          tracking_number: trackingNumber
+        },
+        success: function(e) {
+          if(e == 'success') {
+            that.find('.ship-confirm').remove();
+            that.text(trackingNumber);
+            that.unbind('click');
+            var ship = "#participant-" + id;
+            $(ship).text("已发货");
+            swal("发货已完成！", "该团购已完成发货，等待对方收货。", "success");
+          };
+        }
+      });
     });
   });
 });

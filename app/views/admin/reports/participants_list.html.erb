@@ -42,11 +42,15 @@
       <td><%= is_paid p %></td>
       <td id="participant-<%= p.id %>" ><%= is_shiped p %></td>
       <td><%= p.created_at.strftime('%F') %></td>
-      <td class="participant-ship-confirm" data-id="<%= p.id %>" data-url="<%= confirm_shiped_groupbuy_participant_path(@groupbuy.id, p.id) %>">
+      <% if p.tracking_number.present? %>
+      <td><%= p.tracking_number %></td>
+      <% else %>
+      <td class="participant-ship-confirm" data-id="<%= p.id %>" data-url="<%= confirm_shiped_participant_path(p.id) %>">
         <% if p.status_ship == 0 %>
         <div class="ship-confirm">发货确认</div>
         <% end %>
       </td>
+      <% end %>
     </tr>
     <% end %>
   </table>
