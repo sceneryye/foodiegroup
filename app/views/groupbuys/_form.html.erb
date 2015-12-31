@@ -23,12 +23,12 @@
  <div>
   <%#= f.label :pic_url %>
   <div class="left"><%=t(:pic_url)%></div>
-   <div class="left picture-upload"><%= file_field_tag :file%></div>
-   <div class="clear"></div>
-   <!-- <%#= show_error_message('请上传活动图片') %> -->
-   <%#= f.text_field :pic_url, required: true%>
- </div>
- <div class='groupbuy-conditions'>
+  <div class="left picture-upload"><%= file_field_tag :file%></div>
+  <div class="clear"></div>
+  <!-- <%#= show_error_message('请上传活动图片') %> -->
+  <%#= f.text_field :pic_url, required: true%>
+</div>
+<div class='groupbuy-conditions'>
   <div class="price left">
     <!-- <%#= f.label :price %> -->
     <%= f.text_field :price,placeholder: t(:price) %>
@@ -46,6 +46,21 @@
   </div>
   <div class="clear"></div>
 </div>
+
+<div class="row collapse goods-maximal">
+  <div class="small-3 columns">
+    <span class="postfix"><%= t(:inventory) %></span>
+  </div>
+  <div class="small-6 columns">
+    <span class="postfix">
+      <%= f.text_field :goods_maximal %>
+    </span>
+  </div>
+  <div class="small-3 columns">
+    <span class="postfix goods-unit-blank"></span>
+  </div>
+</div>
+
  <!--  <div>
     <%= f.text_field :name, required: true, placeholder: '姓名'%>
     <%= show_error_message('活动联系人')%>
@@ -61,7 +76,7 @@
     <!-- <%#= show_error_message('内容请不要超过1千字')%> -->
   </div>
   <div>
-     <%= f.submit class:'tiny button radius right' %>
-  </div>
-  <% end %>
+   <%= f.submit class:'tiny button radius right' %>
+ </div>
+ <% end %>
 </div>

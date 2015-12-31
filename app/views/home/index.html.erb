@@ -1,6 +1,6 @@
  <!--[if lt IE 9]><script type="text/javascript" src="/assets/excanvas.js"></script><![endif]-->
  <% provide :title, t(:home) %>
-<div class="row">
+ <div class="row">
   <div class="columns small-12">
     <script src="/assets/tagcanvas.min.js" type="text/javascript"></script>
     <div id="myCanvasContainer">
@@ -11,10 +11,10 @@
     <div id="tags" style="display: none;">
       <ul>
         <%@tags.each do |tag|%>
-         <li><%=link_to tag.name, tag.url, :target=>"_blank"%></li>
-         <%end if @tags%>
-       </ul>
-     </div>
+        <li><%=link_to tag.name, tag.url, :target=>"_blank"%></li>
+        <%end if @tags%>
+      </ul>
+    </div>
     <script type="text/javascript">
       window.onload = function() {
         try {
@@ -26,9 +26,9 @@
                 // };
                 // TagCanvas.weightGradient = gradient;
 
-                  TagCanvas.Start('myCanvas','tags',{
-                    shape: "hcylinder",
-                    lock: "x",
+                TagCanvas.Start('myCanvas','tags',{
+                  shape: "hcylinder",
+                  lock: "x",
                     textColour: null,//'#008CBA',
                     textHeight: 20,
                     outlineColour: '#0000ff',
@@ -36,28 +36,28 @@
                     depth: 0.5,
                     maxSpeed: 0.02
                   });
-                } catch(e) {
+              } catch(e) {
               // something went wrong, hide the canvas container
               document.getElementById('myCanvasContainer').style.display = 'none';
             }
           };
-    </script>
-  </div>
-</div>
+        </script>
+      </div>
+    </div>
 
-<div class="row">
-  <div class="small-12 columns">
-    <div class="topics panel columns radius ">
-      <%= form_for :search, url: search_path do |f|%>
-        <div class="small-8 columns">
-          <%= f.text_field :keyword,  placeholder: 'search' %>
-        </div>
-        <div class="small-4 columns">
-          <button type="submit" class="button postfix "><i class='fa fa-search'></i></button>
-          <!-- <input type="text" style="height:45px" placeholder="请输入您想搜索的内容..."> -->
-        </div>
+    <div class="row">
+      <div class="small-12 columns">
+        <div class="topics panel columns radius ">
+          <%= form_for :search, url: search_path do |f|%>
+          <div class="small-8 columns">
+            <%= f.text_field :keyword,  placeholder: 'search' %>
+          </div>
+          <div class="small-4 columns">
+            <button type="submit" class="button postfix "><i class='fa fa-search'></i></button>
+            <!-- <input type="text" style="height:45px" placeholder="请输入您想搜索的内容..."> -->
+          </div>
 
-      <%end%>
+          <%end%>
        <!--  <div class="small-6 columns">
           <a href="/searchs" class="button split small"><i class="fa fa-search"></i><span data-dropdown="drop"></span></a><br>
           <ul id="drop" class="f-dropdown" data-dropdown-content>
@@ -66,39 +66,42 @@
             <li><a href="#"><i class="fa fa-calendar"></i></a></li>
           </ul>
         </div> -->
+      </div>
     </div>
   </div>
-</div>
-<div class="events-index"  data-over="<%= t(:groupbuy_end) %>">
-  <% if @groupbuys && @groupbuys.size>0 %>
-  <%= render @groupbuys %>
-  <div class="columns small-12 text-right">
-    <a href="/groupbuys"><h5><%=t(:more)%>...</h5></a><hr>
+  <div class="events-index"  data-over="<%= t(:groupbuy_end) %>">
+    <% if @groupbuys && @groupbuys.size>0 %>
+    <%= render @groupbuys %>
+    <div class="columns small-12 text-right">
+      <a href="/groupbuys"><h5><%=t(:more)%>...</h5></a><hr>
+    </div>
+    <% else %>
+    <p><%= t(:no_groupbuys) %></p> 
+    <hr />
+    <% end%>
   </div>
-  <% else %>
-  <!-- <p>还没有任何团购。</p> -->
-  <% end%>
-</div>
 
-<div class="events-index">
-  <% if @events && @events.size>0%>
-  <%= render @events %>
-  <div class="columns small-12 text-right">
-    <a href="/events"><h5><%=t(:more)%>...</h5></a>
-    <hr>
+  <div class="events-index">
+    <% if @events && @events.size>0%>
+    <%= render @events %>
+    <div class="columns small-12 text-right">
+      <a href="/events"><h5><%=t(:more)%>...</h5></a>
+      <hr>
+    </div>
+    <% else %>
+    <p><%= t(:no_events) %></p>
+    <hr />
+    <% end%>
   </div>
-  <% else %>
-  <!-- <h5>还没有任何活动。</p> -->
-  <% end%>
-</div>
 
-<div class="topics-index">
-  <% if @topics%>
-  <%= render @topics %>
-  <div class="columns small-12 text-right">
-    <a href="/forums/<%=forum_id%>"><h5><%=t(:more)%>...</h5></a><hr>
+  <div class="topics-index">
+    <% if @topics%>
+    <%= render @topics %>
+    <div class="columns small-12 text-right">
+      <a href="/forums/<%=forum_id%>"><h5><%=t(:more)%>...</h5></a><hr>
+    </div>
+    <% else %>
+    <p><%= t(:no_topics) %></p>
+    <hr />
+    <% end%>
   </div>
-  <% else %>
-  <!-- <p>还没有任何话题.</p> -->
-  <% end%>
-</div>

@@ -77,3 +77,10 @@ var checkout = $('#dpd2').fdatetimepicker({
 }).on('changeDate', function (ev) {
   checkout.hide();
 }).data('datepicker');
+
+//--------------新建团购-----------------//
+
+$('#groupbuy_goods_unit').on('change', function(){
+  var val = $(this).val();
+  $('.goods-unit-blank').text(val);
+})
