@@ -22,13 +22,14 @@ class HomeController < ApplicationController
 			end
 		end
 
+		if current_user.nil?
+			session[:locale] = 'zh'
+		end
 		@events = Event.where("locale='#{session[:locale]}' and recommend>0").includes(:user)
 		@groupbuys = Groupbuy.where("locale='#{session[:locale]}' and recommend>0").includes(:user)
 		@tags = Tag.where(locale: session[:locale]).limit(10)
 		@topics = Topic.where(forum_id:forum_id).includes(:forum, :forum).first
-		if current_user.nil?
-			session[:locale] = 'zh'
-		end
+
 
 	end
 end
