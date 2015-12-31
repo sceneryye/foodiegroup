@@ -86,6 +86,13 @@ $light-slate-gray: #6D7B8D;
   font-weight: 800;
   padding-right: 10px;
 }
+.address-detail {
+  width: 70%;
+  .name, .mobile, .address {
+    color: $light-slate-gray;
+    font-size: 0.8em;
+  }
+}
 
 /*******************groupbuy new page******************/
 
