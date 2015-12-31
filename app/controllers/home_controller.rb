@@ -1,6 +1,6 @@
 #encoding:utf-8
 class HomeController < ApplicationController
-  before_action {@forums = Forum.all}
+	before_action {@forums = Forum.all}
 
 	def index
 		#微信入口页面
@@ -24,8 +24,11 @@ class HomeController < ApplicationController
 
 		@events = Event.where("locale='#{session[:locale]}' and recommend>0").includes(:user)
 		@groupbuys = Groupbuy.where("locale='#{session[:locale]}' and recommend>0").includes(:user)
-	  	@tags = Tag.where(locale: session[:locale]).limit(10)
-	    @topics = Topic.where(forum_id:forum_id).includes(:forum, :forum).first
+		@tags = Tag.where(locale: session[:locale]).limit(10)
+		@topics = Topic.where(forum_id:forum_id).includes(:forum, :forum).first
+		if current_user.nil?
+			session[:locale] = 'zh'
+		end
 
 	end
 end
