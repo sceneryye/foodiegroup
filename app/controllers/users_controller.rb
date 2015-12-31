@@ -6,6 +6,10 @@ class UsersController < ApplicationController
   end
 
   def new
+    user = User.where(openid: params[:openid])
+    if user.present?
+      login(user)
+    end
     @user = User.new
     @groups = Group.all
   end
