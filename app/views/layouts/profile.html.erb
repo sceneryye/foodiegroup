@@ -34,7 +34,7 @@
           <li><%= link_to t(:comment), profile_path(@user, type: 'comment'),class: 'small button secondary'  if @user%></li>
           <li><%= link_to t(:event), profile_path(@user, type: 'event'),class: 'small button secondary'  if @user%></li>
           <li><%= link_to t(:groupbuy), profile_path(@user, type: 'groupbuy'),class: 'small button secondary'  if @user%></li>
-          <li><%= link_to t(:participants), profile_path(@user, type: 'participant'),class: 'small button secondary'  if @user%></li>
+          <li><%= link_to t(:histroy), profile_path(@user, type: 'participant'),class: 'small button secondary'  if @user%></li>
           <% if current_user.group_id.present? %>
           <% group = Group.where(id: current_user.group_id).first %>
           <% group_admin = User.where(id: group.user_id).first %>

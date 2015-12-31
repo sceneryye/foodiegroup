@@ -1,32 +1,32 @@
 #encoding:utf-8
 class ForumsController < ApplicationController
-  before_action {@forums = Forum.all}
-
+	before_action {@forums = Forum.all}
+	before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
 
 	def new
-	    @forum = Forum.new
+		@forum = Forum.new
 	end
 
 	def create
-	    @forum = Forum.new(params[:forum])
+		@forum = Forum.new(params[:forum])
 
-	    if @forum.save
-	      redirect_to forum_url, notice: '论坛添加成功!'
-	    else
-	      render :new
-	    end
+		if @forum.save
+			redirect_to forum_url, notice: '论坛添加成功!'
+		else
+			render :new
+		end
 	end
 
- 	def edit() end
+	def edit() end
 
- 	def update
+		def update
 
- 	end
+		end
 
- 	def destroy
- 	end
+		def destroy
+		end
 
-	def index
+		def index
 		#微信入口页面
 		if params[:openid]
 			session[:openid] = params[:openid].split('_shop')[0]
@@ -48,13 +48,13 @@ class ForumsController < ApplicationController
 
 		@events = Event.where("locale='#{session[:locale]}' and recommend>0").includes(:user)
 		@groupbuys = Groupbuy.where("locale='#{session[:locale]}' and recommend>0").includes(:user)
-	  	@tags = Tag.where(locale: session[:locale]).limit(10)
-	    @topics = Topic.where(forum_id:forum_id).includes(:forum, :forum).first
+		@tags = Tag.where(locale: session[:locale]).limit(10)
+		@topics = Topic.where(forum_id:forum_id).includes(:forum, :forum).first
 
 	end
 
 	def show
-	    @forum  = Forum.find(forum_id)
-	    @topics = @forum.topics.includes(:forum)
+		@forum  = Forum.find(forum_id)
+		@topics = @forum.topics.includes(:forum)
 	end
 end

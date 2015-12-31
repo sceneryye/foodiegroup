@@ -392,3 +392,5 @@ zh:
   no_groupbuys: 暂无团购。
   should_be_int: 数量必须为正整数！
   send_to: 送货至
+  tracking_number: 运单号
+  histroy: 记录

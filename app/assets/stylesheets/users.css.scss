@@ -1,3 +1,6 @@
+$light-slate-gray: #6D7B8D;
+
+
 /**************show page******************/
 
 .hidden {
@@ -11,4 +14,15 @@
 }
 .clear {
   clear: both;
+}
+.tracking-number {
+  margin: 10px;
+  margin-bottom: 0;
+  .tracking-title {
+    font-weight: 600;
+  }
+  .number {
+    padding-left: 20px;
+    color: $light-slate-gray;
+  }
 }

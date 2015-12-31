@@ -1,7 +1,7 @@
 #encoding:utf-8
 require 'rest-client'
 class GroupbuysController < ApplicationController
-
+before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
   def index
     @groupbuys = Groupbuy.where(locale: session[:locale]).includes(:user)
   end

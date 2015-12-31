@@ -67,6 +67,9 @@ def participant_info(participant, price)
   else
     info << t(:people) +' '+ participant.amount.to_s
   end
+  if participant.tracking_number.present?
+    info << "<div class='tracking-number'><span class='tracking-title'>" << t(:tracking_number) << "</span><span class='number'>" << format_string(participant.tracking_number) << "</span></div>"
+  end
   info << "<div class='owner-buttons-for-p'>" << owner_buttons_for_p(participant, price) << "</div>" if current_user == participant.user
   info << '</small>'
    
@@ -148,5 +151,14 @@ end
       highlight:          true
     }
     Redcarpet::Markdown.new(renderer, extensions).render(text).html_safe
+  end
+
+  def format_string string
+    str = string
+    count = str.length / 4
+    count.times do |t|
+      str[4 * (t + 1) - 1] += ' '
+    end
+    str.strip
   end
 end
