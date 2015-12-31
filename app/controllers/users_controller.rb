@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def new
     user = User.where(weixin_openid: params[:openid])
     if user.present?
-      login(user)
+      login(user.first)
     end
     @user = User.new
     @groups = Group.all
