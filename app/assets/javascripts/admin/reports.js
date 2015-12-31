@@ -18,54 +18,45 @@ $('.participant-ship-confirm').on('click', function(){
   var id = $(this).data('id');
   var url = $(this).data('url');
   var that = $(this);
+  
   swal({
-    title: "确认完成发货？",
-    text: "点击“确定”将会完成发货！",
-    type: "warning",
+    title: "确认发货",
+    text: '请输入运单号',
+    type: 'input',
     showCancelButton: true,
-    confirmButtonColor: "#DD6B55",
-    confirmButtonText: "确定",
-    closeOnConfirm: false
-  },
-  function(){
-    swal({
-      title: "确认发货",
-      text: '请输入运单号',
-      type: 'input',
-      showCancelButton: true,
-      closeOnConfirm: false,
-      closeOnCancel: true,
-      animation: "slide-from-top"
-    }, function(inputValue){
-      if (inputValue === false) return false;
-      console.log("You wrote", inputValue);
-      var trackingNumber = inputValue;
-      if(trackingNumber.replace(/\s/g, '').length < 13) {
-        swal.showInputError('正确的运单号为13位数字！');
-        return false;
-        return;
+    closeOnConfirm: false,
+    closeOnCancel: true,
+    animation: "slide-from-top"
+  }, function(inputValue){
+    if (inputValue === false) return false;
+    console.log("You wrote", inputValue);
+    var trackingNumber = inputValue;
+    if(trackingNumber.replace(/\s/g, '').length < 13) {
+      swal.showInputError('正确的运单号为13位数字！');
+      return false;
+      return;
+    }
+    $.ajax({
+      url: url,
+      type: 'post',
+      data: {
+        id: id,
+        tracking_number: trackingNumber
+      },
+      success: function(e) {
+        if(e == 'success') {
+          that.find('.ship-confirm').remove();
+          that.text(trackingNumber);
+          that.unbind('click');
+          var ship = "#participant-" + id;
+          $(ship).text("已发货");
+          swal("发货已完成！", "该团购已完成发货，等待对方收货。", "success");
+        };
       }
-      $.ajax({
-        url: url,
-        type: 'post',
-        data: {
-          id: id,
-          tracking_number: trackingNumber
-        },
-        success: function(e) {
-          if(e == 'success') {
-            that.find('.ship-confirm').remove();
-            that.text(trackingNumber);
-            that.unbind('click');
-            var ship = "#participant-" + id;
-            $(ship).text("已发货");
-            swal("发货已完成！", "该团购已完成发货，等待对方收货。", "success");
-          };
-        }
-      });
     });
   });
 });
+
 
 // 活动的首页推荐
 
