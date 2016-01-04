@@ -12,10 +12,12 @@ class UserAddressesController < ApplicationController
 
   def create
     if params[:province] && params[:city] && params[:area]
+      area = [ChinaCity.get(params[:province]), ChinaCity.get(params[:city]), ChinaCity.get(params[:area])].join('/')
       address = ChinaCity.get(params[:province]) + ChinaCity.get(params[:city]) + ChinaCity.get(params[:area])+ user_address_params[:address]
     end
     @user_address = UserAddress.new(user_address_params)
     @user_address.address = address
+    @user_address.area = area
     @user_address.user = current_user
     Rails.logger.info user_address_params
     if@user_address.save
@@ -48,6 +50,7 @@ class UserAddressesController < ApplicationController
 
   def update
     if params[:province] && params[:city] && params[:area]
+      area = [ChinaCity.get(params[:province]), ChinaCity.get(params[:city]), ChinaCity.get(params[:area])].join('/')
       address = ChinaCity.get(params[:province]) + ChinaCity.get(params[:city]) + ChinaCity.get(params[:area])+ user_address_params[:address]
     end
     if params[:from] == 'ajax'
@@ -61,6 +64,7 @@ class UserAddressesController < ApplicationController
 
     if @user_address.update(user_address_params)
       @user_address.update(address: address)
+      @user_address.update(area: area)
       Rails.logger.info user_address_params
       if params[:default] == '1'
         user_address = UserAddress.where(default: 1)
