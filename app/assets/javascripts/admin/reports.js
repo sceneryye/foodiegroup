@@ -281,6 +281,48 @@ $('.groupbuys-list').on('click', '.edit-title', function(){
   });
 });
 
+//编辑话题推荐值
 
-
-
+$('.topic-recommend').on('click', function(){
+  var that = $(this);
+  var nums = $(this).val();
+  var topic_id = $(this).data('id');
+  var url = '/topics/' + topic_id;
+  var nums_value = $(this).data('value');
+  swal({
+    title: "修改推荐值",
+    text: '请输入你想要修改的推荐值',
+    type: 'input',
+    showCancelButton: true,
+    closeOnConfirm: false,
+    closeOnCancel: true,
+    animation: "slide-from-top"
+  }, function(inputValue){
+    if (inputValue === false) return false;
+    console.log("You wrote", inputValue);
+    var new_recommend = inputValue;
+    if(isNaN(new_recommend)) {
+      swal.showInputError('必须输入数字！');
+      return false;
+      return;
+    }
+    $.ajax({
+      url: url,
+      type: 'patch',
+      data: {
+        id: topic_id,
+        recommend: new_recommend,
+        from: 'admin_edit_recommend'
+      },
+      success: function(e) {
+        if(e == 'success') {
+          that.parent().parent().find('.topic-recommend').val(new_recommend);
+          swal('成功!', '修改成功！', 'success');
+        }
+        else {
+          swal('失败!', '提交失败', 'error');
+        }
+      }
+    });
+  });
+});

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151231035442) do
+ActiveRecord::Schema.define(version: 20160104111652) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255, null: false
@@ -173,6 +173,7 @@ ActiveRecord::Schema.define(version: 20151231035442) do
     t.datetime "updated_at"
     t.integer  "agree",          limit: 4,     default: 0
     t.integer  "disagree",       limit: 4,     default: 0
+    t.integer  "recommend",      limit: 4
   end
 
   add_index "topics", ["forum_id"], name: "index_topics_on_forum_id", using: :btree

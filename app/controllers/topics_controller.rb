@@ -34,6 +34,14 @@ class TopicsController < ApplicationController
  def edit() end
 
   def update
+    if params[:from] == 'admin_edit_recommend'
+      topic = Topic.find(params[:id])
+      if topic.update(recommend: params[:recommend])
+        return render text: 'success'
+      else
+        return render text: 'false'
+      end
+    end
     if @topic.update(topic_params)
       redirect_to topic_url(@topic), notice: '话题修改成功'
     else

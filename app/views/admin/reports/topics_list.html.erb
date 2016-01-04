@@ -19,6 +19,7 @@
         <th>话题名称</th>
         <th>话题作者</th>
         <th>评论数量</th>
+        <th>推荐值</th>
         <th>操作</th>
       </tr>
       <% @topics.each_with_index do |topic| %>
@@ -27,6 +28,7 @@
         <td><%= topic.title %></td>
         <td><%= topic.user.username %></td>
         <td><%= topic.comments.count %></td>
+        <td><input type="number" name="recommend" class="topic-recommend" value="<%= topic.recommend %>" data-id="<%= topic.id %>"></td>
         <td><%= link_to "删除", topic_path(topic), method: :delete, remote: true,  data: { confirm:'确定删除?' } %></td>
       </tr>
       <% end %>
