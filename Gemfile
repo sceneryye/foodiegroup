@@ -13,6 +13,7 @@ gem "sinatra"
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
+gem 'unicorn'
 
 gem 'paperclip'
 gem 'ckeditor', github: 'galetahub/ckeditor'
