@@ -35,13 +35,13 @@
           <li><%= link_to t(:event), profile_path(@user, type: 'event'),class: 'small button secondary'  if @user%></li>
           <li><%= link_to t(:groupbuy), profile_path(@user, type: 'groupbuy'),class: 'small button secondary'  if @user%></li>
           <li><%= link_to t(:histroy), profile_path(@user, type: 'participant'),class: 'small button secondary'  if @user%></li>
-          <% if current_user.group_id.present? %>
+          <% if current_user && current_user.group_id.present? %>
           <% group = Group.where(id: current_user.group_id).first %>
           <% group_admin = User.where(id: group.user_id).first %>
           <% url = "http://182.254.137.73:5000?groupid=#{current_user.group_id}&groupname=#{group.name}&imgurl=#{group_admin.avatar}&name=#{group_admin.nickname}&desc=#{group.group_desc}" %>
           <li><%= link_to t(:share), "http://www.trade-v.com/foodies/foodie_group_share?groupid=#{current_user.group_id}&groupname=#{group.name}&imgurl=#{group_admin.avatar}&name=#{group_admin.nickname}&desc=#{group.group_desc}",class: 'small button secondary'  if @user%></li>
           <% end %>
-          <% if ['1', '2'].include? current_user.role %>
+          <% if ['1', '2'].include? current_user.try(:role) %>
           <li class="small button secondary show-groups"><%= t(:group_manage) %></li>
           <% @groups = Group.where(user_id: current_user.id) %>
           <% if current_user.role == '1' %>
