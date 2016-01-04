@@ -15,6 +15,7 @@
   <div class="content">
     <table>
       <tr class="title">
+        <th>用户ID</th>
         <th>用户名称</th>
         <th>用户姓名</th>
         <th>用户手机</th>
@@ -25,7 +26,8 @@
       </tr>
       <% @users.each_with_index do |user| %>
       <tr class="body">
-        <td><%= user.username %></td>
+        <td><%= user.id %></td>
+        <td><%= user.nickname %></td>
         <td><%= user.name %></td>
         <td><%= user.mobile %></td>
         <td><%= user.email %></td>
