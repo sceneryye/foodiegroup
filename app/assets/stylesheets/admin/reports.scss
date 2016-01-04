@@ -24,6 +24,9 @@ $link-color: #2B65EC;
   position: absolute;
   right: 10%;
   padding-bottom: 50px;
+  a, span, em {
+    float: left;
+  }
 }
 table {
   width: 90%;
