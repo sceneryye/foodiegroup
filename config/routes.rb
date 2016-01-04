@@ -1,6 +1,7 @@
 RailsOnForum::Application.routes.draw do
   
   get 'groups/show'
+  mount ChinaCity::Engine => '/china_city'
 
   resources :user_addresses
 

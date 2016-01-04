@@ -9,7 +9,7 @@ gem "faye-websocket"
 gem "sinatra"
 # gem "puma"
  gem "redis"
-
+gem 'china_city'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'

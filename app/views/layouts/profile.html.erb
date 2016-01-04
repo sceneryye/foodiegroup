@@ -42,7 +42,7 @@
           <li><%= link_to t(:share), "http://www.trade-v.com/foodies/foodie_group_share?groupid=#{current_user.group_id}&groupname=#{group.name}&imgurl=#{group_admin.avatar}&name=#{group_admin.nickname}&desc=#{group.group_desc}",class: 'small button secondary'  if @user%></li>
           <% end %>
           <% if ['1', '2'].include? current_user.role %>
-          <li class="small button secondary show-group"><%= t(:group_manage) %></li>
+          <li class="small button secondary show-groups"><%= t(:group_manage) %></li>
           <% @groups = Group.where(user_id: current_user.id) %>
           <% if current_user.role == '1' %>
           <% @groups = Group.all %>
@@ -51,22 +51,24 @@
         </ul>
       </div>
       <div class="clear"></div>
-      </div>
-      <div class="group-list hidden">
-        <% @groups.each do |group| %>
-        <div class="small-12 columns group-name">
-          <%= link_to  group.name, group_path(group) %>
-        </div>
-        <% end %>
-      </div>
-      
-    </div><hr>
-
-    <div class="large-12 columns">
-      <%= yield :profile_content %>
     </div>
+    <% if @groups %>
+    <div class="group-list hidden">
+      <% @groups.each do |group| %>
+      <div class="small-12 columns group-name">
+        <%= link_to  group.name, group_path(group) %>
+      </div>
+      <% end %>
+    </div>
+    <% end %>
+    
+  </div><hr>
 
+  <div class="large-12 columns">
+    <%= yield :profile_content %>
   </div>
+
+</div>
 </div>
 <% end %>
 <%= render template: "layouts/application" %>

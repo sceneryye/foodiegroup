@@ -11,9 +11,13 @@ class UserAddressesController < ApplicationController
   end
 
   def create
+    if params[:province] && params[:city] && params[:area]
+      address = ChinaCity.get(params[:province]) + ChinaCity.get(params[:city]) + ChinaCity.get(params[:area])+ user_address_params[:address]
+    end
     @user_address = UserAddress.new(user_address_params)
+    @user_address.address = address
     @user_address.user = current_user
-
+    Rails.logger.info user_address_params
     if@user_address.save
       if params[:default] == '1'
         user_address = UserAddress.where(default: 1)
@@ -43,6 +47,9 @@ class UserAddressesController < ApplicationController
   end
 
   def update
+    if params[:province] && params[:city] && params[:area]
+      address = ChinaCity.get(params[:province]) + ChinaCity.get(params[:city]) + ChinaCity.get(params[:area])+ user_address_params[:address]
+    end
     if params[:from] == 'ajax'
       user_address = UserAddress.where(default: 1)
       if user_address.present?
@@ -53,6 +60,8 @@ class UserAddressesController < ApplicationController
     end
 
     if @user_address.update(user_address_params)
+      @user_address.update(address: address)
+      Rails.logger.info user_address_params
       if params[:default] == '1'
         user_address = UserAddress.where(default: 1)
         if user_address.present?

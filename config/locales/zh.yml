@@ -365,10 +365,10 @@ zh:
   inventory: 库存
   weekday: 工作日
   weekend: 周末
-  anyday: 任意日期
+  anyday: 不限日期
   morning: 上午
   afternoon: 下午
-  anytime: 任意时间
+  anytime: 不限时间
   deliverytime: 送货时间
   default_address: 默认地址
   new_address: 新建地址
