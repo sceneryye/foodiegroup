@@ -5,7 +5,7 @@
   <%=render @comments%>
   <% if Groupbuy.find(params[:groupbuy_id]).comments.count > @comments.count %>
   <div class="more-comments" style="text-align:center;">
-    <a href="/groupbuys/<%= params[:groupbuy_id] %>"><%= t(:more) %></a>
+  	<%=link_to t(:more), groupbuy_path(params[:groupbuy_id])%>
   </div>
   <% end %>
 </div>

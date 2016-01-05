@@ -15,30 +15,25 @@
   end
 %>
 <div class="icon-bar five-up" role="navigation" id="bottomNav">
-  <a class="item <%=@home_active%>" role="button" tabindex="0" aria-label="home" href="/">
+  <%=link_to root_path,class:"item #{@home_active}" do%>
     <i class="fa fa-home"></i>
-  </a>
-<!--   <a class="item <%=@searchs_active%>" role="button" tabindex="0" aria-label="search" href='/search'>
-    <i class="fa fa-search"></i>
-  </a> -->
-   <a class="item <%=@groupbuys_active%>" role="button" tabindex="0" aria-label="groupbuys" href='/groupbuys'>
+  <%end%>
+  <%=link_to groupbuys_path,class:"item #{@groupbuys_active}" do%>
     <i class="fa fa-cart-plus"></i>
-  </a>
-  <a class="item <%=@events_active%>" role="button" tabindex="0" aria-label="events" href='/events'>
+  <%end%>
+  <%=link_to events_path,class:"item #{@events_active}" do%>
     <i class="fa fa-calendar"></i>
-  </a>
-  <a class="item <%=@forums_active%>" role="button" tabindex="0" aria-label="coversations" href='/forums/<%=forum_id%>'>
-    <i class="fa  fa-bullhorn"></i>
-  </a>
-  <%
-    if current_user
-      @user_url="/#{current_user.nickname}"
+  <%end%>
+  <%=link_to forum_path(forum_id),class:"item #{@forums_active}" do%>
+    <i class="fa fa-bullhorn"></i>
+  <%end%>
+  <%if current_user
+      @user_url = profile_path(current_user.nickname)
     else
-      @user_url="/login"
-    end
-  %>
-  <a class="item <%=@users_active%>" role="button" tabindex="0" aria-label="user" href='<%=@user_url%>'>
+      @user_url= login_path
+    end%>
+  <%=link_to @user_url,class:"item #{@users_active}" do%>
     <i class="fa fa-user"></i>
-  </a>
+  <%end%>
  
 </div>

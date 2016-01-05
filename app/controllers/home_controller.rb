@@ -16,9 +16,9 @@ class HomeController < ApplicationController
 				end.save
 
 				login user.first
-				redirect_to '/' #清空传过来的参数
+				redirect_to root_path #清空传过来的参数
 			else
-				redirect_to '/register'
+				redirect_to  register_apth
 			end
 		end
 

@@ -73,7 +73,7 @@
     <% if @groupbuys && @groupbuys.size>0 %>
     <%= render @groupbuys %>
     <div class="columns small-12 text-right">
-      <a href="/groupbuys"><h5><%=t(:more)%>...</h5></a><hr>
+      <%=link_to t(:more), groupbuys_path%>
     </div>
     <% else %>
     <p><%= t(:no_groupbuys) %></p> 
@@ -85,7 +85,7 @@
     <% if @events && @events.size>0%>
     <%= render @events %>
     <div class="columns small-12 text-right">
-      <a href="/events"><h5><%=t(:more)%>...</h5></a>
+      <%=link_to t(:more), events_path%>
       <hr>
     </div>
     <% else %>

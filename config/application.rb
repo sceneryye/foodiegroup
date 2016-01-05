@@ -16,7 +16,7 @@ Bundler.require(:default, Rails.env)
 
 module RailsOnForum
   class Application < Rails::Application
-   
+
     config.to_prepare do
       # Load application's model / class decorators
       Dir.glob(File.join(File.dirname(__FILE__), "../app/middlewares/chat_backend.rb")) do |c|
@@ -30,6 +30,7 @@ module RailsOnForum
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    config.action_controller.asset_host = 'http://www.trade-v.com:5000/'
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
