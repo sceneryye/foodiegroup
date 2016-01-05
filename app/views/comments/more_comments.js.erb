@@ -1,0 +1,5 @@
+<% @comments.each do |comment| %>
+$('.comments-list').append("<p><%=comment.body.html_safe if comment.body %></p>");
+$('.comments-list').append("<%= comment_info(comment) %>");
+<% end %>
+

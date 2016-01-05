@@ -11,7 +11,8 @@ before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
     @participant = @parent.participants.new
     @comment = @parent.comments.new
     @participants = @groupbuy.participants.includes(:user)
-    @comments = @groupbuy.comments.includes(:user)
+    more = 10
+    @comments = @groupbuy.comments.includes(:user)[0...more]
 
     if current_user
       @user_addresses = current_user.user_addresses
@@ -141,6 +142,19 @@ def create
       format.js
       format.html {redirect_to groupbuys_path}
     end
+  end
+
+  def more_comments
+    elements = []
+    parent = params[:parent]
+    start = params[:start].to_i
+    over = params[:over].to_i
+    comments = parent.capitalize.constantize.includes(:comments, :user).find(params[:id]).comments.includes(:user)[start...over]
+    comments.each do |comment|
+      elements << "<div class='row small-collapse'><div  class='columns small-12 comment'>" << comment.body.html_safe if comment.body << view_context.comment_info(comment) << "</div></div><hr />"
+    end
+    elements = elements.join
+    return render text: elements
   end
 
   private

@@ -112,6 +112,35 @@
       }
     });
 
+    //点击more加载更多评论
+    var times = 2;
+    $('.more-comments').on('click', function(){
+      var url = $(this).data('url');
+      var start = (times - 1) * 10;
+      var over = times * 10;
+      var parent = $(this).data('parent');
+      var id = $(this).data('id');
+      var count = $(this).data('count');
+      $.ajax({
+        url: url,
+        type: 'post',
+        data: {
+          start: start,
+          over: over,
+          parent: parent,
+          id: id
+        },
+        success: function(e){
+          $(".comments-list").append(e);
+        }
+      });
+      times += 1;
+      if(over > count) {
+        $(this).text('已无更多评论');
+        $(this).unbind('click');
+      }
+    });
+
   </script>
 </body>
 </html>

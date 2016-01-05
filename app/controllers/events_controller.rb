@@ -11,7 +11,8 @@ before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
     @participant = @parent.participants.new
     @comment = @parent.comments.new
     @participants = @event.participants.includes(:user)
-    @comments = @event.comments.includes(:user)
+    more = 10
+    @comments = @event.comments.includes(:user)[0...more]
 
    if signed_in? 
      @plus_menu = [{name: '<i class="fa  fa-comment"></i>'.html_safe+' '+t(:new_comment), path: new_event_comment_path(@event)},
@@ -117,6 +118,19 @@ def create
       format.js
       format.html {redirect_to events_path}
     end
+  end
+
+  def more_comments
+    elements = []
+    parent = params[:parent]
+    start = params[:start].to_i
+    over = params[:over].to_i
+    comments = parent.capitalize.constantize.includes(:forum, :comments, :user).find(params[:id]).comments.includes(:user)[start...over]
+    comments.each do |comment|
+      elements << "<div class='row small-collapse'><div  class='columns small-12 comment'>" << comment.body.html_safe if comment.body << view_context.comment_info(comment) << "</div><hr />"
+    end
+    elements = elements.join
+    return render text: elements
   end
 
   private

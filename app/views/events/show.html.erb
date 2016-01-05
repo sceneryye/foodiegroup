@@ -81,7 +81,10 @@
       </div>
       <div class="content" id="comments">
         <%=render 'comments/form' ,:locals=>{@parent=>@parent,@comment=>@comment} if current_user%>
+        <div class="comments-list">
         <%= render @comments %>
+        </div>
+        <a style="width:100%" href="#" class="more-comments tiny expanded button" data-parent="<%= params[:controller].gsub(/\w$/, '') %>" data-count="<%= @comments.count %>" data-id="<%= @event.id %>" data-url="/<%= params[:controller] %>/more_comments"><%= t(:more) %></a>
      </div>
    </div>
  </div>

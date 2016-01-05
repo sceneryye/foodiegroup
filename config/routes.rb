@@ -11,6 +11,10 @@ RailsOnForum::Application.routes.draw do
 
   get 'tags/destroy'
 
+  post 'topics/more_comments', to: 'topics#more_comments'
+  post 'groupbuys/more_comments', to: 'groupbuys#more_comments'
+  post 'events/more_comments', to: 'events#more_comments'
+
   namespace :admin do
   resources :reports
     get '/users_list', to: 'reports#users_list'

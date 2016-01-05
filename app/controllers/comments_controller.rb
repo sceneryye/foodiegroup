@@ -78,6 +78,22 @@ class CommentsController < ApplicationController
     render layout: nil
   end
 
+  def more_comments
+    elements = []
+    parent = params[:parent]
+    start = params[:start].to_i
+    over = params[:over].to_i
+    comments = parent.constantize.includes(:forum, :comments, :user).find(params[:id]).comments.includes(:user)[start...over]
+    comments.each do |comment|
+      elements << "<div class='row small-collapse'><div  class='columns small-12 comment'>" << comment.body.html_safe if comment.body << view_context.comment_info(comment) << "</div></div>"
+    end
+    elements = elements.join
+    return render text: elements
+  end
+
+
+  
+
   private
 
   def select_comment

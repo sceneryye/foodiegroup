@@ -24,7 +24,8 @@ class TopicsController < ApplicationController
 
   def show
     @parent = @topic = Topic.includes(:forum, :comments, :user).find(params[:id])
-    @comments = @topic.comments.includes(:user)
+    more = 10
+    @comments = @topic.comments.includes(:user)[0...more]
     @comment = @topic.comments.new
     if signed_in?
      @plus_menu = [{name: t(:new_comment), path: new_topic_comment_path(@topic)}]
@@ -57,6 +58,22 @@ class TopicsController < ApplicationController
     end
     
   end
+
+  def more_comments
+    elements = []
+    parent = params[:parent]
+    start = params[:start].to_i
+    over = params[:over].to_i
+    comments = parent.capitalize.constantize.includes(:forum, :comments, :user).find(params[:id]).comments.includes(:user)[start...over]
+    comments.each do |comment|
+      elements << "<div class='row small-collapse'><div  class='columns small-12 comment'>" << comment.body.html_safe if comment.body << view_context.comment_info(comment) << "</div></div><hr />"
+    end
+    elements = elements.join
+    return render text: elements
+  end
+
+
+  
 
   private
   def set_topic
