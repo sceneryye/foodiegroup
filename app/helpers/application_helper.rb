@@ -13,7 +13,7 @@ module ApplicationHelper
       child.new_record? ? [parent, child] : child
     end
 
-  def topic_info(topic)
+    def topic_info(topic)
       info = ["<small class='details'>"]
     # info << badge_for(topic.forum) unless params[:controller] == 'forums' &&
     #                                       params[:action]     == 'show'
@@ -26,13 +26,13 @@ module ApplicationHelper
   def event_info(event)
     info = ["<small class='details'>"]
   #  info << link_to(event.event_type, '#', class: 'badge')    
-    info << info_for(event.user)   unless params[:controller] == 'users'
-    info << time_for(event)<< '</small>' 
-    info << vote_for(event) 
-    info.join.html_safe
-  end
+  info << info_for(event.user)   unless params[:controller] == 'users'
+  info << time_for(event)<< '</small>' 
+  info << vote_for(event) 
+  info.join.html_safe
+end
 
- def groupbuy_info(groupbuy)
+def groupbuy_info(groupbuy)
   info = ["<small class='details'>"]   
   info << info_for(groupbuy.user)   unless params[:controller] == 'users'
   info << time_for(groupbuy)<< '</small>' 
@@ -72,13 +72,17 @@ def participant_info(participant, price)
   end
   info << "<div class='owner-buttons-for-p'>" << owner_buttons_for_p(participant, price) << "</div>" if current_user == participant.user
   info << '</small>'
-   
+  
   info.join.html_safe
 end
 
 def is_paid participant
   if participant.status_pay == 1
-   paid = t(:paid)
+    if participant.status_ship == 1
+      paid = t(:shiped)
+    else
+     paid = t(:paid)
+   end
  elsif participant.status_pay == 0
    paid= t(:unpaid)
  elsif participant.status_pay == 2
@@ -112,7 +116,7 @@ def time_for(object)
   ' ' + time_ago_in_words(object.created_at) + ' '+t(:before)+' '
 end
 
-  def vote_for(object)
+def vote_for(object)
   ' '
     # '<a href="#"><i class="fa fa-thumbs-o-up"></i>2</a> <a href="#" style="margin-left:50px"><i class="fa fa-thumbs-o-down"></i>3</a>'
   end 
@@ -126,39 +130,39 @@ end
     link_to('<span class="icons"><i class="fa fa-pencil"></i>'.html_safe + t(:edit) + '</span>'.html_safe, edit_participant_path(participant)) + ' | ' +
     link_to('<span class="icons"><i class="fa fa-times"></i>'.html_safe + t(:delete) + '</span>'.html_safe, participant, method: :delete) +
     if participant.user_id == current_user.id && participant.status_pay == 0 && price > 0
-       link_to('|<span class="icons"><i class="fa fa-jpy"></i>'.html_safe  + t(:pay) + '</span>'.html_safe, wechat_pay_participant_path(participant))
-    else
-      ''  
-    end
+     link_to('|<span class="icons"><i class="fa fa-jpy"></i>'.html_safe  + t(:pay) + '</span>'.html_safe, wechat_pay_participant_path(participant))
+   else
+    ''  
   end
+end
 
-  def markdown(text, options= {links: true})
-    render_options = {
-      filter_html:     true,
-      hard_wrap:       true,
-      no_links:        !options[:links],
-      highlight: true
-    }
-    renderer = Redcarpet::Render::HTML.new(render_options)
+def markdown(text, options= {links: true})
+  render_options = {
+    filter_html:     true,
+    hard_wrap:       true,
+    no_links:        !options[:links],
+    highlight: true
+  }
+  renderer = Redcarpet::Render::HTML.new(render_options)
 
-    extensions = {
-      autolink:           true,
-      fenced_code_blocks: true,
-      lax_spacing:        true,
-      no_intra_emphasis:  true,
-      strikethrough:      true,
-      superscript:        true,
-      highlight:          true
-    }
-    Redcarpet::Markdown.new(renderer, extensions).render(text).html_safe
+  extensions = {
+    autolink:           true,
+    fenced_code_blocks: true,
+    lax_spacing:        true,
+    no_intra_emphasis:  true,
+    strikethrough:      true,
+    superscript:        true,
+    highlight:          true
+  }
+  Redcarpet::Markdown.new(renderer, extensions).render(text).html_safe
+end
+
+def format_string string
+  str = string
+  count = str.length / 4
+  count.times do |t|
+    str[4 * (t + 1) - 1] += ' '
   end
-
-  def format_string string
-    str = string
-    count = str.length / 4
-    count.times do |t|
-      str[4 * (t + 1) - 1] += ' '
-    end
-    str.strip
-  end
+  str.strip
+end
 end
