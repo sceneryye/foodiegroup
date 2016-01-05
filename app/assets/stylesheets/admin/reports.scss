@@ -28,6 +28,7 @@ $link-color: #2B65EC;
     float: left;
   }
 }
+
 table {
   width: 90%;
   margin: 20px auto;
@@ -83,10 +84,25 @@ table {
 .hidden {
   display: none;
 }
+th, td {
+  input {
+    text-align: center;
+  }
+}
 
+/*****************users_list**********************/
+
+.users_list {
+  th, td {
+    text-align: center;
+  }
+}
 /******************participants_list***************/
 
 .participants_list {
+  th, td {
+    text-align: center;
+  }
   margin-bottom: 180px;
   h4 {
     color: $mid-gray;
@@ -101,6 +117,9 @@ table {
 
 /****************events_list********************/
 .groupbuys-list {
+  th, td {
+    text-align: center;
+  }
   .recommend-number {
     width: 50px;
   }
@@ -114,6 +133,9 @@ table {
 /*******************tags_list*******************/
 
 .tags_list {
+  th, td {
+    text-align: center;
+  }
   table {
     width: 80%;
   }
@@ -130,5 +152,17 @@ table {
     float: right;
     margin-right: 10%;
     
+  }
+}
+/**************topics_list*************/
+.topics_list {
+  th, td {
+    text-align: center;
+  }
+  .recommend-value {
+    width: 7%;
+    input {
+      text-align: center;
+    }
   }
 }
