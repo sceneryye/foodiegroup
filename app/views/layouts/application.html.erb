@@ -97,8 +97,13 @@
       $(".participants").remove();
 
       var url = $(this).data('url');
+      var id = $(this).data('id');
+      var more = $(this).data('more');
+      var controllerName = $(this).data('controllername');
+      var linkUrl = "/" + controllerName + '/' + id;
       htmlobj = $.ajax({url: url ,async:false});
       $(this).parent().parent().append('<div class="participants" style="margin:0px;padding:0px;">'+htmlobj.responseText+'</div>');
+      //$(this).parent().parent().append('<div class="more"><a href=' + linkUrl + '></a></div>');
     });
 
     // 防止数量输入非正整数

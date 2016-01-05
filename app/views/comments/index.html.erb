@@ -1,6 +1,11 @@
 <div class="panel" style="margin:0px;">
-<%=render 'form' ,:locals=>{@parent=>@parent,@comment=>@comment} %>
+  <%=render 'form' ,:locals=>{@parent=>@parent,@comment=>@comment} %>
 </div>
 <div class="panel"  style="margin:0px;">
-<%=render @comments%>
+  <%=render @comments%>
+  <% if Groupbuy.find(params[:groupbuy_id]).comments.count > @comments.count %>
+  <div class="more-comments" style="text-align:center;">
+    <a href="/groupbuys/<%= params[:groupbuy_id] %>"><%= t(:more) %></a>
+  </div>
+  <% end %>
 </div>

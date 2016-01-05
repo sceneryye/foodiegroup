@@ -1,6 +1,11 @@
 <div class="panel"  style="margin:0px;">
-<%=render 'form' ,:locals=>{@parent=>@parent,@participant=>@participant} %>
-	</div>
-	<div class="panel"  style="margin:0px;">
-<%=render @participants%>
-	</div>
+  <%=render 'form' ,:locals=>{@parent=>@parent,@participant=>@participant} %>
+</div>
+<div class="panel"  style="margin:0px;">
+  <%=render @participants%>
+  <% if Groupbuy.find(params[:groupbuy_id]).participants.count > @participants.count %>
+  <div class="more-participants" style="text-align:center;">
+    <a href="/groupbuys/<%= params[:groupbuy_id] %>"><%= t(:more) %></a>
+  </div>
+  <% end %>
+</div>
