@@ -15,7 +15,7 @@
 <% provide :title, t(:event) %>
 <%# content_for(:event_content) do %>
 
-    <div class="events-index-list ">
+    <div class="events-index-list " data-over="<%= t(:event_end) %>">
       <% if @events.any? %>
       <%#= render partial: 'event2', locals: {events: @events} %>
       <%= render @events %>

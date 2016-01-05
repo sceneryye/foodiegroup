@@ -6,7 +6,11 @@ $light-slate-gray: #6D7B8D;
 .clear {
   clear: both;
 }
-
+.countdown-day, .countdown-hour, .countdown-minute, .countdown-second {
+  color:white;
+  background-color: black;
+  padding: 3px;
+}
 
 
 /**************new participant**********/

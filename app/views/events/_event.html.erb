@@ -1,31 +1,41 @@
-<div class="row">
-  <div class="columns small-4">
-    <%= link_to event, class: 'th' do %>
-    <img src="<%= event.pic_url %>"/>
-    <%end%>
-  </div>
-  <div class="columns small-8">
-    <h4><%= link_to event.title, event%></h4>
-      <!-- <span class="price"><%=t(:price)%>:&nbsp;<i class="fa fa-cny"></i><%=event.price %></span><br> -->
+<div class="event-list" data-endtime="<%= event.end_time.to_i %>" data-day="<%= t(:day) %>">
+  <div class="row">
+    <div class="columns small-4">
+      <%= link_to event, class: 'th' do %>
+      <img src="<%= event.pic_url %>"/>
+      <%end%>
+    </div>
+    <div class="columns small-8">
+      <h4><%= link_to event.title, event%></h4>
       <span><%=t(:by)%>:&nbsp;<%=link_to event.user.nickname.html_safe,profile_path(event.user) %><span>   
-  </div>
-  
-</div>
-<div class="row">
-  <div class="columns small-12 list_button">
-    <ul class="button-group even-2">
-      <li>
-        <a href="#" class="show-participants button tiny secondary" data-url="<%=event_participants_path(event)%>">
-          <i class="fa fa-user-plus"></i>(<%=event.participants_count%>)</a>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="show-comments button tiny secondary" data-url="<%=event_comments_path(event)%>">
-          <i class="fa fa-comments"></i>(<%=event.comments_count%>)
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
 
+
+
+        <div class="countdown">
+          <span class="countdonw-title"></span>
+          <span class="countdown-day"></span>
+          <span class="countdown-hour"></span>
+          <span class="countdown-minute"></span>
+          <span class="countdown-second"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="columns small-12 list_button">
+        <ul class="button-group even-2">
+          <li>
+            <a href="#" class="<%= 'show-participants' if event.end_time.to_i > Time.zone.now.to_i %> button tiny secondary" data-url="<%=event_participants_path(event)%>">
+              <i class="fa fa-user-plus"></i>(<%=event.participants_count%>)</a>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="show-comments button tiny secondary" data-url="<%=event_comments_path(event)%>">
+              <i class="fa fa-comments"></i>(<%=event.comments_count%>)
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
