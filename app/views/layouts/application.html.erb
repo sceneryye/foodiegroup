@@ -141,7 +141,7 @@
       });
       times += 1;
       if(over > count) {
-        $(this).text('已无更多评论');
+        $(this).text('<%=t(:nomore)%>');
         $(this).unbind('click');
       }
     });
