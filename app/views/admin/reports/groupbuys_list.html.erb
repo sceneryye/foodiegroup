@@ -35,7 +35,7 @@
         <td><%= groupbuy.name %></td>
         <td><%= groupbuy.price %></td>
         <td>
-          <input type="number" name="recommend" value="<%= groupbuy.recommend %>" id="<%= groupbuy.id %>" data-value="<%= groupbuy.recommend %>" class="recommend-number" data-id="<%= groupbuy.id %>" />
+          <input type="number" name="recommend" value="<%= groupbuy.recommend %>" data-url="<%=groupbuy_path(groupbuy)%> id="<%= groupbuy.id %>" data-value="<%= groupbuy.recommend %>" class="recommend-number" data-id="<%= groupbuy.id %>" />
         </td>
         <td>
         <span class="edit-title edit" data-id="<%= groupbuy.id %>" data-title="<%= groupbuy.title %>">编辑</span>

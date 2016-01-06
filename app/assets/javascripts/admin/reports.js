@@ -64,7 +64,7 @@ $('.recommend-number').on('change', function(){
   var that = $(this);
   var nums = $(this).val();
   var groupbuy_id = $(this).data('id');
-  var url = '/groupbuys/' + groupbuy_id;
+  var url = $(this).data('url');//'/groupbuys/' + groupbuy_id;
   var nums_value = $(this).data('value');
   if(nums == '' || nums == undefined || isNaN(nums) == true) {
     $(this).val(nums_value);
