@@ -28,23 +28,54 @@
   <!-- <%#= show_error_message('请上传活动图片') %> -->
   <%#= f.text_field :pic_url, required: true%>
 </div>
-<div class='groupbuy-conditions'>
-  <div class="price left">
-    <!-- <%#= f.label :price %> -->
-    <%= f.text_field :price,placeholder: t(:price) %>
+<div class='groupbuy-conditions row collapse'>
+  <div class="small-3 columns">
+    <span class="price postfix">
+      <%= t(:price) %>
+    </span>
   </div>
-  <div class="goods-unit left">
-    <%= f.text_field :goods_unit,placeholder: t(:goods_unit) %>
+  <div class="small-2 columns">
+    <span class="price postfix">
+      <!-- <%#= f.label :price %> -->
+      <%= f.text_field :price,placeholder: t(:price) %>
+    </span>
   </div>
-  <!-- <div>
-    <%#= f.label :goods_maximall %>
-    <%#= f.text_field :goods_maximal,placeholder: t(:goods_maximal)%>
-  </div> -->
-  <div class="goods-minimal left">
-    <!-- <%#= f.label :goods_minimal %> -->
-    <%= f.text_field :goods_minimal,placeholder: t(:goods_minimal) %>
+
+  <div class="small-5 columns">
+    <span class="market_price postfix">
+      <%= t(:market_price) %>
+    </span>
   </div>
-  <div class="clear"></div>
+  <div class="small-2 columns">
+    <span class="market_price postfix">
+      <%= f.text_field :market_price, placeholder: t(:market_price) %>
+    </span>
+  </div>
+
+
+  <div class="small-3 columns">
+    <span class="goods-unit postfix">
+      <%= t(:price) %>
+    </span>
+  </div>
+  <div class="small-2 columns">
+    <span class="goods-unit postfix">
+      <%= f.text_field :goods_unit,placeholder: t(:goods_unit) %>
+    </span>
+  </div>
+  
+  <div class="small-5 columns">
+    <span class="market_price postfix">
+      <%= t(:goods_minimal) %>
+    </span>
+  </div>
+  <div class="small-2 columns">
+    <span class="goods-minimal postfix">
+      <!-- <%#= f.label :goods_minimal %> -->
+      <%= f.text_field :goods_minimal,placeholder: t(:goods_minimal) %>
+    </span>
+  </div>
+
 </div>
 
 <div class="row collapse goods-maximal">

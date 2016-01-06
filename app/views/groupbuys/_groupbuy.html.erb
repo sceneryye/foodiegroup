@@ -13,10 +13,10 @@
           <div class="columns small-6 groupbuy-price" style="line-height:100%">
             <span class="price save"><i class="fa fa-cny"></i><%=groupbuy.price %></span><br>
 
-            <small class="money">  <span class="price market"><i class="fa fa-cny"></i><%=(groupbuy.price*1.8).to_i %></span></small>
+            <small class="money">  <span class="price market"><i class="fa fa-cny"></i><%=(groupbuy.market_price).to_i %></span></small>
           </div>
           <div class="columns small-6">
-            <span class="price save"><%=t(:save)%>:&nbsp;40%</span>
+            <span class="price save"><%=t(:save)%>:&nbsp;<%= ((groupbuy.market_price - groupbuy.price) / groupbuy.market_price) * 100 %>%</span>
           </div>
         </div>
 
