@@ -1,9 +1,9 @@
 class GroupsController < ApplicationController
   before_action :validate_user!, only: :update
-    @group = Group.find(params[:id])
-    @group_admin = User.find(@group.user_id)
-    @group_member = User.where(group_id: params[:id])
-  end
+  @group = Group.find(params[:id])
+  @group_admin = User.find(@group.user_id)
+  @group_member = User.where(group_id: params[:id])
+  
 
   def update
     group = Group.find(params[:id])
