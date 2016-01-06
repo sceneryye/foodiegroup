@@ -8,6 +8,7 @@ before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
 
   def show
     @parent = @event  = Event.find(params[:id])
+    @active = @event.comments.count > 10 ? true : false
     @participant = @parent.participants.new
     @comment = @parent.comments.new
     @participants = @event.participants.includes(:user)

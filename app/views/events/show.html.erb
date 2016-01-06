@@ -81,7 +81,9 @@
           <div class="comments-list">
             <%= render @comments %>
           </div>
-          <a style="width:100%" href="#" class="more-comments tiny expanded button" data-parent="<%= params[:controller].gsub(/\w$/, '') %>" data-count="<%= @comments.count %>" data-id="<%= @event.id %>" data-url="/<%= params[:controller] %>/more_comments"><%= t(:more) %></a>
+          <% if @active %>
+          <a style="width:100%" href="#" class="more-comments tiny expanded button" data-parent="<%= params[:controller].gsub(/\w$/, '') %>" data-count="<%= @comments.count %>" data-id="<%= @event.id %>" data-url="<%= events_more_comments_path %>"><%= t(:more) %></a>
+          <% end %>
         </div>
       </div>
     </div>

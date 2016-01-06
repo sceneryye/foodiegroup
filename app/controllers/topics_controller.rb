@@ -24,6 +24,7 @@ class TopicsController < ApplicationController
 
   def show
     @parent = @topic = Topic.includes(:forum, :comments, :user).find(params[:id])
+    @active = @topic.comments.count > 10 ? true : false
     more = 10
     @comments = @topic.comments.includes(:user)[0...more]
     @comment = @topic.comments.new
