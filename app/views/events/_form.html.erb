@@ -20,10 +20,16 @@
       </thead>
     </table>
   </div>
- <!--  <div>
-    <%= f.label :event_type %>
-    <%= f.text_field :event_type, value:'tuan', required: true%>
-  </div> -->
+
+  <div>    
+    <p><%=t(:please_enter_event_address)%></p>
+    <div class="row collapse">
+      <div class="columns small-12"><%= f.text_field :address, placeholder: t(:detail_address) %></div>
+      <div class="columns small-6"><%= f.text_field :x_coordinate, placeholder: "X #{t(:coordinate)}" %></div>
+      <div class="columns small-6"><%= f.text_field :y_coordinate, placeholder: "Y #{t(:coordinate)}" %></div>
+    </div>
+  </div>
+ 
   <div>
     <%#= f.label :pic_url %>
     <span><%=t(:pic_url)%>
