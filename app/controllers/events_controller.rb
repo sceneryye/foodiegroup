@@ -139,7 +139,7 @@ def create
   end
 
   def event_params
-    params.require(:event).permit(:title, :body,:end_time,:start_time,:event_type,
+    params.require(:event).permit(:title, :body,:end_time,:start_time,:event_type, :address, :x_coordinate, :y_coordinate,
       :pic_url,:limited_people,:goods_big_than,:goods_small_than,:name,:mobile,:goods_unit,:price,:pic_url)
   end
 end
