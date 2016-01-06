@@ -14,8 +14,10 @@ class ParticipantsController < ApplicationController
   before_action only: [:new, :create,:index] do
     if params[:groupbuy_id]
       @parent = Groupbuy.find(params[:groupbuy_id])
+      @url = groupbuy_path(@parent)
     elsif params[:event_id]
       @parent = Event.find(params[:event_id])
+      @url = event_path(@parent)
     end
 
     @user_addresses = current_user.user_addresses

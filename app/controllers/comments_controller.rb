@@ -72,7 +72,6 @@ class CommentsController < ApplicationController
   def index
     @comment = @parent.comments.new
     @comments = @parent.comments.includes(:user).limit(3)
-    @
     render layout: nil
   end
 

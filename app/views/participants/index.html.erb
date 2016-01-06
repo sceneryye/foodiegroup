@@ -3,9 +3,9 @@
 </div>
 <div class="panel"  style="margin:0px;">
   <%=render @participants%>
-  <% if Groupbuy.find(params[:groupbuy_id]).participants.count > @participants.count %>
+  <%# if Groupbuy.find(params[:groupbuy_id]).participants.count > @participants.count %>
   <div class="more-participants" style="text-align:center;">
-  	<%=link_to t(:more), groupbuy_path(params[:groupbuy_id])%>
+  	<%=link_to t(:more), @url%>
   </div>
-  <% end %>
+  <%# end %>
 </div>
