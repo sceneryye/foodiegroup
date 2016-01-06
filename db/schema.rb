@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160106073947) do
+ActiveRecord::Schema.define(version: 20160106102617) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255, null: false
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 20160106073947) do
     t.integer  "participants_count", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "market_price",                   precision: 10, scale: 2
   end
 
   add_index "groupbuys", ["user_id"], name: "index_groupbuys_on_user_id", using: :btree
