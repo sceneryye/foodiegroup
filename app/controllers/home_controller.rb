@@ -18,7 +18,7 @@ class HomeController < ApplicationController
 				login user.first
 				redirect_to root_path #清空传过来的参数
 			else
-				redirect_to  register_apth
+				redirect_to  register_path
 			end
 		end
 
