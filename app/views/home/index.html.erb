@@ -1,11 +1,11 @@
- <!--[if lt IE 9]><script type="text/javascript" src="/assets/excanvas.js"></script><![endif]-->
- <% provide :title, t(:home) %>
- <div class="row">
+<!--[if lt IE 9]><script type="text/javascript" src="/assets/excanvas.js"></script><![endif]-->
+<% provide :title, t(:home) %>
+<div class="row">
   <div class="columns small-12">
-    <script src="/assets/tagcanvas.min.js" type="text/javascript"></script>
+    <%= javascript_include_tag "tagcanvas.min"%>
     <div id="myCanvasContainer">
       <canvas width="300" height="250" id="myCanvas" style="">
-        <p><img src='/foodie_logo.jpg'></p>
+        <p><img src='foodie_logo.jpg'></p>
       </canvas>
     </div>
     <div id="tags" style="display: none;">
@@ -18,46 +18,44 @@
     <script type="text/javascript">
       window.onload = function() {
         try {
-                // var gradient = {
-                //  0:    '#f00', // red
-                //  0.33: '#ff0', // yellow
-                //  0.66: '#0f0', // green
-                //  1:    '#00f'  // blue
-                // };
-                // TagCanvas.weightGradient = gradient;
+              // var gradient = {
+              //  0:    '#f00', // red
+              //  0.33: '#ff0', // yellow
+              //  0.66: '#0f0', // green
+              //  1:    '#00f'  // blue
+              // };
+              // TagCanvas.weightGradient = gradient;
 
-                TagCanvas.Start('myCanvas','tags',{
-                  shape: "hcylinder",
-                  lock: "x",
-                    textColour: null,//'#008CBA',
-                    textHeight: 20,
-                    outlineColour: '#0000ff',
-                    reverse: true,
-                    depth: 0.5,
-                    maxSpeed: 0.02
-                  });
-              } catch(e) {
-              // something went wrong, hide the canvas container
-              document.getElementById('myCanvasContainer').style.display = 'none';
+              TagCanvas.Start('myCanvas','tags',{
+                shape: "hcylinder",
+                lock: "x",
+                  textColour: null,//'#008CBA',
+                  textHeight: 20,
+                  outlineColour: '#0000ff',
+                  reverse: true,
+                  depth: 0.5,
+                  maxSpeed: 0.02
+                });
+            } catch(e) {
+            // something went wrong, hide the canvas container
+            document.getElementById('myCanvasContainer').style.display = 'none';
             }
           };
-        </script>
-      </div>
-    </div>
+      </script>
 
-    <div class="row">
-      <div class="small-12 columns">
-        <div class="topics panel columns radius ">
-          <%= form_for :search, url: search_path do |f|%>
+  </div>
+</div>
+
+<div class="row collapse panel radius">
+        <%= form_for :search, url: search_path do |f|%>
           <div class="small-8 columns">
             <%= f.text_field :keyword,  placeholder: 'search' %>
           </div>
           <div class="small-4 columns">
-            <button type="submit" class="button postfix "><i class='fa fa-search'></i></button>
-            <!-- <input type="text" style="height:45px" placeholder="请输入您想搜索的内容..."> -->
+            <span class="postfix"><button type="submit" class="button postfix small"><i class='fa fa-search'></i></button></span>
           </div>
 
-          <%end%>
+        <%end%>
        <!--  <div class="small-6 columns">
           <a href="/searchs" class="button split small"><i class="fa fa-search"></i><span data-dropdown="drop"></span></a><br>
           <ul id="drop" class="f-dropdown" data-dropdown-content>
@@ -66,42 +64,40 @@
             <li><a href="#"><i class="fa fa-calendar"></i></a></li>
           </ul>
         </div> -->
-      </div>
-    </div>
-  </div>
-  <div class="events-index"  data-over="<%= t(:groupbuy_end) %>">
-    <% if @groupbuys && @groupbuys.size>0 %>
+</div>
+<div class="events-index"  data-over="<%= t(:groupbuy_end) %>">
+  <% if @groupbuys && @groupbuys.size>0 %>
     <%= render @groupbuys %>
     <div class="columns small-12 text-right">
       <%=link_to t(:more), groupbuys_path%>
     </div>
-    <% else %>
+  <% else %>
     <p><%= t(:no_groupbuys) %></p> 
     <hr />
-    <% end%>
-  </div>
+  <% end%>
+</div>
 
-  <div class="events-index">
-    <% if @events && @events.size>0%>
+<div class="events-index">
+  <% if @events && @events.size>0%>
     <%= render @events %>
     <div class="columns small-12 text-right">
       <%=link_to t(:more), events_path%>
       <hr>
     </div>
-    <% else %>
+  <% else %>
     <p><%= t(:no_events) %></p>
     <hr />
-    <% end%>
-  </div>
+  <% end%>
+</div>
 
-  <div class="topics-index">
-    <% if @topics%>
+<div class="topics-index">
+  <% if @topics%>
     <%= render @topics %>
     <div class="columns small-12 text-right">
-      <a href="/forums/<%=forum_id%>"><h5><%=t(:more)%>...</h5></a><hr>
+      <%=link_to t(:more), forum_path(forum_id)%>
     </div>
-    <% else %>
+  <% else %>
     <p><%= t(:no_topics) %></p>
     <hr />
-    <% end%>
-  </div>
+  <% end%>
+</div>
