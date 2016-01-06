@@ -142,6 +142,8 @@
         }
       });
       times += 1;
+      console.log(count);
+      console.log(over);
       if(over > count) {
         $(this).text('<%=t(:nomore)%>');
         $(this).unbind('click');
