@@ -15,9 +15,11 @@
   <ul class="off-canvas-list">
     <li>      
       <%if session[:locale] == 'en'%>  
-         <%=link_to '<i class="fa fa-language"></i>'.html_safe+' 中文',"#{request.url.sub('?locale=en','')}?locale=zh"%>
+         <%#=link_to '<i class="fa fa-language"></i>'.html_safe+' 中文',"#{request.url.sub('?locale=en','')}?locale=zh"%>
+         <%=link_to '<i class="fa fa-language"></i>'.html_safe+' 中文',"/foodiegroup?locale=zh"%>
       <%else%>
-        <%=link_to '<i class="fa fa-language"></i>'.html_safe+' English',"#{request.url.sub('?locale=zh','')}?locale=en"%>
+        <%#=link_to '<i class="fa fa-language"></i>'.html_safe+' English',"#{request.url.sub('?locale=zh','')}?locale=en"%>
+        <%=link_to '<i class="fa fa-language"></i>'.html_safe+' English',"/foodiegroup?locale=en"%>
       <%end%> 
     </li>
     <li><%=link_to ' <i class="fa fa-search"></i>'.html_safe+' '+t(:search),search_path%></li>

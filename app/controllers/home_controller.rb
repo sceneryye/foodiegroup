@@ -4,12 +4,14 @@ class HomeController < ApplicationController
 
 	def index
 		#微信入口页面
+
 		if !params[:openid].blank?
 			session[:openid] = params[:openid].split('_shop')[0]
+
 			session[:avatar] = params[:avatar]
 			session[:nickname] = params[:nickname]
 			user = User.where(:weixin_openid=>session[:openid])
-			if user.size>0
+			if user.size>0				
 				@user = user.first do |u|
 					u.avatar = session[:avatar]
 					u.nickname = session[:nickname]

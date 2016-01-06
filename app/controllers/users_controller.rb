@@ -5,10 +5,12 @@ class UsersController < ApplicationController
     validate_permission! select_user
   end
 
-  def new
-    user = User.where(weixin_openid: params[:openid])
-    if user.present?
-      login(user.first)
+  def new   
+    if !session[:openid].blank?
+      user = User.where(weixin_openid: session[:openid])
+      if user.present?
+        login(user.first)
+      end
     end
     @user = User.new
     @groups = Group.all
