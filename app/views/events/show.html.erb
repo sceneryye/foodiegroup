@@ -1,3 +1,5 @@
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6HTcUtGlDjpH9MSrrW7Oc8Wf"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
 <% provide :title, t(:event_detail) %>
 <div class="row">
   <div class="large-2 columns">
@@ -14,80 +16,85 @@
 </div>
 <div class="row">
   <div class="small-12 columns">
-      <table style="width:100%">
-        <tr>
-          <th><%=t(:event)%> No.</th>
-          <td>#<%= @event.id.to_s.rjust(10,'0') %></td>
-        </tr>
-        <tr>
-          <th><%=t(:start_time)%></th>
-          <td><%= @event.start_time.strftime("%Y-%m-%d %H:%M") %></td>
-        </tr>
-        <tr>
-          <th><%=t(:end_time)%></th>
-          <td><%=@event.end_time.strftime("%Y-%m-%d %H:%M")%></td>
-        </tr>
-        <tr>
-          <th><%=t(:limited_people)%></th>
-          <td><%=@event.limited_people%></td>
-        </tr>
-        <tr>
-          <th><%=t(:participants)%></th>
-          <td><%=@participants.count%></td>
-        </tr>
-        <tr>
-          <th><%=t(:price)%></th>
-          <td>￥<%=@event.price%></td>
-        </tr>
-        <tr>
-          <td colspan='2'><%= @event.body.html_safe  %></td>
-        </tr>
-      </table>
-      <!-- <p><%=@event.event_type%></p> -->
-      <!-- <p><%=@event.limited_people%>人</p> -->
-      <!-- <p>联系人：<%=@event.name%></p>
-      <p>电话：<%=@event.mobile%></p><hr> -->      
+    <table style="width:100%">
+      <tr>
+        <th><%=t(:event)%> No.</th>
+        <td>#<%= @event.id.to_s.rjust(10,'0') %></td>
+      </tr>
+      <tr>
+        <th><%=t(:start_time)%></th>
+        <td><%= @event.start_time.strftime("%Y-%m-%d %H:%M") %></td>
+      </tr>
+      <tr>
+        <th><%=t(:end_time)%></th>
+        <td><%=@event.end_time.strftime("%Y-%m-%d %H:%M")%></td>
+      </tr>
+      <tr>
+        <th><%=t(:address)%></th>
+        <td><%=@event.address%></td>
+      </tr>
+      <tr>
+        <th><%=t(:limited_people)%></th>
+        <td><%=@event.limited_people%></td>
+      </tr>
+      <tr>
+        <th><%=t(:participants)%></th>
+        <td><%=@participants.count%></td>
+      </tr>
+      <tr>
+        <th><%=t(:price)%></th>
+        <td>￥<%=@event.price%></td>
+      </tr>
+      <tr>
+        <td colspan='2'><%= @event.body.html_safe  %></td>
+      </tr>
+    </table>
+    
 
-     <!--   <%= link_to t(:comment), new_event_comment_path(@event),
-                              class:"tiny button radius" if signed_in? %>
-       <%= link_to t(:rsvp), new_event_participant_path(@event),
-                              class:"tiny button radius" if signed_in? %>
-       -->
-
-<% if current_user == @event.user %>
-<div class="row">
-  <div class="small-12 columns">
+    <% if current_user == @event.user %>
+    <div class="row">
+      <div class="small-12 columns">
         <%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_event_path(@event), class:"tiny button radius" %>
         <%= link_to '<i class="fa fa-times"></i>'.html_safe + ' ' + t(:delete), @event, method: :delete,
-                  class:"tiny button alert radius",
-                  data: {confirm: '?'} %>
-  </div>
-</div>
-<% end %>
-<div class="row">
-  <div class="small-12 columns">
-      <ul class="tabs" data-tab role="tablist">
-        <li class="tab-title active">
-          <a href="#participants"><i class="fa fa-user-plus"></i><%=t(:goings)%> (<%=@event.participants_count%>)</a>
-        </li>
-        <li class="tab-title">
-          <a href="#comments"><i class="fa fa-comments"></i><%=t(:comments)%> (<%=@event.comments_count%>)</a>
-        </li>
-      </ul> 
-    <div class="tabs-content panel">
-      <div class="content active" id="participants">
-        <%=render 'participants/form' ,:locals=>{@parent=>@parent,@participant=>@participant} if current_user%>
-        <%= render @participants %>
-      </div>
-      <div class="content" id="comments">
-        <%=render 'comments/form' ,:locals=>{@parent=>@parent,@comment=>@comment} if current_user%>
-        <div class="comments-list">
-        <%= render @comments %>
+        class:"tiny button alert radius",
+          data: {confirm: '?'} %>
         </div>
-        <a style="width:100%" href="#" class="more-comments tiny expanded button" data-parent="<%= params[:controller].gsub(/\w$/, '') %>" data-count="<%= @comments.count %>" data-id="<%= @event.id %>" data-url="/<%= params[:controller] %>/more_comments"><%= t(:more) %></a>
-     </div>
-   </div>
- </div>
-</div>
+      </div>
+      <% end %>
+      <div class="row">
+        <div class="small-12 columns">
+          <ul class="tabs" data-tab role="tablist">
+            <li class="tab-title active">
+              <a href="#participants"><i class="fa fa-user-plus"></i><%=t(:goings)%> (<%=@event.participants_count%>)</a>
+            </li>
+            <li class="tab-title">
+              <a href="#comments"><i class="fa fa-comments"></i><%=t(:comments)%> (<%=@event.comments_count%>)</a>
+            </li>
+          </ul> 
+          <div class="tabs-content panel">
+            <div class="content active" id="participants">
+              <%=render 'participants/form' ,:locals=>{@parent=>@parent,@participant=>@participant} if current_user%>
+              <%= render @participants %>
+            </div>
+            <div class="content" id="comments">
+              <%=render 'comments/form' ,:locals=>{@parent=>@parent,@comment=>@comment} if current_user%>
+              <div class="comments-list">
+                <%= render @comments %>
+              </div>
+              <a style="width:100%" href="#" class="more-comments tiny expanded button" data-parent="<%= params[:controller].gsub(/\w$/, '') %>" data-count="<%= @comments.count %>" data-id="<%= @event.id %>" data-url="/<%= params[:controller] %>/more_comments"><%= t(:more) %></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="allmap"></div>
+      
+
+      <script type="text/javascript">
+  //百度地图API功能 
+  var map = new BMap.Map("allmap");          // 创建地图实例  
+var point = new BMap.Point(116.404, 39.915);  // 创建点坐标  
+map.centerAndZoom(point, 15);   
+</script>
 
 
