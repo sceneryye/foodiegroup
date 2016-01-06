@@ -1,7 +1,5 @@
 //= require foundation-datetimepicker
 
-//= require ckeditor/init
-
 //倒计时
 
 $('.groupbuy-list').each(function(){

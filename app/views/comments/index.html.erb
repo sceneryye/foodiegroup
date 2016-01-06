@@ -3,11 +3,11 @@
 </div>
 <div class="panel"  style="margin:0px;">
   <%=render @comments%>
-  <% if params[:groupbuy_id] || params[:event_id] %>
-  <% if Groupbuy.find(params[:groupbuy_id] || params[:event_id]).comments.count > @comments.count %>
-  <% end %>
+  <%# if params[:groupbuy_id] || params[:event_id] %>
+  <%# if Groupbuy.find(params[:groupbuy_id] || params[:event_id]).comments.count > @comments.count %>
+  <%# end %>
   <div class="more-comments" style="text-align:center;">
-  	<%=link_to t(:more), groupbuy_path(params[:groupbuy_id])%>
+  	<%=link_to t(:more), @url%>
   </div>
-  <% end %>
+  <%# end %>
 </div>

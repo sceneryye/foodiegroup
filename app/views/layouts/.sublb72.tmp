@@ -20,6 +20,7 @@
 
 <body>
   <div class="body">
+  session_user_id<%=session[:user_id]%>
     <div class="off-canvas-wrap docs-wrap" data-offcanvas>
       <div class="inner-wrap">
         <%=render '/layouts/top_bar'%>

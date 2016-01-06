@@ -11,10 +11,13 @@ class CommentsController < ApplicationController
   before_action only: [:new, :create,:index] {
     if params[:topic_id]
       @parent = Topic.find(params[:topic_id])
+      @url = topic_path(@parent)
     elsif params[:event_id]
       @parent = Event.find(params[:event_id])
+      @url = event_path(@parent)
     elsif params[:groupbuy_id]
       @parent = Groupbuy.find(params[:groupbuy_id])
+      @url = groupbuy_path(@parent)
     end
   }
 
@@ -29,13 +32,7 @@ class CommentsController < ApplicationController
 
     if @comment.save
       notice = '添加评论成功'
-      if params[:topic_id]
-        redirect_to topic_url(@parent), notice: notice
-      elsif  params[:event_id]
-        redirect_to event_url(@parent), notice: notice
-      elsif  params[:groupbuy_id]
-        redirect_to groupbuy_url(@parent), notice: notice
-      end
+      redirect_to @url, notice: notice      
     else
       render :new
     end
@@ -75,6 +72,7 @@ class CommentsController < ApplicationController
   def index
     @comment = @parent.comments.new
     @comments = @parent.comments.includes(:user).limit(3)
+    @
     render layout: nil
   end
 
