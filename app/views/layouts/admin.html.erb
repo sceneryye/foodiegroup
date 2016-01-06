@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="http://cdn.bootcss.com/foundation/6.0.5/css/foundation.min.css">
   <%#= javascript_include_tag "admin/reports" %>
   <%= javascript_include_tag "#{params[:controller]}" %>
-  <script type="text/javascript" src="/assets/sweetalert.min.js"></script>
+  <%= javascript_include_tag "sweetalert.min" %>
   <%= csrf_meta_tags %>
 </head>
 
