@@ -101,8 +101,8 @@
   var map = new BMap.Map("container");
   var x = "<%= @event.x_coordinate %>";          // 创建地图实例
   var y = "<%= @event.y_coordinate %>";          // 创建地图实例
-  if(x && y) {          
-    var point = new BMap.Point(x, y);
+  if(x && y) {
+    var point = new BMap.Point(parseFloat(x), parseFloat(y));
     map.centerAndZoom(point, 15);
   }
   else {  // 创建点坐标
