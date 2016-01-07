@@ -111,12 +111,9 @@
  </div>
  <% end %>
 </div>
-<div class="upload-forms">
-  <div class="upload-form">
-    <%= form_tag groupbuys_upload_path, remote: true, :html => {:multipart => true, class: "upload-file"} do %>
-    <label for="file">File to Upload</label>
-    <%= file_field_tag :file %>
-    <div class="submit-button">提交</div>
-    <% end %>
-  </div>
-</div>
+
+<%= form_tag groupbuys_upload_path, :html => {:multipart => true, class: "upload-file"} do %>
+<label for="file">File to Upload</label>
+<%= file_field_tag :file %>
+<div class="submit-button">提交</div>
+<% end %>
