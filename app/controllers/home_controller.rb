@@ -23,7 +23,7 @@ class HomeController < ApplicationController
 				redirect_to  register_path
 			end
 		end
-
+		Rails.logger.info "#################{current_user}"
 		if current_user.nil?
 			session[:locale] = 'zh'
 		end
