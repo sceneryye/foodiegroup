@@ -18,7 +18,7 @@ class HomeController < ApplicationController
 					u.nickname = session[:nickname]
 				end.save
 
-				login user.first
+				login @user
 				redirect_to root_path #清空传过来的参数
 			else
 				redirect_to  register_path
