@@ -11,12 +11,11 @@ class HomeController < ApplicationController
 			session[:avatar] = params[:avatar]
 			session[:nickname] = params[:nickname]
 			user = User.where(:weixin_openid=>session[:openid])
-			
+			Rails.logger.info "#################{user.nickname}###################{session[:nickname]}"
 			if user.size>0				
-				@user = user.first do |u|
-					u.avatar = session[:avatar]
-					u.nickname = session[:nickname]
-				end
+				@user = user.first 
+				@user.avatar = session[:avatar]
+				@user.nickname = session[:nickname]
 				@user.save
 				login @user
 				redirect_to root_path #清空传过来的参数
