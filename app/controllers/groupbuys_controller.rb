@@ -135,7 +135,8 @@ def create
     end
   end
 
-  
+  def upload
+  end
 
   def destroy
     @groupbuy = Groupbuy.find(params[:id])
