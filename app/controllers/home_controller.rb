@@ -16,8 +16,8 @@ class HomeController < ApplicationController
 				@user = user.first do |u|
 					u.avatar = session[:avatar]
 					u.nickname = session[:nickname]
-				end.save
-
+				end
+				@user.save
 				login @user
 				redirect_to root_path #清空传过来的参数
 			else
