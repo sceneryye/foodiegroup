@@ -13,6 +13,6 @@ $(function(){ $(document).foundation(); });
 //   });
 
 
-$('.submit-buuton').on('click', function(){
+$('.submit-button').on('click', function(){
   $(this).parent().submit();
 })
