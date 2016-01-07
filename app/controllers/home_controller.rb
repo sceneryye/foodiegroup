@@ -11,7 +11,6 @@ class HomeController < ApplicationController
 			session[:avatar] = params[:avatar]
 			session[:nickname] = params[:nickname]
 			user = User.where(:weixin_openid=>session[:openid])
-			Rails.logger.info "#################{user.nickname}###################{session[:nickname]}"
 			if user.size>0				
 				@user = user.first 
 				@user.avatar = session[:avatar]
@@ -23,8 +22,6 @@ class HomeController < ApplicationController
 				redirect_to  register_path
 			end
 		end
-		Rails.logger.info "#################{current_user.nickname}###################{session[:nickname]}"
-		Rails.logger.info "#################{profile_path(current_user.nickname)}###################{session[:nickname]}"
 		if current_user.nil?
 			session[:locale] = 'zh'
 		end
