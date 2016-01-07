@@ -12,11 +12,11 @@ class HomeController < ApplicationController
 			session[:nickname] = params[:nickname]
 			user = User.where(:weixin_openid=>session[:openid])
 			if user.size>0				
-				@user = user.first 
-				@user.avatar = session[:avatar]
-				@user.nickname = session[:nickname]
-				@user.save
-				login @user
+				@user = user.first do |u|
+					u.avatar = session[:avatar]
+					u.nickname = session[:nickname]
+				end.save
+				login user.first
 				redirect_to root_path #清空传过来的参数
 			else
 				redirect_to  register_path

@@ -71,12 +71,13 @@
     <div class="columns small-12 text-right">
       <%=link_to t(:more), groupbuys_path%>
     </div>
+    <hr />
   <% else %>
     <p><%= t(:no_groupbuys) %></p> 
     <hr />
   <% end%>
 </div>
-<hr />
+
 
 <div class="events-index">
   <% if @events && @events.size>0%>
@@ -90,7 +91,7 @@
     <hr />
   <% end%>
 </div>
-<hr />
+
 
 <div class="topics-index">
   <% if @topics%>

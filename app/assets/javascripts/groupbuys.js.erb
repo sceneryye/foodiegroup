@@ -2,11 +2,20 @@
 
 //= require ckeditor/init
 
-function checkPositiveNumber(obj){
+function checkPositiveInteger(obj){
   var num = obj.val();
   if(isNaN(num) || num < 1 || num % 1 != 0) {
     obj.val('');
     var errmsg = '只能为正整数！';
+    alert(errmsg);
+  }
+}
+
+function checkPositiveNumber(obj){
+  var num = obj.val();
+  if(isNaN(num) || num < 1 ) {
+    obj.val('');
+    var errmsg = '只能为正数！';
     alert(errmsg);
   }
 }
@@ -102,6 +111,9 @@ else {
 
 // 价格不能为负数
 $('#groupbuy_price').on('change', function(){
+  checkPositiveNumber($(this));
+})
+$('#groupbuy_market_price').on('change', function(){
   checkPositiveNumber($(this));
 })
 
