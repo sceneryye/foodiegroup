@@ -1,7 +1,7 @@
 #encoding:utf-8
 require 'rest-client'
 class GroupbuysController < ApplicationController
-before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
+  before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
   def index
     @groupbuys = Groupbuy.where(locale: session[:locale]).includes(:user)
   end
@@ -136,6 +136,17 @@ def create
   end
 
   def upload
+    session[:pic_url] ||= ''
+    uploaded_io = params[:file]
+    if !uploaded_io.blank?
+      extension = uploaded_io.original_filename.split('.')
+      filename = "#{Time.now.strftime('%Y%m%d%H%M%S')}.#{extension[-1]}"
+      filepath = "#{PIC_PATH}/groupbuys/#{filename}"
+      File.open(filepath, 'wb') do |file|
+        file.write(uploaded_io.read)
+      end
+      session[:pic_url] += ",/groupbuys/#{filename}"
+    end
   end
 
   def destroy
