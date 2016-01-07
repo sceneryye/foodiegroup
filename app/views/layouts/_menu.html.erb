@@ -32,7 +32,6 @@
     else
       @user_url= login_path
     end%>
-    <% Rails.logger.info [current_user, @user_url] %>
   <%=link_to @user_url,class:"item #{@users_active}" do%>
     <i class="fa fa-user"></i>
   <%end%>
