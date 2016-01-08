@@ -11,7 +11,7 @@
   <%= form_for @groupbuy, data: {abide: ''}  ,:html => {class: 'new-form'} do|f| %>
   <%= render 'layouts/form_errors', object: @groupbuy %>
   <%#= f.hidden_field :pic_url, '', class: 'pic_urls' %>
-  <input type="hidden", name='pic_url' value='' class="pic_urls">
+  <input type="hidden", name='pic_url' value="<%= params[:id].present? ? @groupbuy.pic_url : '' %>" class="pic_urls">
   <div>
     <%= f.text_field :title, required: true,placeholder: "#{t(:groupbuy)} #{t(:title)}" %>
     <!--  <%#= show_error_message('团购名称，不能为空！') %> -->

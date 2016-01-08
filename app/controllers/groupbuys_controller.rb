@@ -114,21 +114,11 @@ def create
       end
     end
 
-    uploaded_io = params[:file]
-    if !uploaded_io.blank?
-      extension = uploaded_io.original_filename.split('.')
-      filename = "#{Time.now.strftime('%Y%m%d%H%M%S')}.#{extension[-1]}"
-      filepath = "#{PIC_PATH}/groupbuys/#{filename}"
-      File.open(filepath, 'wb') do |file|
-        file.write(uploaded_io.read)
-      end
-      groupbuy_params.merge!(:pic_url=>"/groupbuys/#{filename}")
 
-    end
 
 
     @groupbuy = Groupbuy.find(params[:id])
-    if @groupbuy.update(groupbuy_params)
+    if @groupbuy.update(groupbuy_params) && @groupbuy.update(pic_url: params[:pic_url])
       redirect_to groupbuy_url(@groupbuy), notice: '团购修改成功'
     else
       render :edit
