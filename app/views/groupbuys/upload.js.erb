@@ -1,4 +1,4 @@
-var url =  'public' + "<%= @pic_urls %>".split(',')[1];
+var url =  'http://www.trade-v.com:5000' + "<%= @pic_urls %>".split(',')[1];
 $('.upload-forms').find('input[name="commit"]:last').val('完成');
 $('.upload-forms').find('img:last').attr('src', url);
 $('.upload-forms').find('.pic-show:last').show();
