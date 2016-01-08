@@ -147,7 +147,10 @@ def create
     url = params[:url]
     pic_url = @groupbuy.pic_url
     new_pic_url = pic_url.gsub(url, '')
+    pic_name = url.split('/').last
     if @groupbuy.update(pic_url: new_pic_url)
+      `cd "#{Rails.root}"/public/groupbuys`
+      `rm "#{pic_name}"`
       return render text: new_pic_url
     else
       return render text: 'failed'
