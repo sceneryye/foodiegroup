@@ -123,9 +123,13 @@
  <% end %>
 </div>
 
-<%= form_tag groupbuys_upload_path, :multipart => true, html: {class: "upload-file"} do %>
+<%= form_tag groupbuys_upload_path, :multipart => true, remote: true, html: {class: "upload-file"} do %>
 <%= csrf_meta_tags %>
 <label for="file">File to Upload</label>
 <%= file_field_tag :file %>
 <%= submit_tag '提交' %>
 <% end %>
+<br>
+<br>
+<br>
+<br>
