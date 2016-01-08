@@ -1,4 +1,4 @@
-var url =  "<%= @pic_urls %>".split(',')[1];
+var url =  "<%= @pic_urls %>".split(',')[1].replace('/', '');
 $('.upload-forms').find('input[name="commit"]:last').val('完成');
 $('.upload-forms').find('img:last').attr('src', url);
 $('.upload-forms').find('.pic-show:last').show();
