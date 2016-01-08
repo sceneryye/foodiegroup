@@ -1,2 +1,16 @@
-<% provide :title, t(:edit_groupbuy) %>
-<%= render 'form' %>
+<div class="edit-groupbuy">
+<% @pic.each do |pic| %>
+  <div class="columns small-8 medium-6 large-4">
+    <%= image_tag pic %>
+    <i class="fa fa-remove delete-pic"></i>
+  </div>
+  
+  <% end %>
+  <% provide :title, t(:edit_groupbuy) %>
+  <%= render 'form' %>
+
+  
+</div>
+<script>
+
+</script>

@@ -9,6 +9,8 @@ class GroupbuysController < ApplicationController
   def show
 
     @parent = @groupbuy  = Groupbuy.find(params[:id])
+    @title_pic = @groupbuy.pic_url.split(',').reject{|x| x.blank?}[0]
+    @content_pic = @groupbuy.pic_url.split(',').reject{|x| x.blank?}[1..-1]
     @active = @groupbuy.comments.count > 10 ? true : false
     @participant = @parent.participants.new
     @comment = @parent.comments.new
@@ -29,28 +31,29 @@ class GroupbuysController < ApplicationController
 
    #@amount = Foodie::Participant.where
 
-    if signed_in? 
+   if signed_in? 
      @plus_menu = [{name: '<i class="fa  fa-comment"></i>'.html_safe+' '+t(:new_comment), path: new_groupbuy_comment_path(@groupbuy)},
       {name: '<i class="fa fa-user-plus"></i>'.html_safe+' '+t(:buy), path: new_groupbuy_participant_path(@groupbuy)}
-      ]
-      if @participants.where(:user_id => current_user.id).size>0
-        @again = '再次'     
-      else
-        @again = '立即'
-      end
+    ]
+    if @participants.where(:user_id => current_user.id).size>0
+      @again = '再次'     
+    else
+      @again = '立即'
     end
-
   end
 
-  def new
-   @groupbuy = Groupbuy.new
-   session[:pic_file] = nil
-  end
+end
 
-  def create
-    @groupbuy = Groupbuy.new(groupbuy_params)
-    @groupbuy.user = current_user
-    @groupbuy.locale = session[:locale]
+def new
+ @groupbuy = Groupbuy.new
+ session[:pic_file] = nil
+end
+
+def create
+  @groupbuy = Groupbuy.new(groupbuy_params)
+  @groupbuy.pic_url = params[:pic_url]
+  @groupbuy.user = current_user
+  @groupbuy.locale = session[:locale]
 
     # uploaded_io = params[:file]
     # if !uploaded_io.blank?
@@ -63,11 +66,6 @@ class GroupbuysController < ApplicationController
     #       # groupbuy_params.merge!(:pic_url=>"/groupbuys/#{filename}")
     #       @groupbuy.pic_url = "/groupbuys/#{filename}"
     # end
-     groupbuy_params.merge!(session[:pic_file])
-     session[:pic_file] = nil
-     
-     return render :text=>  groupbuy_params
-
     if @groupbuy.save
       post_url = "http://www.trade-v.com/send_group_message_api"
       # openids = User.plunk(:weixin_openid)
@@ -91,6 +89,7 @@ class GroupbuysController < ApplicationController
 
   def edit
     @groupbuy = Groupbuy.find(params[:id])
+    @pic = @groupbuy.pic_url.split(',').reject{|x| x.blank?}
   end
 
   def update
@@ -137,20 +136,31 @@ class GroupbuysController < ApplicationController
   end
 
   def upload
-
-    session[:pic_url] ||= ''
     uploaded_io = params[:file]
+    
     if !uploaded_io.blank?
       extension = uploaded_io.original_filename.split('.')
-      filename = "#{Time.now.strftime('%Y%m%d%H%M%S')}.#{extension[-1]}"
-      filepath = "#{Rails.root}/public/groupbuys/#{filename}"
+      filename = "#{Time.now.strftime('%Y%m%d%H%M%S%L')}.#{extension[-1]}"
+      filepath = "#{PIC_PATH}/groupbuys/#{filename}"
       File.open(filepath, 'wb') do |file|
         file.write(uploaded_io.read)
       end
-      session[:pic_url] += ",/groupbuys/#{filename}"
+      @pic_urls = ',/groupbuys/' + filename
       respond_to do |format|
         format.js
       end
+    end
+  end
+
+  def destroy_pic
+    @groupbuy = Groupbuy.find(params[:id])
+    url = params[:url]
+    pic_url = @groupbuy.pic_url
+    new_pic_url = pic_url.gsub(url, '')
+    if @groupbuy.update(pic_url: new_pic_url)
+      return render text: new_pic_url
+    else
+      return render text: 'failed'
     end
   end
 

@@ -1,3 +1,7 @@
-
-
-console.log('ok');
+var url =  "<%= @pic_urls %>".split(',')[1];
+$('.upload-forms').find('input[name="commit"]:last').val('完成');
+$('.upload-forms').find('img:last').attr('src', url);
+$('.upload-forms').find('.pic-show:last').show();
+$('.upload-forms').append($('.upload-form-hidden').html());
+var urls = $('.pic_urls').val() + "<%= @pic_urls %>";
+$('.pic_urls').val(urls);

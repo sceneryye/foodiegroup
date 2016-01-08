@@ -8,6 +8,7 @@ RailsOnForum::Application.routes.draw do
     get 'tags/create'
 
     post '/groupbuys/upload', to: 'groupbuys#upload'
+    post '/groupbuys/destroy_pic', to: 'groupbuys#destroy_pic'
 
     get 'tags/update'
 

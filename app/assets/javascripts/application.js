@@ -1,7 +1,7 @@
 //= require jquery
 //= require jquery_ujs
-//= require foundation
 //= require jquery.remotipart
+//= require foundation
 
 
 $(function(){ $(document).foundation(); });
