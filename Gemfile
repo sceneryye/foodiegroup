@@ -5,6 +5,9 @@ gem 'rails_12factor', group: :production
 gem 'rails', '4.2.5'
 gem 'mysql2'
 
+#Rails upload files through ajax
+gem 'remotipart', '~> 1.2'
+
 gem "faye-websocket"
 gem "sinatra"
 # gem "puma"
