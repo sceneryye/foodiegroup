@@ -2,7 +2,7 @@
   <div class="row">
     <div class="columns small-4">
       <%= link_to groupbuy,class: "th" do %>
-        <%= image_tag groupbuy.pic_url.split(',')[1] %>
+        <%= image_tag groupbuy.pic_url.split(',').reject{|x|x.blank?}[0] %>
       <%end%>
     </div>
     <div class="columns small-8">
