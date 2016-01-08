@@ -148,8 +148,9 @@ class GroupbuysController < ApplicationController
         file.write(uploaded_io.read)
       end
       session[:pic_url] += ",/groupbuys/#{filename}"
-      render 'upload.js'
-
+      respond_to do |format|
+        format.js
+      end
     end
   end
 

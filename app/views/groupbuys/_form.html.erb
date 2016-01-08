@@ -123,7 +123,7 @@
  <% end %>
 </div>
 
-<%= form_tag groupbuys_upload_path, :multipart => true, remote: true, html: {class: "upload-file"} do %>
+<%= form_tag groupbuys_upload_path, remote: true, html: {:multipart => true, class: "upload-file"} do %>
 <%= hidden_field_tag request_forgery_protection_token.to_s, form_authenticity_token %>
 <label for="file">File to Upload</label>
 <%= file_field_tag :file %>
