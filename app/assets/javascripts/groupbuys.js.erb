@@ -129,7 +129,7 @@ $('#groupbuy_goods_maximal').on('change', function(){
 $('.delete-pic').on('click', function(){
   var url = ',/' + $(this).parent().find('img').attr('src').split('/').slice(-2).join('/');
   var id = $(this).parent().data('id');
-  var post_url = "<%= groupbuys_destroy_pic_path %>";
+  var post_url = $(this).parent().data('posturl');
   var that = $(this);
   $.ajax({
     url: post_url,

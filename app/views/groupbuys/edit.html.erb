@@ -1,6 +1,6 @@
 <div class="edit-groupbuy">
 <% @pic.each do |pic| %>
-  <div class="columns small-8 medium-6 large-4" data-id="<%= params[:id] %>">
+  <div class="columns small-8 medium-6 large-4" data-id="<%= params[:id] %>" data-posturl="<%= groupbuys_destroy_pic_path %>">
     <%= image_tag pic %>
     <i class="fa fa-remove delete-pic"></i>
   </div>
