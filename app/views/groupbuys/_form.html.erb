@@ -1,4 +1,13 @@
+
 <div class="small-12 columns">
+<div class="hidden">
+<form id ="file_form" action='upload' remote="true" enctype="multipart/form-data" accept-charset="UTF-8" method="post">
+<input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="WUHTyYOI1b5+1v5SzEsqY6FoK2z0GFvB5tW3FGSjOIHwhv+kLtMT4yPjbM8w7MZXq3PTuRutm+FvDxrfO/QXeA==" />
+  <label for="file">File to Upload</label>
+  <input type="file" id ="file" name="file"%>
+  <div class="submit-button"><input type="submit"></div>
+</form>
+  </div>
   <%= form_for @groupbuy, data: {abide: ''}  ,:html => {:multipart => true} do|f| %>
   <%= render 'layouts/form_errors', object: @groupbuy %>
   <div>
@@ -20,95 +29,97 @@
      </thead>
    </table>
  </div>
- <div>
+ <div class="file_upload">
+  <input type="file" name="file" onchange="transfile(this);">
+  <script>
+  function transfile(this_file){
+    document.getElementById('file').defaultValue = this_file.value;
+    alert(document.getElementById('file').defaultValue);
+    // document.getElementById('file_form').submit();
+  }
+  </script>
+<!-- 
   <%#= f.label :pic_url %>
-  <div class="left"><%=t(:pic_url)%></div>
-  <div class="left picture-upload"><%= file_field_tag :file%></div>
+  <div class="left"><%#=t(:pic_url)%></div>
+  <div class="left picture-upload"><%#= file_field_tag :file%></div>
   <div class="clear"></div>
   <!-- <%#= show_error_message('请上传活动图片') %> -->
-  <%#= f.text_field :pic_url, required: true%>
+  <!-- <%#= f.text_field :pic_url, required: true%> -->
+  </div> 
 </div>
-<div class='groupbuy-conditions row collapse'>
-  <div class="small-3 columns">
-    <span class="price postfix">
-      <%= t(:price) %>
-    </span>
-  </div>
-  <div class="small-2 columns">
-    <span class="price postfix">
-      <!-- <%#= f.label :price %> -->
-      <%= f.text_field :price %>
-    </span>
+  <div class='groupbuy-conditions row collapse'>
+    <div class="small-3 columns">
+      <span class="price postfix">
+        <%= t(:price) %>
+      </span>
+    </div>
+    <div class="small-2 columns">
+      <span class="price postfix">
+        <!-- <%#= f.label :price %> -->
+        <%= f.text_field :price %>
+      </span>
+    </div>
+
+    <div class="small-5 columns">
+      <span class="market_price postfix">
+        <%= t(:market_price) %>
+      </span>
+    </div>
+    <div class="small-2 columns">
+      <span class="market_price postfix">
+        <%= f.text_field :market_price %>
+      </span>
+    </div>
+
+
+    <div class="small-3 columns">
+      <span class="goods-unit postfix">
+        <%= t(:goods_unit) %>
+      </span>
+    </div>
+    <div class="small-2 columns">
+      <span class="goods-unit postfix">
+        <%= f.text_field :goods_unit %>
+      </span>
+    </div>
+    
+    <div class="small-5 columns">
+      <span class="market_price postfix">
+        <%= t(:goods_minimal) %>
+      </span>
+    </div>
+    <div class="small-2 columns">
+      <span class="goods-minimal postfix">
+        <!-- <%#= f.label :goods_minimal %> -->
+        <%= f.text_field :goods_minimal %>
+      </span>
+    </div>
+
   </div>
 
-  <div class="small-5 columns">
-    <span class="market_price postfix">
-      <%= t(:market_price) %>
-    </span>
+  <div class="row collapse goods-maximal">
+    <div class="small-3 columns">
+      <span class="postfix"><%= t(:inventory) %></span>
+    </div>
+    <div class="small-6 columns">
+      <span class="postfix">
+        <%= f.text_field :goods_maximal %>
+      </span>
+    </div>
+    <div class="small-3 columns">
+      <span class="postfix goods-unit-blank"></span>
+    </div>
   </div>
-  <div class="small-2 columns">
-    <span class="market_price postfix">
-      <%= f.text_field :market_price %>
-    </span>
-  </div>
-
-
-  <div class="small-3 columns">
-    <span class="goods-unit postfix">
-      <%= t(:goods_unit) %>
-    </span>
-  </div>
-  <div class="small-2 columns">
-    <span class="goods-unit postfix">
-      <%= f.text_field :goods_unit %>
-    </span>
-  </div>
-  
-  <div class="small-5 columns">
-    <span class="market_price postfix">
-      <%= t(:goods_minimal) %>
-    </span>
-  </div>
-  <div class="small-2 columns">
-    <span class="goods-minimal postfix">
-      <!-- <%#= f.label :goods_minimal %> -->
-      <%= f.text_field :goods_minimal %>
-    </span>
-  </div>
-
-</div>
-
-<div class="row collapse goods-maximal">
-  <div class="small-3 columns">
-    <span class="postfix"><%= t(:inventory) %></span>
-  </div>
-  <div class="small-6 columns">
-    <span class="postfix">
-      <%= f.text_field :goods_maximal %>
-    </span>
-  </div>
-  <div class="small-3 columns">
-    <span class="postfix goods-unit-blank"></span>
-  </div>
-</div>
-
- <!--  <div>
-    <%= f.text_field :name, required: true, placeholder: '姓名'%>
-    <%= show_error_message('活动联系人')%>
-  </div>
-  <div>
-    <%= f.text_field :mobile, required: true, placeholder: '手机'%>
-    <%#= show_error_message('活动联系电话')%>
-  </div> -->
   <div>
     <%#= f.label :body %>
     <%= f.text_area :body,placeholder: t(:body), rows: 5%>
     <!-- <%#= f.cktext_area :body, :class => 'someclass', :ckeditor => {:language => 'zh'} , required: true%> -->
     <!-- <%#= show_error_message('内容请不要超过1千字')%> -->
   </div>
+
   <div>
    <%= f.submit class:'tiny button radius right' %>
- </div>
+  </div>
  <% end %>
 </div>
 
