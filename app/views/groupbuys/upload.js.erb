@@ -1,7 +1,10 @@
 var url =  'http://www.trade-v.com:5000' + "<%= @pic_urls %>".split(',')[1];
-$('.upload-forms').find('input[name="commit"]:last').val('完成');
+//var url =  "<%= @pic_urls %>".split(',')[1];
+console.info(url);
+$('.upload-forms').find('input[name="commit"]:last').val('继续上传');
+$('.upload-forms').append($('.show-pics').html());
 $('.upload-forms').find('img:last').attr('src', url);
-$('.upload-forms').find('.pic-show:last').show();
-$('.upload-forms').append($('.upload-form-hidden').html());
+//$('.upload-forms').find('.pic-show:last').show();
+//$('.upload-forms').append($('.upload-form-hidden').html());
 var urls = $('.pic_urls').val() + "<%= @pic_urls %>";
 $('.pic_urls').val(urls);

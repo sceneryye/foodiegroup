@@ -1,6 +1,6 @@
 
 <div class="small-12 columns">
-  
+
   <%= form_for @groupbuy, data: {abide: ''}  ,:html => {class: 'new-form'} do|f| %>
   <%= render 'layouts/form_errors', object: @groupbuy %>
   <%#= f.hidden_field :pic_url, '', class: 'pic_urls' %>
@@ -113,30 +113,16 @@
         <div class="columns small-4">
           <%= submit_tag '提交' %>
         </div>
-        <div class="columns small-3 pic-show" style="display: none;">
-          <img src="" style="width:20%;">
-        </div>
+        
       </div>
       <% end %>
+
+    </div>
+  </div>
+  <div class="show-pics">
+  <div class="columns small-3 pic-show">
+      <img src="" style="width:20%;">
     </div>
   </div>
 
-  <div class="upload-form-hidden" style="display: none;">
-    <%= form_tag groupbuys_upload_path, remote: true, html: {:multipart => true, class: "upload-file"} do %>
-    <%= hidden_field_tag request_forgery_protection_token.to_s, form_authenticity_token %>
-    <div class="row">
-      <div class="columns small-4">
-        <%= file_field_tag :file %>
-      </div>
-      <div class="columns small-4">
-        <%= submit_tag '提交' %>
-      </div>
-      <div class="columns small-3 pic-show" style="display: none;">
-        <img src="" style="width:20%;">
-      </div>
-    </div>
-    <% end %>
-  </div>
-</div>
-
-
+  
