@@ -37,7 +37,7 @@
         <td colspan='2'>
         <% @content_pic.each do |pic| %>
           <div>
-            <%= image_tag pic %>
+            <%= image_tag pic.try(:image).present? ? pic.image : pic %>
           </div>
           <% end %>
           <%= @groupbuy.body.html_safe  %>

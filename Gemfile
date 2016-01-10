@@ -8,6 +8,10 @@ gem 'mysql2'
 #Rails upload files through ajax
 gem 'remotipart', '~> 1.2'
 
+#picture process
+gem 'carrierwave'
+gem "mini_magick"
+
 gem "faye-websocket"
 gem "sinatra"
 # gem "puma"

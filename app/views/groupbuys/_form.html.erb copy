@@ -1,12 +1,10 @@
 
 <div class="small-12 columns">
 
-  <%= form_for @groupbuy, data: {abide: ''}  ,:html => {multipart: true, class: 'new-form'} do|f| %>
+  <%= form_for @groupbuy, data: {abide: ''}  ,:html => {class: 'new-form'} do|f| %>
   <%= render 'layouts/form_errors', object: @groupbuy %>
   <%#= f.hidden_field :pic_url, '', class: 'pic_urls' %>
   <input type="hidden", name='pic_url' value="<%= params[:id].present? ? @groupbuy.pic_url : '' %>" class="pic_urls">
-  <!--images[] returned to the album as an array. We use file_field_tag since images is not @album's attribute-->
-    <%= file_field_tag "images[]", type: :file, multiple: true %>
   <div>
     <%= f.text_field :title, required: true,placeholder: "#{t(:groupbuy)} #{t(:title)}" %>
     <!--  <%#= show_error_message('团购名称，不能为空！') %> -->
@@ -92,9 +90,10 @@
   </div>
 </div>
 <div>
-
+  <%#= f.label :body %>
   <%= f.text_area :body,placeholder: t(:body), rows: 5%>
-
+  <!-- <%#= f.cktext_area :body, :class => 'someclass', :ckeditor => {:language => 'zh'} , required: true%> -->
+  <!-- <%#= show_error_message('内容请不要超过1千字')%> -->
 </div>
 
 <div>
@@ -102,6 +101,28 @@
 </div>
 <% end %>
 </div>
+<div class="columns small-12">
+  <div class="upload-forms" style="margin-bottom: 50px;">
+    <div class="upload-form">
+      <%= form_tag groupbuys_upload_path, remote: true, html: {:multipart => true} do %>
+      <%= hidden_field_tag request_forgery_protection_token.to_s, form_authenticity_token %>
+      <div class="row">
+        <div class="columns small-4">
+          <%= file_field_tag :file %>
+        </div>
+        <div class="columns small-4">
+          <%= submit_tag '提交' %>
+        </div>
+        
+      </div>
+      <% end %>
 
+    </div>
+  </div>
+  <div class="show-pics">
+  <div class="columns small-3 pic-show">
+      <img src="" style="width:20%;">
+    </div>
+  </div>
 
-
+  

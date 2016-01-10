@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160106102617) do
+ActiveRecord::Schema.define(version: 20160110093309) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255, null: false
@@ -156,6 +156,14 @@ ActiveRecord::Schema.define(version: 20160106102617) do
     t.integer  "status_ship",     limit: 4,                             default: 0
     t.string   "delivery_time",   limit: 255
     t.string   "tracking_number", limit: 255
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.integer  "groupbuy_id", limit: 4
+    t.integer  "event_id",    limit: 4
+    t.string   "image",       limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "tags", force: :cascade do |t|

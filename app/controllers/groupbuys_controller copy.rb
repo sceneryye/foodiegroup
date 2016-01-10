@@ -9,14 +9,8 @@ class GroupbuysController < ApplicationController
   def show
 
     @parent = @groupbuy  = Groupbuy.find(params[:id])
-    if @parent.pic_url.present?
-      @title_pic = @groupbuy.pic_url.split(',').reject{|x| x.blank?}[0]
-      @content_pic = @groupbuy.pic_url.split(',').reject{|x| x.blank?}[1..-1]
-    else
-      @title_pic = @parent.photos.first.try(:image)
-      @content_pic = @parent.photos[1..-1]
-    end
-    
+    @title_pic = @groupbuy.pic_url.split(',').reject{|x| x.blank?}[0]
+    @content_pic = @groupbuy.pic_url.split(',').reject{|x| x.blank?}[1..-1]
     @active = @groupbuy.comments.count > 10 ? true : false
     @participant = @parent.participants.new
     @comment = @parent.comments.new
@@ -73,15 +67,6 @@ def create
     #       @groupbuy.pic_url = "/groupbuys/#{filename}"
     # end
     if @groupbuy.save
-      if params[:images]
-        params[:images].each do |image|
-          @groupbuy.photos.create(image: image)
-        end
-        flash[:notice] = "Your groupbuy has been created."
-      else 
-        flash[:alert] = "Something went wrong."
-      end
-
       post_url = "http://www.trade-v.com/send_group_message_api"
       # openids = User.plunk(:weixin_openid)
       openids = "oVxC9uBr12HbdFrW1V0zA3uEWG8c"

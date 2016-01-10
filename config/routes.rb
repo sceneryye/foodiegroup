@@ -1,9 +1,12 @@
 RailsOnForum::Application.routes.draw do
+  get 'photos/create'
+
   scope '/foodiegroup' do
     get 'groups/show'
     mount ChinaCity::Engine => '/china_city'
 
     resources :user_addresses
+    resources :photos, only: [:create, :destroy, :edit]
 
     get 'tags/create'
 
