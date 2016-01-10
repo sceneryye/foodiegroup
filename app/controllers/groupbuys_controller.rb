@@ -133,6 +133,11 @@ def create
 
 
     @groupbuy = Groupbuy.find(params[:id])
+    if params[:images]
+        params[:images].each do |image|
+          @groupbuy.photos.update(image: image)
+        end
+      end
     if @groupbuy.update(groupbuy_params) && @groupbuy.update(pic_url: params[:pic_url])
       redirect_to groupbuy_url(@groupbuy), notice: '团购修改成功'
     else
