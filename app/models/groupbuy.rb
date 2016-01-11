@@ -6,7 +6,7 @@ class Groupbuy < ActiveRecord::Base
 	has_many :photos, :inverse_of => :groupbuy, :dependent => :destroy
 	accepts_nested_attributes_for :photos, allow_destroy: true
 
-	validates :body,  presence: true
+	validates :body,  length: {in: 5..5000}
 	validates :title,  presence: true
 	validates :end_time, presence: true
 	validates :start_time, presence: true
