@@ -6,7 +6,7 @@ RailsOnForum::Application.routes.draw do
     mount ChinaCity::Engine => '/china_city'
 
     resources :user_addresses
-    resources :photos, only: [:create, :destroy, :index]
+    resources :photos, only: [:create, :destroy, :index, :new]
 
     get 'tags/create'
 

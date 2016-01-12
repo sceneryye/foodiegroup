@@ -1,0 +1,40 @@
+<%= form_for(Photo.new) do |f| %>
+  <% if @photo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
+
+      <ul>
+      <% @photo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row drop">
+    <div id="dropzone" class="fade well col-md-12">Drop files here</div>
+    <div class="col-md-12">
+      <span class="btn btn-success fileinput-button">
+          <i class="glyphicon glyphicon-plus"></i>
+          <span>Select files...</span>
+          <!-- The file input field used as target for the file upload widget -->
+          <%= f.file_field :image, multiple: true, name: "photo[image]" %>
+      </span>
+    </div>
+  </div>
+  <br>
+  <div id="progress" class="progress">
+      <div class="progress-bar progress-bar-success"></div>
+  </div>
+  <div id="preview" class="row">
+    <div class="media hide">
+      <a class="pull-left" href="#">
+        <img class="media-object" data-src="holder.js/64x64" src="" alt="">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading"></h4>
+        <a href="#" class="btn btn-danger delete" role="button">Delete</a>
+      </div>
+    </div>
+  </div>
+<% end %>
