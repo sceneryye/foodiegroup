@@ -53,6 +53,7 @@ end
 def new
  @groupbuy = Groupbuy.new
  session[:pic_file] = nil
+ @photo = Photo.new
 end
 
 def create

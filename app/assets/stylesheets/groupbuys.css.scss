@@ -100,6 +100,27 @@ $primary-color: #008CBA;
     font-size: 0.8em;
   }
 }
+.drop{
+    position: relative;
+    margin: 0;
+
+    #dropzone {
+        position: absolute;
+        height: 80px;
+    }
+
+    #dropzone.in {
+        z-index: 1;
+        border: 5px dashed #e69;
+        text-align: center;
+        font-size: 2em;
+    }
+
+    #dropzone.hover {
+        border: 5px dashed #FDD017;
+        background-color: #FFF380;
+    }
+}
 
 /*******************groupbuy new page******************/
 

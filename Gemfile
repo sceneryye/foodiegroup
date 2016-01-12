@@ -11,6 +11,7 @@ gem 'remotipart', '~> 1.2'
 #picture process
 gem 'carrierwave'
 gem "mini_magick"
+gem "jquery-fileupload-rails"
 
 gem "faye-websocket"
 gem "sinatra"
