@@ -1,7 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 
-
+$(document).ready(function(){
 
 //判断值是否为空
 
@@ -330,4 +330,4 @@ $('.topic-recommend').on('click', function(){
   });
 });
 
-
+})
