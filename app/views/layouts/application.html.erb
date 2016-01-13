@@ -14,8 +14,8 @@
   <%= javascript_include_tag "vendor/modernizr" %>
   <%= javascript_include_tag "sweetalert.min"%>
   <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
-  <script src="http://www.trade-v.com:5000/assets/jquery.self.js?body=1"></script>
-<script src="http://www.trade-v.com:5000/assets/jquery_ujs.self.js?body=1"></script>
+  <!--<script src="http://www.trade-v.com:5000/assets/jquery.self.js?body=1"></script>
+<script src="http://www.trade-v.com:5000/assets/jquery_ujs.self.js?body=1"></script>-->
 <script src="http://www.trade-v.com:5000/assets/jquery.iframe-transport.self.js?body=1"></script>
 <script src="http://www.trade-v.com:5000/assets/jquery.remotipart.self.js?body=1"></script>
 <script src="http://www.trade-v.com:5000/assets/foundation/foundation.self.js?body=1"></script>
@@ -63,7 +63,7 @@
   
  
   <link rel="stylesheet" media="screen" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <%= javascript_include_tag params[:controller] %>
+  
 
   <script>
     $(function(){ $(document).foundation(); });
@@ -153,6 +153,6 @@
     });
 
   </script>
-  
+  <%= javascript_include_tag params[:controller] %>
 </body>
 </html>

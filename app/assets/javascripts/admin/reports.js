@@ -286,6 +286,7 @@ $('.groupbuys-list').on('click', '.edit-title', function(){
 //编辑话题推荐值
 
 $('.topic-recommend').on('click', function(){
+
   var that = $(this);
   var nums = $(this).val();
   var topic_id = $(this).data('id');
@@ -328,3 +329,5 @@ $('.topic-recommend').on('click', function(){
     });
   });
 });
+
+

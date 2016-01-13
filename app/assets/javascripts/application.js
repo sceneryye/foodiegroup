@@ -2,10 +2,9 @@
 //= require jquery_ujs
 //= require jquery.remotipart
 //= require jquery-fileupload
-//= require foundation
 
 
-$(function(){ $(document).foundation(); });
+//$(function(){ $(document).foundation(); });
 
 
 
