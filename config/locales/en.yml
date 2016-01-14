@@ -221,11 +221,11 @@ en:
   new_comment: New Comment
   title: Title
   goods_unit: Unit Name
-  please_choose_event_duration: Please choose meetup's duration
+  please_choose_event_duration: Duration
   start_time: Start Time
   end_time: End Time
   price:  Price
-  goods_minimal: Minimum quantity
+  goods_minimal: Min. Quantity
   new_forum:  New Forum
   edit_forum: Edit Forum
   new_topic:  Add new discuz
@@ -236,7 +236,7 @@ en:
   unpaid: Unpaid
   pic_url: Picture upload
   paid: Paid
-  body: detail
+  body: Description
   waiting_confirm: Wait for confirm
   shiped: Shiped
   unshiped: Wating for ship
@@ -259,7 +259,7 @@ en:
   limited_people: people up to
   new groupbuy: Add new deal
   welcome: Welcome
-  inventory: Inventory
+  inventory: Stocks
   weekday: Weekday
   weekend: Weekend
   anyday: Anyday
@@ -294,3 +294,6 @@ en:
   detail_address: Detail address
   coordinate: Coordinate
   please_enter_event_address: Please enter event address
+  new_groupbuy: Create Groupbuying Deal
+  new_event: Create New Meetup
+  new_topic: Create New Disscusion
