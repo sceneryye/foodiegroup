@@ -122,6 +122,14 @@ $primary-color: #008CBA;
     }
 }
 
+.dz-filename, .dz-success-mark, .dz-error-mark {
+  display: none;
+}
+.dz-preview {
+  float: left;
+  margin-left: 20px;
+}
+
 /*******************groupbuy new page******************/
 
 .new-groupbuy {

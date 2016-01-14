@@ -58,7 +58,7 @@ end
 
 def create
   @groupbuy = Groupbuy.new(groupbuy_params)
-  @groupbuy.pic_url = params[:pic_url]
+  @groupbuy.pic_url = ''
   @groupbuy.user = current_user
   @groupbuy.locale = session[:locale]
 
@@ -74,14 +74,8 @@ def create
     #       @groupbuy.pic_url = "/groupbuys/#{filename}"
     # end
     if @groupbuy.save
-      if params[:images]
-        params[:images].each do |image|
-          @groupbuy.photos.create(image: image)
-        end
-        flash[:notice] = "Your groupbuy has been created."
-      else 
-        flash[:alert] = "Something went wrong."
-      end
+      photo_ids = params[:photo_ids].split(',')
+      Photo.where(id: photo_ids).update_all(groupbuy_id: @groupbuy.id)
 
       post_url = "http://www.trade-v.com/send_group_message_api"
       # openids = User.plunk(:weixin_openid)

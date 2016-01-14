@@ -29,19 +29,29 @@ class PhotosController < ApplicationController
   # POST /photos
   # POST /photos.json
   def create
-    @photo = Photo.new(photo_params)
+   uploaded_io = params[:file]
+   if !uploaded_io.blank?
+     extension = uploaded_io.original_filename.split('.')
+     filename = "#{Time.now.strftime('%Y%m%d%H%M%S%L')}#{rand(100)}.#{extension[-1]}"
+     filepath = "#{PIC_PATH}/#{params[:parent]}/#{filename}"
+     content_type = uploaded_io.content_type
+     file = File.open(filepath, 'wb') do |file|
+       file.write(uploaded_io.read)
+     end
+     photo_params = {}
+     photo_params[:image] = "/#{params[:parent]}/#{filename}"
+     photo_params[:content_type] = content_type
+     photo_params[:name] = uploaded_io.original_filename
+     photo_params[:size] = (uploaded_io.size.to_f / 1024 / 1024).round(3).to_s + 'Mb'
+     
 
-    respond_to do |format|
-      if @photo.save
-        format.html { redirect_to @photo, notice: ' photo was successfully created.' }
-        # format.json { render action: 'show', status: :created, location: @photo }
-        format.json { render json: {files: [@photo.to_jq_upload]}, status: :created, location: @upload }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @photo.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+
+     @photo = Photo.new(photo_params)
+     @photo.save
+
+     render text: @photo.id
+   end
+ end
 
   # PATCH/PUT /photos/1
   # PATCH/PUT /photos/1.json
@@ -75,6 +85,6 @@ class PhotosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_params
-      params.require(:photo).permit(:name, :image, :size, :content_type)
+      params.require(:photo).permit!
     end
-end
+  end

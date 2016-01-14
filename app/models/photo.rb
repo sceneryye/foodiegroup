@@ -1,7 +1,7 @@
 class Photo < ActiveRecord::Base
   belongs_to :groupbuy
   belongs_to :event
-  mount_uploader :image, PictureUploader
+  #mount_uploader :image, PictureUploader
   include Rails.application.routes.url_helpers
 
   def to_jq_upload
@@ -15,15 +15,9 @@ class Photo < ActiveRecord::Base
         }
     end
 
-    before_save :update_banner_attributes
+    
 
     private
 
-    def update_banner_attributes
-        if file.present? && file_changed?
-            self.name         = file.file.filename
-            self.size         = file.file.size
-            self.content_type = file.file.content_type
-        end
-    end
+    
 end

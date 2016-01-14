@@ -1,40 +1,36 @@
-<%= form_for(Photo.new) do |f| %>
-  <% if @photo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
+<!-- HTML heavily inspired by http://blueimp.github.io/jQuery-File-Upload/ -->
+<div class="" class="files" id="previews">
 
-      <ul>
-      <% @photo.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <div id="template" class="file-row">
+    <!-- This is used as the file preview template -->
+    <div>
+        <span class="preview"><img data-dz-thumbnail /></span>
     </div>
-  <% end %>
+    <div>
+        <p class="name" data-dz-name></p>
+        <strong class="error text-danger" data-dz-errormessage></strong>
+    </div>
+    <div>
+        <p class="size" data-dz-size></p>
+        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+        </div>
+    </div>
+    <div>
+      <button class="button success start">
+          <i class="fa fa-cloud-upload"></i>
+          <span>Start</span>
+      </button>
+      <button data-dz-remove class="button warning cancel">
+          <i class="fa fa-ban"></i>
+          <span>Cancel</span>
+      </button>
+      <button data-dz-remove class="button alert delete">
+        <i class="fa fa-trash"></i>
+        <span>Delete</span>
+      </button>
+    </div>
+  </div>
 
-  <div class="row drop">
-    <div id="dropzone" class="fade well col-md-12">Drop files here</div>
-    <div class="col-md-12">
-      <span class="btn btn-success fileinput-button">
-          <i class="glyphicon glyphicon-plus"></i>
-          <span>Select files...</span>
-          <!-- The file input field used as target for the file upload widget -->
-          <%= f.file_field :image, multiple: true, name: "photo[image]" %>
-      </span>
-    </div>
-  </div>
-  <br>
-  <div id="progress" class="progress">
-      <div class="progress-bar progress-bar-success"></div>
-  </div>
-  <div id="preview" class="row">
-    <div class="media hide">
-      <a class="pull-left" href="#">
-        <img class="media-object" data-src="holder.js/64x64" src="" alt="">
-      </a>
-      <div class="media-body">
-        <h4 class="media-heading"></h4>
-        <a href="#" class="btn btn-danger delete" role="button">Delete</a>
-      </div>
-    </div>
-  </div>
-<% end %>
+</div>
+
