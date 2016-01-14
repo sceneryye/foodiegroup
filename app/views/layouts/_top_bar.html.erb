@@ -1,16 +1,21 @@
 
 <div class="header">
-  <nav class="tab-bar">
-    <section class="left-small">
-      <a class="left-off-canvas-toggle menu-icon" ><span></span></a>
-    </section>
+ 
 
-    <section class="right tab-bar-section">
-      <h1 class="title"><%= content_for?(:title) ? yield(:title) : t(:site_name) %></h1>
-    </section>
-  </nav>
+<nav class="tab-bar">
+  <section class="left-small">
+    <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+  </section>
 
-</div>
+  <section class="middle tab-bar-section">
+     <h1 class="title"><%= content_for?(:title) ? yield(:title) : t(:site_name) %></h1>
+  </section>
+
+  <!-- <section class="right-small">
+    <a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+  </section> -->
+</nav>
+
 <aside class="left-off-canvas-menu">
   <ul class="off-canvas-list">
     <li>      
@@ -38,3 +43,4 @@
     <%end if @plus_menu%>
   </ul>
 </aside>
+</div>

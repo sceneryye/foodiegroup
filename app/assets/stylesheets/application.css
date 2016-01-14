@@ -12,7 +12,9 @@ body{ position: relative; min-height: 550px;}
 
 footer{ position: absolute; bottom: 0; left: 0; }*/
 
-html, body {position: relative;font-family: "Microsoft YaHei";}
+html, body {/*position: relative;*/
+  font-family: "Microsoft YaHei";
+}
 a.button:visited{color:white;}
 
 .list_button{ margin:5px 0px 10px 0px;}
@@ -26,14 +28,14 @@ a.button.secondary:visited{color:black;}
   overflow:visible; 
 }
 
-article {
+/*article {
   overflow-y: auto;
   margin-top:50px;
-}
+}*/
 
 footer{margin-bottom:100px;}
 
-article,
+/*article,
 body,
 html,
 .off-canvas-wrap, 
@@ -48,7 +50,7 @@ html,
   top: 0;
   width: 100%;
   z-index: 99;
-}
+}*/
 
 .market{text-decoration:line-through;}
 .save{color:red;}
@@ -58,51 +60,56 @@ html,
 
 .profile-image{
   margin-top: 15px;
-  border-radius: 5%;}
+  border-radius: 5%;
+}
 
-  .new.button{
-    margin-top: 15px;}
+.new.button{
+  margin-top: 15px;
+}
 
-    .forums.panel {
-      background-color: #fff;
-      border: none;
-      border-right: 1px solid #eee;
-    }
+.forums.panel {
+  background-color: #fff;
+  border: none;
+  border-right: 1px solid #eee;
+}
 
-    .topics.panel{
-      background-color: #fff;
-      padding:30px 15px;}
+.topics.panel{
+  background-color: #fff;
+  padding:30px 15px;
+}
 
-      .topic-area{
-        min-height: 200px;
-      }
+.topic-area{
+  min-height: 200px;
+}
 
-      .topic{
-        /*  border-bottom: 1px solid #ccc;*/
-        padding: 10px 0 20px;}
+.topic{
+  /*  border-bottom: 1px solid #ccc;*/
+  padding: 10px 0 20px;
+}
 
-        .topic:last-child{
-          border: none;}
+.topic:last-child{ border: none;}
 
-          .topic p{font-size: .85em;}
+.topic p{font-size: .85em;}
 
-          .topic .answer-count{
-            padding: 25px 10px;
-            border: 1px solid #eee;
-            border-radius: 5px;}
+.topic .answer-count{
+  padding: 25px 10px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
 
-            .details{
-              font-size: .70em;
-              margin-top: 5px;}
+.details{
+  font-size: .70em;
+  margin-top: 5px;
+}
 
-              .badge{
-                background: #eee;
-                border-radius: 10px;
-                padding: 3px 10px;
-                margin-right: 10px;
-              }
+.badge{
+  background: #eee;
+  border-radius: 10px;
+  padding: 3px 10px;
+  margin-right: 10px;
+}
 
-              .user-thumb{
-                border-radius: 50%;
-                width:20px;
-              }
+.user-thumb{
+  border-radius: 50%;
+  width:20px;
+}

@@ -14,50 +14,49 @@
   <%= javascript_include_tag "vendor/modernizr" %>
   <%= javascript_include_tag "sweetalert.min"%>
   <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
-  <!--<script src="http://www.trade-v.com:5000/assets/jquery.self.js?body=1"></script>
-<script src="http://www.trade-v.com:5000/assets/jquery_ujs.self.js?body=1"></script>-->
 <script src="http://www.trade-v.com:5000/assets/jquery.iframe-transport.self.js?body=1"></script>
 <script src="http://www.trade-v.com:5000/assets/jquery.remotipart.self.js?body=1"></script>
 <script src="http://www.trade-v.com:5000/assets/foundation/foundation.self.js?body=1"></script>
 <script src="http://www.trade-v.com:5000/assets/foundation/foundation.offcanvas.self.js?body=1"></script>
 <script src="http://www.trade-v.com:5000/assets/foundation/foundation.tab.self.js?body=1"></script>
-<!--<script src="http://www.trade-v.com:5000/assets/application.self.js?body=1" data-turbolinks-track="true"></script>-->
-  
 
   <%= csrf_meta_tags %>
 </head>
 
 <body>
-  <div class="body">
-    <div class="off-canvas-wrap docs-wrap" data-offcanvas>
-      <div class="inner-wrap">
-        <%=render '/layouts/top_bar'%>
-        <!-- main content goes here -->
-        <article>
-          <%= yield %>
-          <%= yield :content %>
-          <hr>
-          <div class="large-12 columns">
-            <footer id="footer">
-              <div class="row">
-                <div class="columns small-12" style="line-height: 100%">
-                  <small> &copy; 2014 - <span id='copyright_year'></span>, <%=t(:site_name)%><br>
-                   技术支持: <a target="_blank" href="http://www.trade-v.com/" title="上海普慧信息科技有限公司">上海普慧信息科技有限公司</a></small>
-                   <script>
-                    var myDate = new Date();
-                    var currentYear = myDate.getFullYear();
-                    document.getElementById('copyright_year').innerText=currentYear;
-                  </script>
-                </div>
-              </div>
-            </footer>
+<div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+    <!-- Off Canvas Menu -->   
+    <%=render '/layouts/top_bar'%>
+
+    <!-- main content goes here -->
+    <article>
+      <%= yield %>
+      <%= yield :content %>
+      <hr>
+      <div class="large-12 columns">
+        <footer id="footer">
+          <div class="row">
+            <div class="columns small-12" style="line-height: 100%">
+              <small> &copy; 2014 - <span id='copyright_year'></span>, <%=t(:site_name)%><br>
+               技术支持: <a target="_blank" href="http://www.trade-v.com/" title="上海普慧信息科技有限公司">上海普慧信息科技有限公司</a></small>
+               <script>
+                var myDate = new Date();
+                var currentYear = myDate.getFullYear();
+                document.getElementById('copyright_year').innerText=currentYear;
+              </script>
+            </div>
           </div>
-        </article>
-        <!-- close the off-canvas menu -->
-        <a class="exit-off-canvas"></a>
+        </footer>
       </div>
-    </div>
+    </article>
+  <!-- close the off-canvas menu -->
+  <a class="exit-off-canvas"></a>
+
   </div>
+</div>
+
+ 
   <%=render '/layouts/menu'%>
 
   
