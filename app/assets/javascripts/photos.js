@@ -1,5 +1,4 @@
 var previewNode = document.querySelector("#template");
-var previewTemplate = previewNode.parentNode.innerHTML;
 
 
 Dropzone.options.myDropzone = {
@@ -8,7 +7,7 @@ addRemoveLinks: true,
 thumbnailWidth: 40,
 thumbnailHeight: 40,
 maxFiles: 10,
-dictDefaultMessage: "<div class='button success' sytle='background-color:#008CBA;'><i class="fa fa-plus-circle"></i><i class="fa fa-picture-o"></i></div>",
+dictDefaultMessage: "<div class='button tiny' sytle='background-color:#008CBA;'><i class='fa fa-cloud-upload'></i><i class='fa fa-picture-o'></i></div>",
 
   // Prevents Dropzone from uploading dropped files immediately
   autoProcessQueue: true,
