@@ -47,7 +47,7 @@
   <div class="small-3 columns">
     <span class="price postfix">
       <!-- <%#= f.label :price %> -->
-      <%= f.text_field :price %>
+      <%= f.text_field :price, placeholder: '¥' %>
     </span>
   </div>
 
@@ -70,7 +70,8 @@
   </div>
   <div class="small-3 columns">
     <span class="goods-unit postfix">
-      <%= f.text_field :goods_unit %>
+    <% eg = session[:locale] == 'en' ? 'eg. Kilogram' : '例如：千克' %>
+      <%= f.text_field :goods_unit, placeholder: eg %>
     </span>
   </div>
 

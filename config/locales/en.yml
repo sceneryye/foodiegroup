@@ -256,8 +256,8 @@ en:
   remark: Remark
   new_event: Add new meetup
   group_management: Group Manage
-  limited_people: people up to
-  new groupbuy: Add new deal
+  limited_people: Max. attendee
+  new_groupbuy: Add new deal
   welcome: Welcome
   inventory: Stocks
   weekday: Weekday
@@ -293,7 +293,17 @@ en:
   nomore: No more comments
   detail_address: Detail address
   coordinate: Coordinate
-  please_enter_event_address: Please enter event address
+  event_address: Event address
   new_groupbuy: Create Groupbuying Deal
   new_event: Create New Meetup
   new_topic: Create New Disscusion
+  content: Content
+  durantion: Duration
+  day: Day
+  hour: Hour
+  minute: Minute
+  month: Month
+  second: Seconds
+  year: Year
+  contact: Contact
+  free: Free

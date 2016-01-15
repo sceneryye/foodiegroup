@@ -400,7 +400,17 @@ zh:
   nomore: 已无更多评论
   detail_address: 详细地址
   coordinate: 坐标
-  please_enter_event_address: 请输入活动地址
+  event_address: 活动地址
   new_groupbuy: 新增团购
   new_event: 新增活动
   new_topic: 新增话题
+  content: 内容
+  duration: 持续时间
+  day: 天
+  hour: 时
+  minute: 分
+  month: 月
+  second: 秒
+  year: 年
+  contact: 联系方式
+  free: 免费

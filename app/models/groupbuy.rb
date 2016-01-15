@@ -15,7 +15,7 @@ class Groupbuy < ActiveRecord::Base
 	validates :goods_minimal,  presence: true
 	#validates :pic_url, presence: true
 
- 	default_scope {order 'created_at DESC, recommend DESC'}
+ 	default_scope {order 'recommend DESC, created_at DESC'}
 
  	
 

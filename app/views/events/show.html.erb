@@ -26,12 +26,19 @@
         <td><%= @event.start_time.strftime("%Y-%m-%d %H:%M") %></td>
       </tr>
       <tr>
-        <th><%=t(:end_time)%></th>
-        <td><%=@event.end_time.strftime("%Y-%m-%d %H:%M")%></td>
+        <th><%=t(:duration)%></th>
+        <td><%=@event.event_duration[0] + t(:day) + @event.event_duration[1] + t(:hour) + @event.event_duration[2] + t(:minute)  %></td>
       </tr>
       <tr>
         <th><%=t(:address)%></th>
         <td><%=@event.address%></td>
+      </tr>
+      <tr>
+        <th><%=t(:contact)%></th>
+        <td>
+          <span class="contact-name"><%= @event.name.present? ? @event.name : @event.user.nickname %></span>
+          <span class="contact-mobile"><%= @event.user.mobile %></span>
+        </td>
       </tr>
       <tr>
         <th><%=t(:limited_people)%></th>
@@ -109,7 +116,7 @@
     var marker = new BMap.Marker(point);  // 创建标注
     map.addOverlay(marker);               // 将标注添加到地图中
     marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-}
+  }
   else {  // 创建点坐标
     map.centerAndZoom('上海市');
   }

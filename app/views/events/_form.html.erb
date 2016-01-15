@@ -2,7 +2,7 @@
 <%= form_for @event, data: {abide: ''}  ,:html => {:multipart => true} do|f| %>
   <%= render 'layouts/form_errors', object: @event %>
   <div>
-    <%= f.text_field :title, required: true,placeholder: "#{t(:event)} #{t(:title)}" %>
+    <%= f.text_field :title, required: true,placeholder: "#{t(:title)}" %>
    <!--  <%#= show_error_message('活动名称，不能为空！') %> -->
   </div>
   <div>    
@@ -22,11 +22,9 @@
   </div>
 
   <div>    
-    <p><%=t(:please_enter_event_address)%></p>
+    <p><%=t(:event_address)%></p>
     <div class="row collapse">
       <div class="columns small-12"><%= f.text_field :address, placeholder: t(:detail_address) %></div>
-      <div class="columns small-6"><%= f.text_field :x_coordinate, placeholder: "X #{t(:coordinate)}" %></div>
-      <div class="columns small-6"><%= f.text_field :y_coordinate, placeholder: "Y #{t(:coordinate)}" %></div>
     </div>
   </div>
  
@@ -40,8 +38,10 @@
   <div>
     <%= f.text_field :limited_people,placeholder: t(:limited_people)%>
   </div>
-  <div>
-    <!-- <%#= f.label :price %> -->
+  <div class="free-checkbox">
+    <%= check_box_tag :price, t(:free), false, class: 'free-event' %>
+  </div>
+  <div class="event-price">
     <%= f.text_field :price,placeholder: t(:price)%>
   </div>
  <!--  <div>
@@ -54,7 +54,7 @@
   </div> -->
   <div>
     <%#= f.label :body %>
-    <%= f.text_area :body,placeholder: t(:body)%>
+    <%= f.text_area :body,placeholder: t(:content)%>
     <!-- <%#= f.cktext_area :body, :class => 'someclass', :ckeditor => {:language => 'zh'} , required: true%> -->
     <!-- <%#= show_error_message('内容请不要超过1千字')%> -->
   </div>
