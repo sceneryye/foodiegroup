@@ -4,7 +4,7 @@
 //= require foundation-datepicker.min
 // if session[:locale] == 'zh'
 //= require foundation-datepicker.zh-CN
- 
+
 
 function checkPositiveInteger(obj){
   var num = obj.val();
@@ -38,7 +38,7 @@ $('.new_participant').on('change', '.goods-weight', function(){
   var nums = that.val();
   if(nums == '' || nums == undefined || isNaN(nums) == true || parseInt(nums) < 1) {
     $(this).val('');
-    alert("只能输入正整数");
+    alert("只能输入正数");
     return;
   }
 });
@@ -77,12 +77,12 @@ $('.groupbuy-list').each(function(){
 });
 
 //--------时间选择插件----------//
- $('.fdatepicker').fdatepicker({
-    language: 'zh',
-    format: 'yyyy-dd-mm hh:ii',
-    disableDblClickSelection: true,
-    pickTime: true
-  });
+$('.fdatepicker').fdatepicker({
+  language: 'zh',
+  format: 'yyyy-dd-mm hh:ii',
+  disableDblClickSelection: true,
+  pickTime: true
+});
 
 // end
 // var nowTemp = new Date();
@@ -112,14 +112,16 @@ $('.groupbuy-list').each(function(){
 //--------------新建团购-----------------//
 var unitInput = $('#groupbuy_goods_unit');
 var unitText = $('.goods-unit-blank');
-if(unitInput.val().replace(/\s/g, '').length > 0) {
-  unitText.text(unitInput.val());
-}
-else {
-  $('#groupbuy_goods_unit').on('change', function(){
-    var val = $(this).val();
-    $('.goods-unit-blank').text(val);
-  });
+if(unitInput.val()){
+  if(unitInput.val().replace(/\s/g, '').length > 0) {
+    unitText.text(unitInput.val());
+  }
+  else {
+    $('#groupbuy_goods_unit').on('change', function(){
+      var val = $(this).val();
+      $('.goods-unit-blank').text(val);
+    });
+  }
 }
 
 // 价格不能为负数
