@@ -39,9 +39,9 @@
     <%= f.text_field :limited_people,placeholder: t(:limited_people)%>
   </div>
   <div class="free-checkbox">
-    <%= check_box_tag :price, t(:free), false, class: 'free-event' %>
+    <%= check_box_tag :price, t(:free), true, class: 'free-event' %><span class="free-label"><%= t(:free) %></span>
   </div>
-  <div class="event-price">
+  <div class="event-price" style="display:none">
     <%= f.text_field :price,placeholder: t(:price)%>
   </div>
  <!--  <div>

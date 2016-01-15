@@ -3,11 +3,10 @@ require 'rest-client'
 class GroupbuysController < ApplicationController
   before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
   def index
-    @groupbuys = Groupbuy.where(locale: session[:locale]).includes(:user)
+    @groupbuys = Groupbuy.where(locale: session[:locale]).includes(:user).order(created_at: :desc)
   end
 
   def show
-
     @parent = @groupbuy  = Groupbuy.find(params[:id])
     if @parent.pic_url.present?
       @title_pic = @groupbuy.pic_url.split(',').reject{|x| x.blank?}[0]
@@ -23,6 +22,26 @@ class GroupbuysController < ApplicationController
     @participants = @groupbuy.participants.includes(:user)
     more = 10
     @comments = @groupbuy.comments.includes(:user)[0...more]
+
+    #微信share接口配置
+    @title = "#{@groupbuy.user.nickname}推荐您加入团购：#{@groupbuy.title}"
+    @img_url = @title_pic
+    @desc = @groupbuy.body
+    supplier = Ecstore::Supplier.where(:id => 78).first
+    @timestamp = Time.now.to_i
+    @appId = supplier.weixin_appid
+    @noncestr = random_str 16
+    @jsapilist = ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
+    @jsapi_ticket = get_jsapi_ticket
+    post_params = {
+      :noncestr => @noncestr,
+      :jsapi_ticket => @jsapi_ticket,
+      :timestamp => @timestamp,
+      :url => request.url.gsub("trade", "www.trade-v.com")
+    }
+    @sign = create_sign_for_js post_params
+    @a = [post_params, request.url.gsub("trade", "vshop.trade-v.com")]
+
 
     if current_user
       @user_addresses = current_user.user_addresses
@@ -129,10 +148,10 @@ def create
 
     @groupbuy = Groupbuy.find(params[:id])
     if params[:images]
-        params[:images].each do |image|
-          @groupbuy.photos.update(image: image)
-        end
+      params[:images].each do |image|
+        @groupbuy.photos.update(image: image)
       end
+    end
     if @groupbuy.update(groupbuy_params) && @groupbuy.update(pic_url: params[:pic_url])
       redirect_to groupbuy_url(@groupbuy), notice: '团购修改成功'
     else
@@ -203,4 +222,70 @@ def create
     params.require(:groupbuy).permit(:title, :body,:end_time,:start_time,:groupbuy_type, :goods_maximal, :goods_minimal, :market_price,
       :pic_url,:limited_people,:goods_big_than,:goods_small_than,:name,:mobile,:goods_unit,:price,:pic_url)
   end
+
+  def to_label_xml hash
+    params_str = ''
+    hash.each do |key, value|
+      params_str += "<#{key}>" + "<![CDATA[#{value}]]>" + "</#{key}>"
+    end
+    params_xml = '<xml>' + params_str + '</xml>'
+  end
+
+  def random_str str_length
+    arr = ('0'..'9').to_a + ('a'..'z').to_a
+    nonce_str = ''
+    str_length.times do
+      nonce_str += arr[rand(36)]
+    end
+    nonce_str
+  end
+
+  def create_sign hash
+    key = Ecstore::Supplier.where(:name => '贸威').first.partner_key
+    stringA = hash.select{|key, value|value.present?}.sort.map do |arr|
+     arr.map(&:to_s).join('=')
+   end
+   stringA = stringA.join("&")
+   string_sing_temp = stringA + "&key=#{key}"
+   sign = (Digest::MD5.hexdigest string_sing_temp).upcase
+ end
+
+ def create_sign_for_js hash
+  key = Ecstore::Supplier.where(:name => '贸威').first.partner_key
+  stringA = hash.select { |key, value| value.present? }.sort.map do |arr|
+    arr.map(&:to_s).join('=')
+  end
+  stringA = stringA.join("&")
+  sign = (Digest::SHA1.hexdigest stringA)
+end
+
+
+
+def get_jsapi_ticket
+  if current_account.present?
+    supplier = Ecstore::Supplier.where(:id => 78).first
+    return supplier.jsapi_ticket if supplier.expires_at.to_i > Time.now.to_i && supplier.jsapi_ticket.present?
+    access_token = get_jsapi_access_token
+    get_url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket'
+    res_data_json = RestClient.get get_url, {:params => {:access_token => access_token, :type => 'jsapi'}}
+    res_data_hash = ActiveSupport::JSON.decode res_data_json
+    if res_data_hash['errmsg'] == 'ok'
+      jsapi_ticket = res_data_hash['ticket']
+      supplier.update_attributes(:jsapi_ticket => jsapi_ticket)
+    end
+    jsapi_ticket
+  end
+end
+
+def get_jsapi_access_token
+  supplier = Ecstore::Supplier.where(:id => 78).first
+  return supplier.access_token if supplier.expires_at.to_i > Time.now.to_i
+  get_url = 'https://api.weixin.qq.com/cgi-bin/token'
+  res_data_json = RestClient.get get_url, {:params => {:appid => supplier.weixin_appid, :grant_type => 'client_credential', :secret => supplier.weixin_appsecret}}
+  res_data_hash = ActiveSupport::JSON.decode res_data_json
+  access_token = res_data_hash["access_token"]
+  expires_at = Time.now.to_i + res_data_hash['expires_in'].to_i
+  supplier.update_attributes(:access_token => access_token, :expires_at => expires_at)
+  access_token
+end
 end
