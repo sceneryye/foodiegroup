@@ -1,5 +1,6 @@
 #encoding:utf-8
 require 'rest-client'
+require 'digest/sha1'
 class GroupbuysController < ApplicationController
   before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
   def index
@@ -257,6 +258,7 @@ def create
   end
   stringA = stringA.join("&")
   sign = (Digest::SHA1.hexdigest stringA)
+  [sign, stringA]
 end
 
 
