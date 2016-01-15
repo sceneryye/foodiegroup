@@ -27,7 +27,7 @@ class GroupbuysController < ApplicationController
     @title = "#{@groupbuy.user.nickname}推荐您加入团购：#{@groupbuy.title}"
     @img_url = @title_pic
     @desc = @groupbuy.body
-    supplier = Ecstore::Supplier.where(:id => 78).first
+    supplier = Supplier.where(:id => 78).first
     @timestamp = Time.now.to_i
     @appId = supplier.weixin_appid
     @noncestr = random_str 16
@@ -241,7 +241,7 @@ def create
   end
 
   def create_sign hash
-    key = Ecstore::Supplier.where(:name => '贸威').first.partner_key
+    key = Supplier.where(:name => '贸威').first.partner_key
     stringA = hash.select{|key, value|value.present?}.sort.map do |arr|
      arr.map(&:to_s).join('=')
    end
@@ -251,7 +251,7 @@ def create
  end
 
  def create_sign_for_js hash
-  key = Ecstore::Supplier.where(:name => '贸威').first.partner_key
+  key = Supplier.where(:name => '贸威').first.partner_key
   stringA = hash.select { |key, value| value.present? }.sort.map do |arr|
     arr.map(&:to_s).join('=')
   end
@@ -262,8 +262,7 @@ end
 
 
 def get_jsapi_ticket
-  if current_account.present?
-    supplier = Ecstore::Supplier.where(:id => 78).first
+    supplier = Supplier.where(:id => 78).first
     return supplier.jsapi_ticket if supplier.expires_at.to_i > Time.now.to_i && supplier.jsapi_ticket.present?
     access_token = get_jsapi_access_token
     get_url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket'
@@ -274,11 +273,10 @@ def get_jsapi_ticket
       supplier.update_attributes(:jsapi_ticket => jsapi_ticket)
     end
     jsapi_ticket
-  end
 end
 
 def get_jsapi_access_token
-  supplier = Ecstore::Supplier.where(:id => 78).first
+  supplier = Supplier.where(:id => 78).first
   return supplier.access_token if supplier.expires_at.to_i > Time.now.to_i
   get_url = 'https://api.weixin.qq.com/cgi-bin/token'
   res_data_json = RestClient.get get_url, {:params => {:appid => supplier.weixin_appid, :grant_type => 'client_credential', :secret => supplier.weixin_appsecret}}
