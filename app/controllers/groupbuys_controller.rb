@@ -38,7 +38,7 @@ class GroupbuysController < ApplicationController
       :noncestr => @noncestr,
       :jsapi_ticket => @jsapi_ticket,
       :timestamp => @timestamp,
-      :url => request.url.gsub("trade", "www.trade-v.com")
+      :url => request.url.gsub("localhost:5000", "www.trade-v.com")
     }
     @sign = create_sign_for_js post_params
     @a = [post_params, request.url.gsub("trade", "vshop.trade-v.com")]
@@ -258,7 +258,6 @@ def create
   end
   stringA = stringA.join("&")
   sign = (Digest::SHA1.hexdigest stringA)
-  [sign, stringA]
 end
 
 
