@@ -26,7 +26,7 @@ class GroupbuysController < ApplicationController
 
     #微信share接口配置
     @title = "#{@groupbuy.user.nickname}推荐您加入团购：#{@groupbuy.title}"
-    @img_url = @title_pic
+    @img_url = 'http://www.trade-v.com:5000' + @title_pic
     @desc = @groupbuy.body
     supplier = Supplier.where(:id => 78).first
     @timestamp = Time.now.to_i
