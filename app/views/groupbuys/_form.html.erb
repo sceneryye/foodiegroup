@@ -9,8 +9,6 @@
 
 
 
-
-
   <%= form_for @groupbuy, data: {abide: ''}  ,:html => {multipart: true, class: 'new-form'} do|f| %>
   <%= render 'layouts/form_errors', object: @groupbuy %>
   <%#= f.hidden_field :pic_url, '', class: 'pic_urls' %>
@@ -27,10 +25,10 @@
       <thead>
         <tr>
           <th> <%#= f.label :start_time %>
-            <%= f.text_field :start_time, required: true,:class=>"span2",:id=>"dpd2",placeholder: t(:start_time)%>
+            <%= f.text_field :start_time, required: true,:class=>"fdatepicker",:id=>"dpd2",placeholder: t(:start_time)%>
           </th>
           <th><%#= f.label :end_time %>
-           <%= f.text_field :end_time, required: true,:class=>"span2",:id=>"dpd1",placeholder: t(:end_time)%>
+           <%= f.text_field :end_time, required: true,:class=>"fdatepicker",:id=>"dpd1",placeholder: t(:end_time)%>
          </th>
        </tr>
      </thead>

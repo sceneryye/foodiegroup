@@ -325,7 +325,7 @@ zh:
   start_time: 开始时间
   end_time: 结束时间
   price:  单价
-  goods_minimal: 最少成团商品数量
+  goods_minimal: 最少成团数量
   new_forum:  新增论坛
   new_groupbuy:  新增团购
   new_event:  新增活动

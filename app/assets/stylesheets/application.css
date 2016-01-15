@@ -1,7 +1,7 @@
 /*
  *= require_self
  *= require foundation_and_overrides
- 
+ *= require foundation-datepicker.min
  *= require_tree .
 
  */
