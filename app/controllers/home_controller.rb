@@ -26,7 +26,7 @@ class HomeController < ApplicationController
 			session[:locale] = 'zh'
 		end
 		@events = Event.where("locale='#{session[:locale]}' and recommend > ?", 0).includes(:user)
-		@groupbuys = Groupbuy.where("locale='#{session[:locale]}' and recommend>0 and end_time > ?", Time.zone.now).includes(:user)
+		@groupbuys = Groupbuy.where("locale='#{session[:locale]}' and recommend>0").includes(:user)
 		@tags = Tag.where(locale: session[:locale]).limit(10)
 		@topics = Topic.where("forum_id = ? and recommend > ?", forum_id, 0).includes(:forum, :forum).order(recommend: :desc)
 

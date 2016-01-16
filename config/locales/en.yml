@@ -225,7 +225,7 @@ en:
   start_time: Start Time
   end_time: End Time
   price:  Price
-  goods_minimal: Min. Quantity
+  goods_minimal: Min. Deal
   new_forum:  New Forum
   edit_forum: Edit Forum
   new_topic:  Add new discuz
@@ -259,7 +259,7 @@ en:
   limited_people: Max. attendee
   new_groupbuy: Add new deal
   welcome: Welcome
-  inventory: Stocks
+  inventory: Stock
   weekday: Weekday
   weekend: Weekend
   anyday: Anyday
