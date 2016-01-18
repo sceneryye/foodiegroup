@@ -41,7 +41,7 @@ class GroupbuysController < ApplicationController
       :url => request.url.gsub("localhost:5000", "www.trade-v.com")
     }
     @sign = create_sign_for_js post_params
-    @a = [post_params, request.url.gsub("trade", "vshop.trade-v.com")]
+    @a = [request.url, post_params, request.url.gsub("trade", "vshop.trade-v.com")]
 
 
     if current_user
