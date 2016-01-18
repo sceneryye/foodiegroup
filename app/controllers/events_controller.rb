@@ -42,7 +42,8 @@ def create
     extension = uploaded_io.original_filename.split('.')
     filename = "#{Time.now.strftime('%Y%m%d%H%M%S')}.#{extension[-1]}"
     filepath = "#{PIC_PATH}/events/#{filename}"
-    File.open(filepath, 'wb') do |file|
+    localpath = "#{Rails.root}/public/events/#{filename}"
+    File.open(localpath, 'wb') do |file|
       file.write(uploaded_io.read)
     end
         # event_params.merge!(:pic_url=>"/events/#{filename}")
