@@ -25,7 +25,7 @@ class GroupbuysController < ApplicationController
     @comments = @groupbuy.comments.includes(:user)[0...more]
 
     #微信share接口配置
-    @title = "#{current_user.nickname}推荐您加入团购：#{@groupbuy.title}"
+    @title = "#{current_user.nickname if current_user.present?}推荐您加入团购：#{@groupbuy.title}"
     @img_url = 'http://www.trade-v.com:5000' + @title_pic.to_s
     @desc = @groupbuy.body.gsub('\n', ' ')[0..20]
     supplier = Supplier.where(:id => 78).first
