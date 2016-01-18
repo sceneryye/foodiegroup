@@ -11,7 +11,7 @@ class Event < ActiveRecord::Base
 	validates :title,  presence: true
 	validates :end_time, presence: true
 	validates :start_time, presence: true
-	validates :pic_url, presence: true
+	# validates :pic_url, presence: true
 
 	default_scope {order 'recommend DESC,created_at DESC'}
 
