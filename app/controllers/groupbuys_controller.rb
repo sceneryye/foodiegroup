@@ -38,7 +38,7 @@ class GroupbuysController < ApplicationController
       :noncestr => @noncestr,
       :jsapi_ticket => @jsapi_ticket,
       :timestamp => @timestamp,
-      :url => request.url.gsub("localhost:5000", "www.trade-v.com")
+      :url => request.url.gsub("localhost:5000", "vshop.trade-v.com")
     }
     @sign = create_sign_for_js post_params
     @a = [request.url, post_params, request.url.gsub("trade", "vshop.trade-v.com")]
