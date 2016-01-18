@@ -37,10 +37,12 @@
       </tr>
       <tr>
         <td colspan='2'>
+          <% if @content_pic.present? %>
           <% @content_pic.each do |pic| %>
           <div class="content-pictures columns small-12 medium-8 medium-center large-6 large-center">
             <%= image_tag pic.try(:image).present? ? pic.image : pic %>
           </div>
+          <% end %>
           <% end %>
           <%= @groupbuy.body.html_safe  %>
         </td>
@@ -88,7 +90,7 @@
   </div>
 
   <script>
-  console.log(location.href);
+    console.log(location.href);
     wx.config({
     debug: false,  //开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
     appId: "<%= @appId %>", // 必填，公众号的唯一标识

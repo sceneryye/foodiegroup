@@ -26,7 +26,7 @@ class GroupbuysController < ApplicationController
 
     #微信share接口配置
     @title = "#{@groupbuy.user.nickname}推荐您加入团购：#{@groupbuy.title}"
-    @img_url = 'http://www.trade-v.com:5000' + @title_pic
+    @img_url = 'http://www.trade-v.com:5000' + @title_pic.to_s
     @desc = @groupbuy.body.gsub('\n', ' ')[0..20]
     supplier = Supplier.where(:id => 78).first
     @timestamp = Time.now.to_i
@@ -120,9 +120,13 @@ def create
   def edit
     @groupbuy = Groupbuy.find(params[:id])
     @pic = @groupbuy.pic_url.split(',').reject{|x| x.blank?}
+    @photos = @groupbuy.photos
   end
 
   def update
+    @groupbuy = Groupbuy.find(params[:id])
+    Rails.logger.info @groupbuy.photos.pluck(:id)
+    Rails.logger.info '###############'
     if params[:from] == 'admin_groupbuy_list'
       if params[:recommend].blank?
         return render :text => 'failed'
@@ -144,16 +148,28 @@ def create
       end
     end
 
-
-
-
-    @groupbuy = Groupbuy.find(params[:id])
+    
     if params[:images]
       params[:images].each do |image|
         @groupbuy.photos.update(image: image)
       end
     end
-    if @groupbuy.update(groupbuy_params) && @groupbuy.update(pic_url: params[:pic_url])
+    # 删除与团购关联的图片
+    origin_ids = @groupbuy.photos.pluck(:id)
+    if params[:photo_ids].present?
+      ids = params[:photo_ids].split(',').select{|id|id.present?}
+      Photo.where(id: ids).update_all(groupbuy_id: params[:id])
+      
+      Rails.logger.info origin_ids
+      Rails.logger.info '###############'
+      Rails.logger.info params[:delete_ids]
+      if params[:delete_ids].present?
+        delete_ids = params[:delete_ids].split(',').select{|id|id.present?}
+        Photo.where(id: delete_ids).update_all(groupbuy_id: nil)
+      end
+    end
+    if @groupbuy.update(groupbuy_params)
+
       redirect_to groupbuy_url(@groupbuy), notice: '团购修改成功'
     else
       render :edit
@@ -162,7 +178,7 @@ def create
 
   def upload
     uploaded_io = params[:file]
-    
+
     if !uploaded_io.blank?
       extension = uploaded_io.original_filename.split('.')
       filename = "#{Time.now.strftime('%Y%m%d%H%M%S%L')}.#{extension[-1]}"
@@ -263,17 +279,17 @@ end
 
 
 def get_jsapi_ticket
-    supplier = Supplier.where(:id => 78).first
-    return supplier.jsapi_ticket if supplier.expires_at.to_i > Time.now.to_i && supplier.jsapi_ticket.present?
-    access_token = get_jsapi_access_token
-    get_url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket'
-    res_data_json = RestClient.get get_url, {:params => {:access_token => access_token, :type => 'jsapi'}}
-    res_data_hash = ActiveSupport::JSON.decode res_data_json
-    if res_data_hash['errmsg'] == 'ok'
-      jsapi_ticket = res_data_hash['ticket']
-      supplier.update_attributes(:jsapi_ticket => jsapi_ticket)
-    end
-    jsapi_ticket
+  supplier = Supplier.where(:id => 78).first
+  return supplier.jsapi_ticket if supplier.expires_at.to_i > Time.now.to_i && supplier.jsapi_ticket.present?
+  access_token = get_jsapi_access_token
+  get_url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket'
+  res_data_json = RestClient.get get_url, {:params => {:access_token => access_token, :type => 'jsapi'}}
+  res_data_hash = ActiveSupport::JSON.decode res_data_json
+  if res_data_hash['errmsg'] == 'ok'
+    jsapi_ticket = res_data_hash['ticket']
+    supplier.update_attributes(:jsapi_ticket => jsapi_ticket)
+  end
+  jsapi_ticket
 end
 
 def get_jsapi_access_token

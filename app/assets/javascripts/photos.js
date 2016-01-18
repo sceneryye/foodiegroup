@@ -2,11 +2,11 @@ var previewNode = document.querySelector("#template");
 
 
 Dropzone.options.myDropzone = {
-maxFilesize: 2, // MB
+maxFilesize: 3, // MB
 addRemoveLinks: true,
 thumbnailWidth: 40,
 thumbnailHeight: 40,
-maxFiles: 10,
+maxFiles: 15,
 dictDefaultMessage: "<div class='button tiny' sytle='background-color:#008CBA;'><i class='fa fa-cloud-upload'></i><i class='fa fa-picture-o'></i></div>",
 
   // Prevents Dropzone from uploading dropped files immediately

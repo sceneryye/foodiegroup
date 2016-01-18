@@ -101,25 +101,25 @@ $primary-color: #008CBA;
   }
 }
 .drop{
-    position: relative;
-    margin: 0;
+  position: relative;
+  margin: 0;
 
-    #dropzone {
-        position: absolute;
-        height: 80px;
-    }
+  #dropzone {
+    position: absolute;
+    height: 80px;
+  }
 
-    #dropzone.in {
-        z-index: 1;
-        border: 5px dashed #e69;
-        text-align: center;
-        font-size: 2em;
-    }
+  #dropzone.in {
+    z-index: 1;
+    border: 5px dashed #e69;
+    text-align: center;
+    font-size: 2em;
+  }
 
-    #dropzone.hover {
-        border: 5px dashed #FDD017;
-        background-color: #FFF380;
-    }
+  #dropzone.hover {
+    border: 5px dashed #FDD017;
+    background-color: #FFF380;
+  }
 }
 
 .dz-filename, .dz-success-mark, .dz-error-mark {
@@ -167,4 +167,15 @@ $primary-color: #008CBA;
 .content-pictures {
   margin-bottom: 5px;
   width: 100%;
+}
+
+/***********************edit**********************/
+
+.dz-image img {
+  width: 50px;
+  height: 50px;
+  
+}
+.img, .trash {
+  text-align: center;
 }
