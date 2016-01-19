@@ -1,7 +1,14 @@
 <div class="row small-collapse">
-<div  class="columns small-12 comment">
-  <p><%=comment.body.html_safe if comment.body %></p>
-  <%= comment_info(comment) %>
-</div>
+  <div  class="columns small-12 comment">
+    <% if comment.photos.present? %>
+    <% comment.photos.each do |pic| %>
+    <div class="content-pictures columns small-12 medium-8 medium-center large-6 large-center">
+      <%= image_tag pic.try(:image).present? ? pic.image : pic %>
+    </div>
+    <% end %>
+    <% end %>
+    <p><%=comment.body.html_safe if comment.body %></p>
+    <%= comment_info(comment) %>
+  </div>
 </div>
 <hr>

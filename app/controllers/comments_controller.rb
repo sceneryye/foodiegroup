@@ -31,6 +31,8 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
+      photo_ids = params[:photo_ids].split(',')
+      Photo.where(id: photo_ids).update_all(comment_id: @comment.id)
       notice = '添加评论成功'
       redirect_to @url, notice: notice      
     else
@@ -41,6 +43,21 @@ class CommentsController < ApplicationController
   def edit() end
 
   def update
+    # 删除与团购关联的图片
+    origin_ids = @groupbuy.photos.pluck(:id)
+    if params[:photo_ids].present? || params[:delete_ids].present?
+      ids = params[:photo_ids].split(',').select{|id|id.present?}
+      Photo.where(id: ids).update_all(groupbuy_id: params[:id])
+      
+      Rails.logger.info origin_ids
+      Rails.logger.info '###############'
+      Rails.logger.info params[:delete_ids]
+      if params[:delete_ids].present?
+        delete_ids = params[:delete_ids].split(',').select{|id|id.present?}
+        Photo.where(id: delete_ids).update_all(groupbuy_id: nil)
+      end
+    end
+    
     if @comment.update(comment_params)
       notice = '修改评论成功'
       if @comment.topic

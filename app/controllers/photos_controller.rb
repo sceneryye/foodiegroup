@@ -49,8 +49,8 @@ class PhotosController < ApplicationController
 
      @photo = Photo.new(photo_params)
      @photo.save
-
-     render text: @photo.id
+     res = {id: @photo.id, pathname: @photo.image}.to_json
+     render json: res
    end
  end
 

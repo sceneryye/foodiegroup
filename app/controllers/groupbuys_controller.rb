@@ -168,6 +168,7 @@ def create
         Photo.where(id: delete_ids).update_all(groupbuy_id: nil)
       end
     end
+    
     if @groupbuy.update(groupbuy_params)
 
       redirect_to groupbuy_url(@groupbuy), notice: '团购修改成功'

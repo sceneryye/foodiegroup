@@ -1,6 +1,7 @@
 class Photo < ActiveRecord::Base
   belongs_to :groupbuy
   belongs_to :event
+  belongs_to :comment
   #mount_uploader :image, PictureUploader
   include Rails.application.routes.url_helpers
 

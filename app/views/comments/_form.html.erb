@@ -1,6 +1,12 @@
 <div class="row small-collapse">
 <div class="columns small-12">
+<form action="<%= photos_path %>" class="dropzone" id="my-dropzone" enctype="multipart/form-data">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token.to_s %>">
+  <input type="hidden" name="parent" value="comments">
+</form>
 <%= form_for form_params(@parent, @comment), data: {abide: ''} do |f| %>
+<input type="hidden", name='photo_ids' value="" class="pic-ids">
+  <input type="hidden", name='delete_ids' value="" class="delete-ids">
 	<%= render 'layouts/form_errors', object: @comment %>
 	 <%= show_error_message('内容不能为空,请不要超过1千字！') %>
 	 <%= f.text_area :body, class:'comment-area', required: true,placeholder:t(:comment)%>
