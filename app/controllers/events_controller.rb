@@ -2,8 +2,10 @@
 require 'rest-client'
 class EventsController < ApplicationController
 before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
+before_action :set_event, only: [:new, :edit, :update, :create, :destroy]
   def index
     @events = Event.where(locale: session[:locale]).includes(:user)
+
   end
 
   def show
@@ -68,10 +70,10 @@ def create
   uploaded_io = params[:file]
   if !uploaded_io.blank?
     extension = uploaded_io.original_filename.split('.')
-    filename = "#{Time.now.strftime('%Y%m%d%H%M%S')}.#{extension[-1]}"
+    filename = "#{Time.now.strftime('%Y%m%d%H%M%S%L')}.#{extension[-1]}"
     filepath = "#{PIC_PATH}/events/#{filename}"
     localpath = "#{Rails.root}/public/events/#{filename}"
-    File.open(filepath, 'wb') do |file|
+    File.open(localpath, 'wb') do |file|
       file.write(uploaded_io.read)
     end
         # event_params.merge!(:pic_url=>"/events/#{filename}")
@@ -83,6 +85,8 @@ def create
 
 
     if @event.save
+      photo_ids = params[:photo_ids].split(',')
+      Photo.where(id: photo_ids).update_all(event_id: @event.id)
       post_url = "http://www.trade-v.com/send_group_message_api"
       # openids = User.plunk(:weixin_openid)
       openids = "oVxC9uBr12HbdFrW1V0zA3uEWG8c"
@@ -105,6 +109,7 @@ def create
 
   def edit
     @event = Event.find(params[:id])
+    @photos = @event.photos
   end
 
   def update
@@ -118,16 +123,20 @@ def create
       return render :text => 'success'
     end
     end
-    uploaded_io = params[:file]
-    if !uploaded_io.blank?
-      extension = uploaded_io.original_filename.split('.')
-      filename = "#{Time.now.strftime('%Y%m%d%H%M%S')}.#{extension[-1]}"
-      filepath = "#{PIC_PATH}/events/#{filename}"
-      File.open(filepath, 'wb') do |file|
-        file.write(uploaded_io.read)
+    
+    # 删除与团购关联的图片
+    origin_ids = @event.photos.pluck(:id)
+    if params[:photo_ids].present? || params[:delete_ids].present?
+      ids = params[:photo_ids].split(',').select{|id|id.present?}
+      Photo.where(id: ids).update_all(event_id: params[:id])
+      
+      Rails.logger.info origin_ids
+      Rails.logger.info '###############'
+      Rails.logger.info params[:delete_ids]
+      if params[:delete_ids].present?
+        delete_ids = params[:delete_ids].split(',').select{|id|id.present?}
+        Photo.where(id: delete_ids).update_all(event_id: nil)
       end
-      event_params.merge!(:pic_url=>"/events/#{filename}")
-
     end
 
 
@@ -165,7 +174,7 @@ def create
 
   private
   def set_event
-    @event = event.find(params[:id])
+    @event = Event.find(params[:id])
   end
 
   def event_params

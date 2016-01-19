@@ -36,7 +36,7 @@ class PhotosController < ApplicationController
      filepath = "#{PIC_PATH}/#{params[:parent]}/#{filename}"
      localpath = "#{Rails.root}/public/#{filename}"
      content_type = uploaded_io.content_type
-     file = File.open(filepath, 'wb') do |file|
+     file = File.open(localpath, 'wb') do |file|
        file.write(uploaded_io.read)
      end
      photo_params = {}

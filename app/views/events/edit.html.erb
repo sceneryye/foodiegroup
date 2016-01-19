@@ -1,2 +1,16 @@
 <% provide :title, t(:edit_event) %>
 <%= render 'form' %>
+<% if @photos.present? %>
+<% @photos.each do |photo| %>
+<div class="columns small-3 medium-2 large-1">
+  <div class="dz-image" id="<%= photo.id %>">
+    <div class="img">
+      <%= image_tag photo.image %>
+    </div>
+    <div class="trash">
+      <i class="fa fa-trash"></i>
+    </div>
+  </div>
+</div>
+<% end %>
+<% end %>

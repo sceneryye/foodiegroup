@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="large-2 columns">
-    <%= image_tag @event.pic_url, class: 'profile-image round' if @event %>
+    <%= image_tag @title_pic, class: 'profile-image round' if @event %>
   </div>
   <div class="large-10 columns">
     <h2><%= @event.title %></h2>
@@ -53,6 +53,13 @@
         <td><%= @event.price.to_i > 0 ? '￥' + @event.price.to_s : t(:free) %></td>
       </tr>
       <tr>
+        <% if @content_pic.present? %>
+        <% @content_pic.each do |pic| %>
+        <div class="content-pictures columns small-12 medium-8 medium-center large-6 large-center">
+          <%= image_tag pic.try(:image).present? ? pic.image : pic %>
+        </div>
+        <% end %>
+        <% end %>
         <td colspan='2'><%= @event.body.html_safe  %></td>
       </tr>
     </table>
@@ -95,9 +102,7 @@
       </div>
     </div>
     <div id="container" class="gaodemap"></div>
-    <div id="tip">
-      <span id="result"></span>
-    </div>
+
   </div>
 
 
@@ -109,10 +114,9 @@
 
 
   <script type="text/javascript">
-  
     var address = $('.event-address').text();
-
     var map = new AMap.Map("container", {
+      //lang: 'en',
       resizeEnable: false
     });
     function geocoder() {
@@ -120,12 +124,10 @@
         //实例化Geocoder
         var geocoder = new AMap.Geocoder({
         });
-
         //地理编码,返回地理编码结果
         geocoder.getLocation(address, function(status, result) {
           if (status === 'complete' && result.info === 'OK') {
             geocoder_CallBack(result);
-
           }
         });
       });
@@ -160,9 +162,9 @@
 
       </script>
 
-<script>
-    console.log(location.href);
-    wx.config({
+      <script>
+        console.log(location.href);
+        wx.config({
     debug: false,  //开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
     appId: "<%= @appId %>", // 必填，公众号的唯一标识
     timestamp: "<%= @timestamp %>", // 必填，生成签名的时间戳
@@ -170,9 +172,9 @@
     signature: "<%= @sign %>",// 必填，签名，见附录1
     jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
   });
-    wx.ready(function(){
-      var url = location.href;
-      wx.onMenuShareTimeline({
+        wx.ready(function(){
+          var url = location.href;
+          wx.onMenuShareTimeline({
     title: "<%= @title %>", // 分享标题
     link: url, // 分享链接
     imgUrl: "<%= @img_url %>", // 分享图标
@@ -185,7 +187,7 @@
       }
     });
 
-      wx.onMenuShareAppMessage({
+          wx.onMenuShareAppMessage({
 
       title: "<%= @title %>", // 分享标题
       desc: "<%= @desc %>", // 分享描述
@@ -202,7 +204,7 @@
 
       });
 
-    });
+        });
 
-  </script>
+      </script>
 

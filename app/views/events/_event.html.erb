@@ -1,8 +1,15 @@
 <div class="event-list" data-endtime="<%= event.end_time.to_i %>" data-day="<%= t(:day) %>">
   <div class="row">
     <div class="columns small-4">
+    <% if event.pic_url.present?
+      @title_pic = event.pic_url.split(',').reject{|x| x.blank?}[0]
+      @content_pic = event.pic_url.split(',').reject{|x| x.blank?}[1..-1]
+    else
+      @title_pic = event.photos.first.try(:image)
+      @content_pic = event.photos[1..-1]
+    end %>
       <%= link_to event, class: 'th' do %>
-        <%= image_tag event.pic_url%>
+        <%= image_tag @title_pic%>
       <%end%>
     </div>
     <div class="columns small-8">
