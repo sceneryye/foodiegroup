@@ -15,6 +15,34 @@ before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
     more = 10
     @comments = @event.comments.includes(:user)[0...more]
 
+    if @parent.pic_url.present?
+      @title_pic = @event.pic_url.split(',').reject{|x| x.blank?}[0]
+      @content_pic = @event.pic_url.split(',').reject{|x| x.blank?}[1..-1]
+    else
+      @title_pic = @parent.photos.first.try(:image)
+      @content_pic = @parent.photos[1..-1]
+    end
+
+    #微信share接口配置
+    @title = "#{current_user.nickname if current_user.present?}推荐您加入活动：#{@event.title}"
+    @img_url = 'http://www.trade-v.com:5000' + @title_pic.to_s
+    @desc = @event.body.gsub('\n', ' ')[0..20]
+    supplier = Supplier.where(:id => 78).first
+    @timestamp = Time.now.to_i
+    @appId = supplier.weixin_appid
+    @noncestr = random_str 16
+    @jsapilist = ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
+    @jsapi_ticket = get_jsapi_ticket
+    post_params = {
+      :noncestr => @noncestr,
+      :jsapi_ticket => @jsapi_ticket,
+      :timestamp => @timestamp,
+      :url => request.url.gsub("localhost:5000", "vshop.trade-v.com")
+    }
+    @sign = create_sign_for_js post_params
+    @a = [request.url, post_params, request.url.gsub("trade", "vshop.trade-v.com")]
+
+
    if signed_in? 
      @plus_menu = [{name: '<i class="fa  fa-comment"></i>'.html_safe+' '+t(:new_comment), path: new_event_comment_path(@event)},
       {name: '<i class="fa fa-user-plus"></i>'.html_safe+' '+t(:rsvp), path: new_event_participant_path(@event)}
