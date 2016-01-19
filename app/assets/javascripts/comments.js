@@ -32,7 +32,6 @@ dictDefaultMessage: "<i class='fa fa-picture-o'></i>",
     });
 
     this.on('success', function(file, e){
-      alert(e['id']);
       $('.dz-image').each(function(){
         if($(this).attr('id') == undefined) {
           $(this).attr('id', e['id']);
@@ -49,7 +48,6 @@ dictDefaultMessage: "<i class='fa fa-picture-o'></i>",
         ids = ids + ',' + e['id'];
         $('.pic-ids').val(ids);
       }
-      alert($('.pic-ids').val());
     });
 
     this.on('removedfile', function(file) {
