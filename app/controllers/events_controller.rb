@@ -73,7 +73,7 @@ def create
     filename = "#{Time.now.strftime('%Y%m%d%H%M%S%L')}.#{extension[-1]}"
     filepath = "#{PIC_PATH}/events/#{filename}"
     localpath = "#{Rails.root}/public/events/#{filename}"
-    File.open(localpath, 'wb') do |file|
+    File.open(filepath, 'wb') do |file|
       file.write(uploaded_io.read)
     end
         # event_params.merge!(:pic_url=>"/events/#{filename}")
