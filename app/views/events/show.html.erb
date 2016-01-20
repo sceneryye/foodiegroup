@@ -120,6 +120,7 @@
     var address = $('.event-address').text();
     var map = new AMap.Map("container", {
       //lang: 'en',
+      zoom: 14,
       resizeEnable: false
     });
     function geocoder() {
@@ -158,8 +159,8 @@
             //拼接输出html
             resultStr += "<span style=\"font-size: 12px;padding:0px 0 4px 2px; border-bottom:1px solid #C1FFC1;\">" + "<b>地址</b>：" + geocode[i].formattedAddress + "" + "&nbsp;&nbsp;<b>的地理编码结果是:</b><b>&nbsp;&nbsp;&nbsp;&nbsp;坐标</b>：" + geocode[i].location.getLng() + ", " + geocode[i].location.getLat() + "" + "<b>&nbsp;&nbsp;&nbsp;&nbsp;匹配级别</b>：" + geocode[i].level + "</span>";
             addMarker(i, geocode[i]);
+            map.setCenter([ geocode[i].location.getLng(),  geocode[i].location.getLat()]);
           }
-          map.setFitView();
           
         }
 
