@@ -1,5 +1,5 @@
 <% if params[:groupbuy_id] || controller_name=='groupbuys'%>
-	<%= render @user_addresses%>
+	
 <%end%>
 <%= form_for form_params(@parent, @participant), data: {abide: ''} do |f| %>
 	<%= render 'layouts/form_errors', object: @participant %>
@@ -63,3 +63,4 @@
 	</div>
 
 <% end %>
+<%= render @user_addresses%>

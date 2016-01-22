@@ -1,8 +1,15 @@
 //= require foundation-datetimepicker
 
 //倒计时
+$(document).ready(function(){
+  countdown($('.groupbuy-list'));
+  countdown($('.event-list'));
+});
 
-$('.groupbuy-list').each(function(){
+
+function countdown(obj) {
+
+obj.each(function(){
   var endTime = $(this).data('endtime');
   var day = $(this).data('day');
   var that = $(this);
@@ -32,3 +39,4 @@ $('.groupbuy-list').each(function(){
   
   //setInterval(getRTime,1000);
 });
+}

@@ -7,9 +7,9 @@
   </div>
 
   <div class="large-10 columns">
-    <h2><%= @groupbuy.title %></h2>      
-    <h3><%= "[No. #{@groupbuy.id.to_s.rjust(10,'0')}]" %></h3> 
-    <%= groupbuy_info(@groupbuy) %>     
+    <h2><%= @groupbuy.title %></h2>
+    <h3><%= "[No. #{@groupbuy.id.to_s.rjust(10,'0')}]" %></h3>
+    <%= groupbuy_info(@groupbuy) %>
   </div>
 </div>
 <div class="row">
@@ -22,6 +22,20 @@
       <tr>
         <th><%=t(:end_time)%></th>
         <td><%=@groupbuy.end_time.strftime("%Y-%m-%d %H:%M")%></td>
+      </tr>
+      <tr>
+        <th><%=t(:remaining_time)%></th>
+        <td>
+        <div class="groupbuy-list" data-endtime="<%= @groupbuy.end_time.to_i %>" data-day="<%= t(:day) %>">
+          <div class="countdown">
+          <span class="countdonw-title"></span>
+          <span class="countdown-day"></span>
+          <span class="countdown-hour"></span>
+          <span class="countdown-minute"></span>
+          <span class="countdown-second"></span>
+        </div>
+        </div>
+        </td>
       </tr>
       <tr>
         <th><%=t(:inventory)%></th>
@@ -51,16 +65,18 @@
 
   </div>
 </div>
-<% if current_user == @groupbuy.user || current_user.try(:role) == '1' %>  
 <div class="row">
   <div class="small-12 columns">
+    <% if current_user == @groupbuy.user || current_user.try(:role) == '1' %>
     <%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_groupbuy_path(@groupbuy), class:"tiny button radius" %>
     <%= link_to '<i class="fa fa-times"></i>'.html_safe + ' ' + t(:delete), @groupbuy,method: :delete,
     class:"tiny button alert radius",
-      data: {confirm: '?'} %>      
+      data: {confirm: '?'} %>
+      <% end %>
+      <%= link_to '<i class="fa fa-cart-plus"></i>'.html_safe + ' ' + t(:buy), '#participants', class:"tiny button radius" %>
     </div>
+
   </div>
-  <% end %>
   <div class="row">
     <div class="small-12 columns">
       <ul class="tabs" data-tab role="tablist">
@@ -88,7 +104,7 @@
       </div>
     </div>
   </div>
-  
+
 
   <!-- ########################comment上传图片########################## -->
   <script type="text/javascript" src="http://www.trade-v.com:5000/assets/comments.js"></script>
@@ -112,7 +128,7 @@
     imgUrl: "<%= @img_url %>", // 分享图标
     success: function () {
         // 用户确认分享后执行的回调函数
-        
+
       },
       cancel: function () {
         // 用户取消分享后执行的回调函数
