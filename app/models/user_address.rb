@@ -7,4 +7,10 @@ class UserAddress < ActiveRecord::Base
 	validates :address, presence: true
 
 	default_scope {order 'updated_at DESC'}
+
+  def default?
+    self.default == 1
+  end
+
+  
 end

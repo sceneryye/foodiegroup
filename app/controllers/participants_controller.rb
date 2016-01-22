@@ -2,7 +2,7 @@
 class ParticipantsController < ApplicationController
 
   skip_before_action :verify_authenticity_token, only: :wechat_notify_url
-  
+
   before_action :validate_user!, except: :wechat_notify_url
 
   before_action only: [:edit, :update, :destroy,:wechat_pay] do
@@ -31,7 +31,7 @@ class ParticipantsController < ApplicationController
   end
 
   def new
-    @participant = @parent.participants.new   
+    @participant = @parent.participants.new
   end
 
   def index
@@ -64,13 +64,12 @@ class ParticipantsController < ApplicationController
     end
   end
 
-  def create   
+  def create
 
-    if !params[:groupbuy_id].nil?     
-      if current_user.user_addresses.size>0
-        address = current_user.user_addresses.first
-        params[:participant].merge!(:name=>address.name,:address=>address.address,:mobile=>address.mobile) 
-      end
+    if !params[:groupbuy_id].nil?
+      address = params[:user_addresses_id].present? ? UserAddress.find_by(id: params[:user_addresses_id]) : current_user.default_address
+      params[:participant].merge!(:name=>address.name,:address=>address.address,:mobile=>address.mobile)
+      
 
       Rails.logger.info "#################{address}"
       delivery_time = params[:date] + '-' + params[:time]
@@ -78,7 +77,7 @@ class ParticipantsController < ApplicationController
     end
 
     @participant = @parent.participants.new(participant_params)
-    
+
     @participant.user = current_user
 
     if @participant.save
@@ -97,7 +96,7 @@ class ParticipantsController < ApplicationController
   end
 
   def wechat_pay
-    
+
     if @participant.event_id
       parent = @participant.event
       type_name = 'events'
@@ -111,7 +110,7 @@ class ParticipantsController < ApplicationController
     openid = current_user.weixin_openid
     event_id = parent.id
     event_name = parent.title
-   
+
     Rails.logger.info money
     data = {
       money: money,

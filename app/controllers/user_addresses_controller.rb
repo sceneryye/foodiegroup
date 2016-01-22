@@ -35,6 +35,10 @@ class UserAddressesController < ApplicationController
         return redirect_to return_url
       end
 
+      if params[:groupbuy_id]
+        return redirect_to groupbuy_path(params[:groupbuy_id])
+      end
+
       redirect_to user_addresses_path, notice: '地址添加成功'
     else
       render :new

@@ -9,9 +9,9 @@
 var groupbuy_id = $.getUrlParam('groupbuy_id');
 if(groupbuy_id) {
   $('.address-detail').on('click', function(){
-    var url = '/groupbuys/' + groupbuy_id + '/participants/new';
     var id = $(this).data('id');
-    var post_url = '/user_addresses/' + id;
+    var url = '/foodiegroup/groupbuys/' + groupbuy_id + '?user_addresses_id=' + id;
+    var post_url = 'user_addresses/' + id;
     $.ajax({
       url: post_url,
       type: 'patch',
@@ -31,3 +31,38 @@ if(groupbuy_id) {
     
   });
 }
+
+//-------------------地区选择-----------------------//
+$(document).ready(function(){
+  (function() {
+    (function($) {
+      $.fn.china_city = function() {
+        return this.each(function() {
+          var selects;
+          selects = $(this).find('.city-select');
+          return selects.change(function() {
+            var $this, next_selects;
+            $this = $(this);
+            next_selects = selects.slice(selects.index(this) + 1);
+            $("option:gt(0)", next_selects).remove();
+            if (next_selects.first()[0] && $this.val()) {
+              return $.get("/foodiegroup/china_city/" + ($(this).val()), function(data) {
+                var i, len, option, results;
+                results = [];
+                for (i = 0, len = data.length; i < len; i++) {
+                  option = data[i];
+                  results.push(next_selects.first()[0].options.add(new Option(option[0], option[1])));
+                }
+                return results;
+              });
+            }
+          });
+        });
+      };
+      return $(function() {
+        return $('.city-group').china_city();
+      });
+    })(jQuery);
+
+  }).call(this);
+})

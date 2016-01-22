@@ -133,6 +133,16 @@ $primary-color: #008CBA;
   margin-left: 20px;
 }
 
+.add-address {
+  margin-bottom: 20px;
+  .add-address-icon {
+    padding-left: 10px;
+    .fa-plus-circle {
+      color: green;
+    }
+  }
+}
+
 /*******************groupbuy new page******************/
 
 .new-groupbuy {

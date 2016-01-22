@@ -4,15 +4,16 @@
   .checked {
     color: green;
   }
-  .checked, .unchecked, .edit-address {
+  .checked, .unchecked, .edit-address, .destroy-address {
     padding-top: 5px;
   }
   .address-detail {
     padding-left: 5%;
-    width: 85%;
+    width: 80%;
   }
-  .edit-address, .plus-circle {
+  .edit-address {
     padding-right: 2%;
+    margin-right: 10px;
   }
   .address-content, .new {
     margin-top: -10px;
@@ -21,4 +22,13 @@
   .new-address {
 
   }
+  .destroy-address, .plus-circle {
+    margin-right: 20px;
+  }
+  .fa-trash {
+    color: red;
+  }
+ .fa-plus-circle {
+  color: green;
+ }
 }

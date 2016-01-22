@@ -3,9 +3,11 @@
   <%#=render 'form' ,:locals=>{@user_address=>@user_address} %>
   <div class="new">
     <div class="new-address left">
-      <%= link_to t(:new_address), new_user_address_path(groupbuy_id: params[:groupbuy_id]) %>
+    <%= t(:new_address) %>
     </div>
+    <%= link_to new_user_address_path(groupbuy_id: params[:groupbuy_id]) do %>
     <div class="plus-circle right"><i class="fa fa-lg fa-plus-circle"></i></div>
+    <% end %>
     <div class="clear"></div>
   </div>
   <hr />

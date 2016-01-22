@@ -45,14 +45,10 @@ class GroupbuysController < ApplicationController
 
 
     if current_user
-      @user_addresses = current_user.user_addresses
-      if  @user_addresses.size == 0
-        return redirect_to new_user_address_path(groupbuy_id: params[:groupbuy_id], from: 'new_participant')
-      elsif  @user_addresses.where(default: 1).present?
-        @user_addresses =  @user_addresses.where(default: 1)
-      else
-        @user_addresses =  @user_addresses.first
-      end
+      @user_addresses = current_user.default_address
+      # if  @user_addresses.nil?
+        # return redirect_to new_user_address_path(groupbuy_id: params[:groupbuy_id], from: 'new_participant')
+      # end
     end
 
    #@amount = Foodie::Participant.where
@@ -168,7 +164,7 @@ def create
         Photo.where(id: delete_ids).update_all(groupbuy_id: nil)
       end
     end
-    
+
     if @groupbuy.update(groupbuy_params)
 
       redirect_to groupbuy_url(@groupbuy), notice: '团购修改成功'
