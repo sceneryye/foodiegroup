@@ -5,7 +5,7 @@
     <% if params[:from].nil? %>
     <h2>欢迎您加入吃货帮!</h2>
     <% end %>
-    <% if params[:from] == 'share_from_foodie' %>
+    <% if params[:from] == 'share_from_foodie' && params[:group_id].present? %>
     <% if session[:locale]=='zh' %>
     <h2>欢迎您加入<%= Group.find(params[:group_id] || params[:groupid]).name %>!</h2>
     <% else %>
