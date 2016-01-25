@@ -116,10 +116,10 @@ class ParticipantsController < ApplicationController
       money: money,
       from: from,
       openid: openid,
-      event_id: event_id,
+      parent_id: parent.id,
       participant_id: @participant.id,
       user_id: @participant.user_id,
-      event_name: event_name,
+      parent_name: parent.title,
       type_name: type_name
     }
     return redirect_to "http://www.trade-v.com/foodies/foodie_pay?#{data.to_query}"
@@ -128,12 +128,14 @@ class ParticipantsController < ApplicationController
   def wechat_notify_url
     if params["result_code"] == 'SUCCESS'
       groupbuy_id, participant_id, user_id = params["attach"].split('_')
-      Participant.find(participant_id).update(status_pay: 2)
+      participant = Participant.find(participant_id)
+      parent = participant.event_id.present? ? 'events' : 'groupbuys'
+      participant.update(status_pay: 2)
       post_url = "http://www.trade-v.com/temp_info_api"
       openid = params["openid"]
       template_id = "E_Mfmg0TwyE3hRnccleURsU5QpqsPVsj0LD5dU4fu0Y"
-      url = "http://182.254.137.73:5000/groupbuys/#{groupbuy_id}"
-      title = Groupbuy.find(groupbuy_id).title
+      url = '/foodiegroup/' + parent + '/groupbuy_id'
+      title = participant.event_id.present? ? Event.find_by(id: groupbuy_id).title : Groupbuy.find_by(id: groupbuy_id).title
       data = {
         :first => {:value => '支付成功', :color => "#173177"},
         :orderMoneySum => {:value => params["cash_fee"].to_f / 100.00, :color => "#173177"},
@@ -147,7 +149,22 @@ class ParticipantsController < ApplicationController
         data: data
       }
       RestClient.post post_url, post_data
-      return render text: 'success'
+
+      post_url = "http://www.trade-v.com/send_group_message_api"
+      user = User.find_by(id: participant.user_id)
+
+      # openids = User.plunk(:weixin_openid)
+      openids = "oVxC9uBr12HbdFrW1V0zA3uEWG8c"
+      msgtype = "text"
+      content = "#{user.nickname}刚刚完成了一笔支付：#{title}, 赶紧去看看哦～"
+      data_hash = {
+        openids: openids,
+        content: content,
+        data: {msgtype: msgtype}
+      }
+      data_json = data_hash.to_json
+      res_data_json = RestClient.post post_url, data_hash
+
     end
   end
 
