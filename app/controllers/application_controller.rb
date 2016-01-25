@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :signed_in?, :current_user,:forum_id
 
-  before_action :set_locale, :login_if_openid_exit
+  before_action :set_locale, :login_if_openid_exit, :auto_login
 
 
   private
@@ -26,6 +26,29 @@ class ApplicationController < ActionController::Base
       session[:locale]='zh'
     end
     
+  end
+
+  def auto_login
+    if !params[:openid].blank?
+      session[:openid] = params[:openid].split('_shop')[0]
+
+      session[:avatar] = params[:avatar]
+      session[:nickname] = params[:nickname]
+      user = User.where(:weixin_openid=>session[:openid])
+      if user.size>0
+        @user = user.first do |u|
+          u.avatar = session[:avatar]
+          u.nickname = session[:nickname]
+        end.save
+        login user.first
+        redirect_to root_path #清空传过来的参数
+      else
+        redirect_to  register_path
+      end
+    end
+    if current_user.nil?
+      session[:locale] = 'zh'
+    end
   end
 
   def login_if_openid_exit
