@@ -65,7 +65,7 @@
           </ul>
         </div> -->
 </div>
-<div class="events-index"  data-over="<%= t(:groupbuy_end) %>">
+<div class="groupbuys-index"  data-over="<%= t(:groupbuy_end) %>">
   <% if @groupbuys && @groupbuys.size>0 %>
     <%= render @groupbuys %>
     <div class="columns small-12 text-right">
@@ -79,7 +79,7 @@
 </div>
 
 
-<div class="events-index">
+<div class="events-index" data-over="<%= t(:event_end) %>">
   <% if @events && @events.size>0%>
     <%= render @events %>
     <div class="columns small-12 text-right">
