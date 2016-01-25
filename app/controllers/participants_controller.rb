@@ -126,7 +126,6 @@ class ParticipantsController < ApplicationController
   end
 
   def wechat_notify_url
-    Rails.logger.info params["xml"]
     if params["xml"]["result_code"] == 'SUCCESS'
       groupbuy_id, participant_id, user_id = params["xml"]["attach"].split('_')
       participant = Participant.find(participant_id)
@@ -166,7 +165,6 @@ class ParticipantsController < ApplicationController
       data_json = data_hash.to_json
       res_data_json = RestClient.post post_url, data_hash
     end
-    return render text: 'success'
   end
 
   def edit() end
