@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :signed_in?, :current_user,:forum_id
 
-  before_action :set_locale
+  before_action :set_locale, :login_if_openid_exit
 
 
   private
@@ -26,6 +26,15 @@ class ApplicationController < ActionController::Base
       session[:locale]='zh'
     end
     
+  end
+
+  def login_if_openid_exit
+    if session[:open_id].present? && current_user.nil?
+      user = User.find_by(weixin_openid: session[:open_id])
+      if user.present?
+        login user
+      end
+    end
   end
 
   def logout
