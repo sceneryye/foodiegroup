@@ -34,7 +34,11 @@ class UsersController < ApplicationController
 
     if @user.save
       login(@user)
-      redirect_to root_url, notice: '注册成功!'
+      if params[:return_url]
+        return redirect_to URI.decode(params[:return_url])
+      else
+        return redirect_to root_url, notice: '注册成功!'
+      end
     else
       render :new
     end

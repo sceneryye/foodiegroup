@@ -73,7 +73,7 @@
     class:"tiny button alert radius",
       data: {confirm: '?'} %>
       <% end %>
-      <%= link_to '<i class="fa fa-cart-plus"></i>'.html_safe + ' ' + t(:buy), '#participants', class:"tiny button radius" %>
+      <%= link_to '<i class="fa fa-cart-plus"></i>'.html_safe + ' ' + t(:buy), '#participants', class:"tiny button radius participant-button", 'data-info' => t(:sign_up_first) %>
     </div>
 
   </div>
@@ -120,11 +120,26 @@
   </script>
 
 
-
-  <!--分享-->
   <script>
-    console.log(location.href);
-    wx.config({
+  //---------------未注册时点击团购按钮提示注册--------------------//
+
+  $('.participant-button').on('click', function(e){
+    var info = $(this).data('info');
+    <% if current_user.nil? %>
+    e.preventDefault;
+    alert(info);
+    var return_url = encodeURIComponent(location.href);
+    location.href = 'http://www.trade-v.com/foodies/go_to_foodie_from_share?return_url=' + return_url;
+    <% end %>
+  });
+</script>
+
+
+
+<!--分享-->
+<script>
+  console.log(location.href);
+  wx.config({
     debug: false,  //开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
     appId: "<%= @appId %>", // 必填，公众号的唯一标识
     timestamp: "<%= @timestamp %>", // 必填，生成签名的时间戳
@@ -132,9 +147,9 @@
     signature: "<%= @sign %>",// 必填，签名，见附录1
     jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
   });
-    wx.ready(function(){
-      var url = location.href;
-      wx.onMenuShareTimeline({
+  wx.ready(function(){
+    var url = location.href;
+    wx.onMenuShareTimeline({
     title: "<%= @title %>", // 分享标题
     link: url, // 分享链接
     imgUrl: "<%= @img_url %>", // 分享图标
@@ -147,7 +162,7 @@
       }
     });
 
-      wx.onMenuShareAppMessage({
+    wx.onMenuShareAppMessage({
 
       title: "<%= @title %>", // 分享标题
       desc: "<%= @desc %>", // 分享描述
@@ -164,7 +179,7 @@
 
       });
 
-    });
+  });
 
-  </script>
+</script>
 
