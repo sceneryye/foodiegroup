@@ -52,8 +52,8 @@ class ApplicationController < ActionController::Base
   end
 
   def login_if_openid_exit
-    if session[:open_id].present? && current_user.nil?
-      user = User.find_by(weixin_openid: session[:open_id])
+    if params[:openid].present? && current_user.nil?
+      user = User.find_by(weixin_openid: params[:openid]
       if user.present?
         login user
       end

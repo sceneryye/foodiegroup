@@ -68,16 +68,18 @@
     </table>
   </div>
 </div>
-<% if current_user == @event.user %>
 <div class="row">
   <div class="small-12 columns">
+<% if current_user == @event.user %>
     <%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_event_path(@event), class:"tiny button radius" %>
     <%= link_to '<i class="fa fa-times"></i>'.html_safe + ' ' + t(:delete), @event, method: :delete,
     class:"tiny button alert radius",
       data: {confirm: '?'} %>
+  <% end %>
+  <%= link_to '<i class="fa fa-cart-plus"></i>'.html_safe + ' ' + t(:buy), '#participants', class:"tiny button radius participant-button", 'data-info' => t(:sign_up_first) %>
+    </div>
     </div>
   </div>
-  <% end %>
   <div class="row">
     <div class="small-12 columns">
       <ul class="tabs" data-tab role="tablist">
@@ -114,6 +116,20 @@
     body{height:100%;margin:0px;padding:0px}
     #container {width:90%; height: 260px; position: relative;margin-left: 5%; }
   </style>
+
+  <script>
+  //---------------未注册时点击参加活动按钮提示注册--------------------//
+
+  $('.participant-button').on('click', function(e){
+    var info = $(this).data('info');
+    <% if current_user.nil? %>
+    e.preventDefault;
+    alert(info);
+    var return_url = encodeURIComponent(location.href);
+    location.href = 'http://www.trade-v.com/foodies/go_to_foodie_from_share?return_url=' + return_url;
+    <% end %>
+  });
+</script>
 
 <!--地图-->
   <script type="text/javascript">
