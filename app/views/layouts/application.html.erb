@@ -25,7 +25,14 @@
 
 <body onload="geocoder()">
 <script>
-  if(var useragent = navigator.userAgent.toLowerCase()) {
+function isWeixinBrowser(){
+    var ua = navigator.userAgent.toLowerCase();
+      //  alert(ua);
+      return (/micromessenger/.test(ua)) ? true : false ;
+    }
+
+    var is_weixin_browser = isWeixinBrowser();
+  if(is_weixin_browser) {
   <% if current_user.nil? && params[:openid].nil? %>
     var return_url = location.href;
     location.href = 'http://vshop.trade-v.com/auto_login?return_url=' + return_url;

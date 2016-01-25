@@ -19,7 +19,7 @@ obj.each(function(){
     var t =EndTime * 1000 - NowTime.getTime();
     if(t < 0) {
       //console.log(t);
-      var over = $('.events-index').data('over');
+      var over = obj.parent().data('over');
       $(that).find('.countdown').text(over);
       return;
     }
