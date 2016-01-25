@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
         end.save
         login user.first
         redirect_to root_path #清空传过来的参数
-     
+
       end
     end
     if current_user.nil?
@@ -52,10 +52,11 @@ class ApplicationController < ActionController::Base
 
   def login_if_openid_exit
     if params[:openid].present? && current_user.nil?
-      user = User.find_by(weixin_openid: params[:openid])
-      if user.present?
-        login user
-      end
+       session[:openid] = params[:openid]
+       user = User.find_by(weixin_openid: params[:openid])
+        if user.present?
+          login user
+        end
     end
   end
 
