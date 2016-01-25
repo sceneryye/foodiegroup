@@ -42,8 +42,7 @@ class ApplicationController < ActionController::Base
         end.save
         login user.first
         redirect_to root_path #清空传过来的参数
-      else
-        redirect_to  register_path
+     
       end
     end
     if current_user.nil?
