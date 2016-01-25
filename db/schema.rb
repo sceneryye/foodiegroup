@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160119091934) do
+ActiveRecord::Schema.define(version: 20160121094034) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255, null: false
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20160119091934) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "market_price",                   precision: 10, scale: 2
+    t.decimal  "weight",                         precision: 10, scale: 2
   end
 
   add_index "groupbuys", ["user_id"], name: "index_groupbuys_on_user_id", using: :btree
@@ -139,6 +140,26 @@ ActiveRecord::Schema.define(version: 20160119091934) do
 
   add_index "groups", ["name"], name: "index_groups_on_name", unique: true, using: :btree
   add_index "groups", ["user_id"], name: "index_groups_on_user_id", using: :btree
+
+  create_table "logistics", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.string   "name",       limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "logistics", ["user_id"], name: "index_logistics_on_user_id", using: :btree
+
+  create_table "logistics_items", force: :cascade do |t|
+    t.integer  "logistic_id", limit: 4
+    t.string   "areas",       limit: 255
+    t.integer  "price",       limit: 4
+    t.integer  "each_add",    limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "logistics_items", ["logistic_id"], name: "index_logistics_items_on_logistic_id", using: :btree
 
   create_table "participants", force: :cascade do |t|
     t.integer  "user_id",         limit: 4,                                         null: false
