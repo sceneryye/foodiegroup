@@ -147,6 +147,7 @@ class ParticipantsController < ApplicationController
         data: data
       }
       RestClient.post post_url, post_data
+      return render text: 'success'
     end
   end
 
