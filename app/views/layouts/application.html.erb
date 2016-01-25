@@ -25,10 +25,12 @@
 
 <body onload="geocoder()">
 <script>
-  <% if current_user.nil? && params[:openid].nil? && params[:controller] != 'reports' %>
+  if(var useragent = navigator.userAgent.toLowerCase()) {
+  <% if current_user.nil? && params[:openid].nil? %>
     var return_url = location.href;
     location.href = 'http://vshop.trade-v.com/auto_login?return_url=' + return_url;
   <% end %>
+}
 </script>
 
 <div class="off-canvas-wrap" data-offcanvas>
