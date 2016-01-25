@@ -18,7 +18,7 @@ function checkPositiveInteger(obj){
 
 function checkPositiveNumber(obj){
   var num = obj.val();
-  if(isNaN(num) || num < 1 ) {
+  if(isNaN(num) || num < 0 ) {
     obj.val('');
     var errmsg = '只能为正数！';
     alert(errmsg);
