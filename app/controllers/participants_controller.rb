@@ -126,19 +126,20 @@ class ParticipantsController < ApplicationController
   end
 
   def wechat_notify_url
-    if params["result_code"] == 'SUCCESS'
-      groupbuy_id, participant_id, user_id = params["attach"].split('_')
+    Rails.logger.info params["xml"]
+    if params["xml"]["result_code"] == 'SUCCESS'
+      groupbuy_id, participant_id, user_id = params["xml"]["attach"].split('_')
       participant = Participant.find(participant_id)
       parent = participant.event_id.present? ? 'events' : 'groupbuys'
       participant.update(status_pay: 2)
       post_url = "http://www.trade-v.com/temp_info_api"
-      openid = params["openid"]
+      openid = params["xml"]["openid"]
       template_id = "E_Mfmg0TwyE3hRnccleURsU5QpqsPVsj0LD5dU4fu0Y"
       url = '/foodiegroup/' + parent + '/groupbuy_id'
       title = participant.event_id.present? ? Event.find_by(id: groupbuy_id).title : Groupbuy.find_by(id: groupbuy_id).title
       data = {
         :first => {:value => '支付成功', :color => "#173177"},
-        :orderMoneySum => {:value => params["cash_fee"].to_f / 100.00, :color => "#173177"},
+        :orderMoneySum => {:value => params["xml"]["cash_fee"].to_f / 100.00, :color => "#173177"},
         :orderProductName => {:value => title, :color => "#173177"},
         :Remark => {:value => '您已支付成功！您可以在吃货帮查看更多详情', :color => "#173177"}
       }
@@ -164,8 +165,8 @@ class ParticipantsController < ApplicationController
       }
       data_json = data_hash.to_json
       res_data_json = RestClient.post post_url, data_hash
-
     end
+    return render text: 'success'
   end
 
   def edit() end
