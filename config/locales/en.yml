@@ -251,7 +251,7 @@ en:
   mobile: Mobile
   address: Address
   quantity: Quantity
-  buy: Buy
+  buy: Buy Now
   buys: Boughts
   remark: Remark
   new_event: Add new meetup
@@ -311,4 +311,5 @@ en:
   no_address: No Address
   enter_address: Please Add Your Address
   confirm_insure: Are you sure to delete?
-  sign_up_first: Sign Up First.
+  sign_up_first: Sign Up First
+  join_now: Join Now!

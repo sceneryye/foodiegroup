@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :signed_in?, :current_user,:forum_id
 
-  before_action :set_locale, :login_if_openid_exit, :auto_login
+  before_action :set_locale, :auto_login
 
 
   private
@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   end
 
   def auto_login
-    if !params[:openid].blank?
+    if !params[:openid].blank? && current_user.nil?
       session[:openid] = params[:openid].split('_shop')[0]
 
       session[:avatar] = params[:avatar]
@@ -50,15 +50,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def login_if_openid_exit
-    if params[:openid].present? && current_user.nil?
-       session[:openid] = params[:openid]
-       user = User.find_by(weixin_openid: params[:openid])
-        if user.present?
-          login user
-        end
-    end
-  end
+  
 
   def logout
     session[:user_id] = nil
