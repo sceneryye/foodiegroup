@@ -167,7 +167,7 @@ class ParticipantsController < ApplicationController
       }
       data_json = data_hash.to_json
       res_data_json = RestClient.post post_url, data_hash
-      Rails.logger.info '##########################4'
+      Rails.logger.info res_data_json
     end
     Rails.logger.info '##########################5'
     render text: 'ok'
