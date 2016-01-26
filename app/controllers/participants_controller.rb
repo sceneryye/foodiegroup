@@ -126,7 +126,9 @@ class ParticipantsController < ApplicationController
   end
 
   def wechat_notify_url
+    Rails.logger.info '##########################1'
     if params["result_code"] == 'SUCCESS'
+      Rails.logger.info '##########################2'
       groupbuy_id, participant_id, user_id = params["attach"].split('_')
       participant = Participant.find(participant_id)
       parent = participant.event_id.present? ? 'events' : 'groupbuys'
@@ -149,6 +151,7 @@ class ParticipantsController < ApplicationController
         data: data
       }
       RestClient.post post_url, post_data
+      Rails.logger.info '##########################3'
 
       post_url = "http://www.trade-v.com/send_group_message_api"
       user = User.find_by(id: participant.user_id)
@@ -164,7 +167,9 @@ class ParticipantsController < ApplicationController
       }
       data_json = data_hash.to_json
       res_data_json = RestClient.post post_url, data_hash
+      Rails.logger.info '##########################4'
     end
+    Rails.logger.info '##########################5'
     render text: 'ok'
   end
 
