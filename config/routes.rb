@@ -74,10 +74,11 @@ RailsOnForum::Application.routes.draw do
 
     resources :groups, only: [:show, :update]
 
+    get '/wechat_notify_url', to: 'participants#wechat_notify_url'
     get '/register',    to: 'users#new',  as: :register
     get '/:id',         to: 'users#show', as: :profile
     get '/:id/edit', to: 'users#edit', as: :edit_profile
-    get '/wechat_notify_url', to: 'participants#wechat_notify_url'
+    
 
     resource :home, only: [:index]
 

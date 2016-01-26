@@ -165,6 +165,7 @@ class ParticipantsController < ApplicationController
       data_json = data_hash.to_json
       res_data_json = RestClient.post post_url, data_hash
     end
+    render text: 'ok'
   end
 
   def edit() end
