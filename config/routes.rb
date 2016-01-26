@@ -77,7 +77,7 @@ RailsOnForum::Application.routes.draw do
     get '/register',    to: 'users#new',  as: :register
     get '/:id',         to: 'users#show', as: :profile
     get '/:id/edit', to: 'users#edit', as: :edit_profile
-    post '/wechat_notify_url', to: 'participants#wechat_notify_url'
+    get '/wechat_notify_url', to: 'participants#wechat_notify_url'
 
     resource :home, only: [:index]
 
