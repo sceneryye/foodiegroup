@@ -14,9 +14,9 @@ class Participant < ActiveRecord::Base
 	def initialize_attrs
 	    #self.order_id = Participant.generate_order_id
 	    # self.amount = 1
-	    self.status = 0
-	    self.freightage = 0
-	    self.discount = 0
+	    # self.status = 0
+	    # # self.freightage = 0
+	    # self.discount = 0
 	    #self.currency = "CNY"
 
 	    # if self.ship_day == 'special'
@@ -43,19 +43,19 @@ class Participant < ActiveRecord::Base
 	end
 
 	def calculate_freightage
-self.freightage = 13
-	 #  	logistics_item = LogisticsItem.where("logistic_id =#{self.groupbuy.logistic_id} and areas like '#{self.area}%' ")
 
-	 #  	if logistics_item.size>0
-	 #  		weight = self.quantity * self.groupbuy.weight
-		# 	self.freightage = logistics_item.price + (weight -1) * logistics_item.each_add
-		# else
-		# 	self.freightage = 13
-	 #  	end
+	  	logistics_item = LogisticsItem.where("logistic_id =#{self.groupbuy.logistic_id} and areas like '#{self.area}%' ")
+
+	  	if logistics_item.size>0
+	  		weight = self.quantity * self.groupbuy.weight
+			self.freightage = logistics_item.first.price + (weight -1) * logistics_item.first.each_add
+		else
+			self.freightage = 0
+	  	end
 	end
 
 	def calculate_discount
-	  	
+	  	self.discount = 0
 	end
 
 	
