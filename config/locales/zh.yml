@@ -240,7 +240,7 @@ zh:
         name: 联系人
         mobile: 联系电话
         body: 活动详情
-        price: 单价
+        price: 团购价
       groupbuy:
         id: 团购号
         title:  活动名称
@@ -374,7 +374,7 @@ zh:
   default_address: 默认地址
   new_address: 新建地址
   set_default: 设为默认
-  market_price: 市场价
+  market_price: 非团购价
   save: 省
   amount: 数量
   please_choose_groupbuy_duration: 请选择团购期间
@@ -423,4 +423,6 @@ zh:
   join_now: 立即参加
   pay_success: 支付成功！
   weight_kg: 重量(公斤)
+  logistics: 物流规则
+  new_logistics: 新增物流规则
 
