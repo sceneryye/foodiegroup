@@ -67,11 +67,10 @@ class ParticipantsController < ApplicationController
   def create
 
     if !params[:groupbuy_id].nil?
-      address = params[:user_addresses_id].present? ? UserAddress.find_by(id: params[:user_addresses_id]) : current_user.default_address
-      params[:participant].merge!(:name=>address.name,:address=>address.address,:mobile=>address.mobile)
+      # address = params[:user_addresses_id].present? ? UserAddress.find_by(id: params[:user_addresses_id]) : current_user.default_address
+      # params[:participant].merge!(:name=>address.name,:address=>address.address,:mobile=>address.mobile)
       
 
-      Rails.logger.info "#################{address}"
       delivery_time = params[:date] + '-' + params[:time]
       params[:participant].merge!(:delivery_time => delivery_time)
     end
@@ -208,6 +207,6 @@ class ParticipantsController < ApplicationController
     end
 
     def participant_params
-      params.require(:participant).permit(:name,:mobile,:amount,:amount,:address, :remark)
+      params.require(:participant).permit(:quantity, :remark)
     end
 end
