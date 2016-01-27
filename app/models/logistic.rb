@@ -7,7 +7,7 @@ class Logistic < ActiveRecord::Base
 	validates :user, presence: true
 	validates :name, presence: true
 
-	default_scope {order 'updated_at DESC'}
+	default_scope {order '`default` DESC, updated_at DESC'}
 
   def default?
     self.default == 1
