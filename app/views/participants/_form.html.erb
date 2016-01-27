@@ -4,10 +4,10 @@
 	<%= render 'layouts/form_errors', object: @participant %>
     <div class="row collapse">
 	    <div class="small-4 columns">
-	    	<span class="prefix"><%= t(:amount) %></span>
+	    	<span class="prefix"><%= t(:quantity) %></span>
 	    </div>
         <div class="small-5 columns">
-          	<%= f.number_field :amount, required: true,value: 1, class: 'participant-number', "data-errmsg" => t(:should_be_int)%>
+          	<%= f.number_field :quantity, required: true,value: 1, class: 'participant-number', "data-errmsg" => t(:should_be_int)%>
         </div>
         <div class="small-3 columns">
           <span class="postfix">

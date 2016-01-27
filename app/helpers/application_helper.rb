@@ -63,9 +63,9 @@ def participant_info(participant, price)
   info << info_for(participant.user)
   info << time_for(participant)
   if participant.groupbuy_id
-    info << ' | ' + participant.amount.to_s + Groupbuy.find(participant.groupbuy_id).goods_unit
+    info << ' | ' + participant.quantity.to_s + Groupbuy.find(participant.groupbuy_id).goods_unit
   else
-    info << t(:people) +' '+ participant.amount.to_s
+    info << t(:people) +' '+ participant.quantity.to_s 
   end
   if participant.tracking_number.present?
     info << "<div class='tracking-number'><span class='tracking-title'>" << t(:tracking_number) << "</span><span class='number'>" << format_string(participant.tracking_number) << "</span></div>"
