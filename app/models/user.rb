@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :groupbuys, dependent: :destroy
   has_many :user_interests, dependent: :destroy
   has_many :user_addresses, dependent: :destroy
+  has_many :logistics, dependent: :destroy
 
   belongs_to :group
 

@@ -1,12 +1,11 @@
 class Logistic < ActiveRecord::Base
 	belongs_to :user
-	has_many :groupbuy
-	has_many :logistics_item
+
+	has_many :groupbuy, dependent: :destroy
+	has_many :logistics_items, dependent: :destroy
 
 	validates :user, presence: true
 	validates :name, presence: true
-	validates :mobile, presence: true
-	validates :address, presence: true
 
 	default_scope {order 'updated_at DESC'}
 
