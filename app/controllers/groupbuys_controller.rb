@@ -3,6 +3,7 @@ require 'rest-client'
 require 'digest/sha1'
 class GroupbuysController < ApplicationController
   before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
+
   def index
     @groupbuys = Groupbuy.where(locale: session[:locale]).includes(:user).order(created_at: :desc)
   end
@@ -51,32 +52,32 @@ class GroupbuysController < ApplicationController
       # end
     end
 
-   #@amount = Foodie::Participant.where
+    #@amount = Foodie::Participant.where
 
-   if signed_in? 
-     @plus_menu = [{name: '<i class="fa  fa-comment"></i>'.html_safe+' '+t(:new_comment), path: new_groupbuy_comment_path(@groupbuy)},
-      {name: '<i class="fa fa-user-plus"></i>'.html_safe+' '+t(:buy), path: new_groupbuy_participant_path(@groupbuy)}
-    ]
-    if @participants.where(:user_id => current_user.id).size>0
-      @again = '再次'     
-    else
-      @again = '立即'
+    if signed_in? 
+      @plus_menu = [{name: '<i class="fa  fa-comment"></i>'.html_safe+' '+t(:new_comment), path: new_groupbuy_comment_path(@groupbuy)},
+        {name: '<i class="fa fa-user-plus"></i>'.html_safe+' '+t(:buy), path: new_groupbuy_participant_path(@groupbuy)}]
+
+      if @participants.where(:user_id => current_user.id).size>0
+        @again = '再次'     
+      else
+        @again = '立即'
+      end
     end
+
   end
 
-end
+  def new
+     @groupbuy = Groupbuy.new
+     session[:pic_file] = nil
+     @photo = Photo.new
+  end
 
-def new
- @groupbuy = Groupbuy.new
- session[:pic_file] = nil
- @photo = Photo.new
-end
-
-def create
-  @groupbuy = Groupbuy.new(groupbuy_params)
-  @groupbuy.pic_url = ''
-  @groupbuy.user = current_user
-  @groupbuy.locale = session[:locale]
+  def create
+    @groupbuy = Groupbuy.new(groupbuy_params)
+    @groupbuy.pic_url = ''
+    @groupbuy.user = current_user
+    @groupbuy.locale = session[:locale]
 
     # uploaded_io = params[:file]
     # if !uploaded_io.blank?
@@ -236,6 +237,5 @@ def create
     params.require(:groupbuy).permit(:title, :body,:end_time,:start_time,:groupbuy_type, :goods_maximal, :goods_minimal, :market_price,
       :pic_url,:limited_people,:goods_big_than,:goods_small_than,:name,:mobile,:goods_unit,:price,:pic_url)
   end
-
   
 end

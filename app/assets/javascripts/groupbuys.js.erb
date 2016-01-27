@@ -1,4 +1,6 @@
-
+<%#encoding:utf-8%>
+var _cities = <%#=Ecstore::Region.hash_cities.to_json%>;
+var _districts = <%#=Ecstore::Region.hash_districts.to_json%>;
 
 //= require ckeditor/init
 //= require foundation-datepicker.min

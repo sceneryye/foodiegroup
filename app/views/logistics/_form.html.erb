@@ -1,0 +1,48 @@
+<%= form_for @user_address, data: {abide: ''} do |f| %>
+<%= render 'layouts/form_errors', object: @user_address %>
+<% if params[:groupbuy_id].present? %>
+<%= hidden_field_tag :from, 'new_participant' %>
+<%= hidden_field_tag :groupbuy_id, params[:groupbuy_id] %>
+<% end %>
+<div>
+ <%= f.text_area :name, required: true, placeholder:t(:name)%>
+ <%= show_error_message('联系人/收货人，不能为空！') %>
+</div>
+<div>
+ <%= f.text_area :mobile, required: true,placeholder:t(:mobile)%>
+ <%= show_error_message('联系电话，不能为空！') %>
+</div>
+<div class="row">
+  <div class="city-group">
+    <div class="columns small-4">
+      <select name="province" id="province" class="city-select">
+        <option value="">--省份--</option>
+        <%= options_for_select(ChinaCity.list) %>
+      </select>
+    </div>
+    <div class="columns small-4">
+      <select name="city" id="city" class="city-select">
+       <option value="">--城市--</option>
+       <%= options_for_select(ChinaCity.list) %>
+     </select>
+   </div>
+   <div class="columns small-4">
+    <select name="area" id="area" class="city-select">
+     <option value="">--地区--</option>
+     <%= options_for_select(ChinaCity.list) %>
+   </select>
+ </div>
+</div>
+</div>
+
+<div>
+ <%= f.text_area :address, required: true, placeholder:t(:address)%>
+ <%= show_error_message('收货地址，不能为空！') %>
+</div>
+<div>
+  <label>
+    <input type="checkbox" name="default" value=1 checked="checked">
+    <%= t(:set_default) %></div>
+  </label>
+  <%= f.submit class:'tiny button radius right' %>
+  <% end %>
