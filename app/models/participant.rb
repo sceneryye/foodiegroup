@@ -147,11 +147,6 @@ class Participant < ActiveRecord::Base
 	    products_total + cost_freight - pmts_total - part_pay.to_f
 	  end
 
-
-	def created_at
-	    Time.at(self.created_at).strftime("%Y-%m-%d %H:%M:%S") if self..created_at
-	end
-
 	def payment_name
 	    return "微信支付" if payment == "wxpay"
 	    return "支付宝手机版" if payment == "alipaywap"    
