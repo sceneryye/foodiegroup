@@ -6,31 +6,35 @@
   }
 })(jQuery);
 
-var groupbuy_id = $.getUrlParam('groupbuy_id');
-if(groupbuy_id) {
-  $('.address-detail').on('click', function(){
-    var id = $(this).data('id');
-    var url = '/foodiegroup/groupbuys/' + groupbuy_id + '?user_addresses_id=' + id;
-    var post_url = 'user_addresses/' + id;
-    $.ajax({
-      url: post_url,
-      type: 'patch',
-      data: {
-        default: 1,
-        from: 'ajax'
-      },
-      success: function(e) {
-        if(e == 'success') {
-          location.href = url;
+$(document).ready(function(){
+
+
+  var groupbuy_id = $.getUrlParam('groupbuy_id');
+  if(groupbuy_id) {
+    $('.address-detail').on('click', function(){
+      var id = $(this).data('id');
+      var url = '/foodiegroup/groupbuys/' + groupbuy_id + '?user_addresses_id=' + id;
+      var post_url = 'user_addresses/' + id;
+      $.ajax({
+        url: post_url,
+        type: 'patch',
+        data: {
+          default: 1,
+          from: 'ajax'
+        },
+        success: function(e) {
+          if(e == 'success') {
+            location.href = url;
+          }
+          else {
+            alert(e);
+          }
         }
-        else {
-          alert(e);
-        }
-      }
+      });
+
     });
-    
-  });
-}
+  }
+});
 
 //-------------------地区选择-----------------------//
 $(document).ready(function(){

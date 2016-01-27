@@ -79,6 +79,7 @@ class UserAddressesController < ApplicationController
       end
 
       return_url = session[:return_url]
+      Rails.logger.info '#################' + return_url.to_s
       if return_url
         session[:return_url] = nil
         return redirect_to return_url
@@ -99,7 +100,7 @@ end
 
 def index
   if params[:groupbuy_id]
-    session[:return_url]= new_groupbuy_participant_path(params[:groupbuy_id])
+    #session[:return_url]= groupbuy_path(params[:groupbuy_id])
     params.delete(:groupbuy_id)
   end
   @user_addresses = current_user.user_addresses
