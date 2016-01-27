@@ -351,6 +351,7 @@ zh:
   share: 分享
   edit_profile: 个人信息
   maintain_addresses: 收货地址
+  maintain_addresses: 物流规则
   interests: 我的关注
   membership: 会员条款
   name: 姓名
@@ -421,3 +422,5 @@ zh:
   sign_up_first: 请先注册
   join_now: 立即参加
   pay_success: 支付成功！
+  weight_kg: 重量(公斤)
+

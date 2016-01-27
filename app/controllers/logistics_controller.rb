@@ -7,7 +7,7 @@ class LogisticsController < ApplicationController
   before_action :set_logistic, only: [:edit, :update, :destroy]
 
   def new
-    @logistic = logistic.new
+    @logistic = Logistic.new
   end
 
   def create
@@ -15,14 +15,14 @@ class LogisticsController < ApplicationController
       area = [ChinaCity.get(params[:province]), ChinaCity.get(params[:city]), ChinaCity.get(params[:area])].join('/')
       address = ChinaCity.get(params[:province]) + ChinaCity.get(params[:city]) + ChinaCity.get(params[:area])+ logistic_params[:address]
     end
-    @logistic = logistic.new(logistic_params)
+    @logistic = Logistic.new(logistic_params)
     @logistic.address = address
     @logistic.area = area
     @logistic.user = current_user
     Rails.logger.info logistic_params
     if@logistic.save
       if params[:default] == '1'
-        logistic = logistic.where(default: 1)
+        logistic = Logistic.where(default: 1)
         if logistic.present?
           logistic.first.update(default: 0)
         end
@@ -46,7 +46,7 @@ class LogisticsController < ApplicationController
   end
 
   def show
-    @logistic = logistic.find(params[:id])
+    @logistic = Logistic.find(params[:id])
   end
 
   def edit()
@@ -58,11 +58,11 @@ class LogisticsController < ApplicationController
       address = ChinaCity.get(params[:province]) + ChinaCity.get(params[:city]) + ChinaCity.get(params[:area])+ logistic_params[:address]
     end
     if params[:from] == 'ajax'
-      logistic = logistic.where(default: 1)
+      logistic = Logistic.where(default: 1)
       if logistic.present?
         logistic.first.update(default: 0)
       end
-      logistic.find(params[:id]).update(default: 1)
+      Logistic.find(params[:id]).update(default: 1)
       return render text: 'success'
     end
 
@@ -71,7 +71,7 @@ class LogisticsController < ApplicationController
       @logistic.update(area: area)
       Rails.logger.info logistic_params
       if params[:default] == '1'
-        logistic = logistic.where(default: 1)
+        logistic = Logistic.where(default: 1)
         if logistic.present?
           logistic.first.update(default: 0)
         end
@@ -103,12 +103,12 @@ def index
     params.delete(:groupbuy_id)
   end
   @logistics = current_user.logistics
-  @logistic = logistic.new
+  @logistic = Logistic.new
 end
 
 private
 def set_logistic
-  @logistic = logistic.find(params[:id])
+  @logistic = Logistic.find(params[:id])
 end
 
 def logistic_params

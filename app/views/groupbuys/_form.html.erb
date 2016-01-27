@@ -84,13 +84,18 @@
   <div class="small-3 columns">
     <span class="postfix"><%= t(:inventory) %></span>
   </div>
-  <div class="small-6 columns">
+  <div class="small-3 columns">
     <span class="postfix">
       <%= f.text_field :goods_maximal %>
     </span>
   </div>
+   <div class="small-3 columns">
+    <span class="postfix"><%= t(:weight_kg) %></span>
+  </div>
   <div class="small-3 columns">
-    <span class="postfix goods-unit-blank"></span>
+    <span class="postfix">
+      <%= f.text_field :weight %>
+    </span>
   </div>
 </div>
 <div>
