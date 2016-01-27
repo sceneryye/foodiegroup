@@ -1,10 +1,10 @@
 class LogisticsItem < ActiveRecord::Base
 	belongs_to :logistic
 
-	validates :user, presence: true
-	validates :name, presence: true
-	validates :mobile, presence: true
-	validates :address, presence: true
+	validates :areas, presence: true
+	validates :price, presence: true
+	validates :each_add, presence: true
+	validates :logistic_id, presence: true
 
 	default_scope {order 'updated_at DESC'}
 

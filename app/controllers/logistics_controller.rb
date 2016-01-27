@@ -11,23 +11,26 @@ class LogisticsController < ApplicationController
   end
 
   def create
-    if params[:province] && params[:city] && params[:area]
-      area = [ChinaCity.get(params[:province]), ChinaCity.get(params[:city]), ChinaCity.get(params[:area])].join('/')
-      address = ChinaCity.get(params[:province]) + ChinaCity.get(params[:city]) + ChinaCity.get(params[:area])+ logistic_params[:address]
-    end
+   
     @logistic = Logistic.new(logistic_params)
-    @logistic.address = address
-    @logistic.area = area
     @logistic.user = current_user
-    Rails.logger.info logistic_params
-    if@logistic.save
-      if params[:default] == '1'
-        logistic = Logistic.where(default: 1)
-        if logistic.present?
-          logistic.first.update(default: 0)
-        end
-        @logistic.update(default: 1)
+
+    if @logistic.save
+      (1..6).each do |i|
+        LogisticsItem.new do |item|
+          item.logistic_id =  @logistic.id
+          item.areas = params["item#{i}_area".to_sym]
+          item.price = params["item#{i}_price".to_sym]
+          item.each_add = params["item#{i}_each_add".to_sym]
+        end.save
       end
+      # if params[:default] == '1'
+      #   logistic = Logistic.where(default: 1)
+      #   if logistic.present?
+      #     logistic.first.update(default: 0)
+      #   end
+      #   @logistic.update(default: 1)
+      # end
       
       return_url = session[:return_url]
       if return_url
@@ -39,7 +42,7 @@ class LogisticsController < ApplicationController
         return redirect_to groupbuy_path(params[:groupbuy_id])
       end
 
-      redirect_to logistics_path, notice: '地址添加成功'
+      redirect_to logistics_path, notice: t(:logistic_rule_save_successed)
     else
       render :new
     end
