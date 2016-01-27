@@ -1,5 +1,6 @@
 class Groupbuy < ActiveRecord::Base
 	belongs_to :user
+	belongs_to :logistic
 	
 	has_many :participants, dependent: :destroy
 	has_many :comments, dependent: :destroy

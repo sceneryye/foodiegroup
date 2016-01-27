@@ -1,5 +1,5 @@
-<%= form_for @user_address, data: {abide: ''} do |f| %>
-<%= render 'layouts/form_errors', object: @user_address %>
+<%= form_for @logistic, data: {abide: ''} do |f| %>
+<%= render 'layouts/form_errors', object: @logistic %>
 <% if params[:groupbuy_id].present? %>
 <%= hidden_field_tag :from, 'new_participant' %>
 <%= hidden_field_tag :groupbuy_id, params[:groupbuy_id] %>
@@ -36,7 +36,7 @@
 </div>
 
 <div>
- <%= f.text_area :address, required: true, placeholder:t(:address)%>
+ <%= f.text_area :logistic, required: true, placeholder:t(:logistic)%>
  <%= show_error_message('收货地址，不能为空！') %>
 </div>
 <div>

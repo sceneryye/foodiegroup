@@ -39,7 +39,7 @@ class LogisticsController < ApplicationController
         return redirect_to groupbuy_path(params[:groupbuy_id])
       end
 
-      redirect_to logistices_path, notice: '地址添加成功'
+      redirect_to logistics_path, notice: '地址添加成功'
     else
       render :new
     end
@@ -83,7 +83,7 @@ class LogisticsController < ApplicationController
         session[:return_url] = nil
         return redirect_to return_url
       end
-      redirect_to logistices_path, notice: '地址修改成功'
+      redirect_to logistics_path, notice: '地址修改成功'
     else
       render :edit
     end
@@ -92,7 +92,7 @@ class LogisticsController < ApplicationController
   def destroy
    @logistic.destroy
    respond_to do |format|
-    format.html {redirect_to logistices_path, notice: '地址删除成功'}
+    format.html {redirect_to logistics_path, notice: '地址删除成功'}
     format.js
   end
 end
@@ -102,7 +102,7 @@ def index
     session[:return_url]= new_groupbuy_participant_path(params[:groupbuy_id])
     params.delete(:groupbuy_id)
   end
-  @logistices = current_user.logistices
+  @logistics = current_user.logistics
   @logistic = logistic.new
 end
 

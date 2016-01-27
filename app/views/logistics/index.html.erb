@@ -1,8 +1,8 @@
-<div class="user-addresses-list">
+<div class="user-logistices-list">
   <%=render @logistics%>
   <%#=render 'form' ,:locals=>{@logistics=>logistics} %>
   <div class="new">
-    <div class="new-address left">
+    <div class="new-logistic left">
     <%= t(:new_logistic) %>
     </div>
     <%= link_to new_logistic_path(groupbuy_id: params[:groupbuy_id]) do %>

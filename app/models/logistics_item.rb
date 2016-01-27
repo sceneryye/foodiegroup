@@ -1,5 +1,5 @@
 class LogisticsItem < ActiveRecord::Base
-	belongs_to :user
+	belongs_to :logistic
 
 	validates :user, presence: true
 	validates :name, presence: true

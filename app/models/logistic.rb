@@ -1,5 +1,7 @@
 class Logistic < ActiveRecord::Base
 	belongs_to :user
+	has_many :groupbuy
+	has_many :logistics_item
 
 	validates :user, presence: true
 	validates :name, presence: true
