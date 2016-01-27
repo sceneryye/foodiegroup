@@ -121,6 +121,13 @@
 
 
   <script>
+  //---------------支付成功则给出提示--------------------//
+  <% if params[:error_message] == '' %>
+  var msg = '<%= t(:pay_success) %>';
+  alert(msg);
+  <% end %>
+
+
   //---------------未注册时点击团购按钮提示注册--------------------//
 
   $('.participant-button').on('click', function(e){
