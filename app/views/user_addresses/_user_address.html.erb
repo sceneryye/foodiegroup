@@ -20,7 +20,7 @@
   </div>
   <% end %>
   <% end %>
-  <% url = params[:id].present? ? user_addresses_path(groupbuy_id: params[:id]) : edit_user_address_path(user_address) %>
+  <% url = params[:id].present? ? user_addresses_path(groupbuy_id: params[:id]) : edit_user_address_path(user_address, groupbuy_id: @groupbuy_id) %>
   <%= link_to url do %>
   <div class="right edit-address" data-url='<%= user_addresses_path(groupbuy_id: params[:id]) %>'><i class="fa fa-pencil"></i></div>
   <% end %>

@@ -69,8 +69,8 @@ class UserAddressesController < ApplicationController
     if @user_address.update(user_address_params)
       @user_address.update(address: address)
       @user_address.update(area: area)
-      Rails.logger.info user_address_params
-      if params[:default] == '1'
+      Rails.logger.info '########' + @user_address.default.to_s
+      if params[:default] == '1' && @user_address.default == 0
         user_address = UserAddress.where(default: 1)
         if user_address.present?
           user_address.first.update(default: 0)
@@ -84,7 +84,7 @@ class UserAddressesController < ApplicationController
         session[:return_url] = nil
         return redirect_to return_url
       end
-      redirect_to user_addresses_path, notice: '地址修改成功'
+      redirect_to user_addresses_path(groupbuy_id: params[:groupbuy_id]), notice: '地址修改成功'
     else
       render :edit
     end
@@ -100,8 +100,10 @@ end
 
 def index
   if params[:groupbuy_id]
+    @groupbuy_id = params[:groupbuy_id]
     #session[:return_url]= groupbuy_path(params[:groupbuy_id])
     params.delete(:groupbuy_id)
+    Rails.logger.info @groupbuy_id
   end
   @user_addresses = current_user.user_addresses
   @user_address = UserAddress.new

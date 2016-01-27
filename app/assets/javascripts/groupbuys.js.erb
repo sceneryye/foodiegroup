@@ -1,6 +1,6 @@
 <%#encoding:utf-8%>
-var _cities = <%#=Ecstore::Region.hash_cities.to_json%>;
-var _districts = <%#=Ecstore::Region.hash_districts.to_json%>;
+//var _cities = <%#=Ecstore::Region.hash_cities.to_json%>;
+//var _districts = <%#=Ecstore::Region.hash_districts.to_json%>;
 
 //= require ckeditor/init
 //= require foundation-datepicker.min
@@ -72,10 +72,10 @@ $('.groupbuy-list').each(function(){
     that.find('.countdown-hour').text(h + ':');
     that.find('.countdown-minute').text(m + ':');
     that.find('.countdown-second').text(s);
-  }, 1000)
+  }, 1000);
 
-  
-  
+
+
   //setInterval(getRTime,1000);
 });
 
@@ -130,18 +130,18 @@ if(unitInput.val()){
 // 价格不能为负数
 $('#groupbuy_price').on('change', function(){
   checkPositiveNumber($(this));
-})
+});
 $('#groupbuy_market_price').on('change', function(){
   checkPositiveNumber($(this));
-})
+});
 
 $('#groupbuy_goods_minimal').on('change', function(){
   checkPositiveNumber($(this));
-})
+});
 
 $('#groupbuy_goods_maximal').on('change', function(){
   checkPositiveNumber($(this));
-})
+});
 
 //-----------------编辑groupbuy的图片-----------------//
 $('.delete-pic').on('click', function(){
