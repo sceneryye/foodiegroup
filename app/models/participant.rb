@@ -5,7 +5,7 @@ class Participant < ActiveRecord::Base
 
 	validates :amount,  presence: true
 	validates :name,  presence: true
-  validates :mobile,  presence: true
+  	validates :mobile,  presence: true
 
 	default_scope {order 'created_at DESC'}
  
