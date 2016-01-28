@@ -114,7 +114,7 @@ class ParticipantsController < ApplicationController
       type_name = 'groupbuys'
     end
 
-    money = @participant.amount.to_f - @participant.discount.to_f + @participant.freightage.to_f
+    money = @participant.total
     from = 'foodiegroup'
     openid = current_user.weixin_openid
     event_id = parent.id

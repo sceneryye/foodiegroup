@@ -44,8 +44,7 @@ class Participant < ActiveRecord::Base
 
 	def calculate_freightage
 
-
-	  	logistics_item = LogisticsItem.where("logistic_id =#{self.groupbuy.logistic_id} and areas like '#{self.area}%' ")
+	  	logistics_item = LogisticsItem.where("logistic_id =#{self.groupbuy.logistic_id} and areas like '%#{self.area}%' ")
 
 	  	if logistics_item.size>0
 	  		weight = self.quantity * self.groupbuy.weight
@@ -145,11 +144,7 @@ class Participant < ActiveRecord::Base
 	    end
 	end
 
-	def pay_amount
-	    final_pay
-	end
-
-
+	
 	  def products_total
 	    self.order_items.select{ |order_item| order_item.item_type == 'product' }.collect{ |order_item|  order_item.amount }.inject(:+).to_f
 	  end
@@ -158,8 +153,8 @@ class Participant < ActiveRecord::Base
 	    self.order_pmts.collect { |order_pmt| order_pmt.pmt_amount }.inject(:+).to_f
 	  end
 
-	  def final_pay
-	    products_total + cost_freight - pmts_total - part_pay.to_f
+	  def total
+	    self.amount+self.freightage-self.discount
 	  end
 
 	def payment_name
