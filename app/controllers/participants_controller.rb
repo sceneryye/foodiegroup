@@ -82,7 +82,7 @@ class ParticipantsController < ApplicationController
     if @participant.save
       notice =  '报名成功'
       
-        redirect_to participant_path, notice: notice
+        redirect_to participant_path(@participant), notice: notice
       
     else
       render :new
