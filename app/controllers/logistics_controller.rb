@@ -95,26 +95,29 @@ class LogisticsController < ApplicationController
   def destroy
    @logistic.destroy
    respond_to do |format|
-    format.html {redirect_to logistics_path, notice: '地址删除成功'}
-    format.js
+      format.html {redirect_to logistics_path, notice: '地址删除成功'}
+      format.js
+    end
   end
-end
 
-def index
-  if params[:groupbuy_id]
-    session[:return_url]= new_groupbuy_participant_path(params[:groupbuy_id])
-    params.delete(:groupbuy_id)
+  def index
+    if params[:groupbuy_id]
+      session[:return_url]= new_groupbuy_participant_path(params[:groupbuy_id])
+      params.delete(:groupbuy_id)
+    end
+    @logistics = current_user.logistics
+    if @logistics.nil?
+      redirect_to new_logistic_path
+    end
+
   end
-  @logistics = current_user.logistics
-  @logistic = Logistic.new
-end
 
-private
-def set_logistic
-  @logistic = Logistic.find(params[:id])
-end
+  private
+  def set_logistic
+    @logistic = Logistic.find(params[:id])
+  end
 
-def logistic_params
-  params.require(:logistic).permit(:name, :address, :mobile, :area, :default)
-end
+  def logistic_params
+    params.require(:logistic).permit(:name, :default)
+  end
 end

@@ -1,27 +1,22 @@
-<div class="logistic-content">
-  <% if controller_name == 'participants' || controller_name == 'groupbuys' %>
-  <div class="left send-to"><%= t(:send_to) %></div>
-  <% else %>
+<div class="logistic-content"> 
   <div class="left <%= logistic.default == 1 ? 'checked' : 'unchecked' %>">
     <i class="fa fa-check-circle"></i>
   </div>
-  <% end %>
   <div class="left logistic-detail" data-id="<%= logistic.id %>">
     <div class="name-mobile">
       <span class="name"><%= logistic.name %></span>
-    </div>
-    <div class="logistic"><%= logistic.logistic %></div>    
+    </div>  
   </div>
   <% if params[:id].nil? %>
-  <%= link_to logistic_path(logistic), method: :delete, confirm: t(:delete_insure) do %>
-  <div class="right destroy-logistic">
-    <i class="fa fa-trash"></i>
-  </div>
+    <%= link_to logistic_path(logistic), method: :delete, confirm: t(:delete_insure) do %>
+    <div class="right destroy-logistic">
+      <i class="fa fa-trash"></i>
+    </div>
+    <% end %>
   <% end %>
-  <% end %>
-  <% url = params[:id].present? ? logistices_path(groupbuy_id: params[:id]) : edit_logistic_path(logistic) %>
-  <%= link_to url do %>
-  <div class="right edit-logistic" data-url='<%= logistices_path(groupbuy_id: params[:id]) %>'><i class="fa fa-pencil"></i></div>
+  <%# url = params[:id].present? ? logistics_path(groupbuy_id: params[:id]) : edit_logistic_path(logistic) %>
+  <%= link_to edit_logistic_path(logistic) do %>
+  <div class="right edit-logistic" ><i class="fa fa-pencil"></i></div>
   <% end %>
 
   <div class="clear"></div>

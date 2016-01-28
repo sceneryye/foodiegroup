@@ -3,9 +3,9 @@ class Participant < ActiveRecord::Base
 	belongs_to :event, counter_cache: true
 	belongs_to :groupbuy, counter_cache: true
 
-	validates :amount,  presence: true
-	validates :name,  presence: true
-  	validates :mobile,  presence: true
+	validates :quantity,  presence: true
+	# validates :name,  presence: true
+ #  	validates :mobile,  presence: true
 
 	default_scope {order 'created_at DESC'}
 
@@ -14,9 +14,9 @@ class Participant < ActiveRecord::Base
 	def initialize_attrs
 	    #self.order_id = Participant.generate_order_id
 	    # self.amount = 1
-	    self.status = 0
-	    self.freightage = 0
-	    self.discount = 0
+	    # self.status = 0
+	    # # self.freightage = 0
+	    # self.discount = 0
 	    #self.currency = "CNY"
 
 	    # if self.ship_day == 'special'
@@ -26,7 +26,15 @@ class Participant < ActiveRecord::Base
 	    # end
 	end
 
-	before_save :calculate_amount,:calculate_freightage, :calculate_discount #:calculate_itemnum
+	before_save :get_address, :calculate_amount,:calculate_freightage, :calculate_discount #:calculate_itemnum
+
+	def get_address
+		address = self.user.default_address
+      	self.name = address.name
+      	self.address = address.address
+      	self.mobile = address.mobile
+      	self.area = address.area.split('/')[0]
+	end
 
 	def calculate_amount
 	  	#团购期间是团购价，非团购期间是市场价
@@ -35,16 +43,22 @@ class Participant < ActiveRecord::Base
 	end
 
 	def calculate_freightage
-	  	logistics_item = LogisticsItem.where("logistic_id =#{self.groupbuy.logistic_id} and areas like '#{self.area}%")
 
-	  	if logistics_item
-	  		weight = self.quantity.to_i * self.groupbuy.weight.to_i
-			self.freightage = logistics_item.price + (weight -1) * logistics_item.each_add
+
+	  	logistics_item = LogisticsItem.where("logistic_id =#{self.groupbuy.logistic_id} and areas like '#{self.area}%' ")
+
+	  	if logistics_item.size>0
+	  		weight = self.quantity * self.groupbuy.weight
+			self.freightage = logistics_item.first.price + (weight -1) * logistics_item.first.each_add
+		else
+			self.freightage = 0
+
 	  	end
 	end
 
 	def calculate_discount
-		discount.to_f
+
+	  	self.discount = 0
 	end
 
 
