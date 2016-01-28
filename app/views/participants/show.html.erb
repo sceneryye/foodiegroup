@@ -42,6 +42,12 @@
   <div class="price-relative">
     <div class="row">
       <div class="columns small-3">
+      <%= t(:area) %>
+      </div>
+      <div class="columns small-6 small-offset-3 price-detail">
+        <%= @parent.area.to_s %>
+      </div>
+      <div class="columns small-3">
         <%= t(:market_price) %>
       </div>
       <div class="columns small-3 small-offset-6 price-detail">
