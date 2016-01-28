@@ -71,7 +71,7 @@
         <%= t(:total_price) %>
       </div>
       <div class="columns small-3 small-offset-6 total-price">
-        <i class="fa fa-jpy"></i><%= @participant.total_price.to_f %>
+        <i class="fa fa-jpy"></i><%= @participant.amount.to_f - @participant.discount.to_f + @participant.freightage.to_f %>
       </div>
     </div>
     <div class="clear"></div>

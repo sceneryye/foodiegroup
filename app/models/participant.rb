@@ -47,9 +47,6 @@ class Participant < ActiveRecord::Base
 		discount.to_f
 	end
 
-	def total_price
-		calculate_amount - calculate_discount
-	end
 
 
 
