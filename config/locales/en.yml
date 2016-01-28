@@ -319,5 +319,7 @@ en:
   discount: Discount
   freightage: Freightage
   total_price: Total Price
-  contact_master: Contact Master
   area: Area
+  detail: Detail
+  pay_online: Pay Online
+  pay_offline: Pay Offline

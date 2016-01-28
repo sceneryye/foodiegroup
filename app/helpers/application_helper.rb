@@ -128,9 +128,10 @@ def vote_for(object)
 
   def owner_buttons_for_p(participant, price)
     link_to('<span class="icons"><i class="fa fa-pencil"></i>'.html_safe + t(:edit) + '</span>'.html_safe, edit_participant_path(participant)) + ' | ' +
-    link_to('<span class="icons"><i class="fa fa-times"></i>'.html_safe + t(:delete) + '</span>'.html_safe, participant, method: :delete) +
+    link_to('<span class="icons"><i class="fa fa-times"></i>'.html_safe + t(:delete) + '</span>'.html_safe, participant_path(participant), method: :delete) + ' | ' +
+    link_to('<span class="icons"><i class="fa fa-bars"></i>'.html_safe + t(:detail) + '</span>'.html_safe, participant_path(participant)) +
     if participant.user_id == current_user.id && participant.status_pay == 0 && price > 0
-     link_to('|<span class="icons"><i class="fa fa-jpy"></i>'.html_safe  + t(:pay) + '</span>'.html_safe, wechat_pay_participant_path(participant))
+      link_to(' | <span class="icons"><i class="fa fa-jpy"></i>'.html_safe  + t(:pay) + '</span>'.html_safe, wechat_pay_participant_path(participant))
    else
     ''  
   end

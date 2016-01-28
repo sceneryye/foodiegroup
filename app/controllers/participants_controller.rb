@@ -179,6 +179,11 @@ class ParticipantsController < ApplicationController
   end
 
   def update
+    if params[:from] == 'pay offline'
+      id = params[:id]
+      participant = Participant.find_by(id: id).update(status_pay: 2)
+      return render json: {msg: 'success'}.to_json
+    end
     if @participant.update(participant_params)
       if @participant.groupbuy
         return_url = groupbuy_url(@participant.groupbuy)

@@ -1,0 +1,25 @@
+//= require 'china_city/jquery.china_city'
+
+//-------------线下支付，修改支付状态-------------//
+$(document).ready(function(){
+  $('.pay-offline').on('click', function(){
+    var id = $(this).data('id');
+    var url = $(this).data('url');
+    var message = $(this).data('message');
+    var redirect_url = $(this).data('redirect');
+    $.ajax({
+      url: url,
+      type: 'patch',
+      data: {
+        id: id,
+        from: 'pay offline'
+      },
+      success: function(e) {
+        if(e.msg == 'success') {
+          alert(message);
+          location.href = redirect_url;
+        }
+      }
+    });
+  });
+});
