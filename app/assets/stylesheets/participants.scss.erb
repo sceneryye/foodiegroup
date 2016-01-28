@@ -1,0 +1,66 @@
+$gray-silver: #eee;
+$gray-deep: #788087;
+/***************show  page****************/
+.participant-show {
+  background-color: $gray-silver;
+  font-size: 0.9rem;
+  hr {
+    margin: 0;
+    color: $gray-silver;
+  }
+  .clear {
+    clear: both;
+  }
+  .seller-state {
+    background: #ff7e00 url(<%= asset_path "/participant_ok.png" %>)no-repeat 90% center;
+    background-size: auto 100%;
+  }
+  .consignee {
+    background-color: white;
+    padding: 20px 10px;
+    margin-bottom: 10px;
+    .name, .mobile, .address-detail {
+      padding-left: 10px;
+      color: $gray-deep;
+    }
+
+  }
+  .apply-success {
+    padding: 30px 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0;
+  }
+  .participant-information {
+    background-color: white;
+    padding-top: 10px;
+    .info-title {
+      padding: 10px 10px;
+      .fa {
+        color: $gray-deep;
+      }
+    }
+    .info-detail {
+      background-color: $gray-silver;
+      padding: 20px 0;
+      width: 100%;
+      .row {
+        margin-bottom: 10px;
+        .amount-detail {
+          color: $gray-deep;
+        }
+      }
+    }
+  }
+  .price-relative {
+    background-color: white;
+    padding-top: 20px;
+    .price-detail {
+      color: $gray-deep;
+    }
+  }
+  .pay-button {
+    margin-top: 20px;
+  }
+}

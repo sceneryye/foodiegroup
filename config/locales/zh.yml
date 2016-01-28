@@ -414,6 +414,8 @@ zh:
   second: 秒
   year: 年
   contact: 联系方式
+  total_price: 总价
+  contact_master: 联系帮主
   free: 免费
   remaining_time: 剩余时间
   no_address: 暂无送货地址
@@ -425,4 +427,8 @@ zh:
   weight_kg: 重量(公斤)
   logistics: 物流规则
   new_logistic: 新增物流规则
+  apply_success: 报名成功！
+  consignee: 收货人
+  discount: 优惠
+  freightage: 邮费
 

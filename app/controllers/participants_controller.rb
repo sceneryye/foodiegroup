@@ -9,7 +9,7 @@ class ParticipantsController < ApplicationController
     validate_permission!(select_participant.user)
   end
 
-  before_action :select_participant, only: [:edit, :update, :destroy, :confirm_paid,:confirm_shiped,:wechat_pay]
+  before_action :select_participant, only: [:edit, :show, :update, :destroy, :confirm_paid,:confirm_shiped,:wechat_pay]
 
   before_action only: [:new, :create,:index] do
     if params[:groupbuy_id]
@@ -82,17 +82,20 @@ class ParticipantsController < ApplicationController
 
     if @participant.save
       notice =  '报名成功'
-      if params[:groupbuy_id]
-        redirect_to groupbuy_url(@parent), notice: notice
-      else
-        redirect_to event_url(@parent), notice: notice
-      end
+      
+        redirect_to participant_path, notice: notice
+      
     else
       render :new
     end
     # else
     #   redirect_to event_url(@event), notice: '您已经报过名了'
     # end
+  end
+
+  def show
+    @parent = @participant.groupbuy_id.present? ? Groupbuy.find_by(id: @participant.groupbuy_id) : Event.find_by(id: @participant.groupbuy_id)
+    @path = @participant.groupbuy_id.present? ? groupbuy_path(@parent) : event_path(@parent)
   end
 
   def wechat_pay

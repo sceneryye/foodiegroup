@@ -313,4 +313,10 @@ en:
   confirm_insure: Are you sure to delete?
   sign_up_first: Sign Up First
   join_now: Join Now!
-  pay_success: Paid Successfully
+  pay_success: Paid Successfully!
+  apply_success: Apply Successfully!
+  consignee: Consignee
+  discount: Discount
+  freightage: Freightage
+  total_price: Total Price
+  contact_master: Contact Master

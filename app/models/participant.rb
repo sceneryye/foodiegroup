@@ -8,7 +8,7 @@ class Participant < ActiveRecord::Base
   	validates :mobile,  presence: true
 
 	default_scope {order 'created_at DESC'}
- 
+
 	before_create :initialize_attrs
 
 	def initialize_attrs
@@ -30,24 +30,28 @@ class Participant < ActiveRecord::Base
 
 	def calculate_amount
 	  	#团购期间是团购价，非团购期间是市场价
-	  	price = self.groupbuy.price  
-	  	self.amount = self.quantity * price
+	  	price = self.groupbuy.price
+	  	self.amount = self.quantity.to_i * price
 	end
 
 	def calculate_freightage
 	  	logistics_item = LogisticsItem.where("logistic_id =#{self.groupbuy.logistic_id} and areas like '#{self.area}%")
 
 	  	if logistics_item
-	  		weight = self.quantity * self.groupbuy.weight
+	  		weight = self.quantity.to_i * self.groupbuy.weight.to_i
 			self.freightage = logistics_item.price + (weight -1) * logistics_item.each_add
 	  	end
 	end
 
 	def calculate_discount
-	  	
+		discount.to_f
 	end
 
-	
+	def total_price
+		calculate_amount - calculate_discount
+	end
+
+
 
 	#  after_create
 
@@ -134,7 +138,7 @@ class Participant < ActiveRecord::Base
 	    final_pay
 	end
 
-	
+
 	  def products_total
 	    self.order_items.select{ |order_item| order_item.item_type == 'product' }.collect{ |order_item|  order_item.amount }.inject(:+).to_f
 	  end
@@ -149,7 +153,7 @@ class Participant < ActiveRecord::Base
 
 	def payment_name
 	    return "微信支付" if payment == "wxpay"
-	    return "支付宝手机版" if payment == "alipaywap"    
+	    return "支付宝手机版" if payment == "alipaywap"
 	    return "支付宝PC版" if payment == "alipay"
 	    return "货到付款" if payment == "offline"
 	    return "无支付方式" if payment.blank?
