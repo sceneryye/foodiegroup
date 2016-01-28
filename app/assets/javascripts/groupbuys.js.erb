@@ -199,6 +199,7 @@ $(document).ready(function(){
         success: function(e) {
           var fee = e.freightage;
           $('.freightage-fee').text(fee);
+          $('.total-fee').text(e.total_price);
         }
       });
     }

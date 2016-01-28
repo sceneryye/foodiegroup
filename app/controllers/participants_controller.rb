@@ -213,8 +213,9 @@ class ParticipantsController < ApplicationController
     logistics_item = groupbuy.logistic.logistics_items.where('areas LIKE ?', "%#{area}%").first
     price = logistics_item.price
     each_add = logistics_item.each_add
-    freightage = (groupbuy.weight * num.to_i - 1 + BOX_WEIGHT).ceil * each_add + price
-    render json: {freightage: freightage}.to_json
+    freightage = (groupbuy.weight * num.to_i - 1 + BOX_WEIGHT).ceil * each_add + price.to_f
+    total_price = num.to_i * groupbuy.price + freightage 
+    render json: {freightage: freightage, total_price: total_price}.to_json
   end
 
   private

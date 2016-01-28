@@ -59,6 +59,10 @@
   <div class="columns small-3"><%= t(:freightage) %></div>
   <div class="columns small-3"><i class="fa fa-jpy"></i><span class="freightage-fee"><%= @freightage.to_f %></span></div>
   </div>
+  <div class="row total-price">
+  <div class="columns small-3"><%= t(:total_price) %></div>
+  <div class="columns small-3"><i class="fa fa-jpy"></i><span class="total-fee"><%= @total_price.to_f %></span></div>
+  </div>
 
   <% else %>
   <div class="small-6 columns small-center add-address">
