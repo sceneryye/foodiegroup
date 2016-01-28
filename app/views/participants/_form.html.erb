@@ -52,27 +52,27 @@
 			  <%#= show_error_message('请输入您的手机号码.') %>
 			</div>
 	<%end%>
-  <% if params[:groupbuy_id] || controller_name == 'groupbuys'%>
-  <% if @user_addresses.present? %>
-  <%= render @user_addresses%>
-  <div class="row freightage">
-  <div class="columns small-3"><%= t(:freightage) %></div>
-  <div class="columns small-3"><i class="fa fa-jpy"></i><span class="freightage-fee"><%= @freightage.to_f %></span></div>
-  </div>
-  <div class="row total-price">
-  <div class="columns small-3"><%= t(:total_price) %></div>
-  <div class="columns small-3"><i class="fa fa-jpy"></i><span class="total-fee"><%= @total_price.to_f %></span></div>
-  </div>
+  	<%if params[:groupbuy_id] || controller_name == 'groupbuys'%>
+	  <% if @user_addresses.present? %>
+		  <%= render @user_addresses%>
+		  <div class="row freightage">
+		  <div class="columns small-3"><%= t(:freightage) %></div>
+		  <div class="columns small-3"><i class="fa fa-jpy"></i><span class="freightage-fee"></span></div>
+		  </div>
+		  <div class="row total-price">
+		  <div class="columns small-3"><%= t(:total_price) %></div>
+		  <div class="columns small-3"><i class="fa fa-jpy"></i><span class="total-fee"></span></div>
+		  </div>
 
-  <% else %>
-  <div class="small-6 columns small-center add-address">
-    <span><%= t(:no_address) %></span>
-    <%= link_to new_user_address_path(groupbuy_id: params[:id]) do %>
-    <span class="add-address-icon"><i class="fa fa-plus-circle"></i></span>
-    <% end %>
-  </div>
-  <% end %>
-<%end%>
+	  <% else %>
+		  <div class="small-6 columns small-center add-address">
+		    <span><%= t(:no_address) %></span>
+		    <%= link_to new_user_address_path(groupbuy_id: params[:id]) do %>
+		    <span class="add-address-icon"><i class="fa fa-plus-circle"></i></span>
+		    <% end %>
+		  </div>
+	  <% end %>
+	<%end%>
 		<div class="small-12 columns">
 			<%= f.text_area :remark, class:'comment-area',placeholder: t(:remark)%>
 			<%#= show_error_message('备注，请不要超过500字') %>
