@@ -7,7 +7,7 @@
 	    	<span class="prefix"><%= t(:quantity) %></span>
 	    </div>
         <div class="small-5 columns">
-          	<%= f.number_field :quantity, required: true,value: 1, class: 'participant-number', "data-errmsg" => t(:should_be_int)%>
+          	<%= f.number_field :quantity, required: true,value: 1, class: 'participant-number', 'data-id' => params[:id], "data-errmsg" => t(:should_be_int)%>
         </div>
         <div class="small-3 columns">
           <span class="postfix">
@@ -55,6 +55,11 @@
   <% if params[:groupbuy_id] || controller_name == 'groupbuys'%>
   <% if @user_addresses.present? %>
   <%= render @user_addresses%>
+  <div class="row freightage">
+  <div class="columns small-3"><%= t(:freightage) %></div>
+  <div class="columns small-3"><i class="fa fa-jpy"></i><span class="freightage-fee"><%= @freightage.to_f %></span></div>
+  </div>
+
   <% else %>
   <div class="small-6 columns small-center add-address">
     <span><%= t(:no_address) %></span>

@@ -21,6 +21,7 @@ RailsOnForum::Application.routes.draw do
     post 'topics/more_comments', to: 'topics#more_comments'
     post 'groupbuys/more_comments', to: 'groupbuys#more_comments'
     post 'events/more_comments', to: 'events#more_comments'
+    post 'cal_freightage', to: 'participants#cal_freightage'
 
     namespace :admin do
     resources :reports
@@ -67,6 +68,7 @@ RailsOnForum::Application.routes.draw do
       get 'wechat_pay', on: :member
       get   'confirm_paid'  ,on: :member
       post 'confirm_shiped', on: :member
+
     end
 
     resources :users,   only: [:create, :update, :destroy] do

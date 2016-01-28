@@ -415,7 +415,7 @@ zh:
   year: 年
   contact: 联系方式
   total_price: 总价
-  contact_master: 联系帮主
+  contact_master: 联系帮主支付
   free: 免费
   remaining_time: 剩余时间
   no_address: 暂无送货地址
@@ -431,4 +431,5 @@ zh:
   consignee: 收货人
   discount: 优惠
   freightage: 邮费
+  area: 地区
 

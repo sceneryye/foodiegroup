@@ -181,3 +181,25 @@ $('.dz-image .trash').on('click', function(){
   $('.pic-ids').val(ids.join(','));
 });
 
+//----------------------显示团购运费-------------------//
+
+$(document).ready(function(){
+  $('.participant-number').on('change', function(){
+    var url = '/foodiegroup/cal_freightage';
+    var num = $(this).val();
+    var groupbuy_id = $(this).data('id');
+    $.ajax({
+      url: url,
+      type: 'post',
+      data: {
+        num: num,
+        groupbuy_id: groupbuy_id
+      },
+      success: function(e) {
+        var fee = e.freightage;
+        $('.freightage-fee').text(fee);
+      }
+    })
+  })
+});
+

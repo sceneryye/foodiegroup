@@ -49,7 +49,7 @@ class Participant < ActiveRecord::Base
 
 	  	if logistics_item.size>0
 	  		weight = self.quantity * self.groupbuy.weight
-			self.freightage = logistics_item.first.price + (weight -1) * logistics_item.first.each_add
+			self.freightage = logistics_item.first.price + (weight - 1 + BOX_WEIGHT).ceil * logistics_item.first.each_add
 		else
 			self.freightage = 0
 

@@ -24,6 +24,7 @@ class GroupbuysController < ApplicationController
     @participants = @groupbuy.participants.includes(:user)
     more = 10
     @comments = @groupbuy.comments.includes(:user)[0...more]
+    
 
     #微信share接口配置
     @title = "#{current_user.nickname if current_user.present?}推荐您加入团购：#{@groupbuy.title}"
@@ -47,6 +48,12 @@ class GroupbuysController < ApplicationController
 
     if current_user
       @user_addresses = current_user.default_address
+      # 默认运费
+      area = @user_addresses.area.split('/')[0]
+      logistics_item = @groupbuy.logistic.logistics_items.where('areas LIKE ?', "%#{area}%").first
+      price = logistics_item.price
+      each_add = logistics_item.each_add
+      @freightage = (@groupbuy.weight * 1 - 1 + BOX_WEIGHT).ceil * each_add + price
       # if  @user_addresses.nil?
         # return redirect_to new_user_address_path(groupbuy_id: params[:groupbuy_id], from: 'new_participant')
       # end
@@ -58,22 +65,22 @@ class GroupbuysController < ApplicationController
       @plus_menu = [{name: '<i class="fa  fa-comment"></i>'.html_safe+' '+t(:new_comment), path: new_groupbuy_comment_path(@groupbuy)},
         {name: '<i class="fa fa-user-plus"></i>'.html_safe+' '+t(:buy), path: new_groupbuy_participant_path(@groupbuy)}]
 
-      if @participants.where(:user_id => current_user.id).size>0
-        @again = '再次'     
-      else
-        @again = '立即'
+        if @participants.where(:user_id => current_user.id).size>0
+          @again = '再次'     
+        else
+          @again = '立即'
+        end
       end
+
     end
 
-  end
-
-  def new
+    def new
      @groupbuy = Groupbuy.new
      session[:pic_file] = nil
      @photo = Photo.new
-  end
+   end
 
-  def create
+   def create
     @groupbuy = Groupbuy.new(groupbuy_params)
     @groupbuy.pic_url = ''
     @groupbuy.user = current_user

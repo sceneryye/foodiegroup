@@ -82,7 +82,7 @@ class ParticipantsController < ApplicationController
     if @participant.save
       notice =  '报名成功'
       
-        redirect_to participant_path(@participant), notice: notice
+      redirect_to participant_path(@participant), notice: notice
       
     else
       render :new
@@ -175,7 +175,8 @@ class ParticipantsController < ApplicationController
     render text: 'ok'
   end
 
-  def edit() end
+  def edit
+  end
 
   def update
     if @participant.update(participant_params)
@@ -203,13 +204,26 @@ class ParticipantsController < ApplicationController
     redirect_to return_url, notice: notice
   end
 
+  def cal_freightage
+    num = params[:num]
+    groupbuy = Groupbuy.find_by(id: params[:groupbuy_id])
+    user_addresses = current_user.default_address
+    # 默认运费
+    area = user_addresses.area.split('/')[0]
+    logistics_item = groupbuy.logistic.logistics_items.where('areas LIKE ?', "%#{area}%").first
+    price = logistics_item.price
+    each_add = logistics_item.each_add
+    freightage = (groupbuy.weight * num.to_i - 1 + BOX_WEIGHT).ceil * each_add + price
+    render json: {freightage: freightage}.to_json
+  end
+
   private
 
-    def select_participant
-      @participant = Participant.find(params[:id])
-    end
+  def select_participant
+    @participant = Participant.find(params[:id])
+  end
 
-    def participant_params
-      params.require(:participant).permit(:quantity, :remark)
-    end
+  def participant_params
+    params.require(:participant).permit(:quantity, :remark)
+  end
 end
