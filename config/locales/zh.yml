@@ -240,7 +240,7 @@ zh:
         name: 联系人
         mobile: 联系电话
         body: 活动详情
-        price: 团购价
+        price: 单价
       groupbuy:
         id: 团购号
         title:  活动名称
@@ -254,7 +254,7 @@ zh:
         name: 联系人
         mobile: 联系电话
         body: 活动详情
-        price: 单价
+        price: 现价
       participant:
         amount: 数量
         name: 收货人
@@ -324,7 +324,7 @@ zh:
   please_choose_event_duration: 请输入活动时间
   start_time: 开始时间
   end_time: 结束时间
-  price:  单价
+  price:  现价
   goods_minimal: 最少成团数量
   new_forum:  新增论坛
   new_groupbuy:  新增团购
@@ -374,13 +374,13 @@ zh:
   default_address: 默认地址
   new_address: 新建地址
   set_default: 设为默认
-  market_price: 非团购价
+  market_price: 市场价
   save: 省
   amount: 数量
   please_choose_groupbuy_duration: 请选择团购期间
   home: 首页
   count_down: 倒计时
-  groupbuy_end: 团购已结束
+  groupbuy_end: 团购已结束,以非团购价购买
   day: 天
   people: 人
   edit: 编辑

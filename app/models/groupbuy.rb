@@ -18,6 +18,14 @@ class Groupbuy < ActiveRecord::Base
 
  	default_scope {order 'recommend DESC, created_at DESC'}
 
- 	
+ 	def current_price
+	    return self.market_price  if Time.now > self.end_time
+	    self.price
+	end
+
+	def current_market_price
+	    return self.market_price*1.2  if Time.now > self.end_time
+	    self.market_price
+	end
 
 end

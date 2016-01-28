@@ -38,7 +38,7 @@ class Participant < ActiveRecord::Base
 
 	def calculate_amount
 	  	#团购期间是团购价，非团购期间是市场价
-	  	price = self.groupbuy.price
+	  	price = self.groupbuy.current_price
 	  	self.amount = self.quantity.to_i * price
 	end
 

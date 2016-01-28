@@ -51,13 +51,13 @@
         <%= t(:market_price) %>
       </div>
       <div class="columns small-3 small-offset-6 price-detail">
-        <i class="fa fa-jpy"></i><%= @parent.market_price.to_f %>
+        <i class="fa fa-jpy"></i><%= @parent.current_market_price.to_f %>
       </div>
       <div class="columns small-3">
         <%= t(:price) %>
       </div>
       <div class="columns small-3 small-offset-6 price-detail">
-        <i class="fa fa-jpy"></i><%= @parent.price %>
+        <i class="fa fa-jpy"></i><%= @parent.current_price %>
       </div>
       <div class="columns small-3">
         <%= t(:discount) %>
