@@ -7,7 +7,7 @@
 	    	<span class="prefix"><%= t(:quantity) %></span>
 	    </div>
         <div class="small-5 columns">
-          	<%= f.number_field :quantity, required: true,value: 1, class: 'participant-number', 'data-id' => @parent.id, "data-errmsg" => t(:should_be_int)%>
+          	<%= f.number_field :quantity, required: true,value: @parent.goods_minimal, class: 'participant-number', 'data-minimal'=>@parent.goods_minimal, 'data-id' => @parent.id%>
         </div>
         <div class="small-3 columns">
           <span class="postfix">
