@@ -128,12 +128,14 @@ function isWeixinBrowser(){
     // 防止数量输入非正整数
     $('body').on('change', '.participant-number', function(){
       var that = $(this);
-      var num = that.val();
+      var num = parseFloat(that.val());
       var minimal = that.data('minimal') ;
       
       if (minimal<1){
         minimal =1;
       }
+      console.log(num);
+      console.log(minimal);
       if(num < minimal || isNaN(num) || num % 1 != 0) {
         that.val(minimal);
         alert('<%=t(:must_large_than_minimal)%>');
