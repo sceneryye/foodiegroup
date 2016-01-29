@@ -33,7 +33,7 @@ function isWeixinBrowser(){
 
     var is_weixin_browser = isWeixinBrowser();
   if(is_weixin_browser) {
-  <% if current_user.nil? && params[:openid].nil? %>
+  <% if (current_user.nil? && params[:openid].nil?) || (current_user && current_user.weixin_openid.nil?) %>
     var return_url = location.href;
     location.href = 'http://vshop.trade-v.com/auto_login?return_url=' + return_url;
   <% end %>
