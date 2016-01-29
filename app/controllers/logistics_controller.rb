@@ -70,8 +70,6 @@ class LogisticsController < ApplicationController
     end
 
     if @logistic.update(logistic_params)
-      @logistic.update(address: address)
-      @logistic.update(area: area)
       Rails.logger.info logistic_params
       if params[:default] == '1'
         logistic = Logistic.where(default: 1)
