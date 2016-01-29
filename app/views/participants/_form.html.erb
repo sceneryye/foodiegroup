@@ -52,7 +52,7 @@
 			  <%#= show_error_message('请输入您的手机号码.') %>
 			</div>
 	<%end%>
-<<<<<<< HEAD
+
   <% if params[:groupbuy_id] || controller_name == 'groupbuys'%>
   <% if @user_addresses.present? %>
   <%= render @user_addresses%>
@@ -64,19 +64,6 @@
   <div class="columns small-3"><%= t(:total_price) %></div>
   <div class="columns small-4"><i class="fa fa-jpy"></i><span class="total-fee"><%= @total_price.to_f %></span></div>
   </div>
-=======
-  	<%if params[:groupbuy_id] || controller_name == 'groupbuys'%>
-	  <% if @user_addresses.present? %>
-		  <%= render @user_addresses%>
-		  <div class="row freightage">
-		  <div class="columns small-3"><%= t(:freightage) %></div>
-		  <div class="columns small-3"><i class="fa fa-jpy"></i><span class="freightage-fee"></span></div>
-		  </div>
-		  <div class="row total-price">
-		  <div class="columns small-3"><%= t(:total_price) %></div>
-		  <div class="columns small-3"><i class="fa fa-jpy"></i><span class="total-fee"></span></div>
-		  </div>
->>>>>>> origin/master
 
 	  <% else %>
 		  <div class="small-6 columns small-center add-address">
