@@ -60,7 +60,7 @@ def participant_info(participant, price)
 
   info = ["<small class='details'>"]
   info << link_to( is_paid(participant), '#', class: 'badge')   
-  info << info_for(participant.user)
+  info << info_for(participant.user) if participant.user
   info << time_for(participant)
   if participant.groupbuy_id
     info << ' | ' + participant.quantity.to_s + Groupbuy.find(participant.groupbuy_id).goods_unit

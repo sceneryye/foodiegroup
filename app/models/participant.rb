@@ -44,7 +44,7 @@ class Participant < ActiveRecord::Base
 
 	def calculate_freightage
 
-	  	logistics_item = LogisticsItem.where("logistic_id =#{self.groupbuy.logistic_id} and areas like '%#{self.area}%' ")
+	  	logistics_item = LogisticsItem.where("logistic_id = #{self.groupbuy.logistic_id} and areas like '%#{self.area}%' ")
 
 	  	if logistics_item.size>0
 	  		weight = self.quantity * self.groupbuy.weight
