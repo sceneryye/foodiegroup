@@ -43,11 +43,11 @@
       </tr>
       <tr>
         <th><%=t(:price)%></th>
-        <td colspan="2">￥<%=@groupbuy.price%>/<%=@groupbuy.goods_unit%></td>
+        <td colspan="2">￥<%=@groupbuy.current_price%>/<%=@groupbuy.goods_unit%></td>
       </tr>
       <tr>
         <th><%=t(:market_price)%></th>
-        <td colspan="2">￥<%=@groupbuy.market_price%>/<%=@groupbuy.goods_unit%></td>
+        <td colspan="2">￥<%=@groupbuy.current_market_price%>/<%=@groupbuy.goods_unit%></td>
       </tr>
       <tr>
         <th><%=t(:logistics)%></th>
@@ -93,7 +93,7 @@
       </ul>
       <div class="tabs-content panel">
         <div class="content active" id="participants" data-url='<%=groupbuy_participants_path(@groupbuy)%>'>
-          <%=render 'participants/form' ,:locals=>{@parent=>@parent,@participant=>@participant} if current_user && @groupbuy.end_time.to_i > Time.zone.now.to_i %>
+          <%=render 'participants/form' ,:locals=>{@parent=>@parent,@participant=>@participant} if current_user && @groupbuy.status>-1%>
           <%= render @participants %>
         </div>
         <div class="content" id="comments"  data-url='<%=groupbuy_comments_path(@groupbuy)%>'>

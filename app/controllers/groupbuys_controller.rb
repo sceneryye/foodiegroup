@@ -46,21 +46,6 @@ class GroupbuysController < ApplicationController
     @a = [request.url, post_params, request.url.gsub("trade", "vshop.trade-v.com")]
 
 
-    if current_user
-      @user_addresses = current_user.default_address
-      # 默认运费
-      area = @user_addresses.area.split('/')[0]
-      logistics_item = @groupbuy.logistic.logistics_items.where('areas LIKE ?', "%#{area}%").first
-      price = logistics_item.price
-      each_add = logistics_item.each_add
-      @freightage = (@groupbuy.weight * 1 - 1 + BOX_WEIGHT).ceil * each_add + price
-      @total_price = @groupbuy.price * 1 + @freightage 
-      # if  @user_addresses.nil?
-        # return redirect_to new_user_address_path(groupbuy_id: params[:groupbuy_id], from: 'new_participant')
-      # end
-    end
-
-    #@amount = Foodie::Participant.where
 
     if signed_in? 
       @plus_menu = [{name: '<i class="fa  fa-comment"></i>'.html_safe+' '+t(:new_comment), path: new_groupbuy_comment_path(@groupbuy)},
@@ -71,7 +56,14 @@ class GroupbuysController < ApplicationController
         else
           @again = '立即'
         end
+
+        @user_addresses = current_user.default_address      
+        # if  @user_addresses.nil?
+          # return redirect_to new_user_address_path(groupbuy_id: params[:groupbuy_id], from: 'new_participant')
+        # end
       end
+
+     
 
     end
 

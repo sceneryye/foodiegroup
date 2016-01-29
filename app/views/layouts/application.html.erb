@@ -129,10 +129,17 @@ function isWeixinBrowser(){
     $('body').on('change', '.participant-number', function(){
       var that = $(this);
       var num = that.val();
-      if(num < 1 || isNaN(num) || num % 1 != 0) {
-        that.val(1);
-        var errmsg = that.data('errmsg');
-        alert(errmsg);
+      var minimal = that.data('minimal') ;
+      
+      if (minimal<1){
+        minimal =1;
+      }
+      if(num < minimal || isNaN(num) || num % 1 != 0) {
+        that.val(minimal);
+        alert('<%=t(:must_large_than_minimal)%>');
+      }
+      else{
+        get_freightage();
       }
     });
 

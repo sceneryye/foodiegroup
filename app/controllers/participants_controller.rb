@@ -114,7 +114,7 @@ class ParticipantsController < ApplicationController
       type_name = 'groupbuys'
     end
 
-    money = @participant.amount.to_f - @participant.discount.to_f + @participant.freightage.to_f
+    money = @participant.total
     from = 'foodiegroup'
     openid = current_user.weixin_openid
     event_id = parent.id
@@ -226,7 +226,7 @@ class ParticipantsController < ApplicationController
     price = logistics_item.price
     each_add = logistics_item.each_add
     freightage = (groupbuy.weight * num.to_i - 1 + BOX_WEIGHT).ceil * each_add + price.to_f
-    total_price = num.to_i * (groupbuy.end_time.to_i > Time.zone.now.to_i ? groupbuy.price : groupbuy.market_price) + freightage 
+    total_price = num.to_i * groupbuy.current_price + freightage 
     render json: {freightage: freightage, total_price: total_price}.to_json
   end
 
