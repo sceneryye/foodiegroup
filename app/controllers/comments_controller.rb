@@ -43,8 +43,8 @@ class CommentsController < ApplicationController
   def edit() end
 
   def update
-    # 删除与团购关联的图片
-    origin_ids = @groupbuy.photos.pluck(:id)
+    # 删除与评论关联的图片
+    origin_ids = @comment.photos.pluck(:id)
     if params[:photo_ids].present? || params[:delete_ids].present?
       ids = params[:photo_ids].split(',').select{|id|id.present?}
       Photo.where(id: ids).update_all(groupbuy_id: params[:id])
