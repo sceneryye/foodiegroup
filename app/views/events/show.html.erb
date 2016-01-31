@@ -101,7 +101,7 @@
             <%= render @comments %>
           </div>
           <% if @active %>
-          <a style="width:100%" href="#" class="more-comments tiny expanded button" data-parent="<%= params[:controller].gsub(/\w$/, '') %>" data-count="<%= @events.comments.count %>" data-id="<%= @event.id %>" data-url="<%= events_more_comments_path %>"><%= t(:more) %></a>
+          <a style="width:100%" href="#" class="more-comments tiny expanded button" data-parent="<%= params[:controller].gsub(/\w$/, '') %>" data-count="<%= @event.comments.count %>" data-id="<%= @event.id %>" data-url="<%= events_more_comments_path %>"><%= t(:more) %></a>
           <% end %>
         </div>
       </div>
