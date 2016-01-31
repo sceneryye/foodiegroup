@@ -108,3 +108,14 @@ $('.dz-image .trash').on('click', function(){
 $(document).ready(function(){
   $('.groupbuy-detail').hide();
 })
+
+//-----------活动报名人数大于0----------------//
+$(document).ready(function(){
+  $('.event-participant-number').on('change', function(){
+    var num = $(this).val();
+    if(isNaN(num) || num < 1 || num % 1 != 0) {
+      alert('请输入大于0的正整数');
+      $(this).val('');
+    }
+  })
+})
