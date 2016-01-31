@@ -128,42 +128,42 @@ def vote_for(object)
 
   def owner_buttons_for_p(participant, price)
     link_to('<span class="icons"><i class="fa fa-pencil"></i>'.html_safe + t(:edit) + '</span>'.html_safe, edit_participant_path(participant)) + ' | ' +
-    link_to('<span class="icons"><i class="fa fa-times"></i>'.html_safe + t(:delete) + '</span>'.html_safe, participant_path(participant), method: :delete) + ' | ' +
-    link_to('<span class="icons"><i class="fa fa-bars"></i>'.html_safe + t(:detail) + '</span>'.html_safe, participant_path(participant)) +
+    link_to('<span class="icons"><i class="fa fa-times"></i>'.html_safe + t(:delete) + '</span>'.html_safe, participant_path(participant), method: :delete) + "#{participant.groupbuy_id.present? ? ' | ' : ''}" +
+    link_to('<span class="icons groupbuy-detail"><i class="fa fa-bars"></i>'.html_safe + t(:detail) + '</span>'.html_safe, participant_path(participant)) +
     if participant.user_id == current_user.id && participant.status_pay == 0 && price > 0
       link_to(' | <span class="icons"><i class="fa fa-jpy"></i>'.html_safe  + t(:pay) + '</span>'.html_safe, wechat_pay_participant_path(participant))
-   else
-    ''  
+    else
+      ''  
+    end
   end
-end
 
-def markdown(text, options= {links: true})
-  render_options = {
-    filter_html:     true,
-    hard_wrap:       true,
-    no_links:        !options[:links],
-    highlight: true
-  }
-  renderer = Redcarpet::Render::HTML.new(render_options)
+  def markdown(text, options= {links: true})
+    render_options = {
+      filter_html:     true,
+      hard_wrap:       true,
+      no_links:        !options[:links],
+      highlight: true
+    }
+    renderer = Redcarpet::Render::HTML.new(render_options)
 
-  extensions = {
-    autolink:           true,
-    fenced_code_blocks: true,
-    lax_spacing:        true,
-    no_intra_emphasis:  true,
-    strikethrough:      true,
-    superscript:        true,
-    highlight:          true
-  }
-  Redcarpet::Markdown.new(renderer, extensions).render(text).html_safe
-end
-
-def format_string string
-  str = string
-  count = str.length / 4
-  count.times do |t|
-    str[4 * (t + 1) - 1] += ' '
+    extensions = {
+      autolink:           true,
+      fenced_code_blocks: true,
+      lax_spacing:        true,
+      no_intra_emphasis:  true,
+      strikethrough:      true,
+      superscript:        true,
+      highlight:          true
+    }
+    Redcarpet::Markdown.new(renderer, extensions).render(text).html_safe
   end
-  str.strip
-end
+
+  def format_string string
+    str = string
+    count = str.length / 4
+    count.times do |t|
+      str[4 * (t + 1) - 1] += ' '
+    end
+    str.strip
+  end
 end

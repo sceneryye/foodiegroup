@@ -66,7 +66,7 @@ class ParticipantsController < ApplicationController
 
   def create
 
-    if !params[:groupbuy_id].nil?
+    if params[:groupbuy_id].present?
       # address = params[:user_addresses_id].present? ? UserAddress.find_by(id: params[:user_addresses_id]) : current_user.default_address
       # params[:participant].merge!(:name=>address.name,:address=>address.address,:mobile=>address.mobile)
       
@@ -81,8 +81,11 @@ class ParticipantsController < ApplicationController
 
     if @participant.save
       notice =  '报名成功'
-      
-      redirect_to participant_path(@participant), notice: notice
+      if @participant.groupbuy_id
+        redirect_to participant_path(@participant), notice: notice
+      else 
+        redirect_to event_path(@participant.event), notice: notice
+      end
       
     else
       render :new
