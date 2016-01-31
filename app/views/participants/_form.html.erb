@@ -3,11 +3,16 @@
 <div class="test"></div>
 	<%= render 'layouts/form_errors', object: @participant %>
     <div class="row collapse">
+    
 	    <div class="small-4 columns">
 	    	<span class="prefix"><%= t(:quantity) %></span>
 	    </div>
         <div class="small-5 columns">
+      <% if controller_name == 'groupbuys' %>
           	<%= f.number_field :quantity, required: true,value: @parent.goods_minimal, class: 'participant-number', 'data-minimal'=>@parent.goods_minimal, 'data-id' => @parent.id%>
+            <% else %>
+            <%= f.number_field :quantity, required: true, class: 'participant-number',  'data-id' => @parent.id%>
+        <% end %>
         </div>
         <div class="small-3 columns">
           <span class="postfix">
