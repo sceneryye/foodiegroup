@@ -256,6 +256,8 @@ zh:
         mobile: 联系电话
         body: 活动详情
         price: 非团购价
+        groupbuy_pric: 团购价
+        market_price: 市场价
       participant:
         amount: 数量
         name: 收货人
