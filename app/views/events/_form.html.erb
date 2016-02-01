@@ -9,18 +9,18 @@
   </div>
   <div>    
     <p><%=t(:please_choose_event_duration)%></p>
-    <table class="table">
+   <table class="table">
       <thead>
-        <tr>         
+        <tr>
           <th> <%#= f.label :start_time %>
-            <%= f.text_field :start_time, required: true,:class=>"span2",:id=>"dpd2",placeholder: t(:start_time)%>
+            <%= f.text_field :start_time, required: true,:class=>"fdatepicker",:id=>"dpd2",placeholder: t(:start_time)%>
           </th>
-           <th><%#= f.label :end_time %>
-             <%= f.text_field :end_time, required: true,:class=>"span2",:id=>"dpd1",placeholder: t(:end_time)%>
-          </th>
-        </tr>
-      </thead>
-    </table>
+          <th><%#= f.label :end_time %>
+           <%= f.text_field :end_time, required: true,:class=>"fdatepicker",:id=>"dpd1",placeholder: t(:end_time)%>
+         </th>
+       </tr>
+     </thead>
+   </table>
   </div>
 
   <div>    
