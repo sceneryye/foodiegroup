@@ -207,6 +207,7 @@ zh:
         even: "必须为双数"
         taken: "已经被使用"
         record_invalid: "校验失败: %{errors}"
+        duration: "开始时间必须早于结束时间"
     models:
       user: 会员
       forum: 论坛

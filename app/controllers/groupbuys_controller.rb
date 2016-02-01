@@ -235,7 +235,7 @@ class GroupbuysController < ApplicationController
 
   def groupbuy_params
     params.require(:groupbuy).permit(:title, :body,:end_time,:start_time,:groupbuy_type, :goods_maximal, :goods_minimal, :market_price,
-      :pic_url,:limited_people,:goods_big_than,:goods_small_than,:name,:mobile,:goods_unit,:price,:pic_url,:logistic_id,:weight)
+      :groupbuy_price, :pic_url,:name,:mobile,:goods_unit,:price,:pic_url,:logistic_id,:weight)
   end
   
 end

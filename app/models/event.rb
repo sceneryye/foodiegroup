@@ -12,6 +12,14 @@ class Event < ActiveRecord::Base
 	validates :end_time, presence: true
 	validates :start_time, presence: true
 	# validates :pic_url, presence: true
+	validate :check_duration
+
+	def check_duration
+		return if self.start_time.blank? || self.end_time.blank?
+		if self.start_time > self.end_time
+			errors.add(:base, :duration)
+		end
+	end
 
 	default_scope {order 'recommend DESC,created_at DESC'}
 

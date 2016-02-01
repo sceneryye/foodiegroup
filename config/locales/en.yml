@@ -116,6 +116,7 @@ en:
       not_an_integer: must be an integer
       odd: must be odd
       record_invalid: 'Validation failed: %{errors}'
+      duration: "start time must earlier than end time"
       restrict_dependent_destroy:
         one: Cannot delete record because a dependent %{record} exists
         many: Cannot delete record because dependent %{record} exist

@@ -13,10 +13,17 @@ class Groupbuy < ActiveRecord::Base
 	validates :start_time, presence: true
 	validates :goods_unit,  presence: true
 	validates :price,  presence: true
-	validates :goods_minimal,  presence: true
 	validates :market_price, presence: true
-	validates :groupbuy_price, presence: true
-	#validates :pic_url, presence: true
+	validates :groupbuy_price, presence: true	
+	validates :goods_minimal,  presence: true
+	validate :check_duration
+
+	def check_duration
+		return if self.start_time.blank? || self.end_time.blank?
+		if self.start_time > self.end_time
+			errors.add(:base, :duration)
+		end
+	end
 
  	default_scope {order 'recommend DESC, created_at DESC'}
 
