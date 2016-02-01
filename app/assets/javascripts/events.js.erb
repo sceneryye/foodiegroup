@@ -1,7 +1,8 @@
-//= require foundation-datetimepicker
 //= require 'china_city/jquery.china_city'
 //= require ckeditor/init
 //= require photos
+//= require foundation-datepicker.min
+//= require foundation-datepicker.zh-CN
 
 	// implementation of disabled form fields
 	// $('.datetimepicker').fdatetimepicker({
@@ -16,28 +17,13 @@
   });
 });
 
-	var nowTemp = new Date();
-	var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
-	var checkin = $('#dpd1').fdatetimepicker({
-		onRender: function (date) {
-			return date.valueOf() < now.valueOf() ? 'disabled' : '';
-		}
-	}).on('changeDate', function (ev) {
-		if (ev.date.valueOf() > checkout.date.valueOf()) {
-			var newDate = new Date(ev.date)
-			newDate.setDate(newDate.getDate() + 1);
-			checkout.update(newDate);
-		}
-		checkin.hide();
-		$('#dpd2')[0].focus();
-	}).data('datepicker');
-	var checkout = $('#dpd2').fdatetimepicker({
-		onRender: function (date) {
-			return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-		}
-	}).on('changeDate', function (ev) {
-		checkout.hide();
-	}).data('datepicker');
+	//--------时间选择插件----------//
+$('.fdatepicker').fdatepicker({
+  language: 'zh',
+  format: 'yyyy-mm-dd hh:ii',
+  disableDblClickSelection: true,
+  pickTime: true
+});
 
 	//--------调用微信支付---------
 	$('.wc-pay').on("click", function(){
