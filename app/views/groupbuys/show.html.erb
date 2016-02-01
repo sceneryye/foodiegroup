@@ -13,7 +13,13 @@
 <div class="row">
   <div class="small-12 columns">
     <table style="width:100%">
-    <tr>
+    
+      <tr>
+        <td><%=l @groupbuy.start_time, format: :long %></td>
+        <td class="text-center">-</td>
+        <td><%=l @groupbuy.end_time, format: :long %></td>
+      </tr>      
+      <tr>
         <th><%=t(:remaining_time)%></th>
         <td colspan="2">
           <div class="groupbuy-list" data-endtime="<%= @groupbuy.end_time.to_i %>" data-day="<%= t(:day) %>">
@@ -27,12 +33,6 @@
           </div>
         </td>
       </tr>
-      <tr>
-        <td><%=@groupbuy.start_time.strftime("%Y-%m-%d %H:%M") %></td>
-        <td class="text-center">--</td>
-        <td><%=@groupbuy.end_time.strftime("%Y-%m-%d %H:%M")%></td>
-      </tr>
-      
       <tr>
         <th><%=t(:inventory)%></th>
         <td colspan="2"><%=@groupbuy.goods_maximal%><%=@groupbuy.goods_unit%></td>

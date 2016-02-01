@@ -23,7 +23,7 @@
       </tr>
       <tr>
         <th><%=t(:start_time)%></th>
-        <td><%= @event.start_time.strftime("%Y-%m-%d %H:%M") %></td>
+        <td><%=l @event.start_time, format: :long%></td>
       </tr>
       <tr>
         <th><%=t(:duration)%></th>
