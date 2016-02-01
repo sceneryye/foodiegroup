@@ -12,12 +12,11 @@
 </div>
 <div class="row">
   <div class="small-12 columns">
-    <table style="width:100%">
-    
+    <table style="width:100%">    
       <tr>
-        <td><%=l @groupbuy.start_time, format: :long %></td>
+        <td><%=l @groupbuy.start_time%></td>
         <td class="text-center">-</td>
-        <td><%=l @groupbuy.end_time, format: :long %></td>
+        <td><%=l @groupbuy.end_time%></td>
       </tr>      
       <tr>
         <th><%=t(:remaining_time)%></th>
