@@ -319,6 +319,8 @@ en:
   discount: Discount
   freightage: Freightage
   total_price: Total Price
+  market_price: Market Price
+  groupbuy_price: Groupbuy Price
   area: Area
   detail: Detail
   pay_online: Pay Online

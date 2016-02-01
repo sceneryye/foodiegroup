@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127154438) do
+ActiveRecord::Schema.define(version: 20160201045532) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255, null: false
@@ -107,29 +107,30 @@ ActiveRecord::Schema.define(version: 20160127154438) do
   add_index "forums", ["name"], name: "index_forums_on_name", unique: true, using: :btree
 
   create_table "groupbuys", force: :cascade do |t|
-    t.string   "title",              limit: 255,                                         null: false
-    t.string   "pic_url",            limit: 500,                          default: ""
-    t.string   "body",               limit: 255,                                         null: false
-    t.string   "locale",             limit: 45,                           default: "zh"
-    t.datetime "start_time",                                                             null: false
-    t.datetime "end_time",                                                               null: false
+    t.string   "title",              limit: 255,                                          null: false
+    t.decimal  "market_price",                    precision: 10, scale: 2
+    t.decimal  "price",                           precision: 10, scale: 2
+    t.decimal  "weight",                          precision: 10, scale: 2
+    t.integer  "logistic_id",        limit: 4
+    t.integer  "status",             limit: 1,                             default: 1
+    t.datetime "start_time",                                                              null: false
+    t.datetime "end_time",                                                                null: false
     t.integer  "user_id",            limit: 4
-    t.integer  "recommend",          limit: 4,                            default: 0
+    t.integer  "recommend",          limit: 4,                             default: 0
+    t.string   "pic_url",            limit: 500,                           default: ""
+    t.string   "locale",             limit: 45,                            default: "zh"
+    t.string   "body",               limit: 5000,                          default: "",   null: false
     t.string   "goods_unit",         limit: 45
-    t.decimal  "price",                          precision: 10, scale: 2
     t.string   "pay_type",           limit: 7
-    t.decimal  "goods_minimal",                  precision: 20, scale: 2
-    t.decimal  "goods_maximal",                  precision: 20, scale: 2
+    t.decimal  "goods_minimal",                   precision: 20, scale: 2
+    t.decimal  "goods_maximal",                   precision: 20, scale: 2
     t.string   "name",               limit: 45
     t.string   "mobile",             limit: 45
-    t.integer  "comments_count",     limit: 4,                            default: 0
+    t.integer  "comments_count",     limit: 4,                             default: 0
     t.integer  "participants_count", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "market_price",                   precision: 10, scale: 2
-    t.decimal  "weight",                         precision: 10, scale: 2
-    t.integer  "logistic_id",        limit: 4
-    t.integer  "status",             limit: 1,                            default: 1
+    t.decimal  "groupbuy_price",                  precision: 10, scale: 2
   end
 
   add_index "groupbuys", ["user_id"], name: "index_groupbuys_on_user_id", using: :btree
@@ -173,6 +174,11 @@ ActiveRecord::Schema.define(version: 20160127154438) do
     t.string   "address",         limit: 255
     t.integer  "status",          limit: 4,                             default: 0
     t.decimal  "amount",                       precision: 10, scale: 2
+    t.integer  "freightage",      limit: 4
+    t.decimal  "discount",                     precision: 10, scale: 2
+    t.string   "area",            limit: 255
+    t.integer  "discount_id",     limit: 4
+    t.integer  "quantity",        limit: 4
     t.string   "remark",          limit: 1000
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -180,11 +186,6 @@ ActiveRecord::Schema.define(version: 20160127154438) do
     t.integer  "status_ship",     limit: 4,                             default: 0
     t.string   "delivery_time",   limit: 255
     t.string   "tracking_number", limit: 255
-    t.integer  "freightage",      limit: 4
-    t.decimal  "discount",                     precision: 10, scale: 2
-    t.string   "area",            limit: 255
-    t.integer  "discount_id",     limit: 4
-    t.integer  "quantity",        limit: 4
   end
 
   create_table "photos", force: :cascade do |t|
