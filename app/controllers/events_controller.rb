@@ -164,7 +164,7 @@ def create
     parent = params[:parent]
     start = params[:start].to_i
     over = params[:over].to_i
-    comments = parent.capitalize.constantize.includes(:forum, :comments, :user).find(params[:id]).comments.includes(:user)[start...over]
+    comments = parent.capitalize.constantize.includes(:comments, :user).find(params[:id]).comments.includes(:user)[start...over]
     comments.each do |comment|
       elements << "<div class='row small-collapse'><div  class='columns small-12 comment'>" << comment.body.html_safe if comment.body << view_context.comment_info(comment) << "</div><hr />"
     end
