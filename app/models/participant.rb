@@ -157,7 +157,7 @@ class Participant < ActiveRecord::Base
 	  end
 
 	  def total
-	  	self.amount+self.freightage-self.discount
+	  	self.amount.to_f + self.freightage.to_f - self.discount.to_f
 	  end
 
 	  def payment_name
