@@ -32,24 +32,35 @@
 <div class='groupbuy-conditions row collapse'>
   <div class="small-3 columns">
     <span class="price postfix">
-      <%= t(:price) %>
+      <%= t(:groupbuy_price) %>
     </span>
   </div>
   <div class="small-3 columns">
     <span class="price postfix">
       <!-- <%#= f.label :price %> -->
-      <%= f.text_field :price, placeholder: '¥' %>
+      <%= f.text_field :groupbuy_price, placeholder: '¥' %>
     </span>
   </div>
 
   <div class="small-4 columns">
     <span class="market_price postfix">
-      <%= t(:market_price) %>
+      <%= t(:price) %>
     </span>
   </div>
   <div class="small-2 columns">
     <span class="market_price postfix">
-      <%= f.text_field :market_price %>
+      <%= f.text_field :price, placeholder: '¥' %>
+    </span>
+  </div>
+
+  <div class="small-6 columns">
+    <span class="market_price postfix">
+      <%= t(:market_price) %>
+    </span>
+  </div>
+  <div class="small-6 columns">
+    <span class="market_price postfix">
+      <%= f.text_field :market_price, placeholder: '¥' %>
     </span>
   </div>
 
