@@ -9,7 +9,7 @@ class GroupbuysController < ApplicationController
   end
 
   def show
-    if params[:from] == 'foodiepay' && params[:total].present
+    if params[:from] == 'foodiepay' && params[:total].present?
       @total = params[:total]
       @alert = true
     end
