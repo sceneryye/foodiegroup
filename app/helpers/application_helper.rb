@@ -60,14 +60,15 @@ def participant_info(participant, price)
 
   info = ["<small class='details'>"]
   info << link_to(is_paid(participant), '#', class: 'badge') if participant.total.to_f > 0
-  info << info_for(participant.user) if participant.user
+  info << '¥' + participant.total.to_s if participant.status_pay.in?([1, 2])
+  info << '<span class="badge">' << info_for(participant.user) << '</span>' if participant.user
   info << time_for(participant)
   if participant.groupbuy_id
     info << ' | ' + participant.quantity.to_s + Groupbuy.find(participant.groupbuy_id).goods_unit
   else
     info << participant.quantity.to_s + ' ' + t(:people)
   end
-  if participant.tracking_number.present?
+  if participant.tracking_number.present? && (participant.user_id == current_user.id || is_admin?)
     info << "<div class='tracking-number'><span class='tracking-title'>" << t(:tracking_number) << "</span><span class='number'>" << format_string(participant.tracking_number) << "</span></div>"
   end
   info << "<div class='owner-buttons-for-p'>" << owner_buttons_for_p(participant, price) << "</div>" if current_user == participant.user
