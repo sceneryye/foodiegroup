@@ -21,9 +21,9 @@
 
         <div class="row radius callout all-kinds-of-money">
           <div class="columns small-6 groupbuy-price" style="line-height:100%">
-            <span class="price save"><i class="fa fa-cny"></i><%=groupbuy.current_price %></span><br>
+            <span class="price save"><i class="fa fa-cny"></i><%=groupbuy.current_price %>/<%=groupbuy.goods_unit%></span><br>
 
-            <small class="money">  <span class="price market"><i class="fa fa-cny"></i><%=groupbuy.market_price %></span></small>
+            <small class="money">  <span class="price market"><i class="fa fa-cny"></i><%=groupbuy.market_price %>/<%=groupbuy.goods_unit%></span></small>
           </div>
           <div class="columns small-6">
             <span class="price save"><%=t(:save)%>:&nbsp;<%= (((groupbuy.market_price - groupbuy.current_price) / groupbuy.market_price) * 100).round(2) %>%</span>
