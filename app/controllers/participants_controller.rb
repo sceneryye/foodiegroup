@@ -99,8 +99,8 @@ class ParticipantsController < ApplicationController
     @parent = @participant.groupbuy_id.present? ? Groupbuy.find_by(id: @participant.groupbuy_id) : Event.find_by(id: @participant.groupbuy_id)
     @path = @participant.groupbuy_id.present? ? groupbuy_path(@parent) : event_path(@parent)
     if @parent.pic_url.present?
-      @title_pic = @groupbuy.pic_url.split(',').reject{|x| x.blank?}[0]
-      @content_pic = @groupbuy.pic_url.split(',').reject{|x| x.blank?}[1..-1]
+      @title_pic = @parent.pic_url.split(',').reject{|x| x.blank?}[0]
+      @content_pic = @parent.pic_url.split(',').reject{|x| x.blank?}[1..-1]
     else
       @title_pic = @parent.photos.first.try(:image)
       @content_pic = @parent.photos[1..-1]
