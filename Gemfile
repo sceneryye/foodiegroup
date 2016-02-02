@@ -34,7 +34,7 @@ gem 'will_paginate', '~> 3.0.6'
    	gem 'sass-rails'#, '~> 5.0.3'
     gem 'uglifier'#, '>= 1.3.0'
 	gem 'coffee-rails'#, '~> 4.0.0'
-    gem 'foundation-rails'#,'~>5.5.3.2'
+    gem 'foundation-rails','~>5.5.3.2'
 	#gem 'foundation_form_builder'
 #end
 

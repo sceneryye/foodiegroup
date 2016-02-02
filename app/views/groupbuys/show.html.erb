@@ -20,6 +20,7 @@
       </tr>      
       <tr>
         <th><%=t(:remaining_time)%></th>
+        <div class="groupbuys-index-list"  data-over="<%= t(:groupbuy_end) %>">
         <td colspan="2">
           <div class="groupbuy-list" data-endtime="<%= @groupbuy.end_time.to_i %>" data-day="<%= t(:day) %>">
             <div class="countdown">
