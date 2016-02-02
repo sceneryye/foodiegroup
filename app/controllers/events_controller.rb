@@ -6,6 +6,8 @@ before_action :set_event, only: [:edit, :update, :destroy, :show]
   def index
     @events = Event.where(locale: session[:locale]).includes(:user)
 
+    @onload='onload="geocoder()"'
+
   end
 
   def show
