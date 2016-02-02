@@ -4,14 +4,26 @@ class Participant < ActiveRecord::Base
 	belongs_to :groupbuy, counter_cache: true
 
 	validates :quantity,  presence: true
-	# validates :name,  presence: true
- #  	validates :mobile,  presence: true
+	validate :check_quantity
 
- default_scope {order 'created_at DESC'}
+	default_scope {order 'created_at DESC'}
 
- before_create :initialize_attrs
+	def check_quantity
+		
+		count = 1
+		if self.groupbuy_id
+			count = self.groupbuy.goods_minimal
+		end
 
- def initialize_attrs
+		if self.quantity < count
+			errors.add(:base, :greater_than_or_equal_to,:count=>count)
+		end
+
+	end
+
+	before_create :initialize_attrs
+
+	def initialize_attrs
 	    #self.order_id = Participant.generate_order_id
 	    # self.amount = 1
 	    # self.status = 0
@@ -24,7 +36,7 @@ class Participant < ActiveRecord::Base
 	    # else
 	    #   self.ship_time = "#{self.ship_day}#{self.ship_time2}"
 	    # end
-	  end
+	end
 
 	before_save :get_address, :calculate_amount,:calculate_freightage, :calculate_discount #:calculate_itemnum
 
