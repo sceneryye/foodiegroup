@@ -443,3 +443,6 @@ zh:
   groupbuy_price: 团购价
   share_page: 请点击右上角的分享按钮来分享本页面
   must_integer: 数量必须为整数
+  unit_price: 单价
+  selling_price: 卖价
+  weight_kg: 重量（千克）

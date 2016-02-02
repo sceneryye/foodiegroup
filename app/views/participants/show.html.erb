@@ -47,14 +47,9 @@
       <div class="columns small-6 small-offset-3 price-detail">
         <%= @participant.area.to_s %>
       </div>
+
       <div class="columns small-3">
-        <%= t(:market_price) %>
-      </div>
-      <div class="columns small-3 small-offset-6 price-detail">
-        <i class="fa fa-jpy"></i><%= @parent.current_market_price.to_f %>
-      </div>
-      <div class="columns small-3">
-        <%= t(:price) %>
+        <%= t(:unit_price) %>
       </div>
       <div class="columns small-3 small-offset-6 price-detail">
         <i class="fa fa-jpy"></i><%= @parent.current_price %>
@@ -89,7 +84,7 @@
         <% end %>
       </div>
       <div class="columns small-4 end">
-        <% message = session[:locale] == 'zh' ? '您的支付状态已改为待确认状态，请尽快联系帮主进行支付！' : 'Your pay status has modified to WAITING FOR CONFIRM and please contact with master to pay for it ' %>
+        <% message = session[:locale] == 'zh' ? '您的支付状态已改为待确认状态，请尽快联系帮主进行支付！' : 'Your pay status has modified TO BE CONFIRM and please contact with master to pay for it offline ' %>
         <div class="button tiny pay-offline" data-id="<%= params[:id] %>" data-url="<%= participant_path(@participant) %>" data-message="<%= message %>" data-redirect="<%= @path %>"><%= t(:pay_offline) %></div>
 
       </div>

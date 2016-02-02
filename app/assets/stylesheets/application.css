@@ -13,7 +13,7 @@ body{ position: relative; min-height: 550px;}
 footer{ position: absolute; bottom: 0; left: 0; }*/
 
 html, body {/*position: relative;*/
-  font-family: "Microsoft YaHei";
+  font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
 }
 a.button:visited{color:white;}
 

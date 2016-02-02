@@ -1,135 +1,139 @@
 <div class="row" style="margin-top:10px;">
   <div class="small-12 columns">
     <%= form_for @groupbuy, data: {abide: ''}  ,:html => {multipart: true, class: 'new-form'} do|f| %>
-      <%= render 'layouts/form_errors', object: @groupbuy %>
-      <input type="hidden", name='photo_ids' value="" class="pic-ids">
-      <input type="hidden", name='delete_ids' value="" class="delete-ids">
-      <!--images[] returned to the album as an array. We use file_field_tag since images is not @album's attribute-->
-        <%#= file_field_tag "images[]", type: :file, multiple: true %>
-      <div>
-        <%= f.text_field :title, required: true,placeholder: "#{t(:groupbuy)} #{t(:title)}" %>
-        <!--  <%#= show_error_message('团购名称，不能为空！') %> -->
-      </div>
-      <div>
-        <p><%=t(:please_choose_groupbuy_duration)%></p>
-        <table class="table">
-          <thead>
-            <tr>
-              <th> <%#= f.label :start_time %>
-                <%= f.text_field :start_time, :value => (@groupbuy.start_time.nil? ? nil : l(@groupbuy.start_time)), required: true,:class=>"fdatepicker",:id=>"dpd2",placeholder: t(:start_time) %>
-              </th>
-              <th><%#= f.label :end_time %>
-               <%= f.text_field :end_time, :value => (@groupbuy.end_time.nil? ? nil : l(@groupbuy.end_time)),  required: true,:class=>"fdatepicker",:id=>"dpd1",placeholder: t(:end_time)%>
-             </th>
-           </tr>
-         </thead>
-       </table>
-      </div>
+    <%= render 'layouts/form_errors', object: @groupbuy %>
+    <input type="hidden", name='photo_ids' value="" class="pic-ids">
+    <input type="hidden", name='delete_ids' value="" class="delete-ids">
+    <!--images[] returned to the album as an array. We use file_field_tag since images is not @album's attribute-->
+    <%#= file_field_tag "images[]", type: :file, multiple: true %>
+    <div>
+      <%= f.text_field :title, required: true,placeholder: "#{t(:groupbuy)} #{t(:title)}" %>
+      <!--  <%#= show_error_message('团购名称，不能为空！') %> -->
+    </div>
+    <div>
+      <p><%=t(:please_choose_groupbuy_duration)%></p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th> <%#= f.label :start_time %>
+              <%= f.text_field :start_time, :value => (@groupbuy.start_time.nil? ? nil : l(@groupbuy.start_time)), required: true,:class=>"fdatepicker",:id=>"dpd2",placeholder: t(:start_time) %>
+            </th>
+            <th><%#= f.label :end_time %>
+             <%= f.text_field :end_time, :value => (@groupbuy.end_time.nil? ? nil : l(@groupbuy.end_time)),  required: true,:class=>"fdatepicker",:id=>"dpd1",placeholder: t(:end_time)%>
+           </th>
+         </tr>
+       </thead>
+     </table>
+   </div>
 
-      <div class='groupbuy-conditions row collapse'>
-        <div class="small-3 columns ">
-          <span class="prefix">
-            <%=t :groupbuy_price %>
-          </span>
-        </div>
-        <div class="small-3 columns">
-          <span class="price postfix">
-            <!-- <%#= f.label :groupbuy_price %> -->
-            <%= f.text_field :groupbuy_price, placeholder: '¥' %>
-          </span>
-        </div>
+   <div class='groupbuy-conditions row collapse'>
+    <div class="small-3 columns ">
+      <span class="prefix">
+        <%=t :groupbuy_price %>
+      </span>
+    </div>
+    <div class="small-3 columns">
+      <span class="price postfix">
+        <!-- <%#= f.label :groupbuy_price %> -->
+        <%= f.text_field :groupbuy_price, placeholder: '¥' %>
+      </span>
+    </div>
 
-        <div class="small-3 columns">
-          <span class="market_price postfix">
-            <%= t(:price) %>
-          </span>
-        </div>
-        <div class="small-3 columns">
-          <span class="market_price postfix">
-            <%= f.text_field :price, placeholder: '¥' %>
-          </span>
-        </div>
+    <div class="small-3 columns">
+      <span class="market_price postfix">
+        <%= t(:price) %>
+      </span>
+    </div>
+    <div class="small-3 columns">
+      <span class="market_price postfix">
+        <%= f.text_field :price, placeholder: '¥' %>
+      </span>
+    </div>
 
-        <div class="small-3 columns">
-          <span class="market_price postfix">
-            <%= t(:market_price) %>
-          </span>
-        </div>
-        <div class="small-3 columns">
-          <span class="market_price postfix">
-            <%= f.text_field :market_price, placeholder: '¥' %>
-          </span>
-        </div>
+    <div class="small-3 columns">
+      <span class="market_price postfix">
+        <%= t(:market_price) %>
+      </span>
+    </div>
+    <div class="small-3 columns">
+      <span class="market_price postfix">
+        <%= f.text_field :market_price, placeholder: '¥' %>
+      </span>
+    </div>
 
 
-        <div class="small-3 columns">
-          <span class="goods-unit postfix">
-            <%= t(:goods_unit) %>
-          </span>
-        </div>
-        <div class="small-3 columns">
-          <span class="goods-unit postfix">
-          <% eg = session[:locale] == 'en' ? 'eg. Kg' : '例如：千克' %>
-            <%= f.text_field :goods_unit, placeholder: eg %>
-          </span>
-        </div>
+    <div class="small-3 columns">
+      <span class="goods-unit postfix">
+        <%= t(:goods_unit) %>
+      </span>
+    </div>
+    <div class="small-3 columns">
+      <span class="goods-unit postfix">
+        <% eg = session[:locale] == 'en' ? 'eg. Kg' : '例如：千克' %>
+        <%= f.text_field :goods_unit, placeholder: eg %>
+      </span>
+    </div>
 
-        <div class="small-3 columns">
-          <span class="market_price postfix">
-            <%= t(:goods_minimal) %>
-          </span>
-        </div>
-        <div class="small-3 columns">
-          <span class="goods-minimal postfix">
-            <!-- <%#= f.label :goods_minimal %> -->
-            <%= f.text_field :goods_minimal %>
-          </span>
-        </div>
-        <div class="small-3 columns">
-          <span class="postfix"><%= t(:inventory) %></span>
-        </div>
-        <div class="small-3 columns">
-          <span>
-            <%= f.text_field :goods_maximal %>
-          </span>
-        </div>
-      </div>
-
-      <div class="row collapse goods-maximal">
-        
-        <div class="small-3 columns">
-          <span class="prefix"><%= t(:weight_kg) %></span>
-        </div>
-        <div class="small-9 columns">
-          <span>
-            <%= f.text_field :weight %>
-          </span>
-        </div>
-        <div class="small-3 columns">
-          <span class="postfix"><%= t(:logistics) %></span>
-        </div>
-        <div class="small-6 columns">
-          <span class="postfix">
-            <%=f.select :logistic_id,options_from_collection_for_select(current_user.logistics.all,:id,:name,@groupbuy.logistic_id), {:include_blank=>"--包邮--"}%>
-
-          </span>
-        </div>
-        <div class="small-3 columns">
-          <span class="postfix"><%=link_to t(:new_logistic), new_logistic_path %></span>
-        </div>
-      </div>
-      <div>
-        <%= f.text_area :body,placeholder: t(:body), rows: 5%>
-      </div>
-      <div>
-       <%= f.submit class:'tiny button radius right' %>
-      </div>
-    <% end %>
-    <form action="<%= photos_path %>" class="dropzone" id="my-dropzone" enctype="multipart/form-data">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token.to_s %>">
-      <input type="hidden" name="parent" value="<%= params[:controller] %>">
-    </form>
+    <div class="small-3 columns">
+      <span class="market_price postfix">
+        <%= t(:goods_minimal) %>
+      </span>
+    </div>
+    <div class="small-3 columns">
+      <span class="goods-minimal postfix">
+        <!-- <%#= f.label :goods_minimal %> -->
+        <%= f.text_field :goods_minimal %>
+      </span>
+    </div>
+    <div class="small-3 columns">
+      <span class="postfix"><%= t(:inventory) %></span>
+    </div>
+    <div class="small-3 columns">
+      <span>
+        <%= f.text_field :goods_maximal %>
+      </span>
+    </div>
   </div>
+
+  <div class="row collapse goods-maximal">
+
+    <div class="small-3 columns">
+      <span class="prefix"><%= t(:weight_kg) %></span>
+    </div>
+    <div class="small-9 columns">
+      <span>
+        <%= f.text_field :weight %>
+      </span>
+    </div>
+    <div class="small-3 columns">
+      <span class="postfix"><%= t(:logistics) %></span>
+    </div>
+    <div class="small-6 columns">
+      <span class="postfix">
+        <%=f.select :logistic_id,options_from_collection_for_select(current_user.logistics.all,:id,:name,@groupbuy.logistic_id), {:include_blank=>"--包邮--"}%>
+
+      </span>
+    </div>
+    <div class="small-3 columns">
+      <span class="postfix">
+        <%=link_to new_logistic_path do %>
+          <i class="fa fa-plus-square"></i>
+        <% end %>
+      </span>
+    </div>
+  </div>
+  <div>
+    <%= f.text_area :body,placeholder: t(:body), rows: 5%>
+  </div>
+  <div>
+   <%= f.submit class:'tiny button radius right' %>
+ </div>
+ <% end %>
+ <form action="<%= photos_path %>" class="dropzone" id="my-dropzone" enctype="multipart/form-data">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token.to_s %>">
+  <input type="hidden" name="parent" value="<%= params[:controller] %>">
+</form>
+</div>
 </div>
 
 
