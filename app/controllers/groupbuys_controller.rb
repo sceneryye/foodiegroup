@@ -9,6 +9,10 @@ class GroupbuysController < ApplicationController
   end
 
   def show
+    if params[:from] == 'foodiepay' && params[:total].present
+      @total = params[:total]
+      @alert = true
+    end
     @parent = @groupbuy  = Groupbuy.find(params[:id])
     if @parent.pic_url.present?
       @title_pic = @groupbuy.pic_url.split(',').reject{|x| x.blank?}[0]
