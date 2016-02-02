@@ -136,8 +136,11 @@ function isWeixinBrowser(){
       }
       console.log(num);
       console.log(minimal);
-      if(num < minimal || isNaN(num) || num % 1 != 0) {
+      if(num < minimal || isNaN(num)) {
         alert('<%=t(:must_large_than_minimal)%>');
+      }
+      else if(num % 1 != 0) {
+        alert('<%= t(:must_integer) %>');
       }
       else{
         get_freightage();

@@ -81,7 +81,12 @@
     class:"tiny button alert radius",
       data: {confirm: '?'} %>
       <% end %>
+      <div>
       <%= link_to '<i class="fa fa-cart-plus"></i>'.html_safe + ' ' + t(:buy), '#participants', class:"tiny button radius participant-button", 'data-info' => t(:sign_up_first) %>
+      <%= link_to '#', class: "tiny button radius share-button", 'data-msg' => t(:share_page) do %>
+      <i class="fa fa-share-alt"></i><%= t(:share) %>
+      <% end %>
+      </div>
     </div>
 
   </div>

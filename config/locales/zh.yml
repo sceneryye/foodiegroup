@@ -441,3 +441,5 @@ zh:
   pay_offline: 线下支付
   must_large_than_minimal: 数量必须大于最低起订量
   groupbuy_price: 团购价
+  share_page: 请点击右上角的分享按钮来分享本页面
+  must_integer: 数量必须为整数

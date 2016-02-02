@@ -38,3 +38,13 @@ function get_freightage(){
       });
     }
 }
+
+//----------------提示分享----------------------//
+
+$(document).ready(function(){
+  $('.share-button').on('click', function(){
+    var msg = $(this).data('msg');
+    alert(msg);
+  })
+})
+

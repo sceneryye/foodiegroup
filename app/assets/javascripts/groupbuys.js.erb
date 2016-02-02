@@ -161,7 +161,7 @@ $('.dz-image .trash').on('click', function(){
 $(document).ready(function(){
 
   $('.new_participant').submit(function(e){
-    var num = parseFloat($(this).data('goods-minimal'));
+    var num = parseFloat($('.participant-number').data('minimal'));
     var other_num = $('#participant_quantity').val();
     console.log('num=' + num);
     console.log('other_num=' + other_num);
@@ -169,5 +169,6 @@ $(document).ready(function(){
       e.preventDefault();
       return false;
     }
-  })
-})
+  });
+});
+

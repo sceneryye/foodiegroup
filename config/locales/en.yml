@@ -328,3 +328,5 @@ en:
   pay_offline: Pay Offline
   delete_insure: Are you sure to delete it?
   must_large_than_minimal: Quantity must large than minimal!
+  share_page: Click the share button on the top right conner to share this page
+  must_integer: Quantity must be integer!

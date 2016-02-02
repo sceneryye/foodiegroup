@@ -1,5 +1,5 @@
 
-<%= form_for form_params(@parent, @participant), data: {abide: '', goods_minimal: @parent.goods_minimal.present? ? @parent.goods_minimal : ''} do |f| %>
+<%= form_for form_params(@parent, @participant), data: {abide: ''} do |f| %>
 <div class="test"></div>
 <%= render 'layouts/form_errors', object: @participant %>
 <div class="row collapse">
@@ -9,7 +9,7 @@
 </div>
 <div class="small-5 columns">
   <% if controller_name == 'groupbuys' %>
-  <%= f.number_field :quantity, required: true,value: @parent.goods_minimal, class: 'participant-number', 'data-minimal'=>@parent.goods_minimal, 'data-id' => @parent.id%>
+  <%= f.number_field :quantity, required: true,value: @parent.goods_minimal.to_i, class: 'participant-number', 'data-minimal'=>@parent.goods_minimal, 'data-id' => @parent.id%>
   <% else %>
   <%= f.number_field :quantity, required: true, class: 'event-participant-number',  'data-id' => @parent.id%>
   <% end %>
