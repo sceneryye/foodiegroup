@@ -15,8 +15,8 @@ $primary-color: #008CBA;
   font-size: 0.8em;
 }
 .fa-cloud-upload {
-    margin-right: 15px;
-  }
+  margin-right: 15px;
+}
 
 
 /**************new participant**********/
@@ -181,6 +181,14 @@ $primary-color: #008CBA;
 }
 .freightage {
   margin-bottom: 10px;
+}
+.content {
+  hr {
+    margin: 8px 0;
+  }
+  p {
+    margin-bottom: 0;
+  }
 }
 
 

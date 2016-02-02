@@ -137,7 +137,6 @@ function isWeixinBrowser(){
       console.log(num);
       console.log(minimal);
       if(num < minimal || isNaN(num) || num % 1 != 0) {
-        that.val(minimal);
         alert('<%=t(:must_large_than_minimal)%>');
       }
       else{

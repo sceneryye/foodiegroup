@@ -1,5 +1,5 @@
 
-<%= form_for form_params(@parent, @participant), data: {abide: ''} do |f| %>
+<%= form_for form_params(@parent, @participant), data: {abide: '', goods_minimal: @parent.goods_minimal.present? ? @parent.goods_minimal : ''} do |f| %>
 <div class="test"></div>
 <%= render 'layouts/form_errors', object: @participant %>
 <div class="row collapse">
