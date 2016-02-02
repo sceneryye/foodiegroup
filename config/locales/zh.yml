@@ -250,7 +250,7 @@ zh:
         event_type: 活动类型
         pic_url:  活动图片
         goods_unit: 团购商品单位
-        goods_minimal: 最低成团数量 
+        goods_minimal: 最低成团数
         inventory: 库存
         name: 联系人
         mobile: 联系电话
@@ -354,7 +354,7 @@ zh:
   share: 分享
   edit_profile: 个人信息
   maintain_addresses: 收货地址
-  maintain_addresses: 物流规则
+  maintain_logistics: 物流规则
   interests: 我的关注
   membership: 会员条款
   name: 姓名
