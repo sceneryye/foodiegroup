@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def show_error_message(message = '不能为空！')
+  def show_error_message(message = I18n.t('activerecord.errors.messages.blank'))
     ['<small class="error">', message, '</small>'].join.html_safe
   end
 
