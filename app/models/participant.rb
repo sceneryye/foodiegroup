@@ -76,9 +76,14 @@ class Participant < ActiveRecord::Base
 	end
 
 
+	after_create  :adjust_store
+	def adjust_store
 
-
-	#  after_create
+		if self.groupbuy_id
+			current_store = self.groupbuy.goods_maximal - self.quantity
+			self.groupbuy.update(goods_maximal: current_store)
+		end
+	end
 
 
 	#  around_update :finish_order

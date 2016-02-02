@@ -16,6 +16,7 @@ class Groupbuy < ActiveRecord::Base
 	validates :market_price, presence: true
 	validates :groupbuy_price, presence: true	
 	validates :goods_minimal,  presence: true
+	validates :goods_maximal,  presence: true
 	validate :check_duration
 
 	def check_duration
