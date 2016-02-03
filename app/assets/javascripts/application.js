@@ -48,3 +48,17 @@ $(document).ready(function(){
   })
 })
 
+//--------------为达到最低团购数量不能提交订单---------------//
+$(document).ready(function(){
+  $('.list_button').on('submit', '.new_participant', function(e){
+    var num = parseFloat($('.participant-number').data('minimal'));
+    var other_num = $('#participant_quantity').val();
+    console.log('num=' + num);
+    console.log('other_num=' + other_num);
+    if(other_num < num) {
+      e.preventDefault();
+      return false;
+    }
+  });
+});
+
