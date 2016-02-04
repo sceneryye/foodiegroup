@@ -5,7 +5,7 @@ class GroupbuysController < ApplicationController
   before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
 
   def index
-    @groupbuys = Groupbuy.where(locale: session[:locale]).includes(:user).order(created_at: :desc)
+    @groupbuys = Groupbuy.all.includes(:user).order(created_at: :desc)
   end
 
   def show
