@@ -27,7 +27,7 @@
       </tr>
       <% @groupbuys.each_with_index do |groupbuy| %>
       <tr class="body" id="groupbuy-<%= groupbuy.id %>">
-        <td class="groupbuy-title"><%= groupbuy.title[0..10] %></td>
+        <td class="groupbuy-title"><%= groupbuy.zh_title[0..10] %></td>
         <td><%= groupbuy.start_time.strftime('%F %T') %></td>
         <td><%= groupbuy.end_time.strftime('%F %T') %></td>
         <td><%= link_to Participant.where(groupbuy_id: groupbuy.id).count, admin_participants_list_path(groupbuy_id: groupbuy.id) %></td>
