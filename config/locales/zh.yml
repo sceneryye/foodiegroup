@@ -445,3 +445,8 @@ zh:
   must_integer: 数量必须为整数
   unit_price: 单价
   selling_price: 卖价
+  en_title: 英文标题
+  zh_title: 中文标题
+  en_body: 英文描述
+  zh_body: 中文描述
+
