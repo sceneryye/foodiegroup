@@ -31,9 +31,9 @@ class GroupbuysController < ApplicationController
     
 
     #微信share接口配置
-    @title = "#{current_user.nickname if current_user.present?}推荐您加入团购：#{@groupbuy.current_title}"
+    @title = "#{current_user.nickname if current_user.present?}推荐您加入团购：#{current_title @groupbuy}"
     @img_url = 'http://www.trade-v.com:5000' + @title_pic.to_s
-    @desc = @groupbuy.current_body.present? ? @groupbuy.current_body.gsub('\n', ' ')[0..20] : ''
+    @desc = current_body(@groupbuy).present? ? current_body(@groupbuy).gsub('\n', ' ')[0..20] : ''
     supplier = Supplier.where(:id => 78).first
     @timestamp = Time.now.to_i
     @appId = supplier.weixin_appid
@@ -107,7 +107,7 @@ class GroupbuysController < ApplicationController
       # openids = User.plunk(:weixin_openid)
       openids = "oVxC9uBr12HbdFrW1V0zA3uEWG8c"
       msgtype = "text"
-      content = "吃货帮刚刚发布了一个新团购：#{@groupbuy.current_title}, 赶紧来看看哦～"
+      content = "吃货帮刚刚发布了一个新团购：#{current_title @groupbuy}, 赶紧来看看哦～"
       data_hash = {
         openids: openids,
         content: content,

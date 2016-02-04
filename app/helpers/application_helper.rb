@@ -167,4 +167,38 @@ def vote_for(object)
     end
     str.strip
   end
+
+  def current_title groupbuy
+    if session[:locale] == 'zh'
+      if groupbuy.zh_title.present?
+        return groupbuy.zh_title
+      else
+        return groupbuy.en_title
+      end
+    elsif session[:locale] == 'en'
+      if groupbuy.en_title.present?
+        return groupbuy.en_title
+      else
+        return groupbuy.zh_title
+      end
+    end
+  end
+
+  def current_body groupbuy
+    if session[:locale] == 'zh'
+      if groupbuy.zh_body.present?
+        return groupbuy.zh_body
+      else
+        return groupbuy.en_body
+      end
+    elsif session[:locale] == 'en'
+      if groupbuy.en_body.present?
+        return groupbuy.en_body
+      else
+        return groupbuy.zh_body
+      end
+    end
+  end
+
+  
 end

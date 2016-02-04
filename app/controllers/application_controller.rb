@@ -1,6 +1,7 @@
 #encoding:utf-8
 class ApplicationController < ActionController::Base
   include SessionsHelper
+  include ApplicationHelper
   protect_from_forgery with: :exception
   helper_method :signed_in?, :current_user,:forum_id
 

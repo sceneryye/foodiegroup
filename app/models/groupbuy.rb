@@ -26,14 +26,7 @@ class Groupbuy < ActiveRecord::Base
 		end
 	end
 
-	def current_title
-		self.locale == 'zh' ? self.zh_title : self.en_title
-	end
-
-
-	def current_body
-		self.locale == 'zh' ? self.zh_body : self.en_body
-	end
+	
 
  	default_scope {order 'recommend DESC, created_at DESC'}
 

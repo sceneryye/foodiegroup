@@ -28,7 +28,7 @@
     <div class="info-detail">
       <div class="row">
         <div class="columns small-3"><%= image_tag @title_pic %></div>
-        <div class="columns small-9"><%= @parent.current_title %></div>
+        <div class="columns small-9"><%= current_title @parent %></div>
       </div>
       <div class="row">
         <div class="columns small-3"><%= t(:amount) %></div>

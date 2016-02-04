@@ -62,3 +62,11 @@ $(document).ready(function(){
   });
 });
 
+//-------------中英文切换--------------//
+function change_locale(obj){
+    var locale = $(obj).data('locale');
+    url = 'http://' + location.host + location.pathname + '?locale=' + locale;
+    console.log(url);
+    location.href = url;
+  };
+

@@ -21,10 +21,10 @@
     <li>      
       <%if session[:locale] == 'en'%>  
       <%#=link_to '<i class="fa fa-language"></i>'.html_safe+' 中文',"#{request.url.sub('?locale=en','')}?locale=zh"%>
-      <%=link_to '<i class="fa fa-language"></i>'.html_safe+' 中文', request.url.split('?')[0] + "?locale=zh"%>
+      <%=link_to '<i class="fa fa-language"></i>'.html_safe+' 中文', 'javascript:void(0);', onclick: 'change_locale(this)', 'data-locale' => 'zh', class: 'change-locale' %>
       <%else%>
       <%#=link_to '<i class="fa fa-language"></i>'.html_safe+' English',"#{request.url.sub('?locale=zh','')}?locale=en"%>
-      <%=link_to '<i class="fa fa-language"></i>'.html_safe+' English', request.url.split('?')[0] + "?locale=en"%>
+      <%=link_to '<i class="fa fa-language"></i>'.html_safe+' English', 'javascript:void(0);', onclick: 'change_locale(this)', 'data-locale' => 'en', class: 'change-loc' %>
       <%end%> 
     </li>
     <li><%=link_to ' <i class="fa fa-search"></i>'.html_safe+' '+t(:search),search_path%></li>
