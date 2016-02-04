@@ -13,7 +13,7 @@
     </div>
     <div class="address"><%= user_address.address %></div>    
   </div>
-  <% if params[:id].nil? %>
+  <% if params[:id].nil? && %>
   <%= link_to user_address_path(user_address), method: :delete, confirm: t(:delete_insure) do %>
   <div class="right destroy-address">
     <i class="fa fa-trash"></i>

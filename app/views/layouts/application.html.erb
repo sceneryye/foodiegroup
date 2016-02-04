@@ -121,7 +121,7 @@ function isWeixinBrowser(){
       var controllerName = $(this).data('controllername');
       var linkUrl = "/" + controllerName + '/' + id;
       htmlobj = $.ajax({url: url ,async:false});
-      $(this).parent().parent().append('<div class="participants" style="margin:0px;padding:0px;">'+htmlobj.responseText+'</div>');
+      $(this).parent().parent().append('<div class="participants" style="margin:0px;padding:0px;">'+htmlobj.responseText.replace('fa-trash', '') + '</div>');
       //$(this).parent().parent().append('<div class="more"><a href=' + linkUrl + '></a></div>');
     });
 
