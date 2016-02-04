@@ -7,7 +7,11 @@
     <!--images[] returned to the album as an array. We use file_field_tag since images is not @album's attribute-->
     <%#= file_field_tag "images[]", type: :file, multiple: true %>
     <div>
-      <%= f.text_field :title, required: true,placeholder: "#{t(:groupbuy)} #{t(:title)}" %>
+      <%= f.text_field :zh_title, placeholder: "#{t(:groupbuy)} #{t(:zh_title)}" %>
+      <!--  <%#= show_error_message('团购名称，不能为空！') %> -->
+    </div>
+    <div>
+      <%= f.text_field :en_title, placeholder: "#{t(:groupbuy)} #{t(:en_title)}" %>
       <!--  <%#= show_error_message('团购名称，不能为空！') %> -->
     </div>
     <div>
@@ -97,10 +101,10 @@
 
   <div class="row collapse goods-maximal">
 
-    <div class="small-3 columns">
+    <div class="small-6 columns">
       <span class="prefix"><%= t(:weight_kg) %></span>
     </div>
-    <div class="small-9 columns">
+    <div class="small-6 columns">
       <span>
         <%= f.text_field :weight %>
       </span>
@@ -123,7 +127,10 @@
     </div>
   </div>
   <div>
-    <%= f.text_area :body,placeholder: t(:body), rows: 5%>
+    <%= f.text_area :zh_body,placeholder: t(:zh_body), rows: 5%>
+  </div>
+  <div>
+    <%= f.text_area :en_body,placeholder: t(:en_body), rows: 5%>
   </div>
   <div>
    <%= f.submit class:'tiny button radius right submit-new-groupbuy' %>

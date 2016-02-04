@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204021536) do
+ActiveRecord::Schema.define(version: 20160204030816) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255, null: false
@@ -107,7 +107,6 @@ ActiveRecord::Schema.define(version: 20160204021536) do
   add_index "forums", ["name"], name: "index_forums_on_name", unique: true, using: :btree
 
   create_table "groupbuys", force: :cascade do |t|
-    t.string   "title",              limit: 255,                                          null: false
     t.decimal  "market_price",                    precision: 10, scale: 2
     t.decimal  "price",                           precision: 10, scale: 2
     t.decimal  "weight",                          precision: 10, scale: 2
@@ -119,7 +118,6 @@ ActiveRecord::Schema.define(version: 20160204021536) do
     t.integer  "recommend",          limit: 4,                             default: 0
     t.string   "pic_url",            limit: 500,                           default: ""
     t.string   "locale",             limit: 45,                            default: "zh"
-    t.string   "body",               limit: 5000,                          default: "",   null: false
     t.string   "goods_unit",         limit: 45
     t.string   "pay_type",           limit: 7
     t.decimal  "goods_minimal",                   precision: 20, scale: 2
@@ -132,9 +130,9 @@ ActiveRecord::Schema.define(version: 20160204021536) do
     t.datetime "updated_at"
     t.decimal  "groupbuy_price",                  precision: 10, scale: 2
     t.string   "en_title",           limit: 255
-    t.string   "en_body",            limit: 255
+    t.string   "en_body",            limit: 5000
     t.string   "zh_title",           limit: 255
-    t.string   "zh_body",            limit: 255
+    t.string   "zh_body",            limit: 5000
   end
 
   add_index "groupbuys", ["user_id"], name: "index_groupbuys_on_user_id", using: :btree

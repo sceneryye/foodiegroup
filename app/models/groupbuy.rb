@@ -7,10 +7,8 @@ class Groupbuy < ActiveRecord::Base
 	has_many :photos, :inverse_of => :groupbuy, :dependent => :destroy
 	accepts_nested_attributes_for :photos, allow_destroy: true
 
-	validates :en_body,  length: {in: 5..5000}
-	validates :zh_body,  length: {in: 5..5000}
-	validates :en_title,  presence: {message: I18n.t('errors.messages.blank')}
-	validates :zh_title,  presence: {message: I18n.t('errors.messages.blank')}
+	
+	
 	validates :end_time, presence: true
 	validates :start_time, presence: true
 	validates :goods_unit,  presence: true
@@ -26,6 +24,15 @@ class Groupbuy < ActiveRecord::Base
 		if self.start_time > self.end_time
 			errors.add(:base, :duration)
 		end
+	end
+
+	def current_title
+		self.locale == 'zh' ? self.zh_title : self.en_title
+	end
+
+
+	def current_body
+		self.locale == 'zh' ? self.zh_body : self.en_body
 	end
 
  	default_scope {order 'recommend DESC, created_at DESC'}

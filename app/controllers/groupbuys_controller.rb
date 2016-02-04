@@ -31,9 +31,9 @@ class GroupbuysController < ApplicationController
     
 
     #微信share接口配置
-    @title = "#{current_user.nickname if current_user.present?}推荐您加入团购：#{@groupbuy.title}"
+    @title = "#{current_user.nickname if current_user.present?}推荐您加入团购：#{@groupbuy.current_title}"
     @img_url = 'http://www.trade-v.com:5000' + @title_pic.to_s
-    @desc = @groupbuy.body.gsub('\n', ' ')[0..20]
+    @desc = @groupbuy.current_body.present? ? @groupbuy.current_body.gsub('\n', ' ')[0..20] : ''
     supplier = Supplier.where(:id => 78).first
     @timestamp = Time.now.to_i
     @appId = supplier.weixin_appid
@@ -78,7 +78,12 @@ class GroupbuysController < ApplicationController
    end
 
    def create
-    @groupbuy = Groupbuy.new(groupbuy_params)
+    modified_groupbuy_params = groupbuy_params
+    modified_groupbuy_params[:en_title] = groupbuy_params[:en_title].blank? ? groupbuy_params[:zh_title] : groupbuy_params[:en_title]
+    modified_groupbuy_params[:zh_title] = groupbuy_params[:zh_title].blank? ? groupbuy_params[:en_title] : groupbuy_params[:zh_title]
+    modified_groupbuy_params[:en_body] = groupbuy_params[:en_body].blank? ? groupbuy_params[:zh_body] : groupbuy_params[:en_body]
+    modified_groupbuy_params[:zh_body] = groupbuy_params[:zh_body].blank? ? groupbuy_params[:en_body] : groupbuy_params[:zh_body]
+    @groupbuy = Groupbuy.new(modified_groupbuy_params)
     @groupbuy.pic_url = ''
     @groupbuy.user = current_user
     @groupbuy.locale = session[:locale]
@@ -102,7 +107,7 @@ class GroupbuysController < ApplicationController
       # openids = User.plunk(:weixin_openid)
       openids = "oVxC9uBr12HbdFrW1V0zA3uEWG8c"
       msgtype = "text"
-      content = "吃货帮刚刚发布了一个新团购：#{@groupbuy.title}, 赶紧来看看哦～"
+      content = "吃货帮刚刚发布了一个新团购：#{@groupbuy.current_title}, 赶紧来看看哦～"
       data_hash = {
         openids: openids,
         content: content,
@@ -238,7 +243,7 @@ class GroupbuysController < ApplicationController
   end
 
   def groupbuy_params
-    params.require(:groupbuy).permit(:title, :body,:end_time,:start_time,:groupbuy_type, :goods_maximal, :goods_minimal, :market_price,
+    params.require(:groupbuy).permit(:en_title, :zh_title, :en_body, :zh_body, :end_time,:start_time,:groupbuy_type, :goods_maximal, :goods_minimal, :market_price,
       :groupbuy_price, :pic_url,:name,:mobile,:goods_unit,:price,:pic_url,:logistic_id,:weight)
   end
   
