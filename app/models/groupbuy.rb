@@ -7,8 +7,10 @@ class Groupbuy < ActiveRecord::Base
 	has_many :photos, :inverse_of => :groupbuy, :dependent => :destroy
 	accepts_nested_attributes_for :photos, allow_destroy: true
 
-	validates :body,  length: {in: 5..5000}
-	validates :title,  presence: {message: I18n.t('errors.messages.blank')}
+	validates :en_body,  length: {in: 5..5000}
+	validates :zh_body,  length: {in: 5..5000}
+	validates :en_title,  presence: {message: I18n.t('errors.messages.blank')}
+	validates :zh_title,  presence: {message: I18n.t('errors.messages.blank')}
 	validates :end_time, presence: true
 	validates :start_time, presence: true
 	validates :goods_unit,  presence: true

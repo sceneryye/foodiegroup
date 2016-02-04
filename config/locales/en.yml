@@ -333,3 +333,7 @@ en:
   unit_price: Unit Price
   selling_price: Selling Price
   weight_kg: Net. Weight(Kg)
+  en_title: English Title
+  zh_title: Chinese Title
+  en_body: English Description
+  zh_body: Chinese Description
