@@ -8,7 +8,7 @@ class Groupbuy < ActiveRecord::Base
 	accepts_nested_attributes_for :photos, allow_destroy: true
 
 	validates :body,  length: {in: 5..5000}
-	validates :title,  presence: true
+	validates :title,  presence: {message: I18n.t('errors.messages.blank')}
 	validates :end_time, presence: true
 	validates :start_time, presence: true
 	validates :goods_unit,  presence: true

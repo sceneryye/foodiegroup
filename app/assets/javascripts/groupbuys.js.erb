@@ -172,5 +172,15 @@ $(document).ready(function(){
   });
 });
 
+//---------新建团购时标题为空时将提示-------------------//
+$(document).ready(function(){
+  $('.submit-new-groupbuy').on('click', function(e){
+    if($('#groupbuy_title').val() == '') {
+      e.preventDefault;
+      var msg = '<%= I18n.t(:title) %> <%= I18n.t('errors.messages.blank') %>';
+      alert(msg);
+    }
+  });
+})
 
 
