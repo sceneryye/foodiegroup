@@ -6,7 +6,7 @@
     <%= image_tag @title_pic, class: 'profile-image round' if @event %>
   </div>
   <div class="large-10 columns">
-    <h2><%= @event.title %></h2>
+    <h2><%= current_title @event %></h2>
   </div>
 </div>
 <div class="row">
@@ -62,7 +62,7 @@
           </div>
           <% end %>
           <% end %>
-          <%= @event.body.html_safe  %>
+          <%= (current_body @event).try(:html_safe)  %>
         </td>
       </tr>
     </table>

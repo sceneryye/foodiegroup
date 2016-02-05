@@ -105,3 +105,21 @@ $(document).ready(function(){
     }
   })
 })
+
+//---------新建团购时标题或内容为空时将提示-------------------//
+$(document).ready(function(){
+  $('.submit-new-event').on('click', function(e){
+    if($('#event_zh_title').val() == '' && $('#event_en_title').val() == '') {
+      e.preventDefault;
+      var msg = "<%= I18n.t(:title) %> <%= I18n.t('errors.messages.blank') %>";
+      alert(msg);
+      return false;
+    }
+    if($('#event_zh_body').val() == '' && $('#event_en_body').val() == '') {
+      e.preventDefault;
+      var msg = "<%= I18n.t(:body) %> <%= I18n.t('errors.messages.blank') %>";
+      alert(msg);
+      return false;
+    }
+  });
+})

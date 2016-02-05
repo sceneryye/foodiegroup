@@ -13,7 +13,7 @@
       <%end%>
     </div>
     <div class="columns small-8">
-      <h4><%= link_to event.title, event%></h4>
+      <h4><%= link_to current_title(event), event%></h4>
       <span><%=t(:by)%>:&nbsp;<%=link_to event.user.nickname.html_safe,profile_path(event.user) %><span>  
       <div class="countdown">
         <span class="countdonw-title"></span>

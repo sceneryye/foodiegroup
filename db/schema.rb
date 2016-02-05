@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160205115056) do
+ActiveRecord::Schema.define(version: 20160205125411) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255, null: false
@@ -45,26 +45,24 @@ ActiveRecord::Schema.define(version: 20160205115056) do
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.string   "title",              limit: 255,                                         null: false
-    t.string   "event_type",         limit: 7,                                           null: false
+    t.string   "event_type",         limit: 7,                                          null: false
     t.integer  "recommend",          limit: 4
-    t.string   "pic_url",            limit: 500,                            default: ""
-    t.text     "body",               limit: 65535,                                       null: false
+    t.string   "pic_url",            limit: 500,                           default: ""
     t.string   "locale",             limit: 255
-    t.datetime "start_time",                                                             null: false
-    t.datetime "end_time",                                                               null: false
-    t.integer  "user_id",            limit: 4,                                           null: false
+    t.datetime "start_time",                                                            null: false
+    t.datetime "end_time",                                                              null: false
+    t.integer  "user_id",            limit: 4,                                          null: false
     t.integer  "limited_people",     limit: 4
-    t.decimal  "price",                            precision: 10, scale: 2
+    t.decimal  "price",                           precision: 10, scale: 2
     t.string   "pay_type",           limit: 7
     t.string   "name",               limit: 45
     t.string   "mobile",             limit: 45
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "participants_count", limit: 4,                              default: 0
-    t.integer  "comments_count",     limit: 4,                              default: 0
-    t.integer  "agree",              limit: 4,                              default: 0
-    t.integer  "disagree",           limit: 4,                              default: 0
+    t.integer  "participants_count", limit: 4,                             default: 0
+    t.integer  "comments_count",     limit: 4,                             default: 0
+    t.integer  "agree",              limit: 4,                             default: 0
+    t.integer  "disagree",           limit: 4,                             default: 0
     t.string   "address",            limit: 255
     t.string   "x_coordinate",       limit: 255
     t.string   "y_coordinate",       limit: 255

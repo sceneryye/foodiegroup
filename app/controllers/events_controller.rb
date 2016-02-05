@@ -1,8 +1,8 @@
 #encoding:utf-8
 require 'rest-client'
 class EventsController < ApplicationController
-before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
-before_action :set_event, only: [:edit, :update, :destroy, :show]
+  before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
+  before_action :set_event, only: [:edit, :update, :destroy, :show]
   def index
     @events = Event.where(locale: session[:locale]).includes(:user)
 
@@ -28,9 +28,9 @@ before_action :set_event, only: [:edit, :update, :destroy, :show]
     end
 
     #微信share接口配置
-    @title = "#{current_user.nickname if current_user.present?}推荐您加入活动：#{@event.title}"
+    @title = "#{current_user.nickname if current_user.present?}推荐您加入活动：#{current_title @event}"
     @img_url = 'http://www.trade-v.com:5000' + @title_pic.to_s
-    @desc = @event.body.gsub('\n', ' ')[0..20]
+    @desc = (current_body @event).gsub('\n', ' ')[0..20]
     supplier = Supplier.where(:id => 78).first
     @timestamp = Time.now.to_i
     @appId = supplier.weixin_appid
@@ -47,7 +47,7 @@ before_action :set_event, only: [:edit, :update, :destroy, :show]
     @a = [request.url, post_params, request.url.gsub("trade", "vshop.trade-v.com")]
 
 
-   if signed_in? 
+    if signed_in? 
      @plus_menu = [{name: '<i class="fa  fa-comment"></i>'.html_safe+' '+t(:new_comment), path: new_event_comment_path(@event)},
       {name: '<i class="fa fa-user-plus"></i>'.html_safe+' '+t(:rsvp), path: new_event_participant_path(@event)}
     ]
@@ -65,7 +65,12 @@ def new
 end
 
 def create
-  @event = Event.new(event_params)
+  modified_event_params = event_params
+  modified_event_params[:en_title] = event_params[:en_title].blank? ? event_params[:zh_title] : event_params[:en_title]
+  modified_event_params[:zh_title] = event_params[:zh_title].blank? ? event_params[:en_title] : event_params[:zh_title]
+  modified_event_params[:en_body] = event_params[:en_body].blank? ? event_params[:zh_body] : event_params[:en_body]
+  modified_event_params[:zh_body] = event_params[:zh_body].blank? ? event_params[:en_body] : event_params[:zh_body]
+  @event = Event.new(modified_event_params)
   @event.user = current_user
   @event.locale = session[:locale]
 
@@ -93,7 +98,7 @@ def create
       # openids = User.plunk(:weixin_openid)
       openids = "oVxC9uBr12HbdFrW1V0zA3uEWG8c"
       msgtype = "text"
-      content = "吃货帮刚刚发布了一个新活动：#{@event.title}, 赶紧来看看哦～"
+      content = "吃货帮刚刚发布了一个新活动：#{current_title @event}, 赶紧来看看哦～"
       data_hash = {
         openids: openids,
         content: content,
@@ -122,8 +127,8 @@ def create
       num = params[:recommend].to_i
       if Event.find(params[:id]).update(recommend: num)
         Rails.logger.info 'true'
-      return render :text => 'success'
-    end
+        return render :text => 'success'
+      end
     end
     
     # 删除与团购关联的图片
@@ -180,7 +185,7 @@ def create
   end
 
   def event_params
-    params.require(:event).permit(:title, :body,:end_time,:start_time,:event_type, :address, :x_coordinate, :y_coordinate,
+    params.require(:event).permit(:zh_title, :en_title, :zh_body, :en_body, :end_time,:start_time,:event_type, :address, :x_coordinate, :y_coordinate,
       :pic_url,:limited_people,:goods_big_than,:goods_small_than,:name,:mobile,:goods_unit,:price,:pic_url)
   end
 end

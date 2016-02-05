@@ -4,7 +4,11 @@
   <input type="hidden", name='photo_ids' value="" class="pic-ids">
   <input type="hidden", name='delete_ids' value="" class="delete-ids">
   <div>
-    <%= f.text_field :title, required: true,placeholder: "#{t(:title)}" %>
+    <%= f.text_field :zh_title, placeholder: "#{t(:zh_title)}" %>
+   <!--  <%#= show_error_message('活动名称，不能为空！') %> -->
+  </div>
+  <div>
+    <%= f.text_field :en_title, placeholder: "#{t(:en_title)}" %>
    <!--  <%#= show_error_message('活动名称，不能为空！') %> -->
   </div>
   <div>    
@@ -50,12 +54,15 @@
   </div> -->
   <div>
     <%#= f.label :body %>
-    <%= f.text_area :body,placeholder: t(:content), rows: 10%>
+    <%= f.text_area :zh_body,placeholder: t(:zh_content), rows: 10%>
     <!-- <%#= f.cktext_area :body, :class => 'someclass', :ckeditor => {:language => 'zh'} , required: true%> -->
     <!-- <%#= show_error_message('内容请不要超过1千字')%> -->
   </div>
   <div>
-     <%= f.submit class:'tiny button radius right' %>
+    <%= f.text_area :en_body,placeholder: t(:en_content), rows: 10%>
+  </div>
+  <div>
+     <%= f.submit class:'tiny button radius right submit-new-event' %>
   </div>
 <% end %>
 <form action="<%= photos_path %>" class="dropzone" id="my-dropzone" enctype="multipart/form-data">

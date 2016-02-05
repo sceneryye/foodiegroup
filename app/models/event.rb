@@ -7,8 +7,6 @@ class Event < ActiveRecord::Base
 	has_many :photos, :inverse_of => :event, :dependent => :destroy
 	accepts_nested_attributes_for :photos, allow_destroy: true
 
-	validates :body,  presence: true
-	validates :title,  presence: true
 	validates :end_time, presence: true
 	validates :start_time, presence: true
 	# validates :pic_url, presence: true
