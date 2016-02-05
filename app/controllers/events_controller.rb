@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
   before_action :set_event, only: [:edit, :update, :destroy, :show]
   def index
-    @events = Event.where(locale: session[:locale]).includes(:user)
+    @events = Event.all.includes(:user)
 
     @onload='onload="geocoder()"'
 
