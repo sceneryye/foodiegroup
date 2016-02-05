@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204030816) do
+ActiveRecord::Schema.define(version: 20160205115056) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255, null: false
@@ -68,6 +68,10 @@ ActiveRecord::Schema.define(version: 20160204030816) do
     t.string   "address",            limit: 255
     t.string   "x_coordinate",       limit: 255
     t.string   "y_coordinate",       limit: 255
+    t.string   "zh_title",           limit: 255
+    t.string   "zh_body",            limit: 5000
+    t.string   "en_title",           limit: 255
+    t.string   "en_body",            limit: 5000
   end
 
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
@@ -222,6 +226,10 @@ ActiveRecord::Schema.define(version: 20160204030816) do
     t.integer  "agree",          limit: 4,     default: 0
     t.integer  "disagree",       limit: 4,     default: 0
     t.integer  "recommend",      limit: 4
+    t.string   "zh_title",       limit: 255
+    t.string   "zh_body",        limit: 5000
+    t.string   "en_title",       limit: 255
+    t.string   "en_body",        limit: 5000
   end
 
   add_index "topics", ["forum_id"], name: "index_topics_on_forum_id", using: :btree
