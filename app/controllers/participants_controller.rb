@@ -225,10 +225,15 @@ class ParticipantsController < ApplicationController
     user_addresses = current_user.default_address
     # 默认运费
     area = user_addresses.area.split('/')[0]
-    logistics_item = groupbuy.logistic.logistics_items.where('areas LIKE ?', "%#{area}%").first
-    price = logistics_item.price
-    each_add = logistics_item.each_add
-    freightage = (groupbuy.weight * num.to_i - 1 + BOX_WEIGHT).ceil * each_add + price.to_f
+    if groupbuy.logistic_id
+      logistics_item = groupbuy.logistic.logistics_items.where('areas LIKE ?', "%#{area}%").first
+
+      price = logistics_item.price
+      each_add = logistics_item.each_add
+      freightage = (groupbuy.weight * num.to_i - 1 + BOX_WEIGHT).ceil * each_add + price.to_f
+    else
+      freightage = 0.0
+    end
     total_price = num.to_i * groupbuy.current_price + freightage 
     render json: {freightage: freightage, total_price: total_price}.to_json
   end
