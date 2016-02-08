@@ -58,7 +58,7 @@ class Participant < ActiveRecord::Base
 
 	def calculate_freightage
 		if self.groupbuy_id.present?
-			if self.logistic_id
+			if Groupbuy.find_by(id: self.groupbuy_id).logistic_id
 				logistics_item = LogisticsItem.where("logistic_id = #{self.groupbuy.logistic_id} and areas like '%#{self.area}%' ")
 
 				if logistics_item.size>0

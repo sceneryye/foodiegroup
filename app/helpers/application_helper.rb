@@ -68,7 +68,7 @@ def participant_info(participant, price)
   else
     info << participant.quantity.to_s + ' ' + t(:people)
   end
-  if participant.tracking_number.present? && (participant.user_id == current_user.id || is_admin?)
+  if participant.tracking_number.present? && (participant.user_id == current_user.try(:id) || is_admin?)
     info << "<div class='tracking-number'><span class='tracking-title'>" << t(:tracking_number) << "</span><span class='number'>" << format_string(participant.tracking_number) << "</span></div>"
   end
   info << "<div class='owner-buttons-for-p'>" << owner_buttons_for_p(participant, price) << "</div>" if current_user == participant.user
