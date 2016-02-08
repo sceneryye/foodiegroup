@@ -36,7 +36,7 @@ class Participant < ActiveRecord::Base
 	    # else
 	    #   self.ship_time = "#{self.ship_day}#{self.ship_time2}"
 	    # end
-	end
+	  end
 
 	before_save :get_address, :calculate_amount,:calculate_freightage, :calculate_discount #:calculate_itemnum
 
@@ -58,14 +58,17 @@ class Participant < ActiveRecord::Base
 
 	def calculate_freightage
 		if self.groupbuy_id.present?
-			logistics_item = LogisticsItem.where("logistic_id = #{self.groupbuy.logistic_id} and areas like '%#{self.area}%' ")
+			if self.logistic_id
+				logistics_item = LogisticsItem.where("logistic_id = #{self.groupbuy.logistic_id} and areas like '%#{self.area}%' ")
 
-			if logistics_item.size>0
-				weight = self.quantity * self.groupbuy.weight
-				self.freightage = logistics_item.first.price + (weight - 1 + BOX_WEIGHT).ceil * logistics_item.first.each_add
+				if logistics_item.size>0
+					weight = self.quantity * self.groupbuy.weight
+					self.freightage = logistics_item.first.price + (weight - 1 + BOX_WEIGHT).ceil * logistics_item.first.each_add
+				else
+					self.freightage = 0
+				end
 			else
 				self.freightage = 0
-
 			end
 		end
 	end
