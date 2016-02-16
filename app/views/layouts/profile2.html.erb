@@ -1,6 +1,6 @@
   <% content_for(:content) do %>
 <div class="main-content">
-  
+
   <% if @user %>
   <div class="weui_cells weui_cells_access">
     <a class="weui_cell" href="<%= user_info_path(params[:id]) %>">
@@ -16,31 +16,61 @@
     </a>
   </div>
 
+  <% if @groups %>
+    <div class="weui_cells weui_cells_access">
+      <%= link_to user_addresses_path(@user), class: 'weui_cell' do %>
+      <div class="weui_cell_bd weui_cell_primary">
+        <div class="type"><i class="fa fa-bookmark"></i><%= t(:maintain_addresses) %></div>
+      </div>
+      <div class="weui_cell_ft"></div>
+      <% end %>
+
+      <%= link_to logistics_path, class: 'weui_cell' do %>
+      <div class="weui_cell_bd weui_cell_primary">
+        <div class="type"><i class="fa fa-file-text"></i><%= t(:maintain_logistics) %></div>
+      </div>
+      <div class="weui_cell_ft"></div>
+      <% end %>
+
+      <%= link_to "javascript:void(0)", class: 'weui_cell show-groups' do %>
+      <div class="weui_cell_bd weui_cell_primary">
+        <div class="type"><i class="fa fa-users"></i><%= t(:group_manage) %></div>
+      </div>
+      <div class="weui_cell_ft"></div>
+      <% end %>
+    </div>
+
+    <div class="group-list hidden">
+      <% @groups.each do |group| %>
+      <div class="small-12 columns group-name">
+        <%= link_to  group.name, group_path(group) %>
+      </div>
+      <% end %>
+    </div>
+  <% end %>
+
   <div class="weui_cells weui_cells_access">
-    <%= link_to profile_path(@user, type: 'topic'),class: 'weui_cell' do %>
+  <%= link_to profile_path(@user, type: 'groupbuy'),class: 'weui_cell' do %>
     <div class="weui_cell_bd weui_cell_primary">
-      <div class="type"><%= t(:topic) %></div>
+      <div class="type"><%= t(:groupbuy) %></div>
     </div>
     <div class="weui_cell_ft"></div>
     <% end %>
-    <%= link_to  profile_path(@user, type: 'comment'),class: 'weui_cell' do %>
-    <div class="weui_cell_bd weui_cell_primary">
-      <div class="type"><%= t(:comment) %></div>
-    </div>
-    <div class="weui_cell_ft"></div>
-    <% end %>
+    
     <%= link_to profile_path(@user, type: 'event'),class: 'weui_cell' do %>
     <div class="weui_cell_bd weui_cell_primary">
       <div class="type"><%= t(:event) %></div>
     </div>
     <div class="weui_cell_ft"></div>
     <% end %>
-    <%= link_to profile_path(@user, type: 'groupbuy'),class: 'weui_cell' do %>
+
+    <%= link_to profile_path(@user, type: 'topic'),class: 'weui_cell' do %>
     <div class="weui_cell_bd weui_cell_primary">
-      <div class="type"><%= t(:groupbuy) %></div>
+      <div class="type"><%= t(:topic) %></div>
     </div>
     <div class="weui_cell_ft"></div>
     <% end %>
+    
     <%= link_to profile_path(@user, type: 'participant'),class: 'weui_cell' do %>
     <div class="weui_cell_bd weui_cell_primary">
       <div class="type"><%= t(:histroy) %></div>
@@ -67,44 +97,13 @@
   </div>
   <% end %>
 
-  <% if @groups %>
-  <div class="weui_cells weui_cells_access">
-    <%= link_to user_addresses_path(@user), class: 'weui_cell' do %>
-    <div class="weui_cell_bd weui_cell_primary">
-      <div class="type"><i class="fa fa-bookmark"></i><%= t(:maintain_addresses) %></div>
-    </div>
-    <div class="weui_cell_ft"></div>
-    <% end %>
-
-    <%= link_to logistics_path, class: 'weui_cell' do %>
-    <div class="weui_cell_bd weui_cell_primary">
-      <div class="type"><i class="fa fa-file-text"></i><%= t(:maintain_logistics) %></div>
-    </div>
-    <div class="weui_cell_ft"></div>
-    <% end %>
-
-    <%= link_to "javascript:void(0)", class: 'weui_cell show-groups' do %>
-    <div class="weui_cell_bd weui_cell_primary">
-      <div class="type"><i class="fa fa-users"></i><%= t(:group_manage) %></div>
-    </div>
-    <div class="weui_cell_ft"></div>
-    <% end %>
-  </div>
-
-  <div class="group-list hidden">
-    <% @groups.each do |group| %>
-    <div class="small-12 columns group-name">
-      <%= link_to  group.name, group_path(group) %>
-    </div>
-    <% end %>
-  </div>
-  <% end %>
+  
 
   <% end %>
   <div class="large-12 columns profile-content">
     <%= yield :profile_content %>
   </div>
-  
+
 </div>
   <% end %>
 
