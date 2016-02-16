@@ -1,6 +1,6 @@
 <div class="logistic-content"> 
   <div class="left <%= logistic.default == 1 ? 'checked' : 'unchecked' %>">
-    <i class="fa fa-check-circle"></i>
+    <i class="<%= 'fa fa-check-circle' if logistic.default? %>"></i>
   </div>
   <div class="left logistic-detail" data-id="<%= logistic.id %>">
     <div class="name-mobile">
@@ -17,6 +17,7 @@
   <%# url = params[:id].present? ? logistics_path(groupbuy_id: params[:id]) : edit_logistic_path(logistic) %>
   <%= link_to edit_logistic_path(logistic) do %>
   <div class="right edit-logistic" ><i class="fa fa-pencil"></i></div>
+  <div class="clear"></div>
   <% end %>
 
   <div class="clear"></div>

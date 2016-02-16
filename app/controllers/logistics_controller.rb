@@ -72,11 +72,11 @@ class LogisticsController < ApplicationController
     if @logistic.update(logistic_params)
       Rails.logger.info logistic_params
       if params[:default] == '1'
-        logistic = Logistic.where(default: 1)
+        logistic = Logistic.where(default: '1')
         if logistic.present?
-          logistic.first.update(default: 0)
+          logistic.first.update(default: '0')
         end
-        @logistic.update(default: 1)
+        @logistic.update(default: '1')
       end
 
       return_url = session[:return_url]

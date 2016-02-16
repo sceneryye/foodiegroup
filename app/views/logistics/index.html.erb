@@ -1,13 +1,15 @@
-<div class="user-logistices-list">
-  <%=render @logistics%>
-  <div class="new">
-    <div class="new-logistic left">
-    <%= t(:new_logistic) %>
-    </div>
-    <%= link_to new_logistic_path do %>
+<div class="columns">
+  <div class="user-logistices-list">
+    <%=render @logistics%>
+    <div class="new">
+      <div class="new-logistic left">
+        <%= t(:new_logistic) %>
+      </div>
+      <%= link_to new_logistic_path do %>
       <div class="plus-circle right"><i class="fa fa-lg fa-plus-circle"></i></div>
-    <% end %>
-    <div class="clear"></div>
+      <% end %>
+      <div class="clear"></div>
+    </div>
+    <hr />
   </div>
-  <hr />
 </div>
