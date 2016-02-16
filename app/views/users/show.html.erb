@@ -1,4 +1,4 @@
-<% provide :title, @user.nickname if @user %>
+<% provide :title, t(:me) %>
 <% content_for(:profile_content) do%>
   <h2><%= t(page) %></h2><hr>
   <% if @data.blank? %>
