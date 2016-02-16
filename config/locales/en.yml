@@ -339,3 +339,11 @@ en:
   zh_body: Chinese Description
   en_content: English Content
   zh_content: Chinese Content
+  avatar: User's Photo
+  nickname: Nickname
+  group: Group
+  profession: Profession
+  male: Male
+  female: Female
+  unknown: Unknown
+  sex: Sex

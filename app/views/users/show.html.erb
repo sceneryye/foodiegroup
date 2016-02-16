@@ -2,8 +2,8 @@
 <% content_for(:profile_content) do%>
   <h2><%= t(page) %></h2><hr>
   <% if @data.blank? %>
-    <p><%= t(:no_topics) %></p>
+  <p><%= t(:no_topics) %></p>
   <% else %>
-    <%= render @data %>
+  <%= render @data %>
   <% end %>
-<% end %>
+  <% end %>

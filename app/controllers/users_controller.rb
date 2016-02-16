@@ -1,6 +1,6 @@
 #encoding:utf-8
 class UsersController < ApplicationController
-  before_action :select_user, only: [:show, :edit, :update, :destroy]
+  before_action :select_user, only: [:show, :edit, :update, :destroy, :user_info]
   before_action only: [:edit, :update, :destroy] do
     validate_permission! select_user
   end
@@ -68,12 +68,37 @@ class UsersController < ApplicationController
       @user = User.includes(:participants).find_by_username(params[:id])
       @data = @user.participants.includes(:event)
     end
+    if current_user == @user
+      @group = Group.find_by_id(current_user.group_id)
+      if @group
+        @group_admin = User.find_by_id(@group.user_id)
+      end
+      if ['1', '2'].include? current_user.try(:role) 
 
-    render layout: "profile", locals: {page: type}
+        @groups = Group.where(user_id: current_user.id)
+        if current_user.role == '1'
+          @groups = Group.all
+        end
+      end
+    end
+
+    render layout: "profile2", locals: {page: type}
   end
 
+  def user_info
+    case @user.sex
+    when '0'
+      @sex = 'unknown'
+    when '1'
+      @sex = 'male'
+    when '2'
+      @sex = 'female'
+    end
+  end
+
+
+
   def edit
-    render layout: "profile"
   end
 
   def update

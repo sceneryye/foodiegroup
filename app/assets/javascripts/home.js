@@ -1,4 +1,3 @@
-//= require foundation-datetimepicker
 
 //倒计时
 $(document).ready(function(){

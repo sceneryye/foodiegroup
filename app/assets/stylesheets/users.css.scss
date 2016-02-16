@@ -1,4 +1,6 @@
 $light-slate-gray: #6D7B8D;
+$wechat-gray: #F0F0F0;
+$primary-color: #008CBA;
 
 
 /**************show page******************/
@@ -24,5 +26,35 @@ $light-slate-gray: #6D7B8D;
   .number {
     padding-left: 20px;
     color: $light-slate-gray;
+  }
+}
+
+/**************show page new**************/
+.main-content {
+  background-color: $wechat_gray;
+  .columns {
+    background-color: $wechat_gray;
+  }
+  hr {
+    margin: 0;
+  }
+  .profile-content, .columns {
+    background-color: white;
+    margin-top: 20px;
+  }
+}
+.weui_cell, .weui_cell_ft {
+  img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border: 1px $wechat_gray solid;
+  }
+  .fa {
+    margin-right: 5px;
+    color: $primary-color;
+  }
+  .weui_cell_bd {
+    margin-top: 8px;
   }
 }

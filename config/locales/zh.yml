@@ -451,4 +451,12 @@ zh:
   zh_body: 中文描述
   zh_content: 中文内容
   en_content: 英文内容
+  avatar: 头像
+  nickname: 昵称
+  group: 群组
+  profession: 职业
+  male: 男
+  female: 女
+  unknown: 未知
+  sex: 性别
 

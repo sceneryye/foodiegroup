@@ -81,6 +81,7 @@ RailsOnForum::Application.routes.draw do
     get '/register',    to: 'users#new',  as: :register
     get '/:id',         to: 'users#show', as: :profile
     get '/:id/edit', to: 'users#edit', as: :edit_profile
+    get '/:id/user_info', to: 'users#user_info', as: :user_info
     
 
     resource :home, only: [:index]

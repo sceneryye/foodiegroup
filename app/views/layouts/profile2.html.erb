@@ -1,0 +1,113 @@
+<div class="main-content">
+  <% content_for(:content) do %>
+  
+  <% if @user %>
+  <div class="weui_cells weui_cells_access">
+    <a class="weui_cell" href="<%= user_info_path(params[:id]) %>">
+      <div class="weui_cell_hd">
+        <%= image_tag @user.avatar %>
+      </div>
+      <div class="weui_cell_bd weui_cell_primary">
+        <div class="nickname"><%= @user.nickname %></div>
+      </div>
+      <div class="weui_cell_ft">
+
+      </div>
+    </a>
+  </div>
+
+  <div class="weui_cells weui_cells_access">
+    <%= link_to profile_path(@user, type: 'topic'),class: 'weui_cell' do %>
+    <div class="weui_cell_bd weui_cell_primary">
+      <div class="type"><%= t(:topic) %></div>
+    </div>
+    <div class="weui_cell_ft"></div>
+    <% end %>
+    <%= link_to  profile_path(@user, type: 'comment'),class: 'weui_cell' do %>
+    <div class="weui_cell_bd weui_cell_primary">
+      <div class="type"><%= t(:comment) %></div>
+    </div>
+    <div class="weui_cell_ft"></div>
+    <% end %>
+    <%= link_to profile_path(@user, type: 'event'),class: 'weui_cell' do %>
+    <div class="weui_cell_bd weui_cell_primary">
+      <div class="type"><%= t(:event) %></div>
+    </div>
+    <div class="weui_cell_ft"></div>
+    <% end %>
+    <%= link_to profile_path(@user, type: 'groupbuy'),class: 'weui_cell' do %>
+    <div class="weui_cell_bd weui_cell_primary">
+      <div class="type"><%= t(:groupbuy) %></div>
+    </div>
+    <div class="weui_cell_ft"></div>
+    <% end %>
+    <%= link_to profile_path(@user, type: 'participant'),class: 'weui_cell' do %>
+    <div class="weui_cell_bd weui_cell_primary">
+      <div class="type"><%= t(:histroy) %></div>
+    </div>
+    <div class="weui_cell_ft"></div>
+    <% end %>
+  </div>
+
+  <% if @group %>
+  <div class="weui_cells weui_cells_access">
+    <%= link_to "http://www.trade-v.com/foodies/foodie_group_share?groupid=#{current_user.group_id}&groupname=#{@group.name}&imgurl=#{@group_admin.avatar}&name=#{@group_admin.nickname}&desc=#{@group.group_desc}", class: 'weui_cell' do %>
+    <div class="weui_cell_bd weui_cell_primary">
+      <div class="type"><i class="fa fa-share-alt-square"></i><%= t(:share) %></div>
+    </div>
+    <div class="weui_cell_ft"></div>
+    <% end %>
+
+    <%= link_to register_path, class: 'weui_cell' do %>
+    <div class="weui_cell_bd weui_cell_primary">
+    <div class="type"><i class="fa fa-book"></i><%= t(:membership) %></div>
+    </div>
+    <div class="weui_cell_ft"></div>
+    <% end %>
+  </div>
+  <% end %>
+
+  <% if @groups %>
+  <div class="weui_cells weui_cells_access">
+    <%= link_to user_addresses_path(@user), class: 'weui_cell' do %>
+    <div class="weui_cell_bd weui_cell_primary">
+      <div class="type"><i class="fa fa-bookmark"></i><%= t(:maintain_addresses) %></div>
+    </div>
+    <div class="weui_cell_ft"></div>
+    <% end %>
+
+    <%= link_to logistics_path, class: 'weui_cell' do %>
+    <div class="weui_cell_bd weui_cell_primary">
+      <div class="type"><i class="fa fa-file-text"></i><%= t(:maintain_logistics) %></div>
+    </div>
+    <div class="weui_cell_ft"></div>
+    <% end %>
+
+    <%= link_to "javascript:void(0)", class: 'weui_cell show-groups' do %>
+    <div class="weui_cell_bd weui_cell_primary">
+      <div class="type"><i class="fa fa-users"></i><%= t(:group_manage) %></div>
+    </div>
+    <div class="weui_cell_ft"></div>
+    <% end %>
+  </div>
+
+  <div class="group-list hidden">
+    <% @groups.each do |group| %>
+    <div class="small-12 columns group-name">
+      <%= link_to  group.name, group_path(group) %>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+
+  <% end %>
+  <div class="large-12 columns profile-content">
+    <%= yield :profile_content %>
+  </div>
+  
+  <% end %>
+
+
+
+  <%= render template: "layouts/application" %>
+</div>
