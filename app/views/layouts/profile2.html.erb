@@ -1,5 +1,5 @@
-<div class="main-content">
   <% content_for(:content) do %>
+<div class="main-content">
   
   <% if @user %>
   <div class="weui_cells weui_cells_access">
@@ -105,9 +105,8 @@
     <%= yield :profile_content %>
   </div>
   
+</div>
   <% end %>
 
 
-
   <%= render template: "layouts/application" %>
-</div>
