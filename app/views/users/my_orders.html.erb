@@ -24,7 +24,7 @@
         <div class="columns small-4">
           <%= t(:order_status) %>
         </div>
-        <div class="columns small-8">
+        <div class="columns small-8 content">
           <%= order.order_status_text %>
         </div>
         <div class="clear"></div>
@@ -34,7 +34,7 @@
         <div class="columns small-4">
           <%= t(:pay_status) %>
         </div>
-        <div class="columns small-8">
+        <div class="columns small-8 content">
           <%= order.pay_status_text %>
         </div>
         <div class="clear"></div>
@@ -44,7 +44,7 @@
         <div class="columns small-4">
           <%= t(:ship_status) %>
         </div>
-        <div class="columns small-8">
+        <div class="columns small-8 content">
           <%= order.ship_status_text %>
         </div>
         <div class="clear"></div>
@@ -54,7 +54,7 @@
         <div class="columns small-4">
           <%= t(:total_price) %>
         </div>
-        <div class="columns small-8">
+        <div class="columns small-8 content">
           ￥<%= order.total %>
         </div>
         <div class="clear"></div>
@@ -64,8 +64,18 @@
         <div class="columns small-4">
           <%= t(:created_at) %>
         </div>
-        <div class="columns small-8">
+        <div class="columns small-8 content">
           <%= order.created_at.strftime('%F %T') %>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+      <div class="rows">
+        <div class="columns small-4">
+          <%= t(:tracking_number) %>
+        </div>
+        <div class="columns small-8 content">
+          <%= order.tracking_number %>
         </div>
         <div class="clear"></div>
       </div>

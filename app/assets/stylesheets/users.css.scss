@@ -69,5 +69,8 @@ $primary-color: #008CBA;
   .my-order {
     margin-top: 20px;
     background-color: white;
+    .content {
+      color: $light-slate-gray;
+    }
   }
 }
