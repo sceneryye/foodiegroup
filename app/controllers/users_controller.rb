@@ -1,7 +1,7 @@
 #encoding:utf-8
 class UsersController < ApplicationController
-  before_action :select_user, only: [:show, :edit, :update, :destroy, :user_info]
-  before_action only: [:edit, :update, :destroy] do
+  before_action :select_user, only: [:show, :edit, :update, :destroy, :user_info, :my_orders]
+  before_action only: [:edit, :update, :destroy, :my_orders] do
     validate_permission! select_user
   end
 
@@ -96,7 +96,9 @@ class UsersController < ApplicationController
     end
   end
 
-
+  def my_orders
+    @orders = Participant.includes(:groupbuy).where('user_id = ? AND groupbuy_id > ?', current_user.id, 0 ).order(created_at: :desc)
+  end
 
   def edit
   end

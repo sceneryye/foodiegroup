@@ -114,7 +114,7 @@
     </div>
     <div class="small-6 columns">
       <span class="postfix">
-        <%=f.select :logistic_id,options_from_collection_for_select(current_user.logistics.all,:id,:name,@groupbuy.logistic_id), {:include_blank=>"--包邮--"}%>
+        <%=f.select :logistic_id,options_from_collection_for_select(current_user.logistics.all,:id,:name,@groupbuy.logistic_id), {:include_blank=>"--包邮--"}, 'data-url' => acquire_logistic_details_path %>
 
       </span>
     </div>

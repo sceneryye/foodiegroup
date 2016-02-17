@@ -6,6 +6,7 @@
 // if session[:locale] == 'zh'
 //= require foundation-datepicker.zh-CN
 //= require photos
+//= require sweetalert.min
 
 
 function checkPositiveInteger(obj){
@@ -187,6 +188,30 @@ $(document).ready(function(){
     }
   });
 })
+
+//---------------新建团购时选择物流规则跳出规则描述-----------------//
+$(document).ready(function(){
+  $('#groupbuy_logistic_id').on('change', function(){
+    var id = $(this).val();
+    if(id > 0) {
+      var post_url = $(this).data('url');
+      $.ajax({
+        url: post_url,
+        type: 'post',
+        data: {
+          id: id
+        },
+        success: function(e) {
+          var title = e.title;
+          var content = e.content;
+          console.log(title);
+          console.log(content);
+          swal(title, content);
+        }
+      });
+    }
+  });
+});
 
 
 

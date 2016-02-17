@@ -107,7 +107,20 @@ class LogisticsController < ApplicationController
     if @logistics.nil?
       redirect_to new_logistic_path
     end
+  end
 
+  def acquire_logistic_details
+    id = params[:id]
+    logistic = Logistic.find_by_id(id)
+    title = logistic.name
+    items = logistic.logistics_items
+    contents = []
+    items.each do |item|
+      body = item.areas + ':' + item.price.to_s + '元/千克'
+      contents << body
+    end
+    content = contents.join(';')
+    render json: {title: title, content: content}.to_json
   end
 
   private

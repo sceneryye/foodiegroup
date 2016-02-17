@@ -23,6 +23,9 @@ RailsOnForum::Application.routes.draw do
     post 'events/more_comments', to: 'events#more_comments'
     post 'cal_freightage', to: 'participants#cal_freightage'
 
+    post 'logistics/acquire_logistic_details', to: 'logistics#acquire_logistic_details', as: :acquire_logistic_details
+
+
     namespace :admin do
     resources :reports
       get '/users_list', to: 'reports#users_list'
@@ -82,6 +85,7 @@ RailsOnForum::Application.routes.draw do
     get '/:id',         to: 'users#show', as: :profile
     get '/:id/edit', to: 'users#edit', as: :edit_profile
     get '/:id/user_info', to: 'users#user_info', as: :user_info
+    get '/users/my_orders', to: 'users#my_orders', as: :my_orders
     
 
     resource :home, only: [:index]

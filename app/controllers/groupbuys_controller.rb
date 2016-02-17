@@ -200,6 +200,8 @@ class GroupbuysController < ApplicationController
     end
   end
 
+  
+
   def destroy_pic
     @groupbuy = Groupbuy.find(params[:id])
     url = params[:url]

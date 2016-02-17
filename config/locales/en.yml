@@ -348,3 +348,8 @@ en:
   unknown: Unknown
   sex: Sex
   me: Me
+  my_orders: My Orders
+  order_status: Order Status
+  pay_status: Pay Status
+  ship_status: Ship Status
+  created_at: Create Time

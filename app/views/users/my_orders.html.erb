@@ -1,0 +1,76 @@
+<% provide :title, t(:me) %>
+<div class="my-orders">
+  <div class="total-orders">
+    <% if session[:locale] == 'zh' %>
+    共<%= @orders.count %>个订单
+    <% else %>
+    <%= pluralize @orders.count, 'order' %> total
+    <% end %>
+  </div>
+
+  <% @orders.each do |order| %>
+  <div class="my-order">
+  <div class="rows pic-title">
+      <div class="columns small-2">
+        <%= image_tag(order.groupbuy.pic_url.present? ? order.groupbuy.pic_url : order.groupbuy.photos.first.try(:image))  %>
+      </div>
+      <div class="columns small-9">
+        <%= current_title(order.groupbuy)[0..20] %>
+      </div>
+      <div class="clear"></div>
+      <hr />
+
+      <div class="rows">
+        <div class="columns small-4">
+          <%= t(:order_status) %>
+        </div>
+        <div class="columns small-8">
+          <%= order.order_status_text %>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+      <div class="rows">
+        <div class="columns small-4">
+          <%= t(:pay_status) %>
+        </div>
+        <div class="columns small-8">
+          <%= order.pay_status_text %>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+      <div class="rows">
+        <div class="columns small-4">
+          <%= t(:ship_status) %>
+        </div>
+        <div class="columns small-8">
+          <%= order.ship_status_text %>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+      <div class="rows">
+        <div class="columns small-4">
+          <%= t(:total_price) %>
+        </div>
+        <div class="columns small-8">
+          ￥<%= order.total %>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+      <div class="rows">
+        <div class="columns small-4">
+          <%= t(:created_at) %>
+        </div>
+        <div class="columns small-8">
+          <%= order.created_at.strftime('%F %T') %>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <% end %>
+</div>

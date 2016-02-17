@@ -50,6 +50,15 @@
   <% end %>
 
   <div class="weui_cells weui_cells_access">
+    <%= link_to my_orders_path,class: 'weui_cell' do %>
+      <div class="weui_cell_bd weui_cell_primary">
+        <div class="type"><i class="fa fa-bars"></i><%= t(:my_orders) %></div>
+      </div>
+      <div class="weui_cell_ft"></div>
+    <% end %>
+  </div>
+
+  <div class="weui_cells weui_cells_access">
   <%= link_to profile_path(@user, type: 'groupbuy'),class: 'weui_cell' do %>
     <div class="weui_cell_bd weui_cell_primary">
       <div class="type"><%= t(:groupbuy) %></div>

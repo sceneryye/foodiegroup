@@ -1,3 +1,4 @@
+//= require 'weui.min'
 $light-slate-gray: #6D7B8D;
 $wechat-gray: #F0F0F0;
 $primary-color: #008CBA;
@@ -56,5 +57,17 @@ $primary-color: #008CBA;
   }
   .weui_cell_bd {
     margin-top: 8px;
+  }
+}
+
+/*******************my orders*******************/
+.my-orders {
+  background-color: $wechat-gray;
+  .pic-title {
+    padding-top: 10px;
+  }
+  .my-order {
+    margin-top: 20px;
+    background-color: white;
   }
 }

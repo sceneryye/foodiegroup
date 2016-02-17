@@ -207,28 +207,28 @@ class Participant < ActiveRecord::Base
 	  end
 
 	  def pay_status_text
-	  	return '未付款' if pay_status == '0'
-	  	return '已付款' if pay_status == '1'
-	  	return '付款至担保方' if pay_status == '2'
-	  	return '部分付款' if pay_status == '3'
-	  	return '部分退款' if pay_status == '4'
-	  	return '已退款' if pay_status == '5'
+	  	return '未付款' if status_pay == 0
+	  	return '已付款' if status_pay == 1
+	  	return '付款至担保方' if status_pay == 2
+	  	return '部分付款' if status_pay == 3
+	  	return '部分退款' if status_pay == 4
+	  	return '已退款' if status_pay == 5
 	  end
 
 	  def ship_status_text
-	  	return '未发货'  if ship_status == '0'
-	  	return '已发货' if ship_status == '1'
-	  	return '部分发货' if ship_status == '2'
-	  	return '部分退货' if ship_status == '3'
-	  	return '已退货' if ship_status == '4'
+	  	return '未发货'  if status_ship == 0
+	  	return '已发货' if status_ship == 1
+	  	return '部分发货' if status_ship == 2
+	  	return '部分退货' if status_ship == 3
+	  	return '已退货' if status_ship == 4
 	  end
 
 	  def order_status_text
-	  	return '已作废'  if status =='-1'
-	  	return '已完成'  if status =='1'
-	  	return '已发货'  if status == 'active' && ship_status == '1'
-	  	return '已付款'  if status == 'active' && pay_status == '1'
-	  	return '待付款'  if status == 'active' && pay_status == '0'
+	  	return '已作废'  if status == -1
+	  	return '已完成'  if status == 1
+	  	return '已发货'  if status == 0 && status_ship == 1
+	  	return '已付款'  if status == 0 && status_pay == 1
+	  	return '待付款'  if status == 0 && status_pay == 0
 	  end
 
 	  def progress_status
