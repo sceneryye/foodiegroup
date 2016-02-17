@@ -206,7 +206,11 @@ $(document).ready(function(){
           var content = e.content;
           console.log(title);
           console.log(content);
-          swal(title, content);
+          swal({
+            title: title,
+            text: content,
+            allowOutsideClick: true,
+          });
         }
       });
     }
