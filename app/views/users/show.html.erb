@@ -21,7 +21,7 @@
   });
   wx.ready(function(){
     var url = "http://vshop.trade-v.com/foodiegroup?groupid=" + "<%= @groupid %>";
-    alert(url);
+    console.log(url);
     wx.onMenuShareTimeline({
     title: "<%= @title %>", // 分享标题
     link: url, // 分享链接
