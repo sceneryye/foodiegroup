@@ -1,6 +1,7 @@
 #encoding:utf-8
 class HomeController < ApplicationController
 	before_action {@forums = Forum.all}
+  before_action :login_with_mobile
 
 	def index
 		#微信入口页面
@@ -32,4 +33,12 @@ class HomeController < ApplicationController
 
 
 	end
+
+  private
+  def login_with_mobile
+    if session[:mobile].present?
+      user = User.find_by(mobile: session[:mobile])
+      login user
+    end
+  end
 end
