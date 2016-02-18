@@ -43,11 +43,13 @@ class SessionsController < ApplicationController
     end
     if user = User.find_by_openid(openid)
       login user
+      redirect_to root_path
     else
       data = get_user_info(openid)
       session[:openid] = data[:openid]
       session[:avatar] = data[:headimgurl]
       session[:nickname] = data[:nickname]
+      redirect_to register_path
     end
   end
 
