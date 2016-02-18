@@ -80,10 +80,11 @@ class SessionsController < ApplicationController
 
   def refresh_auth_access_token
     refresh_token = Wechat.first.auth_refresh_token
-    access_expires_at = Time.zone.now.to_i + res_data_hash["expires_in"]
+    
     get_url = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=#{WX_APP_ID}&grant_type=refresh_token&refresh_token=#{refresh_token}"
     res_data_json = RestClient.get get_url
     res_data_hash = ActiveSupport::JSON.decode res_data_json
+    access_expires_at = Time.zone.now.to_i + res_data_hash["expires_in"]
     Wechat.first.update(auth_access_token: res_data_hash["access_token"], auth_access_token_expires_at: access_expires_at)
     res_data_hash
   end
