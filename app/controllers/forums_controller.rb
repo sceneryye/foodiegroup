@@ -2,6 +2,7 @@
 class ForumsController < ApplicationController
 	before_action {@forums = Forum.all}
 	before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
+	before_action :login_with_mobile
 
 	def new
 		@forum = Forum.new
@@ -56,5 +57,13 @@ class ForumsController < ApplicationController
 	def show
 		@forum  = Forum.find(forum_id)
 		@topics = @forum.topics.includes(:forum)
+	end
+
+	private
+	def login_with_mobile
+		if session[:mobile].present?
+			user = User.find_by(mobile: session[:mobile])
+			login user
+		end
 	end
 end

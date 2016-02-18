@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def new   
-    if !session[:openid].blank?
+    if session[:openid].present?
       user = User.where(weixin_openid: session[:openid])
       if user.present?
         login(user.first)
@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     end
     @user = User.new
     @groups = Group.all
+    session.delete(:openid)
   end
 
   def create
@@ -25,6 +26,7 @@ class UsersController < ApplicationController
     if user = User.find_by(mobile: user_params[:mobile])
       user.update(weixin_openid: session[:openid], nickname: session[:nickname], avatar: session[:avatar])
       login user
+      session[:mobile] = user.mobile
       return redirect_to root_url
     end
 
@@ -41,6 +43,7 @@ class UsersController < ApplicationController
 
     if @user.save
       login(@user)
+      session[:mobile] = @user.mobile
       if params[:return_url]
         return redirect_to URI.decode(params[:return_url])
       else

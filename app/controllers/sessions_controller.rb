@@ -47,6 +47,7 @@ class SessionsController < ApplicationController
     end
     if user = User.find_by(weixin_openid: openid)
       login user
+      session[:mobile] = user.mobile
       redirect_to root_path
     else
       data = get_user_info(openid)
