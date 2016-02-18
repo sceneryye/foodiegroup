@@ -47,6 +47,7 @@ class SessionsController < ApplicationController
       access_token = data["access_token"]
       openid = data["openid"]
     end
+    Rails.logger.info openid
     if user = User.find_by(weixin_openid: openid)
       login user
       session[:mobile] = user.mobile
