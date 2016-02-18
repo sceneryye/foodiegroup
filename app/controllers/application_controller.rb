@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :signed_in?, :current_user,:forum_id
 
-  before_action :set_locale, :auto_login, except: :wechat_notify_url
+  before_action :set_locale,  except: :wechat_notify_url
 
 
   private
