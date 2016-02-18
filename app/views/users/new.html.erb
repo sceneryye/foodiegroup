@@ -5,18 +5,17 @@
     <% if params[:from].nil? %>
     <h2>欢迎您加入吃货帮!</h2>
     <% end %>
-    <% if params[:from] == 'share_from_foodie' && params[:groupid].present? %>
+    <% if params[:groupid].present? %>
     <% if session[:locale]=='zh' %>
     <h2>欢迎您加入<%= Group.find(params[:groupid] || params[:groupid]).name %>!</h2>
     <% else %>
     <h2>Welcome to <%= Group.find(params[:groupid] || params[:groupid]).name %>!</h2>
     <% end %>
     <%= form_for @user do |f| %>
-    <input name="openid" value="<%= params[:openid] %>" type="hidden" />
-    <input name="from" value="share_from_foodie" type="hidden" />
+    <input name="openid" value="<%= session[:openid] %>" type="hidden" />
     <input name="group_id" value="<%= params[:groupid] %>" type="hidden" />
-    <input name="avatar" value="<%= params[:avatar] %>" type="hidden" />
-    <input name="nickname" value="<%= params[:nickname] %>" type="hidden" />
+    <input name="avatar" value="<%= session[:avatar] %>" type="hidden" />
+    <input name="nickname" value="<%= session[:nickname] %>" type="hidden" />
     <div class="small-12 columns">
       <%= f.text_field :mobile, required: true, placeholder: '手机' %>
       <%= show_error_message('请输入您的手机号码.') %>

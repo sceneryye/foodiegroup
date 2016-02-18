@@ -64,7 +64,8 @@ class UsersController < ApplicationController
     if current_user.present?
       group_owner = User.find_by(id: current_user.group.user_id)
       group_name = current_user.group.name
-      @title = "#{group_owner}推荐您加入：#{group_name}"
+      @groupid = current_user.group.id
+      @title = "#{group_owner.name}推荐您加入：#{group_name}"
       @img_url = group_owner.avatar
       @desc = '吃货帮，让我们一起去团购天下健康美食'
       @timestamp = Time.now.to_i
