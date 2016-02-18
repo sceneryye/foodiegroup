@@ -20,7 +20,7 @@
     jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
   });
   wx.ready(function(){
-    var url = "http://vshop.trade-v.com/foodiegroup?groupid=" + "<%= @groupid %>";
+    var url = "http://vshop.trade-v.com/foodiegroup/register?groupid=" + "<%= @groupid %>";
     console.log(url);
     wx.onMenuShareTimeline({
     title: "<%= @title %>", // 分享标题
