@@ -29,7 +29,7 @@ class ForumsController < ApplicationController
 		def index
 		#微信入口页面
 		if params[:openid]
-			session[:openid] = params[:openid].split('_shop')[0]
+			session[:openid] = params[:openid]
 			session[:avatar] = params[:avatar]
 			session[:nickname] = params[:nickname]
 			user = User.where(:weixin_openid=>session[:openid])
@@ -50,6 +50,9 @@ class ForumsController < ApplicationController
 		@groupbuys = Groupbuy.where("locale='#{session[:locale]}' and recommend>0").includes(:user)
 		@tags = Tag.where(locale: session[:locale]).limit(10)
 		@topics = Topic.where(forum_id:forum_id).includes(:forum, :forum).first
+		Rails.logger "---------------------------#{session[:openid]}"
+		Rails.logger "---------------------------#{session[:mobile]}"
+		Rails.logger "---------------------------#{current_user.try(:nickname)}"
 
 	end
 
