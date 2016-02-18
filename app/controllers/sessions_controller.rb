@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_username(params[:session][:user_name])
- 
+
     if user && user.authenticate(params[:session][:password])
       login(user)
       redirect_to root_url, notice: '登录成功'
@@ -32,6 +32,9 @@ class SessionsController < ApplicationController
   def callback
     code = params[:code]
     now = Time.zone.now.to_i
+    if Wechat.first.nil?
+      get_auth_access_token code
+    end
     if now < Wechat.first.auth_refresh_token_expires_at.to_i - 100
       data = refresh_auth_access_token
       access_token = data[:access_token]
@@ -60,9 +63,14 @@ class SessionsController < ApplicationController
     res_data_json = RestClient.get get_url
     res_data_hash = ActiveSupport::JSON.decode res_data_json
     wechat = Wechat.first
-    access_expires_at = Time.zone.now.to_i + res_data_hash[:expires_in]
-    refresh_expires_at = Time.zone.now.to_i + 24 * 3600 * 7
-    wechat.update(auth_access_token: res_data_hash[:access_token], auth_refresh_token_expires_at: access_expires_at, auth_refresh_token_expires_at: refresh_expires_at, auth_refresh_token: res_data_hash[:refresh_token])
+    if wechat
+      access_expires_at = Time.zone.now.to_i + res_data_hash[:expires_in]
+      refresh_expires_at = Time.zone.now.to_i + 24 * 3600 * 7
+      wechat.update(auth_access_token: res_data_hash[:access_token], auth_refresh_token_expires_at: access_expires_at, auth_refresh_token_expires_at: refresh_expires_at, auth_refresh_token: res_data_hash[:refresh_token])
+    else
+      wechat = Wechat.new(auth_access_token: res_data_hash[:access_token], auth_refresh_token_expires_at: access_expires_at, auth_refresh_token_expires_at: refresh_expires_at, auth_refresh_token: res_data_hash[:refresh_token])
+      wechat.save
+    end
     res_data_hash
   end
 
