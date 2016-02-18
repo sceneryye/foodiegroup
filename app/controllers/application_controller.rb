@@ -114,7 +114,6 @@ class ApplicationController < ActionController::Base
  end
 
  def create_sign_for_js hash
-  key = Supplier.where(:name => '贸威').first.partner_key
   stringA = hash.select { |key, value| value.present? }.sort.map do |arr|
     arr.map(&:to_s).join('=')
   end
@@ -125,28 +124,29 @@ end
 
 
 def get_jsapi_ticket
-  supplier = Supplier.where(:id => 78).first
-  return supplier.jsapi_ticket if supplier.expires_at.to_i > Time.now.to_i && supplier.jsapi_ticket.present?
+  wechat = Wechat.first
+  return wechat.jsapi_ticket if wechat.jsapi_ticket_expires_at.to_i > Time.now.to_i && wechat.jsapi_ticket.present?
   access_token = get_jsapi_access_token
   get_url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket'
   res_data_json = RestClient.get get_url, {:params => {:access_token => access_token, :type => 'jsapi'}}
   res_data_hash = ActiveSupport::JSON.decode res_data_json
   if res_data_hash['errmsg'] == 'ok'
     jsapi_ticket = res_data_hash['ticket']
-    supplier.update_attributes(:jsapi_ticket => jsapi_ticket)
+    jsapi_ticket_expires_at = Time.zone.now.to_i + res_data_hash['expires_in'].to_i
+    wechat.update_attributes(:jsapi_ticket => jsapi_ticket, jsapi_ticket_expires_at: jsapi_ticket_expires_at)
   end
   jsapi_ticket
 end
 
 def get_jsapi_access_token
-  supplier = Supplier.where(:id => 78).first
-  return supplier.access_token if supplier.expires_at.to_i > Time.now.to_i
+  wechat = Wechat.first
+  return wechat.access_token if wechat.expires_at.to_i > Time.zone.now.to_i
   get_url = 'https://api.weixin.qq.com/cgi-bin/token'
-  res_data_json = RestClient.get get_url, {:params => {:appid => supplier.weixin_appid, :grant_type => 'client_credential', :secret => supplier.weixin_appsecret}}
+  res_data_json = RestClient.get get_url, {:params => {:appid => WX_APP_ID, :grant_type => 'client_credential', :secret => WX_APP_SECRET}}
   res_data_hash = ActiveSupport::JSON.decode res_data_json
   access_token = res_data_hash["access_token"]
   expires_at = Time.now.to_i + res_data_hash['expires_in'].to_i
-  supplier.update_attributes(:access_token => access_token, :expires_at => expires_at)
+  wechat.update_attributes(:access_token => access_token, :access_token_expires_at => expires_at)
   access_token
 end
 end

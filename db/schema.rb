@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218021849) do
+ActiveRecord::Schema.define(version: 20160218082132) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255, null: false
@@ -302,6 +302,10 @@ ActiveRecord::Schema.define(version: 20160218021849) do
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
     t.integer  "auth_refresh_token_expires_at", limit: 4
+    t.string   "access_token",                  limit: 255
+    t.integer  "access_token_expires_at",       limit: 4
+    t.string   "jsapi_ticket",                  limit: 255
+    t.integer  "jsapi_ticket_expires_at",       limit: 4
   end
 
 end

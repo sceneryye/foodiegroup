@@ -31,9 +31,8 @@ class EventsController < ApplicationController
     @title = "#{current_user.nickname if current_user.present?}推荐您加入活动：#{current_title @event}"
     @img_url = 'http://www.trade-v.com:5000' + @title_pic.to_s
     @desc = (current_body @event).gsub('\n', ' ')[0..20]
-    supplier = Supplier.where(:id => 78).first
     @timestamp = Time.now.to_i
-    @appId = supplier.weixin_appid
+    @appId = WX_APP_ID
     @noncestr = random_str 16
     @jsapilist = ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
     @jsapi_ticket = get_jsapi_ticket
