@@ -23,6 +23,7 @@ class SessionsController < ApplicationController
   end
 
   def auto_login
+    session[:return_url] = params[:return_url]
     state = rand(30000).to_s.ljust(5, '0')
     redirect_url = CGI.escape 'http://vshop.trade-v.com/foodiegroup/sessions/callback'
     url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{WX_APP_ID}&redirect_uri=#{redirect_url}&response_type=code&scope=snsapi_userinfo&state=#{state}#wechat_redirect"
@@ -30,6 +31,7 @@ class SessionsController < ApplicationController
   end
 
   def callback
+    return_url = session[:return_url]
     code = params[:code]
     now = Time.zone.now.to_i
     if Wechat.first.nil?
@@ -48,7 +50,8 @@ class SessionsController < ApplicationController
     if user = User.find_by(weixin_openid: openid)
       login user
       session[:mobile] = user.mobile
-      redirect_to root_path
+      session.delete(:return_url)
+      redirect_to return_url
     else
       data = get_user_info(openid)
       session[:openid] = data["openid"]

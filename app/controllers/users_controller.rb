@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     validate_permission! select_user
   end
 
-  def new   
+  def new
     if session[:openid].present?
       user = User.where(weixin_openid: session[:openid])
       if user.present?
@@ -22,21 +22,25 @@ class UsersController < ApplicationController
       user_params[:password] = user_params[:mobile]
       user_params[:username] = user_params[:mobile]
     end
+
+    redirect_url = session[:return_url].present? ? session[:return_url] : root_url
     # 绑定新的公众号
     if user = User.find_by(mobile: user_params[:mobile])
       user.update(weixin_openid: session[:openid], nickname: session[:nickname], avatar: session[:avatar])
       login user
       session[:mobile] = user.mobile
-      return redirect_to root_url
+      
+      session.delete(:return_url)
+      return redirect_to redirect_url
     end
 
     @user = User.new(user_params)
     @user.weixin_openid = session[:openid]
-    @user.avatar = session[:avatar]    
+    @user.avatar = session[:avatar]
     @user.nickname = session[:nickname]
     if params[:from] == 'share_from_foodie'
       @user.weixin_openid = params[:openid]
-      @user.avatar = params[:avatar]    
+      @user.avatar = params[:avatar]
       @user.nickname = params[:nickname]
       @user.group_id = params[:group_id]
     end
@@ -47,7 +51,7 @@ class UsersController < ApplicationController
       if params[:return_url]
         return redirect_to URI.decode(params[:return_url])
       else
-        return redirect_to root_url, notice: '注册成功!'
+        return redirect_to redirect_url, notice: '注册成功!'
       end
     else
       render :new
@@ -56,9 +60,32 @@ class UsersController < ApplicationController
 
   def show
 
+    #微信share接口配置
+    if current_user.present?
+      group_owner = User.find_by(id: current_user.group.user_id)
+      group_name = current_user.group.name
+      @title = "#{group_owner}推荐您加入：#{group_name}"
+      @img_url = group_owner.avatar
+      @desc = '吃货帮，让我们一起去团购天下健康美食'
+      @timestamp = Time.now.to_i
+      @appId = WX_APP_ID
+      @noncestr = random_str 16
+      @jsapilist = ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
+      @jsapi_ticket = get_jsapi_ticket
+      post_params = {
+        :noncestr => @noncestr,
+        :jsapi_ticket => @jsapi_ticket,
+        :timestamp => @timestamp,
+        :url => request.url.gsub("localhost:5000", "vshop.trade-v.com")
+      }
+      @sign = create_sign_for_js post_params
+      @a = [request.url, post_params, request.url.gsub("trade", "vshop.trade-v.com")]
+    end
+
+
     type = params[:type] || 'topic'
 
-    case type 
+    case type
     when 'topic'
       @user = User.includes(:topics).find_by_username(params[:id])
       if @user
@@ -83,7 +110,7 @@ class UsersController < ApplicationController
       if @group
         @group_admin = User.find_by_id(@group.user_id)
       end
-      if ['1', '2'].include? current_user.try(:role) 
+      if ['1', '2'].include? current_user.try(:role)
 
         @groups = Group.where(user_id: current_user.id)
         if current_user.role == '1'

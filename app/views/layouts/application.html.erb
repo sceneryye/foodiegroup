@@ -34,10 +34,11 @@ function isWeixinBrowser(){
     var is_weixin_browser = isWeixinBrowser();
   if(is_weixin_browser) {
   <% if (current_user.nil? && session[:openid].nil?) %>
-    var return_url = location.href;
-    var url = "<%= wx_auto_login_path %>";
+    var return_url = encodeURIComponent(location.href);
+
+    var url = "<%= wx_auto_login_path %>" + '?return_url=' + return_url;
     //alert(url);
-    location.href = "<%= wx_auto_login_path %>"
+    location.href = url;
   <% end %>
 }
 </script>
