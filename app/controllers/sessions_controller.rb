@@ -69,7 +69,7 @@ class SessionsController < ApplicationController
     wechat = Wechat.first 
     if wechat && Wechat.first.auth_access_token.present?
 
-      wechat.update(auth_access_token: res_data_hash["access_token"], auth_refresh_token_expires_at: access_expires_at, auth_refresh_token_expires_at: refresh_expires_at, auth_refresh_token: res_data_hash["refresh_token"])
+      wechat.update(auth_access_token: res_data_hash["access_token"], auth_access_token_expires_at: access_expires_at, auth_refresh_token_expires_at: refresh_expires_at, auth_refresh_token: res_data_hash["refresh_token"])
     else
       wechat = Wechat.new(auth_access_token: res_data_hash["access_token"], auth_refresh_token_expires_at: access_expires_at, auth_refresh_token_expires_at: refresh_expires_at, auth_refresh_token: res_data_hash["refresh_token"])
       wechat.save
@@ -80,10 +80,11 @@ class SessionsController < ApplicationController
 
   def refresh_auth_access_token
     refresh_token = Wechat.first.auth_refresh_token
+    access_expires_at = Time.zone.now.to_i + res_data_hash["expires_in"]
     get_url = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=#{WX_APP_ID}&grant_type=refresh_token&refresh_token=#{refresh_token}"
     res_data_json = RestClient.get get_url
     res_data_hash = ActiveSupport::JSON.decode res_data_json
-    Wechat.first.update(auth_access_token: res_data_hash["access_token"], auth_refresh_token_expires_at: access_expires_at)
+    Wechat.first.update(auth_access_token: res_data_hash["access_token"], auth_access_token_expires_at: access_expires_at)
     res_data_hash
   end
 
