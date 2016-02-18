@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
   def callback
     code = params[:code]
     now = Time.zone.now.to_i
-    if now < Wechat.auth_refresh_token_expires_at.to_i - 100
+    if now < Wechat.first.auth_refresh_token_expires_at.to_i - 100
       data = refresh_auth_access_token
       access_token = data[:access_token]
       openid = data[:openid]
