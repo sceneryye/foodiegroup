@@ -28,9 +28,9 @@ class ForumsController < ApplicationController
 
 		def index
 		#微信入口页面
-		Rails.logger "---------------------------#{session[:openid]}"
-		Rails.logger "---------------------------#{session[:mobile]}"
-		Rails.logger "---------------------------#{current_user.try(:nickname)}"
+		Rails.logger.info "---------------------------#{session[:openid]}"
+		Rails.logger.info "---------------------------#{session[:mobile]}"
+		Rails.logger.info "---------------------------#{current_user.try(:nickname)}"
 		if params[:openid]
 			session[:openid] = params[:openid]
 			session[:avatar] = params[:avatar]
