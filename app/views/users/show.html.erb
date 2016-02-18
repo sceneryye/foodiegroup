@@ -20,7 +20,8 @@
     jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
   });
   wx.ready(function(){
-    var url = "<%= register_path %>" + '?groupid=' + <%= @groupid %>;
+    var url = "<%= register_path %>" + '?groupid=' + "<%= @groupid %>";
+    alert(url);
     wx.onMenuShareTimeline({
     title: "<%= @title %>", // 分享标题
     link: url, // 分享链接
