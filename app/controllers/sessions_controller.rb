@@ -47,13 +47,13 @@ class SessionsController < ApplicationController
     end
     if user = User.find_by(weixin_openid: openid)
       login user
-      redirect_to root_path
+      redirect_to root_path(openid: data["openid"])
     else
       data = get_user_info(openid)
       session[:openid] = data["openid"]
       session[:avatar] = data["headimgurl"]
       session[:nickname] = data["nickname"]
-      redirect_to register_path
+      redirect_to register_path(openid: data["openid"])
     end
   end
 
