@@ -45,7 +45,7 @@ class SessionsController < ApplicationController
       access_token = data[:access_token]
       openid = data[:openid]
     end
-    if user = User.find_by_openid(openid)
+    if user = User.find_by(weixin_openid: openid)
       login user
       redirect_to root_path
     else
@@ -72,6 +72,7 @@ class SessionsController < ApplicationController
       wechat = Wechat.new(auth_access_token: res_data_hash[:access_token], auth_refresh_token_expires_at: access_expires_at, auth_refresh_token_expires_at: refresh_expires_at, auth_refresh_token: res_data_hash[:refresh_token])
       wechat.save
     end
+    Rails.logger.info res_data_hash
     res_data_hash
   end
 

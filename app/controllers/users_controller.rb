@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       user_params[:username] = user_params[:mobile]
     end
     # 绑定新的公众号
-    if user = User.find_by_mobile(user_params[:mobile])
+    if user = User.find_by(mobile: user_params[:mobile])
       user.update(weixin_openid: session[:openid], nickname: session[:nickname], avatar: session[:avatar])
       login user
       return redirect_to root_url
