@@ -33,7 +33,8 @@ class SessionsController < ApplicationController
     code = params[:code]
     now = Time.zone.now.to_i
     if Wechat.first.nil?
-      get_auth_access_token code
+      data = get_auth_access_token code
+      Rails.logger.info data
     end
     if now < Wechat.first.auth_refresh_token_expires_at.to_i - 100
       data = refresh_auth_access_token
@@ -62,7 +63,7 @@ class SessionsController < ApplicationController
     get_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=#{WX_APP_ID}&secret=#{WX_APP_SECRET}&code=#{code}&grant_type=authorization_code"
     res_data_json = RestClient.get get_url
     res_data_hash = ActiveSupport::JSON.decode res_data_json
-    wechat = Wechat.first
+    wechat = Wechat.first && Wechat.first.access_token.present?
     if wechat
       access_expires_at = Time.zone.now.to_i + res_data_hash[:expires_in]
       refresh_expires_at = Time.zone.now.to_i + 24 * 3600 * 7
