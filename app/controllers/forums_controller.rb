@@ -2,7 +2,6 @@
 class ForumsController < ApplicationController
 	before_action {@forums = Forum.all}
 	before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
-	before_action :login_with_mobile
 
 	def new
 		@forum = Forum.new
