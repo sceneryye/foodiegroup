@@ -33,7 +33,7 @@ class GroupbuysController < ApplicationController
     #微信share接口配置
     @title = "#{current_user.nickname if current_user.present?}推荐您加入团购：#{current_title @groupbuy}"
     @img_url = 'http://www.trade-v.com:5000' + @title_pic.to_s
-    @desc = current_body(@groupbuy).present? ? current_body(@groupbuy).gsub(/\s/, '') : ''
+    @desc = current_body(@groupbuy).present? ? current_body(@groupbuy).html_safe.gsub(/\s/, '').gsub('<p>', '').gsub('</p>', '') : ''
     @timestamp = Time.now.to_i
     @appId = WX_APP_ID
     @noncestr = random_str 16
