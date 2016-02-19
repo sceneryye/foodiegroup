@@ -38,8 +38,8 @@ class SessionsController < ApplicationController
     data = get_auth_access_token code
     access_token = data["access_token"]
     openid = data["openid"]
-    Rails.logger.info openid
-    if user = User.find_by(weixin_openid: openid)
+    Rails.logger.info "----openid=#{openid}"
+    if (user = User.find_by(weixin_openid: openid)) && openid.present?
       login user
       session[:mobile] = user.mobile
       redirect_to return_url

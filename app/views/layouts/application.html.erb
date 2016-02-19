@@ -33,7 +33,7 @@ function isWeixinBrowser(){
 
     var is_weixin_browser = isWeixinBrowser();
   if(is_weixin_browser) {
-  <% if (current_user.nil? && session[:openid].nil?) %>
+  <% if (current_user.nil? && session[:openid].nil?) || (current_user.nil? && controller_name != 'users') %>
     var return_url = encodeURIComponent(location.href);
 
     var url = "http://vshop.trade-v.com/foodiegroup/sessions/auto_login?return_url=" + return_url;
