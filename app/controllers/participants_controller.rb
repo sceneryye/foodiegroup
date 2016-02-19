@@ -131,7 +131,7 @@ class ParticipantsController < ApplicationController
       parent_id: parent.id,
       participant_id: @participant.id,
       user_id: @participant.user_id,
-      parent_name: parent.title,
+      parent_name: event_name,
       type_name: type_name
     }
     
@@ -142,7 +142,7 @@ class ParticipantsController < ApplicationController
     attach = "#{parent_id}_#{@participant_id}_#{@participant.user_id}"
     nonce_str = random_str 32
     out_trade_no = Time.new.to_i.to_s + rand(10 ** 10).to_s.rjust(10, '0')
-    body = URI.decode parent.title
+    body = URI.decode event_name
     openid = openid
     spbill_create_ip = '182.254.138.119'
     trade_type = 'JSAPI'
@@ -217,7 +217,7 @@ class ParticipantsController < ApplicationController
       Rails.logger.info res_data_json
     end
     Rails.logger.info '##########################5'
-    render text: 'ok'
+    render text: 'success'
   end
 
   def edit
