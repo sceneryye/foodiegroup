@@ -55,6 +55,12 @@ class ApplicationController < ActionController::Base
 
   def logout
     session[:user_id] = nil
+    session[:openid] = nil
+    session[:mobile] = nil
+    session.delete(:user_id)
+    session.delete(:openid)
+    session.delete(:mobile)
+    redirect_to root_path
   end
 
   def current_user
