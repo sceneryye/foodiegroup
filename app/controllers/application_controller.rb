@@ -111,7 +111,7 @@ class ApplicationController < ActionController::Base
   end
 
   def create_sign hash
-    key = Supplier.where(:name => '贸威').first.partner_key
+    key = WX_API_KEY
     stringA = hash.select{|key, value|value.present?}.sort.map do |arr|
      arr.map(&:to_s).join('=')
    end
