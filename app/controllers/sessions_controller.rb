@@ -50,9 +50,8 @@ class SessionsController < ApplicationController
       session[:avatar] = data["headimgurl"]
       session[:nickname] = data["nickname"]
       Rails.logger.info "---------------#{data}"
-      session.each do |s|
-        Rails.logger.info "---------------#{s}"
-      end
+      Rails.logger.info "---------------#{session[:openid]}"
+      Rails.logger.info "---------------#{session[:nickname]}"
       redirect_to register_path
     end
   end
