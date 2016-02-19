@@ -157,7 +157,7 @@ class ParticipantsController < ApplicationController
     res_data_hash = Hash.from_xml(RestClient.post post_url, post_data_xml)
     # return render :text => res_data_hash
     if res_data_hash["xml"]["return_code"] == 'SUCCESS'
-      @url = "http://vshop.trade-v.com/foodiegroup/#{params[:type_name]}/#{params[:parent_id]}?from=foodiepay&total=#{total_fee}"
+      @url = "http://vshop.trade-v.com/foodiegroup/#{type_name}/#{parent.id}?from=foodiepay&total=#{total_fee}"
       prepay_id = res_data_hash["xml"]["prepay_id"]
       @timestamp = Time.now.to_i
       @nonce_str = random_str 32
