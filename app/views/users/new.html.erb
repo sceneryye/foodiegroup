@@ -1,4 +1,5 @@
 <% provide :title, current_user.present? ? t(:welcome) : t(:new_user) %>
+<% Rails.logger.info "------------#{session[:openid]}" %>
 <div class="row">
   <%if !signed_in?%>
   <div class="large-7 medium-6 small-12 columns">
