@@ -1,7 +1,7 @@
 #encoding:utf-8
 class UsersController < ApplicationController
   before_action :select_user, only: [:show, :edit, :update, :destroy, :user_info, :my_orders]
-  before_action only: [:edit, :update, :destroy, :my_orders] do
+  before_action only: [:edit, :update, :destroy] do
     validate_permission!(select_user)
   end
 
