@@ -169,16 +169,21 @@ def vote_for(object)
   end
 
   def current_title groupbuy
+    Rails.logger.info "-------------#{session[:locale]}"
     if session[:locale] == 'zh'
       if groupbuy.zh_title.present?
+        Rails.logger.info "-------------yes-zh"
         return groupbuy.zh_title
       else
+        Rails.logger.info "-------------no-zh"
         return groupbuy.en_title
       end
     elsif session[:locale] == 'en'
       if groupbuy.en_title.present?
+        Rails.logger.info "-------------yes-en"
         return groupbuy.en_title
       else
+        Rails.logger.info "-------------no-en"
         return groupbuy.zh_title
       end
     end

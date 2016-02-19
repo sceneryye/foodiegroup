@@ -121,7 +121,7 @@ class ParticipantsController < ApplicationController
     from = 'foodiegroup'
     openid = current_user.weixin_openid
     event_id = parent.id
-    event_name = parent.title
+    event_name = current_title parent
 
     Rails.logger.info money
     data = {
