@@ -16,6 +16,7 @@
    <%end%>
  </div>
  <input name="user[group_id]" value="1" type="hidden" />
+ <input name="user[username]" value="session[:nickname]" type="hidden" />
  <div class="small-12 columns hidden">
   <%= f.text_field :username,  placeholder: '登录名'%>
   <%= show_error_message('请输入您的登录名') %>
