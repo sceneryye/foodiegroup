@@ -139,7 +139,7 @@ class ParticipantsController < ApplicationController
     weixin_appid = WX_APP_ID
     weixin_appsecret = WX_APP_SECRET
     mch_id = WX_MCH_ID
-    attach = "#{parent_id}_#{@participant_id}_#{@participant.user_id}"
+    attach = "#{parent.id}_#{@participant.id}_#{@participant.user_id}"
     nonce_str = random_str 32
     out_trade_no = Time.new.to_i.to_s + rand(10 ** 10).to_s.rjust(10, '0')
     body = URI.decode event_name
