@@ -27,7 +27,7 @@
       <%=link_to '<i class="fa fa-language"></i>'.html_safe+' English', 'javascript:void(0);', onclick: 'change_locale(this)', 'data-locale' => 'en', class: 'change-loc' %>
       <%end%> 
     </li>
-    <li><%=link_to ' <i class="fa fa-search"></i>'.html_safe+' '+t(:search),search_path%></li>
+    <li><%=link_to ' <i class="fa fa-search"></i>'.html_safe+' '+t(:search),search_path, style: 'display:none'%></li>
     <%if signed_in?%>
     <% if current_user.role.in?(['1', '2']) %>
     <li><%=link_to '<i class="fa fa-cart-plus"></i>'.html_safe+' '+t(:new_groupbuy), new_groupbuy_path%></li>
