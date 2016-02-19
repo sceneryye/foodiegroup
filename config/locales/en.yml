@@ -245,7 +245,7 @@ en:
   groupbuy: Group Buying List
   share: Share
   edit_profile: Edit Profile
-  maintain_addresses: Delivery Addresses
+  maintain_addresses: Delivery Address
   interests: interests
   membership: membership
   name: Name
@@ -354,3 +354,5 @@ en:
   ship_status: Ship Status
   created_at: Create Time
   signin_signup: Sign In / Sign Up
+  forum: Forum
+  logistic_ruler: Logistic Ruler

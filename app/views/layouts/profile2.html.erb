@@ -35,14 +35,14 @@
 
       <%= link_to logistics_path, class: 'weui_cell' do %>
       <div class="weui_cell_bd weui_cell_primary">
-        <div class="type"><i class="fa fa-file-text"></i><%= t(:maintain_logistics) %></div>
+        <div class="type"><i class="fa fa-file-text"></i><%= t(:logistic_ruler) %></div>
       </div>
       <div class="weui_cell_ft"></div>
       <% end %>
   <% if @groups %>
       <%= link_to "javascript:void(0)", class: 'weui_cell show-groups' do %>
       <div class="weui_cell_bd weui_cell_primary">
-        <div class="type"><i class="fa fa-users"></i><%= t(:group_manage) %></div>
+        <div class="type"><i class="fa fa-users"></i><%= t(:group_management) %></div>
       </div>
       <div class="weui_cell_ft"></div>
       <% end %>
@@ -74,7 +74,7 @@
 
     <%= link_to profile_path(@user, type: 'topic') + '#datas',class: 'weui_cell' do %>
     <div class="weui_cell_bd weui_cell_primary">
-      <div class="type"><%= t(:topic) %></div>
+      <div class="type"><%= t(:forum) %></div>
     </div>
     <div class="weui_cell_ft"></div>
     <% end %>
@@ -108,7 +108,7 @@
 
 
   <% end %>
-  <div class="large-12 columns profile-content" id="datas">
+  <div class="large-12 columns profile-content hidden" id="datas">
     <%= yield :profile_content %>
   </div>
 

@@ -364,7 +364,7 @@ zh:
   buy: 立即购买
   buys: 团购
   remark: 备注
-  group_manage: 群组管理
+  group_management: 群组管理
   welcome: 欢迎
   inventory: 库存
   weekday: 工作日
@@ -466,3 +466,5 @@ zh:
   ship_status: 发货状态
   created_at: 创建时间
   signin_signup: 登录 / 注册
+  forum: 论坛
+  logistic_ruler: 支付规则
