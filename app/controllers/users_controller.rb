@@ -2,7 +2,7 @@
 class UsersController < ApplicationController
   before_action :select_user, only: [:show, :edit, :update, :destroy, :user_info, :my_orders]
   before_action only: [:edit, :update, :destroy, :my_orders] do
-    :validate_permission!(select_user)
+    validate_permission!(select_user)
   end
 
   def new
