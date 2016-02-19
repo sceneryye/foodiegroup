@@ -36,7 +36,7 @@ function isWeixinBrowser(){
   <% if (current_user.nil? && session[:openid].nil?) %>
     var return_url = encodeURIComponent(location.href);
 
-    var url = "<%= wx_auto_login_path %>" + '?return_url=' + return_url;
+    var url = "http://vshop.trade-v.com/foodiegroup?return_url=" + return_url;
     //alert(url);
     location.href = url;
   <% end %>
