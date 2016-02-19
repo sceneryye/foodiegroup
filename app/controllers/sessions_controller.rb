@@ -34,10 +34,7 @@ class SessionsController < ApplicationController
     return_url = session[:return_url] || params[:return_url]
     code = params[:code]
     now = Time.zone.now.to_i
-    if Wechat.first.nil?
-      data = get_auth_access_token code
-      Rails.logger.info data
-    end
+    
       data = get_auth_access_token code
       access_token = data["access_token"]
       openid = data["openid"]
@@ -52,6 +49,8 @@ class SessionsController < ApplicationController
       session[:openid] = data["openid"]
       session[:avatar] = data["headimgurl"]
       session[:nickname] = data["nickname"]
+      Rails.logger.info "---------------#{data}"
+      Rails.logger.info "---------------#{session}"
       redirect_to register_path
     end
   end
