@@ -180,6 +180,6 @@ def user_params
 end
 
 def select_user
-  @user = User.find_by_username(params[:id])
+  @user = User.find_by_username(params[:id]) || User.find_by_nickname(params[:id])
 end
 end
