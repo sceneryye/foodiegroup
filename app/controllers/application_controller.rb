@@ -60,7 +60,6 @@ class ApplicationController < ActionController::Base
     session.delete(:user_id)
     session.delete(:openid)
     session.delete(:mobile)
-    redirect_to root_path
   end
 
   def current_user
