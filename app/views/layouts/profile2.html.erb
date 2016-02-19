@@ -16,7 +16,15 @@
     </a>
   </div>
 
-  
+  <div class="weui_cells weui_cells_access">
+    <%= link_to my_orders_path,class: 'weui_cell' do %>
+      <div class="weui_cell_bd weui_cell_primary">
+        <div class="type"><i class="fa fa-bars"></i><%= t(:my_orders) %></div>
+      </div>
+      <div class="weui_cell_ft"></div>
+    <% end %>
+  </div>
+
     <div class="weui_cells weui_cells_access">
       <%= link_to user_addresses_path(@user), class: 'weui_cell' do %>
       <div class="weui_cell_bd weui_cell_primary">
@@ -46,17 +54,8 @@
         <%= link_to  group.name, group_path(group) %>
       </div>
       <% end %>
-    </div>
   <% end %>
-
-  <div class="weui_cells weui_cells_access">
-    <%= link_to my_orders_path,class: 'weui_cell' do %>
-      <div class="weui_cell_bd weui_cell_primary">
-        <div class="type"><i class="fa fa-bars"></i><%= t(:my_orders) %></div>
-      </div>
-      <div class="weui_cell_ft"></div>
-    <% end %>
-  </div>
+    </div>
 
   <div class="weui_cells weui_cells_access">
   <%= link_to profile_path(@user, type: 'groupbuy') + '#datas',class: 'weui_cell' do %>
@@ -65,7 +64,7 @@
     </div>
     <div class="weui_cell_ft"></div>
     <% end %>
-    
+
     <%= link_to profile_path(@user, type: 'event') + '#datas',class: 'weui_cell' do %>
     <div class="weui_cell_bd weui_cell_primary">
       <div class="type"><%= t(:event) %></div>
@@ -79,7 +78,7 @@
     </div>
     <div class="weui_cell_ft"></div>
     <% end %>
-    
+
     <%= link_to profile_path(@user, type: 'participant') + '#datas',class: 'weui_cell' do %>
     <div class="weui_cell_bd weui_cell_primary">
       <div class="type"><%= t(:histroy) %></div>
@@ -106,7 +105,7 @@
   </div>
   <% end %>
 
-  
+
 
   <% end %>
   <div class="large-12 columns profile-content" id="datas">
