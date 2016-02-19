@@ -14,7 +14,6 @@ class UsersController < ApplicationController
     end
     @user = User.new
     @groups = Group.all
-    session.delete(:openid)
   end
 
   def create

@@ -52,7 +52,7 @@ class SessionsController < ApplicationController
       Rails.logger.info "---------------#{data}"
       Rails.logger.info "---------------#{session[:openid]}"
       Rails.logger.info "---------------#{session[:nickname]}"
-      redirect_to "http://vshop.trade-v.com/foodiegroup/register"
+      redirect_to register_path
     end
   end
 
