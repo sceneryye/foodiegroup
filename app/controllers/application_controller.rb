@@ -86,8 +86,8 @@ class ApplicationController < ActionController::Base
   end
 
   def validate_permission!(user)
-    Rails.logger.info "------current_user.id=#{current_user.id}"
-    Rails.logger.info "------user.id=#{user.id}"
+    Rails.logger.info "------current_user.id=#{current_user.try(:id)}"
+    Rails.logger.info "------user.id=#{user.try(:id)}"
     unless current_user == user || is_admin?
       redirect_to root_url, alert: '很抱歉您没有权限操作!'
     end
