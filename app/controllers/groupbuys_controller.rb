@@ -9,6 +9,7 @@ class GroupbuysController < ApplicationController
   end
 
   def show
+    Rails.logger.info "---------------#{session[:locale]}"
     if params[:from] == 'foodiepay' && params[:total].present?
       @total = params[:total]
       @alert = true

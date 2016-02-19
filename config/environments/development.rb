@@ -32,4 +32,5 @@ RailsOnForum::Application.configure do
   # number of complex assets.
   config.assets.debug = true
   # config.relative_url_root = "/foodiegroup"
+  config.i18n.available_locales = ["zh", "en"]
 end

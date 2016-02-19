@@ -245,7 +245,7 @@ en:
   groupbuy: Group Buying List
   share: Share
   edit_profile: Edit Profile
-  maintain_addresses: Maintain Addresses
+  maintain_addresses: Delivery Addresses
   interests: interests
   membership: membership
   name: Name
@@ -256,7 +256,7 @@ en:
   buys: Boughts
   remark: Remark
   new_event: Add new meetup
-  group_management: Group Manager
+  group_management: Group Management
   limited_people: Max. attendee
   new_groupbuy: Add new deal
   welcome: Welcome

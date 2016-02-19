@@ -9,3 +9,5 @@ PIC_PATH= "/mydata/foodiegroup/public"
 PATH_PREFIX = '/foodies'
 
 BOX_WEIGHT = 0.7
+
+

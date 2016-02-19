@@ -15,18 +15,13 @@ class ApplicationController < ActionController::Base
     if params[:locale] && I18n.available_locales.include?( params[:locale].to_sym )
       session[:locale] = params[:locale]
     end
+    Rails.logger.info "--------#{session[:locale]}"
 
     I18n.locale = session[:locale] || I18n.default_locale
   end
 
   def login(user)
     session[:user_id] = user.id
-    if user.group.try(:name) =='Foodie Group Buying Group'
-      session[:locale]='en'
-    else
-      session[:locale]='zh'
-    end
-    
   end
 
   def auto_login
