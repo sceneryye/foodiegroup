@@ -38,15 +38,9 @@ class SessionsController < ApplicationController
       data = get_auth_access_token code
       Rails.logger.info data
     end
-    if now < Wechat.first.auth_refresh_token_expires_at.to_i - 100
-      data = refresh_auth_access_token
-      access_token = data["access_token"]
-      openid = data["openid"]
-    else
       data = get_auth_access_token code
       access_token = data["access_token"]
       openid = data["openid"]
-    end
     Rails.logger.info openid
     if user = User.find_by(weixin_openid: openid)
       login user
@@ -69,17 +63,6 @@ class SessionsController < ApplicationController
     res_data_json = RestClient.get get_url
     res_data_hash = ActiveSupport::JSON.decode res_data_json
     Rails.logger.info res_data_hash
-    access_expires_at = Time.zone.now.to_i + res_data_hash["expires_in"].to_i
-    refresh_expires_at = Time.zone.now.to_i + 24 * 3600 * 7
-    wechat = Wechat.first 
-    if wechat && Wechat.first.auth_access_token.present?
-
-      wechat.update(auth_access_token: res_data_hash["access_token"], auth_access_token_expires_at: access_expires_at, auth_refresh_token_expires_at: refresh_expires_at, auth_refresh_token: res_data_hash["refresh_token"])
-    else
-      wechat = Wechat.new(auth_access_token: res_data_hash["access_token"], auth_refresh_token_expires_at: access_expires_at, auth_refresh_token_expires_at: refresh_expires_at, auth_refresh_token: res_data_hash["refresh_token"])
-      wechat.save
-    end
-    
     res_data_hash
   end
 
