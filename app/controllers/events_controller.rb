@@ -6,11 +6,12 @@ class EventsController < ApplicationController
   def index
     @events = Event.all.includes(:user)
 
-    @onload='onload="geocoder()"'
+    
 
   end
 
   def show
+    @onload='onload="geocoder()"'
     @parent = @event  = Event.find(params[:id])
     @active = @event.comments.count > 10 ? true : false
     @participant = @parent.participants.new
