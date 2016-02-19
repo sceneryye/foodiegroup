@@ -35,9 +35,9 @@ class SessionsController < ApplicationController
     code = params[:code]
     now = Time.zone.now.to_i
     
-      data = get_auth_access_token code
-      access_token = data["access_token"]
-      openid = data["openid"]
+    data = get_auth_access_token code
+    access_token = data["access_token"]
+    openid = data["openid"]
     Rails.logger.info openid
     if user = User.find_by(weixin_openid: openid)
       login user
@@ -45,12 +45,14 @@ class SessionsController < ApplicationController
       session.delete(:return_url)
       redirect_to return_url
     else
-      data = get_user_info(openid)
+      data = get_user_info(openid, access_token)
       session[:openid] = data["openid"]
       session[:avatar] = data["headimgurl"]
       session[:nickname] = data["nickname"]
       Rails.logger.info "---------------#{data}"
-      Rails.logger.info "---------------#{session}"
+      session.each do |s|
+        Rails.logger.info "---------------#{s}"
+      end
       redirect_to register_path
     end
   end
@@ -76,8 +78,7 @@ class SessionsController < ApplicationController
     res_data_hash
   end
 
-  def get_user_info openid
-    access_token = Wechat.first.auth_access_token
+  def get_user_info openid, access_token
     get_url = "https://api.weixin.qq.com/sns/userinfo?access_token=#{access_token}&openid=#{openid}&lang=zh_CN"
     res_data_json = RestClient.get get_url
     res_data_hash = ActiveSupport::JSON.decode res_data_json
