@@ -10,14 +10,14 @@
 
   <% if @groups%>
   <div class="small-12 columns hidden">
-   <%=f.select :group_id,options_from_collection_for_select(@groups,:id,:name),{:include_blank=>"请选择您的群||please select your group"}, required:true%>
+   <%=f.select :group_id,options_from_collection_for_select(@groups,:id,:name),{:include_blank=>"请选择您的群||please select your group"}%>
    <%#=f.select :group_id, @groups.collect {|group| [group.name, group.id] },{:include_blank=>"请选择"},{:class=>"span3"} %>
    <%= show_error_message('请选择您所属的微信群') %>
    <%end%>
  </div>
- <input name="user[group_id]" value="<%= params[:groupid] %>" type="hidden" />
+ <input name="user[group_id]" value="1" type="hidden" />
  <div class="small-12 columns hidden">
-  <%= f.text_field :username, required: true, placeholder: '登录名'%>
+  <%= f.text_field :username,  placeholder: '登录名'%>
   <%= show_error_message('请输入您的登录名') %>
 </div>
 <div class="small-12 columns">
