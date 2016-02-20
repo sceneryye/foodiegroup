@@ -3,6 +3,7 @@ require 'rest-client'
 require 'digest/sha1'
 class GroupbuysController < ApplicationController
   before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
+  before_action :login_with_mobile
 
   def index
     @groupbuys = Groupbuy.all.includes(:user).order(created_at: :desc)
@@ -240,6 +241,14 @@ class GroupbuysController < ApplicationController
   end
 
   private
+
+  def login_with_mobile
+    if session[:mobile].present?
+      user = User.find_by(mobile: session[:mobile])
+      login user
+    end
+  end
+
   def set_groupbuy
     @groupbuy = Groupbuy.find(params[:id])
   end
