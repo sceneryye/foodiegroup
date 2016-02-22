@@ -262,25 +262,45 @@ $('.groupbuys-list').on('click', '.edit-title', function(){
       return false;
       return;
     }
-    $.ajax({
-      url: url,
-      type: 'patch',
-      data: {
-        id: id,
-        title: new_title,
-        from: 'admin_edit_title'
-      },
-      success: function(e) {
-        if(e == 'success') {
-          that.parent().parent().find('.groupbuy-title').text(new_title.slice(0,10));
-          swal('成功!', '修改成功！', 'success');
-        }
-        else {
-          swal('失败!', '提交失败', 'error');
-        }
+    
+    swal({
+      title: "选择语言",
+      text: '修改中文标题请输入zh，修改英文标题请输入en',
+      type: 'input',
+      showCancelButton: true,
+      closeOnConfirm: false,
+      closeOnCancel: true,
+      animation: "slide-from-top"
+    }, function(inputValue){
+      if (inputValue === false) return false;
+      console.log("You wrote", inputValue);
+      var language = inputValue;
+      if(language.replace(/\s/g, '') != 'zh' && language.replace(/\s/g, '') != 'en') {
+        swal.showInputError('请输入zh或者en');
+        return false;
+        return;
       }
+      $.ajax({
+        url: url,
+        type: 'patch',
+        data: {
+          id: id,
+          title: new_title,
+          from: 'admin_edit_title',
+          language: language
+        },
+        success: function(e) {
+          if(e == 'success') {
+            that.parent().parent().find('.groupbuy-title').text(new_title.slice(0,10));
+            swal('成功!', '修改成功！', 'success');
+          }
+          else {
+            swal('失败!', '提交失败', 'error');
+          }
+        }
+      });
     });
-  });
+});
 });
 
 //编辑话题推荐值

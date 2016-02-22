@@ -68,7 +68,7 @@ class GroupbuysController < ApplicationController
         # end
       end
 
-     
+      
 
     end
 
@@ -149,9 +149,16 @@ class GroupbuysController < ApplicationController
       if params[:title].blank?
         return render :text => 'failed'
       end
-      if Groupbuy.find(params[:id]).update(title: params[:title])
-        Rails.logger.info 'true'
-        return render :text => 'success'
+      if params[:language] == 'zh'
+        if Groupbuy.find(params[:id]).update(zh_title: params[:title])
+          Rails.logger.info 'true'
+          return render :text => 'success'
+        end
+      elsif params[:language] == 'en'
+        if Groupbuy.find(params[:id]).update(en_title: params[:title])
+          Rails.logger.info 'true'
+          return render :text => 'success'
+        end
       end
     end
 
