@@ -17,7 +17,7 @@ gem 'dropzonejs-rails'
 gem "faye-websocket"
 gem "sinatra"
 # gem "puma"
- gem "redis"
+gem "redis"
 gem 'china_city'
 gem 'jquery-rails'
 gem 'turbolinks'
@@ -30,31 +30,28 @@ gem 'ckeditor', github: 'galetahub/ckeditor'
 gem 'rest-client'
 gem 'will_paginate', '~> 3.0.6'
 
-#group :assets do
-   	gem 'sass-rails'#, '~> 5.0.3'
-    gem 'uglifier'#, '>= 1.3.0'
-	gem 'coffee-rails'#, '~> 4.0.0'
-    gem 'foundation-rails','~>5.5.3.2'
-	#gem 'foundation_form_builder'
-#end
+   	gem 'sass-rails', '~> 5.0.3'
+    gem 'uglifier', '>= 1.3.0'
+	gem 'coffee-rails', '~> 4.0.0'
+  gem 'foundation-rails','~>5.5.3.2'
 
-group :development, :test do
-  gem 'rspec-rails', '~> 3.0'
-  gem 'factory_girl_rails', '~> 4.4'
-  gem 'guard-rspec'
-  gem 'spring-commands-rspec', '~> 1.0.2'
-end
+  group :development, :test do
+    gem 'rspec-rails', '~> 3.0'
+    gem 'factory_girl_rails', '~> 4.4'
+    gem 'guard-rspec'
+    gem 'spring-commands-rspec', '~> 1.0.2'
+  end
 
-group :test do
-  gem 'faker', '~> 1.6'
-  gem 'capybara', '~> 2.5'
-  gem 'database_cleaner', '~> 1.5'
-  gem 'launchy', '~> 2.4'
-  gem 'selenium-webdriver', '~> 2.43'
+  group :test do
+    gem 'faker', '~> 1.6'
+    gem 'capybara', '~> 2.5'
+    gem 'database_cleaner', '~> 1.5'
+    gem 'launchy', '~> 2.4'
+    gem 'selenium-webdriver', '~> 2.43'
 
-end
+  end
 
 
-gem 'bcrypt'
-gem 'email_validator'
-gem 'redcarpet'
+  gem 'bcrypt'
+  gem 'email_validator'
+  gem 'redcarpet'
