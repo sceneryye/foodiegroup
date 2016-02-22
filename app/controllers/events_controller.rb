@@ -31,7 +31,11 @@ class EventsController < ApplicationController
     #微信share接口配置
     @title = "#{current_user.nickname if current_user.present?}推荐您加入活动：#{current_title @event}"
     @img_url = 'http://www.trade-v.com:5000' + @title_pic.to_s
-    @desc = (current_body @event).html_safe.gsub(/\s/, '').gsub('<p>', '').gsub('</p>', '')
+    if (current_body @event).present?
+      @desc = (current_body @event).html_safe.gsub(/\s/, '').gsub('<p>', '').gsub('</p>', '')
+    else 
+      @desc = ''
+    end
     @timestamp = Time.now.to_i
     @appId = WX_APP_ID
     @noncestr = random_str 16
