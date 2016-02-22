@@ -18,6 +18,7 @@ html body, h1, h2, h3, h4, h5, h6 {
   padding: 3px;
   font-size: 0.8em;
 }
+
 .fa-cloud-upload {
   margin-right: 15px;
 }
@@ -208,4 +209,14 @@ html body, h1, h2, h3, h4, h5, h6 {
 }
 .img, .trash {
   text-align: center;
+}
+
+/****************index******************/
+.countdownlists {
+  .countdown-day, .countdown-hour, .countdown-minute, .countdown-second, .ct {
+    color: black;
+    background-color: white;
+    padding: 1px;
+    font-size: 0.7em;
+  }
 }
