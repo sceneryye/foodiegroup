@@ -16,6 +16,7 @@
     </a>
   </div>
 
+<div class="weui_cells_title"><%= t(:histroy) %></div>
   <div class="weui_cells weui_cells_access">
     <%= link_to my_orders_path,class: 'weui_cell' do %>
       <div class="weui_cell_bd weui_cell_primary">
@@ -46,6 +47,7 @@
     <% end %>
   </div>
 
+  <div class="weui_cells_title"><%= t(:setting) %></div>
     <div class="weui_cells weui_cells_access">
       <%= link_to user_addresses_path(@user), class: 'weui_cell' do %>
       <div class="weui_cell_bd weui_cell_primary">
@@ -78,6 +80,7 @@
   <% end %>
     </div>
 
+  <div class="weui_cells_title"><%= t(:others) %></div>
   <div class="weui_cells weui_cells_access">
   <%= link_to profile_path(@user, type: 'groupbuy') + '#datas',class: 'weui_cell' do %>
     <div class="weui_cell_bd weui_cell_primary">
