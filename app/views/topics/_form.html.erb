@@ -1,6 +1,8 @@
 <div class="large-12 medium-12 medium-centered columns">
-<%= form_for form_params(@forum, @topic), data: {abide: ''} do |f| %>
+  <%= form_for form_params(@forum, @topic), data: {abide: ''} do |f| %>
   <%= render 'layouts/form_errors', object: @topic %>
+  <input type="hidden", name='photo_ids' value="" class="pic-ids">
+  <input type="hidden", name='delete_ids' value="" class="delete-ids">
   <div>
     <%= f.label :title %>
     <%= f.text_field :title, required: true%>
@@ -13,11 +15,11 @@
     <%= show_error_message('内容请不要超过1千字')%>
   </div>
   <div>
-     <%= f.submit class:'tiny button radius right' %>
-  </div>
-<% end %>
+   <%= f.submit class:'tiny button radius right' %>
+ </div>
+ <% end %>
 
-<form action="<%= photos_path %>" class="dropzone" id="my-dropzone" enctype="multipart/form-data">
+ <form action="<%= photos_path %>" class="dropzone" id="my-dropzone" enctype="multipart/form-data">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token.to_s %>">
   <input type="hidden" name="parent" value="<%= params[:controller] %>">
 </form>

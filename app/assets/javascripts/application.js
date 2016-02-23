@@ -78,3 +78,21 @@ function change_locale(obj){
     location.href = url;
   };
 
+//-------------------最新版本的编辑图片------------------//
+
+$(document).ready(function(){
+  $('.dz-image .trash').on('click', function(){
+    var ids = [];
+    var deleteIds = $('.delete-ids').val() + ',' + $(this).parent().attr('id');
+    $('.delete-ids').val(deleteIds);
+
+    var that = $(this);
+    $(this).parent().remove();
+    if($('.dz-image').length > 0) {
+      $('.dz-image').each(function(){
+        ids.push($(this).attr('id'));
+      });
+    }
+    $('.pic-ids').val(ids.join(','));
+  });
+});

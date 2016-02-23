@@ -3,8 +3,16 @@
   <div class="columns small-12">
     <div class="topics panel  radius ">
       <h2><%= @topic.title %></h2>
+      <div class="topic-content">
+       <% if photos = @topic.photos %>
+            <% photos.each do |photo| %>
+              <%= image_tag photo.image %>
+            <% end %>
+        <% end %>
+
       <p><%= @topic.body.html_safe  %></p>
       <%= topic_info(@topic) %>
+      </div>
       <p>   
         <% if current_user == @topic.user %>
         <%= link_to '<i class="fa fa-pencil"></i> '.html_safe+t(:edit), edit_topic_path(@topic), class:"tiny button radius" %>

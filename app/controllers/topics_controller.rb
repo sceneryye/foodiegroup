@@ -35,18 +35,34 @@ class TopicsController < ApplicationController
    end
  end
 
- def edit() end
+ def edit()
+  @photos = @topic.photos
+end
 
-  def update
-    if params[:from] == 'admin_edit_recommend'
-      topic = Topic.find(params[:id])
-      if topic.update(recommend: params[:recommend])
-        return render text: 'success'
-      else
-        return render text: 'false'
-      end
+def update
+  if params[:from] == 'admin_edit_recommend'
+    topic = Topic.find(params[:id])
+    if topic.update(recommend: params[:recommend])
+      return render text: 'success'
+    else
+      return render text: 'false'
     end
-    if @topic.update(topic_params)
+  end
+  if @topic.update(topic_params)
+      # 删除与团购关联的图片
+      origin_ids = @topic.photos.pluck(:id)
+      if params[:photo_ids].present? || params[:delete_ids].present?
+        ids = params[:photo_ids].split(',').select{|id|id.present?}
+        Photo.where(id: ids).update_all(topic_id: params[:id])
+
+        Rails.logger.info origin_ids
+        Rails.logger.info '###############'
+        Rails.logger.info params[:delete_ids]
+        if params[:delete_ids].present?
+          delete_ids = params[:delete_ids].split(',').select{|id|id.present?}
+          Photo.where(id: delete_ids).update_all(topic_id: nil)
+        end
+      end
       redirect_to topic_url(@topic), notice: '话题修改成功'
     else
       render :edit

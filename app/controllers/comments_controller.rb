@@ -42,21 +42,23 @@ class CommentsController < ApplicationController
     end
   end
 
-  def edit() end
+  def edit()
+    @photos = @comment.photos
+  end
 
     def update
     # 删除与评论关联的图片
     origin_ids = @comment.photos.pluck(:id)
     if params[:photo_ids].present? || params[:delete_ids].present?
       ids = params[:photo_ids].split(',').select{|id|id.present?}
-      Photo.where(id: ids).update_all(groupbuy_id: params[:id])
+      Photo.where(id: ids).update_all(comment_id: params[:id])
       
       Rails.logger.info origin_ids
       Rails.logger.info '###############'
       Rails.logger.info params[:delete_ids]
       if params[:delete_ids].present?
         delete_ids = params[:delete_ids].split(',').select{|id|id.present?}
-        Photo.where(id: delete_ids).update_all(groupbuy_id: nil)
+        Photo.where(id: delete_ids).update_all(comment_id: nil)
       end
     end
     
