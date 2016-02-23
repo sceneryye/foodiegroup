@@ -7,6 +7,13 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale,  except: :wechat_notify_url
 
+  # inside your ApplicationController
+  before_action do
+    if current_user && is_admin?
+      Rack::MiniProfiler.authorize_request
+    end
+  end
+
 
   private
 

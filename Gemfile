@@ -55,3 +55,6 @@ gem 'will_paginate', '~> 3.0.6'
   gem 'bcrypt'
   gem 'email_validator'
   gem 'redcarpet'
+
+  # mini-profiler
+  gem 'rack-mini-profiler', require: false
