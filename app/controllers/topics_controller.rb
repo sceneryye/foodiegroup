@@ -16,6 +16,8 @@ class TopicsController < ApplicationController
     @topic.user = current_user
 
     if @topic.save
+      photo_ids = params[:photo_ids].split(',')
+      Photo.where(id: photo_ids).update_all(topic_id: @topic.id)
       redirect_to topic_url(@topic), notice: '话题添加成功'
     else
       render :new

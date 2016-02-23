@@ -1,0 +1,11 @@
+<div class="weui_cells_title"><%= t(:my_groupbuys) %></div>
+<div class="weui_cells weui_cells_access">
+  <% @my_groupbuys.each do |groupbuy| %>
+  <%= link_to groupbuy_path(groupbuy), class: 'weui_cell' do %>
+  <div class="weui_cell_bd weui_cell_primary">
+    <div class="type"><%= current_title groupbuy %></div>
+  </div>
+  <div class="weui_cell_ft"></div>
+  <% end %>
+  <% end %>
+</div>

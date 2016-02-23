@@ -1,0 +1,11 @@
+<div class="weui_cells_title"><%= t(:my_events) %></div>
+<div class="weui_cells weui_cells_access">
+  <% @my_events.each do |event| %>
+  <%= link_to event_path(event), class: 'weui_cell' do %>
+  <div class="weui_cell_bd weui_cell_primary">
+    <div class="type"><%= current_title event %></div>
+  </div>
+  <div class="weui_cell_ft"></div>
+  <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,11 @@
+<div class="weui_cells_title"><%= t(:my_topics) %></div>
+<div class="weui_cells weui_cells_access">
+  <% @my_topics.each do |topic| %>
+  <%= link_to topic_path(topic), class: 'weui_cell' do %>
+  <div class="weui_cell_bd weui_cell_primary">
+    <div class="type"><%= current_title topic %></div>
+  </div>
+  <div class="weui_cell_ft"></div>
+  <% end %>
+  <% end %>
+</div>

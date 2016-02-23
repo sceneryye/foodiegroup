@@ -16,6 +16,18 @@ class UsersController < ApplicationController
     @groups = Group.all
   end
 
+  def my_groupbuys
+    @my_groupbuys = current_user.try(:groupbuys)
+  end
+
+  def my_events
+    @my_events = current_user.try(:events)
+  end
+
+  def my_topics
+    @my_topics = current_user.try(:topics)
+  end
+
   def create
     if user_params[:password].nil?
       user_params[:password] = user_params[:mobile]

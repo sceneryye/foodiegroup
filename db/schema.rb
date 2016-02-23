@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218082132) do
+ActiveRecord::Schema.define(version: 20160223082220) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255, null: false
@@ -202,6 +202,7 @@ ActiveRecord::Schema.define(version: 20160218082132) do
     t.string   "size",         limit: 255
     t.string   "content_type", limit: 255
     t.integer  "comment_id",   limit: 4
+    t.integer  "topic_id",     limit: 4
   end
 
   create_table "tags", force: :cascade do |t|

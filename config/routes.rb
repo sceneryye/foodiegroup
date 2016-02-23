@@ -79,6 +79,10 @@ RailsOnForum::Application.routes.draw do
        resources :user_instetests
     end
 
+    get 'my_groupbuys', to: 'users#my_groupbuys'
+    get 'my_events', to: 'users#my_events'
+    get 'my_topics', to: 'users#my_topics'
+
     resources :groups, only: [:show, :update]
 
     get '/wechat_notify_url', to: 'participants#wechat_notify_url'

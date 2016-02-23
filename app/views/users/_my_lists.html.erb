@@ -1,0 +1,11 @@
+<div class="weui_cells_title"><%= t(:my_lists) %></div>
+<div class="weui_cells weui_cells_access">
+  <% my_lists.each do |my_list| %>
+  <%= link_to "#{@my_path}"_path(my_list.id), class: 'weui_cell' do %>
+  <div class="weui_cell_bd weui_cell_primary">
+    <div class="type"><i class="fa fa-share-alt-square"></i><%= t(:share) %></div>
+  </div>
+  <div class="weui_cell_ft"></div>
+  <% end %>
+  <% end %>
+</div>
