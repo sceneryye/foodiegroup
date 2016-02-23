@@ -1,5 +1,4 @@
 class Admin::ReportsController < ApplicationController
-    
   before_action :autheorize_admin!
   layout 'admin'
   def index
@@ -26,6 +25,4 @@ class Admin::ReportsController < ApplicationController
   def tags_list
     @tags = Tag.all.order(locale: :asc)
   end
-
-
 end
