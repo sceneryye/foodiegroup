@@ -53,10 +53,7 @@
         <th><%=t(:price)%></th>
         <td colspan="2">￥<%=@groupbuy.price%>/<%=@groupbuy.goods_unit%></td>
       </tr>
-      <tr>
-        <th><%=t(:logistics)%></th>
-        <td colspan="2"><%=@groupbuy.logistic.name if @groupbuy.logistic_id%></td>
-      </tr>
+      
       <tr>
         <td colspan='3'>
           <% if @content_pic.present? %>

@@ -1,3 +1,4 @@
+<% provide :title, t(:new_logistic_rule) %>
 <%= form_for @logistic, data: {abide: ''} do |f| %>
 <%= render 'layouts/form_errors', object: @logistic %>
 <% if params[:groupbuy_id].present? %>
