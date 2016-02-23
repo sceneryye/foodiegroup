@@ -4,9 +4,10 @@ require 'digest/sha1'
 class GroupbuysController < ApplicationController
   before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
   before_action :login_with_mobile
+  before_action :set_recommend, only: [:index]
 
   def index
-    @groupbuys = Groupbuy.all.includes(:user).order(created_at: :desc)
+    @groupbuys = Groupbuy.all.includes(:user)
   end
 
   def show
@@ -84,6 +85,7 @@ class GroupbuysController < ApplicationController
     modified_groupbuy_params[:zh_title] = groupbuy_params[:zh_title].blank? ? groupbuy_params[:en_title] : groupbuy_params[:zh_title]
     modified_groupbuy_params[:en_body] = groupbuy_params[:en_body].blank? ? groupbuy_params[:zh_body] : groupbuy_params[:en_body]
     modified_groupbuy_params[:zh_body] = groupbuy_params[:zh_body].blank? ? groupbuy_params[:en_body] : groupbuy_params[:zh_body]
+    modified_groupbuy_params[:recommend] = 5
     @groupbuy = Groupbuy.new(modified_groupbuy_params)
     @groupbuy.pic_url = ''
     @groupbuy.user = current_user
@@ -263,6 +265,13 @@ class GroupbuysController < ApplicationController
   def groupbuy_params
     params.require(:groupbuy).permit(:en_title, :zh_title, :en_body, :zh_body, :end_time,:start_time,:groupbuy_type, :goods_maximal, :goods_minimal, :market_price,
       :groupbuy_price, :pic_url,:name,:mobile,:goods_unit,:price,:pic_url,:logistic_id,:weight)
+  end
+
+  def set_recommend
+    gb = Groupbuy.where("end_time< ? AND recommend > ?", Time.zone.now, 1)
+    gb.each do |groupbuy|
+      groupbuy.update_columns(recommend: 1)
+    end
   end
   
 end

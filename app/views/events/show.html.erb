@@ -70,7 +70,7 @@
 </div>
 <div class="row">
   <div class="small-12 columns">
-    <% if current_user == @event.user %>
+    <% if current_user && (current_user == @event.user || is_admin?) %>
       <%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_event_path(@event), class:"tiny button radius" %>
       <%= link_to '<i class="fa fa-times"></i>'.html_safe + ' ' + t(:delete), @event, method: :delete,
       class:"tiny button alert radius",
