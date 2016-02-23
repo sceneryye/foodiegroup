@@ -57,4 +57,4 @@ gem 'will_paginate', '~> 3.0.6'
   gem 'redcarpet'
 
   # mini-profiler
-  gem 'rack-mini-profiler', require: false
+  #gem 'rack-mini-profiler', require: false
