@@ -2,6 +2,12 @@
 //= require jquery_ujs
 //= require jquery.remotipart
 //= require dropzone
+//= require jquery.iframe-transport
+//= require jquery.remotipart
+//= require foundation/foundation
+//= require foundation/foundation.offcanvas
+//= require foundation/foundation.tab
+//= require sweetalert.min
 //= require_tree .
 //= require_self
 
