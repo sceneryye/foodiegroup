@@ -1,3 +1,4 @@
+
 <div class="participants_list">
   <div class="title">
     <h3>报名详情</h3>
@@ -17,17 +18,7 @@
       报名详情
     </span>
   </div>
-<div>
-  <%=form_for :member,:url=>downorder_admin_reports_path,:method=>:post do |f|%>
-      <%= f.hidden_field :select_all,:class=>"sel_operation", :value => 0 %>
 
-        &nbsp;&nbsp;&nbsp;&nbsp;
-      <%if current_admin.has_right_of("orders","downorder") %>
-        <%= f.submit '导出商品', :class => "btn btn-primary"%>
-       <%end%>
-                    <%end%>
-
-</div>
   <table>
     <tr>
       <th>姓名</th>
