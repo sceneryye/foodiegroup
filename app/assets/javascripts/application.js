@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require jquery.remotipart
 //= require dropzone
+//= require_self
 
 
 //$(function(){ $(document).foundation(); });
