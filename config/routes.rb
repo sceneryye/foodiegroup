@@ -28,7 +28,7 @@ RailsOnForum::Application.routes.draw do
 
     namespace :admin do
     resources :reports
-      post "downorder", :on=>:collection
+      #post "downorder", :on=>:collection
       get '/users_list', to: 'reports#users_list'
       get '/groupbuys_list', to: 'reports#groupbuys_list'
       get '/topics_list', to: 'reports#topics_list'
