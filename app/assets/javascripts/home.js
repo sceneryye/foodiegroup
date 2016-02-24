@@ -34,6 +34,9 @@ obj.each(function(){
     if(s< 10) {
       s = '0' + s;
     }
+    if(h< 10) {
+      h = '0' + h;
+    }
 
     that.find('.countdown-day').text(d + day);
     that.find('.countdown-hour').text(h + ':');
