@@ -4,13 +4,14 @@
     <div class="topics panel  radius ">
       <h2><%= @topic.title %></h2>
       <div class="topic-content">
+      <div><%= @topic.body.html_safe  %></div>
        <% if photos = @topic.photos %>
             <% photos.each do |photo| %>
               <%= image_tag photo.image %>
             <% end %>
         <% end %>
 
-      <p><%= @topic.body.html_safe  %></p>
+      
       <%= topic_info(@topic) %>
       </div>
       <p>   

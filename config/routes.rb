@@ -1,7 +1,7 @@
 RailsOnForum::Application.routes.draw do
   #get 'photos/create'
 
-  scope '/foodiegroup' do
+  #scope '/foodiegroup' do
     get 'groups/show'
     mount ChinaCity::Engine => '/china_city'
 
@@ -100,5 +100,5 @@ RailsOnForum::Application.routes.draw do
     resource :home, only: [:index]
 
     root 'home#index'
-  end
+  #end
 end
