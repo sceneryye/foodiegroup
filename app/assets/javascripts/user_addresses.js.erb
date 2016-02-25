@@ -13,7 +13,7 @@ $(document).ready(function(){
   if(groupbuy_id) {
     $('.address-detail').on('click', function(){
       var id = $(this).data('id');
-      var url = '/foodiegroup/groupbuys/' + groupbuy_id + '?user_addresses_id=' + id;
+      var url = '/groupbuys/' + groupbuy_id + '?user_addresses_id=' + id;
       var post_url = 'user_addresses/' + id;
       $.ajax({
         url: post_url,
@@ -50,7 +50,7 @@ $(document).ready(function(){
             next_selects = selects.slice(selects.index(this) + 1);
             $("option:gt(0)", next_selects).remove();
             if (next_selects.first()[0] && $this.val()) {
-              return $.get("/foodiegroup/china_city/" + ($(this).val()), function(data) {
+              return $.get("/china_city/" + ($(this).val()), function(data) {
                 var i, len, option, results;
                 results = [];
                 for (i = 0, len = data.length; i < len; i++) {

@@ -147,7 +147,7 @@ class ParticipantsController < ApplicationController
     spbill_create_ip = '182.254.138.119'
     trade_type = 'JSAPI'
     total_fee = (money.to_f * 100).to_i
-    notify_url = 'http://vshop.trade-v.com/foodiegroup/wechat_notify_url'
+    notify_url = 'http://foodie.trade-v.com/wechat_notify_url'
     post_data_hash = {:appid => weixin_appid, :mch_id => mch_id, :nonce_str => nonce_str, :body => body, :out_trade_no => out_trade_no, :total_fee => total_fee, :attach => attach, :openid => openid, :spbill_create_ip => spbill_create_ip, :notify_url => notify_url, :trade_type => trade_type}
     sign = create_sign post_data_hash
     post_data_hash[:sign] = sign
@@ -157,7 +157,7 @@ class ParticipantsController < ApplicationController
     res_data_hash = Hash.from_xml(RestClient.post post_url, post_data_xml)
     # return render :text => res_data_hash
     if res_data_hash["xml"]["return_code"] == 'SUCCESS'
-      @url = "http://vshop.trade-v.com/foodiegroup/#{type_name}/#{parent.id}?from=foodiepay&total=#{total_fee}"
+      @url = "http://foodie.trade-v.com/#{type_name}/#{parent.id}?from=foodiepay&total=#{total_fee}"
       prepay_id = res_data_hash["xml"]["prepay_id"]
       @timestamp = Time.now.to_i
       @nonce_str = random_str 32
@@ -183,7 +183,7 @@ class ParticipantsController < ApplicationController
       post_url = "http://www.trade-v.com/temp_info_api"
       openid = params["openid"]
       template_id = "E_Mfmg0TwyE3hRnccleURsU5QpqsPVsj0LD5dU4fu0Y"
-      url = '/foodiegroup/' + parent + '/groupbuy_id'
+      url = '/' + parent + '/groupbuy_id'
       title = participant.event_id.present? ? Event.find_by(id: groupbuy_id).title : Groupbuy.find_by(id: groupbuy_id).title
       data = {
         :first => {:value => '支付成功', :color => "#173177"},

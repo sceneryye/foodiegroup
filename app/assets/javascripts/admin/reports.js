@@ -119,7 +119,7 @@ $('.tags_list .table-content').on('click', '.confirm', function(){
   var url = parent_obj.find("input[name='url']").val();
   var locale = parent_obj.find("input[name='locale']").val();
   var id = parent_obj.find('.id').text();
-  var post_url = '/foodiegroup/tags/' + id;
+  var post_url = '/tags/' + id;
   $.ajax({
     url: post_url,
     type: 'patch',
@@ -161,7 +161,7 @@ $('.tags_list').on('click', '.table-content .delete', function(){
   var that = $(this);
   var parent_obj = that.parent().parent();
   var id = parent_obj.find('.id').text();
-  var post_url = '/foodiegroup/tags/' + id;
+  var post_url = '/tags/' + id;
   swal({
     title: "删除确认",
     text: "点击“确定”将会删除该标签！",
@@ -208,7 +208,7 @@ $('.tags_list ').on('click', '.shown-row .confirm', function(){
   var name = parent_obj.find("input[name='name']").val();
   var url = parent_obj.find("input[name='url']").val();
   var locale = parent_obj.find("input[name='locale']").val();
-  var post_url = '/foodiegroup/tags';
+  var post_url = '/tags';
   if(checkNull(name) || checkNull(url) || checkNull(locale)) {
     swal("失败！", "参数不能为空！", "error");
     return;
@@ -244,7 +244,7 @@ $('.groupbuys-list').on('click', '.edit-title', function(){
   var that = $(this);
   var id = that.data('id');
   var title = that.data('title');
-  var url = '/foodiegroup/groupbuys/' + id;
+  var url = '/groupbuys/' + id;
   swal({
     title: "修改标题",
     text: '请输入你想要修改的标题',
@@ -310,7 +310,7 @@ $('.topic-recommend').on('click', function(){
   var that = $(this);
   var nums = $(this).val();
   var topic_id = $(this).data('id');
-  var url = '/foodiegroup/topics/' + topic_id;
+  var url = '/topics/' + topic_id;
   var nums_value = $(this).data('value');
   swal({
     title: "修改推荐值",

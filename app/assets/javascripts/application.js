@@ -27,7 +27,7 @@ $('.submit-button').on('click', function(){
 })
 
 function get_freightage(){
-	 var url = '/foodiegroup/cal_freightage';
+	 var url = '/cal_freightage';
     var num =  $('.participant-number').val();
     var groupbuy_id = $('.participant-number').data('id');
     if(num > 0) {

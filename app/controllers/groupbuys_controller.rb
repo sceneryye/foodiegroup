@@ -49,7 +49,7 @@ class GroupbuysController < ApplicationController
       :url => request.url.gsub("localhost:5000", "vshop.trade-v.com")
     }
     @sign = create_sign_for_js post_params
-    @a = [request.url, post_params, request.url.gsub("trade", "vshop.trade-v.com")]
+    @a = [request.url, post_params, request.url.gsub("trade", "foodie.trade-v.com")]
 
 
 

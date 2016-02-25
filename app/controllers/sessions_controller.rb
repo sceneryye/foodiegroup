@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
   def auto_login
     session[:return_url] = params[:return_url]
     state = rand(30000).to_s.ljust(5, '0')
-    redirect_url = CGI.escape 'http://vshop.trade-v.com/foodiegroup/sessions/callback?return_url=' + params[:return_url]
+    redirect_url = CGI.escape 'http://foodie.trade-v.com/sessions/callback?return_url=' + params[:return_url]
     url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{WX_APP_ID}&redirect_uri=#{redirect_url}&response_type=code&scope=snsapi_userinfo&state=#{state}#wechat_redirect"
     redirect_to url
   end
