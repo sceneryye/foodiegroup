@@ -19,7 +19,7 @@
 
 <body onload="<%=@onload %>" >
 <script>
-<% if params[:controller] == 'sessions' %>
+<% if controller_name == 'users' %>
 function isWeixinBrowser(){
     var ua = navigator.userAgent.toLowerCase();
       //  alert(ua);
