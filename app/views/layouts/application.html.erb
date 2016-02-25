@@ -19,6 +19,7 @@
 
 <body onload="<%=@onload %>" >
 <script>
+<% if params[:controller] == 'sessions' %>
 function isWeixinBrowser(){
     var ua = navigator.userAgent.toLowerCase();
       //  alert(ua);
@@ -35,6 +36,7 @@ function isWeixinBrowser(){
     location.href = url;
   <% end %>
 }
+<% end %>
 </script>
 
 <div class="off-canvas-wrap" data-offcanvas>

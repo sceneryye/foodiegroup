@@ -38,13 +38,16 @@ obj.each(function(){
       h = '0' + h;
     }
     if(day == 'Day') {
-      if(d != 1) {
-        day = 'Days'
-      }
+      days = 'D';
+      hours = 'H';
+    }
+    else {
+      days = '天';
+      hours = '小时';
     }
 
-    that.find('.countdown-day').text(d + day);
-    that.find('.countdown-hour').text(h + 'h');
+    that.find('.countdown-day').text(d + days);
+    that.find('.countdown-hour').text(h + hours);
     //that.find('.countdown-minute').text(m + ':');
     //that.find('.countdown-second').text(s);
   }, 1000)
