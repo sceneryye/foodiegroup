@@ -10,3 +10,10 @@ $('.show-groups').on('click', function(){
   console.log(now - event_time);
   $('.group-list').toggle(1000);
   });
+
+$(document).ready(function(){
+  $('.share-alert').on('click', function(){
+    var shareAlert = $(this).data('alert');
+    alert(shareAlert);
+  })
+})

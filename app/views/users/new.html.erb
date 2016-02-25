@@ -4,7 +4,7 @@
   <%if !signed_in?%>
   <div class="large-7 medium-6 small-12 columns">
     <% if params[:from].nil? %>
-    <h2>欢迎您加入吃货帮!</h2>
+    <h2><%= session[:locale] == 'zh' ? '欢迎您加入吃货帮!' : 'Welcome to Foodiegroup!' %></h2>
     <% end %>
     <% if params[:groupid].present? %>
     <% if session[:locale]=='zh' %>

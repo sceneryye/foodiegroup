@@ -24,7 +24,7 @@ obj.each(function(){
     }
 
     var d=Math.floor(t/1000/60/60/24);
-    var h=Math.floor(t/1000/60/60%24);
+    var h=Math.ceil(t/1000/60/60%24);
     var m=Math.floor(t/1000/60%60);
     var s=Math.floor(t/1000%60);
 
@@ -37,11 +37,16 @@ obj.each(function(){
     if(h< 10) {
       h = '0' + h;
     }
+    if(day == 'Day') {
+      if(d != 1) {
+        day = 'Days'
+      }
+    }
 
     that.find('.countdown-day').text(d + day);
-    that.find('.countdown-hour').text(h + ':');
-    that.find('.countdown-minute').text(m + ':');
-    that.find('.countdown-second').text(s);
+    that.find('.countdown-hour').text(h + 'h');
+    //that.find('.countdown-minute').text(m + ':');
+    //that.find('.countdown-second').text(s);
   }, 1000)
 
   

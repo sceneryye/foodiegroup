@@ -247,7 +247,7 @@ en:
   edit_profile: Edit Profile
   maintain_addresses: Delivery Address
   interests: interests
-  membership: membership
+  membership: Membership
   name: Name
   mobile: Mobile
   address: Address
@@ -365,3 +365,4 @@ en:
   my_groupbuys: My Groupbuys
   my_events: My Events
   my_topics: My Topics
+  login: Login

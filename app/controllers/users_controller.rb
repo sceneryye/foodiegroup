@@ -131,6 +131,8 @@ class UsersController < ApplicationController
       end
     end
 
+    @share_alert = session[:locale] == 'zh' ? '请点击右上角的分享按钮进行分享' : 'Please click the SHARE BUTTON on the top right conner'
+
     render layout: "profile2", locals: {page: type}
   end
 

@@ -41,7 +41,7 @@
 
     <%= link_to my_topics_path,class: 'weui_cell' do %>
     <div class="weui_cell_bd weui_cell_primary">
-      <div class="type"><%= t(:forum) %></div>
+      <div class="type"><%= t(:forums) %></div>
     </div>
     <div class="weui_cell_ft"></div>
     <% end %>
@@ -85,7 +85,7 @@
   <% if @group %>
   <div class="weui_cells_title"><%= t(:others) %></div>
   <div class="weui_cells weui_cells_access">
-    <%= link_to "http://www.trade-v.com/foodies/foodie_group_share?groupid=#{current_user.group_id}&groupname=#{@group.name}&imgurl=#{@group_admin.avatar}&name=#{@group_admin.nickname}&desc=#{@group.group_desc}", class: 'weui_cell' do %>
+    <%= link_to "javascript:void", class: 'weui_cell share-alert', 'data-alert' => @share_alert do %>
     <div class="weui_cell_bd weui_cell_primary">
       <div class="type"><i class="fa fa-share-alt-square"></i><%= t(:share) %></div>
     </div>
