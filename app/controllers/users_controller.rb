@@ -11,6 +11,9 @@ class UsersController < ApplicationController
       user = User.where(weixin_openid: session[:openid])
       if user.present?
         login(user.first)
+        if return_url = params[:return_url]
+          redirect_to return_url
+        end
       end
     end
     @user = User.new
