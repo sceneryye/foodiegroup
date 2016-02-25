@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       if user.present?
         login(user.first)
         if return_url = params[:return_url]
-          redirect_to return_url
+          return redirect_to return_url
         end
       end
     end

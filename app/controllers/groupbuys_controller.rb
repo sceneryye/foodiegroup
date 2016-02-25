@@ -13,7 +13,7 @@ class GroupbuysController < ApplicationController
   def show
     Rails.logger.info "---------------#{session[:locale]}"
     if params[:from] == 'foodiepay' && params[:total].present?
-      @total = params[:total]
+      @total = params[:total].to_f / 100
       @alert = true
     end
     @parent = @groupbuy  = Groupbuy.find(params[:id])
