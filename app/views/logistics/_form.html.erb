@@ -6,7 +6,8 @@
   <%= hidden_field_tag :groupbuy_id, params[:groupbuy_id] %>
 <% end %>
 <div>
- <%= f.text_area :name, required: true, placeholder:'例如江浙沪8元,其他地区10元,新疆西藏20元'%>
+<% title = session[:locale] == 'zh' ? '例如江浙沪8元,其他地区10元,新疆西藏20元' : 'eg, ￥5 for ZH, ￥20 for XJ, ￥10 for others' %>
+ <%= f.text_area :name, required: true, placeholder: title %>
  <%= show_error_message('物流规则名称，不能为空！') %>
 </div>
 <!-- <div class="row">
@@ -34,7 +35,7 @@
 
 <div class="row collapse">
   <div class="small-3 columns">
-    <span class="postfix">首重</span>
+    <span class="postfix"><%= t(:first_weight) %></span>
   </div>
   <div class="small-3 columns">
     <span class="postfix">     
@@ -42,7 +43,7 @@
     </span>
   </div>
    <div class="small-3 columns">
-    <span class="postfix">续重</span>
+    <span class="postfix"><%= t(:additional_weight) %></span>
   </div>
   <div class="small-3 columns">
     <span class="postfix">     
@@ -56,7 +57,7 @@
 
 <div class="row collapse">
   <div class="small-3 columns">
-    <span class="postfix">首重</span>
+    <span class="postfix"><%= t(:first_weight) %></span>
   </div>
   <div class="small-3 columns">
     <span class="postfix">     
@@ -64,7 +65,7 @@
     </span>
   </div>
    <div class="small-3 columns">
-    <span class="postfix">续重</span>
+    <span class="postfix"><%= t(:additional_weight) %></span>
   </div>
   <div class="small-3 columns">
     <span class="postfix">     
@@ -78,7 +79,7 @@
 
 <div class="row collapse">
   <div class="small-3 columns">
-    <span class="postfix">首重</span>
+    <span class="postfix"><%= t(:first_weight) %></span>
   </div>
   <div class="small-3 columns">
     <span class="postfix">     
@@ -86,7 +87,7 @@
     </span>
   </div>
    <div class="small-3 columns">
-    <span class="postfix">续重</span>
+    <span class="postfix"><%= t(:additional_weight) %></span>
   </div>
   <div class="small-3 columns">
     <span class="postfix">     
@@ -100,7 +101,7 @@
 
 <div class="row collapse">
   <div class="small-3 columns">
-    <span class="postfix">首重</span>
+    <span class="postfix"><%= t(:first_weight) %></span>
   </div>
   <div class="small-3 columns">
     <span class="postfix">     
@@ -108,7 +109,7 @@
     </span>
   </div>
    <div class="small-3 columns">
-    <span class="postfix">续重</span>
+    <span class="postfix"><%= t(:additional_weight) %></span>
   </div>
   <div class="small-3 columns">
     <span class="postfix">     
@@ -122,7 +123,7 @@
 
 <div class="row collapse">
   <div class="small-3 columns">
-    <span class="postfix">首重</span>
+    <span class="postfix"><%= t(:first_weight) %></span>
   </div>
   <div class="small-3 columns">
     <span class="postfix">     
@@ -130,7 +131,7 @@
     </span>
   </div>
    <div class="small-3 columns">
-    <span class="postfix">续重</span>
+    <span class="postfix"><%= t(:additional_weight) %></span>
   </div>
   <div class="small-3 columns">
     <span class="postfix">     
@@ -144,7 +145,7 @@
 
 <div class="row collapse">
   <div class="small-3 columns">
-    <span class="postfix">首重</span>
+    <span class="postfix"><%= t(:first_weight) %></span>
   </div>
   <div class="small-3 columns">
     <span class="postfix">     
@@ -152,7 +153,7 @@
     </span>
   </div>
    <div class="small-3 columns">
-    <span class="postfix">续重</span>
+    <span class="postfix"><%= t(:additional_weight) %></span>
   </div>
   <div class="small-3 columns">
     <span class="postfix">     
