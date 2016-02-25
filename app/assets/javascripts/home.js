@@ -28,12 +28,7 @@ obj.each(function(){
     var m=Math.floor(t/1000/60%60);
     var s=Math.floor(t/1000%60);
 
-    if(m < 10) {
-      m = '0' + m;
-    }
-    if(s< 10) {
-      s = '0' + s;
-    }
+    
     if(h< 10) {
       h = '0' + h;
     }

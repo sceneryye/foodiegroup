@@ -16,6 +16,7 @@
       <h4><%= link_to current_title(event), event%></h4>
       <span><%=t(:by)%>:&nbsp;<%=link_to event.user.nickname.html_safe,profile_path(event.user) %><span>  
       <div class="countdown">
+      <span><i class="fa fa-clock-o"></i></span>
         <span class="countdonw-title"></span>
         <span class="countdown-day"></span>
         <span class="countdown-hour"></span>
