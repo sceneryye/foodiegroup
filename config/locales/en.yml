@@ -355,11 +355,12 @@ en:
   created_at: Create Time
   signin_signup: Sign In / Sign Up
   forum: Forum
+  forums: Forums
   logistic_ruler: Logistic Rule
   deal_english_title: Deal Title in English
   new_logistic_rule: New Logistic Rule
   edit_groupbuy: Deal Edit
-  setting: Setting
+  settings: Setting
   others: Others
   my_groupbuys: My Groupbuys
   my_events: My Events

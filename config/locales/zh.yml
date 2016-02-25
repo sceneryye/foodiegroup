@@ -467,11 +467,12 @@ zh:
   created_at: 创建时间
   signin_signup: 登录 / 注册
   forum: 论坛
-  logistic_ruler: 支付规则
+  forums: 论坛
+  logistic_ruler: 物流规则
   deal_english_title: 团购英文标题
   new_logistic_rule: 新建物流规则
   edit_groupbuy: 编辑团购
-  setting: 设置
+  settings: 设置
   others: 其它
   my_groupbuys: 我的团购
   my_events: 我的活动
