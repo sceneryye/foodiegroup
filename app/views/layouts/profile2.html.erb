@@ -16,6 +16,7 @@
     </a>
   </div>
 
+<% if current_user && current_user == User.find_by(nickname: params[:id]) %>
 <div class="weui_cells_title"><%= t(:histroy) %></div>
   <div class="weui_cells weui_cells_access">
     <%= link_to my_orders_path,class: 'weui_cell' do %>
@@ -46,6 +47,7 @@
     <div class="weui_cell_ft"></div>
     <% end %>
   </div>
+
 
   <div class="weui_cells_title"><%= t(:settings) %></div>
     <div class="weui_cells weui_cells_access">
@@ -79,6 +81,7 @@
       <% end %>
   <% end %>
     </div>
+    <% end %>
 
 
 

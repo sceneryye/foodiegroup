@@ -80,9 +80,9 @@ RailsOnForum::Application.routes.draw do
        resources :user_instetests
     end
 
-    get 'my_groupbuys', to: 'users#my_groupbuys'
-    get 'my_events', to: 'users#my_events'
-    get 'my_topics', to: 'users#my_topics'
+    get '/users/:id/my_groupbuys', to: 'users#my_groupbuys', as: :my_groupbuys
+    get '/users/:id/my_events', to: 'users#my_events', as: :my_events
+    get '/users/:id/my_topics', to: 'users#my_topics', as: :my_topics
 
     resources :groups, only: [:show, :update]
 
@@ -91,7 +91,7 @@ RailsOnForum::Application.routes.draw do
     get '/:id',         to: 'users#show', as: :profile
     get '/:id/edit', to: 'users#edit', as: :edit_profile
     get '/:id/user_info', to: 'users#user_info', as: :user_info
-    get '/users/my_orders', to: 'users#my_orders', as: :my_orders
+    get '/users/:id/my_orders', to: 'users#my_orders', as: :my_orders
 
     get '/sessions/auto_login', to: 'sessions#auto_login', as: :wx_auto_login
     get '/sessions/callback', to: 'sessions#callback', as: :wx_callback

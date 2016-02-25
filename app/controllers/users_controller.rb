@@ -1,9 +1,10 @@
 #encoding:utf-8
 class UsersController < ApplicationController
   before_action :select_user, only: [:show, :edit, :update, :destroy, :user_info, :my_orders]
-  before_action only: [:edit, :update, :destroy] do
+  before_action only: [:edit, :update, :destroy, :my_orders, :my_groupbuys, :my_events, :my_topics] do
     validate_permission!(select_user)
   end
+  
 
   def new
     if session[:openid].present?
@@ -196,4 +197,5 @@ end
 def select_user
   @user = User.find_by_username(params[:id]) || User.find_by_nickname(params[:id])
 end
+
 end
