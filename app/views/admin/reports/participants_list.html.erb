@@ -36,9 +36,9 @@
       <td><%= p.name %></td>
       <td><%= p.mobile %></td>
       <td style="width: 25%"><%= p.address %></td>
-      <td><%= p.amount %><%= @groupbuy.goods_unit %></td>
-      <td><%= @groupbuy.price %></td>
-      <td><%= p.amount * @groupbuy.price %></td>
+      <td><%= p.quantity %><%= @groupbuy.goods_unit %></td>
+      <td><%= @groupbuy.current_price %></td>
+      <td><%= p.total %></td>
       <td><%= is_paid p %></td>
       <td id="participant-<%= p.id %>" ><%= is_shiped p %></td>
       <td><%= p.created_at.strftime('%F') %></td>

@@ -45,6 +45,7 @@ class SessionsController < ApplicationController
     if (user = User.find_by(weixin_openid: openid)) && openid.present?
       login user
       session[:mobile] = user.mobile
+      Rails.logger.info "---------------return_url=#{return_url}"
       redirect_to return_url
     else
       data = get_user_info(openid, access_token)
@@ -54,6 +55,7 @@ class SessionsController < ApplicationController
       Rails.logger.info "---------------#{data}"
       Rails.logger.info "---------------#{session[:openid]}"
       Rails.logger.info "---------------#{session[:nickname]}"
+      Rails.logger.info "---------------return_url=#{return_url}"
       redirect_to register_path(return_url: return_url)
     end
   end
