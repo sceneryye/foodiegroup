@@ -3,6 +3,9 @@ require 'rest-client'
 require 'open-uri'
 class SessionsController < ApplicationController
   def new
+    if signed_in?
+      return redirect_to profile_path(current_user)
+    end
   end
 
   def create
