@@ -1,10 +1,13 @@
 #encoding:utf-8
 require 'rest-client'
 require 'digest/sha1'
+require 'convert_picture'
 class GroupbuysController < ApplicationController
+  include ConvertPicture
   before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
   before_action :login_with_mobile
   before_action :set_recommend, only: [:index]
+  helper_method :cut_pic
 
   def index
     @groupbuys = Groupbuy.all.includes(:user)
@@ -250,6 +253,10 @@ class GroupbuysController < ApplicationController
   end
 
   private
+
+  def cut_pic photo
+    other_img photo, 'mini'
+  end
 
   def login_with_mobile
     if session[:mobile].present?

@@ -1,4 +1,6 @@
+require 'convert_picture'
 class PhotosController < ApplicationController
+  include ConvertPicture
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
 
   # GET /photos
@@ -39,6 +41,8 @@ class PhotosController < ApplicationController
      file = File.open(filepath, 'wb') do |file|
        file.write(uploaded_io.read)
      end
+     path = "#{PIC_PATH}/#{params[:parent]}"
+     resize filename, 'mini', 100, 100, path
      photo_params = {}
      photo_params[:image] = "/#{params[:parent]}/#{filename}"
      photo_params[:content_type] = content_type
