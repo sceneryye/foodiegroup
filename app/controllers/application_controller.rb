@@ -1,9 +1,11 @@
 #encoding:utf-8
+require 'convert_picture'
 class ApplicationController < ActionController::Base
   include SessionsHelper
   include ApplicationHelper
+  include ConvertPicture
   protect_from_forgery with: :exception
-  helper_method :signed_in?, :current_user,:forum_id
+  helper_method :signed_in?, :current_user,:forum_id, :cut_pic
 
   before_action :set_locale,  except: :wechat_notify_url
 
@@ -11,6 +13,10 @@ class ApplicationController < ActionController::Base
 
 
   private
+
+  def cut_pic photo
+    other_img photo, 'mini'
+  end
 
   def set_locale
     # 可以將 ["en", "zh-TW"] 設定為 VALID_LANG 放到 config/environment.rb 中
