@@ -47,7 +47,7 @@ class SessionsController < ApplicationController
       session[:mobile] = user.mobile
       Rails.logger.info "---------------return_url=#{return_url}"
       redirect_to return_url
-    else
+    elsif return_url.split('?').first.in? ['http://foodie.trade-v.com/register', 'http://foodie.trade-v.com/login']
       data = get_user_info(openid, access_token)
       session[:openid] = data["openid"]
       session[:avatar] = data["headimgurl"]
@@ -56,7 +56,9 @@ class SessionsController < ApplicationController
       Rails.logger.info "---------------#{session[:openid]}"
       Rails.logger.info "---------------#{session[:nickname]}"
       Rails.logger.info "---------------return_url=#{return_url}"
-      redirect_to register_path(return_url: return_url)
+      redirect_to register_path
+    else
+      redirect_to return_url
     end
   end
 
