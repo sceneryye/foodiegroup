@@ -58,6 +58,10 @@ class SessionsController < ApplicationController
       Rails.logger.info "---------------return_url=#{return_url}"
       redirect_to register_path
     else
+      data = get_user_info(openid, access_token)
+      session[:openid] = data["openid"]
+      session[:avatar] = data["headimgurl"]
+      session[:nickname] = data["nickname"]
       redirect_to return_url
     end
   end
