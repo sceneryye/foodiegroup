@@ -276,7 +276,7 @@ class ParticipantsController < ApplicationController
   private
 
   def select_participant
-    @participant = Participant.find(params[:id])
+    @participant = Participant.find_by(id: (params[:id] || params[:participant_id]))
   end
 
   def participant_params
