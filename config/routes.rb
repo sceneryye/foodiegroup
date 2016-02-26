@@ -70,11 +70,11 @@ RailsOnForum::Application.routes.draw do
     resources :comments, only: [:edit, :update, :destroy]
 
     resources :participants, only: [:edit, :update, :destroy, :show] do    
-      get 'wechat_pay', on: :member
       get   'confirm_paid'  ,on: :member
       post 'confirm_shiped', on: :member
 
     end
+    get 'wechat_pay', to: 'participants#wechat_pay', as: :wechat_pay
 
     resources :users,   only: [:create, :update, :destroy] do
        resources :user_instetests

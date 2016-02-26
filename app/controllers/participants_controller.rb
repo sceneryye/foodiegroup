@@ -9,7 +9,7 @@ class ParticipantsController < ApplicationController
     validate_permission!(select_participant.user)
   end
 
-  before_action :select_participant, only: [:edit, :show, :update, :destroy, :confirm_paid,:confirm_shiped,:wechat_pay]
+  before_action :select_participant, only: [:edit, :show, :update, :destroy, :confirm_paid,:confirm_shiped]
 
   before_action only: [:new, :create,:index] do
     if params[:groupbuy_id]
@@ -108,7 +108,7 @@ class ParticipantsController < ApplicationController
   end
 
   def wechat_pay
-
+    @participant = Participant.find_by(id: params[:participant_id])
     if @participant.event_id
       parent = @participant.event
       type_name = 'events'

@@ -79,7 +79,7 @@
 
     <div class="pay-button">
       <div class="columns small-4 small-offset-2">
-        <%= link_to wechat_pay_participant_path(@participant) do %>
+        <%= link_to wechat_pay_path(participant_id: @participant.id) do %>
         <div class="button tiny"><%= t(:pay_online) %></div>
         <% end %>
       </div>
