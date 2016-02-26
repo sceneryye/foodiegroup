@@ -142,7 +142,7 @@ class ParticipantsController < ApplicationController
     attach = "#{parent.id}_#{@participant.id}_#{@participant.user_id}"
     nonce_str = random_str 32
     out_trade_no = Time.new.to_i.to_s + rand(10 ** 10).to_s.rjust(10, '0')
-    body = URI.decode event_name
+    body = "tile=#{event_name[0..15]}"
     openid = openid
     spbill_create_ip = '182.254.138.119'
     trade_type = 'JSAPI'
