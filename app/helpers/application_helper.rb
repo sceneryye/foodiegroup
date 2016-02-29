@@ -1,3 +1,4 @@
+#encoding:utf-8
 module ApplicationHelper
   def show_error_message(message = I18n.t('activerecord.errors.messages.blank'))
     ['<small class="error">', message, '</small>'].join.html_safe
@@ -205,5 +206,28 @@ def vote_for(object)
     end
   end
 
-  
+  def translate_of word, number = nil
+    word = word.to_sym
+    if session[:locale] == 'zh'
+      if number
+        if ZH_TO_EN[word].present?
+          return "#{number.to_i.to_s}<span class='two-spaces'>#{word}</span>"
+        else
+          return EN_TO_ZH[word].present? ? "#{number.to_i.to_s} + <span class='two-spaces'>#{EN_TO_ZH[word]}</span>" : pluralize(number.to_i, word)
+        end
+      else
+        return EN_TO_ZH[word].present? ? EN_TO_ZH[word] : word
+      end
+    elsif session[:locale] == 'en'
+      if number
+        if EN_TO_ZH[word].present?
+          return pluralize(number.to_i, word)
+        else
+          return ZH_TO_EN[word].present? ? pluralize(number.to_i, ZH_TO_EN[word]) : "#{number.to_i.to_s} + <span class='two-spaces'>#{word}</span>"
+        end
+      else
+        return ZH_TO_EN[word].present? ? ZH_TO_EN[word] : word
+      end
+    end
+  end
 end

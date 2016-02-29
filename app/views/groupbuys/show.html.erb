@@ -35,23 +35,23 @@
         </tr>
         <tr>
           <th><%=t(:inventory)%></th>
-          <td colspan="2"><%=@groupbuy.goods_maximal%><%=@groupbuy.goods_unit%></td>
+          <td colspan="2"><%=translate_of(@groupbuy.goods_unit, @groupbuy.goods_maximal).html_safe%></td>
         </tr>
         <tr>
           <th><%=t(:goods_minimal)%></th>
-          <td colspan="2"><%=@groupbuy.goods_minimal%><%=@groupbuy.goods_unit%></td>
+          <td colspan="2"><%=translate_of(@groupbuy.goods_unit, @groupbuy.goods_minimal).html_safe%></td>
         </tr>
         <tr>
           <th><%=t(:market_price)%></th>
-          <td colspan="2">￥<%=@groupbuy.market_price%>/<%=@groupbuy.goods_unit%></td>
+          <td colspan="2">￥<%=@groupbuy.market_price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
         </tr>
         <tr>
           <th><%=t(:groupbuy_price)%></th>
-          <td colspan="2">￥<%=@groupbuy.groupbuy_price%>/<%=@groupbuy.goods_unit%></td>
+          <td colspan="2">￥<%=@groupbuy.groupbuy_price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
         </tr>
         <tr>
           <th><%=t(:price)%></th>
-          <td colspan="2">￥<%=@groupbuy.price%>/<%=@groupbuy.goods_unit%></td>
+          <td colspan="2">￥<%=@groupbuy.price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
         </tr>
 
         <tr>
