@@ -226,7 +226,7 @@ en:
   start_time: Start Time
   end_time: End Time
   price:  Price
-  goods_minimal: MOQ
+  goods_minimal: Minimum Order
   new_forum:  New Forum
   edit_forum: Edit Forum
   new_topic:  Add new discuz
@@ -247,7 +247,7 @@ en:
   edit_profile: Edit Profile
   maintain_addresses: Delivery Address
   interests: interests
-  membership: Membership
+  membership: About Group Buying
   name: Name
   mobile: Mobile
   address: Address
