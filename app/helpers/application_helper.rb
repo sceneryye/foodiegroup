@@ -231,7 +231,7 @@ def vote_for(object)
         end
       end
     rescue
-      return number.to_i.to_s + word
+      return number.to_i.to_s + word.to_s
     end
   end
 end
