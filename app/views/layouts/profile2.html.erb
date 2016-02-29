@@ -96,6 +96,13 @@
       <div class="weui_cell_ft"></div>
       <% end %>
 
+      <%= link_to register_path, class: 'weui_cell' do %>
+      <div class="weui_cell_bd weui_cell_primary">
+        <div class="type"><i class="fa fa-book"></i><%= t(:membership) %></div>
+      </div>
+      <div class="weui_cell_ft"></div>
+      <% end %>
+
       <%= link_to "javascript:void", class: 'weui_cell share-alert', 'data-alert' => @share_alert do %>
       <div class="weui_cell_bd weui_cell_primary">
         <div class="type"><i class="fa fa-share-alt-square"></i><%= t(:share) %></div>
@@ -103,12 +110,7 @@
       <div class="weui_cell_ft"></div>
       <% end %>
 
-      <%= link_to register_path, class: 'weui_cell' do %>
-      <div class="weui_cell_bd weui_cell_primary">
-        <div class="type"><i class="fa fa-book"></i><%= t(:membership) %></div>
-      </div>
-      <div class="weui_cell_ft"></div>
-      <% end %>
+      
     </div>
     <% end %>
 
