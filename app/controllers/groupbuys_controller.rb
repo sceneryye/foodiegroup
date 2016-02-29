@@ -29,7 +29,13 @@ class GroupbuysController < ApplicationController
     @active = @groupbuy.comments.count > 10 ? true : false
     @participant = @parent.participants.new
     @comment = @parent.comments.new
-    @participants = @groupbuy.participants.includes(:user)
+    if current_user && current_user.role.in?(['1', '2'])
+      @participants = @groupbuy.participants.includes(:user)
+    elsif current_user
+      @participants = @groupbuy.participants.includes(:user).where(user_id: current_user.try(:id))
+    else
+      @participants = []
+    end
     more = 10
     @comments = @groupbuy.comments.includes(:user)[0...more]
     

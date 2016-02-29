@@ -1,55 +1,55 @@
   <% content_for(:content) do %>
-<div class="main-content">
+  <div class="main-content">
 
-  <% if @user %>
-  <div class="weui_cells weui_cells_access">
-    <a class="weui_cell" href="<%= user_info_path(params[:id]) %>">
-      <div class="weui_cell_hd">
-        <%= image_tag @user.avatar %>
-      </div>
-      <div class="weui_cell_bd weui_cell_primary">
-        <div class="nickname"><%= @user.nickname %></div>
-      </div>
-      <div class="weui_cell_ft">
+    <% if @user %>
+    <div class="weui_cells weui_cells_access">
+      <a class="weui_cell" href="<%= user_info_path(params[:id]) %>">
+        <div class="weui_cell_hd">
+          <%= image_tag @user.avatar %>
+        </div>
+        <div class="weui_cell_bd weui_cell_primary">
+          <div class="nickname"><%= @user.nickname %></div>
+        </div>
+        <div class="weui_cell_ft">
 
-      </div>
-    </a>
-  </div>
+        </div>
+      </a>
+    </div>
 
-<% if current_user && current_user == User.find_by(nickname: params[:id]) %>
-<div class="weui_cells_title"><%= t(:histroy) %></div>
-  <div class="weui_cells weui_cells_access">
-    <%= link_to my_orders_path,class: 'weui_cell' do %>
+    <% if current_user && current_user == User.find_by(nickname: params[:id]) %>
+    <div class="weui_cells_title"><%= t(:histroy) %></div>
+    <div class="weui_cells weui_cells_access">
+      <%= link_to my_orders_path,class: 'weui_cell' do %>
       <div class="weui_cell_bd weui_cell_primary">
         <div class="type"><i class="fa fa-bars"></i><%= t(:my_orders) %></div>
       </div>
       <div class="weui_cell_ft"></div>
-    <% end %>
+      <% end %>
 
-    <%= link_to my_groupbuys_path,class: 'weui_cell' do %>
-    <div class="weui_cell_bd weui_cell_primary">
-      <div class="type"><%= t(:groupbuy) %></div>
+      <%= link_to my_groupbuys_path,class: 'weui_cell' do %>
+      <div class="weui_cell_bd weui_cell_primary">
+        <div class="type"><%= t(:groupbuy) %></div>
+      </div>
+      <div class="weui_cell_ft"></div>
+      <% end %>
+
+      <%= link_to my_events_path,class: 'weui_cell' do %>
+      <div class="weui_cell_bd weui_cell_primary">
+        <div class="type"><%= t(:event) %></div>
+      </div>
+      <div class="weui_cell_ft"></div>
+      <% end %>
+
+      <%= link_to my_topics_path,class: 'weui_cell' do %>
+      <div class="weui_cell_bd weui_cell_primary">
+        <div class="type"><%= t(:forums) %></div>
+      </div>
+      <div class="weui_cell_ft"></div>
+      <% end %>
     </div>
-    <div class="weui_cell_ft"></div>
-    <% end %>
-
-    <%= link_to my_events_path,class: 'weui_cell' do %>
-    <div class="weui_cell_bd weui_cell_primary">
-      <div class="type"><%= t(:event) %></div>
-    </div>
-    <div class="weui_cell_ft"></div>
-    <% end %>
-
-    <%= link_to my_topics_path,class: 'weui_cell' do %>
-    <div class="weui_cell_bd weui_cell_primary">
-      <div class="type"><%= t(:forums) %></div>
-    </div>
-    <div class="weui_cell_ft"></div>
-    <% end %>
-  </div>
 
 
-  <div class="weui_cells_title"><%= t(:settings) %></div>
+    <div class="weui_cells_title"><%= t(:settings) %></div>
     <div class="weui_cells weui_cells_access">
       <%= link_to user_addresses_path(@user), class: 'weui_cell' do %>
       <div class="weui_cell_bd weui_cell_primary">
@@ -64,7 +64,7 @@
       </div>
       <div class="weui_cell_ft"></div>
       <% end %>
-  <% if @groups %>
+      <% if @groups %>
       <%= link_to "javascript:void(0)", class: 'weui_cell show-groups' do %>
       <div class="weui_cell_bd weui_cell_primary">
         <div class="type"><i class="fa fa-users"></i><%= t(:group_management) %></div>
@@ -79,39 +79,47 @@
         <%= link_to  group.name, group_path(group) %>
       </div>
       <% end %>
-  <% end %>
+      <% end %>
     </div>
     <% end %>
 
 
 
-  <% if @group %>
-  <div class="weui_cells_title"><%= t(:others) %></div>
-  <div class="weui_cells weui_cells_access">
-    <%= link_to "javascript:void", class: 'weui_cell share-alert', 'data-alert' => @share_alert do %>
-    <div class="weui_cell_bd weui_cell_primary">
-      <div class="type"><i class="fa fa-share-alt-square"></i><%= t(:share) %></div>
+    <% if @group %>
+    <div class="weui_cells_title"><%= t(:others) %></div>
+    <div class="weui_cells weui_cells_access">
+
+      <%= link_to contact_us_path, class: 'weui_cell' do %>
+      <div class="weui_cell_bd weui_cell_primary">
+      <div class="type"><i class="fa fa-book"></i><%= t(:contact_us) %></div>
+      </div>
+      <div class="weui_cell_ft"></div>
+      <% end %>
+
+      <%= link_to "javascript:void", class: 'weui_cell share-alert', 'data-alert' => @share_alert do %>
+      <div class="weui_cell_bd weui_cell_primary">
+        <div class="type"><i class="fa fa-share-alt-square"></i><%= t(:share) %></div>
+      </div>
+      <div class="weui_cell_ft"></div>
+      <% end %>
+
+      <%= link_to register_path, class: 'weui_cell' do %>
+      <div class="weui_cell_bd weui_cell_primary">
+        <div class="type"><i class="fa fa-book"></i><%= t(:membership) %></div>
+      </div>
+      <div class="weui_cell_ft"></div>
+      <% end %>
     </div>
-    <div class="weui_cell_ft"></div>
     <% end %>
 
-    <%= link_to register_path, class: 'weui_cell' do %>
-    <div class="weui_cell_bd weui_cell_primary">
-    <div class="type"><i class="fa fa-book"></i><%= t(:membership) %></div>
-    </div>
-    <div class="weui_cell_ft"></div>
+
+
     <% end %>
+    <div class="large-12 columns profile-content hidden" id="datas">
+      <%= yield :profile_content %>
+    </div>
+
   </div>
-  <% end %>
-
-
-
-  <% end %>
-  <div class="large-12 columns profile-content hidden" id="datas">
-    <%= yield :profile_content %>
-  </div>
-
-</div>
   <% end %>
 
 

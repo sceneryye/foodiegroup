@@ -74,3 +74,16 @@ $primary-color: #008CBA;
     }
   }
 }
+
+/***********Contact Us***************/
+.contact-us {
+  font-size: 0.9rem;
+  margin-top: 50px;
+  .contents {
+    margin-left: 20%;
+  }
+  .value-left {
+    padding-left: 20px;
+    color: $light-slate-gray;
+  }
+}

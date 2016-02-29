@@ -41,6 +41,7 @@ class PhotosController < ApplicationController
      file = File.open(filepath, 'wb') do |file|
        file.write(uploaded_io.read)
      end
+     # resize the picture size
      path = "#{PIC_PATH}/#{params[:parent]}"
      resize filename, 'mini', 100, 100, path
      photo_params = {}
@@ -53,7 +54,7 @@ class PhotosController < ApplicationController
 
      @photo = Photo.new(photo_params)
      @photo.save
-     res = {id: @photo.id, pathname: @photo.image}.to_json
+     res = {id: @photo.id, pathname: @photo.image, filename: filename, origin_path: filepath}.to_json
      render json: res
    end
  end

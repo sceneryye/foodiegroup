@@ -83,6 +83,7 @@ RailsOnForum::Application.routes.draw do
     get '/users/:id/my_groupbuys', to: 'users#my_groupbuys', as: :my_groupbuys
     get '/users/:id/my_events', to: 'users#my_events', as: :my_events
     get '/users/:id/my_topics', to: 'users#my_topics', as: :my_topics
+    get 'users/contact_us', to: 'users#contact_us', as: :contact_us
 
     resources :groups, only: [:show, :update]
 

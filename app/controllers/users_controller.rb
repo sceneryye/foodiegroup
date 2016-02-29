@@ -98,9 +98,7 @@ class UsersController < ApplicationController
       @a = [request.url, post_params, request.url.gsub("trade", "foodie.trade-v.com")]
     end
 
-
     type = params[:type] || 'topic'
-
     case type
     when 'topic'
       @user = User.includes(:topics).find_by_username(params[:id])
@@ -127,17 +125,18 @@ class UsersController < ApplicationController
         @group_admin = User.find_by_id(@group.user_id)
       end
       if ['1', '2'].include? current_user.try(:role)
-
         @groups = Group.where(user_id: current_user.id)
         if current_user.role == '1'
           @groups = Group.all
         end
       end
     end
-
     @share_alert = session[:locale] == 'zh' ? '请点击右上角的分享按钮进行分享' : 'Please click the SHARE BUTTON on the top right conner'
-
     render layout: "profile2", locals: {page: type}
+  end
+
+
+  def contact_us
   end
 
   def user_info
