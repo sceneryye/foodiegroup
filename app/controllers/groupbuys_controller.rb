@@ -98,17 +98,6 @@ class GroupbuysController < ApplicationController
     @groupbuy.user = current_user
     @groupbuy.locale = session[:locale]
 
-    # uploaded_io = params[:file]
-    # if !uploaded_io.blank?
-    #   extension = uploaded_io.original_filename.split('.')
-    #   filename = "#{Time.now.strftime('%Y%m%d%H%M%S')}.#{extension[-1]}"
-    #   filepath = "#{PIC_PATH}/groupbuys/#{filename}"
-    #   File.open(filepath, 'wb') do |file|
-    #     file.write(uploaded_io.read)
-    #   end
-    #       # groupbuy_params.merge!(:pic_url=>"/groupbuys/#{filename}")
-    #       @groupbuy.pic_url = "/groupbuys/#{filename}"
-    # end
     if @groupbuy.save
       photo_ids = params[:photo_ids].split(',')
       Photo.where(id: photo_ids).update_all(groupbuy_id: @groupbuy.id)
@@ -193,6 +182,9 @@ class GroupbuysController < ApplicationController
     end
 
     if @groupbuy.update(groupbuy_params)
+      if @groupbuy.end_time > Time.now && @groupbuy.recommend == 1
+        @groupbuy.update(recommend: 5)
+      end
 
       redirect_to groupbuy_url(@groupbuy), notice: '团购修改成功'
     else

@@ -99,30 +99,11 @@ class UsersController < ApplicationController
     end
 
     type = params[:type] || 'topic'
-    case type
-    when 'topic'
-      @user = User.includes(:topics).find_by_username(params[:id])
-      if @user
-        @data = @user.topics.includes(:forum)
-      end
-    when 'comment'
-      @user = User.includes(:comments).find_by_username(params[:id])
-      @data = @user.comments.includes(:topic)
-      #@data = @user.comments.includes(:events)
-    when 'event'
-      @user = User.includes(:events).find_by_username(params[:id])
-      @data = @user.events
-    when 'groupbuy'
-      @user = User.includes(:groupbuys).find_by_username(params[:id])
-      @data = @user.groupbuys
-    when 'participant'
-      @user = User.includes(:participants).find_by_username(params[:id])
-      @data = @user.participants.includes(:event)
-    end
+    
     if current_user == @user
-      @group = Group.find_by_id(current_user.group_id)
+      @group = Group.find_by(id: current_user.group_id)
       if @group
-        @group_admin = User.find_by_id(@group.user_id)
+        @group_admin = User.find_by(id: @group.user_id)
       end
       if ['1', '2'].include? current_user.try(:role)
         @groups = Group.where(user_id: current_user.id)
@@ -197,7 +178,7 @@ def user_params
 end
 
 def select_user
-  @user = User.find_by_username(params[:id]) || User.find_by_nickname(params[:id])
+  @user = User.find_by(mobile: params[:id]) || User.find_by(username: params[:id]) || User.find_by(nickname: params[:id])
 end
 
 end
