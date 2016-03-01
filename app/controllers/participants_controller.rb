@@ -267,9 +267,7 @@ class ParticipantsController < ApplicationController
     area = params[:area].present? ? ChinaCity.get(params[:area]) : user_addresses.area.split('/')[0]
     Rails.logger.info "-------o-------#{area}"
     Rails.logger.info "-------oo-------#{params[:area].present?}"
-    Rails.logger.info "-------oo-------#{user_addresses.area.split('/')[0]}"
     Rails.logger.info "-------ooo-------#{user_addresses.area}"
-    Rails.logger.info "-------oooo-------#{user_addresses}"
     if groupbuy.logistic_id
       logistics_item = groupbuy.logistic.logistics_items.where('areas LIKE ?', "%#{area}%").first
 
@@ -280,6 +278,7 @@ class ParticipantsController < ApplicationController
       freightage = 0.0
     end
     total_price = num.to_i * groupbuy.current_price + freightage 
+    Rails.logger.info "----groupbuy.logistic_id=#{groupbuy.logistic_id}---freightage=#{freightage}---each_add=#{each_add}"
     render json: {freightage: freightage, total_price: total_price}.to_json
   end
 
