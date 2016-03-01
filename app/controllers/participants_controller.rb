@@ -80,6 +80,11 @@ class ParticipantsController < ApplicationController
     @participant.user = current_user
 
     if @participant.save
+      if params[:as_gift] == '1'
+        area = ChinaCity.get(params[:gift_address][:province])
+        address = ChinaCity.get(params[:gift_address][:province]) + ChinaCity.get(params[:gift_address][:city]) + ChinaCity.get(params[:gift_address][:area])+ params[:gift_address][:address]
+        @participant.update(area: area, address: address)
+      end
       notice =  '报名成功'
       if @participant.groupbuy_id
         redirect_to participant_path(@participant), notice: notice
@@ -259,7 +264,7 @@ class ParticipantsController < ApplicationController
     groupbuy = Groupbuy.find_by(id: params[:groupbuy_id])
     user_addresses = current_user.default_address
     # 默认运费
-    area = user_addresses.area.split('/')[0]
+    area = ChinaCity.get(params[:area]) || user_addresses.area.split('/')[0]
     if groupbuy.logistic_id
       logistics_item = groupbuy.logistic.logistics_items.where('areas LIKE ?', "%#{area}%").first
 

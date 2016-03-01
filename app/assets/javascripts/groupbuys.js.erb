@@ -172,6 +172,28 @@ $(document).ready(function(){
   });
 });
 
+//-------------作为礼品赠送，显示朋友地址输入框-----------//
+
+$(document).ready(function(){
+  $('.as-gift-checkbox').on('change', function(){
+    if($(':checkbox[name="as_gift"]').is(':checked')) {
+      $('.user-address').addClass('hidden');
+      $('.as-gift').removeClass('hidden');
+    }
+    else {
+      $('.user-address').removeClass('hidden');
+      $('.as-gift').addClass('hidden');
+    }
+  })
+})
+
+
+//-----------作为礼品赠送，重新计算运费-------------//
+$(document).ready(function(){
+  $('#province').on('change', function(){
+    get_freightage();
+  })
+})
 
 
 

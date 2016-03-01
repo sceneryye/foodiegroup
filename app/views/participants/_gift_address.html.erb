@@ -1,0 +1,35 @@
+<div>
+<%= text_field :gift_address, :name, placeholder:t(:name)%>
+ <%= show_error_message('联系人/收货人，不能为空！') %>
+</div>
+<div>
+ <%= text_field :gift_address, :mobile, placeholder:t(:mobile)%>
+ <%= show_error_message('联系电话，不能为空！') %>
+</div>
+<div class="row">
+  <div class="city-group">
+    <div class="columns small-4">
+      <select name="gift_address[province]" id="province" class="city-select">
+        <option value="">--省份--</option>
+        <%= options_for_select(ChinaCity.list) %>
+      </select>
+    </div>
+    <div class="columns small-4">
+      <select name="gift_address[city]" id="city" class="city-select">
+       <option value="">--城市--</option>
+       <%= options_for_select(ChinaCity.list) %>
+     </select>
+   </div>
+   <div class="columns small-4">
+    <select name="gift_address[area]" id="area" class="city-select">
+     <option value="">--地区--</option>
+     <%= options_for_select(ChinaCity.list) %>
+   </select>
+ </div>
+</div>
+</div>
+
+<div>
+ <%= text_field :gift_address, :address, placeholder: (session[:locale] == 'en' ? 'Must be in Chinese' : '中文地址')%>
+ <%= show_error_message('收货地址，不能为空！') %>
+</div>

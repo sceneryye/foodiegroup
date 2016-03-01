@@ -60,7 +60,16 @@
 
 <% if params[:groupbuy_id] || controller_name == 'groupbuys'%>
 <% if @user_addresses.present? %>
+<div class="user-address">
 <%= render @user_addresses%>
+</div>
+<label>
+    <input type="checkbox" name="as_gift" value='1' class="as-gift-checkbox">
+    <%= t(:as_gift) %></div>
+  </label>
+<div class="as-gift hidden">
+<%= render 'participants/gift_address' %>
+</div>
 <div class="row freightage">
   <div class="columns small-3"><%= t(:freightage) %></div>
   <div class="columns small-4"><i class="fa fa-jpy"></i><span class="freightage-fee"></span></div>
@@ -86,6 +95,7 @@
 <div class="small-12 columns">
   <%= f.submit class:'tiny button radius right participant-submit' %>
 </div>
+
 </div>
 
 <% end %>
