@@ -265,6 +265,7 @@ class ParticipantsController < ApplicationController
     user_addresses = current_user.default_address
     # 默认运费
     area = params[:area].present? ? ChinaCity.get(params[:area]) : user_addresses.area.split('/')[0]
+    Rails.logger.info "--------------#{area}"
     if groupbuy.logistic_id
       logistics_item = groupbuy.logistic.logistics_items.where('areas LIKE ?', "%#{area}%").first
 
