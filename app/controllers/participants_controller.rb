@@ -268,6 +268,8 @@ class ParticipantsController < ApplicationController
     Rails.logger.info "-------o-------#{area}"
     Rails.logger.info "-------oo-------#{params[:area].present?}"
     Rails.logger.info "-------oo-------#{user_addresses.area.split('/')[0]}"
+    Rails.logger.info "-------ooo-------#{user_addresses.area}"
+    Rails.logger.info "-------oooo-------#{user_addresses}"
     if groupbuy.logistic_id
       logistics_item = groupbuy.logistic.logistics_items.where('areas LIKE ?', "%#{area}%").first
 
