@@ -264,7 +264,7 @@ class ParticipantsController < ApplicationController
     groupbuy = Groupbuy.find_by(id: params[:groupbuy_id])
     user_addresses = current_user.default_address
     # 默认运费
-    area = ChinaCity.get(params[:area]) || user_addresses.area.split('/')[0]
+    area = ChinaCity.get(params[:area]).present? ? ChinaCity.get(params[:area]) : user_addresses.area.split('/')[0]
     if groupbuy.logistic_id
       logistics_item = groupbuy.logistic.logistics_items.where('areas LIKE ?', "%#{area}%").first
 
