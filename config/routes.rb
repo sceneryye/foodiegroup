@@ -13,6 +13,9 @@ RailsOnForum::Application.routes.draw do
 
     post '/groupbuys/upload', to: 'groupbuys#upload'
     post '/groupbuys/destroy_pic', to: 'groupbuys#destroy_pic'
+    get '/groupbuys/choose_or_new_groupbuy', to: 'groupbuys#choose_or_new_groupbuy', as: :choose_or_new_groupbuy
+    get '/groupbuys/choose_from_groupbuys', to: 'groupbuys#choose_from_groupbuys', as: :choose_from_groupbuys
+    get '/groupbuys/:id/new_from_groupbuy', to: 'groupbuys#new_from_groupbuy', as: :new_from_groupbuy
 
     get 'tags/update'
 
@@ -34,6 +37,8 @@ RailsOnForum::Application.routes.draw do
       get '/topics_list', to: 'reports#topics_list'
       get '/participants_list', to: 'reports#participants_list'
       get '/tags_list', to: 'reports#tags_list'
+
+      post '/set_online_offline', to: 'reports#set_online_offline', as: :set_online_offline
 
     end
 

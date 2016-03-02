@@ -1,0 +1,19 @@
+<% provide :title, t(:choose_from_groupbuys) %>
+
+<% if @groupbuys %>
+<% @groupbuys.each do |groupbuy| %>
+<div class="row">
+  <div class="columns small-4">
+    <%= link_to new_from_groupbuy_path(groupbuy.id) do %>
+    <%= image_tag(cut_pic groupbuy.photos.first) %>
+    <% end %>
+  </div>
+
+  <div class="columns small-8">
+    <%= link_to new_from_groupbuy_path(groupbuy.id) do %>
+    <%= current_title(groupbuy) %>
+    <% end %>
+  </div>
+</div>
+<% end %>
+<% end %>

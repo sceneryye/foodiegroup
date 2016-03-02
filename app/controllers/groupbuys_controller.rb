@@ -2,13 +2,13 @@
 require 'rest-client'
 require 'digest/sha1'
 class GroupbuysController < ApplicationController
-  before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy]
+  before_action :validate_user!, only: [:new, :edit, :update, :create, :destroy, :choose_or_new_groupbuy]
   before_action :login_with_mobile
   before_action :set_recommend, only: [:index]
   helper_method :cut_pic
 
   def index
-    @groupbuys = Groupbuy.all.includes(:user)
+    @groupbuys = Groupbuy.online.includes(:user)
   end
 
   def show
@@ -84,7 +84,20 @@ class GroupbuysController < ApplicationController
      @groupbuy = Groupbuy.new
      session[:pic_file] = nil
      @photo = Photo.new
-   end
+    end
+
+    def choose_or_new_groupbuy
+      @groupbuys = Groupbuy.offline.where(user_id: current_user.id)
+    end
+
+    def choose_from_groupbuys
+      @groupbuys = Groupbuy.offline.where(user_id: current_user.id)
+    end
+
+    def new_from_groupbuy
+      @groupbuy = Groupbuy.new
+      @old_groupbuy = Groupbuy.find_by(params[:id])
+    end
 
    def create
     modified_groupbuy_params = groupbuy_params
@@ -225,6 +238,7 @@ class GroupbuysController < ApplicationController
       return render text: 'failed'
     end
   end
+
 
   def destroy
     @groupbuy = Groupbuy.find(params[:id])

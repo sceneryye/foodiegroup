@@ -35,11 +35,15 @@
         <td><%= groupbuy.name %></td>
         <td><%= groupbuy.price %></td>
         <td>
-          <input type="number" name="recommend" value="<%= groupbuy.recommend %>" data-url="<%=groupbuy_path(groupbuy)%> id="<%= groupbuy.id %>" data-value="<%= groupbuy.recommend %>" class="recommend-number" data-id="<%= groupbuy.id %>" />
+          <input type="number" name="recommend" value="<%= groupbuy.recommend %>" data-url="<%=groupbuy_path(groupbuy)%>" id="<%= groupbuy.id %>" data-value="<%= groupbuy.recommend %>" class="recommend-number" data-id="<%= groupbuy.id %>" />
         </td>
         <td>
-        <span class="edit-title edit" data-id="<%= groupbuy.id %>" data-title="<%= groupbuy.zh_title.present? ? groupbuy.zh_title : groupbuy.en_title %>">编辑</span>
-        <%= link_to "删除", groupbuy_path(groupbuy), class: 'delete', method: :delete, remote: true,  data: { confirm:'确定删除?' } %>
+          <span class="edit-title edit" data-id="<%= groupbuy.id %>" data-title="<%= groupbuy.zh_title.present? ? groupbuy.zh_title : groupbuy.en_title %>">编辑</span>
+          <%= link_to "删除", groupbuy_path(groupbuy), class: 'delete', method: :delete, remote: true,  data: { confirm:'确定删除?' } %>
+          <span class="online">
+            <input type="checkbox" class="set-online" data-id="<%= groupbuy.id %>" id="checkbox-<%= groupbuy.id %>" checked="<%= groupbuy.online ? 'checked' : '' %>" data-url="<%= admin_set_online_offline_path %>">
+            <label for="checkbox-<%= groupbuy.id %>">上架</label>
+          </span>
         </td>
       </tr>
       <% end %>

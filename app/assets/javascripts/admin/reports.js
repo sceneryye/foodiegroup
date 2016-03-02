@@ -303,6 +303,41 @@ $('.groupbuys-list').on('click', '.edit-title', function(){
 });
 });
 
+// 对团购进行上架下架操作
+$(document).ready(function(){
+  $('.groupbuys-list .set-online').on('change',  function(e){
+    var that = $(this);
+    var id = that.data('id');
+    var online = '';
+    if(that.is(':checked')) {
+      online = 'true';
+    }
+    else {
+      online = 'false';
+    }
+    url = that.data('url');
+    $.ajax({
+      url: url,
+      type: 'post',
+      data: {
+        id: id,
+        online: online
+      },
+      success: function(e) {
+        var status = '';
+        if(e.online == 'true') {
+          status = '上线';
+        }
+        else {
+          status = '下线';
+        }
+        var msg = '该团购的状态为：'+ status;
+        swal(msg);
+      }
+    })
+  })
+})
+
 //编辑话题推荐值
 
 $('.topic-recommend').on('click', function(){

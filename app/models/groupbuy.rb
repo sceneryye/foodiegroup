@@ -27,8 +27,9 @@ class Groupbuy < ActiveRecord::Base
 	end
 
 	
-
- 	default_scope {order 'recommend DESC, created_at DESC'}
+	scope :online, -> {where(online: true).order('recommend DESC, created_at DESC')}
+	scope :offline, -> {where(online: false).order('created_at DESC')}
+ 	default_scope {order('recommend DESC, created_at DESC')}
 
  	def current_price
 	    return self.price  if Time.now > self.end_time
