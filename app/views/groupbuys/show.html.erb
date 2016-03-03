@@ -24,121 +24,122 @@
           <td colspan="2">
             <div class="groupbuy-list" data-endtime="<%= @groupbuy.end_time.to_i %>" data-day="<%= t(:day) %>">
               <div class="countdown">
-              <span><i class="fa fa-clock-o"></i></span>
+                <span><i class="fa fa-clock-o"></i></span>
                 <span class="countdonw-title"></span>
                 <span class="countdown-day"></span>
                 <span class="countdown-hour"></span>
-
               </div>
             </div>
           </td>
-        </tr>
-        <tr>
-          <th><%=t(:inventory)%></th>
-          <td colspan="2"><%=translate_of(@groupbuy.goods_unit, @groupbuy.goods_maximal).html_safe%></td>
-        </tr>
-        <tr>
-          <th><%=t(:goods_minimal)%></th>
-          <td colspan="2"><%=translate_of(@groupbuy.goods_unit, @groupbuy.goods_minimal).html_safe%></td>
-        </tr>
-        <tr>
-          <th><%=t(:market_price)%></th>
-          <td colspan="2">￥<%=@groupbuy.market_price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
-        </tr>
-        <tr>
-          <th><%=t(:groupbuy_price)%></th>
-          <td colspan="2">￥<%=@groupbuy.groupbuy_price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
-        </tr>
-        <tr>
-          <th><%=t(:price)%></th>
-          <td colspan="2">￥<%=@groupbuy.price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
-        </tr>
-        <tr>
-          <th><%=t(:goods_size)%></th>
-          <td colspan="2"><%= @groupbuy.goods_size || t(:unknown) %></td>
-        </tr>
-        <tr>
-          <th><%=t(:goods_bbd)%></th>
-          <td colspan="2"><%= @groupbuy.goods_bbd || t(:unknown) %></td>
-        </tr>
+        </div>
+      </tr>
+      <tr>
+        <th><%=t(:inventory)%></th>
+        <td colspan="2"><%=translate_of(@groupbuy.goods_unit, @groupbuy.goods_maximal).html_safe%></td>
+      </tr>
+      <tr>
+        <th><%=t(:goods_minimal)%></th>
+        <td colspan="2"><%=translate_of(@groupbuy.goods_unit, @groupbuy.goods_minimal).html_safe%></td>
+      </tr>
+      <tr>
+        <th><%=t(:market_price)%></th>
+        <td colspan="2">￥<%=@groupbuy.market_price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
+      </tr>
+      <tr>
+        <th><%=t(:groupbuy_price)%></th>
+        <td colspan="2">￥<%=@groupbuy.groupbuy_price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
+      </tr>
+      <tr>
+        <th><%=t(:price)%></th>
+        <td colspan="2">￥<%=@groupbuy.price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
+      </tr>
+      <tr>
+        <th><%=t(:goods_size)%></th>
+        <td colspan="2"><%= @groupbuy.goods_size || t(:unknown) %></td>
+      </tr>
+      <tr>
+        <th><%=t(:goods_bbd)%></th>
+        <td colspan="2"><%= @groupbuy.goods_bbd || t(:unknown) %></td>
+      </tr>
 
-        <tr>
-          <td colspan='3'>
-            <% if @content_pic.present? %>
-            <% @content_pic.each do |pic| %>
-            <div class="content-pictures columns small-12 medium-8 medium-center large-6 large-center">
-              <%= image_tag pic.try(:image).present? ? pic.image : pic %>
-            </div>
-            <% end %>
-            <% end %>
-            <%= current_body(@groupbuy).try(:html_safe)  %>
-          </td>
-        </tr>
-      </table>
+      <tr>
+        <td colspan='3'>
+          <% if @content_pic.present? %>
+          <% @content_pic.each do |pic| %>
+          <div class="content-pictures columns small-12 medium-8 medium-center large-6 large-center">
+            <%= image_tag pic.try(:image).present? ? pic.image : pic %>
+          </div>
+          <% end %>
+          <% end %>
+          <%= current_body(@groupbuy).try(:html_safe)  %>
+        </td>
+      </tr>
+    </table>
 
+  </div>
+</div>
+<div class="row">
+  <div class="small-12 columns">
+    <% if current_user == @groupbuy.user || current_user.try(:role) == '1' %>
+    <%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_groupbuy_path(@groupbuy), class:"tiny button radius" %>
+    <%= link_to '<i class="fa fa-times"></i>'.html_safe + ' ' + t(:delete), @groupbuy,method: :delete,
+    class:"tiny button alert radius",
+      data: {confirm: '?'} %>
+      <% end %>
+      <div>
+        <%= link_to '<i class="fa fa-cart-plus"></i>'.html_safe + ' ' + t(:buy), '#participants', class:"tiny button radius participant-button", 'data-info' => t(:sign_up_first) %>
+        <%= link_to '#', class: "tiny button radius share-button", 'data-msg' => t(:share_page) do %>
+        <i class="fa fa-share-alt"></i><%= t(:share) %>
+        <% end %>
+      </div>
     </div>
+
   </div>
   <div class="row">
     <div class="small-12 columns">
-      <% if current_user == @groupbuy.user || current_user.try(:role) == '1' %>
-      <%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_groupbuy_path(@groupbuy), class:"tiny button radius" %>
-      <%= link_to '<i class="fa fa-times"></i>'.html_safe + ' ' + t(:delete), @groupbuy,method: :delete,
-      class:"tiny button alert radius",
-        data: {confirm: '?'} %>
-        <% end %>
-        <div>
-          <%= link_to '<i class="fa fa-cart-plus"></i>'.html_safe + ' ' + t(:buy), '#participants', class:"tiny button radius participant-button", 'data-info' => t(:sign_up_first) %>
-          <%= link_to '#', class: "tiny button radius share-button", 'data-msg' => t(:share_page) do %>
-          <i class="fa fa-share-alt"></i><%= t(:share) %>
+      <ul class="tabs" data-tab role="tablist">
+        <li class="tab-title active">
+          <a href="#participants"><i class="fa fa-cart-plus"></i><%=t(:buys)%> (<%=@groupbuy.participants_count.to_i%>)</a>
+        </li>
+        <li class="tab-title">
+          <a href="#comments"><i class="fa fa-comments"></i><%=t(:comments)%> (<%=@groupbuy.comments_count.to_i%>)</a>
+        </li>
+      </ul>
+      <div class="tabs-content panel">
+        <div class="content active" id="participants" data-url='<%=groupbuy_participants_path(@groupbuy)%>'>
+          <%=render 'participants/form' ,:locals=>{@parent=>@parent,@participant=>@participant} if current_user && @groupbuy.status>-1%>
+          <%= render @participants %>
+        </div>
+        <div class="content" id="comments"  data-url='<%=groupbuy_comments_path(@groupbuy)%>'>
+          <%=render 'comments/form' ,:locals=>{@parent=>@parent,@comment=>@comment} if current_user%>
+          <div class="comments-list">
+            <%= render @comments %>
+          </div>
+          <% if @active %>
+          <a style="width:100%" href="javascript:void(0);" class="more-comments tiny expanded button" data-parent="<%= params[:controller].gsub(/\w$/, '') %>" data-count="<%= @groupbuy.comments.count %>" data-id="<%= @groupbuy.id %>" data-url="<%= groupbuys_more_comments_path %>"><%= t(:more) %></a>
           <% end %>
         </div>
       </div>
-
     </div>
-    <div class="row">
-      <div class="small-12 columns">
-        <ul class="tabs" data-tab role="tablist">
-          <li class="tab-title active">
-            <a href="#participants"><i class="fa fa-cart-plus"></i><%=t(:buys)%> (<%=@groupbuy.participants_count.to_i%>)</a>
-          </li>
-          <li class="tab-title">
-            <a href="#comments"><i class="fa fa-comments"></i><%=t(:comments)%> (<%=@groupbuy.comments_count.to_i%>)</a>
-          </li>
-        </ul>
-        <div class="tabs-content panel">
-          <div class="content active" id="participants" data-url='<%=groupbuy_participants_path(@groupbuy)%>'>
-            <%=render 'participants/form' ,:locals=>{@parent=>@parent,@participant=>@participant} if current_user && @groupbuy.status>-1%>
-            <%= render @participants %>
-          </div>
-          <div class="content" id="comments"  data-url='<%=groupbuy_comments_path(@groupbuy)%>'>
-            <%=render 'comments/form' ,:locals=>{@parent=>@parent,@comment=>@comment} if current_user%>
-            <div class="comments-list">
-              <%= render @comments %>
-            </div>
-            <% if @active %>
-            <a style="width:100%" href="javascript:void(0);" class="more-comments tiny expanded button" data-parent="<%= params[:controller].gsub(/\w$/, '') %>" data-count="<%= @groupbuy.comments.count %>" data-id="<%= @groupbuy.id %>" data-url="<%= groupbuys_more_comments_path %>"><%= t(:more) %></a>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
+  </div>
+</div>
 
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
-    <!-- ########################comment上传图片########################## -->
-    <script type="text/javascript" src="http://www.trade-v.com:5000/assets/comments.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<!-- ########################comment上传图片########################## -->
+<script type="text/javascript" src="http://www.trade-v.com:5000/assets/comments.js"></script>
 
-    <!-- ############参加团购必须有地址############ -->
-    <script>
-      $('.participant-submit').on('click', function(){
-        if($('.address-detail').length == 0) {
-          alert('<%= t(:enter_address) %>');
-          return false;
-        }
-      });
-    </script>
+<!-- ############参加团购必须有地址############ -->
+<script>
+  $('.participant-submit').on('click', function(){
+    if($('.address-detail').length == 0) {
+      alert('<%= t(:enter_address) %>');
+      return false;
+    }
+  });
+</script>
 
 
-    <script>
+<script>
   //---------------支付成功则给出提示--------------------//
   <% if params[:error_message] == '' %>
   var msg = '<%= t(:pay_success) %>';
