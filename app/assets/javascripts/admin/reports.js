@@ -332,7 +332,7 @@ $(document).ready(function(){
           status = '下线';
         }
         var msg = '该团购的状态为：'+ status;
-        swal(msg);
+        alert(msg);
       }
     })
   })
