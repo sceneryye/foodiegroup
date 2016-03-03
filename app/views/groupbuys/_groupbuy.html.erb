@@ -1,5 +1,5 @@
 <div class="groupbuy-list" data-endtime="<%= groupbuy.end_time.to_i %>" data-day="<%= t(:day) %>">
-  <div class="row">
+  <div class="row <%= 'still-valid' if groupbuy.end_time > Time.zone.now %>">
     <div class="columns small-4">
       <% if groupbuy.pic_url.present?
         @title_pic = groupbuy.pic_url.split(',').reject{|x| x.blank?}[0]

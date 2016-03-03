@@ -83,8 +83,7 @@
       </span>
     </div>
     <div class="small-3 columns">
-      <span class="goods-minimal postfix">
-        <!-- <%#= f.label :goods_minimal %> -->
+      <span class="market_price postfix">
         <%= f.text_field :goods_minimal %>
       </span>
     </div>
@@ -92,11 +91,32 @@
       <span class="postfix"><%= t(:inventory) %></span>
     </div>
     <div class="small-3 columns">
-      <span>
+      <span class="postfix">
         <%= f.text_field :goods_maximal %>
       </span>
     </div>
+
+    <div class="small-3 columns">
+      <span class="goods-size postfix">
+        <%= t(:goods_size) %>
+      </span>
+    </div>
+    <div class="small-3 columns">
+      <span class="goods-size postfix">
+        <%= f.text_field :goods_size %>
+      </span>
+    </div>
+    <div class="small-3 columns">
+      <span class="postfix"><%= t(:goods_bbd) %></span>
+    </div>
+    <div class="small-3 columns">
+    <span class="postfix">
+        <%= f.text_field :goods_bbd %>
+      </span>
+    </div>
   </div>
+
+
 
   <div class="row collapse goods-maximal">
 
@@ -120,7 +140,7 @@
     <div class="small-3 columns">
       <span class="postfix">
         <%=link_to logistics_path do %>
-          <i class="fa fa-plus-square"></i>
+        <i class="fa fa-plus-square"></i>
         <% end %>
       </span>
     </div>

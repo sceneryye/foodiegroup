@@ -97,6 +97,25 @@
         <%= f.text_field :goods_maximal, value: @old_groupbuy.goods_maximal %>
       </span>
     </div>
+
+    <div class="small-3 columns">
+      <span class="goods-size postfix">
+        <%= t(:goods_size) %>
+      </span>
+    </div>
+    <div class="small-3 columns">
+      <span class="goods-size postfix">
+        <%= f.text_field :goods_size, value: @old_groupbuy.goods_size %>
+      </span>
+    </div>
+    <div class="small-3 columns">
+      <span class="postfix"><%= t(:bbd) %></span>
+    </div>
+    <div class="small-3 columns">
+    <span class="postfix">
+        <%= f.text_field :goods_bbd, value: @old_groupbuy.goods_bbd %>
+      </span>
+    </div>
   </div>
 
   <div class="row collapse goods-maximal">
