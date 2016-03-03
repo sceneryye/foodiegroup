@@ -53,6 +53,14 @@
           <th><%=t(:price)%></th>
           <td colspan="2">￥<%=@groupbuy.price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
         </tr>
+        <tr>
+          <th><%=t(:goods_size)%></th>
+          <td colspan="2"><%= @groupbuy.goods_size || t(:unknown) %></td>
+        </tr>
+        <tr>
+          <th><%=t(:goods_bbd)%></th>
+          <td colspan="2"><%= @groupbuy.goods_bbd || t(:unknown) %></td>
+        </tr>
 
         <tr>
           <td colspan='3'>
