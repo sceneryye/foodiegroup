@@ -8,7 +8,8 @@ class GroupbuysController < ApplicationController
   helper_method :cut_pic
 
   def index
-    @groupbuys = Groupbuy.online.includes(:user)
+    @groupbuys = Groupbuy.online.includes(:user).where('end_time > ?', Time.zone.now)
+    @products = Groupbuy.online.includes(:user).where('end_time <= ?', Time.zone.now)
   end
 
   def show

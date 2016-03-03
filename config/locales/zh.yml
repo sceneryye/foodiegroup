@@ -317,7 +317,7 @@ zh:
   price: 价格
   search: 搜索
   comment: 评论
-  site_name: 爱尚
+  site_name: 爱上
   before: 前。
   more: 更多
   new_comment: 添加评论
@@ -489,4 +489,5 @@ zh:
   choose_from_groupbuys: 从历史记录中选择
   goods_size: 商品规格
   goods_bbd: 商品保质期
+  products_store: 商品仓库
 

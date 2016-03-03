@@ -22,6 +22,14 @@
       <% else %>
       <p><%= t(:no_groupbuys) %></p>
       <% end%>
+      <% if @products.present? %>
+      <div class="products-store">
+        <%= t(:products_store) %>
+      </div>
+      <% @products.each do |product| %>
+      <%= render partial: 'groupbuys/groupbuy', object: product %>
+      <% end %>
+      <% end %>
     </div>
   
 <%# end %>
