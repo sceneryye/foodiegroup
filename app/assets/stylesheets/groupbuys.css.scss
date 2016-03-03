@@ -2,6 +2,7 @@
 @import "foundation_and_overrides";
 $light-slate-gray: #6D7B8D;
 $primary-color: #008CBA;
+$groupbuy-list-bgc: #FFF5EE;
 
 
 /**************public css**************/
@@ -218,13 +219,13 @@ html body, h1, h2, h3, h4, h5, h6 {
 .countdownlists {
   .countdown-day, .countdown-hour, .countdown-minute, .countdown-second, .ct {
     color: black;
-    background-color: white;
+    background-color: $groupbuy-list-bgc;
     padding: 1px;
     font-size: 0.7em;
   }
 }
 .still-valid {
-  background-color: #FFF5EE;
+  background-color: $groupbuy-list-bgc;
 }
 .products-store {
   text-align: center;
