@@ -8,6 +8,8 @@ gem 'mysql2'
 #Rails upload files through ajax
 gem 'remotipart', '~> 1.2'
 
+gem 'axlsx','~>2.0'
+
 #picture process
 gem 'carrierwave'
 gem "mini_magick"
