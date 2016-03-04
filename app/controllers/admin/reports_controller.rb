@@ -58,7 +58,7 @@ class Admin::ReportsController < ApplicationController
                 
             row_count=0
             @participants.each do |p| 
-        if p.mobile.length == 11 && p.mobile.to_i == true
+        if p.mobile.length == 11 
               orderid=p.name.to_s + " "
               memberid=p.mobile
               shipname=p.address
