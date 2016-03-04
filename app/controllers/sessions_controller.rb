@@ -35,6 +35,7 @@ class SessionsController < ApplicationController
 
   def callback
     return_url = session[:return_url] || params[:return_url]
+    session.delete(:return_url)
     code = params[:code]
     now = Time.zone.now.to_i
     
