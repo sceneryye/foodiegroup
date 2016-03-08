@@ -111,7 +111,7 @@
     </div>
     <div class="small-3 columns">
     <span class="postfix">
-        <%= f.text_field :goods_bbd %>
+        <%= f.text_field :goods_bbd, :value => (@groupbuy.goods_bbd.nil? ? nil : l(@groupbuy.goods_bbd)), :class=>"fdatepicker",:id=>"dpd2",placeholder: t(:goods_bbd) %>
       </span>
     </div>
   </div>

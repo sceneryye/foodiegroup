@@ -48,11 +48,13 @@ $('.new_participant').on('change', '.goods-weight', function(){
 
 
 //--------时间选择插件----------//
-$('.fdatepicker').fdatepicker({
-  language: 'zh-CN',
-  format: 'yyyy-mm-dd hh:ii',
-  disableDblClickSelection: true,
-  pickTime: true
+$(document).ready(function(){
+  $('.fdatepicker').fdatepicker({
+    language: 'zh-CN',
+    format: 'yyyy-mm-dd hh:ii',
+    disableDblClickSelection: true,
+    pickTime: true
+  });
 });
 
 
