@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303023553) do
+ActiveRecord::Schema.define(version: 20160308082923) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255, null: false
@@ -137,7 +137,7 @@ ActiveRecord::Schema.define(version: 20160303023553) do
     t.string   "zh_body",            limit: 5000
     t.boolean  "online",                                                   default: true
     t.string   "goods_size",         limit: 255
-    t.date     "goods_bbd"
+    t.string   "goods_bbd",          limit: 255
   end
 
   add_index "groupbuys", ["user_id"], name: "index_groupbuys_on_user_id", using: :btree

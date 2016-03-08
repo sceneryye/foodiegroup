@@ -105,6 +105,6 @@ RailsOnForum::Application.routes.draw do
 
 
    resource :home, only: [:index]
-   root 'home#index'
+   root to: 'groupbuys#index'
   #end
 end
