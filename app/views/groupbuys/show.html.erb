@@ -35,11 +35,11 @@
       </tr>
       <tr>
         <th><%=t(:inventory)%></th>
-        <td colspan="2"><%=translate_of(@groupbuy.goods_unit.to_i, @groupbuy.goods_maximal).html_safe%></td>
+        <td colspan="2"><%=translate_of(@groupbuy.goods_unit, @groupbuy.goods_maximal.to_i).html_safe%></td>
       </tr>
       <tr>
         <th><%=t(:goods_minimal)%></th>
-        <td colspan="2"><%=translate_of(@groupbuy.goods_unit.to_f, @groupbuy.goods_minimal).html_safe%></td>
+        <td colspan="2"><%=translate_of(@groupbuy.goods_unit, @groupbuy.goods_minimal).html_safe%></td>
       </tr>
       <tr>
         <th><%=t(:market_price)%></th>
