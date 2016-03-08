@@ -277,7 +277,7 @@ class ParticipantsController < ApplicationController
     else
       freightage = 0.0
     end
-    total_price = num.to_i * groupbuy.current_price + freightage 
+    total_price = num.to_f * groupbuy.current_price + freightage 
     Rails.logger.info "----groupbuy.logistic_id=#{groupbuy.logistic_id}---freightage=#{freightage}---each_add=#{each_add}"
     render json: {freightage: freightage, total_price: total_price}.to_json
   end
