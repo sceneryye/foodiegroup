@@ -242,7 +242,7 @@ en:
   shiped: Shiped
   unshiped: Wating for ship
   received: Received
-  groupbuy: Group Buying Deals
+  groupbuy: My Deals
   share: Share
   edit_profile: Edit Profile
   maintain_addresses: Delivery Address
@@ -380,4 +380,7 @@ en:
   goods_size: Goods Size
   goods_bbd: BBD
   products_store: Products Warehouse
+  office_line: Office Line
+  work_time: Work Time
+  workday: From Monday To Friday
 

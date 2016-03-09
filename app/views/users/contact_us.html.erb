@@ -3,7 +3,7 @@
 
   <div class="contacts contents">
     <span class="name-right"><%= t(:contacts) %></span>
-    <span class="value-left">杜崇友</span>
+    <span class="value-left"><%= image_tag '/qrcode_for_aishang.jpg' %></span>
   </div>
 
   <div class="wechat contents">
@@ -13,12 +13,17 @@
 
   <div class="email contents">
     <span class="name-right"><%= t(:email) %></span>
-    <span class="value-left">du@iotps.com</span>
+    <span class="value-left">info@iotps.com</span>
   </div>
 
   <div class="mobile contents">
-    <span class="name-right"><%= t(:tel) %></span>
-    <span class="value-left">18616706037</span>
+    <span class="name-right"><%= t(:office_line) %></span>
+    <span class="value-left">021-62531770-9072</span>
+  </div>
+
+  <div class="mobile contents">
+    <span class="name-right"><%= t(:work_time) %></span>
+    <span class="value-left">09:00 - 18:00  <%= t(:workday) %></span>
   </div>
 
 </div>
