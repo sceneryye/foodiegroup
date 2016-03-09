@@ -211,7 +211,7 @@ en:
   price: Price
   participants: Participants
   comments: Comments
-  site_name: aishang
+  site_name: groupmall
   home: Home
   search: Search
   event: Meetups
@@ -242,7 +242,8 @@ en:
   shiped: Shiped
   unshiped: Wating for ship
   received: Received
-  groupbuy: My Deals
+  groupbuy: Group Buying Deals
+  my_groupbuys: My Deals
   share: Share
   edit_profile: Edit Profile
   maintain_addresses: Delivery Address
@@ -378,9 +379,11 @@ en:
   as_gift: Give As Gift
   choose_from_groupbuys: Choose From Histroy
   goods_size: Goods Size
-  goods_bbd: BBD
+  goods_bbd: Expiration Date
   products_store: Products Warehouse
   office_line: Office Line
   work_time: Work Time
   workday: From Monday To Friday
+  my_events: My Events
+  my_forums: My Forums
 

@@ -215,6 +215,7 @@ zh:
       event:  活动
       participants: 报名
       groupbuy: 团购
+      my_groupbuys: 我的团购
       comment: 评论
       tag: 标签
       search: 搜索
@@ -493,4 +494,6 @@ zh:
   office_line: 办公室电话
   work_time: 工作时间
   workday: 周一到周五
+  my_events: 我的活动
+  my_forums: 我的论坛
 
