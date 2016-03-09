@@ -264,7 +264,7 @@ class ParticipantsController < ApplicationController
     groupbuy = Groupbuy.find_by(id: params[:groupbuy_id])
     user_addresses = current_user.default_address
     # 默认运费
-    area = params[:area].present? ? ChinaCity.get(params[:area]) : user_addresses.area.split('/')[0]
+    area = params[:area].present? ? ChinaCity.get(params[:area]).try(:gsub, '市', '').try(:gsub, '省', '') : user_addresses.area.split('/')[0].try(:gsub, '市', '').try(:gsub, '省', '')
     Rails.logger.info "-------o-------#{area}"
     Rails.logger.info "-------oo-------#{params[:area].present?}"
     Rails.logger.info "-------ooo-------#{user_addresses.area}"
