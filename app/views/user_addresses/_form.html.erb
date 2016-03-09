@@ -36,7 +36,7 @@
 </div>
 
 <div>
- <%= f.text_area :address, required: true, placeholder: (session[:locale] == 'en' ? 'Must be in Chinese' : '中文地址')%>
+ <%= f.text_area :address, required: true, placeholder: (session[:locale] == 'en' ? 'Please insert your address using Chinese characters' : '中文地址')%>
  <%= show_error_message('收货地址，不能为空！') %>
 </div>
 <div>

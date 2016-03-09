@@ -3,7 +3,7 @@
 <div class="test"></div>
 <%= render 'layouts/form_errors', object: @participant %>
 <div class="row collapse">
-  
+
  <div class="small-4 columns">
   <span class="prefix"><%= t(:quantity) %></span>
 </div>
@@ -27,6 +27,7 @@
 <div class="small-4 columns">
   <span class="prefix"><%= t(:deliverytime) %></span>
 </div>
+
 <div class="small-4 columns">
   <select name="date" id="">
    <option value="<%= t(:weekday) %>"><%= t(:weekday) %></option>
@@ -34,13 +35,14 @@
    <option value="<%= t(:anyday) %>" selected="selected"><%= t(:anyday) %></option>
  </select>
 </div> 
-<div class="small-4 columns">
+<div class="small-4 columns hidden">
   <select name="time" id="">
    <option value="<%= t(:morning) %>"><%= t(:morning) %></option>
    <option value="<%= t(:afternoon) %>"><%= t(:afternoon) %></option>
    <option value="<%= t(:anytime) %>" selected="selected"><%= t(:anytime) %></option>
  </select>
 </div>
+<div class="clear"></div>
 <%else%>
 <div class="small-4 columns">
   <span class="prefix"><%= t(:name) %></span>
@@ -61,14 +63,16 @@
 <% if params[:groupbuy_id] || controller_name == 'groupbuys'%>
 <% if @user_addresses.present? %>
 <div class="user-address">
-<%= render @user_addresses%>
+  <%= render @user_addresses%>
 </div>
-<label>
+<div>
+  <label>
     <input type="checkbox" name="as_gift" value='1' class="as-gift-checkbox">
     <%= t(:as_gift) %></div>
   </label>
+</div>
 <div class="as-gift hidden">
-<%= render 'participants/gift_address' %>
+  <%= render 'participants/gift_address' %>
 </div>
 <div class="row freightage">
   <div class="columns small-3"><%= t(:freightage) %></div>

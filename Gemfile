@@ -27,7 +27,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'unicorn'
 
 gem 'paperclip'
-gem 'ckeditor', github: 'galetahub/ckeditor'
+#gem 'ckeditor', github: 'galetahub/ckeditor'
 
 gem 'rest-client'
 gem 'will_paginate', '~> 3.0.6'

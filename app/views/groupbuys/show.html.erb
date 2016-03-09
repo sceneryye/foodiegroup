@@ -14,9 +14,9 @@
   <div class="small-12 columns">
     <table style="width:100%">    
       <tr>
-        <td><%=l @groupbuy.start_time%></td>
+        <td><%= @groupbuy.start_time.strftime('%F %H:%M') %></td>
         <td class="text-center">-</td>
-        <td><%=l @groupbuy.end_time%></td>
+        <td><%= @groupbuy.end_time.strftime('%F %H:%M') %></td>
       </tr>      
       <tr>
         <th><%=t(:remaining_time)%></th>
@@ -55,11 +55,11 @@
       </tr>
       <tr>
         <th><%=t(:goods_size)%></th>
-        <td colspan="2"><%= @groupbuy.goods_size || t(:unknown) %></td>
+        <td colspan="2"><%= @groupbuy.goods_size.to_s %></td>
       </tr>
       <tr>
         <th><%=t(:goods_bbd)%></th>
-        <td colspan="2"><%= @groupbuy.goods_bbd || t(:unknown) %></td>
+        <td colspan="2"><%= @groupbuy.goods_bbd.to_s %></td>
       </tr>
 
       <tr>

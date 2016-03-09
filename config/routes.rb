@@ -47,7 +47,7 @@ RailsOnForum::Application.routes.draw do
     resources :chat
     resources :tags, only: [:create, :update, :destroy]
 
-    mount Ckeditor::Engine => '/ckeditor'
+    #mount Ckeditor::Engine => '/ckeditor'
     
     get    '/login',     to: 'sessions#new',     as: :login
     delete '/logout', to: 'sessions#destroy', as: :logout
