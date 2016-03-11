@@ -8,6 +8,9 @@
 //= require foundation/foundation.offcanvas
 //= require foundation/foundation.tab
 //= require sweetalert.min
+//= require zepto
+//= require zepto.touch
+//= require wangEditor-mobile
 //= require_tree .
 //= require_self
 
