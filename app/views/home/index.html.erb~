@@ -1,0 +1,107 @@
+<!--[if lt IE 9]><script type="text/javascript" src="/assets/excanvas.js"></script><![endif]-->
+<% provide :title, t(:home) %>
+<div class="row">
+  <div class="columns small-12">
+   
+    <div id="myCanvasContainer" class="hidden">
+      <canvas width="300" height="250" id="myCanvas" style="">
+      </canvas>
+    </div>
+    <div id="tags" style="display: none;">
+      <ul>
+        <%@tags.each do |tag|%>
+        <li><%=link_to tag.name, tag.url, :target=>"_blank"%></li>
+        <%end if @tags%>
+      </ul>
+    </div>
+    <!--
+    <script type="text/javascript">
+      window.onload = function() {
+        try {
+              // var gradient = {
+              //  0:    '#f00', // red
+              //  0.33: '#ff0', // yellow
+              //  0.66: '#0f0', // green
+              //  1:    '#00f'  // blue
+              // };
+              // TagCanvas.weightGradient = gradient;
+
+              TagCanvas.Start('myCanvas','tags',{
+                shape: "hcylinder",
+                lock: "x",
+                  textColour: null,//'#008CBA',
+                  textHeight: 20,
+                  outlineColour: '#0000ff',
+                  reverse: true,
+                  depth: 0.5,
+                  maxSpeed: 0.02
+                });
+            } catch(e) {
+            // something went wrong, hide the canvas container
+            document.getElementById('myCanvasContainer').style.display = 'none';
+            }
+          };
+      </script>
+      -->
+
+  </div>
+</div>
+
+<div class="row collapse panel radius hidden">
+        <%= form_for :search, url: search_path do |f|%>
+          <div class="small-8 columns">
+            <%= f.text_field :keyword,  placeholder: 'search' %>
+          </div>
+          <div class="small-4 columns">
+            <span class="postfix"><button type="submit" class="button postfix small"><i class='fa fa-search'></i></button></span>
+          </div>
+
+        <%end%>
+       <!--  <div class="small-6 columns">
+          <a href="/searchs" class="button split small"><i class="fa fa-search"></i><span data-dropdown="drop"></span></a><br>
+          <ul id="drop" class="f-dropdown" data-dropdown-content>
+            <li><a href="#"><i class="fa fa-user"></i></a></li>
+            <li><a href="#"><i class="fa fa-comment-o"></i></a></li>
+            <li><a href="#"><i class="fa fa-calendar"></i></a></li>
+          </ul>
+        </div> -->
+</div>
+<div class="groupbuys-index"  data-over="<%= t(:groupbuy_end) %>">
+  <% if @groupbuys && @groupbuys.size>0 %>
+    <%= render @groupbuys %>
+    <div class="columns small-12 text-right">
+      <%=link_to t(:more), groupbuys_path%>
+    </div>
+    <hr />
+  <% else %>
+    <p><%= t(:no_groupbuys) %></p> 
+    <hr />
+  <% end%>
+</div>
+
+
+<div class="events-index" data-over="<%= t(:event_end) %>">
+  <% if @events && @events.size>0%>
+    <%= render @events %>
+    <div class="columns small-12 text-right">
+      <%=link_to t(:more), events_path%>
+      <hr>
+    </div>
+  <% else %>
+    <p><%= t(:no_events) %></p>
+    <hr />
+  <% end%>
+</div>
+
+
+<div class="topics-index">
+  <% if @topics%>
+    <%= render @topics %>
+    <div class="columns small-12 text-right">
+      <%=link_to t(:more), forum_path(forum_id)%>
+    </div>
+  <% else %>
+    <p><%= t(:no_topics) %></p>
+    <hr />
+  <% end%>
+</div>

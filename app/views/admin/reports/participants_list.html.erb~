@@ -1,0 +1,79 @@
+<div class="participants_list">
+  <div class="title">
+    <h3>报名详情</h3>
+    <h4><%= @groupbuy.zh_title.present? ? @groupbuy.zh_title : @groupbuy.en_title %></h4>
+  </div>
+
+  <div class="navpath">
+    <span>
+      <%= link_to "首页", admin_reports_path %>
+    </span>
+    <span class="slash">/</span>
+    <span class="subpath">
+      <%= link_to "活动列表", admin_groupbuys_list_path(@groupbuy) %>
+    </span>
+    <span class="slash">/</span>
+    <span class="thirdpath">
+      报名详情
+    </span>
+  </div>
+<div>
+
+<%=form_for :member,:url=>admin_downorder_path(groupbuy_id:params[:groupbuy_id]),:method=>:post do |f|%>
+      
+    <span>
+    <%=f.select :status_pay,{"已付款"=>"1","未付款"=>"0"},{default:1},:style=>"margin-left:100px;width:120px" %>
+			
+
+       <ul class="clearfix unstyled" style="margin-left:100px;list-style-type:none" >
+          <li class="checkbox-verticle" style="float:left;font-size=10px"><%= check_box_tag "fields[]","付款状态",true%>付款状态</li>
+          <li class="checkbox-verticle" style="float:left;font-size=10px"><%= check_box_tag "fields[]","发货状态",true%>发货状态</li>
+          <li class="checkbox-verticle" style="float:left;font-size=10px"><%= check_box_tag "fields[]","报名时间",true%>报名时间</li>
+  
+        </ul>
+</span>
+        <%= f.submit '导出' ,:style=>"margin-left:100px;width:100px;background-color:blue"%>
+   
+       <%end%>
+                   
+
+</div>
+  <table>
+    <tr>
+      <th>姓名</th>
+      <th>联系电话</th>
+      <th>地址</th>
+      <th>数量</th>
+      <th>单价</th>
+      <th>总价</th>
+      <th>付款状态</th>
+      <th>发货状态</th>
+      <th>报名时间</th>
+      <th>操作</th>
+    </tr>
+    <% @participants.each do |p| %>
+    <tr>
+      <td><%= p.name %></td>
+      <td><%= p.mobile %></td>
+      <td style="width: 25%"><%= p.address %></td>
+      <td><%= p.amount %><%= @groupbuy.goods_unit %></td>
+      <td><%= @groupbuy.price %></td>
+      <td><%= p.amount * @groupbuy.price %></td>
+      <td><%= is_paid p %></td>
+      <td id="participant-<%= p.id %>" ><%= is_shiped p %></td>
+      <td><%= p.created_at.strftime('%F') %></td>
+      <% if p.tracking_number.present? %>
+      <td><%= p.tracking_number %></td>
+      <% else %>
+      <td class="participant-ship-confirm" data-id="<%= p.id %>" data-url="<%= confirm_shiped_participant_path(p.id) %>">
+        <% if p.status_ship == 0 %>
+        <div class="ship-confirm">发货确认</div>
+        <% end %>
+      </td>
+      <% end %>
+    </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @participants %>
+</div>
+

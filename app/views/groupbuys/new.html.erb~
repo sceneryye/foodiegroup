@@ -1,0 +1,7 @@
+<% provide :title, t(:new_groupbuy) %>
+
+<%= render 'form' %>
+<script type="text/javascript" src="../assets/zepto.js"> </script>
+<script type="text/javascript" src="../assets/zepto.touch.js"> </script>
+<script type="text/javascript" src="../assets/wangEditor-mobile.js"> </script>
+<link href="../assets/wangEditor-mobile.css" media="screen" type="text/css">
