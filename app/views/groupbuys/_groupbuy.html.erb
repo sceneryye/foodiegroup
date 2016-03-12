@@ -51,11 +51,11 @@
       <ul class="button-group even-2" >
         <li>
           <a href="#" class="<%= 'show-participants' if groupbuy.status>-1 %> button tiny secondary" data-url="<%=groupbuy_participants_path(groupbuy)%>">
-            <i class="fa fa-user-plus"></i><%=t(:buys)%>(<%=groupbuy.participants_count.to_i%>)</a>
+            <i class="fa fa-user-plus"></i><%=t(:buys)%></a>
           </li>
           <li>
             <a href="#" class="show-comments button tiny secondary"  data-url="<%=groupbuy_comments_path(groupbuy)%>" data-id="<%= groupbuy.id %>" data-more="<%= t(:more) %>" data-controllername="groupbuys">
-              <i class="fa fa-comments"></i><%=t(:comments)%>(<%=groupbuy.comments_count%>)
+              <i class="fa fa-comments"></i><%=t(:comments)%>
             </a>
           </li>
         </ul>
