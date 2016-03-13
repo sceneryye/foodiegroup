@@ -46,8 +46,8 @@ class SessionsController < ApplicationController
     if (user = User.find_by(weixin_openid: openid)) && openid.present?
       login user
      # session[:mobile] = user.mobile
-     Rails.logger.info "---------------return_url=#{return_url}"
-     redirect_to return_url
+     #Rails.logger.info "---------------return_url=#{return_url}"
+     # redirect_to return_url
     #elsif return_url.split('?').first.in? ['http://foodie.trade-v.com/register', 'http://foodie.trade-v.com/login']
      # data = get_user_info(openid, access_token)
       #session[:openid] = data["openid"]
