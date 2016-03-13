@@ -81,7 +81,7 @@ class UsersController < ApplicationController
       group_name = current_user.group.name
       @groupid = current_user.group.id
       @title = session[:locale] == 'zh' ? "#{group_owner.name}推荐您加入 Groupmall!" : "#{group_owner.name} recommend you to join Groupmall!"
-      @img_url = '/groupmall_logo.jpg'
+      @img_url = 'http://foodie.trade-v.com/groupmall_logo.jpg'
       @desc = session[:locale] == 'zh' ? 'Groupmall 是拼人品的团购、聚会和论坛。' : 'Groupmall is trusted based group buying, meetups and forums.'
       @timestamp = Time.now.to_i
       @appId = WX_APP_ID
