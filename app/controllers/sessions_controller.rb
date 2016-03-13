@@ -63,7 +63,7 @@ class SessionsController < ApplicationController
       # session[:openid] = data["openid"]
       # session[:avatar] = data["headimgurl"]
       # session[:nickname] = data["nickname"]
-      new_user = User.new openid: data["openid"], avatar: data["headimgurl"], nickname: data["nickname"]
+      new_user = User.new openid: data["weixin_openid"], avatar: data["headimgurl"], nickname: data["nickname"]
       if new_user.save
         login new_user
         redirect_to return_url || root_path
