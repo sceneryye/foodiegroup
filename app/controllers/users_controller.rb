@@ -178,7 +178,7 @@ def user_params
 end
 
 def select_user
-  @user = User.find_by(mobile: params[:id]) || User.find_by(username: params[:id]) || User.find_by(nickname: params[:id])
+  @user = User.find_by(id: params[:id])
 end
 
 end

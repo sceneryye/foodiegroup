@@ -28,7 +28,7 @@
     <i class="fa fa-bullhorn"></i>
   <%end%>
   <%if current_user
-      @user_url = profile_path(current_user.mobile)
+      @user_url = profile_path(current_user.id)
     else
       @user_url= login_path
     end%>

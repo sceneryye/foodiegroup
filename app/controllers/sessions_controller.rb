@@ -45,25 +45,31 @@ class SessionsController < ApplicationController
     Rails.logger.info "----openid=#{openid}"
     if (user = User.find_by(weixin_openid: openid)) && openid.present?
       login user
-      session[:mobile] = user.mobile
-      Rails.logger.info "---------------return_url=#{return_url}"
-      redirect_to return_url
-    elsif return_url.split('?').first.in? ['http://foodie.trade-v.com/register', 'http://foodie.trade-v.com/login']
-      data = get_user_info(openid, access_token)
-      session[:openid] = data["openid"]
-      session[:avatar] = data["headimgurl"]
-      session[:nickname] = data["nickname"]
-      Rails.logger.info "---------------#{data}"
-      Rails.logger.info "---------------#{session[:openid]}"
-      Rails.logger.info "---------------#{session[:nickname]}"
-      Rails.logger.info "---------------return_url=#{return_url}"
-      redirect_to register_path
-    else
-      data = get_user_info(openid, access_token)
-      session[:openid] = data["openid"]
-      session[:avatar] = data["headimgurl"]
-      session[:nickname] = data["nickname"]
-      redirect_to return_url
+     # session[:mobile] = user.mobile
+     Rails.logger.info "---------------return_url=#{return_url}"
+     redirect_to return_url
+    #elsif return_url.split('?').first.in? ['http://foodie.trade-v.com/register', 'http://foodie.trade-v.com/login']
+     # data = get_user_info(openid, access_token)
+      #session[:openid] = data["openid"]
+      # session[:avatar] = data["headimgurl"]
+      # session[:nickname] = data["nickname"]
+      # Rails.logger.info "---------------#{data}"
+      # Rails.logger.info "---------------#{session[:openid]}"
+      # Rails.logger.info "---------------#{session[:nickname]}"
+      # Rails.logger.info "---------------return_url=#{return_url}"
+      # redirect_to register_path
+    # else
+      # data = get_user_info(openid, access_token)
+      # session[:openid] = data["openid"]
+      # session[:avatar] = data["headimgurl"]
+      # session[:nickname] = data["nickname"]
+      new_user = User.new openid: data["openid"], avatar: data["headimgurl"], nickname: data["nickname"]
+      if new_user.save
+        login new_user
+        redirect_to return_url || root_path
+      else
+        redirect_to root_path(errmsg: 'Failed to create new user.')
+      end
     end
   end
 
