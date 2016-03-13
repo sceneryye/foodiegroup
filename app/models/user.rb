@@ -13,14 +13,14 @@ class User < ActiveRecord::Base
   belongs_to :group
 
 
-  validates :username,   presence:   true,
-  uniqueness: { case_sensitive: false },
-  length:     { in: 2..40 }
+  #validates :username,   presence:   true,
+  #uniqueness: { case_sensitive: false },
+  #length:     { in: 2..40 }
                          #,format:     { with: /\A[a-zA-Z][a-zA-Z0-9_-]*\Z/ }
                         # ,exclusion:  { in: ['oturum_ac'] }
 
-                        validates :mobile,    presence:   true,
-                        uniqueness: { case_sensitive: false }
+                        #validates :mobile,    presence:   true,
+                        #uniqueness: { case_sensitive: false }
 
   # validates :email,      presence:   true,
   #                        uniqueness: { case_sensitive: false },
