@@ -110,8 +110,8 @@ def badge_for(object)
 end
 
 def info_for(user)
- link_text = image_tag(user.avatar, class:'user-thumb') + ' ' + user.nickname 
- link_to(link_text, profile_path(user))
+ link_text = image_tag(user.try(:avatar), class:'user-thumb') + ' ' + user.try(:nickname)
+ link_to(link_text, profile_path(user.id)) if user
 end
 
 def time_for(object)

@@ -29,9 +29,9 @@ class Admin::ReportsController < ApplicationController
   def set_online_offline
     @groupbuy = Groupbuy.find_by(id: params[:id])
     if params[:online] == 'true'
-      @groupbuy.update(online: true)
+      @groupbuy.update!(online: true)
     elsif params[:online] == 'false'
-      @groupbuy.update(online: false)
+      @groupbuy.update!(online: false)
     end
     render json: {online: @groupbuy.online.to_s}.to_json
   end

@@ -42,7 +42,11 @@ class GroupbuysController < ApplicationController
     
 
     #微信share接口配置
-    @title = "#{current_user.nickname if current_user.present?}推荐您加入团购：#{current_title @groupbuy}"
+    if session[:locale] == 'zh'
+      @title = "#{current_user.nickname if current_user.present?}推荐您加入团购：#{current_title @groupbuy}"
+    else
+      @title = "#{current_user.nickname if current_user.present?}recommend you to join the groupbuy：#{current_title @groupbuy}"
+    end
     @img_url = 'http://www.trade-v.com:5000' + @title_pic.to_s
     @desc = current_body(@groupbuy).present? ? current_body(@groupbuy).html_safe.gsub(/\s/, '').gsub('<p>', '').gsub('</p>', '') : ''
     @timestamp = Time.now.to_i
@@ -85,22 +89,22 @@ class GroupbuysController < ApplicationController
      @groupbuy = Groupbuy.new
      session[:pic_file] = nil
      @photo = Photo.new
-    end
+   end
 
-    def choose_or_new_groupbuy
-      @groupbuys = Groupbuy.offline.where(user_id: current_user.id)
-    end
+   def choose_or_new_groupbuy
+    @groupbuys = Groupbuy.offline.where(user_id: current_user.id)
+  end
 
-    def choose_from_groupbuys
-      @groupbuys = Groupbuy.offline.where(user_id: current_user.id)
-    end
+  def choose_from_groupbuys
+    @groupbuys = Groupbuy.offline.where(user_id: current_user.id)
+  end
 
-    def new_from_groupbuy
-      @groupbuy = Groupbuy.new
-      @old_groupbuy = Groupbuy.find_by(params[:id])
-    end
+  def new_from_groupbuy
+    @groupbuy = Groupbuy.new
+    @old_groupbuy = Groupbuy.find_by(params[:id])
+  end
 
-   def create
+  def create
     modified_groupbuy_params = groupbuy_params
     modified_groupbuy_params[:en_title] = groupbuy_params[:en_title].blank? ? groupbuy_params[:zh_title] : groupbuy_params[:en_title]
     modified_groupbuy_params[:zh_title] = groupbuy_params[:zh_title].blank? ? groupbuy_params[:en_title] : groupbuy_params[:zh_title]

@@ -1,4 +1,6 @@
+
 <div class="groupbuy-list <%= 'still-valid' if groupbuy.end_time > Time.zone.now %>" data-endtime="<%= groupbuy.end_time.to_i %>" data-day="<%= t(:day) %>">
+<%= link_to groupbuy do %>
   <div class="row">
     <div class="columns small-4">
       <% if groupbuy.pic_url.present?
@@ -9,15 +11,12 @@
         @title_pic = cut_pic photos.first || photos.try(:first).try(:image)
       #@content_pic = photos[1..-1]
       end %>
-      <%= link_to groupbuy,class: "th" do %>
-      <%= image_tag @title_pic %>
-
-      <%end%>
+      <%= image_tag @title_pic, class: 'th' %>
 
     </div>
     <div class="columns small-8">
 
-      <h4 class="groupbuy-name"><%= link_to current_title(groupbuy), groupbuy%></h4>
+      <h4 class="groupbuy-name"><%= current_title(groupbuy)%></h4>
 
       <div class="row radius callout all-kinds-of-money">
         <div class="columns small-6 groupbuy-price" style="line-height:100%">
@@ -32,7 +31,7 @@
       
       <% if groupbuy.end_time > Time.zone.now %>
       <div class="countdown countdownlists">
-      <span><i class="fa fa-clock-o"></i></span>
+        <span><i class="fa fa-clock-o"></i></span>
         <% if session[:locale] == 'zh' %>
         <span class='ct'>剩余</span>
         <% end %>
@@ -51,14 +50,15 @@
       <ul class="button-group even-2" >
         <li>
           <a href="#" class="<%= 'show-participants' if groupbuy.status>-1 %> button tiny secondary" data-url="<%=groupbuy_participants_path(groupbuy)%>">
-            <i class="fa fa-user-plus"></i><%=t(:buys)%>(<%=groupbuy.participants_count.to_i%>)</a>
+            <i class="fa fa-user-plus"></i><%=t(:buys)%></a>
           </li>
           <li>
             <a href="#" class="show-comments button tiny secondary"  data-url="<%=groupbuy_comments_path(groupbuy)%>" data-id="<%= groupbuy.id %>" data-more="<%= t(:more) %>" data-controllername="groupbuys">
-              <i class="fa fa-comments"></i><%=t(:comments)%>(<%=groupbuy.comments_count%>)
+              <i class="fa fa-comments"></i><%=t(:comments)%>
             </a>
           </li>
         </ul>
       </div>
     </div>
+    <% end %>
   </div>

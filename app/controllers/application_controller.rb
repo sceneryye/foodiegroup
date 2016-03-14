@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     if params[:locale] && I18n.available_locales.include?( params[:locale].to_sym )
       session[:locale] = params[:locale]
     end
-    session[:locale] ||= 'zh'
+    session[:locale] ||= 'en'
     Rails.logger.info "--------#{session[:locale]}"
 
     I18n.locale = session[:locale] || I18n.default_locale

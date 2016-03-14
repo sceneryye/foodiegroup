@@ -211,7 +211,7 @@ en:
   price: Price
   participants: Participants
   comments: Comments
-  site_name: groupmall
+  site_name: GroupMall
   home: Home
   search: Search
   event: Meetups
@@ -248,7 +248,7 @@ en:
   edit_profile: Edit Profile
   maintain_addresses: Delivery Address
   interests: interests
-  membership: About Group Buying
+  membership: About GroupMall
   name: Name
   mobile: Mobile
   address: Address
@@ -379,8 +379,8 @@ en:
   as_gift: Give As Gift
   choose_from_groupbuys: Choose From Histroy
   goods_size: Goods Size
-  goods_bbd: Expiration Date
-  products_store: Products Warehouse
+  goods_bbd: Expiration
+  products_store: Popular Deals
   office_line: Office Line
   work_time: Work Time
   workday: From Monday To Friday
