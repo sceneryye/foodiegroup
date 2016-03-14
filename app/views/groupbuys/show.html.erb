@@ -1,4 +1,4 @@
-<% provide :title, t(:groupbuy_detail) %>
+﻿<% provide :title, t(:groupbuy_detail) %>
 <div class="row">
   <div class="large-2 columns">
     <%= image_tag @title_pic, class: 'profile-image' if @groupbuy %>
@@ -73,15 +73,10 @@
           </div>
           <% end %>
           <% end %><!--  <%= current_body(@groupbuy).try(:html_safe)  %> -->
-<<<<<<< HEAD
+
 <textarea data-adaptheight rows="3" cols="40" placeholder="Your input" 
 style="padding: 16px; line-height: 1.5; color:#000000;backgroud-color:#ffffff" disabled="disabled">
          
-=======
-          <textarea data-adaptheight rows="3" cols="40" placeholder="Your input" 
-          style="padding: 16px; line-height: 1.5;" disabled="disabled">
->>>>>>> 496ffd20b924f7db32f9e233e960eb6f0257e88c
-
 
           <%=raw current_body(@groupbuy).gsub(/width/,'widthh').gsub(/height/,'heightt')  %>
         </textarea>
