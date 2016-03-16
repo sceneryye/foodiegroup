@@ -4,6 +4,7 @@ RailsOnForum::Application.routes.draw do
   #scope '/foodiegroup' do
   get 'groups/show'
   mount ChinaCity::Engine => '/china_city'
+  get 'drag_drop', to: 'home#drag_drop', as: :drag_drop
 
   resources :user_addresses
   resources :logistics
