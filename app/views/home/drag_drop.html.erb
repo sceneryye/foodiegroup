@@ -1,28 +1,23 @@
-<script type="text/javascript">
-function allowDrop(ev)
-{
-ev.preventDefault();
-}
 
-function drag(ev)
-{
-ev.dataTransfer.setData("Text",ev.target.id);
-}
-
-function drop(ev)
-{
-ev.preventDefault();
-var data=ev.dataTransfer.getData("Text");
-ev.target.appendChild(document.getElementById(data));
-}
-</script>
 
 <style type="text/css">
 #div1 {width:488px;height:70px;padding:10px;border:1px solid #aaaaaa;}
 </style>
 
 
-<div id="div1" ondrop="drop(event)"
-ondragover="allowDrop(event)"></div>
-<div id="drag1"  draggable="true"
-ondragstart="drag(event)" width="336" height="69" />Hello, Please Drag Me!</div>
+<div id="div1" ></div>
+<div id="drag1"   width="336" height="69" />Hello, Please Drag Me!</div>
+
+<script type="text/javascript">
+ var div = document.getElementById('drag1');
+  div.addEventListener('touchmove', function(event) {
+  event.preventDefault();//阻止其他事件
+  // 如果这个元素的位置内只有一个手指的话
+  if (event.targetTouches.length == 1) {
+   var touch = event.targetTouches[0];  // 把元素放在手指所在的位置
+   div.style.left = touch.pageX + 'px';
+  div.style.top = touch.pageY + 'px';
+  div.style.background = "green";
+   }
+  }, false);
+</script>
