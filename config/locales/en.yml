@@ -326,6 +326,7 @@ en:
   area: Area
   detail: Detail
   pay_online: Pay Online
+  pay_now: Pay Now
   pay_offline: Pay Offline
   delete_insure: Are you sure to delete it?
   must_large_than_minimal: Quantity must be larger than MOQ!

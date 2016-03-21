@@ -439,6 +439,7 @@ zh:
   area: 地区
   detail: 详情
   pay_online: 线上支付
+  pay_now: 立刻支付
   pay_offline: 线下支付
   must_large_than_minimal: 数量必须大于最低起订量
   groupbuy_price: 团购价

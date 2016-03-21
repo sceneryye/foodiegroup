@@ -78,12 +78,12 @@
     <div class="clear"></div>
 
     <div class="pay-button">
-      <div class="columns small-4 small-offset-2">
+      <div class="columns small-4 small-centered">
         <%= link_to wechat_pay_path(participant_id: @participant.id) do %>
-        <div class="button tiny"><%= t(:pay_online) %></div>
+        <div class="button small expanded pay-button"><%= t(:pay_now) %></div>
         <% end %>
       </div>
-      <div class="columns small-4 end">
+      <div class="columns small-4 end hidden">
         <% message = session[:locale] == 'zh' ? '您的支付状态已改为待确认状态，请在微信中给 "iamchongyou" 留言，或者发送邮件至"du@iotps.com"进行支付！' : 'Your pay status is now TO BE CONFIRMED, please leave message in WeChat to "iamchongyou" or send an email to "du@iotps.com" to pay for it offline ' %>
         <div class="button tiny pay-offline" data-id="<%= params[:id] %>" data-url="<%= participant_path(@participant) %>" data-message="<%= message %>" data-redirect="<%= @path %>"><%= t(:pay_offline) %></div>
 
