@@ -110,7 +110,7 @@
       <span class="postfix"><%= t(:goods_bbd) %></span>
     </div>
     <div class="small-3 columns">
-    <span class="postfix">
+      <span class="postfix">
         <%= f.text_field :goods_bbd %>
       </span>
     </div>
@@ -152,24 +152,17 @@
     <%= f.text_area :en_body,placeholder: t(:en_body),:id=>'textarea1', rows: 5%>
   </div>
 
-</script>
 
-  <div>
-   <%= f.submit class:'tiny button radius right submit-new-groupbuy' %>
- </div>
- <% end %>
- <form action="<%= photos_path %>" class="dropzone" id="my-dropzone" enctype="multipart/form-data">
+<div>
+ <%= f.submit class:'tiny button radius right submit-new-groupbuy' %>
+</div>
+<% end %>
+<form action="<%= photos_path %>" class="dropzone" id="my-dropzone" enctype="multipart/form-data">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token.to_s %>">
   <input type="hidden" name="parent" value="<%= params[:controller] %>">
 </form>
 </div>
 </div>
 
-<script type="tex/javascript">
-     $(function(){
-       var editor = new ___E('textarea1');
-           editor.init();
-         } );
 
- </script>
 

@@ -115,7 +115,7 @@ def info_for(user)
 end
 
 def time_for(object)
-  ', ' + time_ago_in_words(object.created_at) + ' '+t(:before)+' '
+  ', ' + time_ago_in_words(object.created_at) + ' '+t(:ago)+' '
 end
 
 def vote_for(object)

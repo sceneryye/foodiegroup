@@ -439,6 +439,7 @@ zh:
   area: 地区
   detail: 详情
   pay_online: 线上支付
+  pay_now: 立刻支付
   pay_offline: 线下支付
   must_large_than_minimal: 数量必须大于最低起订量
   groupbuy_price: 团购价
@@ -496,4 +497,7 @@ zh:
   workday: 周一到周五
   my_events: 我的活动
   my_forums: 我的论坛
+  ago: 之前
+  province: 省份
+  city: 城市
 

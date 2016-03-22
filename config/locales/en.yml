@@ -210,7 +210,7 @@ en:
   by: By
   price: Price
   participants: Participants
-  comments: Comments
+  comments: Comment
   site_name: GroupMall
   home: Home
   search: Search
@@ -242,7 +242,7 @@ en:
   shiped: Shiped
   unshiped: Wating for ship
   received: Received
-  groupbuy: Group Buying Deals
+  groupbuy: Hot Deals
   my_groupbuys: My Deals
   share: Share
   edit_profile: Edit Profile
@@ -254,8 +254,8 @@ en:
   address: Address
   quantity: Quantity
   buy: Buy Now
-  buys: Boughts
-  remark: Remark
+  buys: Order
+  remark: Remarks
   new_event: Add new meetup
   group_management: Group Management
   limited_people: Max. attendee
@@ -272,7 +272,7 @@ en:
   default_address: Default Address
   new_address: Create New Address
   set_default: Set As Default
-  groupbuy_detail: Deal Detail
+  groupbuy_detail: Deal Details
   event_detail: Meetup Detail
   amount: Amount
   count_down: Countdown
@@ -326,6 +326,7 @@ en:
   area: Area
   detail: Detail
   pay_online: Pay Online
+  pay_now: Pay Now
   pay_offline: Pay Offline
   delete_insure: Are you sure to delete it?
   must_large_than_minimal: Quantity must be larger than MOQ!
@@ -347,7 +348,7 @@ en:
   male: Male
   female: Female
   unknown: Unknown
-  sex: Sex
+  sex: Gender
   me: Me
   my_orders: My Orders
   order_status: Order Status
@@ -376,9 +377,9 @@ en:
   email: E-mail
   tel: Mobile
   contacts: Contacts
-  as_gift: Give As Gift
+  as_gift: Give As a Gift
   choose_from_groupbuys: Choose From Histroy
-  goods_size: Goods Size
+  goods_size: Format
   goods_bbd: Expiration
   products_store: Popular Deals
   office_line: Office Line
@@ -386,4 +387,8 @@ en:
   workday: From Monday To Friday
   my_events: My Meetups
   my_forums: My Forums
+  ago: ago
+  province: Province
+  city: City
+
 

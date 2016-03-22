@@ -46,7 +46,7 @@
         <td colspan="2">￥<%=@groupbuy.market_price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
       </tr>
       <tr>
-      <% if @groupbuy.end_time > Time.now %>
+        <% if @groupbuy.end_time > Time.now %>
         <th><%=t(:groupbuy_price)%></th>
         <td colspan="2">￥<%=@groupbuy.groupbuy_price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
         <% else %>
@@ -74,9 +74,15 @@
           <% end %>
           <% end %><!--  <%= current_body(@groupbuy).try(:html_safe)  %> -->
 
+<<<<<<< HEAD
 <textarea data-adaptheight rows="3" cols="40" placeholder="Your input" 
 style="padding: 16px; line-height: 1.5; color:#000000;backgroud-color:#ffffff" readonly="readonly">
          
+=======
+          <textarea data-adaptheight rows="3" cols="40" placeholder="Your input" 
+          style="padding: 16px; line-height: 1.5; color:#000000;backgroud-color:#ffffff" disabled="disabled">
+
+>>>>>>> bd7496ac343cff508da4c7fd0599a98e383be081
 
           <%=raw current_body(@groupbuy).gsub(/width/,'widthh').gsub(/height/,'heightt')  %>
         </textarea>
@@ -101,7 +107,6 @@ style="padding: 16px; line-height: 1.5; color:#000000;backgroud-color:#ffffff" r
         <% end %>
       </div>
     </div>
-
   </div>
   <div class="row">
     <div class="small-12 columns">
@@ -130,7 +135,8 @@ style="padding: 16px; line-height: 1.5; color:#000000;backgroud-color:#ffffff" r
       </div>
     </div>
   </div>
-</div>
+
+
 
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
 <!-- ########################comment上传图片########################## -->

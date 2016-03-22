@@ -11,7 +11,7 @@ thumbnailWidth: 40,
 thumbnailHeight: 40,
 maxFiles: 15,
 dictRemoveFile: removeFile,
-dictDefaultMessage: "<div class='button tiny' sytle='background-color:#008CBA;'><i class='fa fa-picture-o'></i></div>",
+dictDefaultMessage: "<div class='button tiny' sytle='background-color:#008CBA;'><i class='fa fa-picture-o'></i>&nbsp;&nbsp;<span>Upload Pictures</span></div>",
 
   // Prevents Dropzone from uploading dropped files immediately
   autoProcessQueue: true,
