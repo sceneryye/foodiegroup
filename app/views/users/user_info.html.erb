@@ -30,7 +30,7 @@
     </div>
     
 
-    <div class="weui_cells">
+    <div class="weui_cells hidden">
       <div class="weui_cell">
         <div class="weui_cell_bd weui_cell_primary">
           <div class="group"><%= t(:group) %></div>
@@ -60,7 +60,7 @@
     </div>
 
     <% if current_user == @user %>
-      <%= link_to t(:edit), edit_profile_path(@user), class: 'weui_btn weui_btn_default' %>
+      <%= link_to t(:edit), edit_profile_path(@user.id), class: 'weui_btn weui_btn_default' %>
       <%= link_to t(:logout), logout_path, method: :delete, class: 'weui_btn weui_btn_warn' %>
     <% end %>
   <% end %>

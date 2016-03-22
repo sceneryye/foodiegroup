@@ -16,19 +16,19 @@
   <div class="city-group">
     <div class="columns small-4">
       <select name="province" id="province" class="city-select">
-        <option value="">--省份--</option>
+        <option value="">--<%= t(:province) %>--</option>
         <%= options_for_select(ChinaCity.list) %>
       </select>
     </div>
     <div class="columns small-4">
       <select name="city" id="city" class="city-select">
-       <option value="">--城市--</option>
+       <option value="">--<%= t(:city) %>--</option>
        <%= options_for_select(ChinaCity.list) %>
      </select>
    </div>
    <div class="columns small-4">
     <select name="area" id="area" class="city-select">
-     <option value="">--地区--</option>
+     <option value="">--<%= t(:area) %>--</option>
      <%= options_for_select(ChinaCity.list) %>
    </select>
  </div>

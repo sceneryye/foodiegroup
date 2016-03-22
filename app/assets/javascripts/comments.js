@@ -12,7 +12,7 @@ thumbnailWidth: 40,
 thumbnailHeight: 40,
 maxFiles: 10,
 dictRemoveFile: removeFile,
-dictDefaultMessage: "<i class='fa fa-picture-o'></i>",
+dictDefaultMessage: "<i class='fa fa-picture-o'></i>&nbsp;&nbsp;Upload Pictures",
 
   // Prevents Dropzone from uploading dropped files immediately
   autoProcessQueue: true,
