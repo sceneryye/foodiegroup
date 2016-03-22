@@ -22,42 +22,42 @@
   <%= show_error_message('请输入您的登录名') %>
 </div>
 <div class="small-12 columns">
-  <%= f.text_field :mobile, required: true, placeholder: '手机' %>
+  <%= f.text_field :mobile, required: true, placeholder: t(:mobile) %>
   <%= show_error_message('请输入您的手机号码.') %>
 </div>
 
 <%else%>
 <div class="small-12 columns">
-  <%= f.email_field :email, required: true, placeholder: :email%>
-  <%= show_error_message('请输入您的email.') %>
+  <%= f.email_field :email, required: true, placeholder: t(:email) %>
+  <%= show_error_message('Please enter your email.') %>
 </div>
 <div class="small-12 columns">
-  <%= f.password_field :password, required: true, placeholder: '密码' %>
-  <%= show_error_message('请输入8个字符以上的密码.') %>
+  <%= f.password_field :password, required: true, placeholder: t(:password) %>
+  <%= show_error_message('Please enter your passowrd with 8 characters at least') %>
 </div>
 <div class="small-12 columns">
-  <%= f.password_field :password_confirmation, required: true, placeholder: '确认密码' %>
-  <%= show_error_message('请输入与上面密码相同的8个以上的字符.') %>
+  <%= f.password_field :password_confirmation, required: true, placeholder: t(:password_confirmation) %>
+  <%= show_error_message('Please enter the same password') %>
 </div>  
 <div class="small-6 columns">
   <%= f.label :avatar %>
 </div>
 <div class="small-6 columns">
  <%= file_field_tag :file%>
- <%= show_error_message('请上传您的头像') %>
+ <%= show_error_message('Please upload your avatar') %>
 </div>
 <div class="small-12 columns">
-  <%= f.text_field :name, placeholder: '姓名' %>
+  <%= f.text_field :name, placeholder: t(:name) %>
   <%= show_error_message %>
 </div>
-<div class="small-3 columns">性别：</div>
+<div class="small-3 columns"><%= t(:sex) %></div>
 <div class="small-5 columns">
   <%=f.radio_button :sex, 1%>
-  <label for="user_sex_1" class="radio-label">男</label>
+  <label for="user_sex_1" class="radio-label"><%= t(:male) %></label>
 </div>
 <div class="small-4 columns">
   <%=f.radio_button :sex, 2%>
-  <label for="user_sex_2" class="radio-label">女</label>
+  <label for="user_sex_2" class="radio-label"><%= t(:female) %></label>
 </div>
 <div class="small-12 columns">
   <%= show_error_message %>

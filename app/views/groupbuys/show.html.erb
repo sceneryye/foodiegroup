@@ -102,23 +102,20 @@ style="padding: 16px; line-height: 1.5; color:#000000;backgroud-color:#ffffff" r
       </div>
     </div>
   </div>
+
   <div class="row">
     <div class="small-12 columns">
       <ul class="tabs" data-tab role="tablist">
-        <li class="tab-title active">
-          <a href="#participants"><i class="fa fa-cart-plus"></i><%=t(:buys)%></a>
-        </li>
-        <li class="tab-title">
-          <a href="#comments"><i class="fa fa-comments"></i><%=t(:comments)%></a>
-        </li>
+        <li class="tab-title active"><a href="#participants"><i class="fa fa-cart-plus"></i><%=t(:buys)%></a></li>
+        <li class="tab-title"><a href="#comments"><i class="fa fa-comments"></i><%=t(:comments)%></a></li>
       </ul>
       <div class="tabs-content panel">
         <div class="content active" id="participants" data-url='<%=groupbuy_participants_path(@groupbuy)%>'>
-          <%=render 'participants/form' ,:locals=>{@parent=>@parent,@participant=>@participant} if current_user && @groupbuy.status>-1%>
+          <%= render 'participants/form', :locals=>{@parent=>@parent,@participant=>@participant} if current_user && @groupbuy.status > -1 %>
           <%= render @participants %>
         </div>
         <div class="content" id="comments"  data-url='<%=groupbuy_comments_path(@groupbuy)%>'>
-          <%=render 'comments/form' ,:locals=>{@parent=>@parent,@comment=>@comment} if current_user%>
+          <%=render 'comments/form',    :locals=>{@parent=>@parent,@comment=>@comment} if current_user%>
           <div class="comments-list">
             <%= render @comments %>
           </div>
@@ -130,24 +127,22 @@ style="padding: 16px; line-height: 1.5; color:#000000;backgroud-color:#ffffff" r
     </div>
   </div>
 
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+  <!-- ########################comment上传图片########################## -->
+  <script type="text/javascript" src="http://www.trade-v.com:5000/assets/comments.js"></script>
+
+  <!-- ############参加团购必须有地址############ -->
+  <script>
+    $('.participant-submit').on('click', function(){
+      if($('.address-detail').length == 0) {
+        alert('<%= t(:enter_address) %>');
+        return false;
+      }
+    });
+  </script>
 
 
-<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
-<!-- ########################comment上传图片########################## -->
-<script type="text/javascript" src="http://www.trade-v.com:5000/assets/comments.js"></script>
-
-<!-- ############参加团购必须有地址############ -->
-<script>
-  $('.participant-submit').on('click', function(){
-    if($('.address-detail').length == 0) {
-      alert('<%= t(:enter_address) %>');
-      return false;
-    }
-  });
-</script>
-
-
-<script>
+  <script>
   //---------------支付成功则给出提示--------------------//
   <% if params[:error_message] == '' %>
   var msg = '<%= t(:pay_success) %>';

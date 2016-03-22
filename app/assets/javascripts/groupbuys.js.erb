@@ -176,7 +176,7 @@ $(document).ready(function(){
 //-------------作为礼品赠送，显示朋友地址输入框-----------//
 
 $(document).ready(function(){
-  $('.as-gift-checkbox').on('change', function(){
+  $(document).on('change', '.as-gift-checkbox', function(){
     if($(':checkbox[name="as_gift"]').is(':checked')) {
       $('.user-address').addClass('hidden');
       $('.as-gift').removeClass('hidden');

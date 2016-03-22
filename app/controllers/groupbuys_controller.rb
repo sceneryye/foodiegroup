@@ -10,6 +10,18 @@ class GroupbuysController < ApplicationController
   def index
     @groupbuys = Groupbuy.online.includes(:user).where('end_time > ?', Time.zone.now)
     @products = Groupbuy.online.includes(:user).where('end_time <= ?', Time.zone.now)
+
+    #微信share接口配置
+    groupbuy = Groupbuy.where('end_time > ?', Time.zone.now).last
+    @title_pic = groupbuy.present? ? groupbuy.photos.first.try(:image) : '/groupmall_logo.jpg'
+    if session[:locale] == 'zh'
+      @title = 'Hot Deal Recommendation'
+    else
+      @title = '热门团购推荐'
+    end
+    @img_url = 'http://www.trade-v.com:5000' + @title_pic.to_s
+    @desc = groupbuy.present? ? (current_title groupbuy) : 'GroupMall'
+    share_config
   end
 
   def show
@@ -43,26 +55,14 @@ class GroupbuysController < ApplicationController
 
     #微信share接口配置
     if session[:locale] == 'zh'
-      @title = "#{current_user.nickname if current_user.present?}推荐您加入团购：#{current_title @groupbuy}"
+      @title = @groupbuy.end_time > Time.zone.now ? 'Hot Deal' : 'Polular Deal'
     else
-      @title = "#{current_user.nickname if current_user.present?}recommend you to join the groupbuy：#{current_title @groupbuy}"
+      @title = @groupbuy.end_time > Time.zone.now ? '热门团购' : '流行团购'
     end
+    @title += @groupbuy.end_time > Time.zone.now ? ' Recommendation' : '推荐'
     @img_url = 'http://www.trade-v.com:5000' + @title_pic.to_s
-    @desc = current_body(@groupbuy).present? ? current_body(@groupbuy).html_safe.gsub(/\s/, '').gsub('<p>', '').gsub('</p>', '') : ''
-    @timestamp = Time.now.to_i
-    @appId = WX_APP_ID
-    @noncestr = random_str 16
-    @jsapilist = ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
-    @jsapi_ticket = get_jsapi_ticket
-    post_params = {
-      :noncestr => @noncestr,
-      :jsapi_ticket => @jsapi_ticket,
-      :timestamp => @timestamp,
-      :url => request.url.gsub("localhost:5000", "foodie.trade-v.com")
-    }
-    @sign = create_sign_for_js post_params
-    @a = [request.url, post_params, request.url.gsub("trade", "foodie.trade-v.com")]
-
+    @desc = current_title @groupbuy
+    share_config
 
 
     if signed_in? 
@@ -292,6 +292,23 @@ class GroupbuysController < ApplicationController
     gb.each do |groupbuy|
       groupbuy.update_columns(recommend: 1)
     end
+  end
+
+  def share_config
+    @timestamp = Time.now.to_i
+    @appId = WX_APP_ID
+    @noncestr = random_str 16
+    @jsapilist = ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
+    @jsapi_ticket = get_jsapi_ticket
+    post_params = {
+      :noncestr => @noncestr,
+      :jsapi_ticket => @jsapi_ticket,
+      :timestamp => @timestamp,
+      :url => request.url.gsub("localhost:5000", "foodie.trade-v.com")
+    }
+    @sign = create_sign_for_js post_params
+    @a = [request.url, post_params, request.url.gsub("trade", "foodie.trade-v.com")]
+
   end
   
 end

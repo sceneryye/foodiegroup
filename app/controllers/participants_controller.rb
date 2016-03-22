@@ -82,8 +82,14 @@ class ParticipantsController < ApplicationController
     if @participant.save
       if params[:as_gift] == '1'
         area = ChinaCity.get(params[:gift_address][:province])
-        address = ChinaCity.get(params[:gift_address][:province]) + ChinaCity.get(params[:gift_address][:city]) + ChinaCity.get(params[:gift_address][:area])+ params[:gift_address][:address]
-        @participant.update(area: area, address: address)
+        address = ChinaCity.get(params[:gift_address][:province]) + params[:gift_address][:address]
+        name = params[:gift_address][:name]
+        mobile = params[:gift_address][:mobile]
+        Rails.logger.info "----------------------#{area}"
+        Rails.logger.info "----------------------#{address}"
+        @participant.update_columns(area: area, address: address, name: name, mobile: mobile)
+        Rails.logger.info "----------------------#{@participant.area}"
+        Rails.logger.info "----------------------#{@participant.address}"
       end
       notice =  '报名成功'
       if @participant.groupbuy_id
