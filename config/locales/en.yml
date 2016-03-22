@@ -392,5 +392,6 @@ en:
   city: City
   password: Password
   password_confirmation: Password Confirmation
+  user_avatar: Avatar
 
 
