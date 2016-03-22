@@ -12,9 +12,9 @@ class GroupbuysController < ApplicationController
     @products = Groupbuy.online.includes(:user).where('end_time <= ?', Time.zone.now)
 
     #微信share接口配置
-    groupbuy = Groupbuy.where('end_time > ?', Time.zone.now).last
+    groupbuy = Groupbuy.online.where('end_time > ?', Time.zone.now).first
     @title_pic = groupbuy.present? ? groupbuy.photos.first.try(:image) : '/groupmall_logo.jpg'
-    if session[:locale] == 'zh'
+    if session[:locale] == 'en'
       @title = 'Hot Deal Recommendation'
     else
       @title = '热门团购推荐'
@@ -54,7 +54,7 @@ class GroupbuysController < ApplicationController
     
 
     #微信share接口配置
-    if session[:locale] == 'zh'
+    if session[:locale] == 'en'
       @title = @groupbuy.end_time > Time.zone.now ? 'Hot Deal' : 'Polular Deal'
     else
       @title = @groupbuy.end_time > Time.zone.now ? '热门团购' : '流行团购'
