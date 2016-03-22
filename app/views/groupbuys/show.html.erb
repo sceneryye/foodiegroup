@@ -74,15 +74,9 @@
           <% end %>
           <% end %><!--  <%= current_body(@groupbuy).try(:html_safe)  %> -->
 
-<<<<<<< HEAD
+
 <textarea data-adaptheight rows="3" cols="40" placeholder="Your input" 
 style="padding: 16px; line-height: 1.5; color:#000000;backgroud-color:#ffffff" readonly="readonly">
-         
-=======
-          <textarea data-adaptheight rows="3" cols="40" placeholder="Your input" 
-          style="padding: 16px; line-height: 1.5; color:#000000;backgroud-color:#ffffff" disabled="disabled">
-
->>>>>>> bd7496ac343cff508da4c7fd0599a98e383be081
 
           <%=raw current_body(@groupbuy).gsub(/width/,'widthh').gsub(/height/,'heightt')  %>
         </textarea>
