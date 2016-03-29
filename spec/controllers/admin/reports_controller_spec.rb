@@ -29,7 +29,6 @@ RSpec.describe Admin::ReportsController, type: :controller do
   describe 'access user' do
     before :each do
       @user = create(:admin)
-      
       session[:user_id] = @user.id
     end
     describe "Get #index with admin role" do
@@ -45,11 +44,7 @@ RSpec.describe Admin::ReportsController, type: :controller do
         expect(response).to render_template "admin"
       end
 
-      it 'collects user to @users' do
-        user = create(:user)
-        get :index
-        expect(assigns(:users)).to match_array [user, @user]
-      end
+      
     end
   end
 

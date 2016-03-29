@@ -329,13 +329,13 @@ en:
   pay_now: Pay Now
   pay_offline: Pay Offline
   delete_insure: Are you sure to delete it?
-  must_large_than_minimal: Quantity must be larger than MOQ!
+  must_large_than_minimal: Quantity must be larger than minimal order quantity!
   share_page: Click the share button on the top right conner to share this page
   must_integer: Quantity must be integer!
   unit_price: Unit Price
   selling_price: Selling Price
   weight_kg: Net. Weight(Kg)
-  en_title: English Title
+  en_title: English Title`
   zh_title: Chinese Title
   en_body: English Description
   zh_body: Chinese Description
