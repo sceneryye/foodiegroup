@@ -26,9 +26,11 @@
       <div class="products-store">
         <%= t(:products_store) %>
       </div>
+      <div id="popular-deals">
       <% @products.each do |product| %>
       <%= render partial: 'groupbuys/groupbuy', object: product %>
       <% end %>
+      </div>
       <% end %>
     </div>
   

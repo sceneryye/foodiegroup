@@ -86,6 +86,7 @@ RailsOnForum::Application.routes.draw do
     resources :users,   only: [:create, :update, :destroy] do
      resources :user_instetests
    end
+   get '/users', to: 'users#index'
 
    get '/users/:id/my_groupbuys', to: 'users#my_groupbuys', as: :my_groupbuys
    get '/users/:id/my_events', to: 'users#my_events', as: :my_events

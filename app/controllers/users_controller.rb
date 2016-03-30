@@ -5,6 +5,8 @@ class UsersController < ApplicationController
     validate_permission!(select_user)
   end
   
+  def index
+  end
 
   def new
     if session[:openid].present?
