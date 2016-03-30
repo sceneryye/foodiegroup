@@ -364,7 +364,7 @@ en:
   edit_groupbuy: Deal Edit
   settings: Settings
   others: Others
-  my_groupbuys: My Groupbuys
+  my_groupbuys: My Deals
   my_events: My Events
   my_topics: My Topics
   login: Login
@@ -393,5 +393,6 @@ en:
   password: Password
   password_confirmation: Password Confirmation
   user_avatar: Avatar
+  about_groupmall: ABOUT GROUPMALL
 
 

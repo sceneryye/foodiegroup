@@ -107,5 +107,6 @@ RailsOnForum::Application.routes.draw do
 
    resource :home, only: [:index]
    root to: 'groupbuys#index'
+   get 'home/about_groupmall', to: 'home#about_groupmall', as: :about_groupmall
   #end
 end

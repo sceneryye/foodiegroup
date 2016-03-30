@@ -21,6 +21,9 @@ class HomeController < ApplicationController
   def drag_drop
   end
 
+  def about_groupmall
+  end
+
   private
   def login_with_mobile
     if session[:mobile].present?

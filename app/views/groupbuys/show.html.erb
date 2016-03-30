@@ -47,11 +47,11 @@
       </tr>
       <tr>
         <% if @groupbuy.end_time > Time.now %>
-        <th><%=t(:groupbuy_price)%></th>
-        <td colspan="2">￥<%=@groupbuy.groupbuy_price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
+        <th class="groupbuy-price-show"><%=t(:price)%></th>
+        <td class="groupbuy-price-show" colspan="2">￥<%=@groupbuy.groupbuy_price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
         <% else %>
-        <th><%=t(:price)%></th>
-        <td colspan="2">￥<%=@groupbuy.price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
+        <th class="groupbuy-price-show"><%=t(:price)%></th>
+        <td class="groupbuy-price-show" colspan="2">￥<%=@groupbuy.price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
         <% end %>
       </tr>
       
