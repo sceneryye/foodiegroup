@@ -325,4 +325,4 @@ DEPENDENCIES
   will_paginate (~> 3.0.6)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

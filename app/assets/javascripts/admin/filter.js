@@ -31,7 +31,7 @@ $(document).ready(function(){
 	$(".pagination").on("click","a",function(){
 		var url = $(this).attr("href");
 		$.getScript(url,checkSelection);
-		return false;
+		//return false;
 	});
 
 
