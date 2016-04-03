@@ -432,7 +432,7 @@ zh:
   weight_kg: 净重(千克)
   logistics: 物流规则
   new_logistic: 新增物流规则
-  apply_success: 报名成功！
+  apply_success: 请点击下面的按钮以完成支付
   consignee: 收货人
   discount: 优惠
   freightage: 邮费
