@@ -50,7 +50,7 @@ class SessionsController < ApplicationController
         RestClient.get user.avatar
       rescue
         data = get_user_info(openid, access_token)
-        user.update_column :avatar, data['avatar']
+        user.update_column :avatar, data['headimgurl']
         Rails.logger.info "------------update avatar => #{user.avatar}"
         Rails.logger.info "------------data => #{data}"
         login user
@@ -78,7 +78,7 @@ class SessionsController < ApplicationController
       data = get_user_info(openid, access_token)
       Rails.logger.info "---------------data => #{data}"
       if user && openid.present? && (user.nickname.nil? || user.avatar.nil?)
-        user.update_columns nickname: data['nickname'], avatar: data['avatar'], username: data['nickname']
+        user.update_columns nickname: data['nickname'], avatar: data['headimgurl'], username: data['nickname']
         login user
         return redirect_to return_url || root_path
       else
