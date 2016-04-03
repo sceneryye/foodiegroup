@@ -45,9 +45,10 @@ class SessionsController < ApplicationController
     user = User.find_by(weixin_openid: openid)
     Rails.logger.info "----openid=#{openid}"
     if user && openid.present? && user.nickname.present? && user.avatar.present?
-      unless RestClient.get user.avatar
+      if (RestClient.get user.avatar).nil?
         data = get_user_info(openid, access_token)
         user.update_column :avatar, data['avatar']
+        Rails.logger.info "------------update avatar => #{user.avatar}"
       end
       login user
      return redirect_to return_url
