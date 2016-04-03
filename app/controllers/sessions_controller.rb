@@ -51,6 +51,7 @@ class SessionsController < ApplicationController
         data = get_user_info(openid, access_token)
         user.update_column :avatar, data['avatar']
         Rails.logger.info "------------update avatar => #{user.avatar}"
+        Rails.logger.info "------------data => #{data}"
       end
       login user
       return redirect_to return_url
