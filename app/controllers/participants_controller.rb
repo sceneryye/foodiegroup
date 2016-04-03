@@ -190,7 +190,7 @@ class ParticipantsController < ApplicationController
       groupbuy_id, participant_id, user_id = params["attach"].split('_')
       participant = Participant.find(participant_id)
       parent = participant.event_id.present? ? 'events' : 'groupbuys'
-      participant.update(status_pay: 2)
+      participant.update(status_pay: 1)
       post_url = "http://www.trade-v.com/temp_info_api"
       openid = params["openid"]
       template_id = "E_Mfmg0TwyE3hRnccleURsU5QpqsPVsj0LD5dU4fu0Y"

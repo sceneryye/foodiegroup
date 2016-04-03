@@ -42,8 +42,9 @@ class SessionsController < ApplicationController
     data = get_auth_access_token code
     access_token = data["access_token"]
     openid = data["openid"]
+    user = User.find_by(weixin_openid: openid)
     Rails.logger.info "----openid=#{openid}"
-    if (user = User.find_by(weixin_openid: openid)) && openid.present?
+    if user && openid.present? && user.nickname.present? && user.avatar.present?
       login user
      # session[:mobile] = user.mobile
      #Rails.logger.info "---------------return_url=#{return_url}"
@@ -64,40 +65,45 @@ class SessionsController < ApplicationController
       # session[:avatar] = data["headimgurl"]
       # session[:nickname] = data["nickname"]
     else
-      new_user = User.new weixin_openid: data["openid"], avatar: data["headimgurl"], nickname: data["nickname"], username: data["nickname"], password_digest: data["openid"]
-      if new_user.save
-        login new_user
-        return redirect_to return_url || root_path
+      data = get_user_info(openid, access_token)
+      if user && openid.present? && (user.nickname.nil? || user.avatar.nil?)
+        user.update_columns nickname: data['nickname'], avatar: data['avatar'], username: data['nickname']
       else
-        return redirect_to root_path(errmsg: 'Failed to create new user.')
-     end
-   end
- end
+        new_user = User.new weixin_openid: data["openid"], avatar: data["headimgurl"], nickname: data["nickname"], username: data["nickname"], password_digest: data["openid"]
+        if new_user.save
+          login new_user
+          return redirect_to return_url || root_path
+        else
+          return redirect_to root_path(errmsg: 'Failed to create new user.')
+        end
+      end
+    end
+  end
 
- private
+  private
 
- def get_auth_access_token code
-  get_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=#{WX_APP_ID}&secret=#{WX_APP_SECRET}&code=#{code}&grant_type=authorization_code"
-  res_data_json = RestClient.get get_url
-  res_data_hash = ActiveSupport::JSON.decode res_data_json
-  Rails.logger.info res_data_hash
-  res_data_hash
-end
+  def get_auth_access_token code
+    get_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=#{WX_APP_ID}&secret=#{WX_APP_SECRET}&code=#{code}&grant_type=authorization_code"
+    res_data_json = RestClient.get get_url
+    res_data_hash = ActiveSupport::JSON.decode res_data_json
+    Rails.logger.info res_data_hash
+    res_data_hash
+  end
 
-def refresh_auth_access_token
-  refresh_token = Wechat.first.auth_refresh_token
+  def refresh_auth_access_token
+    refresh_token = Wechat.first.auth_refresh_token
 
-  get_url = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=#{WX_APP_ID}&grant_type=refresh_token&refresh_token=#{refresh_token}"
-  res_data_json = RestClient.get get_url
-  res_data_hash = ActiveSupport::JSON.decode res_data_json
-  access_expires_at = Time.zone.now.to_i + res_data_hash["expires_in"].to_i
-  Wechat.first.update(auth_access_token: res_data_hash["access_token"], auth_access_token_expires_at: access_expires_at)
-  res_data_hash
-end
+    get_url = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=#{WX_APP_ID}&grant_type=refresh_token&refresh_token=#{refresh_token}"
+    res_data_json = RestClient.get get_url
+    res_data_hash = ActiveSupport::JSON.decode res_data_json
+    access_expires_at = Time.zone.now.to_i + res_data_hash["expires_in"].to_i
+    Wechat.first.update(auth_access_token: res_data_hash["access_token"], auth_access_token_expires_at: access_expires_at)
+    res_data_hash
+  end
 
-def get_user_info openid, access_token
-  get_url = "https://api.weixin.qq.com/sns/userinfo?access_token=#{access_token}&openid=#{openid}&lang=zh_CN"
-  res_data_json = RestClient.get get_url
-  res_data_hash = ActiveSupport::JSON.decode res_data_json
-end
+  def get_user_info openid, access_token
+    get_url = "https://api.weixin.qq.com/sns/userinfo?access_token=#{access_token}&openid=#{openid}&lang=zh_CN"
+    res_data_json = RestClient.get get_url
+    res_data_hash = ActiveSupport::JSON.decode res_data_json
+  end
 end
