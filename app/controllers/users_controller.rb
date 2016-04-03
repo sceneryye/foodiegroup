@@ -103,7 +103,7 @@ class UsersController < ApplicationController
     type = params[:type] || 'topic'
     
     if current_user == @user
-      @group = Group.find_by(id: current_user.group_id)
+      @group = Group.find_by(id: current_user.try(:group_id))
       if @group
         @group_admin = User.find_by(id: @group.user_id)
       end
