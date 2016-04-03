@@ -52,9 +52,10 @@ class SessionsController < ApplicationController
         user.update_column :avatar, data['avatar']
         Rails.logger.info "------------update avatar => #{user.avatar}"
         Rails.logger.info "------------data => #{data}"
+        login user
+        return redirect_to return_url
       end
-      login user
-      return redirect_to return_url
+      
     #elsif return_url.split('?').first.in? ['http://foodie.trade-v.com/register', 'http://foodie.trade-v.com/login']
      # data = get_user_info(openid, access_token)
       #session[:openid] = data["openid"]
