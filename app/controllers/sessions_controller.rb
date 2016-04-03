@@ -76,6 +76,7 @@ class SessionsController < ApplicationController
       # session[:nickname] = data["nickname"]
     else
       data = get_user_info(openid, access_token)
+      Rails.logger.info "---------------data => #{data}"
       if user && openid.present? && (user.nickname.nil? || user.avatar.nil?)
         user.update_columns nickname: data['nickname'], avatar: data['avatar'], username: data['nickname']
         login user
