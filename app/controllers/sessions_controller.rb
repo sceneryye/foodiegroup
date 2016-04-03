@@ -78,7 +78,7 @@ class SessionsController < ApplicationController
       data = get_user_info(openid, access_token)
       if user && openid.present? && (user.nickname.nil? || user.avatar.nil?)
         user.update_columns nickname: data['nickname'], avatar: data['avatar'], username: data['nickname']
-        login new_user
+        login user
         return redirect_to return_url || root_path
       else
         new_user = User.new weixin_openid: data["openid"], avatar: data["headimgurl"], nickname: data["nickname"], username: data["nickname"], password_digest: data["openid"]
