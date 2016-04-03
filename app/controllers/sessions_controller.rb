@@ -45,7 +45,7 @@ class SessionsController < ApplicationController
     user = User.find_by(weixin_openid: openid)
     Rails.logger.info "----openid=#{openid}"
     if user && openid.present? && user.nickname.present? && user.avatar.present?
-      if (RestClient.get user.avatar).nil?
+      if (b = `curl user.avatar -I`).nil?
         data = get_user_info(openid, access_token)
         user.update_column :avatar, data['avatar']
         Rails.logger.info "------------update avatar => #{user.avatar}"
