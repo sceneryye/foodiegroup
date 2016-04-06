@@ -116,6 +116,11 @@ class ParticipantsController < ApplicationController
       @title_pic = @parent.photos.first.try(:image)
       @content_pic = @parent.photos[1..-1]
     end
+    if Groupbuy.find_by(id: @participant.groupbuy_id).end_time > Time.current
+      @note = session[:locale] == 'en' ? 'Note:The delivery will be done with 3 or 4 days.' : '将在三到4天发货'
+    else
+      @note = session[:locale] == 'en' ? 'Note:The delivery will be done at the end of the deal.' : '将在周末活动结束时统一发货'
+    end
   end
 
   def wechat_pay

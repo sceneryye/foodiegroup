@@ -1,4 +1,7 @@
 RailsOnForum::Application.routes.draw do
+  resources :vote_products
+  resources :votings
+  post '/voting/vote_for_voting', to: 'votings#vote_for_voting'
   #get 'photos/create'
 
   #scope '/foodiegroup' do
@@ -47,6 +50,7 @@ RailsOnForum::Application.routes.draw do
     resource :votes, only: :create
     resources :chat
     resources :tags, only: [:create, :update, :destroy]
+    
 
     #mount Ckeditor::Engine => '/ckeditor'
     
@@ -92,6 +96,7 @@ RailsOnForum::Application.routes.draw do
    get '/users/:id/my_events', to: 'users#my_events', as: :my_events
    get '/users/:id/my_topics', to: 'users#my_topics', as: :my_topics
    get 'users/contact_us', to: 'users#contact_us', as: :contact_us
+   get 'users/about_team', to: 'users#about_team', as: :about_team
 
    resources :groups, only: [:show, :update]
 

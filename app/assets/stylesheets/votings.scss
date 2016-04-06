@@ -1,0 +1,44 @@
+/********* show **********/
+.vote-product-tiems {
+  .product-item {
+    margin-top: 20px;
+
+  }
+  .product-image {
+    position: relative;
+    img {
+      display: block;
+      margin: auto;
+      width: 100%;
+    }
+    .fa-check {
+      position: absolute;
+      left: 45%;
+      top: 40%;
+      color: green;
+      opacity: 0.7;
+    }
+  }
+}
+.votes-counter {
+  .bar-length {
+    background-color: green;
+    display: inline-block;
+    padding: 5px 0;
+  }
+  .voting-result {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 2em;
+    font-weight: 700;
+    font-family: 'Open Sans', sans-serif;
+  }
+  .row {
+    margin-top: 20px;
+  }
+}
+.invite-vote {
+  text-align: center;
+  font-size: 1.4em;
+  margin-top: 20px;
+}

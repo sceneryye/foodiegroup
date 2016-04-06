@@ -504,4 +504,12 @@ zh:
   password: 密码
   password_confirmation: 确认密码
   about_groupmall: 关于GroupMall
+  submit: 提交
+  create_voting: 创建投票
+  create_new_item: 新建条目
+  voting: 投票
+  voting_result: 投票结果
+  create_vote_product: 新建投票成员
+  about_the_team: 关于团队
+  management_team: 管理团队
 

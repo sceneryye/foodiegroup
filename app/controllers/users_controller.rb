@@ -79,10 +79,10 @@ class UsersController < ApplicationController
 
     #微信share接口配置
     if current_user.present?
-      group_owner = User.find_by(id: current_user.group.user_id)
-      group_name = current_user.group.name
-      @groupid = current_user.group.id
-      @title = session[:locale] == 'zh' ? "#{group_owner.name}推荐您加入 Groupmall!" : "#{group_owner.name} recommend you to join Groupmall!"
+      group_owner = User.find_by(id: current_user.group.try(:user_id))
+      #group_name = current_user.group.name
+      #@groupid = current_user.group.id
+      @title = session[:locale] == 'zh' ? "#{group_owner.name}推荐您加入 Groupmall!" : "#{group_owner.try(:name)} recommend you to join Groupmall!"
       @img_url = 'http://foodie.trade-v.com/groupmall_logo.jpg'
       @desc = session[:locale] == 'zh' ? 'Groupmall 是拼人品的团购、聚会和论坛。' : 'Groupmall is trusted based group buying, meetups and forums.'
       @timestamp = Time.now.to_i
@@ -120,6 +120,9 @@ class UsersController < ApplicationController
 
 
   def contact_us
+  end
+
+  def about_team
   end
 
   def user_info

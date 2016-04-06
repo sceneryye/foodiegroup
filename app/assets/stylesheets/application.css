@@ -28,6 +28,9 @@ a.button.secondary:visited{color:black;}
  /* _top: expression_r(documentElement.scrollTop + documentElement.clientHeight-this.offsetHeight); */
   overflow:visible; 
 }
+.hidden {
+  display: none;
+}
 
 /*article {
   overflow-y: auto;

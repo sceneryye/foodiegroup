@@ -78,6 +78,11 @@
     <div class="clear"></div>
 
     <div class="pay-button">
+    <div class="row">
+      <div class="columns small-4 small-centered">
+        <%= @note %>
+      </div>
+    </div>
       <div class="columns small-4 small-centered">
         <%= link_to wechat_pay_path(participant_id: @participant.id) do %>
         <div class="button small expanded pay-button"><%= t(:pay_now) %></div>

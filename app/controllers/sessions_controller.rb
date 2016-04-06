@@ -82,7 +82,7 @@ class SessionsController < ApplicationController
         login user
         return redirect_to return_url || root_path
       else
-        new_user = User.new weixin_openid: data["openid"], avatar: data["headimgurl"], nickname: data["nickname"], username: data["nickname"], password_digest: data["openid"]
+        new_user = User.new weixin_openid: data["openid"], avatar: data["headimgurl"], nickname: data["nickname"], username: data["nickname"], password: data["openid"]
         if new_user.save
           login new_user
           return redirect_to return_url || root_path

@@ -227,8 +227,8 @@ en:
   end_time: End Time
   price:  Price
   goods_minimal: Minimum Order
-  new_forum:  New Forum
-  edit_forum: Edit Forum
+  new_forum:  New Blog
+  edit_forum: Edit Blog
   new_topic:  Add new discuz
   edit_topic: Edit discuz
   pay: Pay Now
@@ -356,8 +356,8 @@ en:
   ship_status: Ship Status
   created_at: Create Time
   signin_signup: Sign In / Sign Up
-  forum: Forum
-  forums: Forums
+  forum: Blog
+  forums: Blogs
   logistic_ruler: Logistic Rule
   deal_english_title: Deal Title in English
   new_logistic_rule: New Logistic Rule
@@ -386,7 +386,7 @@ en:
   work_time: Work Time
   workday: From Monday To Friday
   my_events: My Meetups
-  my_forums: My Forums
+  my_forums: My Blogs
   ago: ago
   province: Province
   city: City
@@ -394,5 +394,13 @@ en:
   password_confirmation: Password Confirmation
   user_avatar: Avatar
   about_groupmall: ABOUT GROUPMALL
+  submit: Submit
+  create_new_item: Create New Item
+  create_voting: Create Voting
+  voting: Voting
+  voting_result: Voting Result
+  create_vote_product: Create Vote Product
+  about_the_team: About The Team
+  management_team: Management Team
 
 

@@ -1,0 +1,24 @@
+<div class="create-vote-product">
+  <%= form_for @product, multipart: true do |f| %>
+  <div class="row">
+    <div class="columns small-10 small-offset-1">
+      <%= f.text_field :title, placeholder: 'Title' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="columns small-5 small-offset-1">
+      <%= f.file_field :picture %>
+    </div>
+    <div class="columns small-5 small-offset-1">
+      <img src=''>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="columns small-10 small-offset-1">
+      <%= f.submit t(:submit), class: 'button success small' %>
+    </div>
+  </div>
+  <% end %>
+</div>

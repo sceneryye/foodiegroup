@@ -21,8 +21,8 @@
   <%=link_to groupbuys_path,class: "item #{@groupbuys_active}" do%>
     <i class="fa fa-cart-plus"></i>
   <%end%>
-  <%=link_to events_path,class: "item #{@events_active}" do%>
-    <i class="fa fa-calendar"></i>
+  <%=link_to voting_path(Voting.last),class: "item #{@events_active}" do%>
+    <i class="fa fa-question"></i>
   <%end%>
   <%=link_to forum_path(forum_id),class: "item #{@forums_active}" do%>
     <i class="fa fa-bullhorn"></i>

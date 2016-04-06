@@ -1,0 +1,60 @@
+<div class="about-team">
+  <div class="row">
+    <div class="columns small-12 medium-8 medium-centered management-team">
+      <%= t(:management_team) %>
+    </div>
+  </div>
+
+  <div class="row manager">
+    <div class="columns small-4">
+      <%#= image_tag %>
+    </div>
+    <div class="columns small-8">
+      <% if session[:locale] == 'zh' %>
+      <div class="name">
+        崇友
+      </div>
+      <ul class="experiences">
+        <li>IT 工程师</li>
+        <li>互联网开发者</li>
+        <li>IOTPS创始人</li>
+      </ul>
+      <% else %>
+      <div class="name">
+        Chongyou
+      </div>
+      <ul class="experiences">
+        <li>IT Engineer</li>
+        <li>Web Developer</li>
+        <li>Founder of IOTPS</li>
+      </ul>
+      <% end %>
+    </div>
+  </div>
+
+
+  <div class="row manager">
+    <div class="columns small-4">
+      <%#= image_tag %>
+    </div>
+    <div class="columns small-8">
+      <% if session[:locale] == 'zh' %>
+      <div class="name">
+        Gianmarco
+      </div>
+      <ul class="experiences">
+        <li>超过4年的 F&B 与市场推广经验</li>
+        <li>Nihaoitaly市场部经理</li>
+      </ul>
+      <% else %>
+      <div class="name">
+        Gianmarco
+      </div>
+      <ul class="experiences">
+        <li>More than 4 years F&B and marketing experience</li>
+        <li>Marketing Manager in Nihaoitaly</li>
+      </ul>
+      <% end %>
+    </div>
+  </div>
+</div>

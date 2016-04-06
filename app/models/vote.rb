@@ -1,6 +1,4 @@
 class Vote < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :event
-  belongs_to :comment
-  belongs_to :topic
+  belongs_to :voting
+  belongs_to :vote_product
 end

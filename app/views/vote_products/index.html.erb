@@ -1,0 +1,30 @@
+<div class="vote-product-lists">
+  <% @products.each_with_index do |product, index| %>
+  <div class="row product-item">
+    <div class="columns small-8">
+      <input type="checkbox" value="0" id="index-<%= index + 1 %>" data-id="<%= product.id %>">
+      <label for="index-<%= index + 1 %>"><%= product.title %></label>
+    </div>
+    <div class="columns small-4">
+      <img src="<%= product.picture %>">
+    </div>
+  </div>
+  <% end %>
+
+  <div class="row create-options">
+    <div class="columns small-10 small-offset-1">
+      <ul class="even-2 button-group">
+        <li><a href="/vote_products/new" class="button create-new-item"><%= t(:create_new_item) %></a></li>
+        <li><a class="button create-voting"><%= t(:create_voting) %></a></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!--背景层-->
+  <div class="background-layer hidden"></div>
+
+  <div class="datetime-dash hidden columns small-8 large-6">
+    <input name="end_time data-required="true" class="fdatepicker" id=>"dpd2" placeholder="<%= t(:end_time) %>" >
+  </div>
+</div>

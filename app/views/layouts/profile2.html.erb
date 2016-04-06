@@ -64,12 +64,22 @@
       </div>
       <div class="weui_cell_ft"></div>
       <% end %>
+
       <% if @groups %>
       <%= link_to "javascript:void(0)", class: 'weui_cell show-groups hidden' do %>
       <div class="weui_cell_bd weui_cell_primary">
         <div class="type"><i class="fa fa-users"></i><%= t(:group_management) %></div>
       </div>
       <div class="weui_cell_ft"></div>
+      <% end %>
+
+      <% if is_admin? %>
+      <%= link_to new_vote_product_path, class: 'weui_cell' do %>
+      <div class="weui_cell_bd weui_cell_primary">
+        <div class="type"><i class="fa fa-check-square-o"></i><%= t(:create_vote_product) %></div>
+      </div>
+      <div class="weui_cell_ft"></div>
+      <% end %>
       <% end %>
     </div>
 
@@ -99,6 +109,13 @@
       <%= link_to about_groupmall_path, class: 'weui_cell' do %>
       <div class="weui_cell_bd weui_cell_primary">
         <div class="type"><i class="fa fa-book"></i><%= t(:membership) %></div>
+      </div>
+      <div class="weui_cell_ft"></div>
+      <% end %>
+
+      <%= link_to about_team_path, class: 'weui_cell' do %>
+      <div class="weui_cell_bd weui_cell_primary">
+        <div class="type"><i class="fa fa-book"></i><%= t(:about_the_team) %></div>
       </div>
       <div class="weui_cell_ft"></div>
       <% end %>
