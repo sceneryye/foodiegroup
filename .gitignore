@@ -2,6 +2,7 @@
 /public/events
 /public/groupbuys
 /public/comments
+/public/vote_products
 /config/database.yml
 *.[.DS_Store]
 *.rbc
