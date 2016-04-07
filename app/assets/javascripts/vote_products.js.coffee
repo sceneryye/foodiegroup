@@ -32,14 +32,16 @@ $('.document').ready ->
     $('.submit-voting').on 'click', ->
     # $('.fdatepicker').on 'change', ->
       end_time = $('.fdatepicker').val()
-      return if end_time.length < 1
+      name = $('.voting-name').val()
+      return if end_time.length < 1 || name.length < 1
       post_url = "/votings"
       $.ajax {
         url: post_url,
         type: 'post',
         data: {
           ids: ids,
-          end_time: end_time
+          end_time: end_time,
+          name: name
         },
         success: (e) ->
           if e.msg == 'ok'

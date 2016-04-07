@@ -14,7 +14,7 @@ class VotingsController < ApplicationController
     end
     
     voting = Voting.new end_time: params[:end_time]
-    voting.name = 'No. ' + Voting.count.to_s
+    voting.name = params[:name] || 'No. ' + Voting.count.to_s
     if voting.save
       ids.each do |id|
         Vote.create vote_product_id: id, voting_id: voting.id
@@ -60,6 +60,8 @@ def update
 end
 
 def destroy
+  @voting.delete
+  redirect_to my_votings_path
 end
 
 def show

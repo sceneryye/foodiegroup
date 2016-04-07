@@ -1,0 +1,11 @@
+<div class="weui_cells_title"><%= t(:votings) %></div>
+<div class="weui_cells weui_cells_access">
+  <% @votings.each do |voting| %>
+  <%= link_to votings_path(voting), class: 'weui_cell' do %>
+  <div class="weui_cell_bd weui_cell_primary">
+    <div class="type"><%= voting.name %></div>
+  </div>
+  <div class="weui_cell_ft"></div>
+  <% end %>
+  <% end %>
+</div>

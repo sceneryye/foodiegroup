@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action only: [:edit, :update, :destroy, :my_orders, :my_groupbuys, :my_events, :my_topics] do
     validate_permission!(select_user)
   end
+  before_action :autheorize_admin!, only: [:votings]
   
   def index
   end
@@ -32,6 +33,10 @@ class UsersController < ApplicationController
 
   def my_topics
     @my_topics = current_user.try(:topics)
+  end
+
+  def votings
+    @votings = Voting.all
   end
 
   def create

@@ -32,12 +32,14 @@
       </div>
       <div class="weui_cell_ft"></div>
       <% end %>
-
-      <%= link_to my_events_path,class: 'weui_cell' do %>
+      
+      <% if is_admin? %>
+      <%= link_to my_votings_path,class: 'weui_cell' do %>
       <div class="weui_cell_bd weui_cell_primary">
-        <div class="type"><%= t(:my_events) %></div>
+        <div class="type"><%= t(:votings) %></div>
       </div>
       <div class="weui_cell_ft"></div>
+      <% end %>
       <% end %>
 
       <%= link_to my_topics_path,class: 'weui_cell' do %>

@@ -97,6 +97,7 @@ RailsOnForum::Application.routes.draw do
    get '/users/:id/my_topics', to: 'users#my_topics', as: :my_topics
    get 'users/contact_us', to: 'users#contact_us', as: :contact_us
    get 'users/about_team', to: 'users#about_team', as: :about_team
+   get 'users/votings', to: 'users#votings', as: :my_votings
 
    resources :groups, only: [:show, :update]
 
