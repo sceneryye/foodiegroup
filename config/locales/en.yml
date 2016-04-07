@@ -227,8 +227,8 @@ en:
   end_time: End Time
   price:  Price
   goods_minimal: Minimum Order
-  new_forum:  New Blog
-  edit_forum: Edit Blog
+  new_forum:  New Wish list
+  edit_forum: Edit Wish list
   new_topic:  Add new discuz
   edit_topic: Edit discuz
   pay: Pay Now
@@ -349,15 +349,15 @@ en:
   female: Female
   unknown: Unknown
   sex: Gender
-  me: Me
+  me: My Account
   my_orders: My Orders
   order_status: Order Status
   pay_status: Pay Status
   ship_status: Ship Status
   created_at: Create Time
   signin_signup: Sign In / Sign Up
-  forum: Blog
-  forums: Blogs
+  forum: Wish list
+  forums: Wish lists
   logistic_ruler: Logistic Rule
   deal_english_title: Deal Title in English
   new_logistic_rule: New Logistic Rule
@@ -386,7 +386,7 @@ en:
   work_time: Work Time
   workday: From Monday To Friday
   my_events: My Votes
-  my_forums: My Blogs
+  my_forums: My Wish lists
   ago: ago
   province: Province
   city: City

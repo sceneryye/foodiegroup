@@ -6,8 +6,8 @@
       @users_active = 'active'
     when 'groupbuys'
       @groupbuys_active = 'active'
-    when 'events'
-      @events_active = 'active'  
+    when 'votings'
+      @votes_active = 'active'  
     when 'searchs'
       @searchs_active = 'active'
     else
@@ -23,7 +23,7 @@
   <%=link_to groupbuys_path,class: "item #{@groupbuys_active}" do%>
     <i class="fa fa-cart-plus"></i>
   <%end%>
-  <%=link_to votepath,class: "item #{@events_active}" do%>
+  <%=link_to votepath,class: "item #{@votes_active}" do%>
     <i class="fa fa-question"></i>
   <%end%>
   <%=link_to forum_path(forum_id),class: "item #{@forums_active}" do%>

@@ -1,3 +1,10 @@
+<% provide :title, t(:vote) %>
+<script>
+<% if Voting.count > 0 %>
+var id = "<%= Voting.last.id %>";
+location.pathname = '/votings/' + id;
+<% end %>
+</script>
 <div class="row voting-index">
   <div class="colmuns small-10 small-centered text-info">
     <% if session[:locale] == 'en' %>
