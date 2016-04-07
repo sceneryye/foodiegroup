@@ -12,12 +12,10 @@
   <% end %>
 
   <div class="row create-options">
-    <div class="columns small-10 small-offset-1">
-      <ul class="even-2 button-group">
-        <li><a href="/vote_products/new" class="button create-new-item"><%= t(:create_new_item) %></a></li>
-        <li><a class="button create-voting"><%= t(:create_voting) %></a></li>
-      </ul>
-    </div>
+    <ul class="even-2 button-group">
+      <li><a href="/vote_products/new" class="button create-new-item"><%= t(:create_new_item) %></a></li>
+      <li><a class="button create-voting"><%= t(:create_voting) %></a></li>
+    </ul>
   </div>
 
 
@@ -25,6 +23,7 @@
   <div class="background-layer hidden"></div>
 
   <div class="datetime-dash hidden columns small-8 large-6">
-    <input name="end_time data-required="true" class="fdatepicker" id=>"dpd2" placeholder="<%= t(:end_time) %>" >
+    <input name="end_time" data-required="true" class="fdatepicker" id=>"dpd2" placeholder="<%= t(:end_time) %>" >
+
   </div>
 </div>
