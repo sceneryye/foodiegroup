@@ -29,9 +29,10 @@ $('.document').ready ->
     console.log ids
     $('.background-layer').removeClass('hidden')
     $('.datetime-dash').removeClass('hidden')
+    $('.submit-voting').on 'click', ->
     # $('.fdatepicker').on 'change', ->
-    $('.background-layer').on 'click', ->
       end_time = $('.fdatepicker').val()
+      return if end_time.length < 1
       post_url = "/votings"
       $.ajax {
         url: post_url,
