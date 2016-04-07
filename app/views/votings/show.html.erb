@@ -27,6 +27,8 @@
 <input type="hidden" name="product" value='' data-voting-id="<%= params[:id] %>">
 <div class="columns small-8 small-offset-2 <%= @show_result ? 'hidden' : '' %>">
   <button class="button success expand vote-submit"><%= t(:submit) %></button>
+</div>
+<div class="columns small-8 small-offset-2">
   <% if is_admin? %>
   <%= link_to voting_path(@voting), method: :delete, data: {confirm: 'Are you sure to delete this voting?'} do %>
   <button class="button alert expand delete-vote"><%= t(:delete_voting) %></button>

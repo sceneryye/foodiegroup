@@ -29,23 +29,24 @@ $('.document').ready ->
     console.log ids
     $('.background-layer').removeClass('hidden')
     $('.datetime-dash').removeClass('hidden')
-    $('.submit-voting').on 'click', ->
-    # $('.fdatepicker').on 'change', ->
+    $('.voting-name').on 'change', ->
       end_time = $('.fdatepicker').val()
       name = $('.voting-name').val()
       return if end_time.length < 1 || name.length < 1
-      post_url = "/votings"
-      $.ajax {
-        url: post_url,
-        type: 'post',
-        data: {
-          ids: ids,
-          end_time: end_time,
-          name: name
-        },
-        success: (e) ->
-          if e.msg == 'ok'
-            location.pathname = '/votings/' + e.id
-          else
-            alert e.msg
-      }
+      $('.submit-voting').removeClass('hidden')
+      $('.submit-voting').on 'click', ->
+        post_url = "/votings"
+        $.ajax {
+          url: post_url,
+          type: 'post',
+          data: {
+            ids: ids,
+            end_time: end_time,
+            name: name
+          },
+          success: (e) ->
+            if e.msg == 'ok'
+              location.pathname = '/votings/' + e.id
+            else
+              alert e.msg
+        }
