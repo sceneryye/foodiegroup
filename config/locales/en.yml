@@ -297,8 +297,8 @@ en:
   coordinate: Coordinate
   event_address: Event address
   new_groupbuy: Create Groupbuying Deal
-  new_event: Create New Vote
-  new_topic: Create New Disscusion
+  new_event: Create New Voting
+  new_topic: Create New Wishlist
   content: Content
   durantion: Duration
   day: Day
@@ -356,8 +356,8 @@ en:
   ship_status: Ship Status
   created_at: Create Time
   signin_signup: Sign In / Sign Up
-  forum: Wish list
-  forums: Wish lists
+  forum: Wishlist
+  forums: Wishlists
   logistic_ruler: Logistic Rule
   deal_english_title: Deal Title in English
   new_logistic_rule: New Logistic Rule
@@ -406,4 +406,5 @@ en:
   voting_name: Voting Name
   votings: Votings
   delete_voting: Delete Voting
+  my_wishlist: My Wishlist
 

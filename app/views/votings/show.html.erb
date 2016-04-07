@@ -1,14 +1,14 @@
-<% provide :title, t(:vote) %>
+<% provide :title, t(:voting) %>
 <div class="row">
   <div class="columns small-12 invite-vote">
     <% if session[:locale] == 'en' %>
-    <%= @voting.present? ? 'There are several below options for next hot deal.You can use one vote per week to tell us your preference.Your vote matters!VOTE NOW' : 'No votings yet!' %>
+    <%= @voting.present? ? 'There are several below options for next hot deal.You can use one vote per week to tell us your preference.Your vote matters! VOTE NOW!' : 'No votings yet!' %>
     <% else %>
     <%= @voting.present? ? '请选择以下产品中您最喜欢的产品，得票追最高的将成为下一轮的热门团购。请投出您关键的一票吧！' : '暂无投票项目！' %>
     <% end %>
   </div>
 </div>
-<% provide :title, t(:voting) %>
+
 <div class="row vote-product-tiems">
   <% @voting.vote_products.each do |product| %>
   <div class="columns small-6 product-item" data-id="<%= product.id %>">
@@ -28,7 +28,7 @@
 <div class="columns small-8 small-offset-2 <%= @show_result ? 'hidden' : '' %>">
   <button class="button success expand vote-submit"><%= t(:submit) %></button>
 </div>
-<div class="columns small-8 small-offset-2">
+<div class="columns small-8 small-offset-2 hidden">
   <% if is_admin? %>
   <%= link_to voting_path(@voting), method: :delete, data: {confirm: 'Are you sure to delete this voting?'} do %>
   <button class="button alert expand delete-vote"><%= t(:delete_voting) %></button>

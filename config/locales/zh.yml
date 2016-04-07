@@ -334,8 +334,8 @@ zh:
   new_groupbuy:  新增团购
   new_event:  新增投票
   edit_forum: 编辑心愿卡
-  new_topic:  新增话题
-  edit_topic: 编辑话题
+  new_topic:  新增心愿卡
+  edit_topic: 编辑心愿卡
   pay: 立即支付
   goings: 报名
   rsvp: 报名
@@ -515,4 +515,5 @@ zh:
   voting_name: 名称
   votings: 投票列表
   delete_voting: 删除投票
+  my_wishlist: 我的心愿卡
 
