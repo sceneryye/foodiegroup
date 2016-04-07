@@ -21,7 +21,9 @@ $('.document').ready ->
     disableDblClickSelection: true,
     pickTime: true
   }
+
   $('.create-voting').on 'click', ->
+    $(window).scrollTop(0)
     ids = []
     $('[type="checkbox"]').each ->
       ids.push $(this).data('id') if $(this).is(':checked')
