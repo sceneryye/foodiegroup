@@ -210,9 +210,9 @@ zh:
         duration: "开始时间必须早于结束时间"
     models:
       user: 会员
-      forum: 论坛
+      forum: 博客
       topic: 话题
-      event:  活动
+      event:  投票
       participants: 报名
       groupbuy: 团购
       my_groupbuys: 我的团购
@@ -312,7 +312,7 @@ zh:
       update: "提交"
       submit: "提交"
 
-  event: 活动
+  event: 投票
   topic: 话题
   by: 创建人
   price: 价格
@@ -330,17 +330,17 @@ zh:
   end_time: 结束时间
   price:  正价
   goods_minimal: 最少成团数量
-  new_forum:  新增论坛
+  new_forum:  新增博客
   new_groupbuy:  新增团购
-  new_event:  新增活动
-  edit_forum: 编辑论坛
+  new_event:  新增投票
+  edit_forum: 编辑博客
   new_topic:  新增话题
   edit_topic: 编辑话题
   pay: 立即支付
   goings: 报名
   rsvp: 报名
   groupbuy_detail: 团购详情
-  event_detail: 活动详情
+  event_detail: 投票详情
   limited_people: 人数限制
   comments: 评论
   unpaid: 未付款
@@ -393,7 +393,7 @@ zh:
   logout: 退出
   participants: 参与
   participant: 参与
-  no_events: 暂无活动。
+  no_events: 暂无投票。
   no_topics: 暂无话题。
   no_groupbuys: 暂无团购。
   should_be_int: 数量必须为正整数！
@@ -402,13 +402,13 @@ zh:
   histroy: 记录
   next_page: 下一页
   pre_page: 上一页
-  event_end: 活动已结束
+  event_end: 投票已结束
   nomore: 已无更多评论
   detail_address: 详细地址
   coordinate: 坐标
   event_address: 活动地址
   new_groupbuy: 新增团购
-  new_event: 新增活动
+  new_event: 新增投票
   new_topic: 新增话题
   content: 内容
   duration: 持续时间
@@ -468,8 +468,8 @@ zh:
   ship_status: 发货状态
   created_at: 创建时间
   signin_signup: 登录 / 注册
-  forum: 论坛
-  forums: 论坛
+  forum: 博客
+  forums: 博客
   logistic_ruler: 物流规则
   deal_english_title: 团购英文标题
   new_logistic_rule: 新建物流规则
@@ -477,8 +477,8 @@ zh:
   settings: 设置
   others: 其它
   my_groupbuys: 我的团购
-  my_events: 我的活动
-  my_topics: 我的论坛
+  my_events: 我的投票
+  my_topics: 我的博客
   login: 登录
   first_weight: 首重
   additional_weight: 续重
@@ -495,8 +495,7 @@ zh:
   office_line: 办公室电话
   work_time: 工作时间
   workday: 周一到周五
-  my_events: 我的活动
-  my_forums: 我的论坛
+  my_forums: 我的博客
   ago: 之前
   province: 省份
   city: 城市

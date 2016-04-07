@@ -214,7 +214,7 @@ en:
   site_name: GroupMall
   home: Home
   search: Search
-  event: Meetups
+  event: Votes
   topic: Topics
   user_center: User Center  
   before: before.
@@ -256,7 +256,7 @@ en:
   buy: Buy Now
   buys: Order
   remark: Remarks
-  new_event: Add new meetup
+  new_event: Add new vote
   group_management: Group Management
   limited_people: Max. attendee
   new_groupbuy: Add new deal
@@ -273,7 +273,7 @@ en:
   new_address: Create New Address
   set_default: Set As Default
   groupbuy_detail: Deal Details
-  event_detail: Meetup Detail
+  event_detail: Vote Detail
   amount: Amount
   count_down: Countdown
   groupbuy_end: Past!
@@ -282,7 +282,7 @@ en:
   delete: Delete
   comment: Comment
   logout: Logout
-  no_events: There are no events yet.
+  no_events: There are no votes yet.
   no_topics: There are no topics yet.
   no_groupbuys: There are no groupbuys yet.
   should_be_int: Number should be a positive integer!
@@ -297,7 +297,7 @@ en:
   coordinate: Coordinate
   event_address: Event address
   new_groupbuy: Create Groupbuying Deal
-  new_event: Create New Meetup
+  new_event: Create New Vote
   new_topic: Create New Disscusion
   content: Content
   durantion: Duration
@@ -365,7 +365,7 @@ en:
   settings: Settings
   others: Others
   my_groupbuys: My Deals
-  my_events: My Events
+  my_events: My Votes
   my_topics: My Topics
   login: Login
   logistics: Logistics Rule
@@ -385,7 +385,7 @@ en:
   office_line: Office Line
   work_time: Work Time
   workday: From Monday To Friday
-  my_events: My Meetups
+  my_events: My Votes
   my_forums: My Blogs
   ago: ago
   province: Province
