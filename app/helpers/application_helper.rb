@@ -169,6 +169,19 @@ def vote_for(object)
     str.strip
   end
 
+  def choose_text en_text, zh_text
+    if session[:locale] == 'en'
+      en_text
+    else
+      if zh_text.present?
+        zh_text
+      else
+        en_text
+      end
+    end
+  end
+
+
   def current_title groupbuy
     Rails.logger.info "-------------#{session[:locale]}"
     if session[:locale] == 'zh'

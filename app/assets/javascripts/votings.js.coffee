@@ -4,13 +4,29 @@ $(document).ready ->
     if $(this).find('.check-pic').hasClass('hidden')
       $('.product-item').each ->
         item = $(this).find('.check-pic')
+        background = $(this).find('.background-layer')
         unless item.hasClass('hidden')
           item.addClass('hidden')
+          background.addClass('hidden')
       $(this).find('.check-pic').removeClass('hidden')
-      img_height = $(this).find('img').css('height')
-      img_width = $(this).find('img').css('width')
+      $(this).find('.background-layer').removeClass('hidden')
+      this_img = $(this).find('img')
+      # product's height and width
+      img_height = this_img.css('height')
+      img_width = this_img.css('width')
+      # product's position
+      img_left = this_img.offset().left
+      img_top = this_img.offset().top
+      # check_pic's height and width
       check_pic_height = $(this).find('.fa-check').css('height')
       check_pic_width = $(this).find('.fa-check').css('width')
+      # background's position
+      $(this).find('.background-layer').css('left', 0)
+      $(this).find('.background-layer').css('top', 0)
+      # background's width and height
+      $(this).find('.background-layer').css('height', img_height)
+      $(this).find('.background-layer').css('width', img_width)
+      # make the check_pic in center
       left = (parseFloat(img_width.replace('px', '')) - parseFloat(check_pic_width.replace('px', ''))) / 2
       top = (parseFloat(img_height.replace('px', '')) - parseFloat(check_pic_height.replace('px', ''))) / 2
       $(this).find('.fa-check').css('left', left)

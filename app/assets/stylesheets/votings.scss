@@ -17,10 +17,22 @@
       top: 40%;
       color: green;
       opacity: 0.7;
+      z-index: 99;
+    }
+    .background-layer {
+      position: absolute;
+      z-index: 9;
+      background-color: black;
+      opacity: 0.7;
     }
   }
 }
 .votes-counter {
+
+  
+  .release-info {
+    margin-top: 20px;
+  }
   .bar-length {
     background-color: green;
     display: inline-block;
