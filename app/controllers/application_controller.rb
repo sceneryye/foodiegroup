@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
 
   def validate_user!
     unless signed_in?
-      redirect_to register_path(return_url: request.url.gsub('localhost:5000', 'foodie.trade-v.com')), alert: '请先登录！'
+      #redirect_to register_path(return_url: request.url.gsub('localhost:5000', 'foodie.trade-v.com')), alert: '请先登录！'
     end
   end
 
