@@ -28,8 +28,24 @@ def index
   @products = VoteProduct.all.order(created_at: :desc)
 end
 
-  private
-  def vote_product_params
-    params.require(:vote_product).permit(:title, :picture)
+def destroy
+  product = VoteProduct.find_by(id: params[:id])
+  @id = product.id
+  img_mini_url = "#{PIC_PATH}#{product.picture}"
+  img_url = img_mini_url.sub('/mini', '')
+  product.destroy
+  `rm "#{img_mini_url}"`
+  `rem "#{img_url}"`
+  respond_to do |format|
+    format.html {redirect_to vote_products_path}
+    format.js
   end
+end
+
+
+
+private
+def vote_product_params
+  params.require(:vote_product).permit(:title, :picture)
+end
 end
