@@ -190,19 +190,19 @@ class ParticipantsController < ApplicationController
 
   def wechat_notify_url
     Rails.logger.info "###########################{params}"
-    Rails.logger.info "###########################{request.body}"
-    Rails.logger.info "###########################{Hash.from_xml(request.body.to_a.join)['xml']}"
-
     begin
-      if params["xml"]["result_code"] == 'SUCCESS'
+      params = Hash.from_xml(request.body.to_a.join)['xml']
+
+      Rails.logger.info "###########################{Hash.from_xml(request.body.to_a.join)}"
+      if params["result_code"] == 'SUCCESS'
         Rails.logger.info '##########################2'
-        groupbuy_id, participant_id, user_id = params["xml"]["attach"].split('_')
+        groupbuy_id, participant_id, user_id = params["attach"].split('_')
         participant = Participant.find_by(id: participant_id)
         if participant.try(:pay_notify_status) == 0
           parent = participant.event_id.present? ? 'events' : 'groupbuys'
           participant.update_column(:status_pay, 1)
           post_url = "http://www.trade-v.com/temp_info_api"
-          openid = params["xml"]["openid"]
+          openid = params["openid"]
           template_id = "E_Mfmg0TwyE3hRnccleURsU5QpqsPVsj0LD5dU4fu0Y"
           url = '/' + parent + '/groupbuy_id'
           title = participant.event_id.present? ? Event.find_by(id: groupbuy_id).title : Groupbuy.find_by(id: groupbuy_id).title
