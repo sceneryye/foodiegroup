@@ -11,7 +11,7 @@
       <img src="<%= product.picture %>">
     </div>
     <div class="columns small-3">
-    <%= link_to vote_product_path(product), method: :delete, remote: true, data: {confirm: 'Are you sure to delete this itme?'} do %>
+    <%= link_to vote_product_path(product), method: :delete, remote: true, data: {confirm: t(:confirm_delete)} do %>
       <button class="button alert tiny"><%= t(:delete) %></button>
       <% end %>
     </div>
