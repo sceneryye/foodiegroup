@@ -16,7 +16,7 @@ class VoteProductsController < ApplicationController
        file.write(uploaded_io.read)
      end
      path = "#{PIC_PATH}/vote_products"
-     resize filename, 'mini', 100, 100, path
+     resize filename, 'mini', 300, 300, path
      VoteProduct.create title: vote_product_params[:title], picture: ('/vote_products/mini/' + filename)
      redirect_to vote_products_path
    else
