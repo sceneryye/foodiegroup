@@ -12,19 +12,25 @@
 </div>
 
 <div class="row vote-product-tiems">
-  <% @voting.vote_products.each do |product| %>
-  <div class="columns small-6 product-item" data-id="<%= product.id %>">
-    <div class="product-image">
-      <%= image_tag product.picture %>
-      <div class="hidden check-pic">
-        <i class="fa fa-check fa-3x"></i>
-        <div class="background-layer"></div>
+  <% @voting.vote_products.each_with_index do |product, index| %>
+  <% if index % 2 == 0 %>
+  <div class="row">
+    <% end %>
+    <div class="columns small-6 product-item" data-id="<%= product.id %>">
+      <div class="product-image">
+        <%= image_tag product.picture %>
+        <div class="hidden check-pic">
+          <i class="fa fa-check fa-3x"></i>
+          <div class="background-layer"></div>
+        </div>
+      </div>
+      <div class="title">
+        <%= product.title %>
       </div>
     </div>
-    <div class="title">
-      <%= product.title %>
-    </div>
+    <% if index % 2 == 1 %>
   </div>
+  <% end %>
   <% end %>
 </div>
 <input type="hidden" name="product" value='' data-voting-id="<%= params[:id] %>">
@@ -43,7 +49,7 @@
   <hr />
   <div class="voting-result">
     <% en = 'What\'s gonna be the next Hot Deal?*'
-    zh = '哪个讲成为下一个热门团购？*' %>
+    zh = '哪个将成为下一个热门团购？*' %>
     <%= choose_text en, zh %>
   </div>
   <% @vote_products.each do |product| %>
@@ -60,9 +66,9 @@
   </div>
   <% end %>
   <div class="columns small-10 small-offset-1 release-info">
-  <% en = '*The most voted deal will be released on GroupMall within 1 or 2 weeks from the end of the voting session.'
-  zh = '*最受欢迎的项目将在投票结束后的1到2个星期后发布为热门团购。'  %>
-  <%= choose_text en, zh %>
+    <% en = '*The most voted deal will be released on GroupMall within 1 or 2 weeks from the end of the voting session.'
+    zh = '*最受欢迎的项目将在投票结束后的1到2个星期后发布为热门团购。'  %>
+    <%= choose_text en, zh %>
   </div>
 </div>
 
