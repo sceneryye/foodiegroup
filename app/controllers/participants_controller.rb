@@ -191,10 +191,10 @@ class ParticipantsController < ApplicationController
   def wechat_notify_url
     Rails.logger.info "###########################{params}"
     begin
-      Rails.logger.info "###########################{request.body.gets}"
-      params = Hash.from_xml(request.body.to_a.join)['xml']
+      Rails.logger.info "###########################{Hash.from_xml request.body.read}"
+      params = (Hash.from_xml request.body.read)["xml"]
 
-      Rails.logger.info "###########################{Hash.from_xml(request.body.to_a.join)}"
+
       if params["result_code"] == 'SUCCESS'
         Rails.logger.info '##########################2'
         groupbuy_id, participant_id, user_id = params["attach"].split('_')
