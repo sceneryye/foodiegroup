@@ -35,7 +35,7 @@ def destroy
   img_url = img_mini_url.sub('/mini', '')
   product.destroy
   `rm "#{img_mini_url}"`
-  `rem "#{img_url}"`
+  `rm "#{img_url}"`
   respond_to do |format|
     format.html {redirect_to vote_products_path}
     format.js
