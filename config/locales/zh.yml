@@ -210,7 +210,7 @@ zh:
         duration: "开始时间必须早于结束时间"
     models:
       user: 会员
-      forum: 心愿卡
+      forum: 心愿清单
       topic: 话题
       event:  投票
       participants: 报名
@@ -330,12 +330,12 @@ zh:
   end_time: 结束时间
   price:  正价
   goods_minimal: 最少成团数量
-  new_forum:  新增心愿卡
+  new_forum:  新增心愿清单
   new_groupbuy:  新增团购
   new_event:  新增投票
-  edit_forum: 编辑心愿卡
-  new_topic:  新增心愿卡
-  edit_topic: 编辑心愿卡
+  edit_forum: 编辑心愿清单
+  new_topic:  新增心愿清单
+  edit_topic: 编辑心愿清单
   pay: 立即支付
   goings: 报名
   rsvp: 报名
@@ -468,8 +468,8 @@ zh:
   ship_status: 发货状态
   created_at: 创建时间
   signin_signup: 登录 / 注册
-  forum: 心愿卡
-  forums: 心愿卡
+  forum: 心愿清单
+  forums: 心愿清单
   logistic_ruler: 物流规则
   deal_english_title: 团购英文标题
   new_logistic_rule: 新建物流规则
@@ -478,7 +478,7 @@ zh:
   others: 其它
   my_groupbuys: 我的团购
   my_events: 我的投票
-  my_topics: 我的心愿卡
+  my_topics: 我的心愿清单
   login: 登录
   first_weight: 首重
   additional_weight: 续重
@@ -495,7 +495,7 @@ zh:
   office_line: 办公室电话
   work_time: 工作时间
   workday: 周一到周五
-  my_forums: 我的心愿卡
+  my_forums: 我的心愿清单
   ago: 之前
   province: 省份
   city: 城市
@@ -515,6 +515,6 @@ zh:
   voting_name: 名称
   votings: 投票列表
   delete_voting: 删除投票
-  my_wishlist: 我的心愿卡
+  my_wishlist: 我的心愿清单
   vote_now: 立即投票!
 
