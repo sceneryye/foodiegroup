@@ -208,7 +208,7 @@ class ParticipantsController < ApplicationController
           openid = data["openid"]
           template_id = "E_Mfmg0TwyE3hRnccleURsU5QpqsPVsj0LD5dU4fu0Y"
           url = '/' + parent + '/groupbuy_id'
-          title = participant.event_id.present? ? Event.find_by(id: groupbuy_id).title : Groupbuy.find_by(id: groupbuy_id).title
+          title = participant.event_id.present? ? Event.find_by(id: groupbuy_id).en_title : Groupbuy.find_by(id: groupbuy_id).en_title
           data = {
             :first => {:value => '支付成功', :color => "#173177"},
             :orderMoneySum => {:value => data["cash_fee"].to_f / 100.00, :color => "#173177"},
