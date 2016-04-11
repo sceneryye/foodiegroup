@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160407041806) do
+ActiveRecord::Schema.define(version: 20160411025212) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255, null: false
@@ -173,26 +173,27 @@ ActiveRecord::Schema.define(version: 20160407041806) do
   add_index "logistics_items", ["logistic_id"], name: "index_logistics_items_on_logistic_id", using: :btree
 
   create_table "participants", force: :cascade do |t|
-    t.integer  "user_id",         limit: 4,                                         null: false
-    t.integer  "event_id",        limit: 4
-    t.integer  "groupbuy_id",     limit: 4
-    t.string   "name",            limit: 45,                                        null: false
-    t.string   "mobile",          limit: 45,                                        null: false
-    t.string   "address",         limit: 255
-    t.integer  "status",          limit: 4,                             default: 0
-    t.decimal  "amount",                       precision: 10, scale: 2
-    t.integer  "freightage",      limit: 4
-    t.decimal  "discount",                     precision: 10, scale: 2
-    t.string   "area",            limit: 255
-    t.integer  "discount_id",     limit: 4
-    t.integer  "quantity",        limit: 4
-    t.string   "remark",          limit: 1000
+    t.integer  "user_id",           limit: 4,                                         null: false
+    t.integer  "event_id",          limit: 4
+    t.integer  "groupbuy_id",       limit: 4
+    t.string   "name",              limit: 45,                                        null: false
+    t.string   "mobile",            limit: 45,                                        null: false
+    t.string   "address",           limit: 255
+    t.integer  "status",            limit: 4,                             default: 0
+    t.decimal  "amount",                         precision: 10, scale: 2
+    t.integer  "freightage",        limit: 4
+    t.decimal  "discount",                       precision: 10, scale: 2
+    t.string   "area",              limit: 255
+    t.integer  "discount_id",       limit: 4
+    t.integer  "quantity",          limit: 4
+    t.string   "remark",            limit: 1000
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status_pay",      limit: 4,                             default: 0
-    t.integer  "status_ship",     limit: 4,                             default: 0
-    t.string   "delivery_time",   limit: 255
-    t.string   "tracking_number", limit: 255
+    t.integer  "status_pay",        limit: 4,                             default: 0
+    t.integer  "status_ship",       limit: 4,                             default: 0
+    t.string   "delivery_time",     limit: 255
+    t.string   "tracking_number",   limit: 255
+    t.integer  "pay_notify_status", limit: 4,                             default: 0
   end
 
   create_table "photos", force: :cascade do |t|
