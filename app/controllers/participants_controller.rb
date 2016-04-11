@@ -191,7 +191,7 @@ class ParticipantsController < ApplicationController
   def wechat_notify_url
     Rails.logger.info "###########################{params}"
     # begin
-      Rails.logger.info "###########################{Hash.from_xml request.body.read}"
+
       data1 = Hash.from_xml request.body.read
       Rails.logger.info "###########################{data1}"
       data = data1["xml"]
