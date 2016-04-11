@@ -192,7 +192,9 @@ class ParticipantsController < ApplicationController
     Rails.logger.info "###########################{params}"
     # begin
       Rails.logger.info "###########################{Hash.from_xml request.body.read}"
-      data = (Hash.from_xml request.body.read)["xml"]
+      data1 = Hash.from_xml request.body.read
+      Rails.logger.info "###########################{data1}"
+      data = data1["xml"]
       Rails.logger.info "###########################{data}"
 
       if data["result_code"] == 'SUCCESS'
