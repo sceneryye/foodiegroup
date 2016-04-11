@@ -190,26 +190,26 @@ class ParticipantsController < ApplicationController
 
   def wechat_notify_url
     Rails.logger.info "###########################{params}"
-    begin
+    # begin
       Rails.logger.info "###########################{Hash.from_xml request.body.read}"
-      params = (Hash.from_xml request.body.read)["xml"]
+      data = (Hash.from_xml request.body.read)["xml"]
+      Rails.logger.info "###########################{data}"
 
-
-      if params["result_code"] == 'SUCCESS'
+      if data["result_code"] == 'SUCCESS'
         Rails.logger.info '##########################2'
-        groupbuy_id, participant_id, user_id = params["attach"].split('_')
+        groupbuy_id, participant_id, user_id = data["attach"].split('_')
         participant = Participant.find_by(id: participant_id)
         if participant.try(:pay_notify_status) == 0
           parent = participant.event_id.present? ? 'events' : 'groupbuys'
           participant.update_column(:status_pay, 1)
           post_url = "http://www.trade-v.com/temp_info_api"
-          openid = params["openid"]
+          openid = data["openid"]
           template_id = "E_Mfmg0TwyE3hRnccleURsU5QpqsPVsj0LD5dU4fu0Y"
           url = '/' + parent + '/groupbuy_id'
           title = participant.event_id.present? ? Event.find_by(id: groupbuy_id).title : Groupbuy.find_by(id: groupbuy_id).title
           data = {
             :first => {:value => '支付成功', :color => "#173177"},
-            :orderMoneySum => {:value => params["cash_fee"].to_f / 100.00, :color => "#173177"},
+            :orderMoneySum => {:value => data["cash_fee"].to_f / 100.00, :color => "#173177"},
             :orderProductName => {:value => title, :color => "#173177"},
             :Remark => {:value => '您已支付成功！您可以在吃货帮查看更多详情', :color => "#173177"}
           }
@@ -239,12 +239,12 @@ class ParticipantsController < ApplicationController
           Rails.logger.info res_data_json
         end
       end
-    rescue Exception => e
-      Rails.logger.info e
+    # rescue Exception => e
+      # Rails.logger.info e
       Rails.logger.info '##########################5'
-    ensure
+    # ensure
       render text: 'success'
-    end
+    # end
   end
 
   def edit
