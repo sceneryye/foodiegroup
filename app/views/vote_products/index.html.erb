@@ -1,16 +1,18 @@
 <div class="vote-product-lists">
   <% @products.each_with_index do |product, index| %>
   <div class="row product-item" id="product-<%= product.id %>">
-    <div class="columns small-6">
+    <div class="columns small-1">
       <input type="checkbox" value="0" id="index-<%= index + 1 %>" data-id="<%= product.id %>">
+      </div>
+      <div class="columns small-5">
       <label for="index-<%= index + 1 %>"><%= product.title %></label>
     </div>
-    <div class="columns small-4">
+    <div class="columns small-3">
       <img src="<%= product.picture %>">
     </div>
-    <div class="columns small-2">
+    <div class="columns small-3">
     <%= link_to vote_product_path(product), method: :delete, remote: true, data: {confirm: 'Are you sure to delete this itme?'} do %>
-      <button class="button alert"><%= t(:delete) %></button>
+      <button class="button alert tiny"><%= t(:delete) %></button>
       <% end %>
     </div>
   </div>
