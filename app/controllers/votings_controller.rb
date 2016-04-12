@@ -42,12 +42,12 @@ class VotingsController < ApplicationController
        data_hash = {}
        voting.vote_products.each do |product|
         data_hash["#{product.id}"] = Vote.find_by(vote_product_id: product.id, voting_id: voting_id).votes
-       end
-       all_votes = voting.votes.pluck(:votes).inject(0, :+)
-       Rails.logger.info data_hash
-       render json: {msg: 'ok', data: data_hash, all_votes: all_votes}
-     end
-   rescue Exception => e
+      end
+      all_votes = voting.votes.pluck(:votes).inject(0, :+)
+      Rails.logger.info data_hash
+      render json: {msg: 'ok', data: data_hash, all_votes: all_votes}
+    end
+  rescue Exception => e
     msg = e.message
     render json: {msg: e.message}
   end
@@ -68,7 +68,9 @@ def show
   @vote_products = @voting.vote_products
   @all_votes = @voting.votes.pluck(:votes).inject(0, :+)
   Rails.logger.info @all_votes
-  @show_result = current_user.votings.include?(@voting) || Time.current > @voting.end_time
+  if current_user
+    @show_result = current_user.votings.include?(@voting) || Time.current > @voting.end_time
+  end
 end
 
 def index

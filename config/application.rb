@@ -49,7 +49,7 @@ module RailsOnForum
       routing_specs: false,
       controller_specs: true,
       requeset_specs: false
-      g.fixture_replacement :factory_girl, dir: 'specs/factories'
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
 
   end

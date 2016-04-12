@@ -10,8 +10,8 @@
       @votes_active = 'active'  
     when 'searchs'
       @searchs_active = 'active'
-    else
-      @forums_active = 'active'
+    when 'wishlists'
+      @wishlists_active = 'active'
   end
 %>
 <% votepath = (Voting.count > 0) ? voting_path(Voting.last) : votings_path %>
@@ -26,7 +26,7 @@
   <%=link_to votepath,class: "item #{@votes_active}" do%>
     <i class="fa fa-question"></i>
   <%end%>
-  <%=link_to forum_path(forum_id),class: "item #{@forums_active}" do%>
+  <%=link_to wishlists_path, class: "item #{@wishlists_active}" do%>
     <i class="fa fa-bullhorn"></i>
   <%end%>
   <%if current_user

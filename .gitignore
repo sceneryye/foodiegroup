@@ -3,6 +3,7 @@
 /public/groupbuys
 /public/comments
 /public/vote_products
+public/wishlists
 /config/database.yml
 *.[.DS_Store]
 *.rbc

@@ -1,6 +1,6 @@
 <div class="create-vote-product">
-  <%= form_for @product, multipart: true do |f| %>
-  
+  <%= form_for @wishlist, multipart: true do |f| %>
+  <input type="hidden" name="wishlist[user_id]" value="<%= current_user.id %>">
   <div class="row">
     <div class="columns small-10 small-offset-1">
       <%= f.text_field :title, placeholder: 'Title' %>
@@ -13,6 +13,18 @@
     </div>
     <div class="columns small-5 small-offset-1">
       <img src=''>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="columns small-10 small-offset-1">
+      <%= f.text_field :price, placeholder: 'Price' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="columns small-10 small-offset-1">
+      <%= f.text_area :description, placeholder: 'Description', rows: 5 %>
     </div>
   </div>
 

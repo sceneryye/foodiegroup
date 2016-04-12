@@ -1,4 +1,5 @@
 RailsOnForum::Application.routes.draw do
+  resources :wishlists
   resources :vote_products
   resources :votings
   post '/voting/vote_for_voting', to: 'votings#vote_for_voting'

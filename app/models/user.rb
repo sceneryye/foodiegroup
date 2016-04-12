@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :user_addresses, dependent: :destroy
   has_many :logistics, dependent: :destroy
   has_and_belongs_to_many :votings
-
+  has_many :wishlists
   belongs_to :group
 
 
