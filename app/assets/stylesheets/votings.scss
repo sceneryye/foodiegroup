@@ -9,7 +9,7 @@
     img {
       display: block;
       margin: auto;
-      width: 100%;
+      width: 90%;
     }
     .fa-check {
       position: absolute;
@@ -27,9 +27,12 @@
     }
   }
 }
+.vote-submit {
+  margin-top: 30px;
+}
 .votes-counter {
 
-  
+
   .release-info {
     margin-top: 20px;
   }

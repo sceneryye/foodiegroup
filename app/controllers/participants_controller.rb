@@ -117,9 +117,9 @@ class ParticipantsController < ApplicationController
       @content_pic = @parent.photos[1..-1]
     end
     if Groupbuy.find_by(id: @participant.groupbuy_id).end_time > Time.current
-      @note = session[:locale] == 'en' ? 'Note:The delivery will be done with 3 or 4 days.' : '将在三到4天发货'
+      @note = session[:locale] == 'en' ? 'Note: The order will be shipped at the end of the deal.' : '将在三到4天发货'
     else
-      @note = session[:locale] == 'en' ? 'Note:The delivery will be done at the end of the deal.' : '将在周末活动结束时统一发货'
+      @note = session[:locale] == 'en' ? 'Note: The order will be delivered within 3-4 days.' : '将在周末活动结束时统一发货'
     end
   end
 
@@ -190,7 +190,7 @@ class ParticipantsController < ApplicationController
 
   def wechat_notify_url
     Rails.logger.info "###########################{params}"
-    # begin
+     begin
 
       data1 = Hash.from_xml request.body.read
       Rails.logger.info "###########################{data1}"
@@ -227,7 +227,7 @@ class ParticipantsController < ApplicationController
           post_url = "http://www.trade-v.com/send_group_message_api"
           user = User.find_by(id: participant.user_id)
 
-          # openids = User.plunk(:weixin_openid)
+           openids = User.plunk(:weixin_openid)
           openids = "oVxC9uBr12HbdFrW1V0zA3uEWG8c"
           msgtype = "text"
           content = "#{user.nickname}刚刚完成了一笔支付：#{title}, 赶紧去看看哦～"
@@ -241,12 +241,12 @@ class ParticipantsController < ApplicationController
           Rails.logger.info res_data_json
         end
       end
-    # rescue Exception => e
-      # Rails.logger.info e
+     rescue Exception => e
+      Rails.logger.info e
       Rails.logger.info '##########################5'
-    # ensure
+    ensure
       render text: 'success'
-    # end
+    end
   end
 
   def edit
