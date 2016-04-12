@@ -53,10 +53,10 @@
                function(res){
                 var error_message="";
                 if(res.err_msg != "get_brand_wcpay_request:ok") {
-                  error_message = "&error_message="+res.err_desc;
+                  error_message = "&error_message="+res.err_msg;
                 }
                 else {
-                  error_message = 'success';
+                  error_message = '&error_message=success';
                 }
 
                 window.location ="<%= @url %>"+error_message;
