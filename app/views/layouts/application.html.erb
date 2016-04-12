@@ -29,7 +29,7 @@ function isWeixinBrowser(){
     var is_weixin_browser = isWeixinBrowser();
   if(is_weixin_browser) {
     var id = "<%= current_user.try(:id).to_s %>";
-    var openid = "<%= session[:openid].to_s %>";
+    var nickname = "<%= current_user.try(:nickname).to_s %>";
     alert(id);
     alert(openid);
   <% if (current_user.nil? && session[:openid].nil?) || (current_user.nil? && controller_name != 'users' && session[:openid].nil?) || (current_user.present? && current_user.nickname.nil?) %>
