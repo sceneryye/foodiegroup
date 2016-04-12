@@ -28,7 +28,10 @@ function isWeixinBrowser(){
 
     var is_weixin_browser = isWeixinBrowser();
   if(is_weixin_browser) {
-    alert('1');
+    var id = "<%= current_user.try(:id).to_s %>";
+    var openid = "<%= session[:openid].to_s %>";
+    alert(id);
+    alert(openid);
   <% if (current_user.nil? && session[:openid].nil?) || (current_user.nil? && controller_name != 'users' && session[:openid].nil?) %>
   alert('2');
     var return_url = encodeURIComponent(location.href);
