@@ -77,8 +77,12 @@ class SessionsController < ApplicationController
     else
       data = get_user_info(openid, access_token)
       Rails.logger.info "---------------data => #{data}"
+      Rails.logger.info "---------------nickname => #{user.nickname}"
+      Rails.logger.info "---------------user_id => #{user.id}"
       if user && openid.present? && (user.nickname.nil? || user.avatar.nil?)
         user.update_columns nickname: data['nickname'], avatar: data['headimgurl'], username: data['nickname']
+        Rails.logger.info "---------------nickname_after_update => #{user.nickname}"
+        Rails.logger.info "---------------user_id_after_update => #{user.id}"
         login user
         return redirect_to return_url || root_path
       else
