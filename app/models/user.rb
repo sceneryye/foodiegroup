@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :logistics, dependent: :destroy
   has_and_belongs_to_many :votings
   has_many :wishlists
+  has_many :downpayments
   belongs_to :group
 
 

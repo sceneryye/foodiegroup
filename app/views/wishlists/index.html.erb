@@ -1,36 +1,6 @@
 <% provide :title, t(:wishlist) %>
 <div class="wishlists-index">
-<% if @my_wishlists.any? %>
-<% @my_wishlists.each do |list| %>
-<div class="row">
-  <div class="columns small-4">
-    <%= image_tag list.picture %>
-  </div>
-  <div class="columns small-8">
-    <div class="wishlist-title">
-      <%= list.title %>
-    </div>
-    <div class="wishlist-price">
-      <%= list.price %>
-    </div>
-    <div class="wishlist-description">
-      <%= list.description %>
-    </div>
-  </div>
-</div>
-<% end %>
-<% else %>
-<div class="no-lists">
-<% en = 'You have no wishlists yet!' 
-zh = '您暂无任何心愿清单！' %>
-<%= choose_text en, zh %>
-</div>
-<% end %>
-<%= link_to new_wishlist_path do %>
-<button class="tiny button"><%= t(:new) %></button>
-<% end %>
 
-<div class="published-wishlists-bar"><%= t(:published_wishlists) %></div>
 
 <% if @published_wishlists.any? %>
 <% @published_wishlists.each do |list| %>

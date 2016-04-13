@@ -89,6 +89,28 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def pay_with_wechat attach, body, openid, total_fee, detail
+    weixin_appid = WX_APP_ID
+    weixin_appsecret = WX_APP_SECRET
+    mch_id = WX_MCH_ID
+
+    nonce_str = random_str 32
+    out_trade_no = Time.new.to_i.to_s + rand(10 ** 10).to_s.rjust(10, '0')
+
+
+    spbill_create_ip = '182.254.138.119'
+    trade_type = 'JSAPI'
+
+    notify_url = 'http://foodie.trade-v.com/wechat_notify_url'
+    post_data_hash = {:appid => weixin_appid, :mch_id => mch_id, :nonce_str => nonce_str, :body => body, :out_trade_no => out_trade_no, :total_fee => total_fee, :attach => attach, :openid => openid, :spbill_create_ip => spbill_create_ip, :notify_url => notify_url, :trade_type => trade_type, detail: detail}
+    sign = create_sign post_data_hash
+    post_data_hash[:sign] = sign
+    post_data_xml = to_label_xml post_data_hash
+
+    post_url = 'https://api.mch.weixin.qq.com/pay/unifiedorder'
+    Hash.from_xml(RestClient.post post_url, post_data_xml)
+  end
+
   def validate_permission!(user)
     Rails.logger.info "------current_user.id=#{current_user.try(:id)}"
     Rails.logger.info "------user.id=#{user.try(:id)}"

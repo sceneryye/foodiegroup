@@ -31,6 +31,34 @@ def index
   @my_wishlists = Wishlist.where(user_id: current_user.id).desc
 end
 
+def downpayment_with_wechat
+  user_id = params[:user_id]
+  wishlist_id = params[:wishlist_id]
+  attach = "#{wishlist_id}_#{user_id}"
+  body = 'downpayment'
+  openid = params[:openid]
+  total_fee = 500
+  detail = 'downpayment'
+  res_data_hash = pay_with_wechat(attach, body, openid, total_fee, detail)
+
+  if res_data_hash["xml"]["return_code"] == 'SUCCESS'
+    @url = "http://foodie.trade-v.com/wishlists?from=foodiepay&total=#{total_fee}"
+    prepay_id = res_data_hash["xml"]["prepay_id"]
+    @timestamp = Time.now.to_i
+    @nonce_str = random_str 32
+    @package = "prepay_id=#{prepay_id}"
+    @appId = WX_APP_ID
+    data = {:appId => @appId, :timeStamp => @timestamp, :nonceStr => @nonce_str, :package => @package, :signType => 'MD5'}
+    @paySign = create_sign data
+    render :layout => false
+  else
+    render :text => res_data_hash
+  end
+end
+
+def downpayment_nofify_url
+end
+
 private
 def wishlist_params
   params.require(:wishlist).permit(:title, :picture, :price, :description, :user_id)

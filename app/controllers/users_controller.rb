@@ -27,6 +27,10 @@ class UsersController < ApplicationController
     @my_groupbuys = current_user.try(:groupbuys)
   end
 
+  def my_wishlists
+    @my_wishlists = Wishlist.where(user_id: current_user.id).desc
+  end
+
   def my_events
     @my_events = current_user.try(:events)
   end

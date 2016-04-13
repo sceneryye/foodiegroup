@@ -98,3 +98,20 @@ $bgc-red: rgb(164, 5, 15);
     width: 100%;
   }
 }
+
+/*********** My Wishlists ************/
+.my-wishlists {
+  .row {
+    margin-top: 20px;
+  }
+  .no-lists {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .new-wishlist-link {
+    position: fixed;
+    right: 20px;
+    top: 55px;
+    index: 9;
+  }
+}

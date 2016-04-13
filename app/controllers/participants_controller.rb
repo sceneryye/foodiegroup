@@ -150,27 +150,15 @@ class ParticipantsController < ApplicationController
       parent_name: event_name,
       type_name: type_name
     }
-    
 
-    weixin_appid = WX_APP_ID
-    weixin_appsecret = WX_APP_SECRET
-    mch_id = WX_MCH_ID
     attach = "#{parent.id}_#{@participant.id}_#{@participant.user_id}"
-    nonce_str = random_str 32
-    out_trade_no = Time.new.to_i.to_s + rand(10 ** 10).to_s.rjust(10, '0')
+
+
     body = "tile=#{event_name[0..15]}"
     openid = openid
-    spbill_create_ip = '182.254.138.119'
-    trade_type = 'JSAPI'
+    detail = 'participant'
     total_fee = (money.to_f * 100).to_i
-    notify_url = 'http://foodie.trade-v.com/wechat_notify_url'
-    post_data_hash = {:appid => weixin_appid, :mch_id => mch_id, :nonce_str => nonce_str, :body => body, :out_trade_no => out_trade_no, :total_fee => total_fee, :attach => attach, :openid => openid, :spbill_create_ip => spbill_create_ip, :notify_url => notify_url, :trade_type => trade_type}
-    sign = create_sign post_data_hash
-    post_data_hash[:sign] = sign
-    post_data_xml = to_label_xml post_data_hash
-
-    post_url = 'https://api.mch.weixin.qq.com/pay/unifiedorder'
-    res_data_hash = Hash.from_xml(RestClient.post post_url, post_data_xml)
+    res_data_hash = pay_with_wechat(attach, body, openid, total_fee, detail)
     # return render :text => res_data_hash
     if res_data_hash["xml"]["return_code"] == 'SUCCESS'
       @url = "http://foodie.trade-v.com/#{type_name}/#{parent.id}?from=foodiepay&total=#{total_fee}"
@@ -178,8 +166,8 @@ class ParticipantsController < ApplicationController
       @timestamp = Time.now.to_i
       @nonce_str = random_str 32
       @package = "prepay_id=#{prepay_id}"
-      @appId = weixin_appid
-      data = {:appId => weixin_appid, :timeStamp => @timestamp, :nonceStr => @nonce_str, :package => @package, :signType => 'MD5'}
+      @appId = WX_APP_ID
+      data = {:appId => @appId, :timeStamp => @timestamp, :nonceStr => @nonce_str, :package => @package, :signType => 'MD5'}
       @paySign = create_sign data
       render :layout => false
     else
@@ -188,9 +176,55 @@ class ParticipantsController < ApplicationController
 
   end
 
+  def participant_notify_url
+    data = params['xml']
+    groupbuy_id, participant_id, user_id = data["attach"].split('_')
+    participant = Participant.find_by(id: participant_id)
+    if participant.try(:pay_notify_status) == 0
+      parent = participant.event_id.present? ? 'events' : 'groupbuys'
+      participant.update_column(:status_pay, 1)
+      post_url = "http://www.trade-v.com/temp_info_api"
+      openid = data["openid"]
+      template_id = "E_Mfmg0TwyE3hRnccleURsU5QpqsPVsj0LD5dU4fu0Y"
+      url = '/' + parent + '/groupbuy_id'
+      title = participant.event_id.present? ? Event.find_by(id: groupbuy_id).en_title : Groupbuy.find_by(id: groupbuy_id).en_title
+      data = {
+        :first => {:value => '支付成功', :color => "#173177"},
+        :orderMoneySum => {:value => data["cash_fee"].to_f / 100.00, :color => "#173177"},
+        :orderProductName => {:value => title, :color => "#173177"},
+        :Remark => {:value => '您已支付成功！您可以在吃货帮查看更多详情', :color => "#173177"}
+      }
+      post_data = {
+        openid: openid,
+        template_id: template_id,
+        url: url,
+        data: data
+      }
+      RestClient.post post_url, post_data
+      Rails.logger.info '##########################3'
+
+      post_url = "http://www.trade-v.com/send_group_message_api"
+      user = User.find_by(id: participant.user_id)
+
+      openids = User.plunk(:weixin_openid)
+      openids = "oVxC9uBr12HbdFrW1V0zA3uEWG8c"
+      msgtype = "text"
+      content = "#{user.nickname}刚刚完成了一笔支付：#{title}, 赶紧去看看哦～"
+      data_hash = {
+        openids: openids,
+        content: content,
+        data: {msgtype: msgtype}
+      }
+      data_json = data_hash.to_json
+      res_data_json = RestClient.post post_url, data_hash
+      Rails.logger.info res_data_json
+    end
+    render text: 'ok'
+  end
+
   def wechat_notify_url
     Rails.logger.info "###########################{params}"
-     begin
+    begin
 
       data1 = Hash.from_xml request.body.read
       Rails.logger.info "###########################{data1}"
@@ -199,49 +233,13 @@ class ParticipantsController < ApplicationController
 
       if data["result_code"] == 'SUCCESS'
         Rails.logger.info '##########################2'
-        groupbuy_id, participant_id, user_id = data["attach"].split('_')
-        participant = Participant.find_by(id: participant_id)
-        if participant.try(:pay_notify_status) == 0
-          parent = participant.event_id.present? ? 'events' : 'groupbuys'
-          participant.update_column(:status_pay, 1)
-          post_url = "http://www.trade-v.com/temp_info_api"
-          openid = data["openid"]
-          template_id = "E_Mfmg0TwyE3hRnccleURsU5QpqsPVsj0LD5dU4fu0Y"
-          url = '/' + parent + '/groupbuy_id'
-          title = participant.event_id.present? ? Event.find_by(id: groupbuy_id).en_title : Groupbuy.find_by(id: groupbuy_id).en_title
-          data = {
-            :first => {:value => '支付成功', :color => "#173177"},
-            :orderMoneySum => {:value => data["cash_fee"].to_f / 100.00, :color => "#173177"},
-            :orderProductName => {:value => title, :color => "#173177"},
-            :Remark => {:value => '您已支付成功！您可以在吃货帮查看更多详情', :color => "#173177"}
-          }
-          post_data = {
-            openid: openid,
-            template_id: template_id,
-            url: url,
-            data: data
-          }
-          RestClient.post post_url, post_data
-          Rails.logger.info '##########################3'
-
-          post_url = "http://www.trade-v.com/send_group_message_api"
-          user = User.find_by(id: participant.user_id)
-
-           openids = User.plunk(:weixin_openid)
-          openids = "oVxC9uBr12HbdFrW1V0zA3uEWG8c"
-          msgtype = "text"
-          content = "#{user.nickname}刚刚完成了一笔支付：#{title}, 赶紧去看看哦～"
-          data_hash = {
-            openids: openids,
-            content: content,
-            data: {msgtype: msgtype}
-          }
-          data_json = data_hash.to_json
-          res_data_json = RestClient.post post_url, data_hash
-          Rails.logger.info res_data_json
+        if data['detail'] == 'participant'
+          RestClient.post participant_notify_url_path, data1
+        elsif data['detail'] == 'downpayment'
+          RestClient.post downpayment_nofify_url_path, data1
         end
       end
-     rescue Exception => e
+    rescue Exception => e
       Rails.logger.info e
       Rails.logger.info '##########################5'
     ensure

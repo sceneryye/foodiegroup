@@ -1,15 +1,6 @@
 $primary-color: #008CBA;
 .wishlists-index {
-  .published-wishlists-bar {
-    width: 100%;
-    background-color: $primary-color;
-    text-align: center;
-    padding: 10.5px 0;
-    font-size: 15px;
-    color: white;
-    font-weight: 700;
-    margin-top: 20px;
-  }
+
   .row {
     margin-top: 20px;
   }
@@ -17,4 +8,5 @@ $primary-color: #008CBA;
     text-align: center;
     margin-top: 20px;
   }
+  
 }
