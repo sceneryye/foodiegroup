@@ -1,7 +1,7 @@
 <% provide :title, t(:wishlist_managemnt) %>
 <div class="wishlists-management" data-url="<%= publish_wishlist_path %>">
   <% @wishlists.each do |wishlist| %>
-  <div class="row">
+  <div class="row wishlist-item">
     <div class="columns small-4">
       <%= image_tag wishlist.picture %>
     </div>
@@ -15,10 +15,12 @@
       <div class="wishlist-description">
         <%= wishlist.description %>
       </div>
-      <% if wishlist.offline? %>
-      <div class="row">
-        <div class="columns small-10 small-offset-1">
-          <div class="row collapse postfix-round">
+    </div>
+  </div>
+  <% if wishlist.offline? %>
+  <div class="row publish-line">
+    <div class="columns small-12">
+      <div class="row collapse postfix-round">
         <div class="small-9 columns">
           <input type="text" placeholder="￥  <%= t(:down_payment) %>" class="downpayment-value">
         </div>
@@ -26,10 +28,15 @@
           <a href="javascript:void(0)" class="button postfix publish-wishlist disabled" data-id="<%= wishlist.id %>"><%= t(:publish) %></a>
         </div>
       </div>
-        </div>
-      </div>
-      
-        <% end %>
+    </div>
+  </div>
+
+  <% end %>
+  <div class="row">
+    <div class="columns small-12">
+      <%= link_to edit_wishlist_path(wishlist) do %>
+      <button class="button expand"><%= t(:edit) %></button>
+      <% end %>
     </div>
   </div>
   <hr />

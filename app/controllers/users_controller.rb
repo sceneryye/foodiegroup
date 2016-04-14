@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action only: [:edit, :update, :destroy, :my_orders, :my_groupbuys, :my_events, :my_topics] do
     validate_permission!(select_user)
   end
-  before_action :autheorize_admin!, only: [:votings]
+  before_action :autheorize_admin!, only: [:votings, :wishlists_management]
   
   def index
   end
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   end
 
   def wishlists_management
-    @wishlists = Wishlist.all
+    @wishlists = Wishlist.all.desc
   end
 
   def create

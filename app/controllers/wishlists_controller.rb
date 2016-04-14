@@ -4,8 +4,16 @@ class WishlistsController < ApplicationController
     @wishlist = Wishlist.new
   end
 
-  def create
-    wishlist = Wishlist.new(wishlist_params)
+  def edit
+    @wishlist = Wishlist.find_by(id: params[:id])
+  end
+
+  def update
+    wishlist = Wishlist.find_by(id: params[:id])
+    data = wishlist_params
+    data.delete(:picture)
+    
+    picture = ''
     uploaded_io = wishlist_params[:picture]
     if uploaded_io.present?
       extension = uploaded_io.original_filename.split('.')
@@ -18,13 +26,41 @@ class WishlistsController < ApplicationController
      end
      path = "#{PIC_PATH}/wishlists"
      resize filename, 'mini', 300, 300, path
-     wishlist.picture = '/wishlists/mini/' + filename
+     picture = '/wishlists/mini/' + filename
    end
-   if wishlist.save
-    redirect_to wishlists_path
+   if picture.present?
+     data.merge!(picture: picture)
+   end
+   Rails.logger.info picture
+   Rails.logger.info data
+   if wishlist.update(data)
+    redirect_to wishlists_management_path
   else
-    render 'new'
+    render 'edit'
   end
+end
+
+def create
+  wishlist = Wishlist.new(wishlist_params)
+  uploaded_io = wishlist_params[:picture]
+  if uploaded_io.present?
+    extension = uploaded_io.original_filename.split('.')
+    filename = "#{Time.now.strftime('%Y%m%d%H%M%S%L')}#{rand(100)}.#{extension[-1]}"
+    filepath = "#{PIC_PATH}/wishlists/#{filename}"
+    localpath = "#{Rails.root}/public/#{filename}"
+    content_type = uploaded_io.content_type
+    file = File.open(filepath, 'wb') do |file|
+     file.write(uploaded_io.read)
+   end
+   path = "#{PIC_PATH}/wishlists"
+   resize filename, 'mini', 300, 300, path
+   wishlist.picture = '/wishlists/mini/' + filename
+ end
+ if wishlist.save
+  redirect_to wishlists_path
+else
+  render 'new'
+end
 end
 
 def index

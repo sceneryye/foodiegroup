@@ -32,7 +32,7 @@ RailsOnForum::Application.routes.draw do
   post 'events/more_comments', to: 'events#more_comments'
   post 'cal_freightage', to: 'participants#cal_freightage'
   get 'downpayment_with_wechat', to: 'wishlists#downpayment_with_wechat', as: :downpayment_with_wechat
-  post 'downpayment_notify_url', to: 'wishlists#downpayment_notify_url', as: :downpayment_notify_url
+
   post 'wishlists/publish_wishlist', to: 'wishlists#publish_wishlist', as: :publish_wishlist
 
   post 'logistics/acquire_logistic_details', to: 'logistics#acquire_logistic_details', as: :acquire_logistic_details
@@ -108,7 +108,7 @@ RailsOnForum::Application.routes.draw do
 
    resources :groups, only: [:show, :update]
 
-   post '/wechat_notify_url', to: 'participants#wechat_notify_url'
+
    get '/register',    to: 'users#new',  as: :register
    get '/:id',         to: 'users#show', as: :profile
    get '/:id/edit', to: 'users#edit', as: :edit_profile
