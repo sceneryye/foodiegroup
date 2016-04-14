@@ -2,39 +2,46 @@
 <div class="wishlists-index">
 
 
-<% if @published_wishlists.any? %>
-<% @published_wishlists.each do |list| %>
-<div class="row">
-  <div class="columns small-4">
-    <%= image_tag list.picture %>
+  <% if @published_wishlists.any? %>
+  <% @published_wishlists.each do |list| %>
+  <div class="row">
+    <div class="columns small-4">
+      <%= image_tag list.picture %>
+    </div>
+    <div class="columns small-8">
+      <div class="wishlist-title">
+        <%= list.title %>
+      </div>
+      <div class="wishlist-price">
+        <%= list.price %>
+      </div>
+      <div class="wishlist-description">
+        <%= list.description %>
+      </div>
+    </div>
   </div>
-  <div class="columns small-8">
-    <div class="wishlist-title">
-      <%= list.title %>
+  <div class="row">
+    <div class="columns small-12">
+      <% if current_user.downpayments.pluck(:wishlist_id).include?(list.id) %>
+      <div class="button expand"><%= t(:you_have_paid) %> ￥ <%= Downpayment.where(user_id: current_user.id, wishlist_id: list.id).first.price %></div>
+      <% else %>
+
+      <%= link_to downpayment_with_wechat_path(user_id: current_user.id, wishlist_id: list.id, down_payment: list.down_payment, openid: current_user.weixin_openid) do %>
+      <div class="button expand"><%= t(:pay_for) %> <%= t(:down_payment) %></div>
+      <% end %>
+
     </div>
-    <div class="wishlist-price">
-      <%= list.price %>
-    </div>
-    <div class="wishlist-description">
-      <%= list.description %>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="columns small-12">
-    <%= link_to downpayment_with_wechat_path(user_id: current_user.id, wishlist_id: list.id, down_payment: list.down_payment, openid: current_user.weixin_openid) do %>
-    <div class="button expand"><%= t(:pay_for) %> <%= t(:down_payment) %></div>
     <% end %>
   </div>
-</div>
-<% end %>
-<% else %>
-<div class="no-lists">
-<% en = 'There is no published wishlists yet!' 
-zh = '暂无任何公开的心愿清单！' %>
-<%= choose_text en, zh %>
-</div>
-<% end %>
+
+  <% end %>
+  <% else %>
+  <div class="no-lists">
+    <% en = 'There is no published wishlists yet!' 
+    zh = '暂无任何公开的心愿清单！' %>
+    <%= choose_text en, zh %>
+  </div>
+  <% end %>
 
 
 
