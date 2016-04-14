@@ -233,9 +233,9 @@ class ParticipantsController < ApplicationController
 
       if data["result_code"] == 'SUCCESS'
         Rails.logger.info '##########################2'
-        if data['detail'] == 'participant'
+        if data['attach'].split('_').length == 3
           RestClient.post participant_notify_url_path, data1
-        elsif data['detail'] == 'downpayment'
+        elsif data['attach'].split('_').length == 2
           RestClient.post downpayment_nofify_url_path, data1
         end
       end
