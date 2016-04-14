@@ -2,6 +2,7 @@ RailsOnForum::Application.routes.draw do
   
   resources :vote_products
   resources :votings
+  resources :wishlists
   post '/voting/vote_for_voting', to: 'votings#vote_for_voting'
   #get 'photos/create'
 
@@ -121,6 +122,6 @@ RailsOnForum::Application.routes.draw do
    resource :home, only: [:index]
    root to: 'groupbuys#index'
    get 'home/about_groupmall', to: 'home#about_groupmall', as: :about_groupmall
-   resources :wishlists
+
   #end
 end
