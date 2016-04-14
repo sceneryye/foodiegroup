@@ -57,7 +57,7 @@ def downpayment_with_wechat
   end
 end
 
-def downpayment_nofify_url
+def downpayment_notify_url
   data = params['xml']
   wishlist_id, user_id = data['attach'].split('_')
   total_fee = (data['total_fee'] / 100).to_f
