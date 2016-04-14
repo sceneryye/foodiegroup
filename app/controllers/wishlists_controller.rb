@@ -58,13 +58,7 @@ def downpayment_with_wechat
   end
 end
 
-def downpayment_notify_url
-  data = params['xml']
-  wishlist_id, user_id = data['attach'].split('_')
-  total_fee = (data['total_fee'].to_f / 100).to_f
-  Downpayment.create(user_id: user_id, wishlist_id: wishlist_id, price: total_fee)
-  render text: 'ok'
-end
+
 
 def publish_wishlist
   id = params[:id]
