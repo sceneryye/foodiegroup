@@ -59,7 +59,7 @@ end
 
 def downpayment_nofify_url
   data = params['xml']
-  wishlist_id, user_id = data['attach']
+  wishlist_id, user_id = data['attach'].split('_')
   total_fee = (data['total_fee'] / 100).to_f
   Downpayment.create(user_id: user_id, wishlist_id: wishlist_id, price: total_fee)
   render text: 'ok'
