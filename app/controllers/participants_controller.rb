@@ -224,7 +224,7 @@ class ParticipantsController < ApplicationController
 
   def wechat_notify_url
     Rails.logger.info "###########################{params}"
-    # begin
+    begin
 
     data1 = Hash.from_xml request.body.read
     Rails.logger.info "###########################{data1}"
@@ -243,12 +243,12 @@ class ParticipantsController < ApplicationController
         Rails.logger.info '##########################5'
       end
     end
-    # rescue Exception => e
-      # Rails.logger.info e
-      # Rails.logger.info '##########################5'
-    # ensure
-      # render text: 'success'
-    # end
+    rescue Exception => e
+      Rails.logger.info e
+      Rails.logger.info '##########################5'
+    ensure
+      render text: 'success'
+    end
   end
 
   def edit
