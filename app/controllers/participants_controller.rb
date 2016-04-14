@@ -1,7 +1,7 @@
 #encoding:utf-8
 class ParticipantsController < ApplicationController
 
-  skip_before_action :verify_authenticity_token, only: :wechat_notify_url
+  skip_before_action :verify_authenticity_token, only: [:wechat_notify_url, :participant_notify_url]
 
   before_action :validate_user!, except: :wechat_notify_url
 

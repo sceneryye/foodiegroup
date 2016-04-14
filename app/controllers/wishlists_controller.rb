@@ -1,4 +1,5 @@
 class WishlistsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: :downpayment_notify_url
   def new
     @wishlist = Wishlist.new
   end
