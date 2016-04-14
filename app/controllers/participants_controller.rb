@@ -226,23 +226,23 @@ class ParticipantsController < ApplicationController
     Rails.logger.info "###########################{params}"
     # begin
 
-      data1 = Hash.from_xml request.body.read
-      Rails.logger.info "###########################{data1}"
-      data = data1["xml"]
-      Rails.logger.info "###########################{data}"
+    data1 = Hash.from_xml request.body.read
+    Rails.logger.info "###########################{data1}"
+    data = data1["xml"]
+    Rails.logger.info "###########################{data}"
 
-      if data["result_code"] == 'SUCCESS'
-        Rails.logger.info '##########################2'
-        if data['attach'].split('_').length == 3
-          RestClient.post "http://foodie.trade-v.com#{participant_notify_url_path}", data1
-          Rails.logger.info '##########################3'
-        elsif data['attach'].split('_').length == 2
-          Rails.logger.info '##########################4'
-          Rails.logger.info "#{downpayment_notify_url_url}"
-          RestClient.post "http://foodie.trade-v.com#{downpayment_notify_url_path}", data1
-          Rails.logger.info '##########################5'
-        end
+    if data["result_code"] == 'SUCCESS'
+      Rails.logger.info '##########################2'
+      if data['attach'].split('_').length == 3
+        RestClient.post "http://foodie.trade-v.com#{participant_notify_url_path}", data1
+        Rails.logger.info '##########################3'
+      elsif data['attach'].split('_').length == 2
+        Rails.logger.info '##########################4'
+        Rails.logger.info "http://foodie.trade-v.com#{downpayment_notify_url_path}"
+        RestClient.post "http://foodie.trade-v.com#{downpayment_notify_url_path}", data1
+        Rails.logger.info '##########################5'
       end
+    end
     # rescue Exception => e
       # Rails.logger.info e
       # Rails.logger.info '##########################5'
