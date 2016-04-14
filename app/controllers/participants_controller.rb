@@ -238,6 +238,7 @@ class ParticipantsController < ApplicationController
           Rails.logger.info '##########################3'
         elsif data['attach'].split('_').length == 2
           Rails.logger.info '##########################4'
+          Rails.logger.info "#{downpayment_notify_url_url}"
           RestClient.post downpayment_notify_url_url, data1
           Rails.logger.info '##########################5'
         end
