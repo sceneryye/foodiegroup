@@ -20,6 +20,13 @@
     </div>
   </div>
 </div>
+<div class="row">
+  <div class="columns small-12">
+    <%= link_to downpayment_with_wechat_path(user_id: current_user.id, wishlist_id: list.id, down_payment: list.down_payment, openid: current_user.weixin_openid) do %>
+    <div class="button expand"><%= t(:pay_for) %> <%= t(:down_payment) %></div>
+    <% end %>
+  </div>
+</div>
 <% end %>
 <% else %>
 <div class="no-lists">

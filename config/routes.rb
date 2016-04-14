@@ -30,8 +30,9 @@ RailsOnForum::Application.routes.draw do
   post 'groupbuys/more_comments', to: 'groupbuys#more_comments'
   post 'events/more_comments', to: 'events#more_comments'
   post 'cal_freightage', to: 'participants#cal_freightage'
-  post 'wishlists/downpayment_with_wechat', to: 'wishlists#downpayment_with_wechat', as: :downpayment_with_wechat
+  get 'downpayment_with_wechat', to: 'wishlists#downpayment_with_wechat', as: :downpayment_with_wechat
   post 'wishlists/downpayment_nofify_url', to: 'wishlists#downpayment_nofify_url', as: :downpayment_nofify_url
+  post 'wishlists/publish_wishlist', to: 'wishlists#publish_wishlist', as: :publish_wishlist
 
   post 'logistics/acquire_logistic_details', to: 'logistics#acquire_logistic_details', as: :acquire_logistic_details
 
@@ -102,6 +103,7 @@ RailsOnForum::Application.routes.draw do
    get 'users/contact_us', to: 'users#contact_us', as: :contact_us
    get 'users/about_team', to: 'users#about_team', as: :about_team
    get 'users/votings', to: 'users#votings', as: :my_votings
+   get 'users/wishlists_management', to: 'users#wishlists_management', as: :wishlists_management
 
    resources :groups, only: [:show, :update]
 

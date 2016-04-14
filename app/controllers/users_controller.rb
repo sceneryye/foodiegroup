@@ -43,6 +43,10 @@ class UsersController < ApplicationController
     @votings = Voting.all
   end
 
+  def wishlists_management
+    @wishlists = Wishlist.all
+  end
+
   def create
     if user_params[:password].nil?
       user_params[:password] = user_params[:mobile]

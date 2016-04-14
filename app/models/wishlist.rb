@@ -10,4 +10,12 @@ class Wishlist < ActiveRecord::Base
   def online_status
     update(online: false) if self.online.nil?
   end
+
+  def online?
+    self.online
+  end
+
+  def offline?
+    !self.online
+  end
 end

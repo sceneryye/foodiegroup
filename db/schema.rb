@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413100123) do
+ActiveRecord::Schema.define(version: 20160414013639) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255, null: false
@@ -343,13 +343,14 @@ ActiveRecord::Schema.define(version: 20160413100123) do
 
   create_table "wishlists", force: :cascade do |t|
     t.boolean  "online"
-    t.string   "picture",     limit: 255
-    t.string   "title",       limit: 255
-    t.decimal  "price",                     precision: 10
-    t.text     "description", limit: 65535
-    t.integer  "user_id",     limit: 4
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.string   "picture",      limit: 255
+    t.string   "title",        limit: 255
+    t.decimal  "price",                      precision: 10
+    t.text     "description",  limit: 65535
+    t.integer  "user_id",      limit: 4
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.float    "down_payment", limit: 24
   end
 
   add_index "wishlists", ["user_id"], name: "index_wishlists_on_user_id", using: :btree

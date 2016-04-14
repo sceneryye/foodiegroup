@@ -37,7 +37,8 @@ def downpayment_with_wechat
   attach = "#{wishlist_id}_#{user_id}"
   body = 'downpayment'
   openid = params[:openid]
-  total_fee = 500
+  total_fee = (params[:down_payment].to_f * 100).to_i
+  Rails.logger.info "---------------#{total_fee}"
   detail = 'downpayment'
   res_data_hash = pay_with_wechat(attach, body, openid, total_fee, detail)
 
@@ -57,6 +58,17 @@ def downpayment_with_wechat
 end
 
 def downpayment_nofify_url
+end
+
+def publish_wishlist
+  id = params[:id]
+  down_payment = params[:down_payment].to_f
+  if Wishlist.find_by(id: id).update(online: true, down_payment: down_payment)
+    notice = session[:locale] == 'zh' ? '发布成功！' : 'Published Successfully!'
+  else
+    notice = session[:locale] == 'zh' ? '发布失败！' : 'Publish Failed!'
+  end
+  render json: {msg: 'ok', notice: notice}
 end
 
 private
