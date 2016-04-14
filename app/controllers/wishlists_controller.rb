@@ -57,7 +57,7 @@ def create
    wishlist.picture = '/wishlists/mini/' + filename
  end
  if wishlist.save
-  redirect_to wishlists_path
+  redirect_to my_wishlists_path(current_user)
 else
   render 'new'
 end
@@ -91,6 +91,23 @@ def downpayment_with_wechat
     render :layout => false
   else
     render :text => res_data_hash
+  end
+end
+
+def destroy
+  @id = params[:id]
+  wishlist = Wishlist.find_by(params[:id])
+  pic_url =  "#{Rails.root}/public#{wishlist.picture}"
+  pic_mini_url = "#{Rails.root}/public#{wishlist.picture.sub('/mini', '')}"
+  Rails.logger.info pic_url
+  Rails.logger.info pic_mini_url
+  if wishlist.destroy
+    `rm "#{pic_url}"`
+    `rm "#{pic_mini_url}"`
+  end
+  respond_to do |format|
+    format.html {redirect_to wishlists_path}
+    format.js
   end
 end
 

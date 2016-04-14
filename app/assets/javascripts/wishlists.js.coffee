@@ -2,7 +2,7 @@
 $('.document').ready ->
   $('#wishlist_picture').on 'change', ->
     file = $(this)[0]
-    pic = $(this).parent().parent().find('img')[0]
+    pic = $('.create-wishlist').find('img')[0]
     if window.FileReader
       oFReader = new FileReader()
       oFReader.readAsDataURL(file.files[0])

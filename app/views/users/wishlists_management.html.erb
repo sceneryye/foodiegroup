@@ -1,7 +1,7 @@
 <% provide :title, t(:wishlist_managemnt) %>
 <div class="wishlists-management" data-url="<%= publish_wishlist_path %>">
   <% @wishlists.each do |wishlist| %>
-  <div class="row wishlist-item">
+  <div class="row wishlist-item" id="wishlist-<%= wishlist.id %>">
     <div class="columns small-4">
       <%= image_tag wishlist.picture %>
     </div>
@@ -16,30 +16,38 @@
         <%= wishlist.description %>
       </div>
     </div>
-  </div>
-  <% if wishlist.offline? %>
-  <div class="row publish-line">
-    <div class="columns small-12">
-      <div class="row collapse postfix-round">
-        <div class="small-9 columns">
-          <input type="text" placeholder="￥  <%= t(:down_payment) %>" class="downpayment-value">
-        </div>
-        <div class="small-3 columns">
-          <a href="javascript:void(0)" class="button postfix publish-wishlist disabled" data-id="<%= wishlist.id %>"><%= t(:publish) %></a>
+    
+    <% if wishlist.offline? %>
+    <div class="row publish-line">
+      <div class="columns small-12">
+        <div class="row collapse postfix-round">
+          <div class="small-9 columns">
+            <input type="text" placeholder="￥  <%= t(:down_payment) %>" class="downpayment-value">
+          </div>
+          <div class="small-3 columns">
+            <a href="javascript:void(0)" class="button postfix publish-wishlist disabled" data-id="<%= wishlist.id %>"><%= t(:publish) %></a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <% end %>
-  <div class="row">
-    <div class="columns small-12">
-      <%= link_to edit_wishlist_path(wishlist) do %>
-      <button class="button expand"><%= t(:edit) %></button>
-      <% end %>
+    <% end %>
+    <div class=row>
+      <ul class="stack-for-small round secondary button-group even-2">
+        <li>
+          <%= link_to edit_wishlist_path(wishlist) do %>
+          <button class="button"><%= t(:edit) %></button>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to wishlist_path(wishlist), method: :delete, remote: true, data: {confirm: (choose_text 'Are you sure?', '确认删除？')} do %>
+          <button class="button alert"><%= t(:destroy) %></button>
+          <% end %>
+        </li>
+      </ul>
     </div>
+    
+    <hr />
   </div>
-  <hr />
   <% end %>
-
 </div>
