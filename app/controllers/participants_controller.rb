@@ -293,21 +293,10 @@ class ParticipantsController < ApplicationController
       RestClient.post post_url, post_data.to_json
       Rails.logger.info '##########################3'
 
-      post_url = "http://www.trade-v.com/send_group_message_api"
-      user = User.find_by(id: participant.user_id)
-
-      openids = User.plunk(:weixin_openid)
-      openids = "oVxC9uBr12HbdFrW1V0zA3uEWG8c"
-      msgtype = "text"
-      content = "#{user.nickname}刚刚完成了一笔支付：#{title}, 赶紧去看看哦～"
-      data_hash = {
-        openids: openids,
-        content: content,
-        data: {msgtype: msgtype}
-      }
-      data_json = data_hash.to_json
-      res_data_json = RestClient.post post_url, data_hash
-      Rails.logger.info res_data_json
+      # 发送至boss
+      nickname = User.find_by(id: user_id).nickname
+      info = "#{user.nickname}刚刚完成了一笔支付：#{title}, 赶紧去看看哦～"
+      send_info_preview_api info
     end
   end
 
@@ -331,5 +320,17 @@ class ParticipantsController < ApplicationController
       data: data}
       post_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=#{Wechat.first.access_token}"
       RestClient.post post_url, post_data.to_json
+
+      # 发送至boss
+      nickname = User.find_by(id: user_id).nickname
+      info = "#{nickname}刚刚支付了一笔定金，共计#{total_fee}元。"
+      send_info_preview_api info
+    end
+
+    def send_info_preview_api info
+      post_url = "https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token=#{Wechat.first.access_token}"
+      openid = 'ofi15uFg_zOm57nmfwgL10SbZqq4'
+      data = {touser: openid, text: {content: info}, msgtype: 'text'}
+      RestClient.post post_url, data.to_json
     end
   end
