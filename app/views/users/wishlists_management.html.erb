@@ -6,25 +6,51 @@
       <%= image_tag wishlist.picture %>
     </div>
     <div class="columns small-8">
-      <div class="wishlist-title">
-        <%= wishlist.title %>
+      <div class="wishlist-owner row">
+        <div class="columns small-4">
+          <span class="title"><%= t(:posted_by) %></span>
+        </div>
+        <div class="columns small-8">
+          <%= wishlist.user.username %>
+        </div>
       </div>
-      <div class="wishlist-price">
-        ￥<%= wishlist.price.to_f %>
+      <div class="wishlist-title row">
+        <div class="columns small-4">
+          <span class="title"><%= t(:title) %></span>
+        </div>
+        <div class="columns small-8">
+          <%= wishlist.title %>
+        </div>
       </div>
-      <div class="wishlist-description">
-        <%= wishlist.description %>
+      <div class="wishlist-price row">
+        <div class="columns small-4">
+          <span class="title"><%= t(:price) %></span>
+        </div>
+        <div class="columns small-8">
+          ￥<%= wishlist.price.to_f %>
+        </div>
+      </div>
+      <div class="wishlist-description row">
+        <div class="columns small-4">
+          <span class="title"><%= t(:description) %></span>
+        </div>
+        <div class="columns small-8">
+          <%= wishlist.description %>
+        </div>
       </div>
     </div>
-    
+
     <% if wishlist.offline? %>
-    <div class="row publish-line">
-      <div class="columns small-12">
+    <div class="row">
+      <div class="columns small-12 publish-line">
         <div class="row collapse postfix-round">
-          <div class="small-9 columns">
-            <input type="text" placeholder="￥  <%= t(:down_payment) %>" class="downpayment-value">
+          <div class="small-1 columns">
+            <a href="javascript:void(0)" class="button prefix">￥</a>
           </div>
-          <div class="small-3 columns">
+          <div class="small-7 columns">
+            <input type="text" placeholder="<%= t(:down_payment) %>" class="downpayment-value">
+          </div>
+          <div class="small-4 columns">
             <a href="javascript:void(0)" class="button postfix publish-wishlist disabled" data-id="<%= wishlist.id %>"><%= t(:publish) %></a>
           </div>
         </div>
@@ -32,21 +58,23 @@
     </div>
 
     <% end %>
-    <div class=row>
-      <ul class="stack-for-small round secondary button-group even-2">
-        <li>
-          <%= link_to edit_wishlist_path(wishlist) do %>
-          <button class="button"><%= t(:edit) %></button>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to wishlist_path(wishlist), method: :delete, remote: true, data: {confirm: (choose_text 'Are you sure?', '确认删除？')} do %>
-          <button class="button alert"><%= t(:destroy) %></button>
-          <% end %>
-        </li>
-      </ul>
+    <div class='row'>
+      <div class="columns small-12 edit-delete">
+        <ul class="button-group even-2">
+          <li>
+            <%= link_to edit_wishlist_path(wishlist) do %>
+            <button class="button tiny"><%= t(:edit) %></button>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to wishlist_path(wishlist), method: :delete, remote: true, data: {confirm: (choose_text 'Are you sure?', '确认删除？')} do %>
+            <button class="button tiny alert"><%= t(:destroy) %></button>
+            <% end %>
+          </li>
+        </ul>
+      </div>
     </div>
-    
+
     <hr />
   </div>
   <% end %>

@@ -12,7 +12,6 @@ class WishlistsController < ApplicationController
     wishlist = Wishlist.find_by(id: params[:id])
     data = wishlist_params
     data.delete(:picture)
-    
     picture = ''
     uploaded_io = wishlist_params[:picture]
     if uploaded_io.present?
@@ -33,10 +32,32 @@ class WishlistsController < ApplicationController
    end
    Rails.logger.info picture
    Rails.logger.info data
-   if wishlist.update(data)
-    redirect_to wishlists_management_path
+   # Create a new wishlist if administrator edit a non-admin's wishlist
+   if wishlist.user_id == current_user.id
+     if wishlist.update(data)
+      redirect_to wishlists_management_path
+    else
+      render 'edit'
+    end
   else
-    render 'edit'
+    picture = wishlist.picture
+
+    extension = picture.split('.').last
+    mini_path = "#{Rails.root}/public#{picture}"
+    filename = "#{Time.now.strftime('%Y%m%d%H%M%S%L')}#{rand(100)}.#{extension}"
+    new_mini_path = "#{Rails.root}/public/wishlists/mini/#{filename}"
+    new_path = "#{Rails.root}/public/wishlists/#{filename}"
+    path = "#{Rails.root}/public#{picture.sub('/mini', '')}"
+    Rails.logger.info "--------------#{new_mini_path}"
+    `cp "#{mini_path}" "#{new_mini_path}"`
+    `cp "#{path}" "#{new_path}"`
+    new_picture = '/wishlists/mini/' + filename
+    data.merge!(picture: new_picture)
+    if Wishlist.create(data)
+      redirect_to wishlists_management_path
+    else
+      render 'edit'
+    end
   end
 end
 
@@ -65,7 +86,6 @@ end
 
 def index
   @published_wishlists = Wishlist.online.desc
-  @my_wishlists = Wishlist.where(user_id: current_user.id).desc
 end
 
 def downpayment_with_wechat

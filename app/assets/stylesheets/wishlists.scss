@@ -1,4 +1,7 @@
 $primary-color: #008CBA;
+$light-slate-gray: #6D7B8D;
+
+/************ Index ************/
 .wishlists-index {
 
   .row {
@@ -7,6 +10,9 @@ $primary-color: #008CBA;
   .no-lists {
     text-align: center;
     margin-top: 20px;
+  }
+  .title {
+    color: $light-slate-gray;
   }
   
 }

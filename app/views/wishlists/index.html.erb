@@ -9,25 +9,49 @@
       <%= image_tag list.picture %>
     </div>
     <div class="columns small-8">
-      <div class="wishlist-title">
-        <%= list.title %>
+      
+      <div class="wishlist-title row">
+        <div class="columns small-4">
+          <span class="title"><%= t(:title) %></span>
+        </div>
+        <div class="columns small-8">
+          <%= list.title %>
+        </div>
       </div>
-      <div class="wishlist-price">
-        <%= list.price %>
+      <div class="wishlist-price row">
+        <div class="columns small-4">
+          <span class="title"><%= t(:price) %></span>
+        </div>
+        <div class="columns small-8">
+          ￥<%= list.price.to_f %>
+        </div>
       </div>
-      <div class="wishlist-description">
-        <%= list.description %>
+      <div class="wishlist-description row">
+        <div class="columns small-4">
+          <span class="title"><%= t(:description) %></span>
+        </div>
+        <div class="columns small-8">
+          <%= list.description %>
+        </div>
+      </div>
+      <div class="wishlist-book row">
+          <div class="columns small-4">
+            <span class="title"><%= t(:book_number) %></span>
+          </div>
+          <div class="columns small-8">
+            <%= list.downpayments.count %>
+        </div>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="columns small-12">
       <% if current_user.downpayments.pluck(:wishlist_id).include?(list.id) %>
-      <div class="button expand"><%= t(:you_have_paid) %> ￥ <%= Downpayment.where(user_id: current_user.id, wishlist_id: list.id).first.price %></div>
+      <button class="button expand tiny"><%= t(:you_have_paid) %> ￥ <%= Downpayment.where(user_id: current_user.id, wishlist_id: list.id).first.price %></button>
       <% else %>
 
       <%= link_to downpayment_with_wechat_path(user_id: current_user.id, wishlist_id: list.id, down_payment: list.down_payment, openid: current_user.weixin_openid) do %>
-      <div class="button expand"><%= t(:pay_for) %> <%= t(:down_payment) %>(￥ <%= list.down_payment %>)</div>
+      <div class="button expand tiny"><%= t(:pay_for) %> <%= t(:down_payment) %>(￥ <%= list.down_payment %>)</div>
       <% end %>
 
     </div>

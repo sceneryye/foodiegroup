@@ -32,6 +32,7 @@ RailsOnForum::Application.routes.draw do
   post 'events/more_comments', to: 'events#more_comments'
   post 'cal_freightage', to: 'participants#cal_freightage'
   get 'downpayment_with_wechat', to: 'wishlists#downpayment_with_wechat', as: :downpayment_with_wechat
+  post 'wechat_notify_url', to: 'participants#wechat_notify_url', as: :wechat_notify_url
 
   post 'wishlists/publish_wishlist', to: 'wishlists#publish_wishlist', as: :publish_wishlist
 
