@@ -295,7 +295,7 @@ class ParticipantsController < ApplicationController
 
       # 发送至boss
       nickname = User.find_by(id: user_id).nickname
-      info = "#{user.nickname}刚刚完成了一笔支付：#{title}, 赶紧去看看哦～"
+      info = "#{nickname}刚刚完成了一笔支付：#{title}, 赶紧去看看哦～"
       send_info_preview_api info
     end
   end
