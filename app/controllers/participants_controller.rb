@@ -284,6 +284,7 @@ class ParticipantsController < ApplicationController
         :orderProductName => {:value => title, :color => "#173177"},
         :remark => {:value => 'Paid successfully and please check for more information in Groupmall!(您已支付成功！您可以在吃货帮查看更多详情!)', :color => "#173177"}
       }
+      Rails.logger.info "##########################opendi=#{openid}"
       post_data = {
         openid: openid,
         template_id: template_id,
