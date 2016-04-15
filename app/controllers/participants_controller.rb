@@ -279,10 +279,10 @@ class ParticipantsController < ApplicationController
       url = '/' + parent + '/groupbuy_id'
       title = participant.event_id.present? ? Event.find_by(id: groupbuy_id).en_title : Groupbuy.find_by(id: groupbuy_id).en_title
       data = {
-        :first => {:value => '支付成功', :color => "#173177"},
+        :first => {:value => 'id successfully(支付成功)', :color => "#173177"},
         :orderMoneySum => {:value => data["cash_fee"].to_f / 100.00, :color => "#173177"},
         :orderProductName => {:value => title, :color => "#173177"},
-        :remark => {:value => '您已支付成功！您可以在吃货帮查看更多详情', :color => "#173177"}
+        :remark => {:value => 'Paid successfully and please check for more information in Groupmall!(您已支付成功！您可以在吃货帮查看更多详情!)', :color => "#173177"}
       }
       post_data = {
         openid: openid,
@@ -290,8 +290,8 @@ class ParticipantsController < ApplicationController
         url: url,
         data: data
       }
-      RestClient.post post_url, post_data.to_json
-      Rails.logger.info '##########################3'
+      res_data = RestClient.post post_url, post_data.to_json
+      Rails.logger.info "##########################res_data=#{res_data}"
 
       # 发送至boss
       nickname = User.find_by(id: user_id).nickname
