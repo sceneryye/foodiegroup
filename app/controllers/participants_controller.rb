@@ -183,12 +183,10 @@ class ParticipantsController < ApplicationController
     begin
 
       data1 = Hash.from_xml request.body.read
-      Rails.logger.info "###########################{data1}"
       data = data1["xml"]
       Rails.logger.info "###########################{data}"
 
       if data["result_code"] == 'SUCCESS'
-        Rails.logger.info '##########################2'
         if data['attach'].split('_').length == 3
           deal_with_participant_notify data
         elsif data['attach'].split('_').length == 2
@@ -197,7 +195,6 @@ class ParticipantsController < ApplicationController
       end
     rescue Exception => e
       Rails.logger.info e
-      Rails.logger.info '##########################5'
     ensure
       render text: 'success'
     end
@@ -276,16 +273,16 @@ class ParticipantsController < ApplicationController
     if participant.try(:pay_notify_status) == 0
       parent = participant.event_id.present? ? 'events' : 'groupbuys'
       participant.update_column(:status_pay, 1)
-      post_url = "http://www.trade-v.com/temp_info_api"
+      post_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=#{Wechat.first.access_token}"
       openid = data["openid"]
-      template_id = "E_Mfmg0TwyE3hRnccleURsU5QpqsPVsj0LD5dU4fu0Y"
+      template_id = "M9Mf27pbdTdTIxN_AfwbI3G_9mb5FlaydtsKwOZgSX4"
       url = '/' + parent + '/groupbuy_id'
       title = participant.event_id.present? ? Event.find_by(id: groupbuy_id).en_title : Groupbuy.find_by(id: groupbuy_id).en_title
       data = {
         :first => {:value => '支付成功', :color => "#173177"},
         :orderMoneySum => {:value => data["cash_fee"].to_f / 100.00, :color => "#173177"},
         :orderProductName => {:value => title, :color => "#173177"},
-        :Remark => {:value => '您已支付成功！您可以在吃货帮查看更多详情', :color => "#173177"}
+        :remark => {:value => '您已支付成功！您可以在吃货帮查看更多详情', :color => "#173177"}
       }
       post_data = {
         openid: openid,
@@ -293,7 +290,7 @@ class ParticipantsController < ApplicationController
         url: url,
         data: data
       }
-      RestClient.post post_url, post_data
+      RestClient.post post_url, post_data.to_json
       Rails.logger.info '##########################3'
 
       post_url = "http://www.trade-v.com/send_group_message_api"
@@ -317,6 +314,22 @@ class ParticipantsController < ApplicationController
   def deal_with_downpayment_notify data
     wishlist_id, user_id = data['attach'].split('_')
     total_fee = (data['total_fee'].to_f / 100).to_f
-    Downpayment.create(user_id: user_id, wishlist_id: wishlist_id, price: total_fee)
+    downpayment = Downpayment.create(user_id: user_id, wishlist_id: wishlist_id, price: total_fee)
+    # 模板消息
+    title = 'Downpayment / 定金'
+    remark = 'Your downpayment number is(您的定金编号为):' + downpayment.id.to_s
+
+    data = {
+      :first => {:value => '支付成功', :color => "#173177"},
+      :orderMoneySum => {:value => data["cash_fee"].to_f / 100.00, :color => "#173177"},
+      :orderProductName => {:value => title, :color => "#173177"},
+      :remark => {:value => remark, :color => "#173177"}
+    }
+
+    post_data = {to_user: data['openid'],
+      template_id: 'M9Mf27pbdTdTIxN_AfwbI3G_9mb5FlaydtsKwOZgSX4',
+      data: data}
+      post_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=#{Wechat.first.access_token}"
+      RestClient.post post_url, post_data.to_json
+    end
   end
-end
