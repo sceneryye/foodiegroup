@@ -273,9 +273,7 @@ class ParticipantsController < ApplicationController
     if participant.try(:pay_notify_status) == 0
       parent = participant.event_id.present? ? 'events' : 'groupbuys'
       participant.update_column(:status_pay, 1)
-      post_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=#{Wechat.first.access_token}"
       openid = data["openid"]
-      template_id = "M9Mf27pbdTdTIxN_AfwbI3G_9mb5FlaydtsKwOZgSX4"
       url = '/' + parent + '/groupbuy_id'
       title = participant.event_id.present? ? Event.find_by(id: groupbuy_id).en_title : Groupbuy.find_by(id: groupbuy_id).en_title
       data = {
@@ -284,14 +282,7 @@ class ParticipantsController < ApplicationController
         :orderProductName => {:value => title, :color => "#173177"},
         :remark => {:value => 'Paid successfully and please check for more information in Groupmall!(您已支付成功！您可以在吃货帮查看更多详情!)', :color => "#173177"}
       }
-      Rails.logger.info "##########################opendi=#{openid}"
-      post_data = {
-        openid: openid,
-        template_id: template_id,
-        url: url,
-        data: data
-      }
-      res_data = RestClient.post post_url, post_data.to_json
+      res_data = send_template_info_api openid, data, url
       Rails.logger.info "##########################res_data=#{res_data}"
 
       # 发送至boss
@@ -308,30 +299,30 @@ class ParticipantsController < ApplicationController
     # 模板消息
     title = 'Downpayment / 定金'
     remark = 'Your downpayment number is(您的定金编号为):' + downpayment.id.to_s
-
     data = {
       :first => {:value => '支付成功', :color => "#173177"},
       :orderMoneySum => {:value => data["cash_fee"].to_f / 100.00, :color => "#173177"},
       :orderProductName => {:value => title, :color => "#173177"},
       :remark => {:value => remark, :color => "#173177"}
     }
+    send_template_info_api data["openid"], data
 
-    post_data = {to_user: data['openid'],
-      template_id: 'M9Mf27pbdTdTIxN_AfwbI3G_9mb5FlaydtsKwOZgSX4',
-      data: data}
-      post_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=#{Wechat.first.access_token}"
-      RestClient.post post_url, post_data.to_json
-
-      # 发送至boss
-      nickname = User.find_by(id: user_id).nickname
-      info = "#{nickname}刚刚支付了一笔定金，共计#{total_fee}元。"
-      send_info_preview_api info
-    end
-
-    def send_info_preview_api info
-      post_url = "https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token=#{Wechat.first.access_token}"
-      openid = 'ofi15uFg_zOm57nmfwgL10SbZqq4'
-      data = {touser: openid, text: {content: info}, msgtype: 'text'}
-      RestClient.post post_url, data.to_json
-    end
+    # 发送至boss
+    nickname = User.find_by(id: user_id).nickname
+    info = "#{nickname}刚刚支付了一笔定金，共计#{total_fee}元。"
+    send_info_preview_api info
   end
+
+  def send_info_preview_api info
+    post_url = "https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token=#{get_jsapi_access_token}"
+    openid = 'ofi15uFg_zOm57nmfwgL10SbZqq4'
+    data = {touser: openid, text: {content: info}, msgtype: 'text'}.to_json
+    RestClient.post post_url, data
+  end
+
+  def send_template_info_api openid, data, url = '', template_id = 'M9Mf27pbdTdTIxN_AfwbI3G_9mb5FlaydtsKwOZgSX4'
+    post_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=#{get_jsapi_access_token}"
+    post_data = {to_user: openid, template_id: template_id, data: data, url: url}.to_json
+    RestClient.post post_url, post_data
+  end
+end
