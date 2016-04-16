@@ -20,10 +20,10 @@
       </div>
       <div class="wishlist-price row">
         <div class="columns small-4">
-          <span class="title"><%= t(:price) %></span>
+          <span class="title"><%= t(:down_payment) %></span>
         </div>
         <div class="columns small-8">
-          ￥<%= list.price.to_f %>
+          ￥<%= list.down_payment.to_f %>
         </div>
       </div>
       <div class="wishlist-description row">
@@ -40,6 +40,15 @@
         </div>
         <div class="columns small-8">
           <%= list.downpayments.count %>
+        </div>
+      </div>
+
+      <div class="wishlist-book-number row <%= Downpayment.where(user_id: current_user.id, wishlist_id: list.id).present? ? '' : 'hidden' %>">
+        <div class="columns small-4">
+          <span class="title"><%= t(:downpayment_number) %></span>
+        </div>
+        <div class="columns small-8">
+          <%= Downpayment.where(user_id: current_user.id, wishlist_id: list.id).try(:first).try(:id) %>
         </div>
       </div>
     </div>
