@@ -107,6 +107,8 @@ RailsOnForum::Application.routes.draw do
    get 'users/votings', to: 'users#votings', as: :my_votings
    get 'users/wishlists_management', to: 'users#wishlists_management', as: :wishlists_management
 
+   post '/users/set_user_mobile', to: 'users#set_user_mobile', as: :set_user_mobile
+
    resources :groups, only: [:show, :update]
 
 

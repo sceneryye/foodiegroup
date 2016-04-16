@@ -189,6 +189,16 @@ def destroy
   redirect_to root_url
 end
 
+def set_user_mobile
+  user = User.find_by(id: params[:user_id])
+  mobile = params[:mobile]
+  if user.update_column(:mobile, mobile)
+    render json: {msg: 'ok'}
+  else
+    render json: {msg: 'failed'}
+  end
+end
+
 private
 
 def user_params

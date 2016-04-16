@@ -9,7 +9,7 @@
       <%= image_tag list.picture %>
     </div>
     <div class="columns small-8">
-      
+
       <div class="wishlist-title row">
         <div class="columns small-4">
           <span class="title"><%= t(:title) %></span>
@@ -35,11 +35,11 @@
         </div>
       </div>
       <div class="wishlist-book row">
-          <div class="columns small-4">
-            <span class="title"><%= t(:book_number) %></span>
-          </div>
-          <div class="columns small-8">
-            <%= list.downpayments.count %>
+        <div class="columns small-4">
+          <span class="title"><%= t(:book_number) %></span>
+        </div>
+        <div class="columns small-8">
+          <%= list.downpayments.count %>
         </div>
       </div>
     </div>
@@ -50,9 +50,9 @@
       <button class="button expand tiny"><%= t(:you_have_paid) %> ￥ <%= Downpayment.where(user_id: current_user.id, wishlist_id: list.id).first.price %></button>
       <% else %>
 
-      <%= link_to downpayment_with_wechat_path(user_id: current_user.id, wishlist_id: list.id, down_payment: list.down_payment, openid: current_user.weixin_openid) do %>
-      <div class="button expand tiny"><%= t(:pay_for) %> <%= t(:down_payment) %>(￥ <%= list.down_payment %>)</div>
-      <% end %>
+      <div class="button expand tiny downpayment-pay-link" data-url="<%= downpayment_with_wechat_path(user_id: current_user.id, wishlist_id: list.id, down_payment: list.down_payment, openid: current_user.weixin_openid) %>" data-userid="<%= current_user.id %>" data-mobile="<%= current_user.mobile %>">
+        <%= t(:pay_for) %> <%= t(:down_payment) %>(￥ <%= list.down_payment %>)
+      </div>
 
     </div>
     <% end %>
@@ -66,9 +66,29 @@
     <%= choose_text en, zh %>
   </div>
   <% end %>
-
-
-
-
+  
 </div>
+<div class="set-mobile-before-downpayment hidden">
+  <div class="background-layer"></div>
+
+  <div class="set-mobile">
+    <div class="row">
+      <div class="columns small-10 small-offset-1 title">
+        <%= choose_text 'Please Enter Your Mobile', '请输入您的手机号' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="columns small-10 small-offset-1">
+        <input type="text" name="mobile" class="mobile-input">
+        <div class="errmsg"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="columns small-6 small-offset-6">
+        <button class="button tiny submit-mobile" data-url="<%= set_user_mobile_path %>"><%= t(:submit) %></button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
