@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   helper_method :signed_in?, :current_user,:forum_id, :cut_pic
 
   before_action :set_locale,  except: :wechat_notify_url
-  before_action :show_user_agent
+  before_action :force_sign_in
 
   
 
@@ -95,7 +95,7 @@ class ApplicationController < ActionController::Base
   end
 
   def force_sign_in
-    unless signed_in?
+    if !signed_in? && request.user_agent.match(/MicroMessenger/)
       redirect_to wx_auto_login_path(return_url: request.url.gsub('localhost:5000', 'foodie.trade-v.com'))
     end
   end
