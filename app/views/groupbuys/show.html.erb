@@ -13,6 +13,7 @@
 <div class="row">
   <div class="small-12 columns">
     <table style="width:100%">
+    <% if @groupbuy.end_time > Time.now %>
       <tr>
         <td><%= @groupbuy.start_time.strftime('%F %H:%M') %></td>
         <td class="text-center">-</td>
@@ -33,6 +34,7 @@
           </td>
         </div>
       </tr>
+      <% end %>
       <tr>
         <th><%=t(:inventory)%></th>
         <td colspan="2"><%=translate_of(@groupbuy.goods_unit, @groupbuy.goods_maximal.to_i).html_safe%></td>
