@@ -57,7 +57,7 @@
   </div>
   <div class="row">
     <div class="columns small-12">
-      <% if current_user.downpayments.pluck(:wishlist_id).include?(list.id) %>
+      <% if current_user && current_user.downpayments.pluck(:wishlist_id).include?(list.id) %>
       <button class="button expand tiny"><%= t(:you_have_paid) %> ￥ <%= Downpayment.where(user_id: current_user.id, wishlist_id: list.id).first.price %></button>
       <% else %>
 

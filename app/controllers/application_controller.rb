@@ -89,6 +89,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def force_sign_in
+    unless signed_in?
+      redirect_to wx_auto_login_path(return_url: request.url.gsub('localhost:5000', 'foodie.trade-v.com'))
+    end
+  end
+
   def pay_with_wechat attach, body, openid, total_fee, detail
     weixin_appid = WX_APP_ID
     weixin_appsecret = WX_APP_SECRET
