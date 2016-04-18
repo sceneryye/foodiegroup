@@ -173,7 +173,7 @@ end
 
 def get_jsapi_access_token
   wechat = Wechat.first
-  return wechat.access_token if wechat.access_token_expires_at.to_i > Time.zone.now.to_i
+  return wechat.access_token if wechat.access_token_expires_at.to_i > Time.now.to_i
   get_url = 'https://api.weixin.qq.com/cgi-bin/token'
   res_data_json = RestClient.get get_url, {:params => {:appid => WX_APP_ID, :grant_type => 'client_credential', :secret => WX_APP_SECRET}}
   res_data_hash = ActiveSupport::JSON.decode res_data_json

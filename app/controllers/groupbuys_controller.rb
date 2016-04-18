@@ -28,7 +28,7 @@ class GroupbuysController < ApplicationController
     Rails.logger.info "---------------#{session[:locale]}"
     if params[:from] == 'foodiepay' && params[:total].present?
       @total = params[:total].to_f / 100
-      @alert = true if params[:error_mesage] == 'success'
+      @alert = true if params[:error_message] == 'success'
     end
     @parent = @groupbuy  = Groupbuy.find(params[:id])
     if @parent.pic_url.present?
