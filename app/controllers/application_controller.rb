@@ -8,11 +8,16 @@ class ApplicationController < ActionController::Base
   helper_method :signed_in?, :current_user,:forum_id, :cut_pic
 
   before_action :set_locale,  except: :wechat_notify_url
+  before_action :show_user_agent
 
   
 
 
   private
+
+  def show_user_agent
+    Rails.logger.info request.user_agent
+  end
 
   def cut_pic photo
     other_img photo, 'mini'
