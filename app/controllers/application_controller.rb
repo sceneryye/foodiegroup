@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale,  except: :wechat_notify_url
 
- 
+  
 
 
   private
@@ -181,5 +181,19 @@ def get_jsapi_access_token
   expires_at = Time.now.to_i + res_data_hash['expires_in'].to_i
   wechat.update_attributes(:access_token => access_token, :access_token_expires_at => expires_at)
   access_token
+end
+
+def send_info_preview_api info
+  post_url = "https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token=#{get_jsapi_access_token}"
+  openid = 'ofi15uFg_zOm57nmfwgL10SbZqq4'
+  data = {touser: openid, text: {content: info}, msgtype: 'text'}.to_json
+  RestClient.post post_url, data
+end
+
+def send_template_info_api openid, data, url = '', template_id = 'M9Mf27pbdTdTIxN_AfwbI3G_9mb5FlaydtsKwOZgSX4'
+  post_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=#{get_jsapi_access_token}"
+  post_data = {touser: openid, template_id: template_id, data: data, url: url}.to_json
+  Rails.logger.info post_data
+  RestClient.post post_url, post_data
 end
 end

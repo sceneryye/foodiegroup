@@ -5,27 +5,30 @@ class CommentsController < ApplicationController
   before_action only: [:edit, :update, :destroy] do
     validate_permission!(select_comment.user)
   end
-  
+
   before_action :select_comment, only: [:edit, :update, :destroy]
 
   before_action only: [:new, :create,:index, :destroy] {
     if params[:topic_id]
-      @parent = Topic.find(params[:topic_id])
+      @parent = Topic.find_by(id: params[:topic_id])
+      @where = 'Topic'
       @url = topic_path(@parent)
     elsif params[:event_id]
-      @parent = Event.find(params[:event_id])
+      @parent = Event.find_by(id: params[:event_id])
+      @where = 'Event'
       @url = event_path(@parent)
     elsif params[:groupbuy_id]
-      @parent = Groupbuy.find(params[:groupbuy_id])
+      @parent = Groupbuy.find_by(id: params[:groupbuy_id])
+      @where = 'Groupbuy'
       @url = groupbuy_path(@parent)
     end
   }
 
   def new
-    @comment = @parent.comments.new    
+    @comment = @parent.comments.new
   end
 
-  def create  
+  def create
 
     @comment = @parent.comments.new(comment_params)
     @comment.user = current_user
@@ -36,7 +39,12 @@ class CommentsController < ApplicationController
       comments_count = @parent.comments_count + 1
       @parent.update(comments_count: comments_count)
       notice = '添加评论成功'
-      redirect_to @url, notice: notice      
+      user = current_user.username
+      begin
+        send_info_preview_api "#{user} 在 #{@where}: #{(current_title @parent) || @parent.title} 发表了一个评论！"
+      ensure
+        redirect_to @url, notice: notice
+      end
     else
       render :new
     end
@@ -46,13 +54,13 @@ class CommentsController < ApplicationController
     @photos = @comment.photos
   end
 
-    def update
+  def update
     # 删除与评论关联的图片
     origin_ids = @comment.photos.pluck(:id)
     if params[:photo_ids].present? || params[:delete_ids].present?
       ids = params[:photo_ids].split(',').select{|id|id.present?}
       Photo.where(id: ids).update_all(comment_id: params[:id])
-      
+
       Rails.logger.info origin_ids
       Rails.logger.info '###############'
       Rails.logger.info params[:delete_ids]
@@ -61,7 +69,7 @@ class CommentsController < ApplicationController
         Photo.where(id: delete_ids).update_all(comment_id: nil)
       end
     end
-    
+
     if @comment.update(comment_params)
       notice = '修改评论成功'
       if @comment.topic

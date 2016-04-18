@@ -183,6 +183,7 @@ def vote_for(object)
 
 
   def current_title groupbuy
+    return nil if groupbuy.class.to_s != 'Groupbuy'
     Rails.logger.info "-------------#{session[:locale]}"
     if session[:locale] == 'zh'
       if groupbuy.zh_title.present?

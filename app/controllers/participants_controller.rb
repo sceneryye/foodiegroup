@@ -276,12 +276,13 @@ class ParticipantsController < ApplicationController
     if participant.try(:pay_notify_status) == 0
       parent = participant.event_id.present? ? 'events' : 'groupbuys'
       participant.update_column(:status_pay, 1)
+      # 模板消息
       openid = data["openid"]
       url = '/' + parent + '/groupbuy_id'
       title = participant.event_id.present? ? Event.find_by(id: groupbuy_id).en_title : Groupbuy.find_by(id: groupbuy_id).en_title
       data = {
-        :first => {:value => 'id successfully(支付成功)', :color => "#173177"},
-        :orderMoneySum => {:value => data["cash_fee"].to_f / 100.00, :color => "#173177"},
+        :first => {:value => 'Paid successfully(支付成功)', :color => "#173177"},
+        :orderMoneySum => {:value => format('%.2f', (data["cash_fee"].to_f / 100.00).to_s), :color => "#173177"},
         :orderProductName => {:value => title, :color => "#173177"},
         :remark => {:value => 'Paid successfully and please check for more information in Groupmall!(您已支付成功！您可以在吃货帮查看更多详情!)', :color => "#173177"}
       }
@@ -316,17 +317,5 @@ class ParticipantsController < ApplicationController
     send_info_preview_api info
   end
 
-  def send_info_preview_api info
-    post_url = "https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token=#{get_jsapi_access_token}"
-    openid = 'ofi15uFg_zOm57nmfwgL10SbZqq4'
-    data = {touser: openid, text: {content: info}, msgtype: 'text'}.to_json
-    RestClient.post post_url, data
-  end
-
-  def send_template_info_api openid, data, url = '', template_id = 'M9Mf27pbdTdTIxN_AfwbI3G_9mb5FlaydtsKwOZgSX4'
-    post_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=#{get_jsapi_access_token}"
-    post_data = {touser: openid, template_id: template_id, data: data, url: url}.to_json
-    Rails.logger.info post_data
-    RestClient.post post_url, post_data
-  end
+  
 end
