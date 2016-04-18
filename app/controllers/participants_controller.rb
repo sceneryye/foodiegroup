@@ -151,7 +151,7 @@ class ParticipantsController < ApplicationController
       type_name: type_name
     }
 
-    @total = money
+
 
     attach = "#{parent.id}_#{@participant.id}_#{@participant.user_id}"
 
@@ -160,10 +160,11 @@ class ParticipantsController < ApplicationController
     openid = openid
     detail = 'participant'
     total_fee = (money.to_f * 100).to_i
+    @total = total_fee
     res_data_hash = pay_with_wechat(attach, body, openid, total_fee, detail)
     # return render :text => res_data_hash
     if res_data_hash["xml"]["return_code"] == 'SUCCESS'
-      @url = "http://foodie.trade-v.com/#{type_name}/#{parent.id}?from=foodiepay&total=#{total_fee}"
+      @url = "http://foodie.trade-v.com/#{type_name}/#{parent.id}?from=foodiepay"
       prepay_id = res_data_hash["xml"]["prepay_id"]
       @timestamp = Time.now.to_i
       @nonce_str = random_str 32

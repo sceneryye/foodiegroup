@@ -38,11 +38,12 @@
                //alert(res.err_code+res.err_desc);
                function(res){
                 var error_message="";
+                var total = "<%= @total %>";
                 if(res.err_msg != "get_brand_wcpay_request:ok") {
                   error_message = "&error_message="+res.err_msg;
                 }
                 else {
-                  error_message = '&error_message=success';
+                  error_message = '&error_message=success&total=' + total;
                 }
 
                 window.location ="<%= @url %>"+error_message;
