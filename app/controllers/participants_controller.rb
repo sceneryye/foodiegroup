@@ -325,7 +325,8 @@ class ParticipantsController < ApplicationController
 
   def send_template_info_api openid, data, url = '', template_id = 'M9Mf27pbdTdTIxN_AfwbI3G_9mb5FlaydtsKwOZgSX4'
     post_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=#{get_jsapi_access_token}"
-    post_data = {to_user: openid, template_id: template_id, data: data, url: url}.to_json
+    post_data = {touser: openid, template_id: template_id, data: data, url: url}.to_json
+    Rails.logger.info post_data
     RestClient.post post_url, post_data
   end
 end

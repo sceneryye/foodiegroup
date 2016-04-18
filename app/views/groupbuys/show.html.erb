@@ -152,7 +152,7 @@ style="padding: 16px; line-height: 1.5; color:#000000;backgroud-color:#ffffff" r
   //--------------从支付完毕跳转回来后弹窗提示支付成功---------//
   <% if @alert %>
   var total = '<%= @total %>';
-  alert('您已成功支付¥' + total + '，请等待确认！');
+  alert('您已成功支付¥' + total);
   <% end %>
 
 
