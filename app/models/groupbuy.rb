@@ -1,6 +1,7 @@
 class Groupbuy < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :logistic
+	
 
 
 	has_many :participants, dependent: :destroy
@@ -41,5 +42,7 @@ class Groupbuy < ActiveRecord::Base
 	    return self.market_price*1.2  if Time.now > self.end_time
 	    self.market_price
 	end
+
+	
 
 end

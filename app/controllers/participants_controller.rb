@@ -151,6 +151,8 @@ class ParticipantsController < ApplicationController
       type_name: type_name
     }
 
+    @total = money
+
     attach = "#{parent.id}_#{@participant.id}_#{@participant.user_id}"
 
 

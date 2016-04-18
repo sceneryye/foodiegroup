@@ -88,6 +88,11 @@ class Participant < ActiveRecord::Base
 		end
 	end
 
+	after_create :test_wechat_pay
+
+	def test_wechat_pay
+		update_column(:amount, 0.01) if user_id == 25
+	end
 
 	#  around_update :finish_order
 
