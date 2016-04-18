@@ -59,8 +59,11 @@ class ParticipantsController < ApplicationController
 
   def confirm_shiped
     if is_admin?
-      @participant.update(status_ship: 1, tracking_number: params[:tracking_number])
-      return render :text => 'success'
+      if @participant.update(status_ship: 1, tracking_number: params[:tracking_number])
+        return render json: {msg: 'success'}
+      else
+        return render json: {msg: 'failed'}
+      end
     end
   end
 

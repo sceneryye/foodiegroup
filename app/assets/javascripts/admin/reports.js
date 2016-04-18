@@ -44,7 +44,8 @@ $('.participant-ship-confirm').on('click', function(){
         tracking_number: trackingNumber
       },
       success: function(e) {
-        if(e == 'success') {
+        if(e.msg == 'success') {
+          console.log(e.msg)
           that.find('.ship-confirm').remove();
           that.text(trackingNumber);
           that.unbind('click');
