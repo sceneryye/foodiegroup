@@ -13,7 +13,7 @@
 <div class="row">
   <div class="small-12 columns">
     <table style="width:100%">
-    <% if @groupbuy.end_time > Time.now %>
+      <% if @groupbuy.tag == 'deal' && @groupbuy.end_time > Time.now %>
       <tr>
         <td><%= @groupbuy.start_time.strftime('%F %H:%M') %></td>
         <td class="text-center">-</td>
@@ -34,59 +34,74 @@
           </td>
         </div>
       </tr>
-      <% end %>
+      <% elsif @groupbuy.tag == 'groupbuy' %>
       <tr>
-        <th><%=t(:inventory)%></th>
-        <td colspan="2"><%=translate_of(@groupbuy.goods_unit, @groupbuy.goods_maximal.to_i).html_safe%></td>
+        <th><%=t(:origin)%></th>
+        <td colspan="2"><%= @groupbuy.origin %></td>
       </tr>
       <tr>
-        <th><%=t(:goods_minimal)%></th>
-        <td colspan="2"><%=translate_of(@groupbuy.goods_unit, @groupbuy.goods_minimal).html_safe%></td>
-      </tr>
-      <tr>
-        <th><%=t(:market_price)%></th>
-        <td colspan="2">￥<%=@groupbuy.market_price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
-      </tr>
-      <tr>
-        <% if @groupbuy.end_time > Time.now %>
-        <th class="groupbuy-price-show"><%=t(:price)%></th>
-        <td class="groupbuy-price-show" colspan="2">￥<%=@groupbuy.groupbuy_price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
-        <% else %>
-        <th class="groupbuy-price-show"><%=t(:price)%></th>
-        <td class="groupbuy-price-show" colspan="2">￥<%=@groupbuy.price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
         <% end %>
-      </tr>
+        <tr>
+          <th><%=t(:inventory)%></th>
+          <td colspan="2"><%=translate_of(@groupbuy.goods_unit, @groupbuy.goods_maximal.to_i).html_safe%></td>
+        </tr>
+        <tr>
+          <th><%=t(:goods_minimal)%></th>
+          <td colspan="2"><%=translate_of(@groupbuy.goods_unit, @groupbuy.goods_minimal).html_safe%></td>
+        </tr>
+        <tr>
+          <th><%=t(:market_price)%></th>
+          <td colspan="2">￥<%=@groupbuy.market_price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
+        </tr>
 
-      <tr>
-        <th><%=t(:goods_size)%></th>
-        <td colspan="2"><%= @groupbuy.goods_size.to_s %></td>
-      </tr>
-      <tr>
-        <th><%=t(:goods_bbd)%></th>
-        <td colspan="2"><%= @groupbuy.goods_bbd.to_s %></td>
-      </tr>
-
-      <tr>
-        <td colspan='3'>
-          <% if @content_pic.present? %>
-          <% @content_pic.each do |pic| %>
-          <div class="content-pictures columns small-12 medium-8 medium-center large-6 large-center">
-            <%= image_tag pic.try(:image).present? ? pic.image : pic %>
-          </div>
+        <% if @groupbuy.tag == 'deal' %>
+        <tr>
+          <% if @groupbuy.end_time > Time.now %>
+          <th class="groupbuy-price-show"><%=t(:price)%></th>
+          <td class="groupbuy-price-show" colspan="2">￥<%=@groupbuy.groupbuy_price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
+          <% else %>
+          <th class="groupbuy-price-show"><%=t(:price)%></th>
+          <td class="groupbuy-price-show" colspan="2">￥<%=@groupbuy.price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
           <% end %>
-          <% end %><!--  <%= current_body(@groupbuy).try(:html_safe)  %> -->
+        </tr>
+        <% end %>
+
+        <tr>
+          <th><%=t(:goods_size)%></th>
+          <td colspan="2"><%= @groupbuy.goods_size.to_s %></td>
+        </tr>
+        <tr>
+          <th><%=t(:goods_bbd)%></th>
+          <td colspan="2"><%= @groupbuy.goods_bbd.to_s %></td>
+        </tr>
 
 
-<textarea data-adaptheight rows="3" cols="40" placeholder="Your input"
-style="padding: 16px; line-height: 1.5; color:#000000;backgroud-color:#ffffff" readonly="readonly">
 
-          <%=raw current_body(@groupbuy).gsub(/width/,'widthh').gsub(/height/,'heightt')  %>
-        </textarea>
-      </td>
-    </tr>
-  </table>
+        <tr>
+          <td colspan='3'>
+            <% if @content_pic.present? %>
+            <% @content_pic.each do |pic| %>
+            <div class="content-pictures columns small-12 medium-8 medium-center large-6 large-center">
+              <%= image_tag pic.try(:image).present? ? pic.image : pic %>
+            </div>
+            <% end %>
+            <% end %><!--  <%#= current_body(@groupbuy).try(:html_safe)  %> -->
 
-</div>
+
+            <textarea data-adaptheight rows="3" cols="40" placeholder="Your input"
+            style="padding: 16px; line-height: 1.5; color:#000000;backgroud-color:#ffffff" readonly="readonly">
+
+            <%=raw current_body(@groupbuy).gsub(/width/,'widthh').gsub(/height/,'heightt')  %>
+          </textarea>
+        </td>
+      </tr>
+    </table>
+
+    <% if @groupbuy.tag == 'groupbuy' %>
+    <%= render partial: 'groupbuys/progress_bar', locals: {groupbuy: @groupbuy} %>
+    <% end %>
+
+  </div>
 </div>
 <div class="row">
   <div class="small-12 columns">
@@ -254,7 +269,7 @@ style="padding: 16px; line-height: 1.5; color:#000000;backgroud-color:#ffffff" r
 
         // we don't need any scrollbars, do we? :)
         // 我们不需要滚动条，不是么？ :)
-el.style.overflowY = 'hidden';
+        el.style.overflowY = 'hidden';
 
         // the minimum height initiated through the "rows" attribute
         // 通过"rows"属性初始化的最小高度
@@ -275,4 +290,4 @@ el.style.overflowY = 'hidden';
         adjustHeight(el, minHeight);
       }
     }());
-</script>
+  </script>

@@ -1,4 +1,5 @@
 class Groupbuy < ActiveRecord::Base
+	enum tag: [:deal, :groupbuy]
 	belongs_to :user
 	belongs_to :logistic
 	
@@ -11,8 +12,8 @@ class Groupbuy < ActiveRecord::Base
 
 
 
-	validates :end_time, presence: true
-	validates :start_time, presence: true
+	# validates :end_time, presence: true
+	# validates :start_time, presence: true
 	validates :goods_unit,  presence: true
 	validates :price,  presence: true
 	validates :market_price, presence: true
@@ -28,19 +29,24 @@ class Groupbuy < ActiveRecord::Base
 		end
 	end
 
+	def target_completed
+		return nil if self.deal?
+		total_quantity =	Participant.where(groupbuy_id: self.id).sum(:quantity) * self.weight
+		[(total_quantity.to_f / self.target.to_f).to_s, target - total_quantity]
+	end
 
 	scope :online, -> {where(online: true).order('recommend DESC, created_at DESC')}
 	scope :offline, -> {where(online: false).order('created_at DESC')}
- 	default_scope {order('recommend DESC, created_at DESC')}
+	default_scope {order('recommend DESC, created_at DESC')}
 
- 	def current_price
-	    return self.price  if Time.now > self.end_time
-	    self.groupbuy_price
+	def current_price
+		return self.price  if Time.now > self.end_time
+		self.groupbuy_price
 	end
 
 	def current_market_price
-	    return self.market_price*1.2  if Time.now > self.end_time
-	    self.market_price
+		return self.market_price*1.2  if Time.now > self.end_time
+		self.market_price
 	end
 
 	

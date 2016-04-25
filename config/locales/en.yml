@@ -242,7 +242,7 @@ en:
   shiped: Shiped
   unshiped: Wating for ship
   received: Received
-  groupbuy: Hot Deals
+  groupbuy: Groupbuy
   my_groupbuys: My Deals
   share: Share
   edit_profile: Edit Profile
@@ -259,7 +259,6 @@ en:
   new_event: Add new vote
   group_management: Group Management
   limited_people: Max. attendee
-  new_groupbuy: Add new deal
   welcome: Welcome
   inventory: Stock
   weekday: Weekday
@@ -296,7 +295,7 @@ en:
   detail_address: Detail address
   coordinate: Coordinate
   event_address: Event address
-  new_groupbuy: Create Groupbuying Deal
+  new_groupbuy: Create Groupbuy
   new_event: Create New Voting
   new_topic: Create New Wishlist
   content: Content
@@ -421,3 +420,11 @@ en:
   book_number: Booked
   new_wishlist: Create Wishlist
   downpayment_number: Downpayment Number
+  origin: Origin
+  target_kg: Target(Kg)
+  real_groupbuy: Groupbuy
+  new_deal: Create Deal
+  ordered: Ordered
+  remainder: Remainder
+  deal: Hot Deals
+

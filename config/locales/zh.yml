@@ -331,7 +331,6 @@ zh:
   price:  正价
   goods_minimal: 最少成团数量
   new_forum:  新增心愿清单
-  new_groupbuy:  新增团购
   new_event:  新增投票
   edit_forum: 编辑心愿清单
   new_topic:  新增心愿清单
@@ -407,7 +406,6 @@ zh:
   detail_address: 详细地址
   coordinate: 坐标
   event_address: 活动地址
-  new_groupbuy: 新增团购
   new_event: 新增投票
   new_topic: 新增话题
   content: 内容
@@ -529,4 +527,12 @@ zh:
   book_number: 预定人数
   new_wishlist: 创建心愿清单
   downpayment_number: 定金编号
+  origin: 原产地
+  target_kg: 目标(千克)
+  real_groupbuy: 众买
+  new_deal: 新增团购
+  new_groupbuy: 新增众买
+  ordered: 已预订
+  remainder: 剩余
+  deal: 热门团购
 

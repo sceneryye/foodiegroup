@@ -8,8 +8,13 @@ class GroupbuysController < ApplicationController
   helper_method :cut_pic
 
   def index
-    @groupbuys = Groupbuy.online.includes(:user).where('end_time > ?', Time.zone.now)
-    @products = Groupbuy.online.includes(:user).where('end_time <= ?', Time.zone.now)
+    if params[:tag] == 'deal'
+    @groupbuys = Groupbuy.online.includes(:user).where('tag = ? and end_time > ?', 0, Time.zone.now)
+    @products = Groupbuy.online.includes(:user).where('tag = ? and end_time <= ?', 0, Time.zone.now)
+  elsif params[:tag] == 'groupbuy'
+    @real_groupbuys = Groupbuy.online.includes(:user).where(tag: 1)
+  end
+
 
     #微信share接口配置
     groupbuy = Groupbuy.online.where('end_time > ?', Time.zone.now).first
@@ -54,12 +59,16 @@ class GroupbuysController < ApplicationController
     
 
     #微信share接口配置
-    if session[:locale] == 'en'
-      @title = @groupbuy.end_time > Time.zone.now ? 'Hot Deal' : 'Polular Deal'
+    if @groupbuy.deal?
+      if session[:locale] == 'en'
+        @title = @groupbuy.end_time > Time.zone.now ? 'Hot Deal' : 'Polular Deal'
+      else
+        @title = @groupbuy.end_time > Time.zone.now ? '热门团购' : '流行团购'
+      end
     else
-      @title = @groupbuy.end_time > Time.zone.now ? '热门团购' : '流行团购'
+      @title = session[:locale] == 'en' ? 'Groupbuy' : '众买'
     end
-    @title += @groupbuy.end_time > Time.zone.now ? ' Recommendation' : '推荐'
+    @title += session[:locale] == 'en' ? ' Recommendation' : '推荐'
     @img_url = 'http://www.trade-v.com:5000' + @title_pic.to_s
     @desc = current_title @groupbuy
     share_config
@@ -283,8 +292,7 @@ class GroupbuysController < ApplicationController
   end
 
   def groupbuy_params
-    params.require(:groupbuy).permit(:en_title, :zh_title, :en_body, :zh_body, :end_time,:start_time,:groupbuy_type, :goods_maximal, :goods_minimal, :market_price,
-      :groupbuy_price, :pic_url,:name,:mobile,:goods_unit,:price,:pic_url,:logistic_id,:weight, :goods_size, :goods_bbd)
+    params.require(:groupbuy).permit(:en_title, :zh_title, :en_body, :zh_body, :end_time,:start_time,:groupbuy_type, :goods_maximal, :goods_minimal, :market_price, :tag, :target, :origin, :groupbuy_price, :pic_url,:name,:mobile,:goods_unit,:price, :logistic_id,:weight, :goods_size, :goods_bbd)
   end
 
   def set_recommend

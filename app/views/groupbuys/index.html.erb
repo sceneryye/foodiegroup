@@ -12,16 +12,19 @@
 	</thead>
 </table> -->
 
-<% provide :title, t(:groupbuy) %>
+<% provide :title, params[:tag] == 'groupbuy' ? t(:groupbuy) : t(:deal) %>
 <%# content_for(:groupbuy_content) do %>
 
 <div class="groupbuys-index-list"  data-over="<%= t(:groupbuy_end) %>">
-  <% if @groupbuys.any? %>
+  <% if params[:tag] == 'deal' %>
+  <% if @groupbuys.present? %>
   <%#= render partial: 'groupbuy2', locals: {groupbuys: @groupbuys} %>
   <%= render @groupbuys %>
   <% else %>
   <p><%= t(:no_groupbuys) %></p>
   <% end%>
+  
+
   <% if @products.present? %>
   <div id="popular-deals">
     <div class="products-store">
@@ -32,7 +35,18 @@
     <% end %>
   </div>
   <% end %>
+  <% elsif params[:tag] == 'groupbuy' %>
+  <% if @real_groupbuys.present? %>
+  <%= render partial: 'real_groupbuy', collection: @real_groupbuys %>
+  <%#= render @real_groupbuys %>
+  <% else %>
+  <p><%= t(:no_groupbuys) %></p>
+  <% end%>
+  <% end %>
 </div>
+
+
+
 
 <%# end %>
 

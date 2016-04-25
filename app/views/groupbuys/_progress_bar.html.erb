@@ -1,0 +1,27 @@
+<div class="row progress-bar-picture">
+  <div class="columns small-12">
+    <div class="groupbuy-price">
+      ￥<%= groupbuy.groupbuy_price %>
+    </div>
+    <div class="clear"></div>
+    <div class="progress-bar" data-ratio="<%= groupbuy.target_completed.first %>">
+      <div class="back"></div>
+      <div class="front"></div>
+    </div>
+    <div class="status">
+      <div class="zero status-bar">0</div>
+      <div class="group status-bar">
+        <div class="ratio text-center">
+          <div class="num"><%= groupbuy.target_completed.first %>%</div>
+          <div><%= t(:ordered) %></div>
+        </div>
+        <div class="left-target text-center">
+          <div class="num"><%= "#{groupbuy.target_completed.last} #{groupbuy.goods_unit}" %></div>
+          <div><%= t(:remainder) %></div>
+        </div>
+      </div>
+      <div class="total status-bar">100%</div>
+    </div>
+
+  </div>
+</div>

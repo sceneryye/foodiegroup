@@ -203,6 +203,51 @@ html body, h1, h2, h3, h4, h5, h6 {
   padding-left: 4px;
 }
 
+.progress-bar-picture {
+  position: relative;
+  .groupbuy-price {
+    float: right;
+  }
+  .progress-bar {
+    position: relative;
+    height: 15px;
+    .back, .front {
+      display: block-inline;
+      background-color: $light-slate-gray;
+      width: 100%;
+      height: 15px;
+      position: absolute;
+    }
+    .front {
+      background-color: $primary-color;
+      z-index: 99;
+      width: 0;
+    }
+  }
+  .status {
+    position: relative;
+    height: 55px;
+    .status-bar {
+      position: absolute;
+    }
+    .zero {
+      left: 0;
+    }
+    .total {
+      right: 0;
+    }
+    .group {
+      left: 10%;
+    }
+    .ratio, .left-target {
+      float: left;
+    }
+    .left-target {
+      margin-left: 15px;
+    }
+  }
+}
+
 
 
 /***********************edit**********************/

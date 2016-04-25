@@ -1,14 +1,14 @@
 <% provide :title, t(:new_groupbuy) %>
 
 <div class="weui_cells weui_cells_access">
-  <%= link_to new_groupbuy_path,class: 'weui_cell' do %>
+  <%= link_to new_groupbuy_path(tag: params[:tag]),class: 'weui_cell' do %>
   <div class="weui_cell_bd weui_cell_primary">
     <div class="type"><i class="fa fa-plus-square"></i><%= t(:new_groupbuy) %></div>
   </div>
   <div class="weui_cell_ft"></div>
   <% end %>
   <% if @groupbuys.length > 0 %>
-  <%= link_to choose_from_groupbuys_path,class: 'weui_cell' do %>
+  <%= link_to choose_from_groupbuys_path(tag: params[:tag]),class: 'weui_cell' do %>
   <div class="weui_cell_bd weui_cell_primary">
     <div class="type"><i class="fa fa-hand-lizard-o"></i><%= t(:choose_from_groupbuys) %></div>
   </div>
