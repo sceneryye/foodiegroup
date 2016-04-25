@@ -73,7 +73,7 @@ def show
   end
   #微信share接口配置
     if session[:locale] == 'en'
-      @title = 'Vote now!'
+      @title = 'Vote Now!'
     else
       @title = '本周投票'
     end
