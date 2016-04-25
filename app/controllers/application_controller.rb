@@ -207,4 +207,20 @@ def send_template_info_api openid, data, url = '', template_id = 'M9Mf27pbdTdTIx
   Rails.logger.info post_data
   RestClient.post post_url, post_data
 end
+
+def share_config
+    @timestamp = Time.now.to_i
+    @appId = WX_APP_ID
+    @noncestr = random_str 16
+    @jsapilist = ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
+    @jsapi_ticket = get_jsapi_ticket
+    post_params = {
+      :noncestr => @noncestr,
+      :jsapi_ticket => @jsapi_ticket,
+      :timestamp => @timestamp,
+      :url => request.url.gsub("localhost:5000", "foodie.trade-v.com")
+    }
+    @sign = create_sign_for_js post_params
+    @a = [request.url, post_params, request.url.gsub("trade", "foodie.trade-v.com")]
+  end
 end

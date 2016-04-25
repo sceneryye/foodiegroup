@@ -84,7 +84,21 @@ $(document).ready(function(){
 //-------------中英文切换--------------//
 function change_locale(obj){
   var locale = $(obj).data('locale');
-  url = 'http://' + location.host + location.pathname + '?locale=' + locale;
+  if(location.search) {
+    if(location.search.match(/locale/)){
+      var arr = location.href.split('locale=');
+      var str = arr[arr.length - 1].split('&')[0];
+      var old_locale = 'locale=' + str;
+      var new_locale = 'locale=' + locale;
+      url = location.href.replace(old_locale, new_locale);
+    }
+    else {
+      url = location.href + '&locale=' + locale;
+    }
+  }
+  else {
+    url = 'http://' + location.host + location.pathname + '?locale=' + locale;
+  }
   console.log(url);
   location.href = url;
 };

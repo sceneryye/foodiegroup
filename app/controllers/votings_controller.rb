@@ -71,6 +71,15 @@ def show
   if current_user
     @show_result = current_user.votings.include?(@voting) || Time.current > @voting.end_time
   end
+  #微信share接口配置
+    if session[:locale] == 'en'
+      @title = 'Vote now!'
+    else
+      @title = '本周投票'
+    end
+  @img_url = 'http://www.trade-v.com:5000/votenow.jpg'
+  @desc = 'The most voted will become the next hot deal!'
+  share_config
 end
 
 def index
