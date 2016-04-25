@@ -77,7 +77,7 @@ def show
     else
       @title = '本周投票'
     end
-  @img_url = 'http://www.trade-v.com:5000/votenow.jpg'
+  @img_url = 'http://foodie.trade-v.com/votenow.jpg'
   @desc = 'The most voted will become the next hot deal!'
   share_config
 end
