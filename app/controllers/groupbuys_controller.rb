@@ -258,10 +258,11 @@ class GroupbuysController < ApplicationController
 
   def destroy
     @groupbuy = Groupbuy.find(params[:id])
+    tag = @groupbuy.tag
     @groupbuy.destroy
     respond_to do |format|
       format.js
-      format.html {redirect_to groupbuys_path}
+      format.html {redirect_to groupbuys_path(tag: tag)}
     end
   end
 
