@@ -9,11 +9,11 @@ class GroupbuysController < ApplicationController
 
   def index
     if params[:tag] == 'deal'
-    @groupbuys = Groupbuy.online.includes(:user).where('tag = ? and end_time > ?', 0, Time.zone.now)
-    @products = Groupbuy.online.includes(:user).where('tag = ? and end_time <= ?', 0, Time.zone.now)
-  elsif params[:tag] == 'groupbuy'
-    @real_groupbuys = Groupbuy.online.includes(:user).where(tag: 1)
-  end
+      @groupbuys = Groupbuy.online.includes(:user).where('tag = ? and end_time > ?', 0, Time.zone.now)
+      @products = Groupbuy.online.includes(:user).where('tag = ? and end_time <= ?', 0, Time.zone.now)
+    elsif params[:tag] == 'groupbuy'
+      @real_groupbuys = Groupbuy.online.includes(:user).where(tag: 1)
+    end
 
 
     #微信share接口配置
@@ -143,7 +143,7 @@ class GroupbuysController < ApplicationController
       res_data_json = RestClient.post post_url, data_hash
 
 
-      redirect_to groupbuy_url(@groupbuy), notice: '团购发布成功!'
+      redirect_to groupbuy_url(@groupbuy, tag: @groupbuy.tag), notice: '团购发布成功!'
     else
       render :new
     end
@@ -209,11 +209,13 @@ class GroupbuysController < ApplicationController
     end
 
     if @groupbuy.update(groupbuy_params)
-      if @groupbuy.end_time > Time.now && @groupbuy.recommend == 1
-        @groupbuy.update(recommend: 5)
+      if @groupbuy.deal?
+        if @groupbuy.end_time > Time.now && @groupbuy.recommend == 1
+          @groupbuy.update(recommend: 5)
+        end
       end
 
-      redirect_to groupbuy_url(@groupbuy), notice: '团购修改成功'
+      redirect_to groupbuy_url(@groupbuy, tag: @groupbuy.tag), notice: '团购修改成功'
     else
       render :edit
     end
