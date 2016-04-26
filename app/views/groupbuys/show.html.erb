@@ -106,7 +106,7 @@
 <div class="row">
   <div class="small-12 columns">
     <% if current_user == @groupbuy.user || current_user.try(:role) == '1' %>
-    <%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_groupbuy_path(@groupbuy), class:"tiny button radius" %>
+    <%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_groupbuy_path(@groupbuy, tag: params[:tag]), class:"tiny button radius" %>
     <%= link_to '<i class="fa fa-times"></i>'.html_safe + ' ' + t(:delete), @groupbuy,method: :delete,
     class:"tiny button alert radius",
       data: {confirm: '?'} %>

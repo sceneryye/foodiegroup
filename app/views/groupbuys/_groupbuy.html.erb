@@ -1,6 +1,6 @@
 
 <div class="groupbuy-list <%= 'still-valid' if groupbuy.end_time > Time.zone.now %>" data-endtime="<%= groupbuy.end_time.to_i %>" data-day="<%= t(:day) %>">
-<%= link_to groupbuy do %>
+<%= link_to groupbuy_path(groupbuy, tag: 'deal') do %>
   <div class="row">
     <div class="columns small-4">
       <% if groupbuy.pic_url.present?

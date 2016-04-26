@@ -164,10 +164,15 @@ class ParticipantsController < ApplicationController
     detail = 'participant'
     total_fee = (money.to_f * 100).to_i
     @total = total_fee
+
     res_data_hash = pay_with_wechat(attach, body, openid, total_fee, detail)
     # return render :text => res_data_hash
     if res_data_hash["xml"]["return_code"] == 'SUCCESS'
       @url = "http://foodie.trade-v.com/#{type_name}/#{parent.id}?from=foodiepay"
+      if type_name == 'groupbuys'
+        tag = Groupbuy.find_by(id: parent.id).try(:tag)
+        @url = "http://foodie.trade-v.com/#{type_name}/#{parent.id}?from=foodiepay&tag=#{tag}"
+      end
       prepay_id = res_data_hash["xml"]["prepay_id"]
       @timestamp = Time.now.to_i
       @nonce_str = random_str 32
