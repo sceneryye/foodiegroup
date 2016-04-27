@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
           u.nickname = session[:nickname]
         end.save
         login user.first
-        redirect_to root_path #清空传过来的参数
+        redirect_to root_path(tag: 'deal') #清空传过来的参数
 
       end
     end

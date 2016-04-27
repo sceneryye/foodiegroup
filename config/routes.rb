@@ -1,12 +1,12 @@
 RailsOnForum::Application.routes.draw do
-  
+  root 'groupbuys#index'
   resources :vote_products
   resources :votings
   resources :wishlists
   post '/voting/vote_for_voting', to: 'votings#vote_for_voting'
-  #get 'photos/create'
+  # get 'photos/create'
 
-  #scope '/foodiegroup' do
+  # scope '/foodiegroup' do
   get 'groups/show'
   mount ChinaCity::Engine => '/china_city'
   get 'drag_drop', to: 'home#drag_drop', as: :drag_drop
@@ -38,93 +38,87 @@ RailsOnForum::Application.routes.draw do
 
   post 'logistics/acquire_logistic_details', to: 'logistics#acquire_logistic_details', as: :acquire_logistic_details
 
-
   namespace :admin do
     resources :reports
-      #post "downorder", :on=>:collection
-      post "/downorder", to:'reports#downorder'
-      get '/users_list', to: 'reports#users_list'
-      get '/groupbuys_list', to: 'reports#groupbuys_list'
-      get '/topics_list', to: 'reports#topics_list'
-      get '/participants_list', to: 'reports#participants_list'
-      get '/tags_list', to: 'reports#tags_list'
+    # post "downorder", :on=>:collection
+    post '/downorder', to: 'reports#downorder'
+    get '/users_list', to: 'reports#users_list'
+    get '/groupbuys_list', to: 'reports#groupbuys_list'
+    get '/topics_list', to: 'reports#topics_list'
+    get '/participants_list', to: 'reports#participants_list'
+    get '/tags_list', to: 'reports#tags_list'
 
-      post '/set_online_offline', to: 'reports#set_online_offline', as: :set_online_offline
+    post '/set_online_offline', to: 'reports#set_online_offline', as: :set_online_offline
+  end
 
-    end
+  resource :votes, only: :create
+  resources :chat
+  resources :tags, only: [:create, :update, :destroy]
 
-    resource :votes, only: :create
-    resources :chat
-    resources :tags, only: [:create, :update, :destroy]
-    
+  # mount Ckeditor::Engine => '/ckeditor'
 
-    #mount Ckeditor::Engine => '/ckeditor'
-    
-    get    '/login',     to: 'sessions#new',     as: :login
-    delete '/logout', to: 'sessions#destroy', as: :logout
-    resource  :session, only: :create
+  get    '/login', to: 'sessions#new', as: :login
+  delete '/logout', to: 'sessions#destroy', as: :logout
+  resource :session, only: :create
 
-    resource :search
+  resource :search
 
-    resources :forums  do
-      resources :topics, only: [:new, :create]
-    end
+  resources :forums do
+    resources :topics, only: [:new, :create]
+  end
 
-    resources :topics, except: [:index, :new, :create]  do
-      resources :comments, only: [:new, :create,:index]
-    end 
+  resources :topics, except: [:index, :new, :create] do
+    resources :comments, only: [:new, :create, :index]
+  end
 
-    resources :events do 
-      resources :participants, only: [:new, :create,:index]
-      resources :comments, only: [:new, :create,:index]
-    end
+  resources :events do
+    resources :participants, only: [:new, :create, :index]
+    resources :comments, only: [:new, :create, :index]
+  end
 
-    resources :groupbuys do 
-      resources :participants, only: [:new, :create,:index]
-      resources :comments, only: [:new, :create,:index]
-    end
+  resources :groupbuys do
+    resources :participants, only: [:new, :create, :index]
+    resources :comments, only: [:new, :create, :index]
+  end
 
-    resources :comments, only: [:edit, :update, :destroy]
+  resources :comments, only: [:edit, :update, :destroy]
 
-    resources :participants, only: [:edit, :update, :destroy, :show] do    
-      get   'confirm_paid'  ,on: :member
-      post 'confirm_shiped', on: :member
+  resources :participants, only: [:edit, :update, :destroy, :show] do
+    get 'confirm_paid', on: :member
+    post 'confirm_shiped', on: :member
+  end
+  get 'wechat_pay', to: 'participants#wechat_pay', as: :wechat_pay
 
-    end
-    get 'wechat_pay', to: 'participants#wechat_pay', as: :wechat_pay
+  resources :users, only: [:create, :update, :destroy] do
+    resources :user_instetests
+  end
+  get '/users', to: 'users#index'
 
-    resources :users,   only: [:create, :update, :destroy] do
-     resources :user_instetests
-   end
-   get '/users', to: 'users#index'
+  get '/users/:id/my_groupbuys', to: 'users#my_groupbuys', as: :my_groupbuys
+  get '/users/:id/my_events', to: 'users#my_events', as: :my_events
+  get '/users/:id/my_topics', to: 'users#my_topics', as: :my_topics
+  get '/users/:id/my_wishlists', to: 'users#my_wishlists', as: :my_wishlists
+  get 'users/contact_us', to: 'users#contact_us', as: :contact_us
+  get 'users/about_team', to: 'users#about_team', as: :about_team
+  get 'users/votings', to: 'users#votings', as: :my_votings
+  get 'users/wishlists_management', to: 'users#wishlists_management', as: :wishlists_management
 
-   get '/users/:id/my_groupbuys', to: 'users#my_groupbuys', as: :my_groupbuys
-   get '/users/:id/my_events', to: 'users#my_events', as: :my_events
-   get '/users/:id/my_topics', to: 'users#my_topics', as: :my_topics
-   get '/users/:id/my_wishlists', to: 'users#my_wishlists', as: :my_wishlists
-   get 'users/contact_us', to: 'users#contact_us', as: :contact_us
-   get 'users/about_team', to: 'users#about_team', as: :about_team
-   get 'users/votings', to: 'users#votings', as: :my_votings
-   get 'users/wishlists_management', to: 'users#wishlists_management', as: :wishlists_management
+  post '/users/set_user_mobile', to: 'users#set_user_mobile', as: :set_user_mobile
 
-   post '/users/set_user_mobile', to: 'users#set_user_mobile', as: :set_user_mobile
+  resources :groups, only: [:show, :update]
 
-   resources :groups, only: [:show, :update]
+  get '/register',    to: 'users#new',  as: :register
+  get '/:id',         to: 'users#show', as: :profile
+  get '/:id/edit', to: 'users#edit', as: :edit_profile
+  get '/:id/user_info', to: 'users#user_info', as: :user_info
+  get '/users/:id/my_orders', to: 'users#my_orders', as: :my_orders
 
+  get '/sessions/auto_login', to: 'sessions#auto_login', as: :wx_auto_login
+  get '/sessions/callback', to: 'sessions#callback', as: :wx_callback
 
-   get '/register',    to: 'users#new',  as: :register
-   get '/:id',         to: 'users#show', as: :profile
-   get '/:id/edit', to: 'users#edit', as: :edit_profile
-   get '/:id/user_info', to: 'users#user_info', as: :user_info
-   get '/users/:id/my_orders', to: 'users#my_orders', as: :my_orders
+  resource :home, only: [:index]
 
-   get '/sessions/auto_login', to: 'sessions#auto_login', as: :wx_auto_login
-   get '/sessions/callback', to: 'sessions#callback', as: :wx_callback
+  get 'home/about_groupmall', to: 'home#about_groupmall', as: :about_groupmall
 
-
-   resource :home, only: [:index]
-   root to: 'groupbuys#index'
-   get 'home/about_groupmall', to: 'home#about_groupmall', as: :about_groupmall
-
-  #end
+  # end
 end

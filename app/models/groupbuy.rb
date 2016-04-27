@@ -2,7 +2,7 @@ class Groupbuy < ActiveRecord::Base
 	enum tag: [:deal, :groupbuy]
 	belongs_to :user
 	belongs_to :logistic
-	
+
 
 
 	has_many :participants, dependent: :destroy
@@ -35,7 +35,7 @@ class Groupbuy < ActiveRecord::Base
 		[(total_quantity.to_f / self.target.to_f).to_s, target - total_quantity]
 	end
 
-	scope :online, -> {where(online: true).order('recommend DESC, created_at DESC')}
+	scope :online, -> {where('online = ? and start_time < ?', true, Time.now).order('recommend DESC, created_at DESC')}
 	scope :offline, -> {where(online: false).order('created_at DESC')}
 	default_scope {order('recommend DESC, created_at DESC')}
 
@@ -49,6 +49,6 @@ class Groupbuy < ActiveRecord::Base
 		self.market_price
 	end
 
-	
+
 
 end

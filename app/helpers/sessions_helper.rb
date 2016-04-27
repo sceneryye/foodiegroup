@@ -4,6 +4,6 @@ module SessionsHelper
   end
 
   def autheorize_admin!
-    redirect_to root_path unless is_admin?
+    redirect_to root_path(tag: 'deal') unless is_admin?
   end
 end

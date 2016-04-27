@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:session][:password])
       login(user)
-      redirect_to root_url, notice: '登录成功'
+      redirect_to root_url(tag: 'deal'), notice: '登录成功'
     else
       flash[:error] = "账户名或密码错误"
       redirect_to login_url
@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to root_url, notice: '退出登录'
+    redirect_to root_url(tag: 'deal'), notice: '退出登录'
   end
 
   def auto_login
@@ -38,7 +38,7 @@ class SessionsController < ApplicationController
     return_url = session[:return_url] || params[:return_url]
     session.delete(:return_url)
     code = params[:code]
-    now = Time.zone.now.to_i
+    # now = Time.zone.now.to_i
 
     data = get_auth_access_token code
     access_token = data["access_token"]
@@ -55,10 +55,10 @@ class SessionsController < ApplicationController
         Rails.logger.info "------------update avatar => #{user.avatar}"
         Rails.logger.info "------------data => #{data}"
         login user
-        return redirect_to return_url || root_path
+        return redirect_to return_url || root_path(tag: 'deal')
       end
       login user
-      return redirect_to return_url || root_path
+      return redirect_to return_url || root_path(tag: 'deal')
 
     #elsif return_url.split('?').first.in? ['http://foodie.trade-v.com/register', 'http://foodie.trade-v.com/login']
      # data = get_user_info(openid, access_token)
@@ -90,7 +90,7 @@ class SessionsController < ApplicationController
         Rails.logger.info "---------------nickname_after_update => #{user.try :nickname}"
         Rails.logger.info "---------------user_id_after_update => #{user.try :id}"
         login user
-        return redirect_to return_url || root_path
+        return redirect_to return_url || root_path(tag: 'deal')
 
       else
         new_user = User.new weixin_openid: data["openid"], avatar: data["headimgurl"], nickname: data["nickname"], username: data["nickname"], password: data["openid"]
@@ -101,7 +101,7 @@ class SessionsController < ApplicationController
           new_user.save
         end
         login new_user
-        return redirect_to return_url || root_path
+        return redirect_to return_url || root_path(tag: 'deal')
       end
 
     end
@@ -132,6 +132,6 @@ class SessionsController < ApplicationController
   def get_user_info openid, access_token
     get_url = "https://api.weixin.qq.com/sns/userinfo?access_token=#{access_token}&openid=#{openid}&lang=zh_CN"
     res_data_json = RestClient.get get_url
-    res_data_hash = ActiveSupport::JSON.decode res_data_json
+    ActiveSupport::JSON.decode res_data_json
   end
 end

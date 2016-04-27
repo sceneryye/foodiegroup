@@ -53,7 +53,7 @@ class UsersController < ApplicationController
       user_params[:username] = user_params[:mobile]
     end
 
-    redirect_url = session[:return_url].present? ? session[:return_url] : root_url
+    redirect_url = session[:return_url].present? ? session[:return_url] : root_url(tag: 'deal')
     # 绑定新的公众号
     if user = User.find_by(mobile: user_params[:mobile])
       user.update(weixin_openid: session[:openid], nickname: session[:nickname], avatar: session[:avatar])
@@ -186,7 +186,7 @@ end
 def destroy
   logout
   @user.destroy
-  redirect_to root_url
+  redirect_to root_url(tag: 'deal')
 end
 
 def set_user_mobile

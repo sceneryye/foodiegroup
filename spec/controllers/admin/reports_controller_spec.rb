@@ -10,7 +10,7 @@ RSpec.describe Admin::ReportsController, type: :controller do
 
     it 'redirect_to root path' do
       get :index
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to root_path(tag: 'deal')
     end
   end
 
@@ -22,7 +22,7 @@ RSpec.describe Admin::ReportsController, type: :controller do
 
     it 'redirect_to root path' do
       get :groupbuys_list
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to root_path(tag: 'deal')
     end
   end
 

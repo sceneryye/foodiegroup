@@ -1,4 +1,4 @@
-#encoding:utf-8
+# encoding:utf-8
 require 'rest-client'
 require 'digest/sha1'
 class GroupbuysController < ApplicationController
@@ -15,15 +15,14 @@ class GroupbuysController < ApplicationController
       @real_groupbuys = Groupbuy.online.includes(:user).where(tag: 1)
     end
 
-
-    #微信share接口配置
+    # 微信share接口配置
     groupbuy = Groupbuy.online.where('end_time > ?', Time.zone.now).first
     @title_pic = groupbuy.present? ? groupbuy.photos.first.try(:image) : '/groupmall_logo.jpg'
-    if session[:locale] == 'en'
-      @title = 'Hot Deal Recommendation'
-    else
-      @title = '热门团购推荐'
-    end
+    @title = if session[:locale] == 'en'
+               'Hot Deal Recommendation'
+             else
+               '热门团购推荐'
+             end
     @img_url = 'http://www.trade-v.com:5000' + @title_pic.to_s
     @desc = groupbuy.present? ? (current_title groupbuy) : 'GroupMall'
     share_config
@@ -35,19 +34,19 @@ class GroupbuysController < ApplicationController
       @total = params[:total].to_f / 100
       @alert = true if params[:error_message] == 'success'
     end
-    @parent = @groupbuy  = Groupbuy.find(params[:id])
+    @parent = @groupbuy = Groupbuy.find(params[:id])
     if @parent.pic_url.present?
-      @title_pic = @groupbuy.pic_url.split(',').reject{|x| x.blank?}[0]
-      @content_pic = @groupbuy.pic_url.split(',').reject{|x| x.blank?}[1..-1]
+      @title_pic = @groupbuy.pic_url.split(',').reject(&:blank?)[0]
+      @content_pic = @groupbuy.pic_url.split(',').reject(&:blank?)[1..-1]
     else
       @title_pic = @parent.photos.first.try(:image)
       @content_pic = @parent.photos[1..-1]
     end
-    
+
     @active = @groupbuy.comments.count > 10 ? true : false
     @participant = @parent.participants.new
     @comment = @parent.comments.new
-    if current_user && current_user.role.in?(['1', '2'])
+    if current_user && current_user.role.in?(%w(1 2))
       @participants = @groupbuy.participants.includes(:user)
     elsif current_user
       @participants = @groupbuy.participants.includes(:user).where(user_id: current_user.try(:id))
@@ -56,9 +55,8 @@ class GroupbuysController < ApplicationController
     end
     more = 10
     @comments = @groupbuy.comments.includes(:user)[0...more]
-    
 
-    #微信share接口配置
+    # 微信share接口配置
     if @groupbuy.deal?
       if session[:locale] == 'en'
         @title = @groupbuy.end_time > Time.zone.now ? 'Hot Deal' : 'Polular Deal'
@@ -73,34 +71,30 @@ class GroupbuysController < ApplicationController
     @desc = current_title @groupbuy
     share_config
 
+    if signed_in?
+      @plus_menu = [{ name: '<i class="fa  fa-comment"></i>'.html_safe + ' ' + t(:new_comment), path: new_groupbuy_comment_path(@groupbuy) },
+                    { name: '<i class="fa fa-user-plus"></i>'.html_safe + ' ' + t(:buy), path: new_groupbuy_participant_path(@groupbuy) }]
 
-    if signed_in? 
-      @plus_menu = [{name: '<i class="fa  fa-comment"></i>'.html_safe+' '+t(:new_comment), path: new_groupbuy_comment_path(@groupbuy)},
-        {name: '<i class="fa fa-user-plus"></i>'.html_safe+' '+t(:buy), path: new_groupbuy_participant_path(@groupbuy)}]
+      @again = if !@participants.where(user_id: current_user.id).empty?
+                 '再次'
+               else
+                 '立即'
+               end
 
-        if @participants.where(:user_id => current_user.id).size>0
-          @again = '再次'     
-        else
-          @again = '立即'
-        end
-
-        @user_addresses = current_user.default_address      
-        # if  @user_addresses.nil?
-          # return redirect_to new_user_address_path(groupbuy_id: params[:groupbuy_id], from: 'new_participant')
-        # end
-      end
-
-      
-
+      @user_addresses = current_user.default_address
+      # if  @user_addresses.nil?
+      # return redirect_to new_user_address_path(groupbuy_id: params[:groupbuy_id], from: 'new_participant')
+      # end
     end
+  end
 
-    def new
-     @groupbuy = Groupbuy.new
-     session[:pic_file] = nil
-     @photo = Photo.new
-   end
+  def new
+    @groupbuy = Groupbuy.new
+    session[:pic_file] = nil
+    @photo = Photo.new
+  end
 
-   def choose_or_new_groupbuy
+  def choose_or_new_groupbuy
     @groupbuys = Groupbuy.offline.where(user_id: current_user.id)
   end
 
@@ -129,19 +123,18 @@ class GroupbuysController < ApplicationController
       photo_ids = params[:photo_ids].split(',')
       Photo.where(id: photo_ids).update_all(groupbuy_id: @groupbuy.id)
 
-      post_url = "http://www.trade-v.com/send_group_message_api"
+      post_url = 'http://www.trade-v.com/send_group_message_api'
       # openids = User.plunk(:weixin_openid)
-      openids = "oVxC9uBr12HbdFrW1V0zA3uEWG8c"
-      msgtype = "text"
+      openids = 'oVxC9uBr12HbdFrW1V0zA3uEWG8c'
+      msgtype = 'text'
       content = "吃货帮刚刚发布了一个新团购：#{current_title @groupbuy}, 赶紧来看看哦～"
       data_hash = {
         openids: openids,
         content: content,
-        data: {msgtype: msgtype}
+        data: { msgtype: msgtype }
       }
-      data_json = data_hash.to_json
-      res_data_json = RestClient.post post_url, data_hash
-
+      # data_json = data_hash.to_json
+      RestClient.post post_url, data_hash
 
       redirect_to groupbuy_url(@groupbuy, tag: @groupbuy.tag), notice: '团购发布成功!'
     else
@@ -151,7 +144,7 @@ class GroupbuysController < ApplicationController
 
   def edit
     @groupbuy = Groupbuy.find(params[:id])
-    @pic = @groupbuy.pic_url.split(',').reject{|x| x.blank?}
+    @pic = @groupbuy.pic_url.split(',').reject(&:blank?)
     @photos = @groupbuy.photos
   end
 
@@ -160,34 +153,29 @@ class GroupbuysController < ApplicationController
     Rails.logger.info @groupbuy.photos.pluck(:id)
     Rails.logger.info '###############'
     if params[:from] == 'admin_groupbuy_list'
-      if params[:recommend].blank?
-        return render :text => 'failed'
-      end
+      return render text: 'failed' if params[:recommend].blank?
       num = params[:recommend].to_i
       if Groupbuy.find(params[:id]).update(recommend: num)
         Rails.logger.info 'true'
-        return render :text => 'success'
+        return render text: 'success'
       end
     end
 
     if params[:from] == 'admin_edit_title'
-      if params[:title].blank?
-        return render :text => 'failed'
-      end
+      return render text: 'failed' if params[:title].blank?
       if params[:language] == 'zh'
         if Groupbuy.find(params[:id]).update(zh_title: params[:title])
           Rails.logger.info 'true'
-          return render :text => 'success'
+          return render text: 'success'
         end
       elsif params[:language] == 'en'
         if Groupbuy.find(params[:id]).update(en_title: params[:title])
           Rails.logger.info 'true'
-          return render :text => 'success'
+          return render text: 'success'
         end
       end
     end
 
-    
     if params[:images]
       params[:images].each do |image|
         @groupbuy.photos.update(image: image)
@@ -196,14 +184,14 @@ class GroupbuysController < ApplicationController
     # 删除与团购关联的图片
     origin_ids = @groupbuy.photos.pluck(:id)
     if params[:photo_ids].present? || params[:delete_ids].present?
-      ids = params[:photo_ids].split(',').select{|id|id.present?}
+      ids = params[:photo_ids].split(',').select(&:present?)
       Photo.where(id: ids).update_all(groupbuy_id: params[:id])
-      
+
       Rails.logger.info origin_ids
       Rails.logger.info '###############'
       Rails.logger.info params[:delete_ids]
       if params[:delete_ids].present?
-        delete_ids = params[:delete_ids].split(',').select{|id|id.present?}
+        delete_ids = params[:delete_ids].split(',').select(&:present?)
         Photo.where(id: delete_ids).update_all(groupbuy_id: nil)
       end
     end
@@ -224,7 +212,7 @@ class GroupbuysController < ApplicationController
   def upload
     uploaded_io = params[:file]
 
-    if !uploaded_io.blank?
+    unless uploaded_io.blank?
       extension = uploaded_io.original_filename.split('.')
       filename = "#{Time.now.strftime('%Y%m%d%H%M%S%L')}.#{extension[-1]}"
       filepath = "#{PIC_PATH}/groupbuys/#{filename}"
@@ -237,8 +225,6 @@ class GroupbuysController < ApplicationController
       end
     end
   end
-
-  
 
   def destroy_pic
     @groupbuy = Groupbuy.find(params[:id])
@@ -255,14 +241,13 @@ class GroupbuysController < ApplicationController
     end
   end
 
-
   def destroy
     @groupbuy = Groupbuy.find(params[:id])
     tag = @groupbuy.tag
     @groupbuy.destroy
     respond_to do |format|
       format.js
-      format.html {redirect_to groupbuys_path(tag: tag)}
+      format.html { redirect_to groupbuys_path(tag: tag) }
     end
   end
 
@@ -273,15 +258,13 @@ class GroupbuysController < ApplicationController
     over = params[:over].to_i
     comments = parent.capitalize.constantize.includes(:comments, :user).find(params[:id]).comments.includes(:user)[start...over]
     comments.each do |comment|
-      elements << "<div class='row small-collapse'><div  class='columns small-12 comment'>" << comment.body.html_safe if comment.body << view_context.comment_info(comment) << "</div></div><hr />"
+      elements << "<div class='row small-collapse'><div  class='columns small-12 comment'>" << comment.body.html_safe if comment.body << view_context.comment_info(comment) << '</div></div><hr />'
     end
     elements = elements.join
-    return render text: elements
+    render text: elements
   end
 
   private
-
-  
 
   def login_with_mobile
     if session[:mobile].present?
@@ -295,11 +278,11 @@ class GroupbuysController < ApplicationController
   end
 
   def groupbuy_params
-    params.require(:groupbuy).permit(:en_title, :zh_title, :en_body, :zh_body, :end_time,:start_time,:groupbuy_type, :goods_maximal, :goods_minimal, :market_price, :tag, :target, :origin, :groupbuy_price, :pic_url,:name,:mobile,:goods_unit,:price, :logistic_id,:weight, :goods_size, :goods_bbd)
+    params.require(:groupbuy).permit(:en_title, :zh_title, :en_body, :zh_body, :end_time, :start_time, :groupbuy_type, :goods_maximal, :goods_minimal, :market_price, :tag, :target, :origin, :groupbuy_price, :pic_url, :name, :mobile, :goods_unit, :price, :logistic_id, :weight, :goods_size, :goods_bbd)
   end
 
   def set_recommend
-    gb = Groupbuy.where("end_time< ? AND recommend > ?", Time.zone.now, 1)
+    gb = Groupbuy.where('end_time< ? AND recommend > ?', Time.zone.now, 1)
     gb.each do |groupbuy|
       groupbuy.update_columns(recommend: 1)
     end
