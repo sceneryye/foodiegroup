@@ -1,17 +1,16 @@
-#encoding:utf-8
+# encoding:utf-8
 class ParticipantsController < ApplicationController
-
   skip_before_action :verify_authenticity_token, only: [:wechat_notify_url, :participant_notify_url]
 
   before_action :validate_user!, except: :wechat_notify_url
 
-  before_action only: [:edit, :update, :destroy,:wechat_pay] do
+  before_action only: [:edit, :update, :destroy, :wechat_pay] do
     validate_permission!(select_participant.user)
   end
 
-  before_action :select_participant, only: [:edit, :show, :update, :destroy, :confirm_paid,:confirm_shiped]
+  before_action :select_participant, only: [:edit, :show, :update, :destroy, :confirm_paid, :confirm_shiped]
 
-  before_action only: [:new, :create,:index] do
+  before_action only: [:new, :create, :index] do
     if params[:groupbuy_id]
       @parent = Groupbuy.find(params[:groupbuy_id])
       @url = groupbuy_path(@parent)
@@ -21,9 +20,9 @@ class ParticipantsController < ApplicationController
     end
 
     @user_addresses = current_user.user_addresses
-    if  @user_addresses.size == 0
+    if @user_addresses.empty?
       redirect_to new_user_address_path(groupbuy_id: params[:groupbuy_id], from: 'new_participant')
-    elsif  @user_addresses.where(default: 1).present?
+    elsif @user_addresses.where(default: 1).present?
       @user_addresses =  @user_addresses.where(default: 1)
     else
       @user_addresses =  @user_addresses.first
@@ -50,9 +49,7 @@ class ParticipantsController < ApplicationController
       return_url = event_url(@participant.event)
     end
 
-    if current_user == owner #只能由活动发起人修改支付状态
-      @participant.update(:status_pay=>1)
-    end
+    @participant.update(status_pay: 1) if current_user == owner # 只能由活动发起人修改支付状态
 
     redirect_to return_url, notice: '确认付款'
   end
@@ -60,22 +57,20 @@ class ParticipantsController < ApplicationController
   def confirm_shiped
     if is_admin?
       if @participant.update(status_ship: 1, tracking_number: params[:tracking_number])
-        return render json: {msg: 'success'}
+        return render json: { msg: 'success' }
       else
-        return render json: {msg: 'failed'}
+        return render json: { msg: 'failed' }
       end
     end
   end
 
   def create
-
     if params[:groupbuy_id].present?
       # address = params[:user_addresses_id].present? ? UserAddress.find_by(id: params[:user_addresses_id]) : current_user.default_address
       # params[:participant].merge!(:name=>address.name,:address=>address.address,:mobile=>address.mobile)
-      
 
       delivery_time = params[:date] + '-' + params[:time]
-      params[:participant].merge!(:delivery_time => delivery_time)
+      params[:participant][:delivery_time] = delivery_time
     end
 
     @participant = @parent.participants.new(participant_params)
@@ -94,13 +89,13 @@ class ParticipantsController < ApplicationController
         Rails.logger.info "----------------------#{@participant.area}"
         Rails.logger.info "----------------------#{@participant.address}"
       end
-      notice =  '报名成功'
+      notice = '报名成功'
       if @participant.groupbuy_id
         redirect_to participant_path(@participant), notice: notice
-      else 
+      else
         redirect_to event_path(@participant.event), notice: notice
       end
-      
+
     else
       render :new
     end
@@ -113,16 +108,18 @@ class ParticipantsController < ApplicationController
     @parent = @participant.groupbuy_id.present? ? Groupbuy.find_by(id: @participant.groupbuy_id) : Event.find_by(id: @participant.groupbuy_id)
     @path = @participant.groupbuy_id.present? ? groupbuy_path(@parent) : event_path(@parent)
     if @parent.pic_url.present?
-      @title_pic = @parent.pic_url.split(',').reject{|x| x.blank?}[0]
-      @content_pic = @parent.pic_url.split(',').reject{|x| x.blank?}[1..-1]
+      @title_pic = @parent.pic_url.split(',').reject(&:blank?)[0]
+      @content_pic = @parent.pic_url.split(',').reject(&:blank?)[1..-1]
     else
       @title_pic = @parent.photos.first.try(:image)
       @content_pic = @parent.photos[1..-1]
     end
-    if Groupbuy.find_by(id: @participant.groupbuy_id).end_time > Time.current
-      @note = session[:locale] == 'en' ? 'Note: The order will be shipped at the end of the deal.' : '将在三到4天发货'
-    else
-      @note = session[:locale] == 'en' ? 'Note: The order will be delivered within 3-4 days.' : '将在周末活动结束时统一发货'
+    if Groupbuy.find_by(id: @participant.groupbuy_id).deal?
+      if Groupbuy.find_by(id: @participant.groupbuy_id).end_time > Time.current
+        @note = session[:locale] == 'en' ? 'Note: The order will be shipped at the end of the deal.' : '将在三到4天发货'
+      else
+        @note = session[:locale] == 'en' ? 'Note: The order will be delivered within 3-4 days.' : '将在周末活动结束时统一发货'
+      end
     end
   end
 
@@ -154,10 +151,7 @@ class ParticipantsController < ApplicationController
       type_name: type_name
     }
 
-
-
     attach = "#{parent.id}_#{@participant.id}_#{@participant.user_id}"
-
 
     body = "tile=#{event_name[0..15]}"
     openid = openid
@@ -167,37 +161,34 @@ class ParticipantsController < ApplicationController
 
     res_data_hash = pay_with_wechat(attach, body, openid, total_fee, detail)
     # return render :text => res_data_hash
-    if res_data_hash["xml"]["return_code"] == 'SUCCESS'
+    if res_data_hash['xml']['return_code'] == 'SUCCESS'
       @url = "http://foodie.trade-v.com/#{type_name}/#{parent.id}?from=foodiepay"
       if type_name == 'groupbuys'
         tag = Groupbuy.find_by(id: parent.id).try(:tag)
         @url = "http://foodie.trade-v.com/#{type_name}/#{parent.id}?from=foodiepay&tag=#{tag}"
       end
-      prepay_id = res_data_hash["xml"]["prepay_id"]
+      prepay_id = res_data_hash['xml']['prepay_id']
       @timestamp = Time.now.to_i
       @nonce_str = random_str 32
       @package = "prepay_id=#{prepay_id}"
       @appId = WX_APP_ID
-      data = {:appId => @appId, :timeStamp => @timestamp, :nonceStr => @nonce_str, :package => @package, :signType => 'MD5'}
+      data = { appId: @appId, timeStamp: @timestamp, nonceStr: @nonce_str, package: @package, signType: 'MD5' }
       @paySign = create_sign data
-      render :layout => false
+      render layout: false
     else
-      render :text => res_data_hash
+      render text: res_data_hash
     end
-
   end
-
-  
 
   def wechat_notify_url
     Rails.logger.info "###########################{params}"
     begin
 
       data1 = Hash.from_xml request.body.read
-      data = data1["xml"]
+      data = data1['xml']
       Rails.logger.info "###########################{data}"
 
-      if data["result_code"] == 'SUCCESS'
+      if data['result_code'] == 'SUCCESS'
         if data['attach'].split('_').length == 3
           deal_with_participant_notify data
         elsif data['attach'].split('_').length == 2
@@ -218,15 +209,15 @@ class ParticipantsController < ApplicationController
     if params[:from] == 'pay offline'
       id = params[:id]
       participant = Participant.find_by(id: id).update(status_pay: 2)
-      return render json: {msg: 'success'}.to_json
+      return render json: { msg: 'success' }.to_json
     end
     if @participant.update(participant_params)
-      if @participant.groupbuy
-        return_url = groupbuy_url(@participant.groupbuy)
-      else
-        return_url = event_url(@participant.event)
-      end
-      notice =  '报名修改成功'
+      return_url = if @participant.groupbuy
+                     groupbuy_url(@participant.groupbuy)
+                   else
+                     event_url(@participant.event)
+                   end
+      notice = '报名修改成功'
       redirect_to return_url, notice: notice
     else
       render :edit
@@ -234,14 +225,14 @@ class ParticipantsController < ApplicationController
   end
 
   def destroy
-    if @participant.groupbuy
-      return_url = groupbuy_url(@participant.groupbuy)
-    else
-      return_url = event_url(@participant.event)
-    end
+    return_url = if @participant.groupbuy
+                   groupbuy_url(@participant.groupbuy)
+                 else
+                   event_url(@participant.event)
+                 end
 
     @participant.destroy
-    notice =  '取消报名成功'
+    notice = '取消报名成功'
     redirect_to return_url, notice: notice
   end
 
@@ -265,7 +256,7 @@ class ParticipantsController < ApplicationController
     end
     total_price = (num.to_f * groupbuy.current_price + freightage).round(2)
     Rails.logger.info "----groupbuy.logistic_id=#{groupbuy.logistic_id}---freightage=#{freightage}---each_add=#{each_add}"
-    render json: {freightage: freightage, total_price: total_price}.to_json
+    render json: { freightage: freightage, total_price: total_price }.to_json
   end
 
   private
@@ -278,21 +269,21 @@ class ParticipantsController < ApplicationController
     params.require(:participant).permit(:quantity, :remark)
   end
 
-  def deal_with_participant_notify data
-    groupbuy_id, participant_id, user_id = data["attach"].split('_')
+  def deal_with_participant_notify(data)
+    groupbuy_id, participant_id, user_id = data['attach'].split('_')
     participant = Participant.find_by(id: participant_id)
     if participant.try(:pay_notify_status) == 0
       parent = participant.event_id.present? ? 'events' : 'groupbuys'
       participant.update_column(:status_pay, 1)
       # 模板消息
-      openid = data["openid"]
+      openid = data['openid']
       url = '/' + parent + '/groupbuy_id'
       title = participant.event_id.present? ? Event.find_by(id: groupbuy_id).en_title : Groupbuy.find_by(id: groupbuy_id).en_title
       data = {
-        :first => {:value => 'Paid successfully(支付成功)', :color => "#173177"},
-        :orderMoneySum => {:value => format('%.2f', (data["cash_fee"].to_f / 100.00).to_s), :color => "#173177"},
-        :orderProductName => {:value => title, :color => "#173177"},
-        :remark => {:value => 'Paid successfully and please check for more information in Groupmall!(您已支付成功！您可以在吃货帮查看更多详情!)', :color => "#173177"}
+        first: { value: 'Paid successfully(支付成功)', color: '#173177' },
+        orderMoneySum: { value: format('%.2f', (data['cash_fee'].to_f / 100.00).to_s), color: '#173177' },
+        orderProductName: { value: title, color: '#173177' },
+        remark: { value: 'Paid successfully and please check for more information in Groupmall!(您已支付成功！您可以在吃货帮查看更多详情!)', color: '#173177' }
       }
       res_data = send_template_info_api openid, data, url
       Rails.logger.info "##########################res_data=#{res_data}"
@@ -304,7 +295,7 @@ class ParticipantsController < ApplicationController
     end
   end
 
-  def deal_with_downpayment_notify data
+  def deal_with_downpayment_notify(data)
     wishlist_id, user_id = data['attach'].split('_')
     total_fee = (data['total_fee'].to_f / 100).to_f
     downpayment = Downpayment.create(user_id: user_id, wishlist_id: wishlist_id, price: total_fee)
@@ -312,18 +303,16 @@ class ParticipantsController < ApplicationController
     title = 'Downpayment / 定金'
     remark = 'Your downpayment number is(您的定金编号为):' + downpayment.id.to_s
     data = {
-      :first => {:value => '支付成功', :color => "#173177"},
-      :orderMoneySum => {:value => data["cash_fee"].to_f / 100.00, :color => "#173177"},
-      :orderProductName => {:value => title, :color => "#173177"},
-      :remark => {:value => remark, :color => "#173177"}
+      first: { value: '支付成功', color: '#173177' },
+      orderMoneySum: { value: data['cash_fee'].to_f / 100.00, color: '#173177' },
+      orderProductName: { value: title, color: '#173177' },
+      remark: { value: remark, color: '#173177' }
     }
-    send_template_info_api data["openid"], data
+    send_template_info_api data['openid'], data
 
     # 发送至boss
     nickname = User.find_by(id: user_id).nickname
     info = "#{nickname}刚刚支付了一笔定金，共计#{total_fee}元。"
     send_info_preview_api info
   end
-
-  
 end
