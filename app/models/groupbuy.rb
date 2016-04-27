@@ -31,7 +31,7 @@ class Groupbuy < ActiveRecord::Base
 
 	def target_completed
 		return nil if self.deal?
-		total_quantity =	Participant.where(groupbuy_id: self.id).sum(:quantity) * self.weight
+		total_quantity =	Participant.where(groupbuy_id: self.id).sum(:quantity) * self.weight.to_f
 		[(total_quantity.to_f / self.target.to_f).to_s, target - total_quantity]
 	end
 
