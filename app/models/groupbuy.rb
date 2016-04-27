@@ -35,6 +35,7 @@ class Groupbuy < ActiveRecord::Base
 		[(total_quantity.to_f / self.target.to_f).to_s, target - total_quantity]
 	end
 
+	
 	scope :online, -> {where('online = ? and start_time < ?', true, Time.now).order('recommend DESC, created_at DESC')}
 	scope :online_groupbuy, -> {where('online = ?', true).order('recommend DESC, created_at DESC')}
 	scope :offline, -> {where(online: false).order('created_at DESC')}
