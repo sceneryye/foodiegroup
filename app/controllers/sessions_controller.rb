@@ -80,7 +80,7 @@ class SessionsController < ApplicationController
       Rails.logger.info "---------------data => #{data}"
       Rails.logger.info "---------------nickname => #{user.try(:nickname)}"
       Rails.logger.info "---------------user_id => #{user.try(:id)}"
-      Rails.logger.info "---------------Encoding => #{data['nickanme'].encoding}"
+      Rails.logger.info "---------------Encoding => #{data['nickname'].encoding}"
       if user && openid.present? && (user.nickname.nil? || user.avatar.nil?)
         begin
           user.update_columns nickname: data['nickname'], avatar: data['headimgurl'], username: data['nickname']
