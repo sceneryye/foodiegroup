@@ -19,7 +19,7 @@ class Admin::ReportsController < ApplicationController
 
   def participants_list
     @groupbuy = Groupbuy.find(params[:groupbuy_id])
-    @participants = Participant.unscoped {Participant.where(:groupbuy_id => params[:groupbuy_id]).paginate(per_page: 100, page: params[:page]).order(status_pay: :desc)}
+    @participants = Participant.unscoped {Participant.where(:groupbuy_id => params[:groupbuy_id]).paginate(per_page: 100, page: params[:page]).order(created_at: :desc)}
   end
 
   def tags_list
@@ -54,18 +54,18 @@ class Admin::ReportsController < ApplicationController
         workbook.add_worksheet(:name => "Groupbuy") do |sheet|
 
           sheet.add_row ["姓名","联系电话","地址","数量",fields[0],fields[1],fields[2]],:style=>head_cell
-                     
-                
+
+
             row_count=0
-            @participants.each do |p| 
-        if p.mobile.length == 11 
+            @participants.each do |p|
+        if p.mobile.length == 11
               orderid=p.name.to_s + " "
               memberid=p.mobile
               shipname=p.address
               createdat=p.quantity
-              
+
              shipstatustext=p.status_pay ==1 ? "已付款" : "未付款"
-            
+
               shopid=p.status_ship ==0 ? "未发货" : "已发货"
              shipaddrs=p.created_at
 
@@ -81,9 +81,9 @@ class Admin::ReportsController < ApplicationController
                   if field=="报名时间"
                     v.push(p.created_at)
                   end
-              
+
                 end
-              
+
               sheet.add_row [orderid,memberid,shipname,createdat,v[0],v[1],v[2]]
               end
               row_count +=1

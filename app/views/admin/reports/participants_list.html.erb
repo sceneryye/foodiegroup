@@ -20,22 +20,22 @@
 <div>
 
 <%=form_for :member,:url=>admin_downorder_path(groupbuy_id:params[:groupbuy_id]),:method=>:post do |f|%>
-      
+
     <span>
     <%=f.select :status_pay,{"已付款"=>"1","未付款"=>"0"},{default:1},:style=>"width:120px;margin-left:100px" %>
-      
+
 
        <ul class="clearfix unstyled" style="list-style-type:none;margin-left:120px" >
           <li class="checkbox-verticle" style="float:left;font-size:10px"><%= check_box_tag "fields[]","付款状态",true%>付款状态</li>
           <li class="checkbox-verticle" style="float:left;font-size:10px"><%= check_box_tag "fields[]","发货状态",true%>发货状态</li>
           <li class="checkbox-verticle" style="float:left;font-size:10px"><%= check_box_tag "fields[]","报名时间",true%>报名时间</li>
-  
+
         </ul>
 </span>
         <%= f.submit '导出', :style=>"width:30px;background-color:blue;margin-left:120px"%>
-   
+
        <%end%>
-                   
+
 
 </div>
   <table>
@@ -61,7 +61,7 @@
       <td><%= p.total %></td>
       <td><%= is_paid p %></td>
       <td id="participant-<%= p.id %>" ><%= is_shiped p %></td>
-      <td><%= p.created_at.strftime('%F') %></td>
+      <td><%= p.created_at.strftime('%F %T') %></td>
       <% if p.tracking_number.present? %>
       <td><%= p.tracking_number %></td>
       <% else %>
@@ -76,4 +76,3 @@
   </table>
   <%= will_paginate @participants %>
 </div>
-
