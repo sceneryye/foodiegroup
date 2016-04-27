@@ -1,4 +1,4 @@
-﻿<% provide :title, t(:groupbuy_detail) %>
+<% provide :title, t(:groupbuy_detail) %>
 <div class="row">
   <div class="large-2 columns">
     <%= image_tag @title_pic, class: 'profile-image' if @groupbuy %>
@@ -21,11 +21,13 @@
       </tr>
       <tr>
         <th><%=t(:remaining_time)%></th>
-        <div class="groupbuys-index-list"  data-over="<%= t(:groupbuy_end) %>">
+        <div class="groupbuys-index-list" data-over="<%= t(:groupbuy_end) %>">
           <td colspan="2">
             <div class="groupbuy-list" data-endtime="<%= @groupbuy.end_time.to_i %>" data-day="<%= t(:day) %>">
               <div class="countdown">
-                <span><i class="fa fa-clock-o"></i></span>
+                <span>
+                  <i class="fa fa-clock-o"></i>
+                </span>
                 <span class="countdonw-title"></span>
                 <span class="countdown-day"></span>
                 <span class="countdown-hour"></span>
@@ -51,17 +53,17 @@
         </tr>
         <tr>
           <th><%=t(:market_price)%></th>
-          <td colspan="2">￥<%=@groupbuy.market_price / @groupbuy.set_ratio%>/<%=translate_of(@groupbuy.single_unit)%></td>
+          <td colspan="2">￥<%=@groupbuy.market_price / (@groupbuy.set_ratio || 1)%>/<%=translate_of(@groupbuy.single_unit)%></td>
         </tr>
 
         <% if @groupbuy.tag == 'deal' %>
         <tr>
           <% if @groupbuy.end_time > Time.now %>
           <th class="groupbuy-price-show"><%=t(:price)%></th>
-          <td class="groupbuy-price-show" colspan="2">￥<%= @groupbuy.groupbuy_price / @groupbuy.set_ratio %>/<%=translate_of(@groupbuy.single_unit)%></td>
-          <% else %>
+          <td class="groupbuy-price-show" colspan="2">￥<%= @groupbuy.groupbuy_price / (@groupbuy.set_ratio || 1) %>/<%=translate_of(@groupbuy.single_unit)%></td>
+        <% else %>
           <th class="groupbuy-price-show"><%=t(:price)%></th>
-          <td class="groupbuy-price-show" colspan="2">￥<%=@groupbuy.price / @groupbuy.set_ratio %>/<%=translate_of(@groupbuy.single_unit)%></td>
+          <td class="groupbuy-price-show" colspan="2">￥<%=@groupbuy.price / (@groupbuy.set_ratio || 1) %>/<%=translate_of(@groupbuy.single_unit)%></td>
           <% end %>
         </tr>
         <% end %>
@@ -75,8 +77,6 @@
           <td colspan="2"><%= @groupbuy.goods_bbd.to_s %></td>
         </tr>
 
-
-
         <tr>
           <td colspan='3'>
             <% if @content_pic.present? %>
@@ -85,29 +85,28 @@
               <%= image_tag pic.try(:image).present? ? pic.image : pic %>
             </div>
             <% end %>
-            <% end %><!--  <%#= current_body(@groupbuy).try(:html_safe)  %> -->
+            <% end %>
+            <!--  <%#= current_body(@groupbuy).try(:html_safe)  %> -->
 
+            <textarea data-adaptheight rows="3" cols="40" placeholder="Your input" style="padding: 16px; line-height: 1.5; color:#000000;backgroud-color:#ffffff" readonly="readonly">
 
-            <textarea data-adaptheight rows="3" cols="40" placeholder="Your input"
-            style="padding: 16px; line-height: 1.5; color:#000000;backgroud-color:#ffffff" readonly="readonly">
+              <%=raw current_body(@groupbuy).gsub(/width/,'widthh').gsub(/height/,'heightt')  %>
+            </textarea>
+          </td>
+        </tr>
+      </table>
 
-            <%=raw current_body(@groupbuy).gsub(/width/,'widthh').gsub(/height/,'heightt')  %>
-          </textarea>
-        </td>
-      </tr>
-    </table>
+      <% if @groupbuy.tag == 'groupbuy' %>
+      <%= render partial: 'groupbuys/progress_bar', locals: {groupbuy: @groupbuy} %>
+      <% end %>
 
-    <% if @groupbuy.tag == 'groupbuy' %>
-    <%= render partial: 'groupbuys/progress_bar', locals: {groupbuy: @groupbuy} %>
-    <% end %>
-
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="small-12 columns">
-    <% if current_user == @groupbuy.user || current_user.try(:role) == '1' %>
-    <%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_groupbuy_path(@groupbuy, tag: params[:tag]), class:"tiny button radius" %>
-    <%= link_to '<i class="fa fa-times"></i>'.html_safe + ' ' + t(:delete), @groupbuy,method: :delete,
+  <div class="row">
+    <div class="small-12 columns">
+      <% if current_user == @groupbuy.user || current_user.try(:role) == '1' %>
+      <%= link_to '<i class="fa fa-pencil"></i>'.html_safe + ' ' + t(:edit), edit_groupbuy_path(@groupbuy, tag: params[:tag]), class:"tiny button radius" %>
+      <%= link_to '<i class="fa fa-times"></i>'.html_safe + ' ' + t(:delete), @groupbuy,method: :delete,
     class:"tiny button alert radius",
       data: {confirm: '?'} %>
       <% end %>
@@ -123,21 +122,34 @@
   <div class="row">
     <div class="small-12 columns">
       <ul class="tabs" data-tab role="tablist">
-        <li class="tab-title active"><a href="#participants"><i class="fa fa-cart-plus"></i><%=t(:buys)%></a></li>
-        <li class="tab-title"><a href="#comments"><i class="fa fa-comments"></i><%=t(:comments)%></a></li>
+        <li class="tab-title active">
+          <a href="#participants">
+            <i class="fa fa-cart-plus"></i><%=t(:buys)%></a>
+        </li>
+        <li class="tab-title">
+          <a href="#comments">
+            <i class="fa fa-comments"></i><%=t(:comments)%></a>
+        </li>
       </ul>
       <div class="tabs-content panel">
         <div class="content active" id="participants" data-url='<%=groupbuy_participants_path(@groupbuy)%>'>
           <%= render 'participants/form', :locals=>{@parent=>@parent,@participant=>@participant} if current_user && @groupbuy.status > -1 %>
           <%= render @participants %>
         </div>
-        <div class="content" id="comments"  data-url='<%=groupbuy_comments_path(@groupbuy)%>'>
+        <div class="content" id="comments" data-url='<%=groupbuy_comments_path(@groupbuy)%>'>
           <%=render 'comments/form',    :locals=>{@parent=>@parent,@comment=>@comment} if current_user%>
           <div class="comments-list">
             <%= render @comments %>
           </div>
           <% if @active %>
-          <a style="width:100%" href="javascript:void(0);" class="more-comments tiny expanded button" data-parent="<%= params[:controller].gsub(/\w$/, '') %>" data-count="<%= @groupbuy.comments.count %>" data-id="<%= @groupbuy.id %>" data-url="<%= groupbuys_more_comments_path %>"><%= t(:more) %></a>
+          <a
+            style="width:100%"
+            href="javascript:void(0);"
+            class="more-comments tiny expanded button"
+            data-parent="<%= params[:controller].gsub(/\w$/, '') %>"
+            data-count="<%= @groupbuy.comments.count %>"
+            data-id="<%= @groupbuy.id %>"
+            data-url="<%= groupbuys_more_comments_path %>"><%= t(:more) %></a>
           <% end %>
         </div>
       </div>
@@ -150,79 +162,75 @@
 
   <!-- ############参加团购必须有地址############ -->
   <script>
-    $('.participant-submit').on('click', function(){
-      if($('.address-detail').length == 0) {
+    $('.participant-submit').on('click', function () {
+      if ($('.address-detail').length == 0) {
         alert('<%= t(:enter_address) %>');
         return false;
       }
     });
   </script>
 
-
   <script>
-  //---------------支付成功则给出提示--------------------//
-  <% if params[:error_message] == '' %>
-  var msg = '<%= t(:pay_success) %>';
-  alert(msg);
-  <% end %>
-
-  //--------------从支付完毕跳转回来后弹窗提示支付成功---------//
-  <% if @alert %>
-  var total = '<%= @total %>';
-  alert('您已成功支付¥' + total);
-  <% end %>
-
-
-  //---------------未注册时点击团购按钮提示注册--------------------//
-
-  $('.participant-button').on('click', function(e){
-    var info = $(this).data('info');
-    <% if current_user.nil? %>
-    e.preventDefault;
-    alert(info);
-    var return_url = encodeURIComponent(location.href);
-    location.href = '/register?return_url=' + return_url;
+    //---------------支付成功则给出提示--------------------//
+    <% if params[:error_message] == '' %>
+    var msg = '<%= t(:pay_success) %>';
+    alert(msg);
     <% end %>
-  });
-</script>
 
+    //--------------从支付完毕跳转回来后弹窗提示支付成功---------//
+    <% if @alert %>
+    var total = '<%= @total %>';
+    alert('您已成功支付¥' + total);
+    <% end %>
 
+    //---------------未注册时点击团购按钮提示注册--------------------//
 
-<!--分享-->
-<script>
-  console.log(location.href);
-  wx.config({
-    debug: false,  //开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-    appId: "<%= @appId %>", // 必填，公众号的唯一标识
-    timestamp: "<%= @timestamp %>", // 必填，生成签名的时间戳
-    nonceStr: "<%= @noncestr %>", // 必填，生成签名的随机串
-    signature: "<%= @sign %>",// 必填，签名，见附录1
-    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-  });
-  wx.ready(function(){
-    var url = location.href;
-    wx.onMenuShareTimeline({
-    title: "<%= @title %>", // 分享标题
-    link: url, // 分享链接
-    imgUrl: "<%= @img_url %>", // 分享图标
-    success: function () {
-        // 用户确认分享后执行的回调函数
-
-      },
-      cancel: function () {
-        // 用户取消分享后执行的回调函数
-      }
+    $('.participant-button').on('click', function (e) {
+      var info = $(this).data('info');
+      <% if current_user.nil? %>
+      e.preventDefault;
+      alert(info);
+      var return_url = encodeURIComponent(location.href);
+      location.href = '/register?return_url=' + return_url;
+      <% end %>
     });
+  </script>
 
-    wx.onMenuShareAppMessage({
+  <!--分享-->
+  <script>
+    console.log(location.href);
+    wx.config({
+      debug: false, //开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+      appId: "<%= @appId %>", // 必填，公众号的唯一标识
+      timestamp: "<%= @timestamp %>", // 必填，生成签名的时间戳
+      nonceStr: "<%= @noncestr %>", // 必填，生成签名的随机串
+      signature: "<%= @sign %>", // 必填，签名，见附录1
+      jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+    wx.ready(function () {
+      var url = location.href;
+      wx.onMenuShareTimeline({
+        title: "<%= @title %>", // 分享标题
+        link: url, // 分享链接
+        imgUrl: "<%= @img_url %>", // 分享图标
+        success: function () {
+          // 用户确认分享后执行的回调函数
 
-      title: "<%= @title %>", // 分享标题
-      desc: "<%= @desc %>", // 分享描述
-      link: url, // 分享链接
-      imgUrl: "<%= @img_url %>", // 分享图标
-      type: 'link', // 分享类型,music、video或link，不填默认为link
-      dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-      success: function () {
+        },
+        cancel: function () {
+          // 用户取消分享后执行的回调函数
+        }
+      });
+
+      wx.onMenuShareAppMessage({
+
+        title: "<%= @title %>", // 分享标题
+        desc: "<%= @desc %>", // 分享描述
+        link: url, // 分享链接
+        imgUrl: "<%= @img_url %>", // 分享图标
+        type: 'link', // 分享类型,music、video或link，不填默认为link
+        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+        success: function () {
           // 用户确认分享后执行的回调函数
         },
         cancel: function () {
@@ -231,62 +239,49 @@
 
       });
 
-  });
+    });
+  </script>
 
-</script>
-
-<script>
-  (function() {
-    function adjustHeight(textareaElement, minHeight) {
-        // compute the height difference which is caused by border and outline
-        // 计算因边框和轮廓产生的高度差异
+  <script>
+    (function () {
+      function adjustHeight(textareaElement, minHeight) {
+        // compute the height difference which is caused by border and outline 计算因边框和轮廓产生的高度差异
         var outerHeight = parseInt(window.getComputedStyle(el).height, 10);
         var diff = outerHeight - el.clientHeight;
 
-        // set the height to 0 in case of it has to be shrinked
-        // 设置高度为0以防需要收缩（高度）
+        // set the height to 0 in case of it has to be shrinked 设置高度为0以防需要收缩（高度）
         el.style.height = 0;
 
-        // set the correct height
-        // el.scrollHeight is the full height of the content, not just the visible part
-        // 设置正确的高度
-        // el.scrollHeight 是文本内容的全部高度，而不仅仅是可见部分的。
+        // set the correct height el.scrollHeight is the full height of the content, not just the visible part 设置正确的高度 el.scrollHeight 是文本内容的全部高度，而不仅仅是可见部分的。
         el.style.height = Math.max(minHeight, el.scrollHeight + diff) + 'px';
       }
 
-    // we use the "data-adaptheight" attribute as a marker
-    // 我们使用"data-adaptheight"属性作为一个标记
-    var textAreas = document.querySelectorAll('textarea[data-adaptheight]');
+      // we use the "data-adaptheight" attribute as a marker 我们使用"data-adaptheight"属性作为一个标记
+      var textAreas = document.querySelectorAll('textarea[data-adaptheight]');
 
-    // iterate through all the textareas on the page
-    // 迭代本页所有的文本域
-    for (var i = 0, l = textAreas.length; i < l; i++) {
-      var el = textAreas[i];
+      // iterate through all the textareas on the page 迭代本页所有的文本域
+      for (var i = 0, l = textAreas.length; i < l; i++) {
+        var el = textAreas[i];
 
-        // we need box-sizing: border-box, if the textarea has padding
-        // 如果文本域有边距，我们需要设置box-sizing: border-box
+        // we need box-sizing: border-box, if the textarea has padding 如果文本域有边距，我们需要设置box-sizing: border-box
         el.style.boxSizing = el.style.mozBoxSizing = 'border-box';
 
-        // we don't need any scrollbars, do we? :)
-        // 我们不需要滚动条，不是么？ :)
+        // we don't need any scrollbars, do we? :) 我们不需要滚动条，不是么？ :)
         el.style.overflowY = 'hidden';
 
-        // the minimum height initiated through the "rows" attribute
-        // 通过"rows"属性初始化的最小高度
+        // the minimum height initiated through the "rows" attribute 通过"rows"属性初始化的最小高度
         var minHeight = el.scrollHeight;
 
-        el.addEventListener('input', function() {
+        el.addEventListener('input', function () {
           adjustHeight(el, minHeight);
         });
 
-        // we have to readjust when window size changes (e.g. orientation change)
-        // 当窗口大小改变时，我们需要重新调整高度（例如方向变化）
-        window.addEventListener('resize', function() {
+        // we have to readjust when window size changes (e.g. orientation change) 当窗口大小改变时，我们需要重新调整高度（例如方向变化）
+        window.addEventListener('resize', function () {
           adjustHeight(el, minHeight);
         });
 
-        // we adjust height to the initial content
-        // 我们调整初始内容的高度
+        // we adjust height to the initial content 我们调整初始内容的高度
         adjustHeight(el, minHeight);
       }
     }());
