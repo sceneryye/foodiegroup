@@ -9,7 +9,7 @@ en:
     - Fri
     - Sat
     abbr_month_names:
-    - 
+    -
     - Jan
     - Feb
     - Mar
@@ -35,7 +35,7 @@ en:
       long: "%B %d, %Y"
       short: "%b %d"
     month_names:
-    - 
+    -
     - January
     - February
     - March
@@ -139,7 +139,7 @@ en:
   helpers:
     select:
       prompt: Please select
-    submit: 
+    submit:
       create: Submit
       submit: Submit
       update: Submit
@@ -216,7 +216,7 @@ en:
   search: Search
   event: Votes
   topic: Topics
-  user_center: User Center  
+  user_center: User Center
   before: before.
   more: More
   new_comment: New Comment
@@ -427,4 +427,5 @@ en:
   ordered: Ordered
   remainder: Remainder
   deal: Hot Deals
-
+  single_unit: Single Unit
+  set_ratio: Set / Unit

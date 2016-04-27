@@ -51,17 +51,17 @@
         </tr>
         <tr>
           <th><%=t(:market_price)%></th>
-          <td colspan="2">￥<%=@groupbuy.market_price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
+          <td colspan="2">￥<%=@groupbuy.market_price / @groupbuy.set_ratio%>/<%=translate_of(@groupbuy.single_unit)%></td>
         </tr>
 
         <% if @groupbuy.tag == 'deal' %>
         <tr>
           <% if @groupbuy.end_time > Time.now %>
           <th class="groupbuy-price-show"><%=t(:price)%></th>
-          <td class="groupbuy-price-show" colspan="2">￥<%=@groupbuy.groupbuy_price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
+          <td class="groupbuy-price-show" colspan="2">￥<%= @groupbuy.groupbuy_price / @groupbuy.set_ratio %>/<%=translate_of(@groupbuy.single_unit)%></td>
           <% else %>
           <th class="groupbuy-price-show"><%=t(:price)%></th>
-          <td class="groupbuy-price-show" colspan="2">￥<%=@groupbuy.price%>/<%=translate_of(@groupbuy.goods_unit)%></td>
+          <td class="groupbuy-price-show" colspan="2">￥<%=@groupbuy.price / @groupbuy.set_ratio %>/<%=translate_of(@groupbuy.single_unit)%></td>
           <% end %>
         </tr>
         <% end %>

@@ -98,6 +98,29 @@
   </div>
 
   <div class="small-3 columns">
+    <span class="single-unit postfix">
+      <%= t(:single_unit) %>
+    </span>
+  </div>
+  <div class="small-3 columns">
+    <span class="single-unit postfix">
+      <% eg = session[:locale] == 'en' ? 'eg. Kg' : '例如：千克' %>
+      <%= f.text_field :single_unit, placeholder: eg %>
+    </span>
+  </div>
+
+  <div class="small-3 columns">
+    <span class="set-ratio postfix">
+      <%= t(:set_ratio) %>
+    </span>
+  </div>
+  <div class="small-3 columns">
+    <span class="set-ratio postfix">
+      <%= f.text_field :set_ratio %>
+    </span>
+  </div>
+
+  <div class="small-3 columns">
     <span class="market_price postfix">
       <%= t(:goods_minimal) %>
     </span>
@@ -148,10 +171,10 @@
       <%= f.text_field :weight %>
     </span>
   </div>
-  <div class="small-3 columns">
+  <div class="small-4 columns">
     <span class="postfix"><%= t(:logistics) %></span>
   </div>
-  <div class="small-6 columns">
+  <div class="small-5 columns">
     <span class="postfix">
       <%=f.select :logistic_id,options_from_collection_for_select(current_user.logistics.all,:id,:name,@groupbuy.logistic_id), {:include_blank=>"--包邮--"}, 'data-url' => acquire_logistic_details_path %>
 
@@ -183,6 +206,3 @@
 </form>
 </div>
 </div>
-
-
-

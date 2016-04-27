@@ -55,13 +55,13 @@ zh:
 
   time:
     formats:
-      default: "%Y年%b%d日 %H:%M"  
+      default: "%Y年%b%d日 %H:%M"
       short: "%b%d日 %H:%M"
       long: "%Y年%b%d日 %A %H:%M:%S"
       normal: "%Y年%b%d日"
     am: "上午"
     pm: "下午"
-  
+
   datetime:
     distance_in_words:
       half_a_minute: "半分钟"
@@ -535,4 +535,5 @@ zh:
   ordered: 已预订
   remainder: 剩余
   deal: 热门团购
-
+  single_unit: 单位
+  set_ratio: 每组数量

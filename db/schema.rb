@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160425050747) do
+ActiveRecord::Schema.define(version: 20160427091736) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255, null: false
@@ -122,8 +122,8 @@ ActiveRecord::Schema.define(version: 20160425050747) do
     t.decimal  "weight",                          precision: 10, scale: 2
     t.integer  "logistic_id",        limit: 4
     t.integer  "status",             limit: 1,                             default: 1
-    t.datetime "start_time",                                                              null: false
-    t.datetime "end_time",                                                                null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.integer  "user_id",            limit: 4
     t.integer  "recommend",          limit: 4,                             default: 0
     t.string   "pic_url",            limit: 500,                           default: ""
@@ -149,6 +149,8 @@ ActiveRecord::Schema.define(version: 20160425050747) do
     t.integer  "tag",                limit: 2
     t.integer  "target",             limit: 8
     t.string   "origin",             limit: 20
+    t.integer  "set_ratio",          limit: 8
+    t.string   "single_unit",        limit: 20
   end
 
   add_index "groupbuys", ["user_id"], name: "index_groupbuys_on_user_id", using: :btree
