@@ -62,7 +62,7 @@
           <th class="groupbuy-price-show"><%=t(:unit_price)%></th>
           <td class="groupbuy-price-show" colspan="2">￥<%= @groupbuy.groupbuy_price / (@groupbuy.set_ratio || 1) %>/<%=translate_of(@groupbuy.single_unit)%></td>
         <% else %>
-          <th class="groupbuy-price-show"><%=t(:price)%></th>
+          <th class="groupbuy-price-show"><%=t(:unit_price)%></th>
           <td class="groupbuy-price-show" colspan="2">￥<%=@groupbuy.price / (@groupbuy.set_ratio || 1) %>/<%=translate_of(@groupbuy.single_unit)%></td>
           <% end %>
         </tr>
