@@ -12,7 +12,7 @@ class GroupbuysController < ApplicationController
       @groupbuys = Groupbuy.online.includes(:user).where('tag = ? and end_time > ?', 0, Time.zone.now)
       @products = Groupbuy.online.includes(:user).where('tag = ? and end_time <= ?', 0, Time.zone.now)
     elsif params[:tag] == 'groupbuy'
-      @real_groupbuys = Groupbuy.online.includes(:user).where(tag: 1)
+      @real_groupbuys = Groupbuy.online_groupbuy.includes(:user).where(tag: 1)
     end
 
     # 微信share接口配置

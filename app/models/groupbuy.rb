@@ -36,6 +36,7 @@ class Groupbuy < ActiveRecord::Base
 	end
 
 	scope :online, -> {where('online = ? and start_time < ?', true, Time.now).order('recommend DESC, created_at DESC')}
+	scope :online_groupbuy, -> {where('online = ?', true).order('recommend DESC, created_at DESC')}
 	scope :offline, -> {where(online: false).order('created_at DESC')}
 	default_scope {order('recommend DESC, created_at DESC')}
 
