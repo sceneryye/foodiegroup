@@ -10,8 +10,6 @@ class ApplicationController < ActionController::Base
   before_action :set_locale,  except: :wechat_notify_url
   before_action :force_sign_in
 
-  
-
 
   private
 

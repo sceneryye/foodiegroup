@@ -15,8 +15,8 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       login(user)
       redirect_to root_url, notice: '登录成功'
-    else        
-      flash[:error] = "账户名或密码错误"      
+    else
+      flash[:error] = "账户名或密码错误"
       redirect_to login_url
     end
   end
@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
     session.delete(:return_url)
     code = params[:code]
     now = Time.zone.now.to_i
-    
+
     data = get_auth_access_token code
     access_token = data["access_token"]
     openid = data["openid"]
@@ -59,7 +59,7 @@ class SessionsController < ApplicationController
       end
       login user
       return redirect_to return_url || root_path
-      
+
     #elsif return_url.split('?').first.in? ['http://foodie.trade-v.com/register', 'http://foodie.trade-v.com/login']
      # data = get_user_info(openid, access_token)
       #session[:openid] = data["openid"]
@@ -80,23 +80,33 @@ class SessionsController < ApplicationController
       Rails.logger.info "---------------data => #{data}"
       Rails.logger.info "---------------nickname => #{user.try(:nickname)}"
       Rails.logger.info "---------------user_id => #{user.try(:id)}"
+      Rails.logger.info "---------------Encoding => #{data['nickanme'].encoding}"
       if user && openid.present? && (user.nickname.nil? || user.avatar.nil?)
-        user.update_columns nickname: data['nickname'], avatar: data['headimgurl'], username: data['nickname']
+        begin
+          user.update_columns nickname: data['nickname'], avatar: data['headimgurl'], username: data['nickname']
+        rescue
+          user.update_columns nickname: 'Unknown', avatar: data['headimgurl'], username: 'Unknown'
+        end
         Rails.logger.info "---------------nickname_after_update => #{user.try :nickname}"
         Rails.logger.info "---------------user_id_after_update => #{user.try :id}"
         login user
         return redirect_to return_url || root_path
+
       else
         new_user = User.new weixin_openid: data["openid"], avatar: data["headimgurl"], nickname: data["nickname"], username: data["nickname"], password: data["openid"]
-        if new_user.save
-          login new_user
-          return redirect_to return_url || root_path
-        else
-          return redirect_to root_path(errmsg: 'Failed to create new user.')
+        begin
+          new_user.save
+        rescue
+          new_user = User.new weixin_openid: data["openid"], avatar: data["headimgurl"], nickname: 'Unknown', username: 'Unknown', password: data["openid"]
+          new_user.save
         end
+        login new_user
+        return redirect_to return_url || root_path
       end
+
     end
   end
+
 
   private
 
