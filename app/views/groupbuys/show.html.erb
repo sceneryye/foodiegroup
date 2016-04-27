@@ -66,6 +66,11 @@
           <td class="groupbuy-price-show" colspan="2">￥<%= (@groupbuy.price / (@groupbuy.set_ratio || 1)).round(2) %>/<%=translate_of(@groupbuy.single_unit)%></td>
           <% end %>
         </tr>
+        <% elsif @groupbuy.tag == 'groupbuy' %>
+        <tr>
+          <th class="groupbuy-price-show"><%=t(:unit_price)%></th>
+          <td class="groupbuy-price-show" colspan="2">￥<%= (@groupbuy.groupbuy_price / (@groupbuy.set_ratio || 1)).round(2) %>/<%=translate_of(@groupbuy.single_unit)%></td>
+          <tr>
         <% end %>
 
         <tr>
