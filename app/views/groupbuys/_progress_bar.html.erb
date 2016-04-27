@@ -1,6 +1,9 @@
 <div class="row progress-bar-picture">
   <div class="columns small-12">
-    
+    <div class="groupbuy-target">
+      <%= t(:target) %> : <%= translate_of(groupbuy.goods_unit, groupbuy.target.to_i).html_safe %>
+    </div>
+    <div class="clear"></div>
     <div class="progress-bar" data-ratio="<%= groupbuy.target_completed.first %>">
       <div class="back"></div>
       <div class="front"></div>

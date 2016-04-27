@@ -213,6 +213,9 @@ $(document).ready(function(){
 //-------------groupbuy进度条------------------//
 $(document).ready(function(){
   var len_ratio = parseFloat($('.progress-bar').data('ratio'));
+  if(len_ratio > 1) {
+    len_ratio = 1;
+  }
   console.log(len_ratio);
   var status_position = 0;
   if(len_ratio < 0.1) {
@@ -233,17 +236,3 @@ $(document).ready(function(){
     $('.front').css('background-color', 'green');
   }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
