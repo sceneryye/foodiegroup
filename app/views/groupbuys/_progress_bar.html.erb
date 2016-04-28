@@ -4,7 +4,7 @@
       <%= t(:target) %> : <%= translate_of(groupbuy.goods_unit, groupbuy.target.to_i).html_safe %>
     </div>
     <div class="clear"></div>
-    <div class="progress-bar" data-ratio="<%= groupbuy.target_completed.first %>">
+    <div class="progress-bar" data-ratio="<%= (groupbuy.target_completed.first.to_f / 100).round(2) %>">
       <div class="back"></div>
       <div class="front"></div>
     </div>

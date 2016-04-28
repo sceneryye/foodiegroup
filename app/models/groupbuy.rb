@@ -32,7 +32,7 @@ class Groupbuy < ActiveRecord::Base
 	def target_completed
 		return nil if self.deal?
 		total_quantity =	Participant.where(groupbuy_id: self.id, status_pay: 1).sum(:quantity)
-		[(total_quantity.to_f / self.target.to_f).to_s, target - total_quantity]
+		[((total_quantity.to_f / self.target.to_f).round(2) * 100).to_s, target - total_quantity]
 	end
 
 
