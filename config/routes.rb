@@ -53,6 +53,7 @@ RailsOnForum::Application.routes.draw do
 
     member do
        get :edit_user
+       get :send_hongbao
        post :update_user
     end      
   end

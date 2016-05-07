@@ -15,23 +15,6 @@
   </div>
 <div>
 
-<%=form_for :member,:url=>downorder_admins_path(groupbuy_id:params[:groupbuy_id]),:method=>:post do |f|%>
-
-    <span>
-    <%=f.select :status_pay,{"已发放"=>"1","未发放"=>"0"},{default:1},:style=>"width:120px;margin-left:100px" %>
-
-
-       <ul class="clearfix unstyled" style="list-style-type:none;margin-left:120px" >
-          <li class="checkbox-verticle" style="float:left;font-size:10px"><%= check_box_tag "fields[]","付款状态",true%>付款状态</li>
-          <li class="checkbox-verticle" style="float:left;font-size:10px"><%= check_box_tag "fields[]","发货状态",true%>发货状态</li>
-          <li class="checkbox-verticle" style="float:left;font-size:10px"><%= check_box_tag "fields[]","报名时间",true%>报名时间</li>
-
-        </ul>
-</span>
-        <%= f.submit '导出', :style=>"width:30px;background-color:blue;margin-left:120px"%>
-
-       <%end%>
-
 
 </div>
   <table>
@@ -39,24 +22,31 @@
       <th>姓名</th>
       <th>联系电话</th>
       <th>佣金</th>
+      <th>订单号</th>
       <th>付款状态</th>
       <th>发货状态</th>
       <th>订货时间</th>
-      <th>发放时间</th>
       <th>操作</th>
     </tr>
-    <% @hongbaos.each do |p| %>
+    <% @hongbaos.each do |hongbao| %>
     <tr>
-      <td><%= p.user.name %></td>
-      <td><%= p.user.mobile %></td>
-      <td><%= p.amount %></td>
-      <td><%= is_paid p.participant %></td>
-      <td id="participant-<%= p.participent.id %>" ><%= is_shiped p.participant %></td>
-      <td><%= p.created_at.strftime('%F %T') %></td>
-      <td><%= p.upated_at.strftime('%F %T')  if p.status==1%></td>
-      <td><%=link_to '发红包','#' %>
+      <td><%= hongbao.user.name %></td>
+      <td><%= hongbao.user.mobile %></td>
+      <td><%= hongbao.amount %></td>
+      <td><%= hongbao.participant.id%></td>
+      <td><%= is_paid hongbao.participant %></td>
+      <td id="participant-<%= p.participant.id %>" ><%= is_shiped hongbao.participant %></td>
+      <td><%= hongbao.created_at.strftime('%F %T') %></td>
+      <td><td class="status">
+          <%if hongbao.status==0%>
+          <%=link_to '发送红包', send_bonus_admin_path(hongbao.id),class:'button'%>
+            <div class='sent'>
+            </div>
+          <%else%>          
+            hongbao.upated_at.strftime('%F %T')
+          <%end%>
     </tr>
-    <% end %>
+    <% end if @honbaos%>
   </table>
-  <%= will_paginate @participants %>
+  <%= will_paginate @hongbaos %>
 </div>
