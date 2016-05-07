@@ -28,22 +28,27 @@
   <span class="text">统计：</span>
   <span class="count">
     <%= link_to users_list_admins_path do %>
-    会员数：<%= User.count %>
+    会员列表
     <% end %>
   </span>
   <span class="count">
     <%= link_to groupbuys_list_admins_path do %>
-    团购数：<%= Groupbuy.count %>
+    团购
+    <% end %>
+  </span>
+  <span class="count">
+    <%= link_to hongbaos_list_admins_path do %>
+    红包
     <% end %>
   </span>
   <span class="count">
     <%= link_to tags_list_admins_path do %>
-    标签数：<%= Tag.count %>
+    标签
     <% end %>
   </span>
   <span class="count">
     <%= link_to topics_list_admins_path do %>
-    话题数：<%= Topic.count %>
+    话题
     <% end %>
   </span>
   

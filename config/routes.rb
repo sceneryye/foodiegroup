@@ -48,6 +48,7 @@ RailsOnForum::Application.routes.draw do
       get :participants_list
       get :tags_list
       post :set_online_offline
+      get :hongbaos_list
     end
 
     member do

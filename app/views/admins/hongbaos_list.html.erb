@@ -1,7 +1,4 @@
 <div class="participants_list">
-  <div class="title">
-    <h4><%= @groupbuy.zh_title.present? ? @groupbuy.zh_title : @groupbuy.en_title %></h4>
-  </div>
 
   <div class="navpath">
     <span>
@@ -13,7 +10,7 @@
     </span>
     <span class="slash">/</span>
     <span class="thirdpath">
-      红包列表
+      红包列表(红包数：<%= Hongbao.count %>)
     </span>
   </div>
 <div>
