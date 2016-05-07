@@ -32,14 +32,14 @@
       </div>
       <div class="weui_cell_ft"></div>
       <% end %>
-
+<!-- 
       <%= link_to my_wishlists_path,class: 'weui_cell' do %>
       <div class="weui_cell_bd weui_cell_primary">
         <div class="type"><%= t(:my_wishlist) %></div>
       </div>
       <div class="weui_cell_ft"></div>
       <% end %>
-      
+       -->
       <% if is_admin? %>
         <%= link_to my_votings_path,class: 'weui_cell' do %>
         <div class="weui_cell_bd weui_cell_primary">
@@ -100,19 +100,19 @@
       <% end %>
 
       <% if is_admin? %>
-      <%= link_to new_vote_product_path, class: 'weui_cell' do %>
-      <div class="weui_cell_bd weui_cell_primary">
-        <div class="type"><i class="fa fa-check-square-o"></i><%= t(:create_vote_product) %></div>
-      </div>
-      <div class="weui_cell_ft"></div>
-      <% end %>
+       <!--  <%= link_to new_vote_product_path, class: 'weui_cell' do %>
+        <div class="weui_cell_bd weui_cell_primary">
+          <div class="type"><i class="fa fa-check-square-o"></i><%= t(:create_vote_product) %></div>
+        </div>
+        <div class="weui_cell_ft"></div>
+        <% end %>
 
-      <%= link_to wishlists_management_path,class: 'weui_cell' do %>
-      <div class="weui_cell_bd weui_cell_primary">
-        <div class="type"><i class="fa fa-wrench"></i><%= t(:wishlists_management) %></div>
-      </div>
-      <div class="weui_cell_ft"></div>
-      <% end %>
+        <%= link_to wishlists_management_path,class: 'weui_cell' do %>
+        <div class="weui_cell_bd weui_cell_primary">
+          <div class="type"><i class="fa fa-wrench"></i><%= t(:wishlists_management) %></div>
+        </div>
+        <div class="weui_cell_ft"></div>
+        <% end %> -->
       <% end %>
     </div>
 

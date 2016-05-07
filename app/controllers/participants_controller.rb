@@ -83,7 +83,7 @@ class ParticipantsController < ApplicationController
         @hongbao = Hongbao.new do |hongbao|
           hongbao.user_id = session[:kol].to_i
           hongbao.participant_id = @participant.id
-          hongbao.amount = @participant.amount*0.1
+          hongbao.amount = @participant.groupbuy.commision.to_f
         end
         @hongbao.save!
       end
