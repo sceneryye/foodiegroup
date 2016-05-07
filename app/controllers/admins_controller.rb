@@ -5,14 +5,9 @@ class AdminsController < ApplicationController
    redirect_to users_list_admins_path
   end
 
-  def send_bonus
-    if params[:order_id].present?
-      share = Ecstore::WeihuoShare.where(:order_id => params[:order_id]).first
-      if share.status != 0
-        return render :text => {:status => share.status}.to_json
-      end
-    end
-    supplier = Ecstore::Supplier.where(:name => '贸威').first
+  def send_hongbao
+    id = params[:id]
+    hongbao = Hongbao.find(id)
 
     arr = ('0'..'9').to_a + ('a'..'z').to_a
     nonce_str = ''
@@ -20,16 +15,17 @@ class AdminsController < ApplicationController
       nonce_str += arr[rand(36)].upcase
     end
 
-    re_openid = params[:re_openid]
-    total_amount = params[:total_amount].present? ? params[:total_amount].to_i * 100 : ''
-    weixin_appid = supplier.weixin_appid
-    weixin_appsecret = supplier.weixin_appsecret
-    key = Ecstore::Supplier.where(:name => '贸威').first.partner_key
-    mch_id = supplier.mch_id
+    re_openid = hongbao.participant.user.weixin_openid
+    total_amount = (hongbao.amount*100).to_i
+    weixin_appid = WX_APP_ID
+    weixin_appsecret = WX_APP_SECRET
+    mch_id = WX_MCH_ID
+    key = WX_API_KEY
+
     mch_billno = mch_id + Time.zone.now.strftime('%F').split('-').join + rand(10000000000).to_s.rjust(10, '0')
 
     parameter = {
-      :nonce_str => nonce_str, :mch_billno => mch_billno, :mch_id => mch_id, :wxappid => weixin_appid, :send_name =>'尾货良品老板',
+      :nonce_str => nonce_str, :mch_billno => mch_billno, :mch_id => mch_id, :wxappid => weixin_appid, :send_name =>'GroupMall',
       :re_openid => re_openid, :total_amount => total_amount, :total_num => 1, :wishing => params[:wishing],
       :client_ip => '182.254.138.119', :act_name => params[:act_name], :remark => params[:remark]
     }
@@ -76,12 +72,7 @@ class AdminsController < ApplicationController
 
     http.start { http.request_post(uri.path, params_xml) { |res| res_data = res.body } }
     @res_data_hash = Hash.from_xml res_data
-    if params[:from] == 'weihuo_shares'
-      return render :text => @res_data_hash['xml'].to_json
-    elsif params[:from] == 'auto_send_bonus'
-      return render :text => @res_data_hash['xml']
-    end
-    render 'send_bonus'
+    render json: {data: @res_data_hash}
   end
 
 
