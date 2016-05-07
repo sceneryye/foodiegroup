@@ -13,7 +13,7 @@
     </span>
     <span class="slash">/</span>
     <span class="thirdpath">
-      报名详情
+      红包列表
     </span>
   </div>
 <div>
@@ -21,7 +21,7 @@
 <%=form_for :member,:url=>downorder_admins_path(groupbuy_id:params[:groupbuy_id]),:method=>:post do |f|%>
 
     <span>
-    <%=f.select :status_pay,{"已付款"=>"1","未付款"=>"0"},{default:1},:style=>"width:120px;margin-left:100px" %>
+    <%=f.select :status_pay,{"已发放"=>"1","未发放"=>"0"},{default:1},:style=>"width:120px;margin-left:100px" %>
 
 
        <ul class="clearfix unstyled" style="list-style-type:none;margin-left:120px" >
@@ -41,35 +41,23 @@
     <tr>
       <th>姓名</th>
       <th>联系电话</th>
-      <th>地址</th>
-      <th>数量</th>
-      <th>单价</th>
-      <th>总价</th>
+      <th>佣金</th>
       <th>付款状态</th>
       <th>发货状态</th>
-      <th>报名时间</th>
+      <th>订货时间</th>
+      <th>发放时间</th>
       <th>操作</th>
     </tr>
-    <% @participants.each do |p| %>
+    <% @hongbaos.each do |p| %>
     <tr>
-      <td><%= p.name %></td>
-      <td><%= p.mobile %></td>
-      <td style="width: 25%"><%= p.address %></td>
-      <td><%= p.quantity %><%= @groupbuy.goods_unit %></td>
-      <td><%= @groupbuy.current_price %></td>
-      <td><%= p.total %></td>
-      <td><%= is_paid p %></td>
-      <td id="participant-<%= p.id %>" ><%= is_shiped p %></td>
+      <td><%= p.user.name %></td>
+      <td><%= p.user.mobile %></td>
+      <td><%= p.amount %></td>
+      <td><%= is_paid p.participant %></td>
+      <td id="participant-<%= p.participent.id %>" ><%= is_shiped p.participant %></td>
       <td><%= p.created_at.strftime('%F %T') %></td>
-      <% if p.tracking_number.present? %>
-      <td><%= p.tracking_number %></td>
-      <% else %>
-      <td class="participant-ship-confirm" data-id="<%= p.id %>" data-url="<%= confirm_shiped_participant_path(p.id) %>">
-        <% if p.status_ship == 0 %>
-        <div class="ship-confirm">发货确认</div>
-        <% end %>
-      </td>
-      <% end %>
+      <td><%= p.upated_at.strftime('%F %T')  if p.status==1%></td>
+      <td><%=link_to '发红包','#' %>
     </tr>
     <% end %>
   </table>

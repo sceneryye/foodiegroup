@@ -20,6 +20,10 @@ class AdminsController < ApplicationController
     @users = User.paginate(per_page: 20, page: params[:page]).order(id: :asc)
   end
 
+   def hongbaos_list
+    @hongbaos = Hongbao.paginate(per_page: 20, page: params[:page]).order(id: :asc)
+  end
+
   def groupbuys_list
     @groupbuys = Groupbuy.paginate(per_page: 20, page: params[:page]).order(id: :asc)
   end
