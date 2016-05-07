@@ -1,0 +1,49 @@
+<% provide :title, t(:me) %>
+<div class="my-hongbaos">
+  <div class="total-hongbaos">
+    <% if session[:locale] == 'zh' %>
+    共<%= @hongbaos.count %>个红包
+    <% else %>
+    <%= pluralize @hongbaos.count, 'hongbao' %> total
+    <% end %>
+  </div>
+
+  <% @hongbaos.each do |hongbao| %>
+  <div class="my-hongbao">
+  <div class="rows pic-title">     
+
+      <div class="rows">
+        <div class="columns small-4">
+          <%= t(:hongbao_status) %>
+        </div>
+        <div class="columns small-8 content">
+          <%= hongbao.status_text %>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="rows">
+        <div class="columns small-4">
+          <%= t(:hongbao) %>
+        </div>
+        <div class="columns small-8 content">
+          ￥<%= hongbao.amount %>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+      <div class="rows">
+        <div class="columns small-4">
+          <%= t(:created_at) %>
+        </div>
+        <div class="columns small-8 content">
+          <%= hongbao.created_at.strftime('%F %T') %>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+     
+      <div class="clear"></div>
+    </div>
+  </div>
+  <% end %>
+</div>

@@ -1,6 +1,20 @@
+<%if @my_customs.blank?%>
 <script>
   <% if current_user %>
   var id = "<%= current_user.id %>";
   location.pathname = '/' + id;
   <% end %>
 </script>
+<%end%>
+<div class="weui_cells_title"><%= t(:my_customs) %></div>
+<div class="weui_cells weui_cells_access">
+  <% @my_customs.each do |user| %>
+	  <%= link_to user_path(user), class: 'weui_cell' do %>
+	  <div class="weui_cell_bd weui_cell_primary">
+	    <div class="type"><%= user.name%></div>
+	  </div>
+	  <div class="weui_cell_ft"></div>
+	  <% end %>
+  <% end %>
+</div>
+

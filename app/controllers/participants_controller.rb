@@ -78,6 +78,15 @@ class ParticipantsController < ApplicationController
     @participant.user = current_user
 
     if @participant.save
+      if session[:kol].present?
+        @participant.update_columns(kol_id: session[:kol])
+        @hongbao = Hongbao.new do |hongbao|
+          hongbao.user_id = session[:kol].to_i
+          hongbao.participant_id = @participant.id
+          hongbao.amount = @participant.amount*0.1
+        end
+        @hongbao.save!
+      end
       if params[:as_gift] == '1'
         area = ChinaCity.get(params[:gift_address][:province])
         address = ChinaCity.get(params[:gift_address][:province]) + params[:gift_address][:address]

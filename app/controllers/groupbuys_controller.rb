@@ -8,6 +8,11 @@ class GroupbuysController < ApplicationController
   helper_method :cut_pic
 
   def index
+    if params[:kol].present?
+      session[:kol] = params[:kol]
+      @kol = User.find_by_id(session[:kol])
+      @kol_title = "[#{@kol.name}]"
+    end
     if params[:tag] == 'deal'
       @groupbuys = Groupbuy.online.includes(:user).where('tag = ? and end_time > ?', 0, Time.zone.now)
       @products = Groupbuy.online.includes(:user).where('tag = ? and end_time <= ?', 0, Time.zone.now)
@@ -19,9 +24,9 @@ class GroupbuysController < ApplicationController
     groupbuy = Groupbuy.online.where('end_time > ?', Time.zone.now).first
     @title_pic = groupbuy.present? ? groupbuy.photos.first.try(:image) : '/groupmall_logo.jpg'
     @title = if session[:locale] == 'en'
-               'Hot Deal Recommendation'
+               "Hot Deal Recommendation#{@kol_title}"
              else
-               '热门团购推荐'
+               "热门团购推荐#{@kol_title}"
              end
     @img_url = 'http://www.trade-v.com:5000' + @title_pic.to_s
     @desc = groupbuy.present? ? (current_title groupbuy) : 'GroupMall'

@@ -38,17 +38,22 @@ RailsOnForum::Application.routes.draw do
 
   post 'logistics/acquire_logistic_details', to: 'logistics#acquire_logistic_details', as: :acquire_logistic_details
 
-  namespace :admin do
-    resources :reports
+  resources :admins do
     # post "downorder", :on=>:collection
-    post '/downorder', to: 'reports#downorder'
-    get '/users_list', to: 'reports#users_list'
-    get '/groupbuys_list', to: 'reports#groupbuys_list'
-    get '/topics_list', to: 'reports#topics_list'
-    get '/participants_list', to: 'reports#participants_list'
-    get '/tags_list', to: 'reports#tags_list'
+    collection do    
+      get 'users_list' 
+      post :downorder    
+      get :groupbuys_list
+      get :topics_list
+      get :participants_list
+      get :tags_list
+      post :set_online_offline
+    end
 
-    post '/set_online_offline', to: 'reports#set_online_offline', as: :set_online_offline
+    member do
+       get :edit_user
+       post :update_user
+    end      
   end
 
   resource :votes, only: :create
@@ -89,11 +94,12 @@ RailsOnForum::Application.routes.draw do
   end
   get 'wechat_pay', to: 'participants#wechat_pay', as: :wechat_pay
 
-  resources :users, only: [:create, :update, :destroy] do
-    resources :user_instetests
-  end
+  resources :users
+
   get '/users', to: 'users#index'
 
+  get '/users/:id/my_shop_orders', to: 'users#my_shop_orders', as: :my_shop_orders
+  get '/users/:id/my_hongbaos', to: 'users#my_hongbaos', as: :my_hongbaos
   get '/users/:id/my_groupbuys', to: 'users#my_groupbuys', as: :my_groupbuys
   get '/users/:id/my_events', to: 'users#my_events', as: :my_events
   get '/users/:id/my_topics', to: 'users#my_topics', as: :my_topics

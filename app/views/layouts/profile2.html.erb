@@ -41,12 +41,32 @@
       <% end %>
       
       <% if is_admin? %>
-      <%= link_to my_votings_path,class: 'weui_cell' do %>
-      <div class="weui_cell_bd weui_cell_primary">
-        <div class="type"><%= t(:votings) %></div>
-      </div>
-      <div class="weui_cell_ft"></div>
-      <% end %>
+        <%= link_to my_votings_path,class: 'weui_cell' do %>
+        <div class="weui_cell_bd weui_cell_primary">
+          <div class="type"><%= t(:votings) %></div>
+        </div>
+        <div class="weui_cell_ft"></div>
+        <% end %>
+      <%end%>
+      <% if is_kol? %>
+        <%= link_to groupbuys_path(tag:'deal', kol:current_user.id),class: 'weui_cell' do %>
+        <div class="weui_cell_bd weui_cell_primary">
+          <div class="type"><%= t(:KOL_shop) %></div>
+        </div>
+        <div class="weui_cell_ft"></div>
+        <%end%>
+        <%= link_to my_hongbaos_path,class: 'weui_cell' do %>
+        <div class="weui_cell_bd weui_cell_primary">
+          <div class="type"><%= t(:KOL_hongbaos) %></div>
+        </div>
+        <div class="weui_cell_ft"></div>
+        <%end%>
+        <%= link_to my_shop_orders_path,class: 'weui_cell' do %>
+        <div class="weui_cell_bd weui_cell_primary">
+          <div class="type"><%= t(:KOL_orders) %></div>
+        </div>
+        <div class="weui_cell_ft"></div>
+        <% end %>
 
       
       <% end %>

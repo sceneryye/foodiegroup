@@ -1,0 +1,46 @@
+<div class="users_list">
+  <div class="navpath">
+    <span>
+     <%= link_to "首页", users_list_admins_path %>
+    </span>
+    <span class="slash">/</span>
+    <span class="subpath">
+      用户列表
+    </span>
+  </div>
+
+  <div class="content">
+   <table>
+        <tr class="title">
+          <th>用户ID</th>
+          <th>用户名称</th>
+          <th>用户姓名</th>
+          <th>用户手机</th>
+          <th>用户邮箱</th>
+          <th>用户地区</th>
+          <th>参与活动</th>
+          <th>参与话题</th>
+          <th>角色</th>
+          <th>KOL</th>
+        </tr>
+        <% @users.each_with_index do |user| %>
+        <tr class="body">
+          <td><%= user.id %></td>
+          <td><%= user.nickname %></td>
+          <td><%= user.name %></td>
+          <td><%= user.mobile %></td>
+          <td><%= user.email %></td>
+          <td><%= user.location %></td>
+          <td><%= Participant.where(user_id: user.id).count %></td>
+          <td><%= Topic.where(user_id: user.id).count %></td>
+          <td><%=user.role%></td>
+          <td><%=user.kol%></td>
+          <td><%=link_to '编辑',edit_user_admin_path(user.id)%></td>
+        </tr>
+        <% end %>
+      </table>
+      <div class="paginate">
+        <%= will_paginate @users %>
+      </div>
+  </div>
+</div>

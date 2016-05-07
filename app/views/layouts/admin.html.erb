@@ -20,7 +20,40 @@
 
   <%= javascript_include_tag "#{params[:controller]}", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <div class="title">
+  <h3>后台管理</h3>
+</div>
+
+<div class="counting">
+  <span class="text">统计：</span>
+  <span class="count">
+    <%= link_to users_list_admins_path do %>
+    会员数：<%= User.count %>
+    <% end %>
+  </span>
+  <span class="count">
+    <%= link_to groupbuys_list_admins_path do %>
+    团购数：<%= Groupbuy.count %>
+    <% end %>
+  </span>
+  <span class="count">
+    <%= link_to tags_list_admins_path do %>
+    标签数：<%= Tag.count %>
+    <% end %>
+  </span>
+  <span class="count">
+    <%= link_to topics_list_admins_path do %>
+    话题数：<%= Topic.count %>
+    <% end %>
+  </span>
+  
+  <span class="count">评论数：<%= Comment.count %></span>
+
+</div>
+<div class="content">
+ <%= render 'layouts/flash_messages'%>
   <%= yield %>
+</div>
   <%#= javascript_include_tag "application" 'data-turbolinks-track' => true %>
   
 </body>

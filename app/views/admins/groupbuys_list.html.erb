@@ -1,10 +1,7 @@
 <div class="groupbuys-list">
-  <div class="title">
-    <h3>团购列表</h3>
-  </div>
   <div class="navpath">
     <span>
-      <%= link_to "首页", admin_reports_path %>
+      <%= link_to "首页", users_list_admins_path %>
     </span>
     <span class="slash">/</span>
     <span class="subpath">
@@ -30,7 +27,7 @@
         <td class="groupbuy-title"><%= groupbuy.zh_title.present? ? groupbuy.zh_title[0..10] : groupbuy.en_title[0..10] %></td>
         <td><%= groupbuy.start_time.present? ? groupbuy.start_time.strftime('%F %T') : '' %></td>
         <td><%= groupbuy.end_time.present? ? groupbuy.end_time.strftime('%F %T') : '' %></td>
-        <td><%= link_to Participant.where(groupbuy_id: groupbuy.id).count, admin_participants_list_path(groupbuy_id: groupbuy.id) %></td>
+        <td><%= link_to Participant.where(groupbuy_id: groupbuy.id).count, participants_list_admins_path(groupbuy_id: groupbuy.id) %></td>
         <td><%= Participant.where(groupbuy_id: groupbuy.id, status_pay: 1).count %></td>
         <td><%= groupbuy.name %></td>
         <td><%= groupbuy.price %></td>
@@ -41,7 +38,7 @@
           <span class="edit-title edit" data-id="<%= groupbuy.id %>" data-title="<%= groupbuy.zh_title.present? ? groupbuy.zh_title : groupbuy.en_title %>">编辑</span>
           <%= link_to "删除", groupbuy_path(groupbuy), class: 'delete', method: :delete, remote: true,  data: { confirm:'确定删除?' } %>
           <span class="online">
-            <input type="checkbox" class="set-online" data-id="<%= groupbuy.id %>" id="checkbox-<%= groupbuy.id %>" <%= 'checked' if groupbuy.online  %> data-url="<%= admin_set_online_offline_path %>">
+            <input type="checkbox" class="set-online" data-id="<%= groupbuy.id %>" id="checkbox-<%= groupbuy.id %>" <%= 'checked' if groupbuy.online  %> data-url="<%= set_online_offline_admins_path %>">
             <label for="checkbox-<%= groupbuy.id %>">上架</label>
           </span>
         </td>

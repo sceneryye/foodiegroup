@@ -7,6 +7,16 @@ class UsersController < ApplicationController
   before_action :autheorize_admin!, only: [:votings, :wishlists_management]
   
   def index
+    @my_customs = ShopUsers.where(owner_id:current_user)
+  end
+
+  
+  def my_shop_orders
+    @orders = Participant.includes(:groupbuy).where('kol_id = ? AND groupbuy_id > ?', current_user.id, 0 ).order(created_at: :desc)
+  end
+
+  def my_hongbaos
+    @hongbaos = Hongbao.where(user_id:current_user.id)
   end
 
   def new
@@ -162,51 +172,51 @@ class UsersController < ApplicationController
     if !uploaded_io.blank?
       extension = uploaded_io.original_filename.split('.')
       filename = "#{Time.now.strftime('%Y%m%d%H%M%S')}.#{extension[-1]}"
-     # filepath = "#{PIC_PATH}/teachResources/devices/#{filename}"
-     filepath = "#{PIC_PATH}/avatars/#{filename}"
-     File.open(filepath, 'wb') do |file|
-      file.write(uploaded_io.read)
+       # filepath = "#{PIC_PATH}/teachResources/devices/#{filename}"
+       filepath = "#{PIC_PATH}/avatars/#{filename}"
+       File.open(filepath, 'wb') do |file|
+        file.write(uploaded_io.read)
+      end
+      user_params.merge!(:avatar=>"/avatars/#{filename}")
     end
-    user_params.merge!(:avatar=>"/avatars/#{filename}")
+
+    update_params = user_params
+
+    if update_params.has_key?(:password)
+      update_params.delete([:password, :password_confirmation])
+    end
+
+    if @user.update(update_params)
+      redirect_to profile_url(@user), notice: '个人信息修改成功'
+    else
+      render :edit, layout: "profile"
+    end
   end
 
-  update_params = user_params
-
-  if update_params.has_key?(:password)
-    update_params.delete([:password, :password_confirmation])
+  def destroy
+    logout
+    @user.destroy
+    redirect_to root_url(tag: 'deal')
   end
 
-  if @user.update(update_params)
-    redirect_to profile_url(@user), notice: '个人信息修改成功'
-  else
-    render :edit, layout: "profile"
+  def set_user_mobile
+    user = User.find_by(id: params[:user_id])
+    mobile = params[:mobile]
+    if user.update_column(:mobile, mobile)
+      render json: {msg: 'ok'}
+    else
+      render json: {msg: 'failed'}
+    end
   end
-end
 
-def destroy
-  logout
-  @user.destroy
-  redirect_to root_url(tag: 'deal')
-end
+  private
 
-def set_user_mobile
-  user = User.find_by(id: params[:user_id])
-  mobile = params[:mobile]
-  if user.update_column(:mobile, mobile)
-    render json: {msg: 'ok'}
-  else
-    render json: {msg: 'failed'}
+  def user_params
+    params.require(:user).permit!
   end
-end
 
-private
-
-def user_params
-  params.require(:user).permit!
-end
-
-def select_user
-  @user = User.find_by(id: params[:id])
-end
+  def select_user
+    @user = User.find_by(id: params[:id])
+  end
 
 end

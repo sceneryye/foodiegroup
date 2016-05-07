@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_secure_password
-  validates :weixin_openid, uniqueness: true
+  # validates :weixin_openid, uniqueness: true
 
   has_many :topics,   dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -11,8 +11,9 @@ class User < ActiveRecord::Base
   has_many :user_addresses, dependent: :destroy
   has_many :logistics, dependent: :destroy
   has_and_belongs_to_many :votings
-  has_many :wishlists
-  has_many :downpayments
+  has_many :wishlists, dependent: :destroy
+  has_many :downpayments, dependent: :destroy
+  has_many :shops, dependent: :destroy
   belongs_to :group
 
 
