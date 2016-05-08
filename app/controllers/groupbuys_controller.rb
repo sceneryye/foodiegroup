@@ -11,7 +11,7 @@ class GroupbuysController < ApplicationController
     if params[:kol].present?
       session[:kol] = params[:kol]
       @kol = User.find_by_id(session[:kol])
-      @kol_title = "[#{@kol.name}]"
+      @kol_title = "-#{@kol.name}"
     end
     if params[:tag] == 'deal'
       @groupbuys = Groupbuy.online.includes(:user).where('tag = ? and end_time > ?', 0, Time.zone.now)

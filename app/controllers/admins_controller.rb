@@ -7,7 +7,7 @@ class AdminsController < ApplicationController
 
   def send_hongbao
     id = params[:id]
-    hongbao = Hongbao.find(id)
+    @hongbao = Hongbao.find(id)
 
     arr = ('0'..'9').to_a + ('a'..'z').to_a
     nonce_str = ''
@@ -15,19 +15,19 @@ class AdminsController < ApplicationController
       nonce_str += arr[rand(36)].upcase
     end
 
-    re_openid = hongbao.participant.user.weixin_openid
-    total_amount = (hongbao.amount*100).to_i
-    weixin_appid = WX_APP_ID
-    weixin_appsecret = WX_APP_SECRET
-    mch_id = WX_MCH_ID
-    key = WX_API_KEY
-
-    mch_billno = mch_id + Time.zone.now.strftime('%F').split('-').join + rand(10000000000).to_s.rjust(10, '0')
-
     parameter = {
-      :nonce_str => nonce_str, :mch_billno => mch_billno, :mch_id => mch_id, :wxappid => weixin_appid, :send_name =>'GroupMall',
-      :re_openid => re_openid, :total_amount => total_amount, :total_num => 1, :wishing => params[:wishing],
-      :client_ip => '182.254.138.119', :act_name => params[:act_name], :remark => params[:remark]
+      :nonce_str => nonce_str, 
+      :mch_billno =>  "#{WX_MCH_ID}#{Time.zone.now.strftime('%F').split('-').join}#{rand(10000000000).to_s.rjust(10, '0')}", 
+      :mch_id => WX_MCH_ID, 
+      :wxappid => WX_APP_ID, 
+      :send_name =>'GroupMall',
+      :re_openid => @hongbao.participant.user.weixin_openid, 
+      :total_amount => (@hongbao.amount*100).to_i, 
+      :total_num => 1, 
+      :wishing => 'Gong Xi Fa Cai',
+      :client_ip => '182.254.138.119', 
+      :act_name => "KOL Hongbao",
+      :remark => "OrderID[#{@hongbao.participant.id}]"
     }
 
     stringA = parameter.select{|key, value|value.present?}.sort.map do |arr|
@@ -36,7 +36,7 @@ class AdminsController < ApplicationController
 
     stringA = stringA.join("&")
     #return render :text => stringA
-    @b = string_sing_temp = stringA + "&key=#{key}"
+    @b = string_sing_temp = stringA + "&key=#{WX_API_KEY}"
 
     sign = (Digest::MD5.hexdigest string_sing_temp).upcase
     parameter[:sign] = sign
@@ -53,9 +53,9 @@ class AdminsController < ApplicationController
 
     uri = URI.parse('https://api.mch.weixin.qq.com/mmpaymkttransfers/sendredpack')
 
-    cert = File.read("#{ Rails.root }/lib/maowei_cert/apiclient_cert.pem")
+    cert = File.read("#{ Rails.root }/lib/weixin_cert/apiclient_cert.pem")
 
-    key = File.read("#{ Rails.root }/lib/maowei_cert/apiclient_key.pem")
+    key = File.read("#{ Rails.root }/lib/weixin_cert/apiclient_key.pem")
 
     http = Net::HTTP.new(uri.host, uri.port)
 
@@ -65,14 +65,23 @@ class AdminsController < ApplicationController
 
     http.key = OpenSSL::PKey::RSA.new(key, '商户编号')
 
-    http.ca_file = File.join("#{ Rails.root }/lib/maowei_cert/rootca.pem")
+    http.ca_file = File.join("#{ Rails.root }/lib/weixin_cert/rootca.pem")
 
     http.verify_mode = OpenSSL::SSL::VERIFY_PEER
     res_data = ''
 
     http.start { http.request_post(uri.path, params_xml) { |res| res_data = res.body } }
+    #{}"err_code":"MONEY_LIMIT","err_code_des":"参数错误:只能发放1.00块到200块钱的红包."
+    #
+
     @res_data_hash = Hash.from_xml res_data
-    render json: {data: @res_data_hash}
+    @hongbao.update_attribute :return_message, "#{@hongbao.return_message}|#{@res_data_hash}"
+    if @res_data_hash.err_code.present
+      return render json: {data: @res_data_hash}
+    else
+      @hongbao.update_attribute :status, 1
+      redirect_to hongbaos_list_admins_path
+    end
   end
 
 
