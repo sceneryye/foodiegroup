@@ -32,140 +32,31 @@
  </div>
 </div>
 </div> -->
-
-<div class="row collapse">
-  <div class="small-3 columns">
-    <span class="postfix"><%= t(:first_weight) %></span>
+<% i=0%>
+<% @logistic_items.each do |item|%>
+  <%i +=1%>
+  <div class="row collapse">
+    <div class="small-3 columns">
+      <span class="postfix"><%= t(:first_weight) %></span>
+    </div>
+    <div class="small-3 columns">
+      <span class="postfix">     
+        <%=text_field_tag "item#{i}_price",value=item.price%>
+      </span>
+    </div>
+     <div class="small-3 columns">
+      <span class="postfix"><%= t(:additional_weight) %></span>
+    </div>
+    <div class="small-3 columns">
+      <span class="postfix">     
+        <%=text_field_tag "item#{i}_each_add",value=item.each_add%>
+      </span>
+    </div>
   </div>
-  <div class="small-3 columns">
-    <span class="postfix">     
-      <%=text_field_tag :item1_price,value='8'%>
-    </span>
+  <div>  
+    <%=text_area_tag "item#{i}_areas",value=item.areas, rows: 2%>
   </div>
-   <div class="small-3 columns">
-    <span class="postfix"><%= t(:additional_weight) %></span>
-  </div>
-  <div class="small-3 columns">
-    <span class="postfix">     
-      <%=text_field_tag :item1_each_add,value='1'%>
-    </span>
-  </div>
-</div>
-<div>  
-  <%=text_area_tag :item1_area,value='上海市|浙江省|江苏省|安徽省', rows: 2%>
-</div>
-
-<div class="row collapse">
-  <div class="small-3 columns">
-    <span class="postfix"><%= t(:first_weight) %></span>
-  </div>
-  <div class="small-3 columns">
-    <span class="postfix">     
-      <%=text_field_tag :item2_price,value='10'%>
-    </span>
-  </div>
-   <div class="small-3 columns">
-    <span class="postfix"><%= t(:additional_weight) %></span>
-  </div>
-  <div class="small-3 columns">
-    <span class="postfix">     
-      <%=text_field_tag :item2_each_add,value='1'%>
-    </span>
-  </div>
-</div>
-<div>  
-  <%=text_area_tag :item2_area,value='北京市|天津市广东省|山东省|福建省|河北省|湖北省|河南省|湖南省|江西省', rows: 2%>
-</div>
-
-<div class="row collapse">
-  <div class="small-3 columns">
-    <span class="postfix"><%= t(:first_weight) %></span>
-  </div>
-  <div class="small-3 columns">
-    <span class="postfix">     
-      <%=text_field_tag :item3_price,value='10'%>
-    </span>
-  </div>
-   <div class="small-3 columns">
-    <span class="postfix"><%= t(:additional_weight) %></span>
-  </div>
-  <div class="small-3 columns">
-    <span class="postfix">     
-      <%=text_field_tag :item3_each_add,value='5'%>
-    </span>
-  </div>
-</div>
-<div>  
-  <%=text_area_tag :item3_area,value='陕西省|山西省|广西省|四川省|重庆市|海南省|贵州省|云南省', rows: 2%>
-</div>
-
-<div class="row collapse">
-  <div class="small-3 columns">
-    <span class="postfix"><%= t(:first_weight) %></span>
-  </div>
-  <div class="small-3 columns">
-    <span class="postfix">     
-      <%=text_field_tag :item4_price,value='10'%>
-    </span>
-  </div>
-   <div class="small-3 columns">
-    <span class="postfix"><%= t(:additional_weight) %></span>
-  </div>
-  <div class="small-3 columns">
-    <span class="postfix">     
-      <%=text_field_tag :item4_each_add,value='6'%>
-    </span>
-  </div>
-</div>
-<div>  
-  <%=text_area_tag :item4_area,value='黑龙江省|吉林省|辽宁省', rows: 2%>
-</div>
-
-<div class="row collapse">
-  <div class="small-3 columns">
-    <span class="postfix"><%= t(:first_weight) %></span>
-  </div>
-  <div class="small-3 columns">
-    <span class="postfix">     
-      <%=text_field_tag :item5_price,value='10'%>
-    </span>
-  </div>
-   <div class="small-3 columns">
-    <span class="postfix"><%= t(:additional_weight) %></span>
-  </div>
-  <div class="small-3 columns">
-    <span class="postfix">     
-      <%=text_field_tag :item5_each_add,value='8'%>
-    </span>
-  </div>
-</div>
-<div>  
-  <%=text_area_tag :item5_area,value='内蒙古自治区|宁夏回族自治区|青海省|甘肃省', rows: 2%>
-</div>
-
-<div class="row collapse">
-  <div class="small-3 columns">
-    <span class="postfix"><%= t(:first_weight) %></span>
-  </div>
-  <div class="small-3 columns">
-    <span class="postfix">     
-      <%=text_field_tag :item6_price,value='15'%>
-    </span>
-  </div>
-   <div class="small-3 columns">
-    <span class="postfix"><%= t(:additional_weight) %></span>
-  </div>
-  <div class="small-3 columns">
-    <span class="postfix">     
-      <%=text_field_tag :item6_each_add,value='14'%>
-    </span>
-  </div>
-</div>
-<div>  
-  <%=text_area_tag :item6_area,value='新疆维吾尔族自治区|西藏藏族自治区', rows: 2%>
-</div>
-
-<div>
+<%end%>
   <label>
     <input type="checkbox" name="default" value=1 checked="checked">
     <%= t(:set_default) %></div>

@@ -105,7 +105,7 @@ class UsersController < ApplicationController
       group_owner = User.find_by(id: current_user.group.try(:user_id))
       #group_name = current_user.group.name
       #@groupid = current_user.group.id
-      @title = session[:locale] == 'zh' ? "#{group_owner.name}推荐您加入 Groupmall!" : "#{group_owner.try(:name)} recommend you to join Groupmall!"
+      @title = session[:locale] == 'zh' ? "#{group_owner.try(:name)}推荐您加入 Groupmall!" : "#{group_owner.try(:name)} recommend you to join Groupmall!"
       @img_url = 'http://foodie.trade-v.com/groupmall_logo.jpg'
       @desc = session[:locale] == 'zh' ? 'Groupmall 是拼人品的团购、聚会和论坛。' : 'Groupmall is trusted based group buying, meetups and forums.'
       @timestamp = Time.now.to_i

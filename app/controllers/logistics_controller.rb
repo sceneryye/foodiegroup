@@ -8,6 +8,7 @@ class LogisticsController < ApplicationController
 
   def new
     @logistic = Logistic.new
+    @logistic_items = LogisticsItem.where(logistic_id: 0)
   end
 
   def create
@@ -19,7 +20,7 @@ class LogisticsController < ApplicationController
       (1..6).each do |i|
         LogisticsItem.new do |item|
           item.logistic_id =  @logistic.id
-          item.areas = params["item#{i}_area".to_sym]
+          item.areas = params["item#{i}_areas".to_sym]
           item.price = params["item#{i}_price".to_sym]
           item.each_add = params["item#{i}_each_add".to_sym]
         end.save
@@ -53,6 +54,7 @@ class LogisticsController < ApplicationController
   end
 
   def edit()
+    @logistic_items = @logistic.logistics_items
   end
 
   def update
@@ -70,6 +72,15 @@ class LogisticsController < ApplicationController
     end
 
     if @logistic.update(logistic_params)
+      LogisticsItem.where(logistic_id:  @logistic.id).delete_all
+      (1..6).each do |i|
+        LogisticsItem.new do |item|
+          item.logistic_id = @logistic.id
+          item.areas = params["item#{i}_areas".to_sym]
+          item.price = params["item#{i}_price".to_sym]
+          item.each_add = params["item#{i}_each_add".to_sym]
+        end.save
+      end
       Rails.logger.info logistic_params
       if params[:default] == '1'
         logistic = Logistic.where(default: '1')

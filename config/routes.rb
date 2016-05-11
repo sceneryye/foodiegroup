@@ -106,10 +106,10 @@ RailsOnForum::Application.routes.draw do
   get '/users/:id/my_events', to: 'users#my_events', as: :my_events
   get '/users/:id/my_topics', to: 'users#my_topics', as: :my_topics
   get '/users/:id/my_wishlists', to: 'users#my_wishlists', as: :my_wishlists
-  get 'users/contact_us', to: 'users#contact_us', as: :contact_us
-  get 'users/about_team', to: 'users#about_team', as: :about_team
-  get 'users/votings', to: 'users#votings', as: :my_votings
-  get 'users/wishlists_management', to: 'users#wishlists_management', as: :wishlists_management
+  get '/users/:id/contact_us', to: 'users#contact_us', as: :contact_us
+  get '/users/:id/about_team', to: 'users#about_team', as: :about_team
+  get '/users/:id/votings', to: 'users#votings', as: :my_votings
+  get '/users/:id/wishlists_management', to: 'users#wishlists_management', as: :wishlists_management
 
   post '/users/set_user_mobile', to: 'users#set_user_mobile', as: :set_user_mobile
 
