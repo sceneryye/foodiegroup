@@ -11,9 +11,6 @@
 //= require foundation-datepicker.min
 // if session[:locale] == 'zh'
 //= require foundation-datepicker.zh-CN
-//= require zepto
-//= require zepto.touch
-//= require wangEditor-mobile
 //= require_tree .
 //= require_self
 
