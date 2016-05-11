@@ -74,10 +74,10 @@ class AdminsController < ApplicationController
     #{}"err_code":"MONEY_LIMIT","err_code_des":"参数错误:只能发放1.00块到200块钱的红包."
     #
 
-    @res_data_hash = Hash.from_xml res_data
+    @res_data_hash = (Hash.from_xml res_data)['xml']
     @hongbao.update_attribute :return_message, "#{@hongbao.return_message}|#{@res_data_hash}"
-    if @res_data_hash.err_code.present
-      return render json: {data: @res_data_hash}
+    if @res_data_hash['result_code']=='FAIL'
+      return render json: {data: @res_data_hash["return_msg"]}
     else
       @hongbao.update_attribute :status, 1
       redirect_to hongbaos_list_admins_path

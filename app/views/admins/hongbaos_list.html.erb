@@ -36,14 +36,14 @@
       <td><%= hongbao.participant.id%></td>
       <td><%= is_paid hongbao.participant %></td>
       <td><%= is_shiped hongbao.participant %></td>
-      <td><%= hongbao.created_at.strftime('%F %T') %></td>
+      <td><%=l hongbao.created_at %></td>
       <td><td class="status">
           <%if hongbao.status==0%>
           <%=link_to '发送红包', send_hongbao_admin_path(hongbao.id),class:'button'%>
             <div class='sent'>
             </div>
           <%else%>          
-            hongbao.upated_at.strftime('%F %T')
+           <%=l hongbao.updated_at%>
           <%end%>
     </tr>
     <% end if @hongbaos%>

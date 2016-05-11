@@ -21,13 +21,13 @@
       <div class="row radius callout all-kinds-of-money">
         <div class="columns small-6 groupbuy-price" style="line-height:100%">
           <span class="price save"><i class="fa fa-cny"></i>
-          <%#=groupbuy.current_price %>/<%#=translate_of(groupbuy.goods_unit)%>
+          <!-- <%=groupbuy.current_price %>/<%=translate_of(groupbuy.goods_unit)%> -->
           <%= (groupbuy.groupbuy_price / (groupbuy.set_ratio || 1)).round(2) %>/<%=translate_of(groupbuy.single_unit)%>
 
           </span><br>
 
           <small class="money">  <span class="price market"><i class="fa fa-cny"></i>
-            <%#=groupbuy.market_price %>/<%#=translate_of(groupbuy.goods_unit)%>
+            <!-- <%=groupbuy.market_price %>/<%=translate_of(groupbuy.goods_unit)%> -->
             <%= (groupbuy.market_price / (groupbuy.set_ratio || 1)).round(2) %>/<%=translate_of(groupbuy.single_unit)%>
           </span></small>
         </div>
