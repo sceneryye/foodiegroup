@@ -4,8 +4,7 @@ class Hongbao < ActiveRecord::Base
 
 
   	def status_text
-	  	return 'Paid'  if status == 1
-	  	return 'Unpaid'  if status == 0
-	  	#return 'order unpaid'  if self.participant.status_pay == 0
+	  	return 'sent'  if status == 1
+	  	return 'unsent'  if status == 0
 	end
 end
