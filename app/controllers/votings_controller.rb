@@ -2,6 +2,7 @@ class VotingsController < ApplicationController
   before_action :select_voting
   before_action :validate_user!
   before_action :autheorize_admin!, only: [:create, :eitd, :update, :new, :destroy]
+  
   def new
   end
 
@@ -47,46 +48,46 @@ class VotingsController < ApplicationController
       Rails.logger.info data_hash
       render json: {msg: 'ok', data: data_hash, all_votes: all_votes}
     end
-  rescue Exception => e
-    msg = e.message
-    render json: {msg: e.message}
-  end
-end
-
-def edit
-end
-
-def update
-end
-
-def destroy
-  @voting.delete
-  redirect_to my_votings_path
-end
-
-def show
-  @vote_products = @voting.vote_products
-  @all_votes = @voting.votes.pluck(:votes).inject(0, :+)
-  Rails.logger.info @all_votes
-  if current_user
-    @show_result = current_user.votings.include?(@voting) || Time.current > @voting.end_time
-  end
-  #微信share接口配置
-    if session[:locale] == 'en'
-      @title = 'Vote Now!'
-    else
-      @title = '本周投票'
+    rescue Exception => e
+      msg = e.message
+      render json: {msg: e.message}
     end
-  @img_url = 'http://foodie.trade-v.com/votenow.jpg'
-  @desc = 'The most voted will become the next hot deal!'
-  share_config
-end
+  end
 
-def index
-end
+  def edit
+  end
 
-private
-def select_voting
-  @voting = Voting.find_by(id: params[:id])
-end
+  def update
+  end
+
+  def destroy
+    @voting.delete
+    redirect_to my_votings_path
+  end
+
+  def show
+    @vote_products = @voting.vote_products
+    @all_votes = @voting.votes.pluck(:votes).inject(0, :+)
+    Rails.logger.info @all_votes
+    if current_user
+      @show_result = current_user.votings.include?(@voting) || Time.current > @voting.end_time
+    end
+    #微信share接口配置
+      if session[:locale] == 'en'
+        @title = 'Vote Now!'
+      else
+        @title = '本周投票'
+      end
+    @img_url = 'http://foodie.trade-v.com/votenow.jpg'
+    @desc = 'The most voted will become the next hot deal!'
+    share_config
+  end
+
+  def index
+  end
+
+  private
+  def select_voting
+    @voting = Voting.find_by(id: params[:id])
+  end
 end

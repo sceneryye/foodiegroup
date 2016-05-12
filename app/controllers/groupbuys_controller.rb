@@ -40,6 +40,16 @@ class GroupbuysController < ApplicationController
       @alert = true if params[:error_message] == 'success'
     end
     @parent = @groupbuy = Groupbuy.find(params[:id])
+    @groupbuy_price_unit = if @groupbuy.tag == 'deal'       
+                              if @groupbuy.end_time > Time.now      
+                                "#{(@groupbuy.groupbuy_price / (@groupbuy.set_ratio || 1)).round(2)} /#{translate_of(@groupbuy.single_unit)}"
+                              else
+                                "#{(@groupbuy.price / (@groupbuy.set_ratio || 1)).round(2)}/#{translate_of(@groupbuy.single_unit)}"
+                              end
+                            elsif @groupbuy.tag == 'groupbuy'
+                              "#{(@groupbuy.groupbuy_price / (@groupbuy.set_ratio || 1)).round(2)}/#{translate_of(@groupbuy.single_unit)}"
+                            end
+
     if @parent.pic_url.present?
       @title_pic = @groupbuy.pic_url.split(',').reject(&:blank?)[0]
       @content_pic = @groupbuy.pic_url.split(',').reject(&:blank?)[1..-1]

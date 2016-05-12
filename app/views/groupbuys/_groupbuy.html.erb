@@ -22,7 +22,17 @@
         <div class="columns small-6 groupbuy-price" style="line-height:100%">
           <span class="price save"><i class="fa fa-cny"></i>
           <!-- <%=groupbuy.current_price %>/<%=translate_of(groupbuy.goods_unit)%> -->
-          <%= (groupbuy.groupbuy_price / (groupbuy.set_ratio || 1)).round(2) %>/<%=translate_of(groupbuy.single_unit)%>
+          <%@groupbuy_price_unit = if groupbuy.tag == 'deal'       
+                              if groupbuy.end_time > Time.now      
+                                "#{(groupbuy.groupbuy_price / (groupbuy.set_ratio || 1)).round(2)} /#{translate_of(groupbuy.single_unit)}"
+                              else
+                                "#{(groupbuy.price / (groupbuy.set_ratio || 1)).round(2)}/#{translate_of(groupbuy.single_unit)}"
+                              end
+                            elsif groupbuy.tag == 'groupbuy'
+                              "#{(groupbuy.groupbuy_price / (groupbuy.set_ratio || 1)).round(2)}/#{translate_of(groupbuy.single_unit)}"
+                            end
+          %>
+          <%=@groupbuy_price_unit%>
 
           </span><br>
 
