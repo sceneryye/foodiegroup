@@ -7,10 +7,10 @@ class AdminsController < ApplicationController
 
   def search_users
     @key = params[:key]
-    if @key.blank
+    if @key.blank?
       return redirect_to users_list_admins_path
     end
-    @users = User.where("username like '%#{@key}%'").paginate(per_page: 20, page: params[:page]).order(id: :asc)
+    @users = User.where('username like ?',"%#{@key}%").paginate(per_page: 20, page: params[:page]).order(id: :asc)
     render 'users_list'
   end
 
