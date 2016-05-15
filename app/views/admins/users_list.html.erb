@@ -8,7 +8,20 @@
       用户列表(会员数：<%= User.count %>)
     </span>
   </div>
-
+  <form action='<%=search_users_admins_path%>' method='post'>
+    <div class="row">
+        <div class="large-12 columns">
+          <div class="row collapse">
+            <div class="small-10 columns">
+              <input type="text" name='key' placeholder="user name">
+            </div>
+            <div class="small-2 columns">
+              <input type='submit' value='search' class='button'>
+            </div>
+          </div>
+        </div>
+      </div>
+  </form>
   <div class="content">
    <table>
         <tr class="title">

@@ -5,6 +5,15 @@ class AdminsController < ApplicationController
    redirect_to users_list_admins_path
   end
 
+  def search_users
+    @key = params[:key]
+    if @key.blank
+      return redirect_to users_list_admins_path
+    end
+    @users = User.where("username like '%#{@key}%'").paginate(per_page: 20, page: params[:page]).order(id: :asc)
+    render 'users_list'
+  end
+
   def send_hongbao
     id = params[:id]
     @hongbao = Hongbao.find(id)
