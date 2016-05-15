@@ -105,6 +105,18 @@ class AdminsController < ApplicationController
     redirect_to users_list_admins_path, notice: '会员信息修改成功'
   end
 
+  def edit_groupbuy
+    @groupbuy = Groupbuy.find(params[:id])
+  end
+
+  def update_groupbuy
+    @gropubuy = Groupbuy.find(params[:id])
+    @groupby.update_attributes(groupbuy_params)
+    @groupbuy.save!
+    redirect_to groupbuys_list_admins_path, notice: '信息修改成功'
+  end
+
+
   def users_list
     @users = User.paginate(per_page: 20, page: params[:page]).order(id: :asc)
   end
@@ -199,8 +211,15 @@ class AdminsController < ApplicationController
   end
 
   private 
-  def user_params
+  def set_groupbuy
+    @groupbuy = Groupbuy.find(params[:id])
+  end
 
+  def groupbuy_params
+    params.require(:groupbuy).permit(:commision,:en_title, :zh_title, :en_body, :zh_body, :end_time, :start_time, :groupbuy_type, :goods_maximal, :goods_minimal, :market_price, :tag, :target, :origin, :groupbuy_price, :pic_url, :name, :mobile, :goods_unit, :price, :logistic_id, :weight, :goods_size, :goods_bbd, :single_unit, :set_ratio)
+  end
+
+  def user_params
     params.require(:user).permit(:role,:kol,
                         groupbuys_attributes: [:id])
   end

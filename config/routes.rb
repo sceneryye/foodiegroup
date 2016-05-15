@@ -41,7 +41,7 @@ RailsOnForum::Application.routes.draw do
   resources :admins do
     # post "downorder", :on=>:collection
     collection do    
-      get 'users_list' 
+      get :users_list
       post :downorder    
       get :groupbuys_list
       get :topics_list
@@ -54,6 +54,8 @@ RailsOnForum::Application.routes.draw do
 
     member do
        get :edit_user
+       get :edit_groupbuy
+       post :update_groupbuy
        get :send_hongbao
        post :update_user
     end      

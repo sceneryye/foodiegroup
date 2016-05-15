@@ -35,7 +35,8 @@
           <input type="number" name="recommend" value="<%= groupbuy.recommend %>" data-url="<%=groupbuy_path(groupbuy)%>" id="<%= groupbuy.id %>" data-value="<%= groupbuy.recommend %>" class="recommend-number" data-id="<%= groupbuy.id %>" />
         </td>
         <td>
-          <span class="edit-title edit" data-id="<%= groupbuy.id %>" data-title="<%= groupbuy.zh_title.present? ? groupbuy.zh_title : groupbuy.en_title %>">编辑</span>
+<!--           <span class="edit-title edit" data-id="<%= groupbuy.id %>" data-title="<%= groupbuy.zh_title.present? ? groupbuy.zh_title : groupbuy.en_title %>">编辑</span> -->
+          <%=link_to '编辑' ,edit_groupbuy_admin_path(groupbuy),class:'button'%>
           <%= link_to "删除", groupbuy_path(groupbuy), class: 'delete', method: :delete, remote: true,  data: { confirm:'确定删除?' } %>
           <span class="online">
             <input type="checkbox" class="set-online" data-id="<%= groupbuy.id %>" id="checkbox-<%= groupbuy.id %>" <%= 'checked' if groupbuy.online  %> data-url="<%= set_online_offline_admins_path %>">
