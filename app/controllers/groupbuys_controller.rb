@@ -11,7 +11,7 @@ class GroupbuysController < ApplicationController
     if params[:kol].present?
       session[:kol] = params[:kol]
       @kol = User.find_by_id(session[:kol])
-      @kol_title = "-#{@kol.name}"
+      @kol_title = "-#{@kol.kol}"
     end
     if params[:tag] == 'deal'
       @groupbuys = Groupbuy.online.includes(:user).where('tag = ? and end_time > ?', 0, Time.zone.now)
@@ -25,8 +25,14 @@ class GroupbuysController < ApplicationController
     @title_pic = groupbuy.present? ? groupbuy.photos.first.try(:image) : '/groupmall_logo.jpg'
     @title = if session[:locale] == 'en'
                "Hot Deal Recommendation#{@kol_title}"
+                if is_kol?
+                    "A way to buy smart! recommend from KOL:#{current_user.kol}"
+                end       
              else
                "热门团购推荐#{@kol_title}"
+                if is_kol?
+                  "聪明购物就在菇蘑 来自 KOL:#{current_user.kol} 的推荐"
+                end
              end
     @img_url = 'http://www.trade-v.com:5000' + @title_pic.to_s
     @desc = groupbuy.present? ? (current_title groupbuy) : 'GroupMall'
@@ -34,7 +40,6 @@ class GroupbuysController < ApplicationController
   end
 
   def show
-    Rails.logger.info "---------------#{session[:locale]}"
     if params[:from] == 'foodiepay' && params[:total].present?
       @total = params[:total].to_f / 100
       @alert = true if params[:error_message] == 'success'

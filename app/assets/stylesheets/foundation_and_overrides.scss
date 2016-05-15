@@ -143,7 +143,7 @@ $primary-color: #008CBA;
 // $last-child-float: $opposite-direction;
 
 // We use these to make sure border radius matches unless we want it different.
-// $global-radius: 3px;
+ $global-radius: 3px;
 // $global-rounded: 1000px;
 
 // We use these to control inset shadow shiny edges and depressions.
@@ -1034,14 +1034,14 @@ $panel-bg: scale-color($white, $lightness: -5%);
 // $include-html-media-classes: $include-html-classes;
 
 // We use this to set the progress bar height
-// $progress-bar-height: rem-calc(25);
+ $progress-bar-height: rem-calc(15);
 // $progress-bar-color: $vapor  ;
 
 // We use these to control the border styles
-// $progress-bar-border-color: scale-color($white, $lightness: 20%);
+ $progress-bar-border-color: scale-color($white, $lightness: 20%);
 // $progress-bar-border-size: 1px;
 // $progress-bar-border-style: solid;
-// $progress-bar-border-radius: $global-radius;
+ $progress-bar-border-radius: $global-radius;
 
 // We use these to control the margin & padding
 // $progress-bar-pad: rem-calc(2);

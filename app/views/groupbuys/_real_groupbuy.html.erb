@@ -18,16 +18,9 @@
 
       <h4 class="groupbuy-name"><%= current_title(real_groupbuy)%></h4>
 
-      <div class="row radius callout all-kinds-of-money">
-        <div class="columns small-6 groupbuy-price" style="line-height:100%">
-          <span class="price save"><i class="fa fa-cny"></i><%=real_groupbuy.groupbuy_price %>/<%=translate_of(real_groupbuy.goods_unit)%></span><br>
+      <%= render partial: 'groupbuys/progress_bar', locals: {groupbuy: real_groupbuy} %>
 
-          <small class="money">  <span class="price market"><i class="fa fa-cny"></i><%=real_groupbuy.market_price %>/<%=translate_of(real_groupbuy.goods_unit)%></span></small>
-        </div>
-        <div class="columns small-6">
-          <span class="price save"><%=t(:save)%>:&nbsp;<%= (((real_groupbuy.market_price - real_groupbuy.groupbuy_price) / real_groupbuy.market_price) * 100).round(2) %>%</span>
-        </div>
-      </div>
+     
       
     </div>
   </div>

@@ -4,7 +4,7 @@ module SessionsHelper
   end
 
   def is_kol?
-    current_user.try(:kol) == '1'
+    current_user.try(:kol).include?('GM')
   end
 
   def autheorize_admin!

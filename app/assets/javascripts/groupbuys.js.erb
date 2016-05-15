@@ -210,29 +210,3 @@ $(document).ready(function(){
   })
 })
 
-//-------------groupbuy进度条------------------//
-$(document).ready(function(){
-  var len_ratio = parseFloat($('.progress-bar').data('ratio'));
-  if(len_ratio > 1) {
-    len_ratio = 1;
-  }
-  console.log(len_ratio);
-  var status_position = 0;
-  if(len_ratio < 0.1) {
-    status_position = 0.1
-  }
-  else if(len_ratio > 0.8) {
-    status_position = 0.8
-  }
-  else {
-    status_position = len_ratio
-  }
-  var back_len = $('.progress-bar .back').width();
-  var front_len = back_len * len_ratio + 'px';
-  $('.progress-bar .front').css('width', front_len);
-  status_position = status_position * back_len + 'px';
-  $('.group').css('left', status_position);
-  if(parseInt(len_ratio) == 1) {
-    $('.front').css('background-color', 'green');
-  }
-})
