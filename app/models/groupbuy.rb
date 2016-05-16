@@ -12,8 +12,8 @@ class Groupbuy < ActiveRecord::Base
 
 
 
-	# validates :end_time, presence: true
-	# validates :start_time, presence: true
+	validates :end_time, presence: true
+	validates :start_time, presence: true
 	validates :goods_unit,  presence: true
 	validates :price,  presence: true
 	validates :market_price, presence: true

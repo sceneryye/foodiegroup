@@ -15,6 +15,7 @@
         <th>团购名称</th>
         <th>开始时间</th>
         <th>结束时间</th>
+        <th>类别</th>
         <th>报名人数</th>
         <th>支付人数</th>
         <th>发起人</th>
@@ -27,6 +28,7 @@
         <td class="groupbuy-title"><%= groupbuy.zh_title.present? ? groupbuy.zh_title[0..10] : groupbuy.en_title[0..10] %></td>
         <td><%= groupbuy.start_time.present? ? groupbuy.start_time.strftime('%F %T') : '' %></td>
         <td><%= groupbuy.end_time.present? ? groupbuy.end_time.strftime('%F %T') : '' %></td>
+        <td><%= groupbuy.tag%>
         <td><%= link_to Participant.where(groupbuy_id: groupbuy.id).count, participants_list_admins_path(groupbuy_id: groupbuy.id) %></td>
         <td><%= Participant.where(groupbuy_id: groupbuy.id, status_pay: 1).count %></td>
         <td><%= groupbuy.name %></td>

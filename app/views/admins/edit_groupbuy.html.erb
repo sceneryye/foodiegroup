@@ -4,7 +4,6 @@
     <%= render 'layouts/form_errors', object: @groupbuy %>
     <input type="hidden", name='photo_ids' value="" class="pic-ids">
     <input type="hidden", name='delete_ids' value="" class="delete-ids">
-    <input type="hidden", name='groupbuy[tag]' value="<%= params[:tag] %>">
     <!--images[] returned to the album as an array. We use file_field_tag since images is not @album's attribute-->
     <%#= file_field_tag "images[]", type: :file, multiple: true %>
   <div>
@@ -15,6 +14,7 @@
     <%= f.text_field :en_title, placeholder: "#{t(:deal_english_title)}" %>
     <!--  <%#= show_error_message('团购名称，不能为空！') %> -->
   </div>
+   
   <div class="time-limitation <%= params[:tag] == 'groupbuy' ? 'hidden' : '' %>">
     <table class="table">
       <thead>
@@ -29,9 +29,22 @@
      </thead>
    </table>
  </div>
+ <div class='groupbuy-attr row collapse '>
+ <div class="small-3 columns ">
+    <span class="prefix">
+      <%=t :tags %>
+    </span>
+  </div>
+  <div class="small-9 columns">
+   <span class="postfix">
+    
+    <%= f.text_field :tag%>
+  </span>
+  </div>
+ </div>
 
  <div class="groupbuy-attr row collapse <%= params[:tag] == 'deal' ? 'hidden' : '' %>">
-   <div class="small-3 columns">
+  <div class="small-3 columns">
     <span class="postfix"><%= t(:target_kg) %></span>
   </div>
   <div class="small-3 columns">
