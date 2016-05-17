@@ -25,7 +25,7 @@
       </tr>
       <% @groupbuys.each_with_index do |groupbuy| %>
       <tr class="body" id="groupbuy-<%= groupbuy.id %>">
-        <td class="groupbuy-title"><%= groupbuy.zh_title.present? ? groupbuy.zh_title[0..10] : groupbuy.en_title[0..10] %></td>
+        <td class="groupbuy-title"><%=link_to groupbuy.zh_title.present? ? groupbuy.zh_title[0..10] : groupbuy.en_title[0..10] , groupbuy_path(groupbuy),target:'_blank' %></td>
         <td><%= groupbuy.start_time.present? ? groupbuy.start_time.strftime('%F %T') : '' %></td>
         <td><%= groupbuy.end_time.present? ? groupbuy.end_time.strftime('%F %T') : '' %></td>
         <td><%= groupbuy.tag%>
