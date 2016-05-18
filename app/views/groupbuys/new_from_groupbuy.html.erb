@@ -8,11 +8,11 @@
     <!--images[] returned to the album as an array. We use file_field_tag since images is not @album's attribute-->
     <%#= file_field_tag "images[]", type: :file, multiple: true %>
     <div>
-      <%= f.text_field :zh_title, placeholder: "#{t(:groupbuy)} #{t(:zh_title)}", value: @old_groupbuy.zh_title %>
+      <%= f.text_field :zh_title, placeholder: t(:zh_title), value: @old_groupbuy.zh_title %>
       <!--  <%#= show_error_message('团购名称，不能为空！') %> -->
     </div>
     <div>
-      <%= f.text_field :en_title, placeholder: "#{t(:deal_english_title)}", value: @old_groupbuy.en_title %>
+      <%= f.text_field :en_title, placeholder: t(:en_title), value: @old_groupbuy.en_title %>
       <!--  <%#= show_error_message('团购名称，不能为空！') %> -->
     </div>
     <div>

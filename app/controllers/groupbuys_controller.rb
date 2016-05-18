@@ -13,6 +13,7 @@ class GroupbuysController < ApplicationController
       @kol = User.find_by_id(session[:kol])
       @kol_title = "-#{@kol.kol}"
     end
+    
     if params[:tag] == 'deal'
       @groupbuys = Groupbuy.online.includes(:user).where('tag = ? and end_time > ?', 0, Time.zone.now)
       @products = Groupbuy.online.includes(:user).where('tag = ? and end_time <= ?', 0, Time.zone.now)

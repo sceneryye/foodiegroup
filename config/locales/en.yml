@@ -334,10 +334,10 @@ en:
   unit_price: Unit Price
   selling_price: Selling Price
   weight_kg: Net. Weight(Kg)
-  en_title: English Title`
-  zh_title: Chinese Title
-  en_body: English Description
-  zh_body: Chinese Description
+  en_title: Title` in English
+  zh_title: Title in Chinese
+  en_body: Description in English
+  zh_body: Description in Chinese
   en_content: English Content
   zh_content: Chinese Content
   avatar: User's Photo
@@ -358,7 +358,6 @@ en:
   forum: Wishlist
   forums: Wishlists
   logistic_ruler: Logistic Rule
-  deal_english_title: Deal Title in English
   new_logistic_rule: New Logistic Rule
   edit_groupbuy: Deal Edit
   settings: Settings

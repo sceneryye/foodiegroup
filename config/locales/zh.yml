@@ -469,7 +469,6 @@ zh:
   forum: 心愿清单
   forums: 心愿清单
   logistic_ruler: 物流规则
-  deal_english_title: 团购英文标题
   new_logistic_rule: 新建物流规则
   edit_groupbuy: 编辑团购
   settings: 设置
@@ -543,3 +542,4 @@ zh:
   commision: 佣金
   unsent: 未发
   sent: 已发
+  groupbuys: 众买
