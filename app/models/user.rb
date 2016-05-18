@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :wishlists, dependent: :destroy
   has_many :downpayments, dependent: :destroy
   has_many :shops, dependent: :destroy
+  has_many :hongbaos
   belongs_to :group
 
 

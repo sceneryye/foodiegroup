@@ -27,9 +27,11 @@
 <div class="counting">
   <span class="text">统计：</span>
   <span class="count">
-    <%= link_to users_list_admins_path do %>
-    会员列表
-    <% end %>
+    <%= link_to '会员列表',users_list_admins_path%>
+  </span>
+
+  <span class="count">
+    <%= link_to 'KOL',kols_list_admins_path%>
   </span>
   <span class="count">
     <%= link_to groupbuys_list_admins_path do %>
