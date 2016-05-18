@@ -122,7 +122,7 @@ class AdminsController < ApplicationController
   end
 
   def kols_list
-    @users = User.paginate(per_page: 20, page: params[:page]).order(id: :asc)
+    @users = User.where("kol like ?", 'GM%').paginate(per_page: 20, page: params[:page]).order(kol: :desc)
   end
 
   def hongbaos_list

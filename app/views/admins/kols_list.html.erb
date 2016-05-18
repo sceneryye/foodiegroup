@@ -8,21 +8,6 @@
       用户列表(会员数：<%= User.count %>)
     </span>
   </div>
-  <%= form_tag search_users_admins_path, method:'post' do %>
-  <form action='<%=search_users_admins_path%>' method='post'>
-    <div class="row">
-        <div class="large-12 columns">
-          <div class="row collapse">
-            <div class="small-10 columns">
-              <%=text_field_tag :key%>
-            </div>
-            <div class="small-2 columns">
-              <%=submit_tag "search",class: 'button'%>
-            </div>
-          </div>
-        </div>
-      </div>
-  <%end%>
   <div class="content">
    <table>
         <tr class="title">
