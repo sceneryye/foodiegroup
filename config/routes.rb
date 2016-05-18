@@ -41,6 +41,7 @@ RailsOnForum::Application.routes.draw do
   resources :admins do
     # post "downorder", :on=>:collection
     collection do    
+      get  :kols_list
       get :users_list
       post :downorder    
       get :groupbuys_list

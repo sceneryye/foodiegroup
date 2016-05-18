@@ -26,7 +26,7 @@ class GroupbuysController < ApplicationController
     @title = if session[:locale] == 'en'
                "Hot Deal Recommendation#{@kol_title}"
                 if is_kol?
-                    "A way to buy smart! recommend from KOL:#{current_user.kol}"
+                    "Buy smart together ! Recommended by: KOL[#{current_user.kol}]"
                 end       
              else
                "热门团购推荐#{@kol_title}"

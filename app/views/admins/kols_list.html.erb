@@ -1,0 +1,60 @@
+<div class="users_list">
+  <div class="navpath">
+    <span>
+     <%= link_to "首页", users_list_admins_path %>
+    </span>
+    <span class="slash">/</span>
+    <span class="subpath">
+      用户列表(会员数：<%= User.count %>)
+    </span>
+  </div>
+  <%= form_tag search_users_admins_path, method:'post' do %>
+  <form action='<%=search_users_admins_path%>' method='post'>
+    <div class="row">
+        <div class="large-12 columns">
+          <div class="row collapse">
+            <div class="small-10 columns">
+              <%=text_field_tag :key%>
+            </div>
+            <div class="small-2 columns">
+              <%=submit_tag "search",class: 'button'%>
+            </div>
+          </div>
+        </div>
+      </div>
+  <%end%>
+  <div class="content">
+   <table>
+        <tr class="title">
+          <th>用户ID</th>
+          <th>用户昵称</th>
+          <th>用户手机</th>
+          <th>用户邮箱</th>
+          <th>用户地区</th>
+          <th>参与活动</th>
+          <th>参与话题</th>
+          <th>红包</th>
+          <th>角色</th>
+          <th>KOL</th>
+        </tr>
+        <% @users.each_with_index do |user| %>
+        <tr class="body">
+          <td><%= user.id %></td>
+          <td><%= user.nickname %></td>
+          <td><%= user.mobile %></td>
+          <td><%= user.email %></td>
+          <td><%= user.location %></td>
+          <td><%= Participant.where(user_id: user.id).count %></td>
+          <td><%= Topic.where(user_id: user.id).count %></td>
+          <td><%=user.role%></td>
+          <td><%=user.hongbaos.count if user.hongbaos%></td>
+          <td><%=user.kol%></td>
+          <td><%=link_to '编辑',edit_user_admin_path(user.id)%></td>
+        </tr>
+        <% end %>
+      </table>
+      <div class="paginate">
+        <%= will_paginate @users %>
+      </div>
+  </div>
+</div>
