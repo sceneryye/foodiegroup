@@ -1,4 +1,4 @@
-<% provide :title, t(:new_groupbuy) %>
+<% provide :title, @title%>
 <div class="row" style="margin-top:10px;">
   <div class="small-12 columns">
     <%= form_for @groupbuy, data: {abide: ''}  ,:html => {multipart: true, class: 'new-form'} do|f| %>

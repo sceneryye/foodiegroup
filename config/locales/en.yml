@@ -334,7 +334,7 @@ en:
   unit_price: Unit Price
   selling_price: Selling Price
   weight_kg: Net. Weight(Kg)
-  en_title: Title` in English
+  en_title: Title in English
   zh_title: Title in Chinese
   en_body: Description in English
   zh_body: Description in Chinese
@@ -434,4 +434,5 @@ en:
   unsent: Unsent
   sent: Sent
   group_buy: Groupbuy
+  create: Create
 

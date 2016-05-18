@@ -13,7 +13,7 @@ class GroupbuysController < ApplicationController
       @kol = User.find_by_id(session[:kol])
       @kol_title = "-#{@kol.kol}"
     end
-    
+
     if params[:tag] == 'deal'
       @groupbuys = Groupbuy.online.includes(:user).where('tag = ? and end_time > ?', 0, Time.zone.now)
       @products = Groupbuy.online.includes(:user).where('tag = ? and end_time <= ?', 0, Time.zone.now)
@@ -110,12 +110,14 @@ class GroupbuysController < ApplicationController
   end
 
   def new
+    @title = "#{t(:create)} #{t(params[:tag])}"
     @groupbuy = Groupbuy.new
     session[:pic_file] = nil
     @photo = Photo.new
   end
 
   def choose_or_new_groupbuy
+    @title = "#{t(:create)} #{t(params[:tag])}"
     @groupbuys = Groupbuy.offline.where(user_id: current_user.id)
   end
 
@@ -124,6 +126,7 @@ class GroupbuysController < ApplicationController
   end
 
   def new_from_groupbuy
+    @title = "#{t(:create)} #{t(params[:tag])}"
     @groupbuy = Groupbuy.new
     @old_groupbuy = Groupbuy.find_by(params[:id])
   end
