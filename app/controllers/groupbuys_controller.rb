@@ -17,7 +17,7 @@ class GroupbuysController < ApplicationController
     if params[:tag] == 'deal'
       @groupbuys = Groupbuy.online.includes(:user).where('tag = ? and end_time > ?', 0, Time.zone.now)
       @products = Groupbuy.online.includes(:user).where('tag = ? and end_time <= ?', 0, Time.zone.now)
-    elsif params[:tag] == 'groupbuy'
+    elsif params[:tag] == 'group_buy'
       @real_groupbuys = Groupbuy.online_groupbuy.includes(:user).where(tag: 1)
     end
 
