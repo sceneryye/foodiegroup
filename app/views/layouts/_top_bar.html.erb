@@ -29,12 +29,12 @@
     </li>
     <li><%=link_to ' <i class="fa fa-search"></i>'.html_safe+' '+t(:search),search_path, style: 'display:none'%></li>
     <%if signed_in?%>
-    <% if current_user.role.in?(['1', '2']) %>
-    <li><%=link_to '<i class="fa fa-cart-plus"></i>'.html_safe+' '+t(:new_deal), choose_or_new_groupbuy_path(tag: 'deal')%></li>
-    <li><%=link_to '<i class="fa fa-cart-plus"></i>'.html_safe+' '+t(:new_groupbuy), choose_or_new_groupbuy_path(tag: 'group_buy')%></li>
-    <% end %>
-    <li><%=link_to '<i class="fa fa-calendar"></i>'.html_safe+' '+t(:new_event), vote_products_path%></li>
-    <li><%=link_to '<i class="fa fa-bullhorn"></i>'.html_safe+' '+t(:new_topic), new_forum_topic_path(forum_id)%></li>
+      <% if current_user.role.in?(['1', '2']) %>
+        <li><%=link_to '<i class="fa fa-cart-plus"></i>'.html_safe+' '+t(:new_deal), choose_or_new_groupbuy_path(tag: 'deal')%></li>
+        <li><%=link_to '<i class="fa fa-cart-plus"></i>'.html_safe+' '+t(:new_groupbuy), choose_or_new_groupbuy_path(tag: 'group_buy')%></li>
+        <li><%=link_to '<i class="fa fa-calendar"></i>'.html_safe+' '+t(:new_event), vote_products_path%></li>
+        <li><%=link_to '<i class="fa fa-bullhorn"></i>'.html_safe+' '+t(:new_topic), new_forum_topic_path(forum_id)%></li>      
+      <% end %>
     <%else%>
     <li><%=link_to '<i class="fa  fa-sign-in"></i>'.html_safe+' '+t(:login), login_path%></li>
     <%end%>

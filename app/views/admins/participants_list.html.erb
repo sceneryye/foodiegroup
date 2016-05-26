@@ -1,6 +1,6 @@
 <div class="participants_list">
   <div class="title">
-    <h4><%= @groupbuy.zh_title.present? ? @groupbuy.zh_title : @groupbuy.en_title %></h4>
+    <h4><%= @groupbuy.zh_title.present? ? @groupbuy.zh_title : @groupbuy.en_title  if @groupbuy%></h4>
   </div>
 
   <div class="navpath">
@@ -39,8 +39,8 @@
 </div>
   <table>
     <tr>
-      <th>姓名</th>
-      <th>联系电话</th>
+      <th>团购</th>
+      <th>姓名/电话</th>
       <th>地址</th>
       <th>数量</th>
       <th>单价</th>
@@ -52,11 +52,11 @@
     </tr>
     <% @participants.each do |p| %>
     <tr>
-      <td><%= p.name %></td>
-      <td><%= p.mobile %></td>
+      <td style="width:180px"><%=p.groupbuy.zh_title%></td>
+      <td><%= p.name %>[<%=p.user_id%>]<hr><%= p.mobile %></td>
       <td style="width: 25%"><%= p.address %><hr>备注：<%=p.remark%></td>
-      <td><%= p.quantity %><%= @groupbuy.goods_unit %></td>
-      <td><%= @groupbuy.current_price %></td>
+      <td><%= p.quantity %><%= p.groupbuy.goods_unit if p.groupbuy%></td>
+      <td><%= p.groupbuy.current_price if p.groupbuy%></td>
       <td><%= p.total %></td>
       <td><%= is_paid p %></td>
       <td id="participant-<%= p.id %>" ><%= is_shiped p %></td>

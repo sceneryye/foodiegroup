@@ -34,24 +34,19 @@
     <%= link_to 'KOL',kols_list_admins_path%>
   </span>
   <span class="count">
-    <%= link_to groupbuys_list_admins_path do %>
-    团购
-    <% end %>
+    <%= link_to t(:groupbuy),groupbuys_list_admins_path%>
   </span>
   <span class="count">
-    <%= link_to hongbaos_list_admins_path do %>
-    红包
-    <% end %>
+    <%= link_to t(:participants),participants_list_admins_path%>
   </span>
   <span class="count">
-    <%= link_to tags_list_admins_path do %>
-    标签
-    <% end %>
+    <%= link_to t(:hongbao), hongbaos_list_admins_path%>
   </span>
   <span class="count">
-    <%= link_to topics_list_admins_path do %>
-    话题
-    <% end %>
+    <%= link_to t(:tag),tags_list_admins_path %>
+  </span>
+  <span class="count">
+    <%= link_to t(:topics),topics_list_admins_path%>
   </span>
   
   <span class="count">评论数：<%= Comment.count %></span>

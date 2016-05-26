@@ -133,13 +133,19 @@ class AdminsController < ApplicationController
     @groupbuys = Groupbuy.paginate(per_page: 20, page: params[:page]).order(id: :asc)
   end
 
+
   def topics_list
     @topics = Topic.paginate(per_page: 20, page: params[:page]).order(id: :asc)
   end
 
   def participants_list
-    @groupbuy = Groupbuy.find(params[:groupbuy_id])
-    @participants = Participant.unscoped {Participant.where(:groupbuy_id => params[:groupbuy_id]).paginate(per_page: 100, page: params[:page]).order(created_at: :desc)}
+    if params[:groupbuy_id]
+      @groupbuy = Groupbuy.find(params[:groupbuy_id])
+      @participants = Participant.unscoped {Participant.where(:groupbuy_id => params[:groupbuy_id]).paginate(per_page: 100, page: params[:page]).order(created_at: :desc)}
+    else
+      @participants = Participant.all.order(created_at: :desc).paginate(per_page: 100, page: params[:page])
+    end
+
   end
 
   def tags_list

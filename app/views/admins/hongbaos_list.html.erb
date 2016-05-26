@@ -33,9 +33,9 @@
       <td><%= hongbao.user.name %></td>
       <td><%= hongbao.user.mobile %></td>
       <td><%= hongbao.amount %></td>
-      <td><%= hongbao.participant.id%></td>
-      <td><%= is_paid hongbao.participant %></td>
-      <td><%= is_shiped hongbao.participant %></td>
+      <td><%= hongbao.participant.id if hongbao.participant%></td>
+      <td><%= is_paid hongbao.participant if hongbao.participant%></td>
+      <td><%= is_shiped hongbao.participant if hongbao.participant%></td>
       <td><%=l hongbao.created_at %></td>
       <td><td class="status">
           <%if hongbao.status==0%>

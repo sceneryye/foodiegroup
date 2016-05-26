@@ -17,30 +17,30 @@
 
 <div class="groupbuys-index-list"  data-over="<%= t(:groupbuy_end) %>">
   <% if params[:tag] == 'deal' %>
-  <% if @groupbuys.present? %>
-  <%#= render partial: 'groupbuy2', locals: {groupbuys: @groupbuys} %>
-  <%= render @groupbuys %>
-  <% else %>
-  <p><%= t(:no_groupbuys) %></p>
-  <% end%>
+    <% if @groupbuys.present? %>
+      <%#= render partial: 'groupbuy2', locals: {groupbuys: @groupbuys} %>
+      <%= render @groupbuys %>
+    <% else %>
+      <p><%= t(:no_groupbuys) %></p>
+    <% end%>
 
-  <% if @products.present? %>
-  <div id="popular-deals">
-    <div class="products-store">
-      <%= t(:products_store) %>
-    </div>
-    <% @products.each do |product| %>
-    <%= render partial: 'groupbuys/groupbuy', object: product %>
+    <% if @products.present? %>
+      <div id="popular-deals">
+        <div class="products-store">
+          <%= t(:products_store) %>
+        </div>
+        <% @products.each do |product| %>
+          <%= render partial: 'groupbuys/groupbuy', object: product %>
+        <% end %>
+      </div>
     <% end %>
-  </div>
-  <% end %>
-  <% elsif params[:tag] == 'groupbuy' %>
-  <% if @real_groupbuys.present? %>
-  <%= render partial: 'real_groupbuy', collection: @real_groupbuys %>
-  <%#= render @real_groupbuys %>
-  <% else %>
-  <p><%= t(:no_groupbuys) %></p>
-  <% end%>
+  <%elsif params[:tag] == 'group_buy' %>
+    <% if @real_groupbuys.present? %>
+      <%= render partial: 'real_groupbuy', collection: @real_groupbuys %>
+      <%#= render @real_groupbuys %>
+    <% else %>
+      <p><%= t(:no_groupbuys) %></p>
+    <% end%>
   <% end %>
 </div>
 

@@ -15,12 +15,8 @@
 
     </div>
     <div class="columns small-8">
-
       <h4 class="groupbuy-name"><%= current_title(real_groupbuy)%></h4>
-
-      <%= render partial: 'groupbuys/progress_bar', locals: {groupbuy: real_groupbuy} %>
-
-     
+      <%= render partial: 'groupbuys/progress_bar', locals: {groupbuy: real_groupbuy} %>    
       
     </div>
   </div>
@@ -28,11 +24,13 @@
     <div class="columns small-12 list_button">
       <ul class="button-group even-2" >
         <li>
-          <a href="#" class="<%= 'show-participants' if real_groupbuy.status>-1 %> button tiny secondary" data-url="<%=groupbuy_participants_path(real_groupbuy)%>">
+          <a href="#" class="<%= 'show-participants' if real_groupbuy.status>-1 %> button tiny secondary" 
+                data-url="<%=groupbuy_participants_path(real_groupbuy)%>">
             <i class="fa fa-user-plus"></i><%=t(:buys)%></a>
           </li>
           <li>
-            <a href="#" class="show-comments button tiny secondary"  data-url="<%=groupbuy_comments_path(real_groupbuy)%>" data-id="<%= real_groupbuy.id %>" data-more="<%= t(:more) %>" data-controllername="groupbuys">
+            <a href="#" class="show-comments button tiny secondary"  data-url="<%=groupbuy_comments_path(real_groupbuy)%>" 
+                  data-id="<%= real_groupbuy.id %>" data-more="<%= t(:more) %>" data-controllername="groupbuys">
               <i class="fa fa-comments"></i><%=t(:comments)%>
             </a>
           </li>

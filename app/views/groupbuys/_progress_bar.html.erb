@@ -4,10 +4,13 @@
    <div class="row radius callout all-kinds-of-money">
         <div class="columns small-6 groupbuy-price" style="line-height:100%">
           <span class="price save"><i class="fa fa-cny"></i><%=groupbuy.groupbuy_price %>/<%=translate_of(groupbuy.goods_unit)%></span>
-          <small class="money">  <span class="price market"><i class="fa fa-cny"></i><%=groupbuy.market_price %>/<%=translate_of(groupbuy.goods_unit)%></span></small>
+          <small class="money">  
+            <span class="price market"><i class="fa fa-cny"></i><%=groupbuy.market_price %>/<%=translate_of(groupbuy.goods_unit)%></span>
+          </small>
         </div>
         <div class="columns small-6">
-          <span class="price save"><%=t(:save)%>:&nbsp;<%= (((groupbuy.market_price - groupbuy.groupbuy_price) / groupbuy.market_price) * 100).round(2) %>%</span>
+          <span class="price save"><%=t(:save)%>:&nbsp;
+          <%= (((groupbuy.market_price - groupbuy.groupbuy_price) / groupbuy.market_price) * 100).round(2) %>%</span>
         </div>
       </div>
     <div class="progress ">

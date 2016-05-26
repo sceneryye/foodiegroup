@@ -47,7 +47,7 @@
           <% if @groupbuy.deal? %>
           <th><%=t(:inventory)%></th>
           <td colspan="2"><%=translate_of(@groupbuy.goods_unit, @groupbuy.goods_maximal.to_i).html_safe%></td>
-          <% elsif @groupbuy.groupbuy? %>
+          <% elsif @groupbuy.group_buy? %>
           <th><%=t(:target)%></th>
           <td colspan="2"><%=translate_of(@groupbuy.goods_unit, @groupbuy.target.to_i).html_safe%></td>
           <% end %>

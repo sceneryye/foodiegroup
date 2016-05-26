@@ -88,14 +88,14 @@
       </div>
       <div class="weui_cell_ft"></div>
       <% end %>
-
-      <%= link_to logistics_path, class: 'weui_cell' do %>
-      <div class="weui_cell_bd weui_cell_primary">
-        <div class="type"><i class="fa fa-file-text"></i><%= t(:logistic_ruler) %></div>
-      </div>
-      <div class="weui_cell_ft"></div>
-      <% end %>
-
+      <% if is_admin? %>
+        <%= link_to logistics_path, class: 'weui_cell' do %>
+        <div class="weui_cell_bd weui_cell_primary">
+          <div class="type"><i class="fa fa-file-text"></i><%= t(:logistic_ruler) %></div>
+        </div>
+        <div class="weui_cell_ft"></div>
+        <% end %>
+      <%end%>
       <% if @groups %>
       <%= link_to "javascript:void(0)", class: 'weui_cell show-groups hidden' do %>
       <div class="weui_cell_bd weui_cell_primary">
