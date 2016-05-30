@@ -1,6 +1,5 @@
 <% provide :title, t(:choose_from_groupbuys) %>
 
-<% if @groupbuys %>
 <% @groupbuys.each do |groupbuy| %>
 <div class="row">
   <div class="columns small-4">
@@ -15,5 +14,4 @@
     <% end %>
   </div>
 </div>
-<% end %>
-<% end %>
+<% end if @groupbuys%>

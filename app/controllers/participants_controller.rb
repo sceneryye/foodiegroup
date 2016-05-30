@@ -76,9 +76,9 @@ class ParticipantsController < ApplicationController
     @participant = @parent.participants.new(participant_params)
 
     @participant.user = current_user
-
+    
     if @participant.save
-      if session[:kol].present?
+      if session[:kol].present? && current_user.id.to_s != session[:kol]
         @participant.update_columns(kol_id: session[:kol])
         @hongbao = Hongbao.new do |hongbao|
           hongbao.user_id = session[:kol].to_i

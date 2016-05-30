@@ -6,6 +6,8 @@ class GroupbuysController < ApplicationController
   before_action :login_with_mobile
   before_action :set_recommend, only: [:index]
   helper_method :cut_pic
+  before_action :get_tag, only: [:index,:new,:choose_or_new_groupbuy,:new_from_groupbuy]
+
 
   def index
     if params[:kol].present?
@@ -14,10 +16,10 @@ class GroupbuysController < ApplicationController
       @kol_title = "-#{@kol.kol}"
     end
 
-    if params[:tag] == 'deal'
+    if  @tag == 'deal'
       @groupbuys = Groupbuy.online.includes(:user).where('tag = ? and end_time > ?', 0, Time.zone.now)
       @products = Groupbuy.online.includes(:user).where('tag = ? and end_time <= ?', 0, Time.zone.now)
-    elsif params[:tag] == 'group_buy'
+    else 
       @real_groupbuys = Groupbuy.online_groupbuy.includes(:user).where(tag: 1)
     end
 
@@ -52,7 +54,7 @@ class GroupbuysController < ApplicationController
                               else
                                 "#{(@groupbuy.price / (@groupbuy.set_ratio || 1)).round(2)}/#{translate_of(@groupbuy.single_unit)}"
                               end
-                            elsif @groupbuy.tag == 'groupbuy'
+                            elsif @groupbuy.tag == 'group_buy'
                               "#{(@groupbuy.groupbuy_price / (@groupbuy.set_ratio || 1)).round(2)}/#{translate_of(@groupbuy.single_unit)}"
                             end
 
@@ -110,14 +112,14 @@ class GroupbuysController < ApplicationController
   end
 
   def new
-    @title = "#{t(:create)} #{t(params[:tag])}"
+    @title = "#{t(:create)} #{t(@tag)}"
     @groupbuy = Groupbuy.new
     session[:pic_file] = nil
     @photo = Photo.new
   end
 
   def choose_or_new_groupbuy
-    @title = "#{t(:create)} #{t(params[:tag])}"
+    @title = "#{t(:create)} #{t(@tag)}"
     @groupbuys = Groupbuy.offline.where(user_id: current_user.id)
   end
 
@@ -126,7 +128,7 @@ class GroupbuysController < ApplicationController
   end
 
   def new_from_groupbuy
-    @title = "#{t(:create)} #{t(params[:tag])}"
+    @title = "#{t(:create)} #{t(@tag)}"
     @groupbuy = Groupbuy.new
     @old_groupbuy = Groupbuy.find_by(params[:id])
   end
@@ -289,6 +291,14 @@ class GroupbuysController < ApplicationController
   end
 
   private
+
+  def get_tag
+      @tag = 'group_buy'
+      if params[:tag]== 'deal'
+        @tag = 'deal'
+      end
+  end
+
 
   def login_with_mobile
     if session[:mobile].present?

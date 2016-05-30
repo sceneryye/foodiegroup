@@ -4,7 +4,7 @@
     <%= render 'layouts/form_errors', object: @groupbuy %>
     <input type="hidden", name='photo_ids' value="" class="pic-ids">
     <input type="hidden", name='delete_ids' value="" class="delete-ids">
-    <input type="hidden", name='groupbuy[tag]' value="<%= params[:tag] %>">
+    <input type="hidden", name='groupbuy[tag]' value="<%= @tag %>">
     <!--images[] returned to the album as an array. We use file_field_tag since images is not @album's attribute-->
     <%#= file_field_tag "images[]", type: :file, multiple: true %>
   <div>
