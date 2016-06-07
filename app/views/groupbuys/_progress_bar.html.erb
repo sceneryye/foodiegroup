@@ -23,7 +23,7 @@
       </div>
       <div class='columns small-4'>
          <div class="num"><%= "#{groupbuy.target_completed.last} #{groupbuy.goods_unit}" %></div>
-          <div><%= t(:remainder) %></div>
+          <div><%= t(:Left) %></div>
       </div>
       <div class='columns small-4 groupbuy-target'>
       <%= t(:target) %> : <%= translate_of(groupbuy.goods_unit, groupbuy.target.to_i).html_safe %>

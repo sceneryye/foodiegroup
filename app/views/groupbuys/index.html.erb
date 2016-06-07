@@ -16,7 +16,7 @@
 <%# content_for(:groupbuy_content) do %>
 
 <div class="groupbuys-index-list"  data-over="<%= t(:groupbuy_end) %>">
-  <% if (@tag == 'deal' %>
+  <% if @tag == 'deal' %>
     <% if @groupbuys.present? %>
       <%#= render partial: 'groupbuy2', locals: {groupbuys: @groupbuys} %>
       <%= render @groupbuys %>
