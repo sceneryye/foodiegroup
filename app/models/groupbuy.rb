@@ -1,5 +1,5 @@
 class Groupbuy < ActiveRecord::Base
-	enum tag: [:deal, :group_buy]
+	enum tag: [:deal, :group_buy,:naked_hub]
 	belongs_to :user
 	belongs_to :logistic
 

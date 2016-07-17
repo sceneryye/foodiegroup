@@ -1,6 +1,6 @@
 
 <div class="header">
- 
+
 
 <nav class="tab-bar">
   <section class="left-small">
@@ -18,28 +18,29 @@
 
 <aside class="left-off-canvas-menu">
   <ul class="off-canvas-list">
-    <li>      
-      <%if session[:locale] == 'en'%>  
+    <li>
+      <%if session[:locale] == 'en'%>
       <%#=link_to '<i class="fa fa-language"></i>'.html_safe+' 中文',"#{request.url.sub('?locale=en','')}?locale=zh"%>
       <%=link_to '<i class="fa fa-language"></i>'.html_safe+' 中文', 'javascript:void(0);', onclick: 'change_locale(this)', 'data-locale' => 'zh', class: 'change-locale' %>
       <%else%>
       <%#=link_to '<i class="fa fa-language"></i>'.html_safe+' English',"#{request.url.sub('?locale=zh','')}?locale=en"%>
       <%=link_to '<i class="fa fa-language"></i>'.html_safe+' English', 'javascript:void(0);', onclick: 'change_locale(this)', 'data-locale' => 'en', class: 'change-loc' %>
-      <%end%> 
+      <%end%>
     </li>
     <li><%=link_to ' <i class="fa fa-search"></i>'.html_safe+' '+t(:search),search_path, style: 'display:none'%></li>
     <%if signed_in?%>
       <% if current_user.role.in?(['1', '2']) %>
         <li><%=link_to '<i class="fa fa-cart-plus"></i>'.html_safe+' '+t(:new_deal), choose_or_new_groupbuy_path(tag: 'deal')%></li>
         <li><%=link_to '<i class="fa fa-cart-plus"></i>'.html_safe+' '+t(:new_groupbuy), choose_or_new_groupbuy_path(tag: 'group_buy')%></li>
+        <li><%=link_to '<i class="fa fa-cart-plus"></i>'.html_safe+' '+t(:new_nakedhub), new_groupbuy_path(tag: 'naked_hub')%></li>
         <li><%=link_to '<i class="fa fa-calendar"></i>'.html_safe+' '+t(:new_event), vote_products_path%></li>
-        <li><%=link_to '<i class="fa fa-bullhorn"></i>'.html_safe+' '+t(:new_topic), new_forum_topic_path(forum_id)%></li>      
+        <li><%=link_to '<i class="fa fa-bullhorn"></i>'.html_safe+' '+t(:new_topic), new_forum_topic_path(forum_id)%></li>
       <% end %>
     <%else%>
     <li><%=link_to '<i class="fa  fa-sign-in"></i>'.html_safe+' '+t(:login), login_path%></li>
     <%end%>
     <li class="divider hide-for-small"></li>
-    
+
   </ul>
 </aside>
 </div>

@@ -6,16 +6,17 @@
       @users_active = 'active'
     when 'groupbuys'
       @deals_active = 'active' if params[:tag] == 'deal'
-      @groupbuys_active = 'active' if params[:tag] == 'groupbuy'
+      @groupbuys_active = 'active' if params[:tag] == 'group_buy'
+      @nakedhubs_active = 'active' if params[:tag] == 'naked_hub'
     when 'votings', 'vote_products'
-      @votes_active = 'active'  
+      @votes_active = 'active'
     when 'searchs'
       @searchs_active = 'active'
   end
 %>
 <% votepath = (Voting.count > 0) ? voting_path(Voting.last) : votings_path %>
 
-<div class="icon-bar four-up" role="navigation" id="bottomNav">
+<div class="icon-bar five-up" role="navigation" id="bottomNav">
   <%=link_to root_path(tag: 'deal'),class: "item #{@home_active}, hidden" do%>
     <i class="fa fa-home"></i>
   <%end%>
@@ -28,6 +29,9 @@
   <%=link_to groupbuys_path(tag: 'group_buy'), class: "item #{@groupbuys_active}" do%>
     <i class="fa fa-bullhorn"></i>
   <%end%>
+  <%=link_to groupbuys_path(tag: 'naked_hub'), class: "item #{@nakedhubs_active}" do%>
+    <i class="fa fa-ge"></i>
+  <%end%>
   <%if current_user
       @user_url = profile_path(current_user.id)
     else
@@ -36,5 +40,5 @@
   <%=link_to @user_url,class: "item #{@users_active}" do%>
     <i class="fa fa-user"></i>
   <%end%>
- 
+
 </div>

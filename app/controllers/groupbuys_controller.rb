@@ -15,12 +15,18 @@ class GroupbuysController < ApplicationController
       @kol = User.find_by_id(session[:kol])
       @kol_title = "-#{@kol.kol}"
     end
-    
-    if  @tag == 'deal'
-      @groupbuys = Groupbuy.online.includes(:user).where('tag = ? and end_time > ?', 0, Time.zone.now)
-      @products = Groupbuy.online.includes(:user).where('tag = ? and end_time <= ?', 0, Time.zone.now)
-    else 
-      @real_groupbuys = Groupbuy.online_groupbuy.includes(:user).where(tag: 1)
+
+    @tag_id = case @tag
+    when 'group_buy' then 1
+    when 'naked_hub' then 2
+    else 0
+    end
+
+    if @tag == 'group_buy'
+      @real_groupbuys = Groupbuy.online_groupbuy.includes(:user).where(tag: @tag_id)
+    else
+      @groupbuys = Groupbuy.online.includes(:user).where('tag = ? and end_time > ?', @tag_id, Time.zone.now)
+      @products = Groupbuy.online.includes(:user).where('tag = ? and end_time <= ?', @tag_id, Time.zone.now)
     end
 
     # 微信share接口配置
@@ -30,7 +36,7 @@ class GroupbuysController < ApplicationController
                "Hot Deal Recommendation#{@kol_title}"
                 if is_kol?
                     "Buy smart together ! Recommended by: KOL[#{current_user.kol}]"
-                end       
+                end
              else
                "热门团购推荐#{@kol_title}"
                 if is_kol?
@@ -48,8 +54,8 @@ class GroupbuysController < ApplicationController
       @alert = true if params[:error_message] == 'success'
     end
     @parent = @groupbuy = Groupbuy.find(params[:id])
-    @groupbuy_price_unit = if @groupbuy.tag == 'deal'       
-                              if @groupbuy.end_time > Time.now      
+    @groupbuy_price_unit = if @groupbuy.tag == 'deal'
+                              if @groupbuy.end_time > Time.now
                                 "#{(@groupbuy.groupbuy_price / (@groupbuy.set_ratio || 1)).round(2)} /#{translate_of(@groupbuy.single_unit)}"
                               else
                                 "#{(@groupbuy.price / (@groupbuy.set_ratio || 1)).round(2)}/#{translate_of(@groupbuy.single_unit)}"
@@ -294,8 +300,8 @@ class GroupbuysController < ApplicationController
 
   def get_tag
       @tag = 'group_buy'
-      if params[:tag]== 'deal'
-        @tag = 'deal'
+      if params[:tag].present?
+        @tag = params[:tag]
       end
   end
 

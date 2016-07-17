@@ -22,14 +22,14 @@
         <div class="columns small-6 groupbuy-price" style="line-height:100%">
           <span class="price save"><i class="fa fa-cny"></i>
           <!-- <%=groupbuy.current_price %>/<%=translate_of(groupbuy.goods_unit)%> -->
-          <%@groupbuy_price_unit = if groupbuy.tag == 'deal'       
-                              if groupbuy.end_time > Time.now      
+          <%@groupbuy_price_unit = if groupbuy.tag == 'group_buy'
+                              "#{(groupbuy.groupbuy_price / (groupbuy.set_ratio || 1)).round(2)}/#{translate_of(groupbuy.single_unit)}"
+                            else
+                              if groupbuy.end_time > Time.now
                                 "#{(groupbuy.groupbuy_price / (groupbuy.set_ratio || 1)).round(2)} /#{translate_of(groupbuy.single_unit)}"
                               else
                                 "#{(groupbuy.price / (groupbuy.set_ratio || 1)).round(2)}/#{translate_of(groupbuy.single_unit)}"
                               end
-                            else
-                              "#{(groupbuy.groupbuy_price / (groupbuy.set_ratio || 1)).round(2)}/#{translate_of(groupbuy.single_unit)}"
                             end
           %>
           <%=@groupbuy_price_unit%>
@@ -45,7 +45,7 @@
           <span class="price save"><%=t(:save)%>:&nbsp;<%= (((groupbuy.market_price - groupbuy.current_price) / groupbuy.market_price) * 100).round(2) %>%</span>
         </div>
       </div>
-      
+
       <% if groupbuy.end_time > Time.zone.now %>
       <div class="countdown countdownlists">
         <span><i class="fa fa-clock-o"></i></span>
