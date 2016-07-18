@@ -94,6 +94,16 @@
       <%= f.text_field :commision, placeholder: '¥' %>
     </span>
   </div>
+  <div class="small-3 columns">
+    <span class="market_price postfix">
+      <%= t(:cost) %>
+    </span>
+  </div>
+  <div class="small-3 columns">
+    <span class="market_price postfix">
+      <%= f.text_field :cost, placeholder: '¥' %>
+    </span>
+  </div>
 
 
   <div class="small-3 columns">
@@ -182,7 +192,7 @@
 
 <div class="row collapse goods-maximal">
 
-  
+
   <div class="small-4 columns">
     <span class="postfix"><%= t(:logistics) %></span>
   </div>

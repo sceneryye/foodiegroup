@@ -318,7 +318,7 @@ class GroupbuysController < ApplicationController
   end
 
   def groupbuy_params
-    params.require(:groupbuy).permit(:commision,:en_title, :zh_title, :en_body, :zh_body, :end_time, :start_time, :groupbuy_type, :goods_maximal, :goods_minimal, :market_price, :tag, :target, :origin, :groupbuy_price, :pic_url, :name, :mobile, :goods_unit, :price, :logistic_id, :weight, :goods_size, :goods_bbd, :single_unit, :set_ratio)
+    params.require(:groupbuy).permit(:commision,:en_title, :zh_title, :en_body, :zh_body, :end_time, :start_time, :groupbuy_type, :goods_maximal, :goods_minimal, :market_price, :cost,:tag, :target, :origin, :groupbuy_price, :pic_url, :name, :mobile, :goods_unit, :price, :logistic_id, :weight, :goods_size, :goods_bbd, :single_unit, :set_ratio)
   end
 
   def set_recommend

@@ -7,7 +7,6 @@
     when 'groupbuys'
       @deals_active = 'active' if params[:tag] == 'deal'
       @groupbuys_active = 'active' if params[:tag] == 'group_buy'
-      @nakedhubs_active = 'active' if params[:tag] == 'naked_hub'
     when 'votings', 'vote_products'
       @votes_active = 'active'
     when 'searchs'
@@ -29,9 +28,7 @@
   <%=link_to groupbuys_path(tag: 'group_buy'), class: "item #{@groupbuys_active}" do%>
     <i class="fa fa-bullhorn"></i>
   <%end%>
-  <%=link_to groupbuys_path(tag: 'naked_hub'), class: "item #{@nakedhubs_active}" do%>
-    <i class="fa fa-ge"></i>
-  <%end%>
+
   <%if current_user
       @user_url = profile_path(current_user.id)
     else
