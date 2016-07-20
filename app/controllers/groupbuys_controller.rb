@@ -22,12 +22,13 @@ class GroupbuysController < ApplicationController
     else 0
     end
 
-    if @tag == 'group_buy'
-      @real_groupbuys = Groupbuy.online_groupbuy.includes(:user).where(tag: @tag_id)
-    else
+    if @tag == 'deal'
       @groupbuys = Groupbuy.online.includes(:user).where('tag = ? and end_time > ?', @tag_id, Time.zone.now)
       @products = Groupbuy.online.includes(:user).where('tag = ? and end_time <= ?', @tag_id, Time.zone.now)
+    else
+      @real_groupbuys = Groupbuy.online_groupbuy.includes(:user).where(tag: @tag_id)
     end
+
 
     # 微信share接口配置
     groupbuy = Groupbuy.online.where('end_time > ?', Time.zone.now).first
@@ -178,6 +179,7 @@ class GroupbuysController < ApplicationController
     @groupbuy = Groupbuy.find(params[:id])
     @pic = @groupbuy.pic_url.split(',').reject(&:blank?)
     @photos = @groupbuy.photos
+    @tag = @groupbuy.tag
   end
 
   def update
@@ -318,7 +320,10 @@ class GroupbuysController < ApplicationController
   end
 
   def groupbuy_params
-    params.require(:groupbuy).permit(:commision,:en_title, :zh_title, :en_body, :zh_body, :end_time, :start_time, :groupbuy_type, :goods_maximal, :goods_minimal, :market_price, :cost,:tag, :target, :origin, :groupbuy_price, :pic_url, :name, :mobile, :goods_unit, :price, :logistic_id, :weight, :goods_size, :goods_bbd, :single_unit, :set_ratio)
+    params.require(:groupbuy).permit(:commision,:en_title, :zh_title, :en_body, :zh_body, :end_time,
+    :start_time, :groupbuy_type, :goods_maximal, :goods_minimal, :market_price, :cost,:tag, :target,
+    :origin, :groupbuy_price, :pic_url, :name, :mobile, :goods_unit, :price, :logistic_id, :weight,
+    :goods_size, :goods_bbd, :single_unit, :set_ratio, :site_id)
   end
 
   def set_recommend

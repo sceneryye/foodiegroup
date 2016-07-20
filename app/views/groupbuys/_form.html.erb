@@ -188,18 +188,34 @@
   </div>
 </div>
 
+<%if @tag=='naked_hub'%>
+<div class="row collapse goods-maximal">
+  <div class="small-4 columns">
+    <span class="postfix"><%= t(:site) %></span>
+  </div>
+  <div class="small-5 columns">
+    <span class="postfix">
+      <%=f.select :site_id,options_from_collection_for_select(Site.all,:id,:address,@groupbuy.site_id)%>
+    </span>
+  </div>
+  <div class="small-3 columns">
+    <span class="postfix">
+      <%=link_to sites_path do %>
+      <i class="fa fa-plus-square"></i>
+      <% end %>
+    </span>
+  </div>
+</div>
+<%end%>
 
 
 <div class="row collapse goods-maximal">
-
-
   <div class="small-4 columns">
     <span class="postfix"><%= t(:logistics) %></span>
   </div>
   <div class="small-5 columns">
     <span class="postfix">
       <%=f.select :logistic_id,options_from_collection_for_select(current_user.logistics.all,:id,:name,@groupbuy.logistic_id), {:include_blank=>"--包邮--"}, 'data-url' => acquire_logistic_details_path %>
-
     </span>
   </div>
   <div class="small-3 columns">

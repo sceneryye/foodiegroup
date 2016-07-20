@@ -29,7 +29,7 @@ class SitesController < ApplicationController
         return redirect_to groupbuy_path(params[:groupbuy_id])
       end
 
-      redirect_to sitees_path, notice: '地址添加成功'
+      redirect_to sites_path, notice: '地址添加成功'
     else
       render :new
     end
@@ -67,7 +67,7 @@ class SitesController < ApplicationController
         session[:return_url] = nil
         return redirect_to return_url
       end
-      redirect_to sitees_path(groupbuy_id: params[:groupbuy_id]), notice: '地址修改成功'
+      redirect_to sites_path(groupbuy_id: params[:groupbuy_id]), notice: '地址修改成功'
     else
       render :edit
     end
@@ -76,7 +76,7 @@ class SitesController < ApplicationController
   def destroy
    @site.destroy
    respond_to do |format|
-    format.html {redirect_to sitees_path, notice: '地址删除成功'}
+    format.html {redirect_to sites_path, notice: '地址删除成功'}
     format.js
   end
   end

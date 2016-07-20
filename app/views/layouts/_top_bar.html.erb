@@ -31,8 +31,9 @@
     <%if signed_in?%>
       <% if current_user.role.in?(['1', '2']) %>
         <li><%=link_to '<i class="fa fa-cart-plus"></i>'.html_safe+' '+t(:new_deal), choose_or_new_groupbuy_path(tag: 'deal')%></li>
-        <li><%=link_to '<i class="fa fa-cart-plus"></i>'.html_safe+' '+t(:new_groupbuy), choose_or_new_groupbuy_path(tag: 'group_buy')%></li>
-        <li><%=link_to '<i class="fa fa-cart-plus"></i>'.html_safe+' '+t(:new_nakedhub), new_groupbuy_path(tag: 'naked_hub')%></li>
+        <li><%=link_to '<i class="fa fa-ellipsis-h"></i>'.html_safe+' '+t(:new_groupbuy), choose_or_new_groupbuy_path(tag: 'group_buy')%></li>
+        <li><%=link_to '<i class="fa fa-circle-o"></i>'.html_safe+' '+t(:new_nakedhub), new_groupbuy_path(tag: 'naked_hub')%></li>
+        <li><%=link_to '<i class="fa fa-circle"></i>'.html_safe+' '+t(:nakedhub), groupbuys_path(tag: 'naked_hub')%></li>
         <li><%=link_to '<i class="fa fa-calendar"></i>'.html_safe+' '+t(:new_event), vote_products_path%></li>
         <li><%=link_to '<i class="fa fa-bullhorn"></i>'.html_safe+' '+t(:new_topic), new_forum_topic_path(forum_id)%></li>
       <% end %>

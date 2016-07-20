@@ -1,11 +1,6 @@
 <div class="address-content">
-  <% if controller_name == 'groupbuys' %>
   <div class="left send-to"><%= t(:send_to) %></div>
-  <% else %>
-  <div class="left <%= site.default == 1 ? 'checked' : 'unchecked' %>">
-    <i class="fa fa-check-circle"></i>
-  </div>
-  <% end %>
+
   <div class="left address-detail" data-id="<%= site.id %>">
     <div class="name-mobile">
       <span class="name"><%= site.area %></span>

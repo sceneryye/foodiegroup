@@ -60,7 +60,7 @@
           <td colspan="2">￥<%=(@groupbuy.market_price / (@groupbuy.set_ratio || 1)).round(2)%>/<%=translate_of(@groupbuy.single_unit)%></td>
         </tr>
         <tr>
-          <th class="groupbuy-price-show"><%=t(:unit_price)%></th>            
+          <th class="groupbuy-price-show"><%=t(:unit_price)%></th>
           <td class="groupbuy-price-show" colspan="2">￥<%=@groupbuy_price_unit%></td>
         </tr>
         <tr>
@@ -89,10 +89,14 @@
             </textarea>
           </td>
         </tr>
+        <tr>
+          <td><%=t(:address)%></td>
+          <td><%=@groupbuy.site.address if @groupbuy.site%></td>
+
       </table>
 
-      <% if @groupbuy.tag == 'group_buy' %>
-      <%= render partial: 'groupbuys/progress_bar', locals: {groupbuy: @groupbuy} %>
+      <% if @groupbuy.tag != 'deal' %>
+        <%= render partial: 'groupbuys/progress_bar', locals: {groupbuy: @groupbuy} %>
       <% end %>
 
     </div>
