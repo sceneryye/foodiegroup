@@ -4,7 +4,7 @@ class Groupbuy < ActiveRecord::Base
 	belongs_to :logistic
 
 
-
+	has_many :groupbuy_sites, dependent: :destroy
 	has_many :participants, dependent: :destroy
 	has_many :comments, dependent: :destroy
 	has_many :photos, :inverse_of => :groupbuy, :dependent => :destroy

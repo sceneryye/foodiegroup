@@ -1,0 +1,14 @@
+<div class="user-addresses-list">
+  <%=render @sites%>
+  <#=render 'form' ,:locals=>{@site=>@site} %>
+  <div class="new">
+    <div class="new-address left">
+    <%= t(:new_site) %>
+    </div>
+    <%= link_to new_site_path do %>
+    <div class="plus-circle right"><i class="fa fa-lg fa-plus-circle"></i></div>
+    <% end %>
+    <div class="clear"></div>
+  </div>
+  <hr />
+</div>

@@ -15,7 +15,7 @@
 %>
 <% votepath = (Voting.count > 0) ? voting_path(Voting.last) : votings_path %>
 
-<div class="icon-bar five-up" role="navigation" id="bottomNav">
+<div class="icon-bar four-up" role="navigation" id="bottomNav">
   <%=link_to root_path(tag: 'deal'),class: "item #{@home_active}, hidden" do%>
     <i class="fa fa-home"></i>
   <%end%>

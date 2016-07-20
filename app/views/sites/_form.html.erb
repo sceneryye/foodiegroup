@@ -1,0 +1,41 @@
+<%= form_for @site, data: {abide: ''} do |f| %>
+<%= render 'layouts/form_errors', object: @site %>
+<% if params[:groupbuy_id].present? %>
+<%= hidden_field_tag :from, 'new_groupbuy' %>
+<%= hidden_field_tag :groupbuy_id, params[:groupbuy_id] %>
+<% end %>
+
+<div class="row">
+  <div class="city-group">
+    <div class="columns small-4">
+      <select name="province" id="province" class="city-select">
+        <option value="">--<%= t(:province) %>--</option>
+        <%= options_for_select(ChinaCity.list) %>
+      </select>
+    </div>
+    <div class="columns small-4">
+      <select name="city" id="city" class="city-select hidden">
+       <option value="">--<%= t(:city) %>--</option>
+       <%= options_for_select(ChinaCity.list) %>
+     </select>
+   </div>
+   <div class="columns small-4">
+    <select name="area" id="area" class="city-select hidden">
+     <option value="">--<%= t(:area) %>--</option>
+     <%= options_for_select(ChinaCity.list) %>
+   </select>
+ </div>
+</div>
+</div>
+
+<div>
+ <%= f.text_area :address, required: true, placeholder: (session[:locale] == 'en' ? 'Please insert your address using Chinese characters' : '中文地址')%>
+ <%= show_error_message('收货地址，不能为空！') %>
+</div>
+<div>
+  <label>
+    <input type="checkbox" name="default" value=1 checked="checked">
+    <%= t(:set_default) %></div>
+  </label>
+  <%= f.submit class:'tiny button radius right' %>
+  <% end %>

@@ -1,5 +1,6 @@
 RailsOnForum::Application.routes.draw do
   root 'groupbuys#index'
+  resources :sites
   resources :vote_products
   resources :votings
   resources :wishlists
@@ -40,10 +41,10 @@ RailsOnForum::Application.routes.draw do
 
   resources :admins do
     # post "downorder", :on=>:collection
-    collection do    
+    collection do
       get  :kols_list
       get :users_list
-      post :downorder    
+      post :downorder
       get :groupbuys_list
       get :topics_list
       get :participants_list
@@ -59,7 +60,7 @@ RailsOnForum::Application.routes.draw do
        post :update_groupbuy
        get :send_hongbao
        post :update_user
-    end      
+    end
   end
 
   resource :votes, only: :create
