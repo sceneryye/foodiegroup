@@ -11,7 +11,9 @@
       <span class="name"><%= user_address.name %></span>
       <span class="mobile"><%= user_address.mobile %></span>
     </div>
-    <div class="address"><%= user_address.address %></div>    
+    <%if @parent.tag!='naked_hub'%>
+    <div class="address"><%= user_address.address %></div>
+    <%end%>
   </div>
   <% if params[:id].nil? && %>
   <%= link_to user_address_path(user_address), method: :delete, confirm: t(:delete_insure) do %>

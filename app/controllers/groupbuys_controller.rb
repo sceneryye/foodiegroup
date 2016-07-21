@@ -61,7 +61,7 @@ class GroupbuysController < ApplicationController
                               else
                                 "#{(@groupbuy.price / (@groupbuy.set_ratio || 1)).round(2)}/#{translate_of(@groupbuy.single_unit)}"
                               end
-                            elsif @groupbuy.tag == 'group_buy'
+                            else
                               "#{(@groupbuy.groupbuy_price / (@groupbuy.set_ratio || 1)).round(2)}/#{translate_of(@groupbuy.single_unit)}"
                             end
 

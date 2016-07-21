@@ -34,7 +34,7 @@
    <option value="<%= t(:weekend) %>"><%= t(:weekend) %></option>
    <option value="<%= t(:anyday) %>" selected="selected"><%= t(:anyday) %></option>
  </select>
-</div> 
+</div>
 <div class="small-4 columns hidden">
   <select name="time" id="">
    <option value="<%= t(:morning) %>"><%= t(:morning) %></option>
@@ -59,8 +59,7 @@
  <%#= show_error_message('请输入您的手机号码.') %>
 </div>
 <%end%>
-
-<% if params[:groupbuy_id] || controller_name == 'groupbuys'%>
+<% if params[:groupbuy_id] || controller_name == 'groupbuys' %>
 <% if @user_addresses.present? %>
 <div class="user-address">
   <%= render @user_addresses%>
@@ -106,8 +105,7 @@
 <script>
   $(document).ready(function(){
     <% if @parent.respond_to? :goods_minimal %>
-    get_freightage();   
+    get_freightage();
     <% end %>
   });
 </script>
-

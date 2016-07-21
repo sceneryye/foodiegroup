@@ -5,7 +5,7 @@ class Groupbuy < ActiveRecord::Base
 	belongs_to :site
 
 
-	has_many :groupbuy_sites, dependent: :destroy
+	# has_many :groupbuy_sites, dependent: :destroy
 	has_many :participants, dependent: :destroy
 	has_many :comments, dependent: :destroy
 	has_many :photos, :inverse_of => :groupbuy, :dependent => :destroy
@@ -33,7 +33,9 @@ class Groupbuy < ActiveRecord::Base
 	def target_completed
 		return nil if self.deal?
 		total_quantity =	Participant.where(groupbuy_id: self.id, status_pay: 1).sum(:quantity)
-		[((total_quantity.to_f / self.target.to_f).round(2) * 100).to_s,  self.target.to_f - total_quantity]
+		adjust = total_quantity.to_i % self.target.to_i
+		[((adjust.to_f / self.target.to_f).round(2) * 100).to_s,  self.target.to_f - adjust]
+		# [((total_quantity.to_f / self.target.to_f).round(2) * 100).to_s,  self.target.to_f - total_quantity]
 	end
 
 
