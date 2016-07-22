@@ -10,7 +10,7 @@ class Participant < ActiveRecord::Base
 	default_scope {order 'created_at DESC'}
 
 	def check_quantity
-		
+
 		count = 1
 		if self.groupbuy_id
 			count = self.groupbuy.goods_minimal
@@ -44,9 +44,14 @@ class Participant < ActiveRecord::Base
 	def get_address
 		address = self.user.default_address
 		self.name = address.name
-		self.address = address.address
 		self.mobile = address.mobile
-		self.area = address.area.split('/')[0]
+		if self.groupbuy.tag == 'naked_hub'
+			self.address = self.groupbuy.site.address
+			self.area = self.groupbuy.site.area.split('/')[0]
+		else
+			self.address = address.address
+			self.area = address.area.split('/')[0]
+		end
 	end
 
 	def calculate_amount

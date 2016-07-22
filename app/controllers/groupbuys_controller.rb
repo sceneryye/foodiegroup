@@ -121,6 +121,7 @@ class GroupbuysController < ApplicationController
   def new
     @title = "#{t(:create)} #{t(@tag)}"
     @groupbuy = Groupbuy.new
+    @groupbuy.tag = @tag
     session[:pic_file] = nil
     @photo = Photo.new
   end

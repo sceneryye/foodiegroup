@@ -20,36 +20,37 @@
 <body onload="<%=@onload %>" >
 <script>
 
-function isWeixinBrowser(){
+  function isWeixinBrowser(){
     var ua = navigator.userAgent.toLowerCase();
       //  alert(ua);
       return (/micromessenger/.test(ua)) ? true : false ;
     }
 
     var is_weixin_browser = isWeixinBrowser();
-  if(is_weixin_browser) {
-    var id = "<%= current_user.try(:id).to_s %>";
-    var nickname = "<%= current_user.try(:nickname).to_s %>";
-    //alert(id);
-   // alert(nickname);
-  <% if (current_user.nil? && session[:openid].nil?) || (current_user.nil? && controller_name != 'users' && session[:openid].nil?) || (current_user.present? && current_user.nickname.nil?) %>
-  //alert('2');
-    var return_url = encodeURIComponent(location.href);
+    if(is_weixin_browser) {
+      var id = "<%= current_user.try(:id).to_s %>";
+      var nickname = "<%= current_user.try(:nickname).to_s %>";
+      //alert(id);
+     // alert(nickname);
+    <% if (current_user.nil? && session[:openid].nil?) || (current_user.nil? && controller_name != 'users' && session[:openid].nil?) || (current_user.present? && current_user.nickname.nil?) %>
+    //alert('2');
+      var return_url = encodeURIComponent(location.href);
 
-    var url = "http://foodie.trade-v.com/sessions/auto_login?return_url=" + return_url;
-    //alert(url);
-    location.href = url;
-  <% end %>
-}
+      var url = "http://foodie.trade-v.com/sessions/auto_login?return_url=" + return_url;
+      //alert(url);
+      location.href = url;
+    <% end %>
+  }
 </script>
 
 <div class="off-canvas-wrap" data-offcanvas>
   <div class="inner-wrap">
-    <!-- Off Canvas Menu -->   
+    <!-- Off Canvas Menu -->
     <%=render '/layouts/top_bar'%>
 
     <!-- main content goes here -->
     <article>
+      <%= render 'layouts/flash_messages'%>
       <%= yield %>
       <%= yield :content %>
       <hr>
@@ -75,18 +76,18 @@ function isWeixinBrowser(){
   </div>
 </div>
 
- 
+
   <%=render '/layouts/menu'%>
 
-  
- 
+
+
   <link rel="stylesheet" media="screen" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <style type='text/css'>
   body {
     font-size: 0.9em;
   }
   </style>
-  
+
 
   <script>
     $(function(){ $(document).foundation(); });
@@ -162,15 +163,15 @@ function isWeixinBrowser(){
       var that = $(this);
       var num = parseFloat(that.val());
       var minimal = that.data('minimal') ;
-      
-      
+
+
       console.log(num);
       console.log(minimal);
       if(num < minimal || isNaN(num)) {
         alert('<%=t(:must_large_than_minimal)%>');
         that.val('');
       }
-      
+
       else{
         that.val(num.toFixed(2));
         get_freightage();

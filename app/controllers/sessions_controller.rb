@@ -40,71 +40,54 @@ class SessionsController < ApplicationController
     code = params[:code]
     # now = Time.zone.now.to_i
 
+
     data = get_auth_access_token code
+    # return render text: data
     access_token = data["access_token"]
     openid = data["openid"]
+
     user = User.find_by(weixin_openid: openid)
-    Rails.logger.info "----openid=#{openid}"
-    Rails.logger.info "----return_url=#{return_url}"
+
     if user && openid.present? && user.nickname.present? && user.avatar.present?
       begin
         RestClient.get user.avatar
       rescue
         data = get_user_info(openid, access_token)
-        user.update_column :avatar, data['headimgurl']
-        Rails.logger.info "------------update avatar => #{user.avatar}"
-        Rails.logger.info "------------data => #{data}"
-        login user
-        return redirect_to return_url || root_path(tag: 'deal')
-      end
-      login user
-      return redirect_to return_url || root_path(tag: 'deal')
 
-    #elsif return_url.split('?').first.in? ['http://foodie.trade-v.com/register', 'http://foodie.trade-v.com/login']
-     # data = get_user_info(openid, access_token)
-      #session[:openid] = data["openid"]
-      # session[:avatar] = data["headimgurl"]
-      # session[:nickname] = data["nickname"]
-      # Rails.logger.info "---------------#{data}"
-      # Rails.logger.info "---------------#{session[:openid]}"
-      # Rails.logger.info "---------------#{session[:nickname]}"
-      # Rails.logger.info "---------------return_url=#{return_url}"
-      # redirect_to register_path
-    # else
-      # data = get_user_info(openid, access_token)
-      # session[:openid] = data["openid"]
-      # session[:avatar] = data["headimgurl"]
-      # session[:nickname] = data["nickname"]
+        user.update_column :avatar, data['headimgurl']
+
+      end
+
     else
       data = get_user_info(openid, access_token)
-      Rails.logger.info "---------------data => #{data}"
-      Rails.logger.info "---------------nickname => #{user.try(:nickname)}"
-      Rails.logger.info "---------------user_id => #{user.try(:id)}"
-      Rails.logger.info "---------------Encoding => #{data['nickname'].encoding}"
       if user && openid.present? && (user.nickname.nil? || user.avatar.nil?)
         begin
           user.update_columns nickname: data['nickname'], avatar: data['headimgurl'], username: data['nickname']
         rescue
           user.update_columns nickname: 'Unknown', avatar: data['headimgurl'], username: 'Unknown'
         end
-        Rails.logger.info "---------------nickname_after_update => #{user.try :nickname}"
-        Rails.logger.info "---------------user_id_after_update => #{user.try :id}"
-        login user
-        return redirect_to return_url || root_path(tag: 'deal')
 
       else
-        new_user = User.new weixin_openid: data["openid"], avatar: data["headimgurl"], nickname: data["nickname"], username: data["nickname"], password: data["openid"]
+        user = User.new weixin_openid: data["openid"], avatar: data["headimgurl"], nickname: data["nickname"], username: data["nickname"], password: data["openid"]
         begin
-          new_user.save
+          user.save
         rescue
-          new_user = User.new weixin_openid: data["openid"], avatar: data["headimgurl"], nickname: 'Unknown', username: 'Unknown', password: data["openid"]
-          new_user.save
+          user = User.new weixin_openid: data["openid"], avatar: data["headimgurl"], nickname: 'Unknown', username: 'Unknown', password: data["openid"]
+          user.save
         end
-        login new_user
-        return redirect_to return_url || root_path(tag: 'deal')
       end
 
     end
+    subscribed = get_user_subscribe_info  openid
+    user.update_attribute :subscribed, subscribed
+    if subscribed == '1'
+      notice = 'Please subscribe Groupmall!'
+    else
+      notice = 'Welcome to Groupmall'
+    end
+    login user
+    return redirect_to return_url || root_path(tag: 'deal') ,notice: notice
+
   end
 
 
@@ -112,6 +95,13 @@ class SessionsController < ApplicationController
 
   def get_auth_access_token code
     get_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=#{WX_APP_ID}&secret=#{WX_APP_SECRET}&code=#{code}&grant_type=authorization_code"
+    res_data_json = RestClient.get get_url
+    res_data_hash = ActiveSupport::JSON.decode res_data_json
+    Rails.logger.info res_data_hash
+    res_data_hash
+  end
+  def get_auth_access_token2
+    get_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=#{WX_APP_ID}&secret=#{WX_APP_SECRET}"
     res_data_json = RestClient.get get_url
     res_data_hash = ActiveSupport::JSON.decode res_data_json
     Rails.logger.info res_data_hash
@@ -134,4 +124,12 @@ class SessionsController < ApplicationController
     res_data_json = RestClient.get get_url
     ActiveSupport::JSON.decode res_data_json
   end
+  def get_user_subscribe_info openid
+    access_token = get_auth_access_token2["access_token"]
+    get_url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=#{access_token}&openid=#{openid}"
+    res_data_json = RestClient.get get_url
+    data = ActiveSupport::JSON.decode res_data_json
+    data["subscribe"]
+  end
+
 end

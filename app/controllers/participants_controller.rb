@@ -66,9 +66,7 @@ class ParticipantsController < ApplicationController
 
   def create
     if params[:groupbuy_id].present?
-      # address = params[:user_addresses_id].present? ? UserAddress.find_by(id: params[:user_addresses_id]) : current_user.default_address
-      # params[:participant].merge!(:name=>address.name,:address=>address.address,:mobile=>address.mobile)
-
+    
       delivery_time = params[:date] + '-' + params[:time]
       params[:participant][:delivery_time] = delivery_time
     end
@@ -76,7 +74,7 @@ class ParticipantsController < ApplicationController
     @participant = @parent.participants.new(participant_params)
 
     @participant.user = current_user
-    
+
     if @participant.save
       if session[:kol].present? && current_user.id.to_s != session[:kol]
         @participant.update_columns(kol_id: session[:kol])
@@ -92,13 +90,11 @@ class ParticipantsController < ApplicationController
         address = ChinaCity.get(params[:gift_address][:province]) + params[:gift_address][:address]
         name = params[:gift_address][:name]
         mobile = params[:gift_address][:mobile]
-        Rails.logger.info "----------------------#{area}"
-        Rails.logger.info "----------------------#{address}"
         @participant.update_columns(area: area, address: address, name: name, mobile: mobile)
-        Rails.logger.info "----------------------#{@participant.area}"
-        Rails.logger.info "----------------------#{@participant.address}"
       end
+
       notice = '报名成功'
+
       if @participant.groupbuy_id
         redirect_to participant_path(@participant), notice: notice
       else

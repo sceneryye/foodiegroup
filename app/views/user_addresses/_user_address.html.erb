@@ -1,6 +1,12 @@
 <div class="address-content">
   <% if controller_name == 'participants' || controller_name == 'groupbuys' %>
-  <div class="left send-to"><%= t(:send_to) %></div>
+  <div class="left send-to">
+    <%if @parent && @parent.tag =='naked_hub'%>
+      <%= t(:contact) %>
+    <%else%>
+      <%= t(:send_to) %>
+    <%end%>
+  </div>
   <% else %>
   <div class="left <%= user_address.default == 1 ? 'checked' : 'unchecked' %>">
     <i class="fa fa-check-circle"></i>
@@ -11,7 +17,7 @@
       <span class="name"><%= user_address.name %></span>
       <span class="mobile"><%= user_address.mobile %></span>
     </div>
-    <%if @parent.tag!='naked_hub'%>
+    <%if @parent && @parent.tag!='naked_hub'%>
     <div class="address"><%= user_address.address %></div>
     <%end%>
   </div>
