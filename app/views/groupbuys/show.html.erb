@@ -89,10 +89,16 @@
             </textarea>
           </td>
         </tr>
+        <%if @groupbuy.tag=='naked_hub'%>
         <tr>
           <td><%=t(:address)%></td>
-          <td><%=@groupbuy.site.address if @groupbuy.site%></td>
-
+          <td><%#=@groupbuy.site.address if @groupbuy.site%>
+            <%Site.all.each do |site|%>
+            <%=site.address%><br>
+            <%end%>
+          </td>
+        </tr>
+        <%end%>
       </table>
 
       <% if @groupbuy.tag != 'deal' %>

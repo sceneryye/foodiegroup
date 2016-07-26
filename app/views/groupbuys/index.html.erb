@@ -42,24 +42,21 @@
     <% else %>
       <p><%= t(:no_groupbuys) %></p>
     <% end%>
-    <div class="row">
-      <div class="columns small-12 medium-4 medium-offset-4 ">
     <%if @tag=='naked_hub'%>
-
-      <p style="text-align:center"><%=t(:nakedhub_share)%><br><%=t(:to_other_language)%><br><img src='/assets/nakedhub.png' class='th'></p>
+      <div class="row">
+        <div class="columns small-12  callout">
+          <div class='callout warning'><%=t(:nakedhub_notice)%></div>
+        </div>
+      </div>
+        <div class="row">
+        <div class="columns small-12 medium-4 medium-offset-4 ">
+          <p style="text-align:center"><br><%=t(:nakedhub_share)%><br><%=t(:to_other_language)%><br><img src='/assets/nakedhub.png' class='th'></p>
+        </div>
+      </div>
     <%end%>
-  </div>
-    </div>
-  <% end %>
-
-
-
+  <%end %>
 </div>
 
-
-
-
-<%# end %>
 
 
 <!--分享-->
