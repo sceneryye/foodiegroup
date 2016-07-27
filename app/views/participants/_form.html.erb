@@ -1,111 +1,109 @@
 
 <%= form_for form_params(@parent, @participant), data: {abide: ''} do |f| %>
-<div class="test"></div>
-<%= render 'layouts/form_errors', object: @participant %>
-<div class="row collapse">
-
- <div class="small-4 columns">
-  <span class="prefix"><%= t(:quantity) %></span>
-</div>
-<div class="small-5 columns">
-  <% if @parent.respond_to? :goods_minimal %>
-  <%= f.number_field :quantity, required: true,value: @parent.goods_minimal.to_i, class: 'participant-number', 'data-minimal'=>@parent.goods_minimal, 'data-id' => @parent.id%>
-  <% else %>
-  <%= f.number_field :quantity, required: true, class: 'event-participant-number',  'data-id' => @parent.id%>
-  <% end %>
-</div>
-<div class="small-3 columns">
-  <span class="postfix">
+  <div class="test"></div>
+  <%= render 'layouts/form_errors', object: @participant %>
+  <div class="row collapse">
+    <div class="small-4 columns">
+     <span class="prefix"><%= t(:quantity) %></span>
+    </div>
+    <div class="small-5 columns">
+      <% if @parent.respond_to? :goods_minimal %>
+        <%= f.number_field :quantity, required: true,value: @parent.goods_minimal.to_i, class: 'participant-number', 'data-minimal'=>@parent.goods_minimal, 'data-id' => @parent.id%>
+      <% else %>
+        <%= f.number_field :quantity, required: true, class: 'event-participant-number',  'data-id' => @parent.id%>
+      <% end %>
+    </div>
+    <div class="small-3 columns">
+      <span class="postfix">
+        <% if params[:groupbuy_id] || controller_name=='groupbuys'%>
+          <%=@parent.goods_unit%>
+        <%else%>
+          <%=t(:people)%>
+        <%end%>
+      </span>
+    </div>
     <% if params[:groupbuy_id] || controller_name=='groupbuys'%>
-    <%=@parent.goods_unit%>
+      <div class="small-4 columns">
+        <span class="prefix"><%= t(:deliverytime) %></span>
+      </div>
+
+      <div class="small-4 columns">
+        <select name="date" id="">
+         <option value="<%= t(:weekday) %>"><%= t(:weekday) %></option>
+         <option value="<%= t(:weekend) %>"><%= t(:weekend) %></option>
+         <option value="<%= t(:anyday) %>" selected="selected"><%= t(:anyday) %></option>
+       </select>
+      </div>
+      <div class="small-4 columns hidden">
+        <select name="time" id="">
+         <option value="<%= t(:morning) %>"><%= t(:morning) %></option>
+         <option value="<%= t(:afternoon) %>"><%= t(:afternoon) %></option>
+         <option value="<%= t(:anytime) %>" selected="selected"><%= t(:anytime) %></option>
+       </select>
+      </div>
+      <div class="clear"></div>
+      <% if @user_addresses.present? %>
+        <div class="user-address">
+          <%= render @user_addresses%>
+        </div>
+        <%if @parent && @parent.tag=='naked_hub'%>
+          <div>
+              <%=f.select :address,options_from_collection_for_select(Site.all,:address,:address)%>
+          </div>
+        <%else%>
+          <div>
+            <label>
+              <input type="checkbox" name="as_gift" value='1' class="as-gift-checkbox">
+              <%= t(:as_gift) %></div>
+            </label>
+          </div>
+          <div class="as-gift hidden">
+            <%= render 'participants/gift_address' %>
+          </div>
+        <%end%>
+        <div class="row freightage">
+          <div class="columns small-3"><%= t(:freightage) %></div>
+          <div class="columns small-4"><i class="fa fa-jpy"></i><span class="freightage-fee"></span></div>
+        </div>
+        <div class="row total-price">
+          <div class="columns small-3"><%= t(:total_price) %></div>
+          <div class="columns small-4"><i class="fa fa-jpy"></i><span class="total-fee"></span></div>
+        </div>
+      <%else %>
+        <div class="small-6 columns small-center add-address">
+        <span><%= t(:no_address) %></span>
+        <%= link_to new_user_address_path(groupbuy_id: params[:id]) do %>
+          <span class="add-address-icon"><i class="fa fa-plus-circle"></i></span>
+        <% end %>
+        </div>
+      <%end %>
     <%else%>
-    <%=t(:people)%>
+      <div class="small-4 columns">
+        <span class="prefix"><%= t(:name) %></span>
+      </div>
+      <div class="small-8 columns">
+       <%= f.text_field :name, required: true, placeholder: t(:name),value: current_user.name%>
+       <%#= show_error_message('请输入您的登录名') %>
+      </div>
+      <div class="small-4 columns">
+        <span class="prefix"><%= t(:mobile) %></span>
+      </div>
+      <div class="small-8 columns">
+       <%= f.text_field :mobile, required: true, placeholder: t(:mobile),value: current_user.mobile %>
+       <%#= show_error_message('请输入您的手机号码.') %>
+      </div>
     <%end%>
-  </span>
-</div>
-<% if params[:groupbuy_id] || controller_name=='groupbuys'%>
-<div class="small-4 columns">
-  <span class="prefix"><%= t(:deliverytime) %></span>
-</div>
 
-<div class="small-4 columns">
-  <select name="date" id="">
-   <option value="<%= t(:weekday) %>"><%= t(:weekday) %></option>
-   <option value="<%= t(:weekend) %>"><%= t(:weekend) %></option>
-   <option value="<%= t(:anyday) %>" selected="selected"><%= t(:anyday) %></option>
- </select>
-</div>
-<div class="small-4 columns hidden">
-  <select name="time" id="">
-   <option value="<%= t(:morning) %>"><%= t(:morning) %></option>
-   <option value="<%= t(:afternoon) %>"><%= t(:afternoon) %></option>
-   <option value="<%= t(:anytime) %>" selected="selected"><%= t(:anytime) %></option>
- </select>
-</div>
-<div class="clear"></div>
-<%else%>
-<div class="small-4 columns">
-  <span class="prefix"><%= t(:name) %></span>
-</div>
-<div class="small-8 columns">
- <%= f.text_field :name, required: true, placeholder: t(:name),value: current_user.name%>
- <%#= show_error_message('请输入您的登录名') %>
-</div>
-<div class="small-4 columns">
-  <span class="prefix"><%= t(:mobile) %></span>
-</div>
-<div class="small-8 columns">
- <%= f.text_field :mobile, required: true, placeholder: t(:mobile),value: current_user.mobile %>
- <%#= show_error_message('请输入您的手机号码.') %>
-</div>
-<%end%>
-<% if params[:groupbuy_id] || controller_name == 'groupbuys' %>
-  <% if @user_addresses.present? %>
-    <div class="user-address">
-      <%= render @user_addresses%>
+    <div class="small-12 columns">
+     <%= f.text_area :remark, class:'comment-area',placeholder: t(:remark)%>
+     <%#= show_error_message('备注，请不要超过500字') %>
     </div>
-    <div>
-      <%if @parent && @parent.tag=='naked_hub'%>
-        <%=f.select :address,options_from_collection_for_select(Site.all,:id,:address,@groupbuy.site_id)%>
-      <%end%>
+    <div class="small-12 columns">
+      <%= f.submit class:'tiny button radius right participant-submit' %>
     </div>
-    <div>
-      <label>
-        <input type="checkbox" name="as_gift" value='1' class="as-gift-checkbox">
-        <%= t(:as_gift) %></div>
-      </label>
-    </div>
-    <div class="as-gift hidden">
-      <%= render 'participants/gift_address' %>
-    </div>
-    <div class="row freightage">
-      <div class="columns small-3"><%= t(:freightage) %></div>
-      <div class="columns small-4"><i class="fa fa-jpy"></i><span class="freightage-fee"></span></div>
-    </div>
-    <div class="row total-price">
-      <div class="columns small-3"><%= t(:total_price) %></div>
-      <div class="columns small-4"><i class="fa fa-jpy"></i><span class="total-fee"></span></div>
-    </div>
-  <%else %>
-    <div class="small-6 columns small-center add-address">
-    <span><%= t(:no_address) %></span>
-    <%= link_to new_user_address_path(groupbuy_id: params[:id]) do %>
-      <span class="add-address-icon"><i class="fa fa-plus-circle"></i></span>
-    <% end %>
-    </div>
-  <%end %>
-<%end%>
-<div class="small-12 columns">
- <%= f.text_area :remark, class:'comment-area',placeholder: t(:remark)%>
- <%#= show_error_message('备注，请不要超过500字') %>
-</div>
-<div class="small-12 columns">
-  <%= f.submit class:'tiny button radius right participant-submit' %>
-</div>
-
-
-
+  </div>
 <% end %>
+
 <script>
   $(document).ready(function(){
     <% if @parent.respond_to? :goods_minimal %>

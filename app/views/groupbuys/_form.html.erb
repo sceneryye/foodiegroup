@@ -204,7 +204,7 @@
   </div>
   <div class="small-7 columns">
     <span class="postfix">
-      <%=f.select :site_id,options_from_collection_for_select(Site.all,:id,:address,@groupbuy.site_id)%>
+      <%=select_tag :site,options_from_collection_for_select(Site.all,:id,:address,@site_ids),multiple: true, size: 8 %>
     </span>
   </div>
   <div class="small-2 columns">

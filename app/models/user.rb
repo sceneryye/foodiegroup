@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
   # validates :weixin_openid, uniqueness: true
-
+  has_many :favorites, dependent: :destroy
   has_many :topics,   dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :participants, dependent: :destroy
@@ -40,5 +40,5 @@ class User < ActiveRecord::Base
 
   def default_address
     self.user_addresses.where(default: 1).first || self.user_addresses.first
-  end 
+  end
 end

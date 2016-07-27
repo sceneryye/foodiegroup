@@ -66,11 +66,11 @@ class ParticipantsController < ApplicationController
 
   def create
     if params[:groupbuy_id].present?
-    
+
       delivery_time = params[:date] + '-' + params[:time]
       params[:participant][:delivery_time] = delivery_time
     end
-
+    # return render text: participant_params
     @participant = @parent.participants.new(participant_params)
 
     @participant.user = current_user
@@ -271,7 +271,7 @@ class ParticipantsController < ApplicationController
   end
 
   def participant_params
-    params.require(:participant).permit(:quantity, :remark)
+    params.require(:participant).permit(:quantity, :remark,:address,:delivery_time)
   end
 
   def deal_with_participant_notify(data)

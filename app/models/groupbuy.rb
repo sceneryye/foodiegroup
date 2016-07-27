@@ -2,10 +2,10 @@ class Groupbuy < ActiveRecord::Base
 	enum tag: [:deal, :group_buy,:naked_hub]
 	belongs_to :user
 	belongs_to :logistic
-	belongs_to :site
+	# belongs_to :site
 
 
-	# has_many :groupbuy_sites, dependent: :destroy
+	has_many :groupbuy_sites, dependent: :destroy
 	has_many :participants, dependent: :destroy
 	has_many :comments, dependent: :destroy
 	has_many :photos, :inverse_of => :groupbuy, :dependent => :destroy
@@ -22,6 +22,10 @@ class Groupbuy < ActiveRecord::Base
 	validates :goods_minimal,  presence: true
 	validates :goods_maximal,  presence: true
 	validate :check_duration
+
+	def site
+
+  end
 
 	def check_duration
 		return if self.start_time.blank? || self.end_time.blank?

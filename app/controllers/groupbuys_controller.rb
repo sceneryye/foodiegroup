@@ -7,7 +7,7 @@ class GroupbuysController < ApplicationController
   before_action :set_recommend, only: [:index]
   helper_method :cut_pic
   before_action :get_tag, only: [:index,:new,:choose_or_new_groupbuy,:new_from_groupbuy]
-
+  before_action :get_groupbuy, only: [:show, :edit, :update, :destroy,:destroy_pic]
 
   def index
     if params[:kol].present?
@@ -27,6 +27,15 @@ class GroupbuysController < ApplicationController
       @products = Groupbuy.online.includes(:user).where('tag = ? and end_time <= ?', @tag_id, Time.zone.now)
     else
       @real_groupbuys = Groupbuy.online_groupbuy.includes(:user).where(tag: @tag_id)
+      if @tag == 'naked_hub' && current_user
+        @favorite = Favorite.where(user_id: current_user.id, url: request.url.sub('http://localhost:5000','')).first_or_create do |favorite|
+          favorite.title = 'naked Hub'
+        end
+        if !@favorite.new_record?
+          @favorite.update_attribute :visit_times, @favorite.visit_times+1
+        end
+
+      end
     end
 
 
@@ -54,7 +63,7 @@ class GroupbuysController < ApplicationController
       @total = params[:total].to_f / 100
       @alert = true if params[:error_message] == 'success'
     end
-    @parent = @groupbuy = Groupbuy.find(params[:id])
+    @parent = @groupbuy
     @groupbuy_price_unit = if @groupbuy.tag == 'deal'
                               if @groupbuy.end_time > Time.now
                                 "#{(@groupbuy.groupbuy_price / (@groupbuy.set_ratio || 1)).round(2)} /#{translate_of(@groupbuy.single_unit)}"
@@ -177,16 +186,18 @@ class GroupbuysController < ApplicationController
   end
 
   def edit
-    @groupbuy = Groupbuy.find(params[:id])
     @pic = @groupbuy.pic_url.split(',').reject(&:blank?)
     @photos = @groupbuy.photos
     @tag = @groupbuy.tag
+
+    @sites = GroupbuySite.where(:groupbuy_id=>@groupbuy.id)
+    @site_ids = []
+    @sites.each do |site|
+      @site_ids << sites.site_id
+    end
   end
 
   def update
-    @groupbuy = Groupbuy.find(params[:id])
-    Rails.logger.info @groupbuy.photos.pluck(:id)
-    Rails.logger.info '###############'
     if params[:from] == 'admin_groupbuy_list'
       return render text: 'failed' if params[:recommend].blank?
       num = params[:recommend].to_i
@@ -262,7 +273,6 @@ class GroupbuysController < ApplicationController
   end
 
   def destroy_pic
-    @groupbuy = Groupbuy.find(params[:id])
     url = params[:url]
     pic_url = @groupbuy.pic_url
     new_pic_url = pic_url.gsub(url, '')
@@ -277,7 +287,6 @@ class GroupbuysController < ApplicationController
   end
 
   def destroy
-    @groupbuy = Groupbuy.find(params[:id])
     tag = @groupbuy.tag
     @groupbuy.destroy
     respond_to do |format|
@@ -301,6 +310,10 @@ class GroupbuysController < ApplicationController
 
   private
 
+  def set_groupbuy
+    @groupbuy = Groupbuy.find(params[:id])
+  end
+
   def get_tag
       @tag = 'group_buy'
       if params[:tag].present?
@@ -316,7 +329,7 @@ class GroupbuysController < ApplicationController
     end
   end
 
-  def set_groupbuy
+  def get_groupbuy
     @groupbuy = Groupbuy.find(params[:id])
   end
 

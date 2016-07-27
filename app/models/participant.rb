@@ -45,10 +45,11 @@ class Participant < ActiveRecord::Base
 		address = self.user.default_address
 		self.name = address.name
 		self.mobile = address.mobile
-		if self.groupbuy.tag == 'naked_hub'
-			self.address = self.groupbuy.site.address
-			self.area = self.groupbuy.site.area.split('/')[0]
-		else
+		# if self.groupbuy.tag == 'naked_hub'
+		# 	self.address = self.groupbuy.site.address
+		# 	self.area = self.groupbuy.site.area.split('/')[0]
+		# else
+		if self.groupbuy.tag != 'naked_hub'
 			self.address = address.address
 			self.area = address.area.split('/')[0]
 		end

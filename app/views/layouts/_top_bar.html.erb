@@ -34,6 +34,9 @@
         <li><%=link_to '<i class="fa fa-ellipsis-h"></i>'.html_safe+' '+t(:new_groupbuy), choose_or_new_groupbuy_path(tag: 'group_buy')%></li>
         <li><%=link_to '<i class="fa fa-circle-o"></i>'.html_safe+' '+t(:create)+' '+t(:naked_hub), new_groupbuy_path(tag: 'naked_hub')%></li>
         <li><%=link_to '<i class="fa fa-circle"></i>'.html_safe+' '+t(:naked_hub), groupbuys_path(tag: 'naked_hub')%></li>
+        <%if current_user.favorites%>
+          <li><%=link_to '<i class="fa fa-circle"></i>'.html_safe+' '+t(:favorite), current_user.favorites.first.url%></li>
+        <%end%>
         <li><%=link_to '<i class="fa fa-calendar"></i>'.html_safe+' '+t(:new_event), vote_products_path%></li>
         <li><%=link_to '<i class="fa fa-bullhorn"></i>'.html_safe+' '+t(:new_topic), new_forum_topic_path(forum_id)%></li>
       <% end %>
