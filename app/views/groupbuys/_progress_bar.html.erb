@@ -4,7 +4,7 @@
    <div class="row radius callout all-kinds-of-money">
         <div class="columns small-6 groupbuy-price" style="line-height:100%">
           <span class="price save"><i class="fa fa-cny"></i><%=groupbuy.groupbuy_price %>/<%=translate_of(groupbuy.goods_unit)%></span>
-          <small class="money">  
+          <small class="money">
             <span class="price market"><i class="fa fa-cny"></i><%=groupbuy.market_price %>/<%=translate_of(groupbuy.goods_unit)%></span>
           </small>
         </div>
@@ -14,11 +14,11 @@
         </div>
       </div>
     <div class="progress ">
-      <span class="meter" style="width: <%=groupbuy.target_completed.first.to_f%>%"></span>
+      <span class="meter" style="width: <%=groupbuy.target_completed.first.to_f.round(2)%>%"></span>
     </div>
     <div class='row'>
       <div class='columns small-4'>
-        <div class="num"><%= groupbuy.target_completed.first %>%</div>
+        <div class="num"><%= groupbuy.target_completed.first.to_f.round(2) %>%</div>
           <div><%= t(:ordered) %></div>
       </div>
       <div class='columns small-4'>
